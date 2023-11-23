@@ -1,0 +1,88 @@
+project:
+  type: website
+
+# comments: 
+#   hypothesis: true
+
+website:
+  title: "COE Github Standards"
+  # author: DIQA 
+  # date: today
+  search: true
+  repo-url: https://github.com/NW-PaGe/standards
+  repo-subdir: docs/
+  repo-actions: [source,edit,issue]
+  
+  navbar: 
+    background: primary
+    left: 
+      - text: Home
+        href: index.qmd
+      - text: Github Organization Standards
+        menu: 
+          - href: std/rules.qmd
+            text: "0: Security Standards"
+          - href: std/lic.qmd
+            text: "1: Choosing a License"
+          - href: std/templates.qmd
+            text: "2: Special Folders/Repos (.github)"
+          - href: std/creds.qmd
+            text: "3: Managing Credentials"
+          - href: std/public_code.qmd
+            text: "4: Pushing Public Code"
+      - text: Repo Tools, Tips and Tricks
+        menu: 
+          - href: tools/how_to.qmd
+            text: "0: How to create this website"
+          - href: tools/renv.qmd
+            text: "1: Virtual Environments - renv"
+          - href: tools/link_code.qmd
+            text: "2: How to link external code to the site"
+          - href: tools/readme.qmd
+            text: "3: README and Github Pages"
+          - href: tools/teams.qmd
+            text: "4: Teams and Project Management"
+
+            
+            
+    search: true
+    logo: images/doh_logo.png
+    pinned: false
+    
+    right:
+      - icon: github
+        href: https://github.com/NW-PaGe/standards
+        aria-label: GitHub
+    
+  page-footer:
+    left: "🍦"
+    background: "#440154ff"
+    
+    
+
+# bibliography: references.bib
+
+
+format:
+  html:
+    theme: 
+      - cosmo
+      - theme.scss
+    scss: theme.scss
+    # css: styles.css
+    toc: true
+    # number-depth: 3
+    # toc-depth: 3
+    link-external-newwindow: false
+    highlight-style: espresso
+    number-sections: true
+    code-fold: show
+    code-overflow: wrap
+    page-layout: full
+    
+execute: 
+  error: true
+  freeze: false
+
+
+

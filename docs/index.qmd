@@ -1,0 +1,22 @@
+---
+title: "COVID-19 Lineages"
+description: Documentation for pulling COVID-19 lineages from the CDC
+editor: 
+  markdown: 
+    wrap: 72
+author: Data Integration/Quality Assurance Team
+date: today
+---
+
+# Preface {.unnumbered}
+
+![](images/DOH_logo_primary.jpg){style="float: right;" fig-alt="Hex logo that says \"Data Science in a Box\"" fig-align="right" width="250"}
+
+This is a website documenting the DIQA Sequencing Team's workflows. It is
+written in **Markdown** and uses [Quarto](https://quarto.org/) to allow
+for `R`, `Python`, `SQL`, `Javascript` and code from other programming languages to be
+displayed and executed. 
+
+This website is divided by project, each in a separate tab in the
+navigation bar above. Use the Home tab for onboarding and general help
+

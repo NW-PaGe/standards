@@ -1,0 +1,130 @@
+---
+title: "Virtual Environments"
+description: How to configure R and python package dependencies to this repo for reproducibility
+date: today
+author: Frank Aragona
+format: 
+  html:
+    code-fold: show
+    code-overflow: wrap
+    toc: true
+    number-sections: true
+    # title-block-banner: true
+    theme:
+      dark: superhero
+      light: flaty 
+---
+
+Virtual environments allow us to execute code while accounting for software/package version differences we have on our local machines. This repo uses virtual environments to configure a user's R software and packages to the repo's specific package versions.
+
+For example, say you have tidyverse version 2.0 but this repo uses tidyverse version 1.1, you may not be able to run the scripts as intended by the author since the functions in tidyverse 1.1 may be different than in 2.0. The virtual environment lets a user run only this repo's version of tidyverse so that the code runs as intended.
+
+# R Package Management -`renv`
+
+The R virtual environment uses a package called `renv`. It will save a list of packages to a lock file, similar to `environment.yml` or `requirements.txt`. Then, every time you or another teammate opens the R project in your repo the `renv` package will activate in the background and determine if any packages are not aligned with the repo's lock file. **It will ensure that everyone is using the same package versions**
+
+::: callout-important
+Your repo should have a `.Rproj` file at the *root* of the directory. If it doesn't you can create it by opening `Rstudio > File > New Project... > Existing Directory (or New Directory)` **Make sure `.Rproj` files are NOT in your `.gitignore`**
+:::
+
+## Creating `renv` in a project
+
+### Step 1: Open the `.Rproj` in your repo
+
+The R project will open up Rstudio at the root of you directory path.
+
+![](images/open_r.gif)
+
+### Step 2: Initialize `renv` for the repo
+
+Now that we're in the root of your repo directory, let's initialize `renv`.
+
+First install `renv` - `install.packages("renv")`
+
+Then in your console write `renv::init()` and run it.
+
+![](images/renvinit.gif)
+
+If you already have an existing repo, you will probably see warnings and errors in the renv::init like I did in the gif above. Not to worry! Read the warnings and follow the instructions. Usually you will need to re-install a package. If you get this warning:
+
+> These may be left over from a prior, failed installation attempt. Consider removing or reinstalling these packages.
+
+-   Then run `renv::install("THAT PACKAGE")`. It will install the package again,
+-   and then you need to update the lock file (more on that later) by running `renv::snapshot()`.
+
+Now the package will be installed correctly
+
+![](images/renv_backports.gif)
+
+`renv::init()` will:
+
+1.  Search through all R scripts in your repo and find all packages used
+2.  Create a snapshot of those packages
+3.  Save all packages in the repo in a new `renv` libraries path (similar to your C drive R libraries paths)
+4.  Create a `.gitignore` within the `renv` libraries path so that you don't get spammed with thousands of libraries in your git commit
+5.  Create a lock file - this is like the `environment.yml` for conda. Think of it as instructions for which packages your repo is using
+6.  It also saved things like an `activate` R script which will activate that `renv` every time the repo is opened from the `.Rproj`
+
+### Step 3: Push to Github
+
+Now look at your git stage and you will see all the files `renv` created.
+
+We have
+
+1.  `.Rprofile` that contains an `renv activate.R` script - this will activate the repo's `renv` every time the project is opened
+2.  The `renv.lock` file shows information on each package used in the repo and is used to update collaborator's environments to match the lock file.
+3.  `renv/.gitignore` I don't feel like explaining this one right now - i'll write more later
+4.  `renv/activate.R` this will activate the env whenever the R project is opened
+5.  `renv/settings.dcf` I have no clue what this is
+
+![](images/renv_git.gif)
+
+## Using `renv` in a project
+
+### Step 1: Open the `.Rproj` for your repo
+
+Any time you need to code or run code from the repo, open up the `.Rproj` file that contains the project. In your file explorer, go to the repo and open `.Rproj`
+
+<br>
+
+This will open up an R window with the repo file path as a root directory. It will also utilize the `renv`. Your console should say something about `renv`, like this
+
+![](images/image-664157118.png)
+
+### Step 2: Load `renv` packages
+
+The first time you use `renv` you will need to configure it to your local machine. To do this, type:
+
+-   `renv::restore()` in your console.
+-   This will create a new environment for your R in your local machine using the lock file packages.
+
+<br>
+
+Now you're ready to use the scripts! Way less complicated than conda
+
+# R Installing New Packages
+
+If you need to install a new package and want to put it in the repo, you will need to update the lock file. To do this:
+
+-   `renv::install()`, `pak::pkg_install("<PACKAGE_NAME>")` (the safe way) or even `install.packages()`
+-   `renv::snapshot()` this will overwrite the lock file with the packages you added
+-   Then push to github
+
+::: callout-warning
+There may be version dependency issues when installing a package and running a script. You may need to use `renv::history()` to see the previous hash of the lock file and use `renv::revert()` to revert the lock file back to its previous, stable state. [More on this here ](https://solutions.posit.co/envs-pkgs/environments/upgrades/)
+:::
+
+![](images/r_save.gif)
+
+The video at the bottom of this page explains `renv` in detail and its [capabilities](https://solutions.posit.co/envs-pkgs/environments/upgrades/)
+
+# Using Reticulate with Conda Env
+
+Now that your R environments is set up, if you have code that uses the `reticulate` package in R, it might still be pointing to your base Python environment. So, if you need to write python code in R (using reticulate), the code may break. Here's what you need to do to make sure your `reticulate` python path is pointing towards your conda environment:
+
+1.  Open an anaconda prompt
+2.  Activate your python conda env and then write `where python` and it will provide you with a python.exe for that particular env. Copy that path
+3.  Open the `.Rprofile` file in your repo and add this code: `Sys.setenv(RETICULATE_PYTHON = PATH_TO_ENV_PYTHON))`
+    -   Note, if you have other team members, make this code flexible to their usernames. It could look something like this `Sys.setenv(RETICULATE_PYTHON = file.path(Sys.getenv("USERPROFILE"),"Anaconda3/envs/seq_env/python.exe"))` where `Sys.getenv("USERPROFILE")` will add `C/Users/XXXX/` and it will automatically add the user's name
+4.  Now restart your R
+5.  Open back up R and **without running any other code or loading any libraries** run `reticulate::py_config()` in your console. This should now show your conda environment path being used for reticulate
