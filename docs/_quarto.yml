@@ -20,17 +20,17 @@ website:
         href: index.qmd
       - text: Github Organization Standards
         menu: 
-          - href: std/rules.qmd
+          - href: std/security.qmd
             text: "0: Security Standards"
           - href: std/lic.qmd
             text: "1: Choosing a License"
           - href: std/templates.qmd
-            text: "2: Special Folders/Repos (.github)"
+            text: "2: Org Policy Setting"
           - href: std/creds.qmd
             text: "3: Managing Credentials"
           - href: std/public_code.qmd
             text: "4: Pushing Public Code"
-      - text: Repo Tools, Tips and Tricks
+      - text: Github Repository Guides
         menu: 
           - href: tools/how_to.qmd
             text: "0: How to create this website"
@@ -65,20 +65,26 @@ website:
 
 format:
   html:
+    # grid:
+    #   sidebar-width: 200px
+    #   body-width: 1000px
+    #   margin-width: 300px
+    #   gutter-width: 1.5rem
     theme: 
       - cosmo
-      - theme.scss
-    scss: theme.scss
+      - assets/styles.scss
+    scss: assets/styles.scss
     # css: styles.css
     toc: true
     # number-depth: 3
     # toc-depth: 3
+    highlight-style: assets/custom.theme
     link-external-newwindow: false
-    highlight-style: espresso
     number-sections: true
     code-fold: show
     code-overflow: wrap
     page-layout: full
+    
     
 execute: 
   error: true

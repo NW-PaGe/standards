@@ -1,0 +1,202 @@
+/*-- scss:defaults --*/
+$white: #fff;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$black: #000;
+$primary: #440154ff;
+$secondary: #20A486ff;
+$tertiary: #75D054ff;
+$theme-white: #F7F8F9;
+$theme-yellow: #E8D4AD;
+$theme-darksand: #D0927D;
+$theme-night: #1E313D;
+$theme-ground: #416270;
+
+
+/*-- scss:rules --*/
+
+// nav bar color
+$navbar-fg: #f5eff6;
+
+// root font size;
+:root {
+  --bs-root-font-size: 20px;
+}
+
+// The page text color
+$body-color: $gray-700;
+
+// Code block background
+// $code-block-bg: $secondary;
+
+// Output colors
+.watch {
+  background-color: lightpurple;
+  border: 3px solid purple;
+  font-weight: bold;
+}
+
+.navbar-brand {
+  color: $gray-100;
+}
+
+.nav-link {
+  color: $gray-100;
+}
+
+.smallframe {
+  /*box-shadow: $back-blue 10px 5px 5px 0px;*/
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 10px !important;
+  box-shadow: 0 20px 47px rgb(0 0 0 / 55%);
+  width: 400px;
+  /*margin: auto !important;*/
+  
+}
+
+
+.myframe {
+  /*box-shadow: $back-blue 10px 5px 5px 0px;*/
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 10px !important;
+  box-shadow: 0 20px 47px rgb(0 0 0 / 55%);
+  /*margin: auto !important;*/
+  
+}
+
+/*----------DIV TIPS------------*/
+
+div.note, div.tip, div.gotcha, div.design, div.hat, div.obj{
+  border: 4px #c5ede2;
+  border-style: solid;
+  padding: 1em;
+  margin: 1em 0;
+  
+  /*uncomment for icon */
+  
+  /* padding-left: 100px; 
+  background-size: 70px; 
+  background-repeat: no-repeat;
+  background-position: 15px center; */
+  min-height: 120px;
+  color: #638f9d;
+  background-color: #ffffff;
+}
+
+div.obj {
+  font-size: 19px;
+  line-height: 1.5em;
+}
+
+div.obj>p:first-child {
+  padding-top: 0;
+  margin-top: 0 !important;
+  font-family: "Source Sans Pro";
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+
+
+// Make new highlight style for specific code blocks.
+
+.window-style {
+  
+  pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; text-align: right; vertical-align: baseline;
+    border: none; 
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: $primary;
+    color: #f8f8f2;
+  }
+pre.numberSource { color:#bdae9d;}
+div.sourceCode.cell-code
+  { color: #f8f8f2; background-color: $primary; }
+
+  
+  // pre.sourceCode numberSource r number-lines code-with-copy
+
+  
+  code.sourceCode.scss {
+    background-color: navy;
+    color: #f8f8f2;
+    
+  }
+  
+  code.sourceCode.r {
+      background-color: $primary;
+      color: #f8f8f2;
+    
+  }
+  code.sourceCode.sass {
+    color: #f8f8f2;
+  
+  }
+  
+  a {
+  color: #f8f8f2;
+}
+
+ 
+  code span.cn { 
+    color: $theme-darksand; 
+  } /* Alert */
+  code span.an { 
+    color: #0066ff;
+    font-weight: bold; font-style: italic; 
+  } /* Annotation */
+  code span.co {
+    color: #f8f8f2;
+    font-style: italic;
+  }
+  code a:any-link {
+    color: inherit;
+    text-decoration: none;
+  }
+  code span.ot {
+    color: #00e0e0;
+  }
+  code span.sc {
+    color: #abe338;
+  }
+  code span.fu {
+    color: #ffa07a;
+  }
+  
+  code span.do {
+    color: gold;
+    font-style: italic;
+}
+  
+  
+
+}
+

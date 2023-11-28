@@ -16,11 +16,11 @@ format:
     toc: true
     number-sections: true
     # title-block-banner: true
-    theme:
-      dark: superhero
-      light: flaty 
 execute: 
   freeze: true
+  echo: true
+  eval: false
+knitr: true
 ---
 
 # Introduction
@@ -73,8 +73,6 @@ The `.yml` workflow for this project looks something like this:
 `on:` is a tag indicating when the action will run. Right now it will run when any code gets pushed to the main branch in the documentation folder or `lineages_public_repo.R` script
 
 ```{yaml}
-#| eval: false
-#| echo: true
 on: 
   push:
     branches:
@@ -87,8 +85,6 @@ on:
 `jobs:` is a tag that tells a Github virtual machine what to run and what operating system to run it on. In this case `ubuntu` with the `latest` version. This can be `windows`, `linux` or `macOS`.
 
 ```{yaml}
-#| eval: false
-#| echo: true
 name: Render and Publish
 
 jobs:
@@ -106,8 +102,6 @@ Now we have the steps:
 -   `uses: actions/cache@v1` and the code below it will set up `renv` and use the cached packages to install them onto the Github virtual machine
 
 ```{yaml}
-#| eval: false
-#| echo: true
     env:
       RENV_PATHS_ROOT: ~/.cache/R/renv
       
@@ -150,8 +144,6 @@ And finally,
 -   `with: target: gh-pages path: documentation/_site` lets you know which branch and path to render the site to
 
 ```{yaml}
-#| eval: false
-#| echo: true
       - name: Publish to GitHub Pages (and render)
         uses: quarto-dev/quarto-actions/publish@v2
         with:
@@ -171,8 +163,6 @@ If you need to constantly update your website with code chunk, this is the best 
 To use `renv` in a Github Action, you can put
 
 ```{yaml}
-#| eval: false
-#| echo: true
 - name: Setup Renv
   uses: r-lib/actions/setup-renv@v2
 ```

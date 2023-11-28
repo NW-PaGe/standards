@@ -1,0 +1,19 @@
+---
+title: "Security Standards"
+description: Protect your credentials, tokens, data and more
+date: September 1, 2023
+date-modified: today
+author: 
+  - name: Frank Aragona
+    email: frank.aragona@doh.wa.gov
+    affiliations:
+      - Washington Department of Health
+      - Data Integration/Quality Assurance
+format: 
+  html:
+    code-fold: show
+    code-overflow: wrap
+    toc: true
+    number-sections: true
+---
+

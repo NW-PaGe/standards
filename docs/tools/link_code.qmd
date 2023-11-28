@@ -8,6 +8,9 @@ author: Frank Aragona
 date: today
 execute: 
   freeze: true
+format: 
+  html: 
+    code-fold: false
 ---
 
 The code in this website is automatically linked to the code in the
@@ -19,6 +22,9 @@ we're using `lineages_public_repo.R`. Now wrap the chunks of code you
 want to link with comments like this, `## ---- libraries` and
 `## ---- stop`:
 
+<!-- <center> -->
+
+:::{.smallframe}
 ```{r}
 #| echo: true
 #| eval: false
@@ -36,6 +42,9 @@ p_load(
 )
 ## ---- stop
 ```
+:::
+
+<!-- </center> -->
 
 The `## ---- libraries` signals the beginning of a chunk. the
 `## ---- stop` signals the end of a chunk.
@@ -47,21 +56,28 @@ this:
 
 Scan the external R script for code chunks:
 
+:::{.smallframe}
 ```` markdown
 ```{{r setup}}
 #| echo: false
 knitr::read_chunk(file.path(getwd(),"lineages_public_repo.R"))
 ```
 ````
+:::
+
 <br>
 
-Call the code chunk you want in the `{r}` header within the chunk. like this `{r libraries}`:
+Call the code chunk you want in the `{r}` header within the chunk. like
+this `{r libraries}`:
 
+:::{.smallframe}
 ```` markdown
 ```{{r libraries}}
 
 ```
 ````
+:::
+
 <br>
 
 And now the document will output any code in that code chunk and can
