@@ -76,7 +76,7 @@ $body-color: $gray-700;
 /*----------DIV TIPS------------*/
 
 div.note, div.tip, div.gotcha, div.design, div.hat, div.obj{
-  border: 4px #c5ede2;
+  border: 4px $secondary;
   border-style: solid;
   padding: 1em;
   margin: 1em 0;
@@ -88,8 +88,8 @@ div.note, div.tip, div.gotcha, div.design, div.hat, div.obj{
   background-repeat: no-repeat;
   background-position: 15px center; */
   min-height: 120px;
-  color: #638f9d;
-  background-color: #ffffff;
+  color: $primary;
+  background-color: $gray-200;
 }
 
 div.obj {

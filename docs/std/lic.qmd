@@ -1,0 +1,58 @@
+---
+title: "Licensing"
+description: Information on which license to choose for you repository
+editor: 
+  markdown: 
+    wrap: 72
+author: Frank Aragona
+date: today
+execute: 
+  freeze: true
+format: 
+  html: 
+    code-fold: false
+---
+
+Having the appropriate license in a Github repo can prevent code theft and inappropriate redistribution of code. Each individual repo author(s) should review common open-source licenses and decide what kind of license is best for their particular repo. Some licenses are very relaxed, meaning anyone in the public can use their code and distribute it widely, including using the software to publish papers or monetize the work. Other licenses are more strict and prevent re-distribution of code.
+
+
+# General License Info
+
+[Below is a list of common open-source licenses.](https://choosealicense.com/licenses/)
+
+```{=html}
+<iframe width="780" height="500" src="https://choosealicense.com/licenses/" title="Github Licenses"></iframe>
+```
+
+I imagine there isn't a one size fits all license, so thankfully there are a variety of options. Here are two common ones:
+
+# GNU GPL licenses
+
+a.  These are the strong licenses
+b.  Prevents someone from taking our code and privatizing it (and making
+    money off of it)
+c.  Someone can still use our code, they just need to ensure that what
+    they're doing with it is open-source
+d.  "Copyright and license notices must be preserved."
+e.  "Contributors provide an express grant of patent rights. When a
+    modified version is used to provide a service over a network, the
+    complete source code of the modified version must be made
+    available."
+
+# MIT license
+
+a.  I think this is the most commonly used one
+b.  "short and simple permissive license... only requiring preservation
+    of copyright and license notices"
+c.  "Licensed works, modifications, and larger works may be distributed
+    under different terms and without source code."
+d.  Someone could basically do whatever they want with the code.
+e.  Nextstain/ncov repo is currently using this
+
+And here are a couple of youtube videos that were helping in explaining
+licensing
+
+{{< video https://www.youtube.com/embed/rbQg9DY_4y0?si=OvU9vLBHX43dTIcA >}}
+
+{{< video https://www.youtube.com/embed/ndORMSnb2nw?si=tkUzjwZYWKfrLTEU >}}
+

@@ -31,9 +31,7 @@ filters:
 4.  Explore Infrastructure as Code (IaC) for administration
 :::
 
-# Required Documents
-
-In the Github Organization we may require all repositories to contain certain documents. For example, we want to make sure that every repo has a `CODE OF CONDUCT` document that is a general policy applied throughout the organization. This way an organization can set a policy one time and not need to worry that each repo is contains the policy.
+In the Github Organization we may require all repositories to contain certain documents. For example, we want to make sure that every repo has a `CODE OF CONDUCT` document that is a general policy applied throughout the organization. 
 
 We could make a `CODE OF CONDUCT` document and manually copy and paste it into each repo, but this will become unmanageable over time because
 
@@ -43,11 +41,7 @@ We could make a `CODE OF CONDUCT` document and manually copy and paste it into e
 
 Thus, **we need a way to programmatically set a policy rule that can be applied to each repo, old or new, and can update the policy for each repo if needed.** This will save a lot of time and effort
 
-## Set Policy Rules at Org Level
-
-You can set most policy rules and create documents for each repo at the organization level by using a special `.github` repo. Dot files and dot folders have special functionality in some software. For Github, the `.github` folder defines workflows for things like Github Actions in a repo. A `.github` *repository* on the other hand defines *organization level* rules and templates.
-
-![](images/special.PNG){.myframe}
+# Required Documents
 
 We may want the follow files to be in every single repo, new or existing, to have the following documents:
 
@@ -55,6 +49,29 @@ We may want the follow files to be in every single repo, new or existing, to hav
 2.  `CODE_OF_CONDUCT.md` to define the ["standards for how to engage in a community"](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-code-of-conduct-to-your-project)
 3.  `CONTRIBUTING.md` this file can set a policy for people wanting to contribute to a repo. Some organizations require people to sign a form before submitting pull requests so that the user understands what they are contributing to and how their code will be used
 4.  `LICENSE` this may be different for each repository, but we can set something general at the org level
+
+## `README` {.unnumbered}
+
+`README` files are instructions or documentation on how to use your software. It should give a quick introduction to the repo and instructions on how to install or run the code.
+
+## `CODE_OF_CONDUCT` {.unnumbered}
+
+A Code of Conduct can let a user know what the rules of the organization are and how any wrongful behavior will be addressed. The document will provide the ["standards for how to engage in a community"](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-code-of-conduct-to-your-project)
+
+## `CONTRIBUTING.md` {.unnumbered}
+
+This file should appear in the issue tab in a repo. It lets a user know how they can contribute to the project and if they need to sign any forms before contributing. Some larger organizations require that a person knows what they are contributing to and they must sign a form acknowledging that any software/code contributions to the project will be used and cannot be retracted by the user. The code submitted may also be used to develop processes but the organization will not pay the individual contributor (since this is open-source, we only look for open-source contributions)
+
+## `LICENSE` {.unnumbered}
+
+These should be and are set at the repo level. There will be many different licenses to choose from that will depend on the specific repo. More on that here.
+
+
+# Set Policy Rules at Org Level
+
+You can set most policy rules and create documents for each repo at the organization level by using a special `.github` repo. Dot files and dot folders have special functionality in some software. For Github, the `.github` folder defines workflows for things like Github Actions in a repo. A `.github` *repository* on the other hand defines *organization level* rules and templates.
+
+![](images/special.PNG){.myframe}
 
 <br>
 
@@ -93,7 +110,7 @@ If you click on the `CODE_OF_CONDUCT` link it will take you right to the `.githu
 
 Now you can set organization level policies from the `.github` repo and they will automatically populate in *all* existing and new repositories *unless there are repo specific policies in place*. If a repo already has its own policies they will not be overwritten.
 
-## Set Templates at the Org Level
+# Set Templates at the Org Level
 
 Aside from policy documents, you can make templates at the organization level. Two commonly used templates are issue templates and discussion templates.
 
