@@ -40,7 +40,7 @@
             "underline": false
         },
         "Char": {
-            "text-color": "#049b0a",
+            "text-color": "#75D054ff",
             "background-color": null,
             "bold": false,
             "italic": false,
@@ -152,16 +152,16 @@
             "underline": false
         },
         "SpecialChar": {
-            "text-color": "#049b0a",
+            "text-color": "#75D054ff",
             "background-color": null,
-            "bold": false,
+            "bold": true,
             "italic": false,
             "underline": false
         },
         "SpecialString": {
-            "text-color": "#049b0a",
+            "text-color": "#75D054ff",
             "background-color": null,
-            "bold": false,
+            "bold": true,
             "italic": false,
             "underline": false
         },

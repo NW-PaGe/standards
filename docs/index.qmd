@@ -4,9 +4,11 @@ description: Documentation for how to structure and standardize the public Githu
 format: 
   html: 
     toc: false
+    number-sections: false
 about:
   id: about
   template: jolla
+  image-shape: rectangle
   image: images/DOH_logo_primary.jpg
   links:
     - icon: info-circle
@@ -21,9 +23,70 @@ about:
     - icon: zulip
       href: https://github.com/NW-PaGe/standards/issues/new
       text: Chat
+execute: 
+  eval: false
 ---
 
+:::{#about}
+:::
 
+<center>
+
+:::{.hover-button}
+<body>
+    <a href="#collapseQuickstart" class="hover-button" data-bs-toggle="collapse"
+    role="button" aria-expanded="false" aria-controls="collapseQuickstart">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Get Started
+    </a>
+        
+</body>
+:::
+
+</center>
+
+
+###
+
+::: {#collapseQuickstart .collapse}
+
+## Quickstart
+
+This is a static website documenting the proposed standards for public Github use at the Pacific Northwest Genomic Center of Excellence. There are documents on 
+
+1.    Security and how to protect credential and private process leaks
+2.    Licensing to protect re-sale or theft of code
+3.    Github Organization templates and Infrastructure as Code (IaC)
+4.    Managing credentials
+5.    Publishing code to the public repositories
+
+
+If there are any questions please reach out to 
+
+:::{.column-screen-inset-shaded layout-nrow="1"}
+
+Protect Security and Credentials with good coding practices and our safety guidelines
+
+Use our policy templates in github 
+
+```{r}
+# some code here
+(
+  df <- airquality |>
+    stats::filter(Month==5)
+)
+```
+
+
+
+:::
+
+
+
+:::
 
 <!--
 

@@ -107,96 +107,106 @@ div.obj>p:first-child {
 
 
 
-// Make new highlight style for specific code blocks.
+/* Make cool hover tabs for front page */
 
-.window-style {
-  
-  pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; text-align: right; vertical-align: baseline;
-    border: none; 
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    background-color: $primary;
-    color: #f8f8f2;
-  }
-pre.numberSource { color:#bdae9d;}
-div.sourceCode.cell-code
-  { color: #f8f8f2; background-color: $primary; }
-
-  
-  // pre.sourceCode numberSource r number-lines code-with-copy
-
-  
-  code.sourceCode.scss {
-    background-color: navy;
-    color: #f8f8f2;
-    
-  }
-  
-  code.sourceCode.r {
-      background-color: $primary;
-      color: #f8f8f2;
-    
-  }
-  code.sourceCode.sass {
-    color: #f8f8f2;
-  
+.hover-button {
+    body
+  {
+      margin: 0 auto;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #031321;
+      font-family: roboto;
+      font-weight: bold;
   }
   
   a {
-  color: #f8f8f2;
+      position: relative;
+      display: inline-block;
+      padding: 15px 30px;
+      color: $primary;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-decoration: none;
+      font-size: 24px;
+      overflow: hidden;
+      transition: 0.2s;
+  }
+  
+  a:hover {
+      color: $secondary;
+      // background: $primary;
+      // box-shadow: 0 0 10px $primary,
+      //   0 0 40px $primary,
+      //   0 0 80px $primary;
+      transition-delay: 1s;
+  }
+  
+  a span {
+      position: absolute;
+      display: block;
+  }
+  
+  a span:nth-child(1) {
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg,transparent,$primary);
+  }
+  
+  a:hover span:nth-child(1) {
+      left: 100%;
+      transition: 1s;
+  }
+  
+  a span:nth-child(3) {
+      bottom: 0;
+      right: -100%;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(270deg,transparent,$primary);
+  }
+  
+  a:hover span:nth-child(3) {
+      right: 100%;
+      transition: 1s;
+      transition-delay: 0.5s;
+  
+  }
+  
+  
+  a span:nth-child(2) {
+      top: -100%;
+      right: 0;
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(180deg,transparent,$primary);
+  }
+  
+  a:hover span:nth-child(2) {
+      top: 100%;
+      transition: 1s;
+      transition-delay: 0.25s;
+  }
+  
+  
+  a span:nth-child(4) {
+      bottom: -100%;
+      left: 0;
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(360deg,transparent,$primary);
+  }
+  
+  a:hover span:nth-child(4) {
+      bottom: 100%;
+      transition: 1s;
+      transition-delay: 0.75s;
+  }
 }
 
- 
-  code span.cn { 
-    color: $theme-darksand; 
-  } /* Alert */
-  code span.an { 
-    color: #0066ff;
-    font-weight: bold; font-style: italic; 
-  } /* Annotation */
-  code span.co {
-    color: #f8f8f2;
-    font-style: italic;
-  }
-  code a:any-link {
-    color: inherit;
-    text-decoration: none;
-  }
-  code span.ot {
-    color: #00e0e0;
-  }
-  code span.sc {
-    color: #abe338;
-  }
-  code span.fu {
-    color: #ffa07a;
-  }
-  
-  code span.do {
-    color: gold;
-    font-style: italic;
-}
-  
-  
-
-}
 
