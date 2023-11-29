@@ -1,19 +1,35 @@
 ---
-title: "Github Organization Standards"
+title: "NW-PaGe Github Organization Standards"
 description: Documentation for how to structure and standardize the public Github Organization
-editor: 
-  markdown: 
-    wrap: 72
-author: 
-  - name: Frank Aragona
-    email: frank.aragona@doh.wa.gov
-    affiliations:
-      - Washington Department of Health
-      - Data Integration/Quality Assurance
-date: November 22, 2023
-date-modified: today
+format: 
+  html: 
+    toc: false
+about:
+  id: about
+  template: jolla
+  image: images/DOH_logo_primary.jpg
+  links:
+    - icon: info-circle
+      href: about.qmd
+    # - icon: download
+    #   href: install.qmd
+    # - icon: book
+    #   href: tutorials/getting_started.qmd
+    - icon: github
+      text: GitHub
+      href: https://github.com/NW-PaGe
+    - icon: zulip
+      href: https://github.com/NW-PaGe/standards/issues/new
+      text: Chat
 ---
 
+
+
+<!--
+
+![](images/DOH_logo_primary.jpg){style="float: center;" fig-alt="Hex logo that says \"Data Science in a Box\"" fig-align="center" width="250"}
+
+Documentation for how to structure and standardize the public Github Organization
 # Preface {.unnumbered}
 
 ![](images/DOH_logo_primary.jpg){style="float: right;" fig-alt="Hex logo that says \"Data Science in a Box\"" fig-align="right" width="250"}
@@ -29,3 +45,4 @@ This is a static website documenting the proposed standards for public Github us
 
 If there are any questions please reach out to 
 
+-->
