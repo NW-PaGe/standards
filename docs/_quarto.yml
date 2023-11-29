@@ -26,22 +26,15 @@ website:
             text: "1: Choosing a License"
           - href: std/templates.qmd
             text: "2: Org Policy Setting"
-          - href: std/creds.qmd
-            text: "3: Managing Credentials"
-          - href: std/public_code.qmd
-            text: "4: Pushing Public Code"
       - text: Github Repository Guides
         menu: 
           - href: tools/how_to.qmd
-            text: "0: How to create this website"
+            text: "0: Code Documentation: Github Pages/READMEs"
           - href: tools/renv.qmd
-            text: "1: Virtual Environments - renv"
-          - href: tools/link_code.qmd
-            text: "2: How to link external code to the site"
-          - href: tools/readme.qmd
-            text: "3: README and Github Pages"
-          - href: tools/teams.qmd
-            text: "4: Teams and Project Management"
+            text: "1: Virtual Environments/Package Management"
+          - href: tools/release.qmd
+            text: "2: Github Release Cycles"
+
 
             
             
@@ -79,9 +72,9 @@ format:
     # number-depth: 3
     # toc-depth: 3
     highlight-style: assets/custom.theme
-    link-external-newwindow: false
+    link-external-newwindow: true
     number-sections: true
-    code-fold: show
+    # code-fold: show
     code-overflow: wrap
     page-layout: full
     

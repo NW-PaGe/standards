@@ -28,7 +28,7 @@ filters:
 1.  Ensure that all repos in the org have the required documents
 2.  Set policy rules at the Organization level
 3.  Create template structure documents for each repo
-4.  Explore Infrastructure as Code (IaC) for administration
+4.  Explore Infrastructure as Code (IaC)
 :::
 
 In the Github Organization we may require all repositories to contain certain documents. For example, we want to make sure that every repo has a `CODE OF CONDUCT` document that is a general policy applied throughout the organization. 
@@ -68,6 +68,11 @@ These should be and are set at the repo level. There will be many different lice
 
 
 # Set Policy Rules at Org Level
+
+Policy rules may include requiring certain documents in each repo or requiring that a person sign every commit.
+
+
+## Document Requirements with `.github` Repos
 
 You can set most policy rules and create documents for each repo at the organization level by using a special `.github` repo. Dot files and dot folders have special functionality in some software. For Github, the `.github` folder defines workflows for things like Github Actions in a repo. A `.github` *repository* on the other hand defines *organization level* rules and templates.
 
@@ -203,5 +208,16 @@ Notice that in the template you can create text areas and pre-fill those areas w
 :::
 
 ![](images/bug_report.jpg){.myframe}
+
+## Commit Sign-Off Requirement - Github Apps
+
+We may want to require authors or reviewers to sign-off on commits to a repo. This is sometimes established in projects to ["ensure that copyrighted code not released under an appropriate free software (open source) license is not included in the kernel."](https://stackoverflow.com/a/1962112)
+
+You can install a Github App in the organization and it will be applied to all repos. [The DCO App (Developer Certificate of Origin) is popular and lightweight](https://github.com/apps/dco). To install it in the organization, click on Configure and it will give you the option to configure it with the organization of choice.
+
+# IaC
+
+Infrastructure as Code (IaC) can be helpful when managing administration tasks or writing hooks at the org level.
+
 
 

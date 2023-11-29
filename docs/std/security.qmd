@@ -11,9 +11,174 @@ author:
       - Data Integration/Quality Assurance
 format: 
   html:
-    code-fold: show
+    code-fold: false
     code-overflow: wrap
     toc: true
     number-sections: true
+execute: 
+  eval: false
+knitr: true
+filters: 
+  - line-highlight
 ---
+
+> "I solemnly swear I am up to no good."
+>
+> \- Harry Potter
+
+::: obj
+**Objectives**
+
+1.  Provide security guidelines
+2.  Set up security guardrails
+3.  Develop a process for reviewing code and pushing private code to a public repo
+:::
+
+# Github Security Guidelines
+
+The following shall not be included in any repo **or any local commit!!!**:
+
+-   Absolute file paths
+-   WDRS server names
+-   SSH server keys
+-   Tokens (REDCap, Azure, etc)
+-   Credentials
+-   PBI key to save in Azure
+-   ODBC connections
+-   Azure blob keys
+-   Block local paths (e.g., c drive file paths, y drive file paths)
+-   Usernames (Github usernames are okay)
+-   Connection strings
+-   Specific location information (e.g., addresses where mosquito traps are placed for gathering mosquitoes samples for surveillance of west Nile)
+
+If any of these are committed to the remote repo then they will stay in the git history (and will require a lot of effort to remove them from the history).
+
+The best line of defense is setting up local guardrails to prevent security leaks in the first place. This section will show how to make these local guardrails
+
+## Prevent Credential Leaks with Env Variables
+
+There are a number of ways to do this. We typically use a yaml file that can be filled out with personal credentials locally. The file will not be committed to the remote repo 
+
+### Create a credentials or object
+The scripts use a `.yml` file that contains a list of API tokens, server names, and usernames/passwords specific to each individual user. There are two `.yml` files. 
+
+One is a template (containing no actual passwords..) that exists in the repo and serves as a template so every individual user can keep up to date with new credential additions. 
+
+The other is the individual `creds.yml` that is in the repo's `.gitignore`. This file will never exist in the repo and only exist locally (in the user's C drive). 
+
+### `creds.yml` details
+The `.yml` file can work with multiple programming languages including R and Python. They are read in the same way and can be easily adjusted when adding new passwords or using them as configuration files.
+
+They look like this:
+
+:::{.myframe}
+```{yaml}
+# Default is needed to distinguish values.
+# Leave a blank line (NO SPACES) as the last line in this file or things will break
+# Quotes aren't necessary, but can be used.
+default: 
+  conn_list_wdrs:
+    Driver: "SQL Server Native Client 11.0"
+    Server: 
+    Database: 
+    Trusted_connection: 
+    ApplicationIntent: 
+    
+  fulgent:
+    username: <USERNAME>
+    password: <PASSWORD>
+
+```
+:::
+
+You can have different variables assigned to unique lists, which allows for easy configuration. For example, the list starting with `default` has variables `conn_list_wdrs` and `fulgent`. You can have a different list of variables within the same file like this:
+
+:::{.myframe}
+```{yaml}
+#| source-line-numbers: "4-5,16"
+# Default is needed to distinguish values.
+# Leave a blank line (NO SPACES) as the last line in this file or things will break
+# Quotes aren't necessary, but can be used.
+default: 
+  conn_list_wdrs:
+    Driver: "SQL Server Native Client 11.0"
+    Server: 
+    Database: 
+    Trusted_connection: 
+    ApplicationIntent: 
+    
+  fulgent:
+    username: <USERNAME>
+    password: <PASSWORD>
+
+test:
+  conn_list_lims:
+    Driver: "SQL Server Native Client 11.0"
+    Server: 
+    Database: 
+    Trusted_connection: 
+    ApplicationIntent: 
+    
+  conn_list_test:
+    Driver: "SQL Server Native Client 11.0"
+    Server: 
+    Database: 
+    Trusted_connection: 
+    ApplicationIntent: 
+
+MPV:
+  redcap_mpv_token: 
+
+```
+:::
+
+Now there is a `test` list and an `MPV` list with their own variables. This lets us switch a set of variables within our scripts. `default` applies to the main credentials where `MPV` can distinguish which variables should be MPV scripts specific
+
+### Safe Guards - Prevent Accidental Leaks!!!
+Once you have the credentials.yml template in your repo, make sure that nobody on your team (or anyone with write access..) is able to accidentally push changes to the template. We don't want someone's passwords or API tokens to exist in GitHub.
+
+[This link shows how to skip any changes made to the specific file](https://stackoverflow.com/a/39776107). If someone makes local changes to the template, the changes will not show in their commit. It is a safe guard.
+
+
+
+#### For all individual users, run this code:
+
+:::{.smallframe}
+```{bash}
+git update-index --skip-worktree creds_TEMPLATE.yml
+```
+:::
+
+This will tell your local git to ignore any changes made to `creds_TEMPLATE.yml`, but also allow it to exist in the repo (since `.gitignore` will prevent it from being in the repo)
+
+#### If you need to update the template file run this:
+
+:::{.smallframe}
+```{bash}
+git update-index --no-skip-worktree creds_TEMPLATE.yml
+```
+:::
+
+This will allow changes to the template. **So when you need to update the template, use this code**
+
+And to get a list of files that are "skipped", use this code:
+
+:::{.smallframe}
+```{bash}
+git ls-files -v . | grep ^S
+```
+:::
+
+# Security Guardrails
+
+Using a `.gitignore` file for environmental variables/credentials is an excellent guardrail and promotes good coding habits, but we may also want additional guardrails such as hooks. 
+
+Hooks are processes that run in the background and can prevent code from being pushed if there is a security flaw. There are two hooks we could use for security; pre-commit hooks and pre-recieve hooks
+
+## Pre-commit Hooks
+
+
+## Pre-Recieve Hooks
+
+# Code Reviewers/Github Operations Team
 
