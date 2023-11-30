@@ -97,7 +97,7 @@ password <- creds$my_credentials$password
 
 :::{.column-screen-inset-shaded layout-nrow="1"}
 
-{{< fa file-lines >}} Each repo in the organization should have a license. Licenses can help prevent your work from being stolen and/or used inappropriately. Licensing details here
+{{< fa file-lines >}} Each repo in the organization should have a license. Licenses can help prevent your work from being stolen and/or used inappropriately. [Licensing details here](std/lic.qmd)
 
 {{< fa book >}} This organization requires each repo to have [certain documents](std/templates.qmd), such as a CODE_OF_CONDUCT. The organization uses a special repo called **.github** to ensure all repos adhere to the policies and have the right documents.
 
