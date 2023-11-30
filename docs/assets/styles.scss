@@ -105,6 +105,14 @@ div.obj>p:first-child {
   letter-spacing: 0.1em;
 }
 
+/* make the screen-inset a little darker */
+
+.page-columns .column-screen-inset-shaded {
+    background: #e9ecef;
+}
+
+
+
 
 
 /* Make cool hover tabs for front page */
