@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.358">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Frank Aragona">
+<meta name="dcterms.date" content="2023-02-01">
+<meta name="description" content="How to configure R and Python package dependencies to this repo for reproducibility">
+
+<title>COE Github Standards - Virtual Environments</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../images/doh_logo.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">COE Github Standards</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-github-organization-standards" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Github Organization Standards</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-github-organization-standards">    
+        <li>
+    <a class="dropdown-item" href="../std/security.html">
+ <span class="dropdown-text">0: Security Standards</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../std/lic.html">
+ <span class="dropdown-text">1: Choosing a License</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../std/templates.html">
+ <span class="dropdown-text">2: Org Policy Setting</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-github-repository-guides" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Github Repository Guides</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-github-repository-guides">    
+        <li>
+    <a class="dropdown-item" href="../tools/how_to.html">
+ <span class="dropdown-text">0: Code Documentation: Github Pages/READMEs</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../tools/renv.html">
+ <span class="dropdown-text">1: Virtual Environments/Package Management</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../tools/release.html">
+ <span class="dropdown-text">2: Github Release Cycles</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/NW-PaGe/standards"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#python---conda-environment-setup" id="toc-python---conda-environment-setup" class="nav-link active" data-scroll-target="#python---conda-environment-setup"><span class="header-section-number">1</span> Python - Conda Environment Setup</a>
+  <ul class="collapse">
+  <li><a href="#step-1-set-up-anaconda" id="toc-step-1-set-up-anaconda" class="nav-link" data-scroll-target="#step-1-set-up-anaconda"><span class="header-section-number">1.1</span> Step 1: Set Up Anaconda</a></li>
+  <li><a href="#step-2-open-anaconda-prompt" id="toc-step-2-open-anaconda-prompt" class="nav-link" data-scroll-target="#step-2-open-anaconda-prompt"><span class="header-section-number">1.2</span> Step 2: Open Anaconda Prompt</a></li>
+  <li><a href="#step-3-change-directories" id="toc-step-3-change-directories" class="nav-link" data-scroll-target="#step-3-change-directories"><span class="header-section-number">1.3</span> Step 3: Change Directories</a></li>
+  <li><a href="#step-4-copy-the-repo-env" id="toc-step-4-copy-the-repo-env" class="nav-link" data-scroll-target="#step-4-copy-the-repo-env"><span class="header-section-number">1.4</span> Step 4: Copy the repo env</a></li>
+  <li><a href="#step-5-activate-the-environment" id="toc-step-5-activate-the-environment" class="nav-link" data-scroll-target="#step-5-activate-the-environment"><span class="header-section-number">1.5</span> Step 5: Activate the environment</a></li>
+  </ul></li>
+  <li><a href="#python---programming-setup" id="toc-python---programming-setup" class="nav-link" data-scroll-target="#python---programming-setup"><span class="header-section-number">2</span> Python - Programming Setup</a>
+  <ul class="collapse">
+  <li><a href="#ide-setup---vs-code" id="toc-ide-setup---vs-code" class="nav-link" data-scroll-target="#ide-setup---vs-code"><span class="header-section-number">2.1</span> IDE Setup - VS Code</a>
+  <ul class="collapse">
+  <li><a href="#step-1-select-a-python-interpreter" id="toc-step-1-select-a-python-interpreter" class="nav-link" data-scroll-target="#step-1-select-a-python-interpreter"><span class="header-section-number">2.1.1</span> Step 1: Select a Python Interpreter</a></li>
+  <li><a href="#step-2-write-code" id="toc-step-2-write-code" class="nav-link" data-scroll-target="#step-2-write-code"><span class="header-section-number">2.1.2</span> Step 2: Write code</a></li>
+  </ul></li>
+  <li><a href="#ide-setup---pycharm" id="toc-ide-setup---pycharm" class="nav-link" data-scroll-target="#ide-setup---pycharm"><span class="header-section-number">2.2</span> IDE Setup - PyCharm</a>
+  <ul class="collapse">
+  <li><a href="#step-1-select-a-python-interpreter-1" id="toc-step-1-select-a-python-interpreter-1" class="nav-link" data-scroll-target="#step-1-select-a-python-interpreter-1"><span class="header-section-number">2.2.1</span> Step 1: Select a Python Interpreter</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#python---installing-new-packages" id="toc-python---installing-new-packages" class="nav-link" data-scroll-target="#python---installing-new-packages"><span class="header-section-number">3</span> Python - Installing New Packages</a>
+  <ul class="collapse">
+  <li><a href="#step-1-install-a-new-package" id="toc-step-1-install-a-new-package" class="nav-link" data-scroll-target="#step-1-install-a-new-package"><span class="header-section-number">3.1</span> Step 1: Install a new package</a></li>
+  <li><a href="#step-2-save-the-package-to-the-repo" id="toc-step-2-save-the-package-to-the-repo" class="nav-link" data-scroll-target="#step-2-save-the-package-to-the-repo"><span class="header-section-number">3.2</span> Step 2: Save the package to the repo</a></li>
+  </ul></li>
+  <li><a href="#r-package-management--renv" id="toc-r-package-management--renv" class="nav-link" data-scroll-target="#r-package-management--renv"><span class="header-section-number">4</span> R Package Management -<code>renv</code></a>
+  <ul class="collapse">
+  <li><a href="#creating-renv-in-a-project" id="toc-creating-renv-in-a-project" class="nav-link" data-scroll-target="#creating-renv-in-a-project"><span class="header-section-number">4.1</span> Creating <code>renv</code> in a project</a>
+  <ul class="collapse">
+  <li><a href="#step-1-open-the-.rproj-in-your-repo" id="toc-step-1-open-the-.rproj-in-your-repo" class="nav-link" data-scroll-target="#step-1-open-the-.rproj-in-your-repo"><span class="header-section-number">4.1.1</span> Step 1: Open the <code>.Rproj</code> in your repo</a></li>
+  <li><a href="#step-2-initialize-renv-for-the-repo" id="toc-step-2-initialize-renv-for-the-repo" class="nav-link" data-scroll-target="#step-2-initialize-renv-for-the-repo"><span class="header-section-number">4.1.2</span> Step 2: Initialize <code>renv</code> for the repo</a></li>
+  <li><a href="#step-3-push-to-github" id="toc-step-3-push-to-github" class="nav-link" data-scroll-target="#step-3-push-to-github"><span class="header-section-number">4.1.3</span> Step 3: Push to Github</a></li>
+  </ul></li>
+  <li><a href="#using-renv-in-a-project" id="toc-using-renv-in-a-project" class="nav-link" data-scroll-target="#using-renv-in-a-project"><span class="header-section-number">4.2</span> Using <code>renv</code> in a project</a>
+  <ul class="collapse">
+  <li><a href="#step-1-open-the-.rproj-for-your-repo" id="toc-step-1-open-the-.rproj-for-your-repo" class="nav-link" data-scroll-target="#step-1-open-the-.rproj-for-your-repo"><span class="header-section-number">4.2.1</span> Step 1: Open the <code>.Rproj</code> for your repo</a></li>
+  <li><a href="#step-2-load-renv-packages" id="toc-step-2-load-renv-packages" class="nav-link" data-scroll-target="#step-2-load-renv-packages"><span class="header-section-number">4.2.2</span> Step 2: Load <code>renv</code> packages</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#r-installing-new-packages" id="toc-r-installing-new-packages" class="nav-link" data-scroll-target="#r-installing-new-packages"><span class="header-section-number">5</span> R Installing New Packages</a></li>
+  <li><a href="#using-reticulate-with-conda-env" id="toc-using-reticulate-with-conda-env" class="nav-link" data-scroll-target="#using-reticulate-with-conda-env"><span class="header-section-number">6</span> Using Reticulate with Conda Env</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/docs/tools/renv.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/docs/tools/renv.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Virtual Environments</h1>
+</div>
+
+<div>
+  <div class="description">
+    How to configure R and Python package dependencies to this repo for reproducibility
+  </div>
+</div>
+
+
+<div class="quarto-title-meta column-page-left">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Frank Aragona </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 1, 2023</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">November 29, 2023</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+<div class="obj">
+<p><strong>Summary</strong></p>
+<p>Virtual environments allow us to execute code while accounting for software/package version differences we have on our local machines. This repo uses virtual environments to configure a user’s R and Python software and packages to the repo’s specific package versions.</p>
+<p>For example, say you have tidyverse version 2.0 but this repo uses tidyverse version 1.1, you may not be able to run the scripts as intended by the author since the functions in tidyverse 1.1 may be different than in 2.0. The virtual environment will allow a given user to use only this repo’s version of tidyverse so they can run the code as intended.</p>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There are two different virtual environments for this repo, one for R and another for Python. <strong>Your workflows for opening R and Python and how you install packages needs to utilize the virtual environments so that all machines are able to use your code.</strong></p>
+</div>
+</div>
+<section id="python---conda-environment-setup" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Python - Conda Environment Setup</h1>
+<p>This repo has a file named <code>environment.yml</code>. It contains a list of all packages and versions used for Python software. This file can be used as a set of instructions for your local machine when configuring your local environment.</p>
+<section id="step-1-set-up-anaconda" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="step-1-set-up-anaconda"><span class="header-section-number">1.1</span> Step 1: Set Up Anaconda</h2>
+<p>You should already have Anaconda installed on your machine if not..</p>
+<p>under construction</p>
+</section>
+<section id="step-2-open-anaconda-prompt" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="step-2-open-anaconda-prompt"><span class="header-section-number">1.2</span> Step 2: Open Anaconda Prompt</h2>
+<p>You may have different Anaconda prompts (prompts aligned with different shells, like PowerShell, bash, etc). There should be a generic Anaconda prompt. Open that one:</p>
+<p><img src="images/open_prompt.gif" class="img-fluid"></p>
+<p><br></p>
+<p>If the first line in the prompt doesn’t start with <code>(base)</code>, write:</p>
+<p><code>conda deactivate</code></p>
+<p>and it will bring you back to your base environment.</p>
+</section>
+<section id="step-3-change-directories" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="step-3-change-directories"><span class="header-section-number">1.3</span> Step 3: Change Directories</h2>
+<p>Change the directory of the prompt to the repo’s directory. The code is</p>
+<p><code>cd C:/Users/XXXXXXX/Projects/Sequencing_2.0</code></p>
+<p>If you are already in your user directory, you can just type</p>
+<p><code>cd projects/sequencing_2.0</code></p>
+<p>capitalization doesn’t matter</p>
+<p><img src="images/change_directory.gif" class="img-fluid"></p>
+<p><br></p>
+<p>Notice that the folder path is now changed to the sequencing repo folder.</p>
+</section>
+<section id="step-4-copy-the-repo-env" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="step-4-copy-the-repo-env"><span class="header-section-number">1.4</span> Step 4: Copy the repo env</h2>
+<p>Now we’re ready to create a new environment based on the repo’s environment.</p>
+<p>Type: <code>conda env create --name seq_env --file=environment.yml</code></p>
+<p>Note that how you name your environment doesn’t really matter, but name it something that resembles the repo. This will save the headache of having random environments for random repos that you can’t remember..</p>
+<p><br></p>
+<ul>
+<li><code>conda env create</code> will create a new environment in your <code>C:/Users/XXXXX/Anaconda3/envs</code> file path</li>
+<li><code>--name</code> or <code>-n</code> will name that environment, in this case <code>seq_env</code></li>
+<li><code>--file=environment.yml</code> this code will take the file in the sequencing 2.0 repo and use it to create this environment. It is essentially a copy of the software versions in the file.</li>
+</ul>
+<p>Note: I sped up the gif below. The whole process may take a few minutes</p>
+<p><img src="images/conda_create.gif" class="img-fluid"></p>
+</section>
+<section id="step-5-activate-the-environment" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="step-5-activate-the-environment"><span class="header-section-number">1.5</span> Step 5: Activate the environment</h2>
+<p>You can switch between environments in the conda prompt or in a programming IDE (or both? idk). To activate and switch the env, write:</p>
+<p><code>conda activate &lt;env_name&gt;</code></p>
+<p>in this case</p>
+<p><code>conda activate seq_env</code></p>
+<p><img src="images/conda_activate.gif" class="img-fluid"></p>
+<p><br></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The environment your in will show on the left of the prompt message. In this case it says <code>(seq_env)</code> instead of <code>(base)</code>. That way you know what env your working in</p>
+</div>
+</div>
+</section>
+</section>
+<section id="python---programming-setup" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Python - Programming Setup</h1>
+<p>Now that your virtual conda environment is set up, let’s set up your programming IDE to be able to recognize your environment.</p>
+<section id="ide-setup---vs-code" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="ide-setup---vs-code"><span class="header-section-number">2.1</span> IDE Setup - VS Code</h2>
+<p>VS Code has a lot built in to use a conda environment. Since your env is already activated, if you have VS Code installed, you can type</p>
+<p><code>code</code></p>
+<p>into the anaconda prompt and it will open a VS Code window</p>
+<p><img src="images/vscode_open.gif" class="img-fluid"></p>
+<section id="step-1-select-a-python-interpreter" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="step-1-select-a-python-interpreter"><span class="header-section-number">2.1.1</span> Step 1: Select a Python Interpreter</h3>
+<p>First we need to select a python interpreter, which is in our env. On your keyboard, press</p>
+<p><code>CTRL+SHIFT+P</code></p>
+<p>This should bring up a window with an option that says <code>Python: Select Interpreter</code>. You may need to search for it.</p>
+<p>Click it and you should see your new environment <code>seq_env</code> in the list. Click it</p>
+<p><img src="images/vscode_int.gif" class="img-fluid"></p>
+</section>
+<section id="step-2-write-code" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="step-2-write-code"><span class="header-section-number">2.1.2</span> Step 2: Write code</h3>
+<p>Now your VS Code is using your environment and the python version/packages in that environment. Check to see that your terminal is using the correct env.</p>
+<p>Open the terminal (terminal &gt; new terminal) and confirm that you are in a cmd prompt in the terminal. On the right side of the terminal it should say <code>cmd</code>. If it says <code>powershell</code> or something else, let’s change it.. See the pic below. There’s a drop down that gives you shell types. Change your default to Command Prompt</p>
+<p><img src="images/image-1580735047.png" class="img-fluid"></p>
+<p><br></p>
+<p>Also notice in the picture that my environment now switches to <code>seq_env</code>. Yours should do the same. You should now be able to run code in a python script. Notice that your terminal will change to run python. If you get an error, write <code>python</code> in the terminal and hit enter. It will change your terminal a little. Now you can run python code and it will output to this terminal.</p>
+<p><img src="images/vscode_run.gif" class="img-fluid"></p>
+</section>
+</section>
+<section id="ide-setup---pycharm" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="ide-setup---pycharm"><span class="header-section-number">2.2</span> IDE Setup - PyCharm</h2>
+<p>PyCharm also works great with a conda environment.</p>
+<section id="step-1-select-a-python-interpreter-1" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="step-1-select-a-python-interpreter-1"><span class="header-section-number">2.2.1</span> Step 1: Select a Python Interpreter</h3>
+<p>You may also be able to open a PyCharm window from an Anaconda prompt like with VS Code (if it’s installed in your env). To do so, write <code>pycharm</code> in the prompt and it should open a new window with the env activated.</p>
+<p>If that doesn’t work, open PyCharm and on the bottom right there is a python version and interpreter selected. Click it and open “Add New Interpreter” &gt; “Add local interpreter”. This opens a new window. Click “Conda Environment” and under “Interpreter” click the dropdown. You should be able to see your new environment there. If not, click away and click the dropdown again. It’s weird sometimes.</p>
+<p>Then click okay. Close and reopen the Python Console window and it should have your environment path for the python.exe. Also, the Python Libraries window should have all of the libraries in your environment now.</p>
+<p><img src="images/pycharm_int.gif" class="img-fluid"></p>
+<p><br></p>
+<p>Notice that now there are a list of interpreters for you to use. You can now switch back and forth between environments. This is great if you have other repos to use or want to test out new packages that aren’t in the main environment.</p>
+</section>
+</section>
+</section>
+<section id="python---installing-new-packages" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Python - Installing New Packages</h1>
+<p>Let’s say you want to add a new python package to the repo. I recommend doing this in an Anaconda prompt and then saving it over the environment.yml. Then you can push the new environment.yml with the new changes to github. Use these steps:</p>
+<section id="step-1-install-a-new-package" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="step-1-install-a-new-package"><span class="header-section-number">3.1</span> Step 1: Install a new package</h2>
+<p>Go to the Anaconda prompt, make sure you’re in the repo file path (<code>cd projects/sequencing_2.0</code>) and make sure you’re in the right conda env (<code>conda activate seq_env</code>).</p>
+<p>Now, install the package. Usually packages can be installed with <code>pip install</code> or <code>conda install</code> or <code>conda install -c conda forge &lt;package&gt;</code>. This depends on the packages. Some need pip, others need conda. Google it to find out. Here i’m going to download a package from NCBI to demonstrate. The package is called <code>ncbi-datasets-cli</code>.</p>
+<ul>
+<li>This package uses <code>conda-forge</code> to install. Type in <code>conda install -c conda-forge ncbi-datasets-cli</code></li>
+<li>It will give you a message Y/N to confirm. Type “y” and enter</li>
+</ul>
+<p><img src="images/add_pack.gif" class="img-fluid"></p>
+</section>
+<section id="step-2-save-the-package-to-the-repo" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="step-2-save-the-package-to-the-repo"><span class="header-section-number">3.2</span> Step 2: Save the package to the repo</h2>
+<p>Now we need to save this package to the repo’s <code>environment.yml</code></p>
+<ul>
+<li>Type <code>conda env export &gt; environment.yml</code></li>
+<li>Since the package is in your environment, this code is exporting your new environment to repo’s one.</li>
+<li>Now push to github</li>
+</ul>
+<p><img src="images/add_yml.gif" class="img-fluid"></p>
+</section>
+</section>
+<section id="r-package-management--renv" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> R Package Management -<code>renv</code></h1>
+<p>Managing R packages is much easier than managing Python packages. The R environment uses a package called <code>renv</code>. It will save a list of packages to a lock file, similar to <code>environment.yml</code>. Then, every time you or another teammate opens the R project in your repo the <code>renv</code> package will activate in the background and determine if any packages are not aligned with the repo’s lock file. <strong>It will ensure that everyone is using the same package versions</strong></p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Your repo should have a <code>.Rproj</code> file at the <em>root</em> of the directory. If it doesn’t you can create it by opening <code>Rstudio &gt; File &gt; New Project... &gt; Existing Directory (or New Directory)</code> <strong>Make sure <code>.Rproj</code> files are NOT in your <code>.gitignore</code></strong></p>
+</div>
+</div>
+<section id="creating-renv-in-a-project" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="creating-renv-in-a-project"><span class="header-section-number">4.1</span> Creating <code>renv</code> in a project</h2>
+<section id="step-1-open-the-.rproj-in-your-repo" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="step-1-open-the-.rproj-in-your-repo"><span class="header-section-number">4.1.1</span> Step 1: Open the <code>.Rproj</code> in your repo</h3>
+<p>The R project will open up Rstudio at the root of you directory path.</p>
+<p><img src="images/open_r.gif" class="img-fluid"></p>
+</section>
+<section id="step-2-initialize-renv-for-the-repo" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="step-2-initialize-renv-for-the-repo"><span class="header-section-number">4.1.2</span> Step 2: Initialize <code>renv</code> for the repo</h3>
+<p>Now that we’re in the root of your repo directory, let’s initialize <code>renv</code>.</p>
+<p>First install <code>renv</code> - <code>install.packages("renv")</code></p>
+<p>Then in your console write <code>renv::init()</code> and run it.</p>
+<p><img src="images/renvinit.gif" class="img-fluid"></p>
+<p>If you already have an existing repo, you will probably see warnings and errors in the renv::init like I did in the gif above. Not to worry! Read the warnings and follow the instructions. Usually you will need to re-install a package. If you get this warning:</p>
+<pre><code>These may be left over from a prior, failed installation attempt.
+Consider removing or reinstalling these packages.</code></pre>
+<ul>
+<li>Then run <code>renv::install("THAT PACKAGE")</code>. It will install the package again,</li>
+<li>and then you need to update the lock file (more on that later) by running <code>renv::snapshot()</code>.</li>
+</ul>
+<p>Now the package will be installed correctly</p>
+<p><img src="images/renv_backports.gif" class="img-fluid"></p>
+<p><code>renv::init()</code> will:</p>
+<ol type="1">
+<li>Search through all R scripts in your repo and find all packages used</li>
+<li>Create a snapshot of those packages</li>
+<li>Save all packages in the repo in a new <code>renv</code> libraries path (similar to your C drive R libraries paths)</li>
+<li>Create a <code>.gitignore</code> within the <code>renv</code> libraries path so that you don’t get spammed with thousands of libraries in your git commit</li>
+<li>Create a lock file - this is like the <code>environment.yml</code> for conda. Think of it as instructions for which packages your repo is using</li>
+<li>It also saved things like an <code>activate</code> R script which will activate that <code>renv</code> every time the repo is opened from the <code>.Rproj</code></li>
+</ol>
+</section>
+<section id="step-3-push-to-github" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="step-3-push-to-github"><span class="header-section-number">4.1.3</span> Step 3: Push to Github</h3>
+<p>Now look at your git stage and you will see all the files <code>renv</code> created.</p>
+<p>We have</p>
+<ol type="1">
+<li><code>.Rprofile</code> that contains an <code>renv activate.R</code> script - this will activate the repo’s <code>renv</code> every time the project is opened</li>
+<li>The <code>renv.lock</code> file shows information on each package used in the repo and is used to update collaborator’s environments to match the lock file.</li>
+<li><code>renv/.gitignore</code> I don’t feel like explaining this one right now - i’ll write more later</li>
+<li><code>renv/activate.R</code> this will activate the env whenever the R project is opened</li>
+<li><code>renv/settings.dcf</code> I have no clue what this is</li>
+</ol>
+<p><img src="images/renv_git.gif" class="img-fluid"></p>
+</section>
+</section>
+<section id="using-renv-in-a-project" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="using-renv-in-a-project"><span class="header-section-number">4.2</span> Using <code>renv</code> in a project</h2>
+<section id="step-1-open-the-.rproj-for-your-repo" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="step-1-open-the-.rproj-for-your-repo"><span class="header-section-number">4.2.1</span> Step 1: Open the <code>.Rproj</code> for your repo</h3>
+<p>Any time you need to code or run code from the repo, open up the <code>.Rproj</code> file that contains the sequencing 2.0 project. In your file explorer, go to the repo and open Sequencing_2.0 <code>.Rproj</code></p>
+<p><br></p>
+<p>This will open up an R window with the repo file path as a root directory. It will also utilize the <code>renv</code>. Your console should say something about <code>renv</code>, like this</p>
+<p><img src="images/image-664157118.png" class="img-fluid"></p>
+</section>
+<section id="step-2-load-renv-packages" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="step-2-load-renv-packages"><span class="header-section-number">4.2.2</span> Step 2: Load <code>renv</code> packages</h3>
+<p>The first time you use <code>renv</code> you will need to configure it to your local machine. To do this, type:</p>
+<ul>
+<li><code>renv::restore()</code> in your console.</li>
+<li>This will create a new environment for your R in your local machine using the lock file packages.</li>
+</ul>
+<p><br></p>
+<p>Now you’re ready to use the scripts! Way less complicated than conda</p>
+</section>
+</section>
+</section>
+<section id="r-installing-new-packages" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> R Installing New Packages</h1>
+<p>If you need to install a new package and want to put it in the repo, you will need to update the lock file. To do this:</p>
+<ul>
+<li><code>renv::install()</code>, <code>pak::pkg_install("&lt;PACKAGE_NAME&gt;")</code> (the safe way) or even <code>install.packages()</code></li>
+<li><code>renv::snapshot()</code> this will overwrite the lock file with the packages you added</li>
+<li>Then push to github</li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There may be version dependency issues when installing a package and running a script. You may need to use <code>renv::history()</code> to see the previous hash of the lock file and use <code>renv::revert()</code> to revert the lock file back to its previous, stable state. More on this here https://solutions.posit.co/envs-pkgs/environments/upgrades/</p>
+</div>
+</div>
+<p><img src="images/r_save.gif" class="img-fluid"></p>
+<p>The video at the bottom of this page explains in detail <code>renv</code> and its capabilities https://solutions.posit.co/envs-pkgs/environments/upgrades/</p>
+</section>
+<section id="using-reticulate-with-conda-env" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Using Reticulate with Conda Env</h1>
+<p>Now that your R and Python environments are set up, if you have code that uses the <code>reticulate</code> package in R, it might still be pointing to your base Python environment. So, if you need to write python code in R (using reticulate), the code may break. Here’s what you need to do to make sure your <code>reticulate</code> python path is pointing towards your conda environment:</p>
+<ol type="1">
+<li>Open an anaconda prompt</li>
+<li>Activate your env and then write <code>where python</code> and it will provide you with a python.exe for that particular env. Copy that path</li>
+<li>Open the <code>.Rprofile</code> file in your repo and add this code: <code>Sys.setenv(RETICULATE_PYTHON = PATH_TO_ENV_PYTHON))</code>
+<ul>
+<li>Note, if you have other team members, make this code flexible to their usernames. It could look something like this <code>Sys.setenv(RETICULATE_PYTHON = file.path(Sys.getenv("USERPROFILE"),"Anaconda3/envs/seq_env/python.exe"))</code> where <code>Sys.getenv("USERPROFILE")</code> will add <code>C/Users/XXXX/</code> and it will automatically add the user’s name</li>
+</ul></li>
+<li>Now restart your R</li>
+<li>Open back up R and <strong>without running any other code or loading any libraries</strong> run <code>reticulate::py_config()</code> in your console. This should now show your conda environment path being used for reticulate</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        return container.innerHTML
+      } else {
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        console.log("RESIZE");
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>🍦</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
