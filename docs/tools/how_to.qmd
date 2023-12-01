@@ -249,12 +249,12 @@ repository. This lets us update the code and not need to copy and paste
 any new changes to the documentation/github page
 
 To do this, open your *external* R script in your repo. In this case
-we're using `lineages_public_repo.R`. Now wrap the chunks of code you
+we're using `external_script.R`. Now wrap the chunks of code you
 want to link with comments like this, `## ---- libraries` and
 `## ---- stop`:
 
 ::: smallframe
-```{r}
+```{r filename="external_script.R"}
 #| echo: true
 #| eval: false
 ## ---- libraries
@@ -287,7 +287,7 @@ Scan the external R script for code chunks:
 ```` markdown
 ```{{r setup}}
 #| echo: false
-knitr::read_chunk(file.path(getwd(),"lineages_public_repo.R"))
+knitr::read_chunk(file.path(getwd(),"external_script.R"))
 ```
 ````
 :::
@@ -360,7 +360,7 @@ run when any code gets pushed to the main branch in the documentation
 folder or `lineages_public_repo.R` script
 
 ::: myframe
-```{yaml}
+```{yaml filename="quarto-publish.yml"}
 #| eval: false
 #| echo: true
 on: 
@@ -378,7 +378,7 @@ what operating system to run it on. In this case `ubuntu` with the
 `latest` version. This can be `windows`, `linux` or `macOS`.
 
 ::: myframe
-```{yaml}
+```{yaml filename="quarto-publish.yml"}
 #| eval: false
 #| echo: true
 name: Render and Publish
@@ -402,7 +402,7 @@ Now we have the steps:
     machine
 
 ::: myframe
-```{yaml}
+```{yaml filename="quarto-publish.yml"}
 #| eval: false
 #| echo: true
     env:
@@ -450,7 +450,7 @@ And finally,
     which branch and path to render the site to
 
 ::: myframe
-```{yaml}
+```{yaml filename="quarto-publish.yml"}
 #| eval: false
 #| echo: true
       - name: Publish to GitHub Pages (and render)
@@ -479,7 +479,7 @@ here](../wiki/venv.qmd)
 To use `renv` in a Github Action, you can put
 
 ::: smallframe
-```{yaml}
+```{yaml filename="quarto-publish.yml"}
 #| eval: false
 #| echo: true
 - name: Setup Renv
@@ -496,7 +496,7 @@ non-executable code chunk once, make sure you have this code in your
 `_quarto.yml` file:
 
 ::: smallframe
-```{yaml}
+```{yaml filename="quarto-publish.yml"}
 #| eval: false
 #| echo: true
 execute:
