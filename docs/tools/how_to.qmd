@@ -496,7 +496,7 @@ non-executable code chunk once, make sure you have this code in your
 `_quarto.yml` file:
 
 ::: smallframe
-```{yaml filename="quarto-publish.yml"}
+```{yaml filename="_quarto.yml"}
 #| eval: false
 #| echo: true
 execute:
