@@ -15,7 +15,7 @@
   --quarto-hl-er-color: #ffff00;
   --quarto-hl-ex-color: inherit;
   --quarto-hl-fl-color: #44aa43;
-  --quarto-hl-fu-color: #ff9358;
+  --quarto-hl-fu-color: #75D054ff;
   --quarto-hl-im-color: inherit;
   --quarto-hl-in-color: #adb5bd;
   --quarto-hl-kw-color: #43a8ed;
@@ -110,7 +110,7 @@ code span.fl {
 }
 
 code span.fu {
-  color: #ff9358;
+  color: #75d054;
   font-weight: bold;
   font-style: inherit;
 }
