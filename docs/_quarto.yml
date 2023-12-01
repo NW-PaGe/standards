@@ -77,6 +77,10 @@ format:
     # code-fold: show
     code-overflow: wrap
     page-layout: full
+    backgroundcolor: "#f8f9fa"
+    # header-includes: |
+    #   <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/metropolitano" type="text/css"/>
+# mainfont: Franklin Gothic   
     
     
 execute: 

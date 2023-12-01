@@ -110,7 +110,7 @@
             "underline": false
         },
         "Function": {
-            "text-color": "#ff9358",
+            "text-color": "#75D054ff",
             "background-color": null,
             "bold": true,
             "italic": false,

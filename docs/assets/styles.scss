@@ -30,6 +30,10 @@ $navbar-fg: #f5eff6;
   --bs-root-font-size: 20px;
 }
 
+h1, h2, h3 {
+  font-family: "Franklin Gothic", Georgia, serif;
+}
+
 // The page text color
 $body-color: $gray-700;
 
@@ -216,5 +220,4 @@ div.obj>p:first-child {
       transition-delay: 0.75s;
   }
 }
-
 

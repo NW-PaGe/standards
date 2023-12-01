@@ -6,9 +6,9 @@ date-modified: today
 author: 
   - name: Frank Aragona
     email: frank.aragona@doh.wa.gov
+  - name: Kathleen Conery
     affiliations:
       - Washington Department of Health
-      - Data Integration/Quality Assurance
 format: 
   html:
     code-fold: false
@@ -22,10 +22,6 @@ filters:
   - line-highlight
 ---
 
-> "I solemnly swear I am up to no good."
->
-> \- Harry Potter
-
 ::: obj
 **Objectives**
 
@@ -34,9 +30,16 @@ filters:
 3.  Develop a process for reviewing code and pushing private code to a public repo
 :::
 
+<br>
+
+> "I solemnly swear I am up to no good."
+>
+> \- Harry Potter
+
+::: column-body-outset
 # Github Security Guidelines
 
-The following shall not be included in any repo **or any local commit!!!**:
+The following shall not be included in any repo **or any local commit!**:
 
 -   Absolute file paths
 -   WDRS server names
@@ -51,28 +54,30 @@ The following shall not be included in any repo **or any local commit!!!**:
 -   Connection strings
 -   Specific location information (e.g., addresses where mosquito traps are placed for gathering mosquitoes samples for surveillance of west Nile)
 
+::: callout-warning
 If any of these are committed to the remote repo then they will stay in the git history (and will require a lot of effort to remove them from the history).
 
 The best line of defense is setting up local guardrails to prevent security leaks in the first place. This section will show how to make these local guardrails
+:::
 
-## Prevent Credential Leaks with Env Variables
+<br>
 
-There are a number of ways to do this. We typically use a yaml file that can be filled out with personal credentials locally. The file will not be committed to the remote repo 
+## Prevent Credential Leaks with Env Variables {.unnumbered}
 
-### Create a credentials or object
-The scripts use a `.yml` file that contains a list of API tokens, server names, and usernames/passwords specific to each individual user. There are two `.yml` files. 
+There are a number of ways to do this. We typically use a yaml file that can be filled out with personal credentials locally. The file will not be committed to the remote repo
 
-One is a template (containing no actual passwords..) that exists in the repo and serves as a template so every individual user can keep up to date with new credential additions. 
+### Create a private credentials file
 
-The other is the individual `creds.yml` that is in the repo's `.gitignore`. This file will never exist in the repo and only exist locally (in the user's C drive). 
+The scripts use a `.yml` file that contains a list of API tokens, server names, and usernames/passwords specific to each individual user. There are two `.yml` files. One is a template (containing no actual passwords..) that exists in the repo and serves as a template so every individual user can keep up to date with new credential additions. The other is the individual `creds.yml` that is in the repo's `.gitignore`. This file will never exist in the repo and only exist locally (in the user's C drive).
 
 ### `creds.yml` details
+
 The `.yml` file can work with multiple programming languages including R and Python. They are read in the same way and can be easily adjusted when adding new passwords or using them as configuration files.
 
 They look like this:
 
-:::{.myframe}
-```{yaml}
+::: myframe
+```{yaml filename="local_credentials.yml"}
 # Default is needed to distinguish values.
 # Leave a blank line (NO SPACES) as the last line in this file or things will break
 # Quotes aren't necessary, but can be used.
@@ -93,9 +98,9 @@ default:
 
 You can have different variables assigned to unique lists, which allows for easy configuration. For example, the list starting with `default` has variables `conn_list_wdrs` and `fulgent`. You can have a different list of variables within the same file like this:
 
-:::{.myframe}
-```{yaml}
-#| source-line-numbers: "4-5,16"
+::: myframe
+```{yaml filename="local_credentials.yml"}
+#| source-line-numbers: "4-5,16-17"
 # Default is needed to distinguish values.
 # Leave a blank line (NO SPACES) as the last line in this file or things will break
 # Quotes aren't necessary, but can be used.
@@ -112,38 +117,74 @@ default:
     password: <PASSWORD>
 
 test:
-  conn_list_lims:
+  conn_list_wdrs:
     Driver: "SQL Server Native Client 11.0"
     Server: 
     Database: 
     Trusted_connection: 
     ApplicationIntent: 
-    
-  conn_list_test:
-    Driver: "SQL Server Native Client 11.0"
-    Server: 
-    Database: 
-    Trusted_connection: 
-    ApplicationIntent: 
-
-MPV:
-  redcap_mpv_token: 
 
 ```
 :::
 
-Now there is a `test` list and an `MPV` list with their own variables. This lets us switch a set of variables within our scripts. `default` applies to the main credentials where `MPV` can distinguish which variables should be MPV scripts specific
+Now there is a `test` list with its own variables. This lets us switch a set of variables within our scripts. `default` applies to the main credentials where `test` can distinguish which variables should be test or dev scripts specific. Notice below that you can now call the credentials from a `.yml` file into an R or Python script and the actual credentials will never exist in the code pushed to the repo.
+
+::: myframe
+```{r filename="script_in_repo.R"}
+# this script is in the repo, but credentials are hidden
+library(yaml)
+
+# read in the local credentials yaml file
+creds <- yaml::read_yaml("path/to/local_credentials.yml")
+
+# pull in the credentials
+server_name <- creds$default$conn_list_wdrs$server
+```
+:::
+:::
+
+###  {.unnumbered}
+
+::: {.column-screen-inset-shaded layout-nrow="1"}
+We can even get more specific and add an `if-else` statement to specify which credential we want to select. This can be helpful if we have a CI/CD pipeline and have a script automatically run on a task scheduler or cron job. We can call the credentials we want in the command line and have the command line code run in my task scheduler. That way we can use multiple different versions of the same script and have all of it be automated. For example, the middle panel uses the `commandArgs()` to pull any arguments passed to the script in a shell/command line script. In the right panel, the shell script has `production` and `test` as second arguments. These are passed to the R script as `arg[2]`. Now we can use `arg[2]` in the if-else statement to conditionally select credentials and do it automatically.
+
+```{r filename="script_in_repo.R"}
+#| source-line-numbers: "1,9-14"
+args <- commandArgs(TRUE)
+
+# this script is in the repo, but credentials are hidden
+library(yaml)
+
+# read in the local credentials yaml file
+creds <- yaml::read_yaml("path/to/local_credentials.yml")
+
+# pull in the credentials
+if(args[2] == "production"){
+  server_name <- creds$default$conn_list_wdrs$server
+} else if(args[2] == "test"){
+  server_name <- creds$test$conn_list_wdrs$server
+}
+
+```
+
+```{bash filename="shell_trigger_script.sh"}
+# Run the production code
+$ Rscript -e "source('path/script_in_repo.R');" production
+
+# Run the test/dev code
+$ Rscript -e "source('path/script_in_repo.R');" test 
+```
+:::
 
 ### Safe Guards - Prevent Accidental Leaks!!!
+
 Once you have the credentials.yml template in your repo, make sure that nobody on your team (or anyone with write access..) is able to accidentally push changes to the template. We don't want someone's passwords or API tokens to exist in GitHub.
 
 [This link shows how to skip any changes made to the specific file](https://stackoverflow.com/a/39776107). If someone makes local changes to the template, the changes will not show in their commit. It is a safe guard.
 
-
-
 #### For all individual users, run this code:
 
-:::{.smallframe}
+::: smallframe
 ```{bash}
 git update-index --skip-worktree creds_TEMPLATE.yml
 ```
@@ -153,7 +194,7 @@ This will tell your local git to ignore any changes made to `creds_TEMPLATE.yml`
 
 #### If you need to update the template file run this:
 
-:::{.smallframe}
+::: smallframe
 ```{bash}
 git update-index --no-skip-worktree creds_TEMPLATE.yml
 ```
@@ -163,7 +204,7 @@ This will allow changes to the template. **So when you need to update the templa
 
 And to get a list of files that are "skipped", use this code:
 
-:::{.smallframe}
+::: smallframe
 ```{bash}
 git ls-files -v . | grep ^S
 ```
@@ -171,14 +212,99 @@ git ls-files -v . | grep ^S
 
 # Security Guardrails
 
-Using a `.gitignore` file for environmental variables/credentials is an excellent guardrail and promotes good coding habits, but we may also want additional guardrails such as hooks. 
+Using a `.gitignore` file for environmental variables/credentials is an excellent guardrail and promotes good coding habits, but we may also want additional guardrails such as hooks.
 
-Hooks are processes that run in the background and can prevent code from being pushed if there is a security flaw. There are two hooks we could use for security; pre-commit hooks and pre-recieve hooks
+Hooks are processes that run in the background and can prevent code from being pushed if there is a security flaw. There are two hooks we could use for security; pre-commit hooks and pre-receive hooks
 
 ## Pre-commit Hooks
 
+Pre-commit hooks run a process locally when the user attempts to commit code to a git branch. Hooks have many uses. Here we can use them as a security guardrail to prevent accidental credential leaks in committed code.
+
+1.  Clone or download the AWS Git Secrets repo from [awslabs GitHub](https://github.com/awslabs/git-secrets/blob/master/install.ps1)
+
+    ![](images/gh_secrets.PNG){.myframe}
+
+2.  Extract zip
+
+3.  Open folder and right click install.ps1
+
+    a.  Run in Power Shell
+    b.  Type Y to give permission
+
+4.  CD to a directory where you have the git repository you want to upload, either in PowerShell or R studio terminal.
+
+    ::: smallframe
+    ```{bash filename="PowerShell"}
+    PS > cd path/to/repo/root
+    ```
+    :::
+
+
+5.  Run git secrets --install
+
+    ::: smallframe
+    ```{bash filename="PowerShell"}
+    git secrets --install
+    ```
+    :::
+
+6.  Copy the regex file containing the secret patterns into your folder. -- make text file -- discuss with team what all we want to make illegal.
+
+7.  Run git secrets --add-provider -- cat ./secrets_key
+
+    ::: smallframe
+    ```{bash filename="PowerShell"}
+    git secrets --add-provider -- cat ./secrets_key
+    ```
+    :::
+
+    You can also add prohibited patterns like this
+
+    ::: smallframe
+    ```{bash filename="PowerShell"}
+    # add a pattern
+    git secrets --add '[A-Z0-9]{20}'
+    
+    # add a literal string, the + is escaped
+    git secrets --add --literal 'foo+bar'
+    
+    # add an allowed pattern
+    git secrets --add -a 'allowed pattern'
+    ```
+    :::
+
+8.  Test Git history by running
+
+    ::: smallframe
+    ```{bash filename="PowerShell"}
+    git secrets --scan-history
+    ```
+    :::
+
+9.  If something gets flagged and you don't care about your history anymore: Delete .git folder and reinitialize repository
+
+    I would take caution about this point. There might be better ways to clean your git history if you don't want to get rid of everything.
+
+10. Test on one of my projects to see if rebasing is a sustainable option
+
+11. Make repo public
+
+12. Will automatically scan on every commit and won't let it commit unless it's clean - Create a few files to show it working
+
+::: callout-note
+We can't use the "Non capture group" feature of regex. Meaning we can't use patterns like this in our regex: (?:abc) -- see https://regexr.com IMPORTANT: Tab separate your regex expressions. Making new lines caused a bit of chaos and took really long to figure out. (you can use multiple tabs to separate them more visually)
+:::
 
 ## Pre-Recieve Hooks
 
+These are still being investigated. They are remote hooks (not local like pre-commit hooks) that can be deployed throughout the Github organization. They can block certain commits from ever being pushed to the remote repo. They may make things unnecessarily complicated
+
 # Code Reviewers/Github Operations Team
 
+With the guardrails above in place there should be few chances that credentials get pushed to a repo. However accidents may still happen. We want to make sure that anyone who opens up a repo in the Github organization adheres to the rules, has the proper credential/coding set-up, and installs their local pre-commit hooks properly.
+
+It may be useful to have a team within the organization that helps with repo set-up. The team would help avoid a scenario where a person opens up a repo without reading this documentation and understanding the rules (and thus potentially breaking security rules).
+
+This Github Operations Team could also be helpful in managing permissions for members in the organization. See the video below on how the company Qualcomm manages their Github organization and how they use a Github Operations Team to guide new members access/repo development
+
+{{< video https://www.youtube.com/embed/1T4HAPBFbb0?si=YRsUYXIxLPhdr41T >}}
