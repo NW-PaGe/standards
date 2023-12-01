@@ -305,6 +305,6 @@ With the guardrails above in place there should be few chances that credentials 
 
 It may be useful to have a team within the organization that helps with repo set-up. The team would help avoid a scenario where a person opens up a repo without reading this documentation and understanding the rules (and thus potentially breaking security rules).
 
-This Github Operations Team could also be helpful in managing permissions for members in the organization. See the video below on how the company Qualcomm manages their Github organization and how they use a Github Operations Team to guide new members access/repo development
+This Github Operations Team could also be helpful in managing permissions for members in the organization. See the video below on how the company Qualcomm manages their Github organization and how they use a Github Operations Team to guide new members access/repo development 
 
 {{< video https://www.youtube.com/embed/1T4HAPBFbb0?si=YRsUYXIxLPhdr41T >}}
