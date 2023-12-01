@@ -25,6 +25,10 @@ $theme-ground: #416270;
 // nav bar color
 $navbar-fg: #f5eff6;
 
+.navbar-dark .navbar-brand .navbar-nav .navbar-link {
+  color: #f5eff6;
+}
+
 // root font size;
 :root {
   --bs-root-font-size: 20px;
