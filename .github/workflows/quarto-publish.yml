@@ -27,22 +27,22 @@ jobs:
       - name: Install CURL Headers
         run: sudo apt-get install libcurl4-openssl-dev
 
-      # - name: Setup Renv
-      #   uses: r-lib/actions/setup-renv@v2
+      - name: Setup Renv
+        uses: r-lib/actions/setup-renv@v2
   
-      - name: Cache packages
-        uses: actions/cache@v1
-        with:
-          path: ${{ env.RENV_PATHS_ROOT }}
-          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-renv-
+      # - name: Cache packages
+      #   uses: actions/cache@v1
+      #   with:
+      #     path: ${{ env.RENV_PATHS_ROOT }}
+      #     key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-renv-
       
-      - name: Restore packages
-        shell: Rscript {0}
-        run: |
-          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
-          renv::restore()
+      # - name: Restore packages
+      #   shell: Rscript {0}
+      #   run: |
+      #     if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+      #     renv::restore()
        
 
       - name: Publish to GitHub Pages (and render)
