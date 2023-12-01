@@ -18,16 +18,31 @@ $theme-yellow: #E8D4AD;
 $theme-darksand: #D0927D;
 $theme-night: #1E313D;
 $theme-ground: #416270;
+$navbar-fg: #f5eff6;
 
 
 /*-- scss:rules --*/
 
 // nav bar color
+/*
 $navbar-fg: #f5eff6;
+*/
 
+/*
 .navbar-dark .navbar-nav .navbar-link {
   color: #f5eff6;
 }
+*/
+
+/*
+.navbar-brand {
+  color: $gray-100;
+}
+
+.nav-link {
+  color: $gray-100;
+}
+*/
 
 // root font size;
 :root {
@@ -49,14 +64,6 @@ $body-color: $gray-700;
   background-color: lightpurple;
   border: 3px solid purple;
   font-weight: bold;
-}
-
-.navbar-brand {
-  color: $gray-100;
-}
-
-.nav-link {
-  color: $gray-100;
 }
 
 .smallframe {
@@ -83,7 +90,7 @@ $body-color: $gray-700;
 
 /*----------DIV TIPS------------*/
 
-div.note, div.tip, div.gotcha, div.design, div.hat, div.obj{
+div.obj{
   border: 4px $secondary;
   border-style: solid;
   padding: 1em;
