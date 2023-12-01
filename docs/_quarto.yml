@@ -5,7 +5,7 @@ project:
 #   hypothesis: true
 
 website:
-  title: "COE Github Standards"
+  title: "🌲 COE Github Standards"
   # author: DIQA 
   # date: today
   search: true
@@ -39,7 +39,7 @@ website:
             
             
     search: true
-    logo: images/doh_logo.png
+    # logo: images/doh_logo.png
     pinned: false
     
     right:
