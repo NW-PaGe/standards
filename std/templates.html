@@ -312,6 +312,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In order to write and set these policies at the organization level we can put them at the root of the <code>.github</code> repository and edit them there.</p>
 <div class="smallframe">
 <div class="cell" data-source-line-numbers="4-7">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>PowerShell</strong></pre>
+</div>
 <div class="sourceCode cell-code" id="cb1" data-source-line-numbers="4-7" data-code-line-numbers="4-7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> tree /f</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">C:.</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   .gitignore</span>
@@ -323,6 +327,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ex">├───.github</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ex">└───profile</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="ex">README.md</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 </div>
 <p><br></p>
@@ -345,6 +350,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In the <code>.github</code> <em>folder</em> I have a folder called <code>DISCUSSION_TEMPLATE</code> and another called <code>ISSUE_TEMPLATE</code>. These are special folders that Github recognizes as discussion and issue folders that will set templates at the repo (or in this case the org) level.</p>
 <div class="smallframe">
 <div class="cell" data-source-line-numbers="9-20">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>PowerShell</strong></pre>
+</div>
 <div class="sourceCode cell-code" id="cb2" data-source-line-numbers="9-20" data-code-line-numbers="9-20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> tree /f</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">C:.</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>   .gitignore</span>
@@ -370,10 +379,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        <span class="ex">README.md</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
+</div>
 <p>Each Folder has <code>.yml</code> files in it that are basically Github instructions on how to format issues and discussions.</p>
 <p>For example, in the <code>ISSUE_TEMPLATE</code> folder I have a <code>.yml</code> file called <code>bug_report.yml</code>. This file contains the structure for how someone can report a bug.</p>
 <div class="smallframe">
 <div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>bug_report.yml</strong></pre>
+</div>
 <div class="sourceCode cell-code" id="cb3" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> 🐛Bug Report</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> File a bug report here</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"[BUG]: "</span></span>
@@ -387,6 +401,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        Make sure there aren't any open/closed issues for this topic 😃</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
+</div>
 <p><br></p>
 <p>Now, when someone clicks on the <code>Issues</code> tab in a repo in this organization they will be met with the <code>Bug Report</code> template:</p>
 <p><img src="images/bug_report.gif" class="myframe img-fluid"></p>
@@ -394,6 +409,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Notice that in the template you can create text areas and pre-fill those areas with suggestions. You can even require that someone fills out those areas before they can submit the issue:</p>
 <div class="smallframe">
 <div class="cell" data-source-line-numbers="1,6-10,11-12">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>bug_report.yml</strong></pre>
+</div>
 <div class="sourceCode cell-code" id="cb4" data-source-line-numbers="1,6-10,11-12" data-code-line-numbers="1,6-10,11-12"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> textarea</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">id</span><span class="kw">:</span><span class="at"> steps-to-reproduce</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">attributes</span><span class="kw">:</span></span>
@@ -406,6 +425,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        4. See error</span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">validations</span><span class="kw">:</span></span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">required</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 </div>
 <p><img src="images/bug_report.jpg" class="myframe img-fluid"></p>
