@@ -413,9 +413,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="how-to-link-external-code-to-the-site" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> How to link external code to the site</h1>
 <p>The code in this website is automatically linked to the code in the repository. This lets us update the code and not need to copy and paste any new changes to the documentation/github page</p>
-<p>To do this, open your <em>external</em> R script in your repo. In this case we’re using <code>lineages_public_repo.R</code>. Now wrap the chunks of code you want to link with comments like this, <code>## ---- libraries</code> and <code>## ---- stop</code>:</p>
+<p>To do this, open your <em>external</em> R script in your repo. In this case we’re using <code>external_script.R</code>. Now wrap the chunks of code you want to link with comments like this, <code>## ---- libraries</code> and <code>## ---- stop</code>:</p>
 <div class="smallframe">
 <div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>external_script.R</strong></pre>
+</div>
 <div class="sourceCode cell-code" id="cb4" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">## ---- libraries</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(</span>
@@ -431,6 +435,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="do">## ---- stop</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
+</div>
 <p>The <code>## ---- libraries</code> signals the beginning of a chunk. the <code>## ---- stop</code> signals the end of a chunk.</p>
 <p><br></p>
 <p>Now you can call this chunk in your <em>github page/quarto document</em> like this:</p>
@@ -438,7 +443,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="smallframe">
 <div class="sourceCode" id="cb5" data-code-line-numbers=""><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup}</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">read_chunk</span>(<span class="fu">file.path</span>(<span class="fu">getwd</span>(),<span class="st">"lineages_public_repo.R"</span>))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">read_chunk</span>(<span class="fu">file.path</span>(<span class="fu">getwd</span>(),<span class="st">"external_script.R"</span>))</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><br></p>
@@ -473,6 +478,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code>on:</code> is a tag indicating when the action will run. Right now it will run when any code gets pushed to the main branch in the documentation folder or <code>lineages_public_repo.R</code> script</p>
 <div class="myframe">
 <div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>quarto-publish.yml</strong></pre>
+</div>
 <div class="sourceCode cell-code" id="cb7" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span><span class="at"> </span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span></span>
@@ -482,14 +491,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> lineages_public_repo.R</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
+</div>
 <p><code>jobs:</code> is a tag that tells a Github virtual machine what to run and what operating system to run it on. In this case <code>ubuntu</code> with the <code>latest</code> version. This can be <code>windows</code>, <code>linux</code> or <code>macOS</code>.</p>
 <div class="myframe">
 <div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>quarto-publish.yml</strong></pre>
+</div>
 <div class="sourceCode cell-code" id="cb8" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Render and Publish</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">build-deploy</span><span class="kw">:</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 </div>
 <p><br></p>
@@ -502,6 +517,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <div class="myframe">
 <div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>quarto-publish.yml</strong></pre>
+</div>
 <div class="sourceCode cell-code" id="cb9" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">env</span><span class="kw">:</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">RENV_PATHS_ROOT</span><span class="kw">:</span><span class="at"> ~/.cache/R/renv</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="at">      </span></span>
@@ -536,6 +555,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>          renv::restore()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
+</div>
 <p><br></p>
 <p>And finally,</p>
 <ul>
@@ -544,6 +564,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <div class="myframe">
 <div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>quarto-publish.yml</strong></pre>
+</div>
 <div class="sourceCode cell-code" id="cb10" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Publish to GitHub Pages (and render)</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> quarto-dev/quarto-actions/publish@v2</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
@@ -551,6 +575,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">path</span><span class="kw">:</span><span class="at"> documentation/_site</span></span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">env</span><span class="kw">:</span></span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">GITHUB_TOKEN</span><span class="kw">:</span><span class="at"> ${{ secrets.GITHUB_TOKEN }}</span><span class="co"> # this secret is always available for github actions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 </div>
 </section>
@@ -561,8 +586,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>To use <code>renv</code> in a Github Action, you can put</p>
 <div class="smallframe">
 <div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>quarto-publish.yml</strong></pre>
+</div>
 <div class="sourceCode cell-code" id="cb11" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Setup Renv</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> r-lib/actions/setup-renv@v2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 </div>
 <p>or use the renv cache code in the <code>yaml</code> section above</p>
@@ -572,9 +602,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>If you only need to execute the code once or just need to render a non-executable code chunk once, make sure you have this code in your <code>_quarto.yml</code> file:</p>
 <div class="smallframe">
 <div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>quarto-publish.yml</strong></pre>
+</div>
 <div class="sourceCode cell-code" id="cb12" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">execute</span><span class="kw">:</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">error</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">freeze</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 </div>
 <p>and then run this in your terminal window:</p>
