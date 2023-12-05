@@ -78,6 +78,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -138,7 +140,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../std/templates.html" rel="" target="">
- <span class="dropdown-text">2: Org Policy Setting</span></a>
+ <span class="dropdown-text">2: Repo Policies</span></a>
   </li>  
     </ul>
   </li>
@@ -198,6 +200,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#pre-commit-hooks" id="toc-pre-commit-hooks" class="nav-link" data-scroll-target="#pre-commit-hooks"><span class="header-section-number">2.1</span> Pre-commit Hooks</a></li>
   <li><a href="#pre-recieve-hooks" id="toc-pre-recieve-hooks" class="nav-link" data-scroll-target="#pre-recieve-hooks"><span class="header-section-number">2.2</span> Pre-Recieve Hooks</a></li>
+  <li><a href="#pushing-private-code-to-public-repos" id="toc-pushing-private-code-to-public-repos" class="nav-link" data-scroll-target="#pushing-private-code-to-public-repos"><span class="header-section-number">2.3</span> Pushing Private Code to Public Repos</a></li>
   </ul></li>
   <li><a href="#code-reviewersgithub-operations-team" id="toc-code-reviewersgithub-operations-team" class="nav-link" data-scroll-target="#code-reviewersgithub-operations-team"><span class="header-section-number">3</span> Code Reviewers/Github Operations Team</a></li>
   </ul>
@@ -217,26 +220,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </div>
 
-<div class="quarto-title-meta-author">
-  <div class="quarto-title-meta-heading">Authors</div>
-  <div class="quarto-title-meta-heading">Affiliation</div>
-  
-    <div class="quarto-title-meta-contents">
-    <p class="author">Frank Aragona </p>
-  </div>
-      <div class="quarto-title-meta-contents">
-    <p class="author">Kathleen Conery </p>
-  </div>
-    <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            Washington Department of Health
-          </p>
-      </div>
-    </div>
 
 <div class="quarto-title-meta">
 
-      
+    <div>
+    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-contents">
+             <p>Frank Aragona </p>
+             <p>Kathleen Conery </p>
+          </div>
+  </div>
+    
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
@@ -247,7 +241,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">December 1, 2023</p>
+      <p class="date-modified">December 5, 2023</p>
     </div>
   </div>
     
@@ -460,7 +454,7 @@ Warning
 </div>
 </section>
 </section>
-<section id="security-guardrails" class="level1" data-number="2">
+<section id="security-guardrails" class="level1 page-columns page-full" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Security Guardrails</h1>
 <p>Using a <code>.gitignore</code> file for environmental variables/credentials is an excellent guardrail and promotes good coding habits, but we may also want additional guardrails such as hooks.</p>
 <p>Hooks are processes that run in the background and can prevent code from being pushed if there is a security flaw. There are two hooks we could use for security; pre-commit hooks and pre-receive hooks</p>
@@ -476,7 +470,7 @@ Warning
 <li>Run in Power Shell</li>
 <li>Type Y to give permission</li>
 </ol></li>
-<li><p>CD to a directory where you have the git repository you want to upload, either in PowerShell or R studio terminal.</p>
+<li><p>CD to a directory where you have the git repository you want to upload, either in PowerShell or R studio terminal <i class="fa-solid fa-terminal" aria-label="terminal"></i></p>
 <div class="smallframe">
 <div class="cell">
 <div class="code-with-filename">
@@ -562,6 +556,25 @@ Note
 <section id="pre-recieve-hooks" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="pre-recieve-hooks"><span class="header-section-number">2.2</span> Pre-Recieve Hooks</h2>
 <p>These are still being investigated. They are remote hooks (not local like pre-commit hooks) that can be deployed throughout the Github organization. They can block certain commits from ever being pushed to the remote repo. They may make things unnecessarily complicated</p>
+</section>
+<section id="pushing-private-code-to-public-repos" class="level2 page-columns page-full" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="pushing-private-code-to-public-repos"><span class="header-section-number">2.3</span> Pushing Private Code to Public Repos</h2>
+<p>We may wish to take private codes and push them to a public repo. We need to make sure that the public code doesn’t not contain sensitive or forbidden data/code, so cleaning up the private repo is important before pushing.</p>
+<p>There are a few ways to do this, but the easiest way is to copy the clean private code to the public repo, that is, copy all the files you want to add publicly but <strong>do not copy the <code>.git</code></strong> folder. If the private repo has a dirty git history we will not want that history in the public repo because the sensitive data will then be publicly available.</p>
+<div class="column-screen-inset-shaded quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="images/private_repo3.PNG" class="myframe img-fluid"></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<p><img src="images/public_repo3.PNG" class="myframe img-fluid"></p>
+</div>
+</div>
+</div>
+<p><br></p>
+<p><i class="fa-solid fa-circle-exclamation" aria-label="circle-exclamation"></i> The private repository on the left still contains sensitive information in the git history. The public repository on the right has a clean git history because we copied only the current clean files from the private repo and did not attach its git history (which lives in the hidden <code>.git</code> folder)</p>
+<p><br></p>
+<p><br></p>
 </section>
 </section>
 <section id="code-reviewersgithub-operations-team" class="level1" data-number="3">

@@ -123,7 +123,7 @@
     "href": "std/security.html#pre-commit-hooks",
     "title": "Security Standards",
     "section": "2.1 Pre-commit Hooks",
-    "text": "2.1 Pre-commit Hooks\nPre-commit hooks run a process locally when the user attempts to commit code to a git branch. Hooks have many uses. Here we can use them as a security guardrail to prevent accidental credential leaks in committed code.\n\nClone or download the AWS Git Secrets repo from awslabs GitHub\n\nExtract zip\nOpen folder and right click install.ps1\n\nRun in Power Shell\nType Y to give permission\n\nCD to a directory where you have the git repository you want to upload, either in PowerShell or R studio terminal.\n\n\n\n\nPowerShell\n\nPS &gt; cd path/to/repo/root\n\n\n\nRun git secrets –install\n\n\n\n\nPowerShell\n\ngit secrets --install\n\n\n\nCopy the regex file containing the secret patterns into your folder. – make text file – discuss with team what all we want to make illegal.\nRun git secrets –add-provider – cat ./secrets_key\n\n\n\n\nPowerShell\n\ngit secrets --add-provider -- cat ./secrets_key\n\n\n\nYou can also add prohibited patterns like this\n\n\n\n\nPowerShell\n\n# add a pattern\ngit secrets --add '[A-Z0-9]{20}'\n\n# add a literal string, the + is escaped\ngit secrets --add --literal 'foo+bar'\n\n# add an allowed pattern\ngit secrets --add -a 'allowed pattern'\n\n\n\nTest Git history by running\n\n\n\n\nPowerShell\n\ngit secrets --scan-history\n\n\n\nIf something gets flagged and you don’t care about your history anymore: Delete .git folder and reinitialize repository\nI would take caution about this point. There might be better ways to clean your git history if you don’t want to get rid of everything.\nTest on one of my projects to see if rebasing is a sustainable option\nMake repo public\nWill automatically scan on every commit and won’t let it commit unless it’s clean - Create a few files to show it working\n\n\n\n\n\n\n\nNote\n\n\n\nWe can’t use the “Non capture group” feature of regex. Meaning we can’t use patterns like this in our regex: (?:abc) – see https://regexr.com IMPORTANT: Tab separate your regex expressions. Making new lines caused a bit of chaos and took really long to figure out. (you can use multiple tabs to separate them more visually)"
+    "text": "2.1 Pre-commit Hooks\nPre-commit hooks run a process locally when the user attempts to commit code to a git branch. Hooks have many uses. Here we can use them as a security guardrail to prevent accidental credential leaks in committed code.\n\nClone or download the AWS Git Secrets repo from awslabs GitHub\n\nExtract zip\nOpen folder and right click install.ps1\n\nRun in Power Shell\nType Y to give permission\n\nCD to a directory where you have the git repository you want to upload, either in PowerShell or R studio terminal \n\n\n\n\nPowerShell\n\nPS &gt; cd path/to/repo/root\n\n\n\nRun git secrets –install\n\n\n\n\nPowerShell\n\ngit secrets --install\n\n\n\nCopy the regex file containing the secret patterns into your folder. – make text file – discuss with team what all we want to make illegal.\nRun git secrets –add-provider – cat ./secrets_key\n\n\n\n\nPowerShell\n\ngit secrets --add-provider -- cat ./secrets_key\n\n\n\nYou can also add prohibited patterns like this\n\n\n\n\nPowerShell\n\n# add a pattern\ngit secrets --add '[A-Z0-9]{20}'\n\n# add a literal string, the + is escaped\ngit secrets --add --literal 'foo+bar'\n\n# add an allowed pattern\ngit secrets --add -a 'allowed pattern'\n\n\n\nTest Git history by running\n\n\n\n\nPowerShell\n\ngit secrets --scan-history\n\n\n\nIf something gets flagged and you don’t care about your history anymore: Delete .git folder and reinitialize repository\nI would take caution about this point. There might be better ways to clean your git history if you don’t want to get rid of everything.\nTest on one of my projects to see if rebasing is a sustainable option\nMake repo public\nWill automatically scan on every commit and won’t let it commit unless it’s clean - Create a few files to show it working\n\n\n\n\n\n\n\nNote\n\n\n\nWe can’t use the “Non capture group” feature of regex. Meaning we can’t use patterns like this in our regex: (?:abc) – see https://regexr.com IMPORTANT: Tab separate your regex expressions. Making new lines caused a bit of chaos and took really long to figure out. (you can use multiple tabs to separate them more visually)"
   },
   {
     "objectID": "std/security.html#pre-recieve-hooks",
@@ -133,51 +133,58 @@
     "text": "2.2 Pre-Recieve Hooks\nThese are still being investigated. They are remote hooks (not local like pre-commit hooks) that can be deployed throughout the Github organization. They can block certain commits from ever being pushed to the remote repo. They may make things unnecessarily complicated"
   },
   {
+    "objectID": "std/security.html#pushing-private-code-to-public-repos",
+    "href": "std/security.html#pushing-private-code-to-public-repos",
+    "title": "Security Standards",
+    "section": "2.3 Pushing Private Code to Public Repos",
+    "text": "2.3 Pushing Private Code to Public Repos\nWe may wish to take private codes and push them to a public repo. We need to make sure that the public code doesn’t not contain sensitive or forbidden data/code, so cleaning up the private repo is important before pushing.\nThere are a few ways to do this, but the easiest way is to copy the clean private code to the public repo, that is, copy all the files you want to add publicly but do not copy the .git folder. If the private repo has a dirty git history we will not want that history in the public repo because the sensitive data will then be publicly available.\n\n\n\n\n\n\n\n\n\n\n\n The private repository on the left still contains sensitive information in the git history. The public repository on the right has a clean git history because we copied only the current clean files from the private repo and did not attach its git history (which lives in the hidden .git folder)"
+  },
+  {
     "objectID": "std/templates.html",
     "href": "std/templates.html",
-    "title": "Github Organization Templates and IaC",
+    "title": "Github Organization Policies",
     "section": "",
-    "text": "Objectives\n\nEnsure that all repos in the org have the required documents\nSet policy rules at the Organization level\nCreate template structure documents for each repo\nExplore Infrastructure as Code (IaC)\nIn the Github Organization we may require all repositories to contain certain documents. For example, we want to make sure that every repo has a CODE OF CONDUCT document that is a general policy applied throughout the organization.\nWe could make a CODE OF CONDUCT document and manually copy and paste it into each repo, but this will become unmanageable over time because\nThus, we need a way to programmatically set a policy rule that can be applied to each repo, old or new, and can update the policy for each repo if needed. This will save a lot of time and effort"
+    "text": "Objectives\n\nEnsure that all repos in the org have the required documents\nSet policy rules at the Organization level\nAll repos need to have reproducible code\nAll repos need documentation via README and/or Github Pages\nIn the Github Organization we may require all repositories to contain certain documents. For example, we want to make sure that every repo has a CODE OF CONDUCT document that is a general policy applied throughout the organization.\nWe could make a CODE OF CONDUCT document and manually copy and paste it into each repo, but this will become unmanageable over time because\nThus, we need a way to programmatically set a policy rule that can be applied to each repo, old or new, and can update the policy for each repo if needed. This will save a lot of time and effort"
   },
   {
     "objectID": "std/templates.html#readme",
     "href": "std/templates.html#readme",
-    "title": "Github Organization Templates and IaC",
+    "title": "Github Organization Policies",
     "section": "README",
     "text": "README\nREADME files are instructions or documentation on how to use your software. It should give a quick introduction to the repo and instructions on how to install or run the code."
   },
   {
     "objectID": "std/templates.html#code_of_conduct",
     "href": "std/templates.html#code_of_conduct",
-    "title": "Github Organization Templates and IaC",
+    "title": "Github Organization Policies",
     "section": "CODE_OF_CONDUCT",
     "text": "CODE_OF_CONDUCT\nA Code of Conduct can let a user know what the rules of the organization are and how any wrongful behavior will be addressed. The document will provide the “standards for how to engage in a community”"
   },
   {
     "objectID": "std/templates.html#contributing.md",
     "href": "std/templates.html#contributing.md",
-    "title": "Github Organization Templates and IaC",
+    "title": "Github Organization Policies",
     "section": "CONTRIBUTING.md",
     "text": "CONTRIBUTING.md\nThis file should appear in the issue tab in a repo. It lets a user know how they can contribute to the project and if they need to sign any forms before contributing. Some larger organizations require that a person knows what they are contributing to and they must sign a form acknowledging that any software/code contributions to the project will be used and cannot be retracted by the user. The code submitted may also be used to develop processes but the organization will not pay the individual contributor (since this is open-source, we only look for open-source contributions)"
   },
   {
     "objectID": "std/templates.html#license",
     "href": "std/templates.html#license",
-    "title": "Github Organization Templates and IaC",
+    "title": "Github Organization Policies",
     "section": "LICENSE",
     "text": "LICENSE\nThese should be and are set at the repo level. There will be many different licenses to choose from that will depend on the specific repo. More on that here."
   },
   {
     "objectID": "std/templates.html#document-requirements-with-.github-repos",
     "href": "std/templates.html#document-requirements-with-.github-repos",
-    "title": "Github Organization Templates and IaC",
+    "title": "Github Organization Policies",
     "section": "2.1 Document Requirements with .github Repos",
     "text": "2.1 Document Requirements with .github Repos\nYou can set most policy rules and create documents for each repo at the organization level by using a special .github repo. Dot files and dot folders have special functionality in some software. For Github, the .github folder defines workflows for things like Github Actions in a repo. A .github repository on the other hand defines organization level rules and templates.\n\n\nIn order to write and set these policies at the organization level we can put them at the root of the .github repository and edit them there.\n\n\n\n\nPowerShell\n\n$ tree /f\nC:.\n│   .gitignore\n│   CODE_OF_CONDUCT.md\n│   CONTRIBUTING.md\n│   LICENSE\n│   README.md\n│\n├───.github\n└───profile\n        README.md\n\n\n\n\nTake a look above. I have the required documents/policies at the root of the .github repo directory. Now if I open up any given repo in the organization I will find a link to those files:\n\n\nIf you click on the CODE_OF_CONDUCT link it will take you right to the .github repo and open the CODE_OF_CONDUCT.md file there:\n\n\nNow you can set organization level policies from the .github repo and they will automatically populate in all existing and new repositories unless there are repo specific policies in place. If a repo already has its own policies they will not be overwritten."
   },
   {
     "objectID": "std/templates.html#commit-sign-off-requirement---github-apps",
     "href": "std/templates.html#commit-sign-off-requirement---github-apps",
-    "title": "Github Organization Templates and IaC",
+    "title": "Github Organization Policies",
     "section": "3.1 Commit Sign-Off Requirement - Github Apps",
     "text": "3.1 Commit Sign-Off Requirement - Github Apps\nWe may want to require authors or reviewers to sign-off on commits to a repo. This is sometimes established in projects to “ensure that copyrighted code not released under an appropriate free software (open source) license is not included in the kernel.”\nYou can install a Github App in the organization and it will be applied to all repos. The DCO App (Developer Certificate of Origin) is popular and lightweight. To install it in the organization, click on Configure and it will give you the option to configure it with the organization of choice."
   },
