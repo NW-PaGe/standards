@@ -4,11 +4,8 @@ description: Protect your credentials, tokens, data and more
 date: September 1, 2023
 date-modified: today
 author: 
-  - name: Frank Aragona
-    email: frank.aragona@doh.wa.gov
-  - name: Kathleen Conery
-    affiliations:
-      - Washington Department of Health
+  - Frank Aragona
+  - Kathleen Conery
 format: 
   html:
     code-fold: false
@@ -20,6 +17,8 @@ execute:
 knitr: true
 filters: 
   - line-highlight
+reference-location: margin
+citation-location: margin
 ---
 
 ::: obj
@@ -231,14 +230,13 @@ Pre-commit hooks run a process locally when the user attempts to commit code to 
     a.  Run in Power Shell
     b.  Type Y to give permission
 
-4.  CD to a directory where you have the git repository you want to upload, either in PowerShell or R studio terminal.
+4.  CD to a directory where you have the git repository you want to upload, either in PowerShell or R studio terminal {{< fa terminal >}}
 
     ::: smallframe
     ```{bash filename="PowerShell"}
     PS > cd path/to/repo/root
     ```
     :::
-
 
 5.  Run git secrets --install
 
@@ -264,10 +262,10 @@ Pre-commit hooks run a process locally when the user attempts to commit code to 
     ```{bash filename="PowerShell"}
     # add a pattern
     git secrets --add '[A-Z0-9]{20}'
-    
+
     # add a literal string, the + is escaped
     git secrets --add --literal 'foo+bar'
-    
+
     # add an allowed pattern
     git secrets --add -a 'allowed pattern'
     ```
@@ -299,12 +297,34 @@ We can't use the "Non capture group" feature of regex. Meaning we can't use patt
 
 These are still being investigated. They are remote hooks (not local like pre-commit hooks) that can be deployed throughout the Github organization. They can block certain commits from ever being pushed to the remote repo. They may make things unnecessarily complicated
 
+## Pushing Private Code to Public Repos
+
+We may wish to take private codes and push them to a public repo. We need to make sure that the public code doesn't not contain sensitive or forbidden data/code, so cleaning up the private repo is important before pushing.
+
+There are a few ways to do this, but the easiest way is to copy the clean private code to the public repo, that is, copy all the files you want to add publicly but **do not copy the `.git`** folder. If the private repo has a dirty git history we will not want that history in the public repo because the sensitive data will then be publicly available.
+
+::: {.column-screen-inset-shaded layout-nrow="1"}
+![](images/private_repo3.PNG){.myframe}
+
+![](images/public_repo3.PNG){.myframe}
+:::
+
+<br>
+
+
+{{< fa circle-exclamation >}} The private repository on the left still contains sensitive information in the git history. The public repository on the right has a clean git history because we copied only the current clean files from the private repo and did not attach its git history (which lives in the hidden `.git` folder)
+
+
+<br>
+
+<br>
+
 # Code Reviewers/Github Operations Team
 
 With the guardrails above in place there should be few chances that credentials get pushed to a repo. However accidents may still happen. We want to make sure that anyone who opens up a repo in the Github organization adheres to the rules, has the proper credential/coding set-up, and installs their local pre-commit hooks properly.
 
 It may be useful to have a team within the organization that helps with repo set-up. The team would help avoid a scenario where a person opens up a repo without reading this documentation and understanding the rules (and thus potentially breaking security rules).
 
-This Github Operations Team could also be helpful in managing permissions for members in the organization. See the video below on how the company Qualcomm manages their Github organization and how they use a Github Operations Team to guide new members access/repo development 
+This Github Operations Team could also be helpful in managing permissions for members in the organization. See the video below on how the company Qualcomm manages their Github organization and how they use a Github Operations Team to guide new members access/repo development
 
 {{< video https://www.youtube.com/embed/1T4HAPBFbb0?si=YRsUYXIxLPhdr41T >}}

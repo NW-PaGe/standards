@@ -1,6 +1,6 @@
 ---
-title: "Github Organization Templates and IaC"
-description: Coding at the Organization level to ensure rules and templates are in each repo
+title: "Github Organization Policies"
+description: Coding at the Organization level to ensure policies are reflected in each repo
 date: November 22, 2023
 date-modified: today
 author: 
@@ -25,10 +25,10 @@ filters:
 ::: obj
 **Objectives**
 
-1.  Ensure that all repos in the org have the required documents
-2.  Set policy rules at the Organization level
-3.  Create template structure documents for each repo
-4.  Explore Infrastructure as Code (IaC)
+1.    Ensure that all repos in the org have the required documents
+2.    Set policy rules at the Organization level
+3.    All repos need to have reproducible code
+4.    All repos need documentation via README and/or Github Pages
 :::
 
 In the Github Organization we may require all repositories to contain certain documents. For example, we want to make sure that every repo has a `CODE OF CONDUCT` document that is a general policy applied throughout the organization. 

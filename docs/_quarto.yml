@@ -25,7 +25,7 @@ website:
           - href: std/lic.qmd
             text: "1: Choosing a License"
           - href: std/templates.qmd
-            text: "2: Org Policy Setting"
+            text: "2: Repo Policies"
       - text: Github Repository Guides
         menu: 
           - href: tools/how_to.qmd
