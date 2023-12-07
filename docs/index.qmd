@@ -10,7 +10,7 @@ about:
   id: about
   template: jolla
   image-shape: rectangle
-  image: images/nwpage_logo.PNG
+  image: images/nwpage_logo.png
   image-width: "40em"
   links:
     - icon: info-circle
