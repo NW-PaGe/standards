@@ -1,15 +1,17 @@
 ---
-title: "NW-PaGe Github Organization Standards"
+title: "Github Organization Standards"
 description: Documentation for how to structure and standardize the public Github Organization
 format: 
   html: 
     toc: false
     number-sections: false
+    title-block-banner: false
 about:
   id: about
   template: jolla
   image-shape: rectangle
-  image: images/DOH_logo_primary.jpg
+  image: images/nwpage_logo.PNG
+  image-width: "40em"
   links:
     - icon: info-circle
       href: about.qmd

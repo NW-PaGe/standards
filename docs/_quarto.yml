@@ -5,7 +5,7 @@ project:
 #   hypothesis: true
 
 website:
-  title: "🌲 COE Github Standards"
+  title: "🌲 NW-PaGe Github Standards"
   # author: DIQA 
   # date: today
   search: true
@@ -67,6 +67,7 @@ format:
       - cosmo
       - assets/styles.scss
     scss: assets/styles.scss
+    title-block-banner: true
     # css: styles.css
     toc: true
     # number-depth: 3

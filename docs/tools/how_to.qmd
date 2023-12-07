@@ -15,7 +15,6 @@ format:
     code-overflow: wrap
     toc: true
     number-sections: true
-    # title-block-banner: true
 execute: 
   freeze: true
   echo: true
@@ -30,7 +29,7 @@ filters:
 
 # Introduction
 
-![](images/DOH_logo_primary.jpg){style="float: right;"
+![](images/nwpage_tree_logo.png){style="float: right;"
 fig-alt="Hex logo that says \"Data Science in a Box\"" fig-align="right"
 width="250"}
 
@@ -249,9 +248,8 @@ repository. This lets us update the code and not need to copy and paste
 any new changes to the documentation/github page
 
 To do this, open your *external* R script in your repo. In this case
-we're using `external_script.R`. Now wrap the chunks of code you
-want to link with comments like this, `## ---- libraries` and
-`## ---- stop`:
+we're using `external_script.R`. Now wrap the chunks of code you want to
+link with comments like this, `## ---- libraries` and `## ---- stop`:
 
 ::: smallframe
 ```{r filename="external_script.R"}

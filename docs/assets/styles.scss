@@ -127,7 +127,29 @@ div.obj>p:first-child {
 }
 
 
+/* Add logo to title block margin */
+.quarto-title-block .quarto-title-banner {
+  background-image: url(images/nwpage_tree_logo.png);
+  background-size: 140px;
+  background-position: left;
+  background-repeat: no-repeat;
+  padding-left: 3%;
+  background-origin: content-box;
+}
 
+.quarto-title-banner {
+  padding-top: 4em;
+  padding-bottom: 4em;
+}
+
+/* Make the title and descriptions positions adjust according to window resizing */
+#title-block-header.quarto-title-block.default .quarto-title .title {
+  padding-left: 15%;
+}
+
+#title-block-header.quarto-title-block.default .keywords, #title-block-header.quarto-title-block.default .description, #title-block-header.quarto-title-block.default .abstract {
+  padding-left: 15%;
+}
 
 
 /* Make cool hover tabs for front page */
