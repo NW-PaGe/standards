@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Frank Aragona">
+<meta name="dcterms.date" content="2023-09-01">
+<meta name="description" content="Utilizing and automating Github Releases in your repo">
 
-<title>🌲 NW-PaGe Github Standards – release</title>
+<title>🌲 NW-PaGe Github Standards - Release Cycles</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -39,6 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -137,19 +141,137 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <h1 class="title">Release Cycles</h1>
+                  <div>
+        <div class="description">
+          Utilizing and automating Github Releases in your repo
+        </div>
+      </div>
+                </div>
+  </div>
+    
+  <div class="quarto-title-meta-author">
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Affiliations</div>
+    
+      <div class="quarto-title-meta-contents">
+      <p class="author">Frank Aragona </p>
+    </div>
+      <div class="quarto-title-meta-contents">
+          <p class="affiliation">
+              Washington Department of Health
+            </p>
+          <p class="affiliation">
+              Data Integration/Quality Assurance
+            </p>
+        </div>
+      </div>
+
+  <div class="quarto-title-meta">
+
+        
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">September 1, 2023</p>
+      </div>
+    </div>
+    
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">December 7, 2023</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#semantic-versioning" id="toc-semantic-versioning" class="nav-link active" data-scroll-target="#semantic-versioning"><span class="header-section-number">1</span> Semantic Versioning</a></li>
+  <li><a href="#github-releases" id="toc-github-releases" class="nav-link" data-scroll-target="#github-releases"><span class="header-section-number">2</span> Github Releases</a></li>
+  <li><a href="#conventional-commits" id="toc-conventional-commits" class="nav-link" data-scroll-target="#conventional-commits"><span class="header-section-number">3</span> Conventional Commits</a></li>
+  <li><a href="#automating-the-release-cycle" id="toc-automating-the-release-cycle" class="nav-link" data-scroll-target="#automating-the-release-cycle"><span class="header-section-number">4</span> Automating The Release Cycle</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources"><span class="header-section-number">5</span> Resources</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/NW-PaGe/standards/blob/main/docs/tools/release.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/NW-PaGe/standards/edit/main/docs/tools/release.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
 
 
+<div class="obj">
+<p><strong>Summary</strong></p>
+<ol type="1">
+<li>Github Releases take snapshots of you repo with each release</li>
+<li>They can help devs and end users switch between repo versions</li>
+<li>Change logs and semantic versioning can help document changes</li>
+<li>Github Actions and pre-commit hooks can automate the release process</li>
+</ol>
+</div>
+<p><br></p>
+<section id="semantic-versioning" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Semantic Versioning</h1>
+<p>Github Releases are a great way to keep your development process organized. Software projects often use releases with semantic versioning where the version numbers serve as snapshots of the project, and each release contains the version number and a changelog summarizing all the changes that took place.</p>
+<p>Semantic Versioning looks like this, where the software version numbers all have a definition:</p>
+<div class="pic-border">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://www.softwarecraftsperson.com/2020/12/06/semantic-versioning-semver-introduction/"><img src="images/semver.png" class="img-fluid figure-img"></a></p>
+<figcaption class="figure-caption">https://www.softwarecraftsperson.com/2020/12/06/semantic-versioning-semver-introduction/</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="github-releases" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Github Releases</h1>
+<p>In the right panel of your Github repo there is a section labeled Releases. Here you can find each release with a change log attached.</p>
+<p><img src="images/releases.PNG" class="myframe img-fluid"></p>
+<p><br></p>
+<p>If you click on the releases you can see different release tags/versions. Each comes with a changelog, git hash number, and zip files to download the repo <em>at the time the specific version was released</em>. This means you can automatically save repo snapshots and backups whenever your project cycle is released.</p>
+<p><img src="images/releases_nav.gif" class="myframe img-fluid"></p>
+<p><br></p>
+<p>you can flip through different releases and tags here</p>
+<p><img src="images/releases_nav2.gif" class="myframe img-fluid"></p>
+<p><br></p>
+<p>You can click on a tag and it will take you to the repo <em>at the time the specific version was released</em></p>
+<p><img src="images/releases_tags.gif" class="myframe img-fluid"></p>
+</section>
+<section id="conventional-commits" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Conventional Commits</h1>
+<p>To create the release cycle in your repo you may want to use Conventional Commits.</p>
+<p>Conventional Commits are a way to format and standardize your commit messages, which can be used to then automate the repo’s release cycle. For example, one conventional naming method is to label any commit associated with a new feature as <code>feat:</code> plus a commit message.</p>
+<ul>
+<li>The word <code>feat:</code> can trigger a Github Action to add that commit to your changelog under the <strong>Features</strong> header,</li>
+<li>and it will up-version the minor release version number.</li>
+<li>So if you are on release 1.0.0, a new <code>feat</code> will up-version the cycle to 1.1.0</li>
+<li>Commit titles that start with the word <code>fix:</code> as in a bug fix will up-version the patch number of the, i.e.&nbsp;1.0.0 to 1.0.1</li>
+</ul>
+<iframe width="780" height="500" src="https://www.conventionalcommits.org/en/v1.0.0/" title="Github Licenses"></iframe>
+</section>
+<section id="automating-the-release-cycle" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Automating The Release Cycle</h1>
+</section>
+<section id="resources" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Resources</h1>
+<p>These videos are excellent summaries of how to use Github Releases and semantic versioning</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/fcHJZ4pMzBs?si=jb-1lgaYevGqOUU9" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/q3qE2nJRuYM?si=7nQ7itJFt3oUtgaL" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -405,7 +527,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-left">🍦</div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/NW-PaGe/standards/blob/main/docs/tools/release.qmd" class="toc-action">View source</a></p><p><a href="https://github.com/NW-PaGe/standards/edit/main/docs/tools/release.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
+    </div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
@@ -414,4 +536,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
+<script src="../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 </body></html>

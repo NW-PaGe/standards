@@ -7,6 +7,13 @@
     "text": "About this site\n\n1 + 1\n\n[1] 2"
   },
   {
+    "objectID": "tools/release.html",
+    "href": "tools/release.html",
+    "title": "Release Cycles",
+    "section": "",
+    "text": "Summary\n\nGithub Releases take snapshots of you repo with each release\nThey can help devs and end users switch between repo versions\nChange logs and semantic versioning can help document changes\nGithub Actions and pre-commit hooks can automate the release process\n\n\n\n\n1 Semantic Versioning\nGithub Releases are a great way to keep your development process organized. Software projects often use releases with semantic versioning where the version numbers serve as snapshots of the project, and each release contains the version number and a changelog summarizing all the changes that took place.\nSemantic Versioning looks like this, where the software version numbers all have a definition:\n\n\n\n\nhttps://www.softwarecraftsperson.com/2020/12/06/semantic-versioning-semver-introduction/\n\n\n\n\n\n2 Github Releases\nIn the right panel of your Github repo there is a section labeled Releases. Here you can find each release with a change log attached.\n\n\nIf you click on the releases you can see different release tags/versions. Each comes with a changelog, git hash number, and zip files to download the repo at the time the specific version was released. This means you can automatically save repo snapshots and backups whenever your project cycle is released.\n\n\nyou can flip through different releases and tags here\n\n\nYou can click on a tag and it will take you to the repo at the time the specific version was released\n\n\n\n3 Conventional Commits\nTo create the release cycle in your repo you may want to use Conventional Commits.\nConventional Commits are a way to format and standardize your commit messages, which can be used to then automate the repo’s release cycle. For example, one conventional naming method is to label any commit associated with a new feature as feat: plus a commit message.\n\nThe word feat: can trigger a Github Action to add that commit to your changelog under the Features header,\nand it will up-version the minor release version number.\nSo if you are on release 1.0.0, a new feat will up-version the cycle to 1.1.0\nCommit titles that start with the word fix: as in a bug fix will up-version the patch number of the, i.e. 1.0.0 to 1.0.1\n\n\n\n\n4 Automating The Release Cycle\n\n\n5 Resources\nThese videos are excellent summaries of how to use Github Releases and semantic versioning"
+  },
+  {
     "objectID": "tools/renv.html",
     "href": "tools/renv.html",
     "title": "Virtual Environments",
