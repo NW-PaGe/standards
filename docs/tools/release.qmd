@@ -1,0 +1,95 @@
+---
+title: "Release Cycles"
+description: Utilizing and automating Github Releases in your repo
+date: September 1, 2023
+date-modified: today
+author: 
+  - name: Frank Aragona
+    email: frank.aragona@doh.wa.gov
+    affiliations:
+      - Washington Department of Health
+      - Data Integration/Quality Assurance
+format: 
+  html:
+    code-fold: false
+    code-overflow: wrap
+    toc: true
+    number-sections: true
+execute: 
+  freeze: true
+  echo: true
+  eval: false
+knitr: true
+filters: 
+  - line-highlight
+---
+
+::: obj
+**Summary**
+
+1.  Github Releases take snapshots of you repo with each release
+2.  They can help devs and end users switch between repo versions
+3.  Change logs and semantic versioning can help document changes
+4.  Github Actions and pre-commit hooks can automate the release process
+:::
+
+<br>
+
+# Semantic Versioning
+
+Github Releases are a great way to keep your development process organized. Software projects often use releases with semantic versioning where the version numbers serve as snapshots of the project, and each release contains the version number and a changelog summarizing all the changes that took place.
+
+Semantic Versioning looks like this, where the software version numbers all have a definition:
+
+::: pic-border
+[![https://www.softwarecraftsperson.com/2020/12/06/semantic-versioning-semver-introduction/](images/semver.png)](https://www.softwarecraftsperson.com/2020/12/06/semantic-versioning-semver-introduction/)
+:::
+
+# Github Releases
+
+In the right panel of your Github repo there is a section labeled Releases. Here you can find each release with a change log attached.
+
+![](images/releases.PNG){.myframe}
+
+<br>
+
+If you click on the releases you can see different release tags/versions. Each comes with a changelog, git hash number, and zip files to download the repo *at the time the specific version was released*. This means you can automatically save repo snapshots and backups whenever your project cycle is released.
+
+![](images/releases_nav.gif){.myframe}
+
+<br>
+
+you can flip through different releases and tags here
+
+![](images/releases_nav2.gif){.myframe}
+
+<br>
+
+You can click on a tag and it will take you to the repo *at the time the specific version was released*
+
+![](images/releases_tags.gif){.myframe}
+
+# Conventional Commits
+
+To create the release cycle in your repo you may want to use Conventional Commits.
+
+Conventional Commits are a way to format and standardize your commit messages, which can be used to then automate the repo's release cycle. For example, one conventional naming method is to label any commit associated with a new feature as `feat:` plus a commit message.
+
+-   The word `feat:` can trigger a Github Action to add that commit to your changelog under the **Features** header,
+-   and it will up-version the minor release version number.
+-   So if you are on release 1.0.0, a new `feat` will up-version the cycle to 1.1.0
+-   Commit titles that start with the word `fix:` as in a bug fix will up-version the patch number of the, i.e. 1.0.0 to 1.0.1
+
+```{=html}
+<iframe width="780" height="500" src="https://www.conventionalcommits.org/en/v1.0.0/" title="Github Licenses"></iframe>
+```
+
+# Automating The Release Cycle
+
+# Resources
+
+These videos are excellent summaries of how to use Github Releases and semantic versioning
+
+{{< video https://www.youtube.com/embed/fcHJZ4pMzBs?si=jb-1lgaYevGqOUU9 >}}
+
+{{< video https://www.youtube.com/embed/q3qE2nJRuYM?si=7nQ7itJFt3oUtgaL >}}

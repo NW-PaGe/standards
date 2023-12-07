@@ -88,6 +88,19 @@ $body-color: $gray-700;
   
 }
 
+.pic-border {
+  
+  .figure-img{
+    border: 4px $secondary;
+    border-style: solid;
+    margin: 1em 0;
+    margin-bottom: 10px !important;
+    box-shadow: 0 20px 47px rgb(0 0 0 / 55%);
+    
+  }
+ 
+}
+
 /*----------DIV TIPS------------*/
 
 div.obj{
