@@ -13,14 +13,15 @@ format:
     code-fold: false
 ---
 
-:::{.obj}
-**Summary**
+:::{.note}
+{{< fa file-circle-check size="3x" >}} **Summary**
 
 1.    Having the appropriate license in a Github repo can prevent code theft and inappropriate redistribution of code. 
 2.    Each individual repo author(s) should review common open-source licenses and decide what kind of license is best for their particular repo. 
 3.    Some licenses are very relaxed, meaning anyone in the public can use their code and distribute it widely, including using the software to publish papers or monetize the work. 
 4.    Other licenses are more strict and prevent re-distribution of code.
 :::
+
 
 # General License Info
 

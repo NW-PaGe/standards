@@ -1,6 +1,6 @@
 ---
 title: "Github Organization Standards"
-description: Documentation for how to structure and standardize the public Github Organization
+# description: Documentation for how to structure and standardize the public Github Organization
 format: 
   html: 
     toc: false

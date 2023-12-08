@@ -22,8 +22,8 @@ filters:
   - line-highlight
 ---
 
-::: obj
-**Objectives**
+::: note
+{{< fa file-circle-check size="3x" >}} **Objectives**
 
 1.    Ensure that all repos in the org have the required documents
 2.    Set policy rules at the Organization level

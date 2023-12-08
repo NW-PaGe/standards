@@ -13,13 +13,16 @@ format:
     # title-block-banner: true
 ---
 
-:::{.obj}
-**Summary**
+# Introduction
+
+![](images/nwpage_tree_logo.png){style="float: right;"
+fig-alt="Hex logo that says \"Data Science in a Box\"" fig-align="right"
+width="250"}
 
 Virtual environments allow us to execute code while accounting for software/package version differences we have on our local machines. This repo uses virtual environments to configure a user's R and Python software and packages to the repo's specific package versions.
 
-For example, say you have tidyverse version 2.0 but this repo uses tidyverse version 1.1, you may not be able to run the scripts as intended by the author since the functions in tidyverse 1.1 may be different than in 2.0. The virtual environment will allow a given user to use only this repo's version of tidyverse so they can run the code as intended.
-:::
+For example, say you have dplyr version 2.0 but this repo uses dplyr version 1.1, you may not be able to run the scripts as intended by the author since the functions in dplyr 1.1 may be different than in 2.0. The virtual environment will allow a given user to use only this repo's version of dplyr so they can run the code as intended.
+
 
 ::: callout-important
 There are two different virtual environments for this repo, one for R and another for Python. **Your workflows for opening R and Python and how you install packages needs to utilize the virtual environments so that all machines are able to use your code.**
