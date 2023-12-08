@@ -1,152 +1,5 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
-  },
-  {
-    "objectID": "tools/release.html",
-    "href": "tools/release.html",
-    "title": "Release Cycles",
-    "section": "",
-    "text": "Summary\n\nGithub Releases take snapshots of you repo with each release\nThey can help devs and end users switch between repo versions\nChange logs and semantic versioning can help document changes\nGithub Actions and pre-commit hooks can automate the release process\n\n\n\n\n1 Semantic Versioning\nGithub Releases are a great way to keep your development process organized. Software projects often use releases with semantic versioning where the version numbers serve as snapshots of the project, and each release contains the version number and a changelog summarizing all the changes that took place.\nSemantic Versioning looks like this, where the software version numbers all have a definition:\n\n\n\n\nhttps://www.softwarecraftsperson.com/2020/12/06/semantic-versioning-semver-introduction/\n\n\n\n\n\n2 Github Releases\nIn the right panel of your Github repo there is a section labeled Releases. Here you can find each release with a change log attached.\n\n\nIf you click on the releases you can see different release tags/versions. Each comes with a changelog, git hash number, and zip files to download the repo at the time the specific version was released. This means you can automatically save repo snapshots and backups whenever your project cycle is released.\n\n\nyou can flip through different releases and tags here\n\n\nYou can click on a tag and it will take you to the repo at the time the specific version was released\n\n\n\n3 Conventional Commits\nTo create the release cycle in your repo you may want to use Conventional Commits.\nConventional Commits are a way to format and standardize your commit messages, which can be used to then automate the repo’s release cycle. For example, one conventional naming method is to label any commit associated with a new feature as feat: plus a commit message.\n\nThe word feat: can trigger a Github Action to add that commit to your changelog under the Features header,\nand it will up-version the minor release version number.\nSo if you are on release 1.0.0, a new feat will up-version the cycle to 1.1.0\nCommit titles that start with the word fix: as in a bug fix will up-version the patch number of the, i.e. 1.0.0 to 1.0.1\n\n\n\n\n4 Automating The Release Cycle\n\n\n5 Resources\nThese videos are excellent summaries of how to use Github Releases and semantic versioning"
-  },
-  {
-    "objectID": "tools/renv.html",
-    "href": "tools/renv.html",
-    "title": "Virtual Environments",
-    "section": "",
-    "text": "Summary\nVirtual environments allow us to execute code while accounting for software/package version differences we have on our local machines. This repo uses virtual environments to configure a user’s R and Python software and packages to the repo’s specific package versions.\nFor example, say you have tidyverse version 2.0 but this repo uses tidyverse version 1.1, you may not be able to run the scripts as intended by the author since the functions in tidyverse 1.1 may be different than in 2.0. The virtual environment will allow a given user to use only this repo’s version of tidyverse so they can run the code as intended."
-  },
-  {
-    "objectID": "tools/renv.html#step-1-set-up-anaconda",
-    "href": "tools/renv.html#step-1-set-up-anaconda",
-    "title": "Virtual Environments",
-    "section": "1.1 Step 1: Set Up Anaconda",
-    "text": "1.1 Step 1: Set Up Anaconda\nYou should already have Anaconda installed on your machine if not..\nunder construction"
-  },
-  {
-    "objectID": "tools/renv.html#step-2-open-anaconda-prompt",
-    "href": "tools/renv.html#step-2-open-anaconda-prompt",
-    "title": "Virtual Environments",
-    "section": "1.2 Step 2: Open Anaconda Prompt",
-    "text": "1.2 Step 2: Open Anaconda Prompt\nYou may have different Anaconda prompts (prompts aligned with different shells, like PowerShell, bash, etc). There should be a generic Anaconda prompt. Open that one:\n\n\nIf the first line in the prompt doesn’t start with (base), write:\nconda deactivate\nand it will bring you back to your base environment."
-  },
-  {
-    "objectID": "tools/renv.html#step-3-change-directories",
-    "href": "tools/renv.html#step-3-change-directories",
-    "title": "Virtual Environments",
-    "section": "1.3 Step 3: Change Directories",
-    "text": "1.3 Step 3: Change Directories\nChange the directory of the prompt to the repo’s directory. The code is\ncd C:/Users/XXXXXXX/Projects/Sequencing_2.0\nIf you are already in your user directory, you can just type\ncd projects/sequencing_2.0\ncapitalization doesn’t matter\n\n\nNotice that the folder path is now changed to the sequencing repo folder."
-  },
-  {
-    "objectID": "tools/renv.html#step-4-copy-the-repo-env",
-    "href": "tools/renv.html#step-4-copy-the-repo-env",
-    "title": "Virtual Environments",
-    "section": "1.4 Step 4: Copy the repo env",
-    "text": "1.4 Step 4: Copy the repo env\nNow we’re ready to create a new environment based on the repo’s environment.\nType: conda env create --name seq_env --file=environment.yml\nNote that how you name your environment doesn’t really matter, but name it something that resembles the repo. This will save the headache of having random environments for random repos that you can’t remember..\n\n\nconda env create will create a new environment in your C:/Users/XXXXX/Anaconda3/envs file path\n--name or -n will name that environment, in this case seq_env\n--file=environment.yml this code will take the file in the sequencing 2.0 repo and use it to create this environment. It is essentially a copy of the software versions in the file.\n\nNote: I sped up the gif below. The whole process may take a few minutes"
-  },
-  {
-    "objectID": "tools/renv.html#step-5-activate-the-environment",
-    "href": "tools/renv.html#step-5-activate-the-environment",
-    "title": "Virtual Environments",
-    "section": "1.5 Step 5: Activate the environment",
-    "text": "1.5 Step 5: Activate the environment\nYou can switch between environments in the conda prompt or in a programming IDE (or both? idk). To activate and switch the env, write:\nconda activate &lt;env_name&gt;\nin this case\nconda activate seq_env\n\n\n\n\n\n\n\n\nNote\n\n\n\nThe environment your in will show on the left of the prompt message. In this case it says (seq_env) instead of (base). That way you know what env your working in"
-  },
-  {
-    "objectID": "tools/renv.html#ide-setup---vs-code",
-    "href": "tools/renv.html#ide-setup---vs-code",
-    "title": "Virtual Environments",
-    "section": "2.1 IDE Setup - VS Code",
-    "text": "2.1 IDE Setup - VS Code\nVS Code has a lot built in to use a conda environment. Since your env is already activated, if you have VS Code installed, you can type\ncode\ninto the anaconda prompt and it will open a VS Code window\n\n\n2.1.1 Step 1: Select a Python Interpreter\nFirst we need to select a python interpreter, which is in our env. On your keyboard, press\nCTRL+SHIFT+P\nThis should bring up a window with an option that says Python: Select Interpreter. You may need to search for it.\nClick it and you should see your new environment seq_env in the list. Click it\n\n\n\n2.1.2 Step 2: Write code\nNow your VS Code is using your environment and the python version/packages in that environment. Check to see that your terminal is using the correct env.\nOpen the terminal (terminal &gt; new terminal) and confirm that you are in a cmd prompt in the terminal. On the right side of the terminal it should say cmd. If it says powershell or something else, let’s change it.. See the pic below. There’s a drop down that gives you shell types. Change your default to Command Prompt\n\n\nAlso notice in the picture that my environment now switches to seq_env. Yours should do the same. You should now be able to run code in a python script. Notice that your terminal will change to run python. If you get an error, write python in the terminal and hit enter. It will change your terminal a little. Now you can run python code and it will output to this terminal."
-  },
-  {
-    "objectID": "tools/renv.html#ide-setup---pycharm",
-    "href": "tools/renv.html#ide-setup---pycharm",
-    "title": "Virtual Environments",
-    "section": "2.2 IDE Setup - PyCharm",
-    "text": "2.2 IDE Setup - PyCharm\nPyCharm also works great with a conda environment.\n\n2.2.1 Step 1: Select a Python Interpreter\nYou may also be able to open a PyCharm window from an Anaconda prompt like with VS Code (if it’s installed in your env). To do so, write pycharm in the prompt and it should open a new window with the env activated.\nIf that doesn’t work, open PyCharm and on the bottom right there is a python version and interpreter selected. Click it and open “Add New Interpreter” &gt; “Add local interpreter”. This opens a new window. Click “Conda Environment” and under “Interpreter” click the dropdown. You should be able to see your new environment there. If not, click away and click the dropdown again. It’s weird sometimes.\nThen click okay. Close and reopen the Python Console window and it should have your environment path for the python.exe. Also, the Python Libraries window should have all of the libraries in your environment now.\n\n\nNotice that now there are a list of interpreters for you to use. You can now switch back and forth between environments. This is great if you have other repos to use or want to test out new packages that aren’t in the main environment."
-  },
-  {
-    "objectID": "tools/renv.html#step-1-install-a-new-package",
-    "href": "tools/renv.html#step-1-install-a-new-package",
-    "title": "Virtual Environments",
-    "section": "3.1 Step 1: Install a new package",
-    "text": "3.1 Step 1: Install a new package\nGo to the Anaconda prompt, make sure you’re in the repo file path (cd projects/sequencing_2.0) and make sure you’re in the right conda env (conda activate seq_env).\nNow, install the package. Usually packages can be installed with pip install or conda install or conda install -c conda forge &lt;package&gt;. This depends on the packages. Some need pip, others need conda. Google it to find out. Here i’m going to download a package from NCBI to demonstrate. The package is called ncbi-datasets-cli.\n\nThis package uses conda-forge to install. Type in conda install -c conda-forge ncbi-datasets-cli\nIt will give you a message Y/N to confirm. Type “y” and enter"
-  },
-  {
-    "objectID": "tools/renv.html#step-2-save-the-package-to-the-repo",
-    "href": "tools/renv.html#step-2-save-the-package-to-the-repo",
-    "title": "Virtual Environments",
-    "section": "3.2 Step 2: Save the package to the repo",
-    "text": "3.2 Step 2: Save the package to the repo\nNow we need to save this package to the repo’s environment.yml\n\nType conda env export &gt; environment.yml\nSince the package is in your environment, this code is exporting your new environment to repo’s one.\nNow push to github"
-  },
-  {
-    "objectID": "tools/renv.html#creating-renv-in-a-project",
-    "href": "tools/renv.html#creating-renv-in-a-project",
-    "title": "Virtual Environments",
-    "section": "4.1 Creating renv in a project",
-    "text": "4.1 Creating renv in a project\n\n4.1.1 Step 1: Open the .Rproj in your repo\nThe R project will open up Rstudio at the root of you directory path.\n\n\n\n4.1.2 Step 2: Initialize renv for the repo\nNow that we’re in the root of your repo directory, let’s initialize renv.\nFirst install renv - install.packages(\"renv\")\nThen in your console write renv::init() and run it.\n\nIf you already have an existing repo, you will probably see warnings and errors in the renv::init like I did in the gif above. Not to worry! Read the warnings and follow the instructions. Usually you will need to re-install a package. If you get this warning:\nThese may be left over from a prior, failed installation attempt.\nConsider removing or reinstalling these packages.\n\nThen run renv::install(\"THAT PACKAGE\"). It will install the package again,\nand then you need to update the lock file (more on that later) by running renv::snapshot().\n\nNow the package will be installed correctly\n\nrenv::init() will:\n\nSearch through all R scripts in your repo and find all packages used\nCreate a snapshot of those packages\nSave all packages in the repo in a new renv libraries path (similar to your C drive R libraries paths)\nCreate a .gitignore within the renv libraries path so that you don’t get spammed with thousands of libraries in your git commit\nCreate a lock file - this is like the environment.yml for conda. Think of it as instructions for which packages your repo is using\nIt also saved things like an activate R script which will activate that renv every time the repo is opened from the .Rproj\n\n\n\n4.1.3 Step 3: Push to Github\nNow look at your git stage and you will see all the files renv created.\nWe have\n\n.Rprofile that contains an renv activate.R script - this will activate the repo’s renv every time the project is opened\nThe renv.lock file shows information on each package used in the repo and is used to update collaborator’s environments to match the lock file.\nrenv/.gitignore I don’t feel like explaining this one right now - i’ll write more later\nrenv/activate.R this will activate the env whenever the R project is opened\nrenv/settings.dcf I have no clue what this is"
-  },
-  {
-    "objectID": "tools/renv.html#using-renv-in-a-project",
-    "href": "tools/renv.html#using-renv-in-a-project",
-    "title": "Virtual Environments",
-    "section": "4.2 Using renv in a project",
-    "text": "4.2 Using renv in a project\n\n4.2.1 Step 1: Open the .Rproj for your repo\nAny time you need to code or run code from the repo, open up the .Rproj file that contains the sequencing 2.0 project. In your file explorer, go to the repo and open Sequencing_2.0 .Rproj\n\nThis will open up an R window with the repo file path as a root directory. It will also utilize the renv. Your console should say something about renv, like this\n\n\n\n4.2.2 Step 2: Load renv packages\nThe first time you use renv you will need to configure it to your local machine. To do this, type:\n\nrenv::restore() in your console.\nThis will create a new environment for your R in your local machine using the lock file packages.\n\n\nNow you’re ready to use the scripts! Way less complicated than conda"
-  },
-  {
-    "objectID": "tools/link_code.html",
-    "href": "tools/link_code.html",
-    "title": "Link external R code to the documentation",
-    "section": "",
-    "text": "The code in this website is automatically linked to the code in the repository. This lets us update the code and not need to copy and paste any new changes to the documentation/github page\nTo do this, open your external R script in your repo. In this case we’re using lineages_public_repo.R. Now wrap the chunks of code you want to link with comments like this, ## ---- libraries and ## ---- stop:\n\n\n\n## ---- libraries\nlibrary(pacman)\np_load(\n  reticulate,\n  fs,\n  lubridate,\n  dplyr,\n  stringr,\n  magrittr,\n  readr,\n  httr\n)\n## ---- stop\n\n\n\nThe ## ---- libraries signals the beginning of a chunk. the ## ---- stop signals the end of a chunk.\n\nNow you can call this chunk in your github page/quarto document like this:\nScan the external R script for code chunks:\n\n```{r setup}\n#| echo: false\nknitr::read_chunk(file.path(getwd(),\"lineages_public_repo.R\"))\n```\n\n\nCall the code chunk you want in the {r} header within the chunk. like this {r libraries}:\n\n```{r libraries}\n\n```\n\n\nAnd now the document will output any code in that code chunk and can also execute that code chunk if you want. Here’s what the output will look like in this case:"
-  },
-  {
-    "objectID": "std/lic.html",
-    "href": "std/lic.html",
-    "title": "Licensing",
-    "section": "",
-    "text": "Summary\n\nHaving the appropriate license in a Github repo can prevent code theft and inappropriate redistribution of code.\nEach individual repo author(s) should review common open-source licenses and decide what kind of license is best for their particular repo.\nSome licenses are very relaxed, meaning anyone in the public can use their code and distribute it widely, including using the software to publish papers or monetize the work.\nOther licenses are more strict and prevent re-distribution of code.\n\n\n\n1 General License Info\nBelow is a list of common open-source licenses.\n\nI imagine there isn’t a one size fits all license, so thankfully there are a variety of options. Here are two common ones:\n\n\n2 GNU GPL licenses\n\nThese are the strong licenses\nPrevents someone from taking our code and privatizing it (and making money off of it)\nSomeone can still use our code, they just need to ensure that what they’re doing with it is open-source\n“Copyright and license notices must be preserved.”\n“Contributors provide an express grant of patent rights. When a modified version is used to provide a service over a network, the complete source code of the modified version must be made available.”\n\n\n\n3 MIT license\n\nI think this is the most commonly used one\n“short and simple permissive license… only requiring preservation of copyright and license notices”\n“Licensed works, modifications, and larger works may be distributed under different terms and without source code.”\nSomeone could basically do whatever they want with the code.\nNextstain/ncov repo is currently using this\n\nAnd here are a couple of youtube videos that were helping in explaining licensing"
-  },
-  {
-    "objectID": "std/security.html",
-    "href": "std/security.html",
-    "title": "Security Standards",
-    "section": "",
-    "text": "Objectives\n\nProvide security guidelines\nSet up security guardrails\nDevelop a process for reviewing code and pushing private code to a public repo"
-  },
-  {
-    "objectID": "std/security.html#prevent-credential-leaks-with-env-variables",
-    "href": "std/security.html#prevent-credential-leaks-with-env-variables",
-    "title": "Security Standards",
-    "section": "Prevent Credential Leaks with Env Variables",
-    "text": "Prevent Credential Leaks with Env Variables\nThere are a number of ways to do this. We typically use a yaml file that can be filled out with personal credentials locally. The file will not be committed to the remote repo\n\n1.0.1 Create a private credentials file\nThe scripts use a .yml file that contains a list of API tokens, server names, and usernames/passwords specific to each individual user. There are two .yml files. One is a template (containing no actual passwords..) that exists in the repo and serves as a template so every individual user can keep up to date with new credential additions. The other is the individual creds.yml that is in the repo’s .gitignore. This file will never exist in the repo and only exist locally (in the user’s C drive).\n\n\n1.0.2 creds.yml details\nThe .yml file can work with multiple programming languages including R and Python. They are read in the same way and can be easily adjusted when adding new passwords or using them as configuration files.\nThey look like this:\n\n\n\n\nlocal_credentials.yml\n\n# Default is needed to distinguish values.\n# Leave a blank line (NO SPACES) as the last line in this file or things will break\n# Quotes aren't necessary, but can be used.\ndefault: \n  conn_list_wdrs:\n    Driver: \"SQL Server Native Client 11.0\"\n    Server: \n    Database: \n    Trusted_connection: \n    ApplicationIntent: \n    \n  fulgent:\n    username: &lt;USERNAME&gt;\n    password: &lt;PASSWORD&gt;\n\n\n\nYou can have different variables assigned to unique lists, which allows for easy configuration. For example, the list starting with default has variables conn_list_wdrs and fulgent. You can have a different list of variables within the same file like this:\n\n\n\n\nlocal_credentials.yml\n\n# Default is needed to distinguish values.\n# Leave a blank line (NO SPACES) as the last line in this file or things will break\n# Quotes aren't necessary, but can be used.\ndefault: \n  conn_list_wdrs:\n    Driver: \"SQL Server Native Client 11.0\"\n    Server: \n    Database: \n    Trusted_connection: \n    ApplicationIntent: \n    \n  fulgent:\n    username: &lt;USERNAME&gt;\n    password: &lt;PASSWORD&gt;\n\ntest:\n  conn_list_wdrs:\n    Driver: \"SQL Server Native Client 11.0\"\n    Server: \n    Database: \n    Trusted_connection: \n    ApplicationIntent: \n\n\n\nNow there is a test list with its own variables. This lets us switch a set of variables within our scripts. default applies to the main credentials where test can distinguish which variables should be test or dev scripts specific. Notice below that you can now call the credentials from a .yml file into an R or Python script and the actual credentials will never exist in the code pushed to the repo.\n\n\n\n\nscript_in_repo.R\n\n# this script is in the repo, but credentials are hidden\nlibrary(yaml)\n\n# read in the local credentials yaml file\ncreds &lt;- yaml::read_yaml(\"path/to/local_credentials.yml\")\n\n# pull in the credentials\nserver_name &lt;- creds$default$conn_list_wdrs$server"
-  },
-  {
-    "objectID": "std/security.html#pre-commit-hooks",
-    "href": "std/security.html#pre-commit-hooks",
-    "title": "Security Standards",
-    "section": "2.1 Pre-commit Hooks",
-    "text": "2.1 Pre-commit Hooks\nPre-commit hooks run a process locally when the user attempts to commit code to a git branch. Hooks have many uses. Here we can use them as a security guardrail to prevent accidental credential leaks in committed code.\n\nClone or download the AWS Git Secrets repo from awslabs GitHub\n\nExtract zip\nOpen folder and right click install.ps1\n\nRun in Power Shell\nType Y to give permission\n\nCD to a directory where you have the git repository you want to upload, either in PowerShell or R studio terminal \n\n\n\n\nPowerShell\n\nPS &gt; cd path/to/repo/root\n\n\n\nRun git secrets –install\n\n\n\n\nPowerShell\n\ngit secrets --install\n\n\n\nCopy the regex file containing the secret patterns into your folder. – make text file – discuss with team what all we want to make illegal.\nRun git secrets –add-provider – cat ./secrets_key\n\n\n\n\nPowerShell\n\ngit secrets --add-provider -- cat ./secrets_key\n\n\n\nYou can also add prohibited patterns like this\n\n\n\n\nPowerShell\n\n# add a pattern\ngit secrets --add '[A-Z0-9]{20}'\n\n# add a literal string, the + is escaped\ngit secrets --add --literal 'foo+bar'\n\n# add an allowed pattern\ngit secrets --add -a 'allowed pattern'\n\n\n\nTest Git history by running\n\n\n\n\nPowerShell\n\ngit secrets --scan-history\n\n\n\nIf something gets flagged and you don’t care about your history anymore: Delete .git folder and reinitialize repository\nI would take caution about this point. There might be better ways to clean your git history if you don’t want to get rid of everything.\nTest on one of my projects to see if rebasing is a sustainable option\nMake repo public\nWill automatically scan on every commit and won’t let it commit unless it’s clean - Create a few files to show it working\n\n\n\n\n\n\n\nNote\n\n\n\nWe can’t use the “Non capture group” feature of regex. Meaning we can’t use patterns like this in our regex: (?:abc) – see https://regexr.com IMPORTANT: Tab separate your regex expressions. Making new lines caused a bit of chaos and took really long to figure out. (you can use multiple tabs to separate them more visually)"
-  },
-  {
-    "objectID": "std/security.html#pre-recieve-hooks",
-    "href": "std/security.html#pre-recieve-hooks",
-    "title": "Security Standards",
-    "section": "2.2 Pre-Recieve Hooks",
-    "text": "2.2 Pre-Recieve Hooks\nThese are still being investigated. They are remote hooks (not local like pre-commit hooks) that can be deployed throughout the Github organization. They can block certain commits from ever being pushed to the remote repo. They may make things unnecessarily complicated"
-  },
-  {
-    "objectID": "std/security.html#pushing-private-code-to-public-repos",
-    "href": "std/security.html#pushing-private-code-to-public-repos",
-    "title": "Security Standards",
-    "section": "2.3 Pushing Private Code to Public Repos",
-    "text": "2.3 Pushing Private Code to Public Repos\nWe may wish to take private codes and push them to a public repo. We need to make sure that the public code doesn’t not contain sensitive or forbidden data/code, so cleaning up the private repo is important before pushing.\nThere are a few ways to do this, but the easiest way is to copy the clean private code to the public repo, that is, copy all the files you want to add publicly but do not copy the .git folder. If the private repo has a dirty git history we will not want that history in the public repo because the sensitive data will then be publicly available.\n\n\n\n\n\n\n\n\n\n\n\n The private repository on the left still contains sensitive information in the git history. The public repository on the right has a clean git history because we copied only the current clean files from the private repo and did not attach its git history (which lives in the hidden .git folder)"
-  },
-  {
     "objectID": "std/templates.html",
     "href": "std/templates.html",
     "title": "Github Organization Policies",
@@ -194,6 +47,111 @@
     "title": "Github Organization Policies",
     "section": "3.1 Commit Sign-Off Requirement - Github Apps",
     "text": "3.1 Commit Sign-Off Requirement - Github Apps\nWe may want to require authors or reviewers to sign-off on commits to a repo. This is sometimes established in projects to “ensure that copyrighted code not released under an appropriate free software (open source) license is not included in the kernel.”\nYou can install a Github App in the organization and it will be applied to all repos. The DCO App (Developer Certificate of Origin) is popular and lightweight. To install it in the organization, click on Configure and it will give you the option to configure it with the organization of choice."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Github Organization Standards",
+    "section": "",
+    "text": "About\n  \n  \n    \n     GitHub\n  \n  \n    \n     Chat"
+  },
+  {
+    "objectID": "index.html#quickstart",
+    "href": "index.html#quickstart",
+    "title": "Github Organization Standards",
+    "section": "Quickstart",
+    "text": "Quickstart\nThis is a static website documenting the proposed policies and standards for public Github use at the Pacific Northwest Genomic Center of Excellence. There are documents on\n\nSecurity and how to protect credential and private process leaks \nLicensing to protect against re-sale or theft of code \nOur Github rules, policies, and templates \nGithub user guides \n\nIf there are any questions please reach out to\n\n\n\n Personal or network credentials, tokens, server names and more are prohibited from being published to our public repos. Protect security and credentials with good coding practices. Using local environment files along with .gitignore can prevent credentials from being accidentally pushed into your repo. Other guardrails like pre-commit hooks can be used to further prevent accidental credential leaks. See more details on our security policies here\n\n\n\n\nlocal_credentials.yml\n\n# local yaml file that will NOT be pushed to the repo\n# add this file to the .gitignore to prevent leaks\nmy_credentials:\n  username: super_secret_user_name\n  password: 12345terriblepassword\n  \n  \n  \n  \n\n\n\n\n\nscript_in_repo.R\n\n# this script is in the repo, but credentials are hidden\nlibrary(yaml)\n\n# read in the local credentials yaml file\ncreds &lt;- yaml::read_yaml(\"path/to/local_credentials.yml\")\n\n# pull in the credentials\nusername &lt;- creds$my_credentials$username\npassword &lt;- creds$my_credentials$password\n\n\n\n\n\n\n\n Each repo in the organization should have a license. Licenses can help prevent your work from being stolen and/or used inappropriately. Licensing details here\n\n\n This organization requires each repo to have certain documents, such as a CODE_OF_CONDUCT. The organization uses a special repo called .github to ensure all repos adhere to the policies and have the right documents.\n\n\n If you’re looking to build a repository, check out the Github user guide tabs for best practices on reproducibility, documentation in the repo, and more."
+  },
+  {
+    "objectID": "tools/renv.html",
+    "href": "tools/renv.html",
+    "title": "Virtual Environments",
+    "section": "",
+    "text": "Virtual environments allow us to execute code while accounting for software/package version differences we have on our local machines. This repo uses virtual environments to configure a user’s R and Python software and packages to the repo’s specific package versions.\nFor example, say you have dplyr version 2.0 but this repo uses dplyr version 1.1, you may not be able to run the scripts as intended by the author since the functions in dplyr 1.1 may be different than in 2.0. The virtual environment will allow a given user to use only this repo’s version of dplyr so they can run the code as intended.\n\n\n\n\n\n\nImportant\n\n\n\nThere are two different virtual environments for this repo, one for R and another for Python. Your workflows for opening R and Python and how you install packages needs to utilize the virtual environments so that all machines are able to use your code."
+  },
+  {
+    "objectID": "tools/renv.html#step-1-set-up-anaconda",
+    "href": "tools/renv.html#step-1-set-up-anaconda",
+    "title": "Virtual Environments",
+    "section": "2.1 Step 1: Set Up Anaconda",
+    "text": "2.1 Step 1: Set Up Anaconda\nYou should already have Anaconda installed on your machine if not..\nunder construction"
+  },
+  {
+    "objectID": "tools/renv.html#step-2-open-anaconda-prompt",
+    "href": "tools/renv.html#step-2-open-anaconda-prompt",
+    "title": "Virtual Environments",
+    "section": "2.2 Step 2: Open Anaconda Prompt",
+    "text": "2.2 Step 2: Open Anaconda Prompt\nYou may have different Anaconda prompts (prompts aligned with different shells, like PowerShell, bash, etc). There should be a generic Anaconda prompt. Open that one:\n\n\nIf the first line in the prompt doesn’t start with (base), write:\nconda deactivate\nand it will bring you back to your base environment."
+  },
+  {
+    "objectID": "tools/renv.html#step-3-change-directories",
+    "href": "tools/renv.html#step-3-change-directories",
+    "title": "Virtual Environments",
+    "section": "2.3 Step 3: Change Directories",
+    "text": "2.3 Step 3: Change Directories\nChange the directory of the prompt to the repo’s directory. The code is\ncd C:/Users/XXXXXXX/Projects/Sequencing_2.0\nIf you are already in your user directory, you can just type\ncd projects/sequencing_2.0\ncapitalization doesn’t matter\n\n\nNotice that the folder path is now changed to the sequencing repo folder."
+  },
+  {
+    "objectID": "tools/renv.html#step-4-copy-the-repo-env",
+    "href": "tools/renv.html#step-4-copy-the-repo-env",
+    "title": "Virtual Environments",
+    "section": "2.4 Step 4: Copy the repo env",
+    "text": "2.4 Step 4: Copy the repo env\nNow we’re ready to create a new environment based on the repo’s environment.\nType: conda env create --name seq_env --file=environment.yml\nNote that how you name your environment doesn’t really matter, but name it something that resembles the repo. This will save the headache of having random environments for random repos that you can’t remember..\n\n\nconda env create will create a new environment in your C:/Users/XXXXX/Anaconda3/envs file path\n--name or -n will name that environment, in this case seq_env\n--file=environment.yml this code will take the file in the sequencing 2.0 repo and use it to create this environment. It is essentially a copy of the software versions in the file.\n\nNote: I sped up the gif below. The whole process may take a few minutes"
+  },
+  {
+    "objectID": "tools/renv.html#step-5-activate-the-environment",
+    "href": "tools/renv.html#step-5-activate-the-environment",
+    "title": "Virtual Environments",
+    "section": "2.5 Step 5: Activate the environment",
+    "text": "2.5 Step 5: Activate the environment\nYou can switch between environments in the conda prompt or in a programming IDE (or both? idk). To activate and switch the env, write:\nconda activate &lt;env_name&gt;\nin this case\nconda activate seq_env\n\n\n\n\n\n\n\n\nNote\n\n\n\nThe environment your in will show on the left of the prompt message. In this case it says (seq_env) instead of (base). That way you know what env your working in"
+  },
+  {
+    "objectID": "tools/renv.html#ide-setup---vs-code",
+    "href": "tools/renv.html#ide-setup---vs-code",
+    "title": "Virtual Environments",
+    "section": "3.1 IDE Setup - VS Code",
+    "text": "3.1 IDE Setup - VS Code\nVS Code has a lot built in to use a conda environment. Since your env is already activated, if you have VS Code installed, you can type\ncode\ninto the anaconda prompt and it will open a VS Code window\n\n\n3.1.1 Step 1: Select a Python Interpreter\nFirst we need to select a python interpreter, which is in our env. On your keyboard, press\nCTRL+SHIFT+P\nThis should bring up a window with an option that says Python: Select Interpreter. You may need to search for it.\nClick it and you should see your new environment seq_env in the list. Click it\n\n\n\n3.1.2 Step 2: Write code\nNow your VS Code is using your environment and the python version/packages in that environment. Check to see that your terminal is using the correct env.\nOpen the terminal (terminal &gt; new terminal) and confirm that you are in a cmd prompt in the terminal. On the right side of the terminal it should say cmd. If it says powershell or something else, let’s change it.. See the pic below. There’s a drop down that gives you shell types. Change your default to Command Prompt\n\n\nAlso notice in the picture that my environment now switches to seq_env. Yours should do the same. You should now be able to run code in a python script. Notice that your terminal will change to run python. If you get an error, write python in the terminal and hit enter. It will change your terminal a little. Now you can run python code and it will output to this terminal."
+  },
+  {
+    "objectID": "tools/renv.html#ide-setup---pycharm",
+    "href": "tools/renv.html#ide-setup---pycharm",
+    "title": "Virtual Environments",
+    "section": "3.2 IDE Setup - PyCharm",
+    "text": "3.2 IDE Setup - PyCharm\nPyCharm also works great with a conda environment.\n\n3.2.1 Step 1: Select a Python Interpreter\nYou may also be able to open a PyCharm window from an Anaconda prompt like with VS Code (if it’s installed in your env). To do so, write pycharm in the prompt and it should open a new window with the env activated.\nIf that doesn’t work, open PyCharm and on the bottom right there is a python version and interpreter selected. Click it and open “Add New Interpreter” &gt; “Add local interpreter”. This opens a new window. Click “Conda Environment” and under “Interpreter” click the dropdown. You should be able to see your new environment there. If not, click away and click the dropdown again. It’s weird sometimes.\nThen click okay. Close and reopen the Python Console window and it should have your environment path for the python.exe. Also, the Python Libraries window should have all of the libraries in your environment now.\n\n\nNotice that now there are a list of interpreters for you to use. You can now switch back and forth between environments. This is great if you have other repos to use or want to test out new packages that aren’t in the main environment."
+  },
+  {
+    "objectID": "tools/renv.html#step-1-install-a-new-package",
+    "href": "tools/renv.html#step-1-install-a-new-package",
+    "title": "Virtual Environments",
+    "section": "4.1 Step 1: Install a new package",
+    "text": "4.1 Step 1: Install a new package\nGo to the Anaconda prompt, make sure you’re in the repo file path (cd projects/sequencing_2.0) and make sure you’re in the right conda env (conda activate seq_env).\nNow, install the package. Usually packages can be installed with pip install or conda install or conda install -c conda forge &lt;package&gt;. This depends on the packages. Some need pip, others need conda. Google it to find out. Here i’m going to download a package from NCBI to demonstrate. The package is called ncbi-datasets-cli.\n\nThis package uses conda-forge to install. Type in conda install -c conda-forge ncbi-datasets-cli\nIt will give you a message Y/N to confirm. Type “y” and enter"
+  },
+  {
+    "objectID": "tools/renv.html#step-2-save-the-package-to-the-repo",
+    "href": "tools/renv.html#step-2-save-the-package-to-the-repo",
+    "title": "Virtual Environments",
+    "section": "4.2 Step 2: Save the package to the repo",
+    "text": "4.2 Step 2: Save the package to the repo\nNow we need to save this package to the repo’s environment.yml\n\nType conda env export &gt; environment.yml\nSince the package is in your environment, this code is exporting your new environment to repo’s one.\nNow push to github"
+  },
+  {
+    "objectID": "tools/renv.html#creating-renv-in-a-project",
+    "href": "tools/renv.html#creating-renv-in-a-project",
+    "title": "Virtual Environments",
+    "section": "5.1 Creating renv in a project",
+    "text": "5.1 Creating renv in a project\n\n5.1.1 Step 1: Open the .Rproj in your repo\nThe R project will open up Rstudio at the root of you directory path.\n\n\n\n5.1.2 Step 2: Initialize renv for the repo\nNow that we’re in the root of your repo directory, let’s initialize renv.\nFirst install renv - install.packages(\"renv\")\nThen in your console write renv::init() and run it.\n\nIf you already have an existing repo, you will probably see warnings and errors in the renv::init like I did in the gif above. Not to worry! Read the warnings and follow the instructions. Usually you will need to re-install a package. If you get this warning:\nThese may be left over from a prior, failed installation attempt.\nConsider removing or reinstalling these packages.\n\nThen run renv::install(\"THAT PACKAGE\"). It will install the package again,\nand then you need to update the lock file (more on that later) by running renv::snapshot().\n\nNow the package will be installed correctly\n\nrenv::init() will:\n\nSearch through all R scripts in your repo and find all packages used\nCreate a snapshot of those packages\nSave all packages in the repo in a new renv libraries path (similar to your C drive R libraries paths)\nCreate a .gitignore within the renv libraries path so that you don’t get spammed with thousands of libraries in your git commit\nCreate a lock file - this is like the environment.yml for conda. Think of it as instructions for which packages your repo is using\nIt also saved things like an activate R script which will activate that renv every time the repo is opened from the .Rproj\n\n\n\n5.1.3 Step 3: Push to Github\nNow look at your git stage and you will see all the files renv created.\nWe have\n\n.Rprofile that contains an renv activate.R script - this will activate the repo’s renv every time the project is opened\nThe renv.lock file shows information on each package used in the repo and is used to update collaborator’s environments to match the lock file.\nrenv/.gitignore I don’t feel like explaining this one right now - i’ll write more later\nrenv/activate.R this will activate the env whenever the R project is opened\nrenv/settings.dcf I have no clue what this is"
+  },
+  {
+    "objectID": "tools/renv.html#using-renv-in-a-project",
+    "href": "tools/renv.html#using-renv-in-a-project",
+    "title": "Virtual Environments",
+    "section": "5.2 Using renv in a project",
+    "text": "5.2 Using renv in a project\n\n5.2.1 Step 1: Open the .Rproj for your repo\nAny time you need to code or run code from the repo, open up the .Rproj file that contains the sequencing 2.0 project. In your file explorer, go to the repo and open Sequencing_2.0 .Rproj\n\nThis will open up an R window with the repo file path as a root directory. It will also utilize the renv. Your console should say something about renv, like this\n\n\n\n5.2.2 Step 2: Load renv packages\nThe first time you use renv you will need to configure it to your local machine. To do this, type:\n\nrenv::restore() in your console.\nThis will create a new environment for your R in your local machine using the lock file packages.\n\n\nNow you’re ready to use the scripts! Way less complicated than conda"
+  },
+  {
+    "objectID": "tools/link_code.html",
+    "href": "tools/link_code.html",
+    "title": "Link external R code to the documentation",
+    "section": "",
+    "text": "The code in this website is automatically linked to the code in the repository. This lets us update the code and not need to copy and paste any new changes to the documentation/github page\nTo do this, open your external R script in your repo. In this case we’re using lineages_public_repo.R. Now wrap the chunks of code you want to link with comments like this, ## ---- libraries and ## ---- stop:\n\n\n\n## ---- libraries\nlibrary(pacman)\np_load(\n  reticulate,\n  fs,\n  lubridate,\n  dplyr,\n  stringr,\n  magrittr,\n  readr,\n  httr\n)\n## ---- stop\n\n\n\nThe ## ---- libraries signals the beginning of a chunk. the ## ---- stop signals the end of a chunk.\n\nNow you can call this chunk in your github page/quarto document like this:\nScan the external R script for code chunks:\n\n```{r setup}\n#| echo: false\nknitr::read_chunk(file.path(getwd(),\"lineages_public_repo.R\"))\n```\n\n\nCall the code chunk you want in the {r} header within the chunk. like this {r libraries}:\n\n```{r libraries}\n\n```\n\n\nAnd now the document will output any code in that code chunk and can also execute that code chunk if you want. Here’s what the output will look like in this case:"
   },
   {
     "objectID": "tools/how_to.html",
@@ -266,17 +224,66 @@
     "text": "6.4 Troubleshooting\nSo you did these steps:\n\nCreate the quarto-publish.yml\nRun quarto publish gh-pages in the terminal\nPush all the files in your git to the main branch\n\nIf this works on your first try then the universe is taking extra special care of you.\nIf not, you are like the rest of us poor souls:/\n\nThe first thing I would check is the error in your Github repo’s Action tab.\nIf the error is something like jsonlite not installed or some package not installed then it most likely means your are trying to commit a chunk of code in the documentation. Even if you are not executing the code, Github Actions will punish you. There are a couple options to fix this, depending on your priorities.\n\nIf you don’t care about executing your code and/or only need to push that part of the script once, consider using the _freeze option\nIf you need to execute code or need to programmtically render the document with code chunks often, consider using renv or a similar package installation method"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Github Organization Standards",
+    "objectID": "tools/release.html",
+    "href": "tools/release.html",
+    "title": "Release Cycles",
     "section": "",
-    "text": "About\n  \n  \n    \n     GitHub\n  \n  \n    \n     Chat"
+    "text": "Summary\n\nGithub Releases take snapshots of you repo with each release\nThey can help devs and end users switch between repo versions\nChange logs and semantic versioning can help document changes\nGithub Actions and pre-commit hooks can automate the release process"
   },
   {
-    "objectID": "index.html#quickstart",
-    "href": "index.html#quickstart",
-    "title": "Github Organization Standards",
-    "section": "Quickstart",
-    "text": "Quickstart\nThis is a static website documenting the proposed policies and standards for public Github use at the Pacific Northwest Genomic Center of Excellence. There are documents on\n\nSecurity and how to protect credential and private process leaks \nLicensing to protect against re-sale or theft of code \nOur Github rules, policies, and templates \nGithub user guides \n\nIf there are any questions please reach out to\n\n\n\n Personal or network credentials, tokens, server names and more are prohibited from being published to our public repos. Protect security and credentials with good coding practices. Using local environment files along with .gitignore can prevent credentials from being accidentally pushed into your repo. Other guardrails like pre-commit hooks can be used to further prevent accidental credential leaks. See more details on our security policies here\n\n\n\n\nlocal_credentials.yml\n\n# local yaml file that will NOT be pushed to the repo\n# add this file to the .gitignore to prevent leaks\nmy_credentials:\n  username: super_secret_user_name\n  password: 12345terriblepassword\n  \n  \n  \n  \n\n\n\n\n\nscript_in_repo.R\n\n# this script is in the repo, but credentials are hidden\nlibrary(yaml)\n\n# read in the local credentials yaml file\ncreds &lt;- yaml::read_yaml(\"path/to/local_credentials.yml\")\n\n# pull in the credentials\nusername &lt;- creds$my_credentials$username\npassword &lt;- creds$my_credentials$password\n\n\n\n\n\n\n\n Each repo in the organization should have a license. Licenses can help prevent your work from being stolen and/or used inappropriately. Licensing details here\n\n\n This organization requires each repo to have certain documents, such as a CODE_OF_CONDUCT. The organization uses a special repo called .github to ensure all repos adhere to the policies and have the right documents.\n\n\n If you’re looking to build a repository, check out the Github user guide tabs for best practices on reproducibility, documentation in the repo, and more."
+    "objectID": "tools/release.html#github-action-for-auto-releases",
+    "href": "tools/release.html#github-action-for-auto-releases",
+    "title": "Release Cycles",
+    "section": "4.1 Github Action for auto releases",
+    "text": "4.1 Github Action for auto releases\nI recommend first creating a test repo for this. In the repo, create a Github Action workflow called changelog.yml. You can copy the full file below:\n\n\n\n\n.github/workflows/changelog.yml\n\nname: Changelog\non:\n  push:\n    branches:\n      - main\n\njobs:\n  changelog:\n    runs-on: ubuntu-latest\n    \n    permissions:\n      # write permission is required to create a github release\n      contents: write\n\n    steps:\n      - uses: actions/checkout@v2\n\n      - name: Conventional Changelog Action\n        id: changelog\n        uses: TriPSs/conventional-changelog-action@v3\n        with:\n          github-token: ${{ secrets.github_token }}\n          create-summary: true\n\n      - name: Create Release\n        uses: actions/create-release@v1\n        if: ${{ steps.changelog.outputs.skipped == 'false' }}\n        env:\n          GITHUB_TOKEN: ${{ secrets.github_token }}\n        with:\n          prerelease: false\n          tag_name: ${{ steps.changelog.outputs.tag }}\n          release_name: ${{ steps.changelog.outputs.tag }}\n          body: ${{ steps.changelog.outputs.clean_changelog }}"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "std/security.html",
+    "href": "std/security.html",
+    "title": "Security Standards",
+    "section": "",
+    "text": "Objectives\n\nProvide security guidelines\nSet up security guardrails\nDevelop a process for reviewing code and pushing private code to a public repo"
+  },
+  {
+    "objectID": "std/security.html#prevent-credential-leaks-with-env-variables",
+    "href": "std/security.html#prevent-credential-leaks-with-env-variables",
+    "title": "Security Standards",
+    "section": "Prevent Credential Leaks with Env Variables",
+    "text": "Prevent Credential Leaks with Env Variables\nThere are a number of ways to do this. We typically use a yaml file that can be filled out with personal credentials locally. The file will not be committed to the remote repo\n\n1.0.1 Create a private credentials file\nThe scripts use a .yml file that contains a list of API tokens, server names, and usernames/passwords specific to each individual user. There are two .yml files. One is a template (containing no actual passwords..) that exists in the repo and serves as a template so every individual user can keep up to date with new credential additions. The other is the individual creds.yml that is in the repo’s .gitignore. This file will never exist in the repo and only exist locally (in the user’s C drive).\n\n\n1.0.2 creds.yml details\nThe .yml file can work with multiple programming languages including R and Python. They are read in the same way and can be easily adjusted when adding new passwords or using them as configuration files.\nThey look like this:\n\n\n\n\nlocal_credentials.yml\n\n# Default is needed to distinguish values.\n# Leave a blank line (NO SPACES) as the last line in this file or things will break\n# Quotes aren't necessary, but can be used.\ndefault: \n  conn_list_wdrs:\n    Driver: \"SQL Server Native Client 11.0\"\n    Server: \n    Database: \n    Trusted_connection: \n    ApplicationIntent: \n    \n  fulgent:\n    username: &lt;USERNAME&gt;\n    password: &lt;PASSWORD&gt;\n\n\n\nYou can have different variables assigned to unique lists, which allows for easy configuration. For example, the list starting with default has variables conn_list_wdrs and fulgent. You can have a different list of variables within the same file like this:\n\n\n\n\nlocal_credentials.yml\n\n# Default is needed to distinguish values.\n# Leave a blank line (NO SPACES) as the last line in this file or things will break\n# Quotes aren't necessary, but can be used.\ndefault: \n  conn_list_wdrs:\n    Driver: \"SQL Server Native Client 11.0\"\n    Server: \n    Database: \n    Trusted_connection: \n    ApplicationIntent: \n    \n  fulgent:\n    username: &lt;USERNAME&gt;\n    password: &lt;PASSWORD&gt;\n\ntest:\n  conn_list_wdrs:\n    Driver: \"SQL Server Native Client 11.0\"\n    Server: \n    Database: \n    Trusted_connection: \n    ApplicationIntent: \n\n\n\nNow there is a test list with its own variables. This lets us switch a set of variables within our scripts. default applies to the main credentials where test can distinguish which variables should be test or dev scripts specific. Notice below that you can now call the credentials from a .yml file into an R or Python script and the actual credentials will never exist in the code pushed to the repo.\n\n\n\n\nscript_in_repo.R\n\n# this script is in the repo, but credentials are hidden\nlibrary(yaml)\n\n# read in the local credentials yaml file\ncreds &lt;- yaml::read_yaml(\"path/to/local_credentials.yml\")\n\n# pull in the credentials\nserver_name &lt;- creds$default$conn_list_wdrs$server"
+  },
+  {
+    "objectID": "std/security.html#pre-commit-hooks",
+    "href": "std/security.html#pre-commit-hooks",
+    "title": "Security Standards",
+    "section": "2.1 Pre-commit Hooks",
+    "text": "2.1 Pre-commit Hooks\nPre-commit hooks run a process locally when the user attempts to commit code to a git branch. Hooks have many uses. Here we can use them as a security guardrail to prevent accidental credential leaks in committed code.\n\nClone or download the AWS Git Secrets repo from awslabs GitHub\n\nExtract zip\nOpen folder and right click install.ps1\n\nRun in Power Shell\nType Y to give permission\n\nCD to a directory where you have the git repository you want to upload, either in PowerShell or R studio terminal \n\n\n\n\nPowerShell\n\nPS &gt; cd path/to/repo/root\n\n\n\nRun git secrets –install\n\n\n\n\nPowerShell\n\ngit secrets --install\n\n\n\nCopy the regex file containing the secret patterns into your folder. – make text file – discuss with team what all we want to make illegal.\nRun git secrets –add-provider – cat ./secrets_key\n\n\n\n\nPowerShell\n\ngit secrets --add-provider -- cat ./secrets_key\n\n\n\nYou can also add prohibited patterns like this\n\n\n\n\nPowerShell\n\n# add a pattern\ngit secrets --add '[A-Z0-9]{20}'\n\n# add a literal string, the + is escaped\ngit secrets --add --literal 'foo+bar'\n\n# add an allowed pattern\ngit secrets --add -a 'allowed pattern'\n\n\n\nTest Git history by running\n\n\n\n\nPowerShell\n\ngit secrets --scan-history\n\n\n\nIf something gets flagged and you don’t care about your history anymore: Delete .git folder and reinitialize repository\nI would take caution about this point. There might be better ways to clean your git history if you don’t want to get rid of everything.\nTest on one of my projects to see if rebasing is a sustainable option\nMake repo public\nWill automatically scan on every commit and won’t let it commit unless it’s clean - Create a few files to show it working\n\n\n\n\n\n\n\nNote\n\n\n\nWe can’t use the “Non capture group” feature of regex. Meaning we can’t use patterns like this in our regex: (?:abc) – see https://regexr.com IMPORTANT: Tab separate your regex expressions. Making new lines caused a bit of chaos and took really long to figure out. (you can use multiple tabs to separate them more visually)"
+  },
+  {
+    "objectID": "std/security.html#pre-recieve-hooks",
+    "href": "std/security.html#pre-recieve-hooks",
+    "title": "Security Standards",
+    "section": "2.2 Pre-Recieve Hooks",
+    "text": "2.2 Pre-Recieve Hooks\nThese are still being investigated. They are remote hooks (not local like pre-commit hooks) that can be deployed throughout the Github organization. They can block certain commits from ever being pushed to the remote repo. They may make things unnecessarily complicated"
+  },
+  {
+    "objectID": "std/security.html#pushing-private-code-to-public-repos",
+    "href": "std/security.html#pushing-private-code-to-public-repos",
+    "title": "Security Standards",
+    "section": "2.3 Pushing Private Code to Public Repos",
+    "text": "2.3 Pushing Private Code to Public Repos\nWe may wish to take private codes and push them to a public repo. We need to make sure that the public code doesn’t not contain sensitive or forbidden data/code, so cleaning up the private repo is important before pushing.\nThere are a few ways to do this, but the easiest way is to copy the clean private code to the public repo, that is, copy all the files you want to add publicly but do not copy the .git folder. If the private repo has a dirty git history we will not want that history in the public repo because the sensitive data will then be publicly available.\n\n\n\n\n\n\n\n\n\n\n\n The private repository on the left still contains sensitive information in the git history. The public repository on the right has a clean git history because we copied only the current clean files from the private repo and did not attach its git history (which lives in the hidden .git folder)"
+  },
+  {
+    "objectID": "std/lic.html",
+    "href": "std/lic.html",
+    "title": "Licensing",
+    "section": "",
+    "text": "Summary\n\nHaving the appropriate license in a Github repo can prevent code theft and inappropriate redistribution of code.\nEach individual repo author(s) should review common open-source licenses and decide what kind of license is best for their particular repo.\nSome licenses are very relaxed, meaning anyone in the public can use their code and distribute it widely, including using the software to publish papers or monetize the work.\nOther licenses are more strict and prevent re-distribution of code.\n\n\n\n1 General License Info\nBelow is a list of common open-source licenses.\n\nI imagine there isn’t a one size fits all license, so thankfully there are a variety of options. Here are two common ones:\n\n\n2 GNU GPL licenses\n\nThese are the strong licenses\nPrevents someone from taking our code and privatizing it (and making money off of it)\nSomeone can still use our code, they just need to ensure that what they’re doing with it is open-source\n“Copyright and license notices must be preserved.”\n“Contributors provide an express grant of patent rights. When a modified version is used to provide a service over a network, the complete source code of the modified version must be made available.”\n\n\n\n3 MIT license\n\nI think this is the most commonly used one\n“short and simple permissive license… only requiring preservation of copyright and license notices”\n“Licensed works, modifications, and larger works may be distributed under different terms and without source code.”\nSomeone could basically do whatever they want with the code.\nNextstain/ncov repo is currently using this\n\nAnd here are a couple of youtube videos that were helping in explaining licensing"
   }
 ]
