@@ -1,1 +1,1 @@
-Sitemap: https://github.com/NW-PaGe/standards/sitemap.xml
+Sitemap: https://NW-PaGe.github.io/standards/sitemap.xml
