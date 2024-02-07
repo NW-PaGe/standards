@@ -1,6 +1,6 @@
 ---
-title: "Github Organization Standards"
-# description: Documentation for how to structure and standardize the public Github Organization
+# title: "Github Policies"
+# description: Github Policies
 format: 
   html: 
     toc: false
@@ -11,7 +11,7 @@ about:
   template: jolla
   image-shape: rectangle
   image: images/nwpage_logo.png
-  image-width: "40em"
+  image-width: "35em"
   links:
     - icon: info-circle
       href: about.qmd

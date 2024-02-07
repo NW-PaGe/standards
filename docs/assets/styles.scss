@@ -45,6 +45,10 @@ $navbar-fg: #f5eff6;
 }
 */
 
+#title-block-header.quarto-title-block.default .quarto-title .title {
+    padding-left: 0;
+}
+
 // root font size;
 :root {
   --bs-root-font-size: 20px;
@@ -87,14 +91,6 @@ $body-color: $gray-700;
   box-shadow: 0 20px 47px rgb(0 0 0 / 55%);
   /*margin: auto !important;*/
   
-}
-
-.sticky {
-    img.sticky {
-    position: -webkit-sticky; /* Safari */
-    position: sticky;
-    top: 0;
-  }
 }
 
 .pic-border {
