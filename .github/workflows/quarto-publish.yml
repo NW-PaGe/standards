@@ -19,7 +19,7 @@ jobs:
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
         with:
-          quarto-version: '1.4.358'
+          version: '1.4.358'
         
       - name: Prep CURL install
         run: sudo apt-get update
