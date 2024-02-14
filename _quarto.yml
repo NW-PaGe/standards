@@ -10,7 +10,6 @@ website:
   # date: today
   search: true
   repo-url: https://github.com/NW-PaGe/standards
-  repo-subdir: docs/
   repo-actions: [source,edit,issue]
   
   navbar: 
