@@ -63,6 +63,34 @@
     "text": "Quickstart\nThis is a static website documenting the proposed policies and standards for public Github use at the Pacific Northwest Genomic Center of Excellence. There are documents on\n\nSecurity and how to protect credential and private process leaks \nLicensing to protect against re-sale or theft of code \nOur Github rules, policies, and templates \nGithub user guides \n\nIf there are any questions please reach out to\n\n\n\n Personal or network credentials, tokens, server names and more are prohibited from being published to our public repos. Protect security and credentials with good coding practices. Using local environment files along with .gitignore can prevent credentials from being accidentally pushed into your repo. Other guardrails like pre-commit hooks can be used to further prevent accidental credential leaks. See more details on our security policies here\n\n\n\n\nlocal_credentials.yml\n\n# local yaml file that will NOT be pushed to the repo\n# add this file to the .gitignore to prevent leaks\nmy_credentials:\n  username: super_secret_user_name\n  password: 12345terriblepassword\n  \n  \n  \n  \n\n\n\n\n\nscript_in_repo.R\n\n# this script is in the repo, but credentials are hidden\nlibrary(yaml)\n\n# read in the local credentials yaml file\ncreds &lt;- yaml::read_yaml(\"path/to/local_credentials.yml\")\n\n# pull in the credentials\nusername &lt;- creds$my_credentials$username\npassword &lt;- creds$my_credentials$password\n\n\n\n\n\n\n\n Each repo in the organization should have a license. Licenses can help prevent your work from being stolen and/or used inappropriately. Licensing details here\n\n\n This organization requires each repo to have certain documents, such as a CODE_OF_CONDUCT. The organization uses a special repo called .github to ensure all repos adhere to the policies and have the right documents.\n\n\n If you’re looking to build a repository, check out the Github user guide tabs for best practices on reproducibility, documentation in the repo, and more."
   },
   {
+    "objectID": "tools/templates.html",
+    "href": "tools/templates.html",
+    "title": "Templates",
+    "section": "",
+    "text": "This is a Github repo template for R projects. It has renv set up and a .devcontainer for reproducibility\n\n\n\nSelect Use Template &gt; NW-PaGe/R_template when creating a new repo in the NW-PaGe org. The template comes with a pre-filled README.md file that you can edit to your own needs. It’s recommended to leave the .devconainter folder in this repo. It serves as instructions to install all the software and R packages needed to reproduce the repos code using a Github Codespace. See the README.md for more information."
+  },
+  {
+    "objectID": "tools/templates.html#r-github-template",
+    "href": "tools/templates.html#r-github-template",
+    "title": "Templates",
+    "section": "",
+    "text": "This is a Github repo template for R projects. It has renv set up and a .devcontainer for reproducibility\n\n\n\nSelect Use Template &gt; NW-PaGe/R_template when creating a new repo in the NW-PaGe org. The template comes with a pre-filled README.md file that you can edit to your own needs. It’s recommended to leave the .devconainter folder in this repo. It serves as instructions to install all the software and R packages needed to reproduce the repos code using a Github Codespace. See the README.md for more information."
+  },
+  {
+    "objectID": "tools/templates.html#purpledoc-quarto-template",
+    "href": "tools/templates.html#purpledoc-quarto-template",
+    "title": "Templates",
+    "section": "2 Purpledoc Quarto Template",
+    "text": "2 Purpledoc Quarto Template\nThis is a Quarto template that contains the style and images used in this site\n\n\n\nquarto use template coe-test-org/purpledoc\nThis will install the extension and create an example qmd file that you can use as a starting place for your report.\nYou may also use this format with an existing Quarto project or document. From the quarto project or document directory, run the following command to install this format:\nquarto add coe-test-org/purpledoc"
+  },
+  {
+    "objectID": "tools/link_code.html",
+    "href": "tools/link_code.html",
+    "title": "Link external R code to the documentation",
+    "section": "",
+    "text": "The code in this website is automatically linked to the code in the repository. This lets us update the code and not need to copy and paste any new changes to the documentation/github page\nTo do this, open your external R script in your repo. In this case we’re using lineages_public_repo.R. Now wrap the chunks of code you want to link with comments like this, ## ---- libraries and ## ---- stop:\n\n\n\n## ---- libraries\nlibrary(pacman)\np_load(\n  reticulate,\n  fs,\n  lubridate,\n  dplyr,\n  stringr,\n  magrittr,\n  readr,\n  httr\n)\n## ---- stop\n\n\n\nThe ## ---- libraries signals the beginning of a chunk. the ## ---- stop signals the end of a chunk.\n\nNow you can call this chunk in your github page/quarto document like this:\nScan the external R script for code chunks:\n\n```{r setup}\n#| echo: false\nknitr::read_chunk(file.path(getwd(),\"lineages_public_repo.R\"))\n```\n\n\nCall the code chunk you want in the {r} header within the chunk. like this {r libraries}:\n\n```{r libraries}\n\n```\n\n\nAnd now the document will output any code in that code chunk and can also execute that code chunk if you want. Here’s what the output will look like in this case:"
+  },
+  {
     "objectID": "tools/how_to.html",
     "href": "tools/how_to.html",
     "title": "Code and Repo Documentation",
@@ -131,6 +159,13 @@
     "title": "Code and Repo Documentation",
     "section": "6.4 Troubleshooting",
     "text": "6.4 Troubleshooting\nSo you did these steps:\n\nCreate the quarto-publish.yml\nRun quarto publish gh-pages in the terminal\nPush all the files in your git to the main branch\n\nIf this works on your first try then the universe is taking extra special care of you.\nIf not, you are like the rest of us poor souls:/\n\nThe first thing I would check is the error in your Github repo’s Action tab.\nIf the error is something like jsonlite not installed or some package not installed then it most likely means your are trying to commit a chunk of code in the documentation. Even if you are not executing the code, Github Actions will punish you. There are a couple options to fix this, depending on your priorities.\n\nIf you don’t care about executing your code and/or only need to push that part of the script once, consider using the _freeze option\nIf you need to execute code or need to programmtically render the document with code chunks often, consider using renv or a similar package installation method"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
   },
   {
     "objectID": "tools/renv.html",
@@ -217,25 +252,11 @@
     "text": "5.2 Using renv in a project\n\n5.2.1 Step 1: Open the .Rproj for your repo\nAny time you need to code or run code from the repo, open up the .Rproj file that contains the sequencing 2.0 project. In your file explorer, go to the repo and open Sequencing_2.0 .Rproj\n\nThis will open up an R window with the repo file path as a root directory. It will also utilize the renv. Your console should say something about renv, like this\n\n\n\n5.2.2 Step 2: Load renv packages\nThe first time you use renv you will need to configure it to your local machine. To do this, type:\n\nrenv::restore() in your console.\nThis will create a new environment for your R in your local machine using the lock file packages.\n\n\nNow you’re ready to use the scripts! Way less complicated than conda"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
-  },
-  {
     "objectID": "tools/index.html",
     "href": "tools/index.html",
     "title": "Guides and Templates",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\nReading Time\n\n\n\n\n\n\n\n\n\nSep 1, 2023\n\n\nCode and Repo Documentation\n\n\nFrank Aragona\n\n\n13 min\n\n\n\n\n\n\n\nFeb 14, 2024\n\n\nLink external R code to the documentation\n\n\nFrank Aragona\n\n\n1 min\n\n\n\n\n\n\n\nSep 1, 2023\n\n\nRelease Cycles\n\n\nFrank Aragona\n\n\n6 min\n\n\n\n\n\n\n\nSep 1, 2023\n\n\nTemplates\n\n\nFrank Aragona\n\n\n1 min\n\n\n\n\n\n\n\nFeb 1, 2023\n\n\nVirtual Environments\n\n\nFrank Aragona\n\n\n11 min\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "tools/link_code.html",
-    "href": "tools/link_code.html",
-    "title": "Link external R code to the documentation",
-    "section": "",
-    "text": "The code in this website is automatically linked to the code in the repository. This lets us update the code and not need to copy and paste any new changes to the documentation/github page\nTo do this, open your external R script in your repo. In this case we’re using lineages_public_repo.R. Now wrap the chunks of code you want to link with comments like this, ## ---- libraries and ## ---- stop:\n\n\n\n## ---- libraries\nlibrary(pacman)\np_load(\n  reticulate,\n  fs,\n  lubridate,\n  dplyr,\n  stringr,\n  magrittr,\n  readr,\n  httr\n)\n## ---- stop\n\n\n\nThe ## ---- libraries signals the beginning of a chunk. the ## ---- stop signals the end of a chunk.\n\nNow you can call this chunk in your github page/quarto document like this:\nScan the external R script for code chunks:\n\n```{r setup}\n#| echo: false\nknitr::read_chunk(file.path(getwd(),\"lineages_public_repo.R\"))\n```\n\n\nCall the code chunk you want in the {r} header within the chunk. like this {r libraries}:\n\n```{r libraries}\n\n```\n\n\nAnd now the document will output any code in that code chunk and can also execute that code chunk if you want. Here’s what the output will look like in this case:"
+    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\nReading Time\n\n\n\n\n\n\n\n\n\nSep 1, 2023\n\n\nCode and Repo Documentation\n\n\nFrank Aragona\n\n\n13 min\n\n\n\n\n\n\n\nFeb 1, 2023\n\n\nGit\n\n\nFrank Aragona\n\n\n1 min\n\n\n\n\n\n\n\nFeb 1, 2023\n\n\nGithub Codespaces\n\n\nFrank Aragona\n\n\n1 min\n\n\n\n\n\n\n\nFeb 14, 2024\n\n\nLink external R code to the documentation\n\n\nFrank Aragona\n\n\n1 min\n\n\n\n\n\n\n\nSep 1, 2023\n\n\nPackage Documentation\n\n\nFrank Aragona\n\n\n1 min\n\n\n\n\n\n\n\nSep 1, 2023\n\n\nRelease Cycles\n\n\nFrank Aragona\n\n\n6 min\n\n\n\n\n\n\n\nSep 1, 2023\n\n\nTemplates\n\n\nFrank Aragona\n\n\n1 min\n\n\n\n\n\n\n\nFeb 1, 2023\n\n\nVirtual Environments\n\n\nFrank Aragona\n\n\n11 min\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "tools/release.html",

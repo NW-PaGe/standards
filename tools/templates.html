@@ -143,6 +143,7 @@ ul.task-list li input[type="checkbox"] {
       </div>
                           <div class="quarto-categories">
                 <div class="quarto-category">data democratization</div>
+                <div class="quarto-category">templates</div>
                 <div class="quarto-category">Quarto</div>
               </div>
                   </div>
@@ -189,7 +190,14 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#r-github-template" id="toc-r-github-template" class="nav-link active" data-scroll-target="#r-github-template"><span class="header-section-number">1</span> R Github Template</a></li>
+  <li><a href="#purpledoc-quarto-template" id="toc-purpledoc-quarto-template" class="nav-link" data-scroll-target="#purpledoc-quarto-template"><span class="header-section-number">2</span> Purpledoc Quarto Template</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/docs/tools/templates.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/docs/tools/templates.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -197,8 +205,39 @@ ul.task-list li input[type="checkbox"] {
 
 
 
+<section id="r-github-template" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="r-github-template"><span class="header-section-number">1</span> <a href="https://github.com/NW-PaGe/R_template">R Github Template</a></h2>
+<p>This is a Github repo template for R projects. It has <code>renv</code> set up and a <code>.devcontainer</code> for reproducibility</p>
+<table>
+<tbody><tr>
+<td valign="top">
+<p>Select <code>Use Template &gt; NW-PaGe/R_template</code> when creating a new repo in the NW-PaGe org. The template comes with a pre-filled <code>README.md</code> file that you can edit to your own needs. It’s recommended to leave the <code>.devconainter</code> folder in this repo. It serves as instructions to install all the software and R packages needed to reproduce the repos code using a Github Codespace. See the <code>README.md</code> for more information.</p>
+</td>
+<td valign="top">
+<a href="https://github.com/NW-PaGe/R_template"><img src="images/r_template.png" class="img-fluid" width="1000"></a>
+</td>
+</tr>
+</tbody></table>
+</section>
+<section id="purpledoc-quarto-template" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="purpledoc-quarto-template"><span class="header-section-number">2</span> <a href="https://github.com/coe-test-org/purpledoc">Purpledoc Quarto Template</a></h2>
+<p>This is a Quarto template that contains the style and images used in this site</p>
+<table>
+<tbody><tr>
+<td valign="top">
+<pre data-code-line-numbers=""><code>quarto use template coe-test-org/purpledoc</code></pre>
+<p>This will install the extension and create an example qmd file that you can use as a starting place for your report.</p>
+<p>You may also use this format with an existing Quarto project or document. From the quarto project or document directory, run the following command to install this format:</p>
+<pre data-code-line-numbers=""><code>quarto add coe-test-org/purpledoc</code></pre>
+</td>
+<td valign="top">
+<a href="https://github.com/coe-test-org/purpledoc"><img src="images/purpledoc.png" class="img-fluid" width="400"></a>
+</td>
+</tr>
+</tbody></table>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -567,7 +606,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/docs/tools/templates.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/docs/tools/templates.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    </div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
