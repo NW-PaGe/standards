@@ -1,59 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://NW-PaGe.github.io/standards/tools/teams.html</loc>
-    <lastmod>2024-02-08T01:37:09.898Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NW-PaGe.github.io/standards/tools/how_to.html</loc>
-    <lastmod>2024-02-08T01:37:09.774Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NW-PaGe.github.io/standards/tools/link_code.html</loc>
-    <lastmod>2024-02-08T01:37:09.898Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NW-PaGe.github.io/standards/tools/renv.html</loc>
-    <lastmod>2024-02-08T01:37:09.898Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NW-PaGe.github.io/standards/index.html</loc>
-    <lastmod>2024-02-08T01:37:09.758Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NW-PaGe.github.io/standards/std/templates.html</loc>
-    <lastmod>2024-02-08T01:37:09.774Z</lastmod>
+    <loc>https://NW-PaGe.github.io/standards/std/public_code.html</loc>
+    <lastmod>2024-02-14T21:21:39.278Z</lastmod>
   </url>
   <url>
     <loc>https://NW-PaGe.github.io/standards/std/creds.html</loc>
-    <lastmod>2024-02-08T01:37:09.758Z</lastmod>
+    <lastmod>2024-02-14T21:21:39.258Z</lastmod>
   </url>
   <url>
-    <loc>https://NW-PaGe.github.io/standards/std/lic.html</loc>
-    <lastmod>2024-02-08T01:37:09.774Z</lastmod>
+    <loc>https://NW-PaGe.github.io/standards/std/policies.html</loc>
+    <lastmod>2024-02-14T21:21:39.278Z</lastmod>
   </url>
   <url>
-    <loc>https://NW-PaGe.github.io/standards/std/security.html</loc>
-    <lastmod>2024-02-08T01:37:09.774Z</lastmod>
+    <loc>https://NW-PaGe.github.io/standards/index.html</loc>
+    <lastmod>2024-02-14T21:21:39.258Z</lastmod>
   </url>
   <url>
-    <loc>https://NW-PaGe.github.io/standards/std/public_code.html</loc>
-    <lastmod>2024-02-08T01:37:09.774Z</lastmod>
+    <loc>https://NW-PaGe.github.io/standards/tools/templates.html</loc>
+    <lastmod>2024-02-14T21:21:39.398Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NW-PaGe.github.io/standards/tools/how_to.html</loc>
+    <lastmod>2024-02-14T21:21:39.278Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NW-PaGe.github.io/standards/tools/renv.html</loc>
+    <lastmod>2024-02-14T21:21:39.398Z</lastmod>
   </url>
   <url>
     <loc>https://NW-PaGe.github.io/standards/about.html</loc>
-    <lastmod>2024-02-08T01:37:09.746Z</lastmod>
+    <lastmod>2024-02-14T21:21:39.246Z</lastmod>
   </url>
   <url>
-    <loc>https://NW-PaGe.github.io/standards/tools/iac.html</loc>
-    <lastmod>2024-02-08T01:37:09.778Z</lastmod>
+    <loc>https://NW-PaGe.github.io/standards/tools/index.html</loc>
+    <lastmod>2024-02-14T21:21:39.398Z</lastmod>
   </url>
   <url>
-    <loc>https://NW-PaGe.github.io/standards/tools/readme.html</loc>
-    <lastmod>2024-02-08T01:37:09.898Z</lastmod>
+    <loc>https://NW-PaGe.github.io/standards/tools/link_code.html</loc>
+    <lastmod>2024-02-14T21:21:39.398Z</lastmod>
   </url>
   <url>
     <loc>https://NW-PaGe.github.io/standards/tools/release.html</loc>
-    <lastmod>2024-02-08T01:37:09.898Z</lastmod>
+    <lastmod>2024-02-14T21:21:39.398Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NW-PaGe.github.io/standards/std/security.html</loc>
+    <lastmod>2024-02-14T21:21:39.278Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NW-PaGe.github.io/standards/std/lic.html</loc>
+    <lastmod>2024-02-14T21:21:39.278Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NW-PaGe.github.io/standards/std/index.html</loc>
+    <lastmod>2024-02-14T21:21:39.278Z</lastmod>
   </url>
 </urlset>

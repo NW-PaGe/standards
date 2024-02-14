@@ -6,11 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Frank Aragona">
-<meta name="dcterms.date" content="2023-11-22">
 <meta name="description" content="Coding at the Organization level to ensure policies are reflected in each repo">
 
-<title>🌲 NW-PaGe Github Standards - Github Organization Policies</title>
+<title>🌲 Github Policies - Github Organization Policies</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -117,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">🌲 NW-PaGe Github Standards</span>
+    <span class="navbar-title">🌲 Github Policies</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -131,10 +129,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-github-organization-standards" role="button" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Github Organization Standards</span>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-policies" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Policies</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-github-organization-standards">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-policies">    
         <li>
     <a class="dropdown-item" href="../std/security.html">
  <span class="dropdown-text">0: Security Standards</span></a>
@@ -144,30 +142,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">1: Choosing a License</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../std/templates.html">
+    <a class="dropdown-item" href="../std/policies.html">
  <span class="dropdown-text">2: Repo Policies</span></a>
   </li>  
     </ul>
   </li>
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-github-repository-guides" role="button" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Github Repository Guides</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-github-repository-guides">    
-        <li>
-    <a class="dropdown-item" href="../tools/how_to.html">
- <span class="dropdown-text">0: Code Documentation: Github Pages/READMEs</span></a>
+  <li class="nav-item">
+    <a class="nav-link" href="../tools/index.html"> 
+<span class="menu-text">Guides</span></a>
   </li>  
-        <li>
-    <a class="dropdown-item" href="../tools/renv.html">
- <span class="dropdown-text">1: Virtual Environments/Package Management</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../tools/release.html">
- <span class="dropdown-text">2: Github Release Cycles</span></a>
-  </li>  
-    </ul>
-  </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
@@ -185,7 +168,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
+    <div class="quarto-title column-body">
       <h1 class="title">Github Organization Policies</h1>
                   <div>
         <div class="description">
@@ -195,44 +178,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
                 </div>
   </div>
     
-  <div class="quarto-title-meta-author column-page-left">
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-heading">Affiliations</div>
-    
-      <div class="quarto-title-meta-contents">
-      <p class="author">Frank Aragona <a href="mailto:frank.aragona@doh.wa.gov" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
-    </div>
-      <div class="quarto-title-meta-contents">
-          <p class="affiliation">
-              Washington Department of Health
-            </p>
-          <p class="affiliation">
-              Data Integration/Quality Assurance
-            </p>
-        </div>
-      </div>
+  
+  <div class="quarto-title-meta">
 
-  <div class="quarto-title-meta column-page-left">
-
-        
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">November 22, 2023</p>
-      </div>
-    </div>
+      
     
-      <div>
-      <div class="quarto-title-meta-heading">Modified</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date-modified">February 8, 2024</p>
-      </div>
-    </div>
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -240,57 +195,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#required-documents" id="toc-required-documents" class="nav-link active" data-scroll-target="#required-documents"><span class="header-section-number">1</span> Required Documents</a>
-  <ul class="collapse">
-  <li><a href="#readme" id="toc-readme" class="nav-link" data-scroll-target="#readme"><code>README</code></a></li>
+  <li><a href="#readme" id="toc-readme" class="nav-link active" data-scroll-target="#readme"><code>README</code></a></li>
   <li><a href="#code_of_conduct" id="toc-code_of_conduct" class="nav-link" data-scroll-target="#code_of_conduct"><code>CODE_OF_CONDUCT</code></a></li>
   <li><a href="#contributing.md" id="toc-contributing.md" class="nav-link" data-scroll-target="#contributing.md"><code>CONTRIBUTING.md</code></a></li>
   <li><a href="#license" id="toc-license" class="nav-link" data-scroll-target="#license"><code>LICENSE</code></a></li>
-  </ul></li>
-  <li><a href="#set-policy-rules-at-org-level" id="toc-set-policy-rules-at-org-level" class="nav-link" data-scroll-target="#set-policy-rules-at-org-level"><span class="header-section-number">2</span> Set Policy Rules at Org Level</a>
+  <li><a href="#set-policy-rules-at-org-level" id="toc-set-policy-rules-at-org-level" class="nav-link" data-scroll-target="#set-policy-rules-at-org-level"><span class="header-section-number">1</span> Set Policy Rules at Org Level</a>
   <ul class="collapse">
-  <li><a href="#document-requirements-with-.github-repos" id="toc-document-requirements-with-.github-repos" class="nav-link" data-scroll-target="#document-requirements-with-.github-repos"><span class="header-section-number">2.1</span> Document Requirements with <code>.github</code> Repos</a></li>
+  <li><a href="#document-requirements-with-.github-repos" id="toc-document-requirements-with-.github-repos" class="nav-link" data-scroll-target="#document-requirements-with-.github-repos"><span class="header-section-number">1.1</span> Document Requirements with <code>.github</code> Repos</a></li>
   </ul></li>
-  <li><a href="#set-templates-at-the-org-level" id="toc-set-templates-at-the-org-level" class="nav-link" data-scroll-target="#set-templates-at-the-org-level"><span class="header-section-number">3</span> Set Templates at the Org Level</a>
+  <li><a href="#set-templates-at-the-org-level" id="toc-set-templates-at-the-org-level" class="nav-link" data-scroll-target="#set-templates-at-the-org-level"><span class="header-section-number">2</span> Set Templates at the Org Level</a>
   <ul class="collapse">
-  <li><a href="#commit-sign-off-requirement---github-apps" id="toc-commit-sign-off-requirement---github-apps" class="nav-link" data-scroll-target="#commit-sign-off-requirement---github-apps"><span class="header-section-number">3.1</span> Commit Sign-Off Requirement - Github Apps</a></li>
+  <li><a href="#commit-sign-off-requirement---github-apps" id="toc-commit-sign-off-requirement---github-apps" class="nav-link" data-scroll-target="#commit-sign-off-requirement---github-apps"><span class="header-section-number">2.1</span> Commit Sign-Off Requirement - Github Apps</a></li>
   </ul></li>
-  <li><a href="#iac" id="toc-iac" class="nav-link" data-scroll-target="#iac"><span class="header-section-number">4</span> IaC</a></li>
+  <li><a href="#iac" id="toc-iac" class="nav-link" data-scroll-target="#iac"><span class="header-section-number">3</span> IaC</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/docs/std/templates.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/docs/std/templates.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/docs/std/policies.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/docs/std/policies.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
-<div class="note">
+<div class="note medframe">
 <p><i class="fa-solid fa-file-circle-check fa-3x" aria-label="file-circle-check"></i> <strong>Objectives</strong></p>
-<ol type="1">
+<ul>
 <li>Ensure that all repos in the org have the required documents</li>
 <li>Set policy rules at the Organization level</li>
-<li>All repos need to have reproducible code</li>
-<li>All repos need documentation via README and/or Github Pages</li>
-</ol>
+<li>Repos need to have reproducible code</li>
+<li>Repos need to have documentation</li>
+</ul>
 </div>
+<p><br></p>
 <p>In the Github Organization we may require all repositories to contain certain documents. For example, we want to make sure that every repo has a <code>CODE OF CONDUCT</code> document that is a general policy applied throughout the organization.</p>
-<p>We could make a <code>CODE OF CONDUCT</code> document and manually copy and paste it into each repo, but this will become unmanageable over time because</p>
-<ol type="1">
-<li>if there are many repos it will be a burden to copy and paste the policy into each one</li>
-<li>we will need to force anyone making a new repo to copy and paste the policy, and</li>
-<li>if the policy changes we will need to edit the policy for every single repo</li>
-</ol>
-<p>Thus, <strong>we need a way to programmatically set a policy rule that can be applied to each repo, old or new, and can update the policy for each repo if needed.</strong> This will save a lot of time and effort</p>
-<section id="required-documents" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Required Documents</h1>
-<p>We may want the follow files to be in every single repo, new or existing, to have the following documents:</p>
-<ol type="1">
-<li>A <code>README.md</code> for documentation</li>
-<li><code>CODE_OF_CONDUCT.md</code> to define the <a href="https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-code-of-conduct-to-your-project">“standards for how to engage in a community”</a></li>
-<li><code>CONTRIBUTING.md</code> this file can set a policy for people wanting to contribute to a repo. Some organizations require people to sign a form before submitting pull requests so that the user understands what they are contributing to and how their code will be used</li>
-<li><code>LICENSE</code> this may be different for each repository, but we can set something general at the org level</li>
-</ol>
+<p>Here’s a list of required documents:</p>
 <section id="readme" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="readme"><code>README</code></h2>
 <p><code>README</code> files are instructions or documentation on how to use your software. It should give a quick introduction to the repo and instructions on how to install or run the code.</p>
@@ -307,12 +245,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="unnumbered anchored" data-anchor-id="license"><code>LICENSE</code></h2>
 <p>These should be and are set at the repo level. There will be many different licenses to choose from that will depend on the specific repo. More on that here.</p>
 </section>
-</section>
-<section id="set-policy-rules-at-org-level" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Set Policy Rules at Org Level</h1>
+<section id="set-policy-rules-at-org-level" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Set Policy Rules at Org Level</h1>
 <p>Policy rules may include requiring certain documents in each repo or requiring that a person sign every commit.</p>
-<section id="document-requirements-with-.github-repos" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="document-requirements-with-.github-repos"><span class="header-section-number">2.1</span> Document Requirements with <code>.github</code> Repos</h2>
+<section id="document-requirements-with-.github-repos" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="document-requirements-with-.github-repos"><span class="header-section-number">1.1</span> Document Requirements with <code>.github</code> Repos</h2>
 <p>You can set most policy rules and create documents for each repo at the organization level by using a special <code>.github</code> repo. Dot files and dot folders have special functionality in some software. For Github, the <code>.github</code> folder defines workflows for things like Github Actions in a repo. A <code>.github</code> <em>repository</em> on the other hand defines <em>organization level</em> rules and templates.</p>
 <p><img src="images/special.PNG" class="myframe img-fluid"></p>
 <p><br></p>
@@ -347,8 +284,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Now you can set organization level policies from the <code>.github</code> repo and they will automatically populate in <em>all</em> existing and new repositories <em>unless there are repo specific policies in place</em>. If a repo already has its own policies they will not be overwritten.</p>
 </section>
 </section>
-<section id="set-templates-at-the-org-level" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Set Templates at the Org Level</h1>
+<section id="set-templates-at-the-org-level" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Set Templates at the Org Level</h1>
 <p>Aside from policy documents, you can make templates at the organization level. Two commonly used templates are issue templates and discussion templates.</p>
 <p>In the public repos there may be end users that may have limited experience using Github. If they want to submit an issue or ask a question they get lost. Templates can help them form a question or idea. Templates can also help standardize how issues and discussions are maintained throughout the organization.</p>
 <p>Structuring the format of issues and discussions can make the author and the end-user’s lives easier.</p>
@@ -436,14 +373,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><img src="images/bug_report.jpg" class="myframe img-fluid"></p>
-<section id="commit-sign-off-requirement---github-apps" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="commit-sign-off-requirement---github-apps"><span class="header-section-number">3.1</span> Commit Sign-Off Requirement - Github Apps</h2>
+<section id="commit-sign-off-requirement---github-apps" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="commit-sign-off-requirement---github-apps"><span class="header-section-number">2.1</span> Commit Sign-Off Requirement - Github Apps</h2>
 <p>We may want to require authors or reviewers to sign-off on commits to a repo. This is sometimes established in projects to <a href="https://stackoverflow.com/a/1962112">“ensure that copyrighted code not released under an appropriate free software (open source) license is not included in the kernel.”</a></p>
 <p>You can install a Github App in the organization and it will be applied to all repos. <a href="https://github.com/apps/dco">The DCO App (Developer Certificate of Origin) is popular and lightweight</a>. To install it in the organization, click on Configure and it will give you the option to configure it with the organization of choice.</p>
 </section>
 </section>
-<section id="iac" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> IaC</h1>
+<section id="iac" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> IaC</h1>
 <p>Infrastructure as Code (IaC) can be helpful when managing administration tasks or writing hooks at the org level.</p>
 
 

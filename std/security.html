@@ -6,12 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Frank Aragona">
-<meta name="author" content="Kathleen Conery">
-<meta name="dcterms.date" content="2023-09-01">
 <meta name="description" content="Protect your credentials, tokens, data and more">
 
-<title>🌲 NW-PaGe Github Standards - Security Standards</title>
+<title>🌲 Github Policies - Security Policies</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -118,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">🌲 NW-PaGe Github Standards</span>
+    <span class="navbar-title">🌲 Github Policies</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -132,10 +129,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-github-organization-standards" role="button" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Github Organization Standards</span>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-policies" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Policies</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-github-organization-standards">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-policies">    
         <li>
     <a class="dropdown-item" href="../std/security.html">
  <span class="dropdown-text">0: Security Standards</span></a>
@@ -145,30 +142,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">1: Choosing a License</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../std/templates.html">
+    <a class="dropdown-item" href="../std/policies.html">
  <span class="dropdown-text">2: Repo Policies</span></a>
   </li>  
     </ul>
   </li>
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-github-repository-guides" role="button" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Github Repository Guides</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-github-repository-guides">    
-        <li>
-    <a class="dropdown-item" href="../tools/how_to.html">
- <span class="dropdown-text">0: Code Documentation: Github Pages/READMEs</span></a>
+  <li class="nav-item">
+    <a class="nav-link" href="../tools/index.html"> 
+<span class="menu-text">Guides</span></a>
   </li>  
-        <li>
-    <a class="dropdown-item" href="../tools/renv.html">
- <span class="dropdown-text">1: Virtual Environments/Package Management</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../tools/release.html">
- <span class="dropdown-text">2: Github Release Cycles</span></a>
-  </li>  
-    </ul>
-  </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
@@ -186,8 +168,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">Security Standards</h1>
+    <div class="quarto-title column-body">
+      <h1 class="title">Security Policies</h1>
                   <div>
         <div class="description">
           Protect your credentials, tokens, data and more
@@ -197,34 +179,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
     
   
-  <div class="quarto-title-meta column-page-left">
+  <div class="quarto-title-meta">
 
-      <div>
-      <div class="quarto-title-meta-heading">Authors</div>
-      <div class="quarto-title-meta-contents">
-               <p>Frank Aragona </p>
-               <p>Kathleen Conery </p>
-            </div>
-    </div>
       
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">September 1, 2023</p>
-      </div>
-    </div>
     
-      <div>
-      <div class="quarto-title-meta-heading">Modified</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date-modified">February 8, 2024</p>
-      </div>
-    </div>
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
@@ -232,86 +195,94 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#github-security-guidelines" id="toc-github-security-guidelines" class="nav-link active" data-scroll-target="#github-security-guidelines"><span class="header-section-number">1</span> Github Security Guidelines</a>
+  <li><a href="#prevent-credential-leaks-with-env-variables" id="toc-prevent-credential-leaks-with-env-variables" class="nav-link active" data-scroll-target="#prevent-credential-leaks-with-env-variables">Prevent Credential Leaks with Env Variables</a>
   <ul class="collapse">
-  <li><a href="#prevent-credential-leaks-with-env-variables" id="toc-prevent-credential-leaks-with-env-variables" class="nav-link" data-scroll-target="#prevent-credential-leaks-with-env-variables">Prevent Credential Leaks with Env Variables</a>
-  <ul class="collapse">
-  <li><a href="#create-a-private-credentials-file" id="toc-create-a-private-credentials-file" class="nav-link" data-scroll-target="#create-a-private-credentials-file"><span class="header-section-number">1.0.1</span> Create a private credentials file</a></li>
-  <li><a href="#creds.yml-details" id="toc-creds.yml-details" class="nav-link" data-scroll-target="#creds.yml-details"><span class="header-section-number">1.0.2</span> <code>creds.yml</code> details</a></li>
-  </ul></li>
-  </ul></li>
+  <li><a href="#create-a-private-credentials-file" id="toc-create-a-private-credentials-file" class="nav-link" data-scroll-target="#create-a-private-credentials-file"><span class="header-section-number">0.0.1</span> Create a private credentials file</a></li>
+  <li><a href="#creds.yml-details" id="toc-creds.yml-details" class="nav-link" data-scroll-target="#creds.yml-details"><span class="header-section-number">0.0.2</span> <code>creds.yml</code> details</a></li>
   <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
-  <li><a href="#safe-guards---prevent-accidental-leaks" id="toc-safe-guards---prevent-accidental-leaks" class="nav-link" data-scroll-target="#safe-guards---prevent-accidental-leaks"><span class="header-section-number">1.0.3</span> Safe Guards - Prevent Accidental Leaks!!!</a></li>
-  <li><a href="#security-guardrails" id="toc-security-guardrails" class="nav-link" data-scroll-target="#security-guardrails"><span class="header-section-number">2</span> Security Guardrails</a>
-  <ul class="collapse">
-  <li><a href="#pre-commit-hooks" id="toc-pre-commit-hooks" class="nav-link" data-scroll-target="#pre-commit-hooks"><span class="header-section-number">2.1</span> Pre-commit Hooks</a></li>
-  <li><a href="#pre-recieve-hooks" id="toc-pre-recieve-hooks" class="nav-link" data-scroll-target="#pre-recieve-hooks"><span class="header-section-number">2.2</span> Pre-Recieve Hooks</a></li>
-  <li><a href="#pushing-private-code-to-public-repos" id="toc-pushing-private-code-to-public-repos" class="nav-link" data-scroll-target="#pushing-private-code-to-public-repos"><span class="header-section-number">2.3</span> Pushing Private Code to Public Repos</a></li>
+  <li><a href="#safe-guards---prevent-accidental-leaks" id="toc-safe-guards---prevent-accidental-leaks" class="nav-link" data-scroll-target="#safe-guards---prevent-accidental-leaks"><span class="header-section-number">0.0.3</span> Safe Guards - Prevent Accidental Leaks!!!</a></li>
   </ul></li>
-  <li><a href="#code-reviewersgithub-operations-team" id="toc-code-reviewersgithub-operations-team" class="nav-link" data-scroll-target="#code-reviewersgithub-operations-team"><span class="header-section-number">3</span> Code Reviewers/Github Operations Team</a></li>
+  <li><a href="#security-guardrails" id="toc-security-guardrails" class="nav-link" data-scroll-target="#security-guardrails"><span class="header-section-number">1</span> Security Guardrails</a>
+  <ul class="collapse">
+  <li><a href="#pre-commit-hooks" id="toc-pre-commit-hooks" class="nav-link" data-scroll-target="#pre-commit-hooks"><span class="header-section-number">1.1</span> Pre-commit Hooks</a></li>
+  <li><a href="#pre-recieve-hooks" id="toc-pre-recieve-hooks" class="nav-link" data-scroll-target="#pre-recieve-hooks"><span class="header-section-number">1.2</span> Pre-Recieve Hooks</a></li>
+  <li><a href="#pushing-private-code-to-public-repos" id="toc-pushing-private-code-to-public-repos" class="nav-link" data-scroll-target="#pushing-private-code-to-public-repos"><span class="header-section-number">1.3</span> Pushing Private Code to Public Repos</a></li>
+  </ul></li>
+  <li><a href="#code-reviewersgithub-operations-team" id="toc-code-reviewersgithub-operations-team" class="nav-link" data-scroll-target="#code-reviewersgithub-operations-team"><span class="header-section-number">2</span> Code Reviewers/Github Operations Team</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/docs/std/security.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/docs/std/security.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block page-columns page-full column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
 
 
 
 
-<div class="note">
-<p><i class="fa-solid fa-unlock fa-3x" aria-label="unlock"></i> <strong>Objectives</strong></p>
-<ol type="1">
-<li>Provide security guidelines</li>
-<li>Set up security guardrails</li>
-<li>Develop a process for reviewing code and pushing private code to a public repo</li>
-</ol>
-</div>
-<p><br></p>
-<blockquote class="blockquote">
-<p>“I solemnly swear I am up to no good.”</p>
-<p>- Harry Potter</p>
-</blockquote>
-<section id="github-security-guidelines" class="level1 column-body-outset" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Github Security Guidelines</h1>
-<p>The following shall not be included in any repo <strong>or any local commit!</strong>:</p>
+<div class="note medframe">
+<p><i class="fa-solid fa-unlock fa-3x" aria-label="unlock"></i><strong>Objectives</strong></p>
 <ul>
-<li>Absolute file paths</li>
-<li>WDRS server names</li>
-<li>SSH server keys</li>
-<li>Tokens (REDCap, Azure, etc)</li>
-<li>Credentials</li>
-<li>PBI key to save in Azure</li>
-<li>ODBC connections</li>
-<li>Azure blob keys</li>
-<li>Block local paths (e.g., c drive file paths, y drive file paths)</li>
-<li>Usernames (Github usernames are okay)</li>
-<li>Connection strings</li>
-<li>Specific location information (e.g., addresses where mosquito traps are placed for gathering mosquitoes samples for surveillance of west Nile)</li>
+<li>Prevent sensitive information leaks to Github</li>
+<li>Set up guardrails, <code>.gitignore</code>, hooks</li>
+<li>Scrub private repos before they go public</li>
 </ul>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Warning
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>If any of these are committed to the remote repo then they will stay in the git history (and will require a lot of effort to remove them from the history).</p>
-<p>The best line of defense is setting up local guardrails to prevent security leaks in the first place. This section will show how to make these local guardrails</p>
-</div>
 </div>
 <p><br></p>
-<section id="prevent-credential-leaks-with-env-variables" class="level2 unnumbered">
+<p>If sensitive information is leaked and commited to the remote repo, then they will stay in the git history (and will require a lot of effort to remove them from the history). The following cannot be included in any repo <strong>or any local commit!</strong>:</p>
+<table class="table">
+<colgroup>
+<col style="width: 37%">
+<col style="width: 58%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>File Paths</td>
+<td><ul>
+<li>Network drives</li>
+<li>Shared internal drives</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td>Server Names</td>
+<td><ul>
+<li>ODBC Connections</li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td>Credentials</td>
+<td><ul>
+<li>SSH Keys</li>
+<li>Tokens (REDCap, Azure, Github, etc)</li>
+<li>Usernames</li>
+<li>Passwords</li>
+<li>Blob/bucket keys</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td>Identifiable Information</td>
+<td><ul>
+<li>Addresses</li>
+<li>Names</li>
+<li>Any PHI</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<section id="prevent-credential-leaks-with-env-variables" class="level2 unnumbered page-columns page-full">
 <h2 class="unnumbered anchored" data-anchor-id="prevent-credential-leaks-with-env-variables">Prevent Credential Leaks with Env Variables</h2>
 <p>There are a number of ways to do this. We typically use a yaml file that can be filled out with personal credentials locally. The file will not be committed to the remote repo</p>
-<section id="create-a-private-credentials-file" class="level3" data-number="1.0.1">
-<h3 data-number="1.0.1" class="anchored" data-anchor-id="create-a-private-credentials-file"><span class="header-section-number">1.0.1</span> Create a private credentials file</h3>
+<section id="create-a-private-credentials-file" class="level3" data-number="0.0.1">
+<h3 data-number="0.0.1" class="anchored" data-anchor-id="create-a-private-credentials-file"><span class="header-section-number">0.0.1</span> Create a private credentials file</h3>
 <p>The scripts use a <code>.yml</code> file that contains a list of API tokens, server names, and usernames/passwords specific to each individual user. There are two <code>.yml</code> files. One is a template (containing no actual passwords..) that exists in the repo and serves as a template so every individual user can keep up to date with new credential additions. The other is the individual <code>creds.yml</code> that is in the repo’s <code>.gitignore</code>. This file will never exist in the repo and only exist locally (in the user’s C drive).</p>
 </section>
-<section id="creds.yml-details" class="level3" data-number="1.0.2">
-<h3 data-number="1.0.2" class="anchored" data-anchor-id="creds.yml-details"><span class="header-section-number">1.0.2</span> <code>creds.yml</code> details</h3>
+<section id="creds.yml-details" class="level3" data-number="0.0.2">
+<h3 data-number="0.0.2" class="anchored" data-anchor-id="creds.yml-details"><span class="header-section-number">0.0.2</span> <code>creds.yml</code> details</h3>
 <p>The <code>.yml</code> file can work with multiple programming languages including R and Python. They are read in the same way and can be easily adjusted when adding new passwords or using them as configuration files.</p>
 <p>They look like this:</p>
 <div class="myframe">
@@ -388,8 +359,6 @@ Warning
 </div>
 </div>
 </section>
-</section>
-</section>
 <section id="section" class="level3 unnumbered page-columns page-full">
 <h3 class="unnumbered anchored" data-anchor-id="section"></h3>
 <div class="column-screen-inset-shaded quarto-layout-panel">
@@ -433,12 +402,12 @@ Warning
 </div>
 </div>
 </section>
-<section id="safe-guards---prevent-accidental-leaks" class="level3" data-number="1.0.3">
-<h3 data-number="1.0.3" class="anchored" data-anchor-id="safe-guards---prevent-accidental-leaks"><span class="header-section-number">1.0.3</span> Safe Guards - Prevent Accidental Leaks!!!</h3>
+<section id="safe-guards---prevent-accidental-leaks" class="level3" data-number="0.0.3">
+<h3 data-number="0.0.3" class="anchored" data-anchor-id="safe-guards---prevent-accidental-leaks"><span class="header-section-number">0.0.3</span> Safe Guards - Prevent Accidental Leaks!!!</h3>
 <p>Once you have the credentials.yml template in your repo, make sure that nobody on your team (or anyone with write access..) is able to accidentally push changes to the template. We don’t want someone’s passwords or API tokens to exist in GitHub.</p>
 <p><a href="https://stackoverflow.com/a/39776107">This link shows how to skip any changes made to the specific file</a>. If someone makes local changes to the template, the changes will not show in their commit. It is a safe guard.</p>
-<section id="for-all-individual-users-run-this-code" class="level4" data-number="1.0.3.1">
-<h4 data-number="1.0.3.1" class="anchored" data-anchor-id="for-all-individual-users-run-this-code"><span class="header-section-number">1.0.3.1</span> For all individual users, run this code:</h4>
+<section id="for-all-individual-users-run-this-code" class="level4" data-number="0.0.3.1">
+<h4 data-number="0.0.3.1" class="anchored" data-anchor-id="for-all-individual-users-run-this-code"><span class="header-section-number">0.0.3.1</span> For all individual users, run this code:</h4>
 <div class="smallframe">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> update-index <span class="at">--skip-worktree</span> creds_TEMPLATE.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -446,8 +415,8 @@ Warning
 </div>
 <p>This will tell your local git to ignore any changes made to <code>creds_TEMPLATE.yml</code>, but also allow it to exist in the repo (since <code>.gitignore</code> will prevent it from being in the repo)</p>
 </section>
-<section id="if-you-need-to-update-the-template-file-run-this" class="level4" data-number="1.0.3.2">
-<h4 data-number="1.0.3.2" class="anchored" data-anchor-id="if-you-need-to-update-the-template-file-run-this"><span class="header-section-number">1.0.3.2</span> If you need to update the template file run this:</h4>
+<section id="if-you-need-to-update-the-template-file-run-this" class="level4" data-number="0.0.3.2">
+<h4 data-number="0.0.3.2" class="anchored" data-anchor-id="if-you-need-to-update-the-template-file-run-this"><span class="header-section-number">0.0.3.2</span> If you need to update the template file run this:</h4>
 <div class="smallframe">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> update-index <span class="at">--no-skip-worktree</span> creds_TEMPLATE.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -462,12 +431,13 @@ Warning
 </div>
 </section>
 </section>
-<section id="security-guardrails" class="level1 page-columns page-full" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Security Guardrails</h1>
+</section>
+<section id="security-guardrails" class="level1 page-columns page-full" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Security Guardrails</h1>
 <p>Using a <code>.gitignore</code> file for environmental variables/credentials is an excellent guardrail and promotes good coding habits, but we may also want additional guardrails such as hooks.</p>
 <p>Hooks are processes that run in the background and can prevent code from being pushed if there is a security flaw. There are two hooks we could use for security; pre-commit hooks and pre-receive hooks</p>
-<section id="pre-commit-hooks" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="pre-commit-hooks"><span class="header-section-number">2.1</span> Pre-commit Hooks</h2>
+<section id="pre-commit-hooks" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="pre-commit-hooks"><span class="header-section-number">1.1</span> Pre-commit Hooks</h2>
 <p>Pre-commit hooks run a process locally when the user attempts to commit code to a git branch. Hooks have many uses. Here we can use them as a security guardrail to prevent accidental credential leaks in committed code.</p>
 <ol type="1">
 <li><p>Clone or download the AWS Git Secrets repo from <a href="https://github.com/awslabs/git-secrets/blob/master/install.ps1">awslabs GitHub</a></p>
@@ -561,12 +531,12 @@ Note
 </div>
 </div>
 </section>
-<section id="pre-recieve-hooks" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="pre-recieve-hooks"><span class="header-section-number">2.2</span> Pre-Recieve Hooks</h2>
+<section id="pre-recieve-hooks" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="pre-recieve-hooks"><span class="header-section-number">1.2</span> Pre-Recieve Hooks</h2>
 <p>These are still being investigated. They are remote hooks (not local like pre-commit hooks) that can be deployed throughout the Github organization. They can block certain commits from ever being pushed to the remote repo. They may make things unnecessarily complicated</p>
 </section>
-<section id="pushing-private-code-to-public-repos" class="level2 page-columns page-full" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="pushing-private-code-to-public-repos"><span class="header-section-number">2.3</span> Pushing Private Code to Public Repos</h2>
+<section id="pushing-private-code-to-public-repos" class="level2 page-columns page-full" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="pushing-private-code-to-public-repos"><span class="header-section-number">1.3</span> Pushing Private Code to Public Repos</h2>
 <p>We may wish to take private codes and push them to a public repo. We need to make sure that the public code doesn’t not contain sensitive or forbidden data/code, so cleaning up the private repo is important before pushing.</p>
 <p>There are a few ways to do this, but the easiest way is to copy the clean private code to the public repo, that is, copy all the files you want to add publicly but <strong>do not copy the <code>.git</code></strong> folder. If the private repo has a dirty git history we will not want that history in the public repo because the sensitive data will then be publicly available.</p>
 <div class="column-screen-inset-shaded quarto-layout-panel">
@@ -585,8 +555,8 @@ Note
 <p><br></p>
 </section>
 </section>
-<section id="code-reviewersgithub-operations-team" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Code Reviewers/Github Operations Team</h1>
+<section id="code-reviewersgithub-operations-team" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Code Reviewers/Github Operations Team</h1>
 <p>With the guardrails above in place there should be few chances that credentials get pushed to a repo. However accidents may still happen. We want to make sure that anyone who opens up a repo in the Github organization adheres to the rules, has the proper credential/coding set-up, and installs their local pre-commit hooks properly.</p>
 <p>It may be useful to have a team within the organization that helps with repo set-up. The team would help avoid a scenario where a person opens up a repo without reading this documentation and understanding the rules (and thus potentially breaking security rules).</p>
 <p>This Github Operations Team could also be helpful in managing permissions for members in the organization. See the video below on how the company Qualcomm manages their Github organization and how they use a Github Operations Team to guide new members access/repo development</p>

@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Frank Aragona">
+<meta name="dcterms.date" content="2023-09-01">
+<meta name="description" content="Github and Quarto templates for repos and document styles">
 
-<title>🌲 NW-PaGe Github Standards – readme</title>
+<title>🌲 Github Policies - Templates</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -39,6 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -77,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">🌲 NW-PaGe Github Standards</span>
+    <span class="navbar-title">🌲 Github Policies</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -91,10 +95,10 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-github-organization-standards" role="button" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Github Organization Standards</span>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-policies" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Policies</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-github-organization-standards">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-policies">    
         <li>
     <a class="dropdown-item" href="../std/security.html">
  <span class="dropdown-text">0: Security Standards</span></a>
@@ -104,30 +108,15 @@ ul.task-list li input[type="checkbox"] {
  <span class="dropdown-text">1: Choosing a License</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../std/templates.html">
+    <a class="dropdown-item" href="../std/policies.html">
  <span class="dropdown-text">2: Repo Policies</span></a>
   </li>  
     </ul>
   </li>
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-github-repository-guides" role="button" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Github Repository Guides</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-github-repository-guides">    
-        <li>
-    <a class="dropdown-item" href="../tools/how_to.html">
- <span class="dropdown-text">0: Code Documentation: Github Pages/READMEs</span></a>
+  <li class="nav-item">
+    <a class="nav-link" href="../tools/index.html"> 
+<span class="menu-text">Guides</span></a>
   </li>  
-        <li>
-    <a class="dropdown-item" href="../tools/renv.html">
- <span class="dropdown-text">1: Virtual Environments/Package Management</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../tools/release.html">
- <span class="dropdown-text">2: Github Release Cycles</span></a>
-  </li>  
-    </ul>
-  </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
@@ -143,14 +132,68 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Templates</h1>
+                  <div>
+        <div class="description">
+          Github and Quarto templates for repos and document styles
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">data democratization</div>
+                <div class="quarto-category">Quarto</div>
+              </div>
+                  </div>
+  </div>
+    
+  <div class="quarto-title-meta-author">
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Affiliations</div>
+    
+      <div class="quarto-title-meta-contents">
+      <p class="author">Frank Aragona <a href="mailto:frank.aragona@doh.wa.gov" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+    </div>
+      <div class="quarto-title-meta-contents">
+          <p class="affiliation">
+              Washington Department of Health
+            </p>
+          <p class="affiliation">
+              Data Integration/Quality Assurance
+            </p>
+        </div>
+      </div>
+
+  <div class="quarto-title-meta">
+
+        
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">September 1, 2023</p>
+      </div>
+    </div>
+    
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">February 14, 2024</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
 
 
 
@@ -524,7 +567,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/docs/tools/readme.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/docs/tools/readme.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/docs/tools/templates.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/docs/tools/templates.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
@@ -534,4 +577,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
+<script src="../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 </body></html>
