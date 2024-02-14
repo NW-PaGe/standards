@@ -4,24 +4,20 @@ description: Information on which license to choose for you repository
 editor: 
   markdown: 
     wrap: 72
-author: Frank Aragona
-date: today
-execute: 
-  freeze: true
 format: 
   html: 
     code-fold: false
 ---
 
-:::{.note}
+:::{.note .medframe}
 {{< fa file-circle-check size="3x" >}} **Summary**
 
-1.    Having the appropriate license in a Github repo can prevent code theft and inappropriate redistribution of code. 
-2.    Each individual repo author(s) should review common open-source licenses and decide what kind of license is best for their particular repo. 
-3.    Some licenses are very relaxed, meaning anyone in the public can use their code and distribute it widely, including using the software to publish papers or monetize the work. 
-4.    Other licenses are more strict and prevent re-distribution of code.
+-   Licenses prevent code theft and inappropriate redistribution of code. 
+-   Review common open-source licenses 
+-   License types vary depending on repo goals
 :::
 
+<br>
 
 # General License Info
 
@@ -31,7 +27,7 @@ format:
 <iframe width="780" height="500" src="https://choosealicense.com/licenses/" title="Github Licenses"></iframe>
 ```
 
-I imagine there isn't a one size fits all license, so thankfully there are a variety of options. Here are two common ones:
+There isn't a one size fits all license, so thankfully there are a variety of options. Here are two common ones:
 
 # GNU GPL licenses
 

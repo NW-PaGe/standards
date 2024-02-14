@@ -9,22 +9,16 @@ author:
     affiliations:
       - Washington Department of Health
       - Data Integration/Quality Assurance
-format: 
-  html:
-    code-fold: false
-    code-overflow: wrap
-    toc: true
-    number-sections: true
-execute: 
-  freeze: true
-  echo: true
-  eval: false
 knitr: true
 editor: 
   markdown: 
     wrap: 72
 filters: 
   - line-highlight
+categories:
+  - data democratization
+  - documentation
+  - Quarto
 ---
 
 # Introduction

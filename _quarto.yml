@@ -5,7 +5,7 @@ project:
 #   hypothesis: true
 
 website:
-  title: "🌲 NW-PaGe Github Standards"
+  title: "🌲 Github Policies"
   # author: DIQA 
   # date: today
   search: true
@@ -18,22 +18,16 @@ website:
     left: 
       - text: Home
         href: index.qmd
-      - text: Github Organization Standards
-        menu: 
+      - text: Policies
+        menu:
           - href: std/security.qmd
             text: "0: Security Standards"
           - href: std/lic.qmd
             text: "1: Choosing a License"
-          - href: std/templates.qmd
+          - href: std/policies.qmd
             text: "2: Repo Policies"
-      - text: Github Repository Guides
-        menu: 
-          - href: tools/how_to.qmd
-            text: "0: Code Documentation: Github Pages/READMEs"
-          - href: tools/renv.qmd
-            text: "1: Virtual Environments/Package Management"
-          - href: tools/release.qmd
-            text: "2: Github Release Cycles"
+      - text: Guides
+        href: tools/index.qmd
 
 
             
@@ -58,9 +52,9 @@ website:
 
 format:
   html:
-    # grid:
-    #   sidebar-width: 200px
-    #   body-width: 1000px
+    grid:
+      sidebar-width: 200px
+      body-width: 1000px
     #   margin-width: 300px
     #   gutter-width: 1.5rem
     theme: 
@@ -77,7 +71,7 @@ format:
     number-sections: true
     # code-fold: show
     code-overflow: wrap
-    page-layout: full
+    # page-layout: full
     backgroundcolor: "#f8f9fa"
     # header-includes: |
     #   <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/metropolitano" type="text/css"/>
@@ -86,7 +80,7 @@ format:
     
 execute: 
   error: true
-  freeze: true
+  freeze: false
 
 
 

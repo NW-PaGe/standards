@@ -1,14 +1,6 @@
 ---
 title: "Github Organization Policies"
 description: Coding at the Organization level to ensure policies are reflected in each repo
-date: November 22, 2023
-date-modified: today
-author: 
-  - name: Frank Aragona
-    email: frank.aragona@doh.wa.gov
-    affiliations:
-      - Washington Department of Health
-      - Data Integration/Quality Assurance
 format: 
   html:
     code-fold: false
@@ -22,33 +14,20 @@ filters:
   - line-highlight
 ---
 
-::: note
+:::{.note .medframe}
 {{< fa file-circle-check size="3x" >}} **Objectives**
 
-1.    Ensure that all repos in the org have the required documents
-2.    Set policy rules at the Organization level
-3.    All repos need to have reproducible code
-4.    All repos need documentation via README and/or Github Pages
+-   Ensure that all repos in the org have the required documents
+-   Set policy rules at the Organization level
+-   Repos need to have reproducible code
+-   Repos need to have documentation
 :::
 
-In the Github Organization we may require all repositories to contain certain documents. For example, we want to make sure that every repo has a `CODE OF CONDUCT` document that is a general policy applied throughout the organization. 
+<br>
 
-We could make a `CODE OF CONDUCT` document and manually copy and paste it into each repo, but this will become unmanageable over time because
+In the Github Organization we may require all repositories to contain certain documents. For example, we want to make sure that every repo has a `CODE OF CONDUCT` document that is a general policy applied throughout the organization.
 
-1.  if there are many repos it will be a burden to copy and paste the policy into each one
-2.  we will need to force anyone making a new repo to copy and paste the policy, and
-3.  if the policy changes we will need to edit the policy for every single repo
-
-Thus, **we need a way to programmatically set a policy rule that can be applied to each repo, old or new, and can update the policy for each repo if needed.** This will save a lot of time and effort
-
-# Required Documents
-
-We may want the follow files to be in every single repo, new or existing, to have the following documents:
-
-1.  A `README.md` for documentation
-2.  `CODE_OF_CONDUCT.md` to define the ["standards for how to engage in a community"](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-code-of-conduct-to-your-project)
-3.  `CONTRIBUTING.md` this file can set a policy for people wanting to contribute to a repo. Some organizations require people to sign a form before submitting pull requests so that the user understands what they are contributing to and how their code will be used
-4.  `LICENSE` this may be different for each repository, but we can set something general at the org level
+Here's a list of required documents:
 
 ## `README` {.unnumbered}
 
