@@ -9,28 +9,22 @@ author:
     affiliations:
       - Washington Department of Health
       - Data Integration/Quality Assurance
-format: 
-  html:
-    code-fold: false
-    code-overflow: wrap
-    toc: true
-    number-sections: true
-execute: 
-  freeze: true
-  echo: true
-  eval: false
 knitr: true
 filters: 
   - line-highlight
+categories:
+  - data democratization
+  - release cycles
+  - Github
 ---
 
-::: note
+:::{.note .medframe}
 {{< fa file-circle-check size="3x" >}} **Summary**
 
-1.  Github Releases take snapshots of you repo with each release
-2.  They can help devs and end users switch between repo versions
-3.  Change logs and semantic versioning can help document changes
-4.  Github Actions and pre-commit hooks can automate the release process
+-   Github Releases
+-   Helps devs and end users
+-   Changelogs and semantic versioning 
+-   Automate the release process
 :::
 
 <br>

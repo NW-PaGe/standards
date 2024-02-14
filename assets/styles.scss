@@ -10,40 +10,38 @@ $gray-700: #495057;
 $gray-800: #343a40;
 $gray-900: #212529;
 $black: #000;
+
 $primary: #440154ff;
 $secondary: #20A486ff;
 $secondaryalt: #155D64;
+$secondaryalt2: #efe8f1;
 $tertiary: #75D054ff;
+
 $theme-white: #F7F8F9;
 $theme-yellow: #E8D4AD;
 $theme-darksand: #D0927D;
-$theme-night: #1E313D;
+$theme-night: #060708;
 $theme-ground: #416270;
 $navbar-fg: #f5eff6;
 
 
 /*-- scss:rules --*/
 
-// nav bar color
-/*
-$navbar-fg: #f5eff6;
-*/
-
-/*
-.navbar-dark .navbar-nav .navbar-link {
-  color: #f5eff6;
-}
-*/
-
-/*
-.navbar-brand {
-  color: $gray-100;
+h1, h2, h3 {
+  font-family: "Franklin Gothic", Georgia, serif;
 }
 
-.nav-link {
-  color: $gray-100;
+h2, .h2 {
+    border-bottom: 1px solid $theme-night;
+    padding-bottom: .5rem;
 }
-*/
+
+h1, .h1, h2, .h2 {
+    color: $theme-night;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
 
 #title-block-header.quarto-title-block.default .quarto-title .title {
     padding-left: 0;
@@ -54,9 +52,7 @@ $navbar-fg: #f5eff6;
   --bs-root-font-size: 20px;
 }
 
-h1, h2, h3 {
-  font-family: "Franklin Gothic", Georgia, serif;
-}
+
 
 // The page text color
 $body-color: $gray-700;
@@ -78,6 +74,17 @@ $body-color: $gray-700;
   margin-bottom: 10px !important;
   box-shadow: 0 20px 47px rgb(0 0 0 / 55%);
   width: 400px;
+  /*margin: auto !important;*/
+  
+}
+
+.medframe {
+  /*box-shadow: $back-blue 10px 5px 5px 0px;*/
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 10px !important;
+  box-shadow: 0 20px 47px rgb(0 0 0 / 55%);
+  width: 700px;
   /*margin: auto !important;*/
   
 }
@@ -116,9 +123,9 @@ div.puzzle, div.fyi, div.demo, div.note {
     background-repeat: no-repeat;
     background-position: 15px center;
     min-height: 120px;
-    color: $gray-100;
-    background-color: $primary;
-    border: solid 5px $secondary;
+    color: $theme-night;
+    background-color: $secondaryalt2;
+    border: solid 5px $theme-night;
     font-family: "Calibri";
   }
   
@@ -182,7 +189,7 @@ div.obj>p:first-child {
   padding-bottom: 4em;
 }
 
-/* Make the title and descriptions positions adjust according to window resizing */
+/* Make the title and descriptions positions adjust according to window resizing 
 #title-block-header.quarto-title-block.default .quarto-title .title {
   padding-left: 15%;
 }
@@ -190,7 +197,7 @@ div.obj>p:first-child {
 #title-block-header.quarto-title-block.default .keywords, #title-block-header.quarto-title-block.default .description, #title-block-header.quarto-title-block.default .abstract {
   padding-left: 15%;
 }
-
+*/
 
 /* Make cool hover tabs for front page */
 

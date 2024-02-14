@@ -11,6 +11,9 @@ execute:
 format: 
   html: 
     code-fold: false
+categories:
+  - documentation
+  - Quarto
 ---
 
 The code in this website is automatically linked to the code in the

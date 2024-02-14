@@ -4,13 +4,11 @@ description: How to configure R and Python package dependencies to this repo for
 date: February 1, 2023
 date-modified: today
 author: Frank Aragona
-format: 
-  html:
-    code-fold: false
-    code-overflow: wrap
-    toc: true
-    number-sections: true
-    # title-block-banner: true
+categories:
+  - data democratization
+  - venv
+  - renv
+  - reproducibility
 ---
 
 # Introduction

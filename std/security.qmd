@@ -1,11 +1,6 @@
 ---
-title: "Security Standards"
+title: "Security Policies"
 description: Protect your credentials, tokens, data and more
-date: September 1, 2023
-date-modified: today
-author: 
-  - Frank Aragona
-  - Kathleen Conery
 format: 
   html:
     code-fold: false
@@ -14,7 +9,7 @@ format:
     number-sections: true
 execute: 
   eval: false
-  freeze: true
+  freeze: false
 knitr: true
 filters: 
   - line-highlight
@@ -22,43 +17,37 @@ reference-location: margin
 citation-location: margin
 ---
 
-:::{.note}
-{{< fa unlock size="3x" >}} **Objectives**
+::: {.note .medframe}
+{{< fa unlock size="3x" >}}**Objectives**
 
-1.  Provide security guidelines
-2.  Set up security guardrails
-3.  Develop a process for reviewing code and pushing private code to a public repo
+- Prevent sensitive information leaks to Github
+- Set up guardrails, `.gitignore`, hooks
+- Scrub private repos before they go public
+
 :::
 
 <br>
 
-> "I solemnly swear I am up to no good."
->
-> \- Harry Potter
+If sensitive information is leaked and commited to the remote repo, then they will stay in the git history (and will require a lot of effort to remove them from the history). The following cannot be included in any repo **or any local commit!**:
 
-::: column-body-outset
-# Github Security Guidelines
-
-The following shall not be included in any repo **or any local commit!**:
-
--   Absolute file paths
--   WDRS server names
--   SSH server keys
--   Tokens (REDCap, Azure, etc)
--   Credentials
--   PBI key to save in Azure
--   ODBC connections
--   Azure blob keys
--   Block local paths (e.g., c drive file paths, y drive file paths)
--   Usernames (Github usernames are okay)
--   Connection strings
--   Specific location information (e.g., addresses where mosquito traps are placed for gathering mosquitoes samples for surveillance of west Nile)
-
-::: callout-warning
-If any of these are committed to the remote repo then they will stay in the git history (and will require a lot of effort to remove them from the history).
-
-The best line of defense is setting up local guardrails to prevent security leaks in the first place. This section will show how to make these local guardrails
-:::
++--------------------------+-----------------------------------------+
+| Type                     | Examples                                |
++==========================+=========================================+
+| File Paths               | -   Network drives                      |
+|                          | -   Shared internal drives              |
++--------------------------+-----------------------------------------+
+| Server Names             | -   ODBC Connections                    |
++--------------------------+-----------------------------------------+
+| Credentials              | -   SSH Keys                            |
+|                          | -   Tokens (REDCap, Azure, Github, etc) |
+|                          | -   Usernames                           |
+|                          | -   Passwords                           |
+|                          | -   Blob/bucket keys                    |
++--------------------------+-----------------------------------------+
+| Identifiable Information | -   Addresses                           |
+|                          | -   Names                               |
+|                          | -   Any PHI                             |
++--------------------------+-----------------------------------------+
 
 <br>
 
@@ -140,7 +129,6 @@ creds <- yaml::read_yaml("path/to/local_credentials.yml")
 # pull in the credentials
 server_name <- creds$default$conn_list_wdrs$server
 ```
-:::
 :::
 
 ###  {.unnumbered}
@@ -312,9 +300,7 @@ There are a few ways to do this, but the easiest way is to copy the clean privat
 
 <br>
 
-
 {{< fa circle-exclamation >}} The private repository on the left still contains sensitive information in the git history. The public repository on the right has a clean git history because we copied only the current clean files from the private repo and did not attach its git history (which lives in the hidden `.git` folder)
-
 
 <br>
 
