@@ -27,6 +27,7 @@ about:
       text: Chat
 execute: 
   eval: false
+  freeze: true
 ---
  
 :::{#about}
