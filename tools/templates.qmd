@@ -10,6 +10,8 @@ author:
       - Washington Department of Health
       - Data Integration/Quality Assurance
 knitr: true
+execute: 
+  eval: false
 editor: 
   markdown: 
     wrap: 72
@@ -17,6 +19,53 @@ filters:
   - line-highlight
 categories:
   - data democratization
+  - templates
   - Quarto
 ---
+
+
+## [R Github Template](https://github.com/NW-PaGe/R_template)
+
+This is a Github repo template for R projects. It has `renv` set up and a `.devcontainer` for reproducibility
+
+
+<table>
+<tr><td valign="top">
+
+Select `Use Template > NW-PaGe/R_template` when creating a new repo in the NW-PaGe org. The template comes with a pre-filled `README.md` file that you can edit to your own needs. It’s recommended to leave the `.devconainter` folder in this repo. It serves as instructions to install all the software and R packages needed to reproduce the repos code using a Github Codespace. See the `README.md` for more information.
+
+</td><td valign="top">
+[![](images/r_template.png){width=1000}](https://github.com/NW-PaGe/R_template)
+</td>
+</tr>
+</table>
+
+## [Purpledoc Quarto Template](https://github.com/coe-test-org/purpledoc)
+
+This is a Quarto template that contains the style and images used in this site
+
+<table>
+<tr><td valign="top">
+
+```
+quarto use template coe-test-org/purpledoc
+```
+
+
+This will install the extension and create an example qmd file that you
+can use as a starting place for your report.
+
+You may also use this format with an existing Quarto project or
+document. From the quarto project or document directory, run the
+following command to install this format:
+
+```
+quarto add coe-test-org/purpledoc
+```
+
+</td><td valign="top">
+[![](images/purpledoc.png){width=400}](https://github.com/coe-test-org/purpledoc)
+</td>
+</tr>
+</table>
 

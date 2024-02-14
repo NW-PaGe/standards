@@ -1,0 +1,11 @@
+---
+title: "Git"
+description: Basic Git usage guide
+date: February 1, 2023
+date-modified: today
+author: Frank Aragona
+categories:
+  - reproducibility
+  - Git
+  - Github
+---
