@@ -35,7 +35,7 @@ This is a Github repo template for R projects. It has `renv` set up and a `.devc
 Select `Use Template > NW-PaGe/R_template` when creating a new repo in the NW-PaGe org. The template comes with a pre-filled `README.md` file that you can edit to your own needs. It’s recommended to leave the `.devconainter` folder in this repo. It serves as instructions to install all the software and R packages needed to reproduce the repos code using a Github Codespace. See the `README.md` for more information.
 
 </td><td valign="top">
-[![](images/r_template.png){width=1000}](https://github.com/NW-PaGe/R_template)
+[![](images/r_template.PNG){width=1000}](https://github.com/NW-PaGe/R_template)
 </td>
 </tr>
 </table>
@@ -64,7 +64,7 @@ quarto add coe-test-org/purpledoc
 ```
 
 </td><td valign="top">
-[![](images/purpledoc.png){width=400}](https://github.com/coe-test-org/purpledoc)
+[![](images/purpledoc.PNG){width=400}](https://github.com/coe-test-org/purpledoc)
 </td>
 </tr>
 </table>
