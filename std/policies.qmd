@@ -7,6 +7,7 @@ format:
     code-overflow: wrap
     toc: true
     number-sections: true
+  pdf: default
 knitr: true
 execute: 
   eval: false
@@ -15,7 +16,7 @@ filters:
 ---
 
 :::{.note .medframe}
-{{< fa file-circle-check size="3x" >}} **Objectives**
+{{< fa unlock size="3x" >}} **Objectives**
 
 -   Ensure that all repos in the org have the required documents
 -   Set policy rules at the Organization level
@@ -23,7 +24,6 @@ filters:
 -   Repos need to have documentation
 :::
 
-<br>
 
 In the Github Organization we may require all repositories to contain certain documents. For example, we want to make sure that every repo has a `CODE OF CONDUCT` document that is a general policy applied throughout the organization.
 
@@ -57,8 +57,6 @@ You can set most policy rules and create documents for each repo at the organiza
 
 ![](images/special.PNG){.myframe}
 
-<br>
-
 In order to write and set these policies at the organization level we can put them at the root of the `.github` repository and edit them there.
 
 ::: smallframe
@@ -78,19 +76,18 @@ C:.
 ```
 :::
 
-<br>
 
 Take a look above. I have the required documents/policies at the root of the `.github` repo directory. Now if I open up any given repo in the organization I will find a link to those files:
 
 ![](images/code_of_conduct.PNG){.myframe}
 
-<br>
 
 If you click on the `CODE_OF_CONDUCT` link it will take you right to the `.github` repo and open the `CODE_OF_CONDUCT.md` file there:
 
+:::{.content-visible unless-format="pdf"}
 ![](images/code_of_conduct.gif){.myframe}
+:::
 
-<br>
 
 Now you can set organization level policies from the `.github` repo and they will automatically populate in *all* existing and new repositories *unless there are repo specific policies in place*. If a repo already has its own policies they will not be overwritten.
 
@@ -102,7 +99,6 @@ In the public repos there may be end users that may have limited experience usin
 
 Structuring the format of issues and discussions can make the author and the end-user's lives easier.
 
-<br>
 
 In the `.github` repo I made a *folder* called `.github`. This is a special folder that can hold Github Action workflows and more, as mentioned above.
 
@@ -142,33 +138,32 @@ Each Folder has `.yml` files in it that are basically Github instructions on how
 For example, in the `ISSUE_TEMPLATE` folder I have a `.yml` file called `bug_report.yml`. This file contains the structure for how someone can report a bug.
 
 ::: smallframe
-```{yaml filename="bug_report.yml"}
-name: 🐛Bug Report
+```{yaml filename="bug-report.yml"}
+name: Bug Report
 description: File a bug report here
 title: "[BUG]: "
 labels: ["bug"]
 assignees: ["DOH-FAA3303"]
 body:
-  - type: markdown
+  type: markdown
     attributes:
       value: |
-        Thanks for taking the time to fill out this bug report 🤗
-        Make sure there aren't any open/closed issues for this topic 😃
+        Thanks for taking the time to fill out this bug report 
+        Make sure there aren't any open/closed issues for this topic 
 ```
 :::
 
-<br>
-
 Now, when someone clicks on the `Issues` tab in a repo in this organization they will be met with the `Bug Report` template:
 
+:::{.content-visible unless-format="pdf"}
 ![](images/bug_report.gif){.myframe}
+:::
 
-<br>
 
 Notice that in the template you can create text areas and pre-fill those areas with suggestions. You can even require that someone fills out those areas before they can submit the issue:
 
 :::{.smallframe}
-```{yaml filename="bug_report.yml"}
+```{yaml filename="bug-report.yml"}
 #| source-line-numbers: "1,6-10,11-12"
 - type: textarea
     id: steps-to-reproduce

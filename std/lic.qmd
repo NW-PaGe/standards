@@ -7,10 +7,11 @@ editor:
 format: 
   html: 
     code-fold: false
+  pdf: default
 ---
 
 :::{.note .medframe}
-{{< fa file-circle-check size="3x" >}} **Summary**
+{{< fa file size="3x" >}} **Summary**
 
 -   Licenses prevent code theft and inappropriate redistribution of code. 
 -   Review common open-source licenses 
@@ -23,9 +24,13 @@ format:
 
 [Below is a list of common open-source licenses.](https://choosealicense.com/licenses/)
 
+<!-- Content for HTML --->
+
+:::{.content-visible unless-format="pdf"}
 ```{=html}
 <iframe width="780" height="500" src="https://choosealicense.com/licenses/" title="Github Licenses"></iframe>
 ```
+:::
 
 There isn't a one size fits all license, so thankfully there are a variety of options. Here are two common ones:
 
