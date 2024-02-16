@@ -2,8 +2,4 @@
 title: "About"
 ---
 
-About this site
-
-```{r}
-1 + 1
-```
+This site was made with Quarto. It can execute code and render the outputs into the html. 

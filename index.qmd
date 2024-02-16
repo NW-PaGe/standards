@@ -30,9 +30,11 @@ execute:
   eval: false
   freeze: true
 ---
- 
+
+
 :::{#about}
 :::
+
 
 <center>
 
@@ -59,12 +61,14 @@ execute:
 This is a static website documenting the proposed policies and standards for public Github use at the Pacific Northwest Genomic Center of Excellence. There are documents on 
 
 1.    Security and how to protect credential and private process leaks {{< fa unlock >}}
-2.    Licensing to protect against re-sale or theft of code {{< fa file-lines >}}
+2.    Licensing to protect against re-sale or theft of code {{< fa file >}}
 3.    Our Github rules, policies, and templates {{< fa book >}}
-4.    Github user guides {{< fa note-sticky >}}
+4.    Github user guides {{< fa file >}}
 
 
 If there are any questions please reach out to 
+
+<!-- Content for HTML --->
 
 :::{.column-screen-inset-shaded layout-nrow="1"}
 
@@ -100,38 +104,14 @@ password <- creds$my_credentials$password
 
 :::{.column-screen-inset-shaded layout-nrow="1"}
 
-{{< fa file-lines >}} Each repo in the organization should have a license. Licenses can help prevent your work from being stolen and/or used inappropriately. [Licensing details here](std/lic.qmd)
+{{< fa file >}} Each repo in the organization should have a license. Licenses can help prevent your work from being stolen and/or used inappropriately. [Licensing details here](std/lic.qmd)
 
 {{< fa book >}} This organization requires each repo to have [certain documents](std/templates.qmd), such as a CODE_OF_CONDUCT. The organization uses a special repo called **.github** to ensure all repos adhere to the policies and have the right documents.
 
 
-{{< fa note-sticky >}} If you're looking to build a repository, [check out the Github user guide tabs](tools/how_to.qmd) for best practices on reproducibility, documentation in the repo, and more.
+{{< fa file >}} If you're looking to build a repository, [check out the Github user guide tabs](tools/how_to.qmd) for best practices on reproducibility, documentation in the repo, and more.
 
 :::
 
 :::
 
-
-
-
-<!--
-
-![](images/DOH_logo_primary.jpg){style="float: center;" fig-alt="Hex logo that says \"Data Science in a Box\"" fig-align="center" width="250"}
-
-Documentation for how to structure and standardize the public Github Organization
-# Preface {.unnumbered}
-
-![](images/DOH_logo_primary.jpg){style="float: right;" fig-alt="Hex logo that says \"Data Science in a Box\"" fig-align="right" width="250"}
-
-This is a static website documenting the proposed standards for public Github use at the Pacific Northwest Genomic Center of Excellence. There are documents on 
-
-1.    Security and how to protect credential and private process leaks
-2.    Licensing to protect re-sale or theft of code
-3.    Github Organization templates and Infrastructure as Code (IaC)
-4.    Managing credentials
-5.    Publishing code to the public repositories
-
-
-If there are any questions please reach out to 
-
---> 

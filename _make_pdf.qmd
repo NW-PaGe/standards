@@ -1,0 +1,114 @@
+---
+title: NW-PaGe Github Organization Policies
+subtitle: Security policies, repo guides and templates for pushing code to the Github Org
+date: September 1, 2023
+date-modified: today
+author: 
+  - name: Frank Aragona
+    email: frank.aragona@doh.wa.gov
+    affiliations:
+      - Washington Department of Health
+      - Data Integration/Quality Assurance
+# bibliography: references.bib
+nocite: |
+  @*
+format:
+  pdf:
+    toc: true
+    toc-depth: 2
+    number-sections: true
+    number-depth: 2
+    output-file: "nw-page-github-policies"
+    output-ext:  "pdf"
+    margin-width: 10px
+    gutter-width: 1.5rem
+    # linkcolor: RSSblue
+    # urlcolor: RSSblue
+    include-in-header:
+       - "styles.tex"
+editor: source
+execute: 
+  warning: false
+  message: false
+---
+
+```{r}
+#| echo: false
+#| eval: true
+# see this discussion for more details
+# https://github.com/quarto-dev/quarto-cli/discussions/5782
+process_qmd <- function(
+    file,
+    fpath_in = "images/",
+    fpath_out = "images/"
+    ) {
+  doc <- readLines(file)
+  end_yaml <- which(doc == "---")[2]
+  out_doc <- doc[seq(end_yaml+1, length(doc))]
+  if (fpath_in != fpath_out) {
+    out_doc <- stringr::str_replace_all(out_doc,
+                                        fpath_in,
+                                        fpath_out)
+  }
+  res <- knitr::knit_child(
+      text = out_doc,
+      quiet = TRUE,
+      options = list(eval = FALSE, echo = TRUE)
+      )
+  return(res)
+}
+```
+
+# Introduction
+
+This document details the policies and guidelines for the Northwest Pathogen Genomics Center of Excellence (NW-PaGe) Github Organization. 
+
+For more information, tutorials and code examples, please see the policies website here https://nw-page.github.io/standards/.
+
+# Security
+
+```{r}
+#| output: asis
+#| echo: false
+#| eval: true
+#| message: false
+#| warning: false
+why <- process_qmd("std/security.qmd", fpath_in = "images/", fpath_out = "std/images/")
+cat(unlist(why), sep = '\n')
+```
+
+# Licensing
+
+```{r}
+#| output: asis
+#| echo: false
+#| eval: true
+#| message: false
+#| warning: false
+why <- process_qmd("std/lic.qmd", fpath_in = "images/", fpath_out = "std/images/")
+cat(unlist(why), sep = '\n')
+```
+
+# Policies
+
+```{r}
+#| output: asis
+#| echo: false
+#| eval: true
+#| message: false
+#| warning: false
+why <- process_qmd("std/policies.qmd", fpath_in = "images/", fpath_out = "std/images/")
+cat(unlist(why), sep = '\n')
+```
+
+# Reproducibility
+
+```{r}
+#| output: asis
+#| echo: false
+#| eval: true
+#| message: false
+#| warning: false
+why <- process_qmd("std/reproduce.qmd", fpath_in = "images/", fpath_out = "std/images/")
+cat(unlist(why), sep = '\n')
+```

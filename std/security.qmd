@@ -7,6 +7,9 @@ format:
     code-overflow: wrap
     toc: true
     number-sections: true
+  pdf:
+    margin-width: 10px
+    gutter-width: 1.5rem
 execute: 
   eval: false
   freeze: false
@@ -18,7 +21,7 @@ citation-location: margin
 ---
 
 ::: {.note .medframe}
-{{< fa unlock size="3x" >}}**Objectives**
+{{< fa unlock size="3x" >}} **Objectives**
 
 - Prevent sensitive information leaks to Github
 - Set up guardrails, `.gitignore`, hooks
@@ -26,7 +29,6 @@ citation-location: margin
 
 :::
 
-<br>
 
 If sensitive information is leaked and commited to the remote repo, then they will stay in the git history (and will require a lot of effort to remove them from the history). The following cannot be included in any repo **or any local commit!**:
 
@@ -49,7 +51,6 @@ If sensitive information is leaked and commited to the remote repo, then they wi
 |                          | -   Any PHI                             |
 +--------------------------+-----------------------------------------+
 
-<br>
 
 ## Prevent Credential Leaks with Env Variables {.unnumbered}
 
@@ -66,7 +67,7 @@ The `.yml` file can work with multiple programming languages including R and Pyt
 They look like this:
 
 ::: myframe
-```{yaml filename="local_credentials.yml"}
+```{yaml filename="local-credentials.yml"}
 # Default is needed to distinguish values.
 # Leave a blank line (NO SPACES) as the last line in this file or things will break
 # Quotes aren't necessary, but can be used.
@@ -88,7 +89,7 @@ default:
 You can have different variables assigned to unique lists, which allows for easy configuration. For example, the list starting with `default` has variables `conn_list_wdrs` and `fulgent`. You can have a different list of variables within the same file like this:
 
 ::: myframe
-```{yaml filename="local_credentials.yml"}
+```{yaml filename="local-credentials.yml"}
 #| source-line-numbers: "4-5,16-17"
 # Default is needed to distinguish values.
 # Leave a blank line (NO SPACES) as the last line in this file or things will break
@@ -119,24 +120,29 @@ test:
 Now there is a `test` list with its own variables. This lets us switch a set of variables within our scripts. `default` applies to the main credentials where `test` can distinguish which variables should be test or dev scripts specific. Notice below that you can now call the credentials from a `.yml` file into an R or Python script and the actual credentials will never exist in the code pushed to the repo.
 
 ::: myframe
-```{r filename="script_in_repo.R"}
+```{r filename="script-in-repo.R"}
 # this script is in the repo, but credentials are hidden
 library(yaml)
 
 # read in the local credentials yaml file
-creds <- yaml::read_yaml("path/to/local_credentials.yml")
+creds <- yaml::read_yaml("path/to/local-credentials.yml")
 
 # pull in the credentials
 server_name <- creds$default$conn_list_wdrs$server
 ```
 :::
 
+{{< pagebreak >}}
+
+<!-- Content for HTML --->
+::::{.content-visible unless-format="pdf"}
+
 ###  {.unnumbered}
 
 ::: {.column-screen-inset-shaded layout-nrow="1"}
 We can even get more specific and add an `if-else` statement to specify which credential we want to select. This can be helpful if we have a CI/CD pipeline and have a script automatically run on a task scheduler or cron job. We can call the credentials we want in the command line and have the command line code run in my task scheduler. That way we can use multiple different versions of the same script and have all of it be automated. For example, the middle panel uses the `commandArgs()` to pull any arguments passed to the script in a shell/command line script. In the right panel, the shell script has `production` and `test` as second arguments. These are passed to the R script as `arg[2]`. Now we can use `arg[2]` in the if-else statement to conditionally select credentials and do it automatically.
 
-```{r filename="script_in_repo.R"}
+```{r filename="script-in-repo.R"}
 #| source-line-numbers: "1,9-14"
 args <- commandArgs(TRUE)
 
@@ -144,7 +150,7 @@ args <- commandArgs(TRUE)
 library(yaml)
 
 # read in the local credentials yaml file
-creds <- yaml::read_yaml("path/to/local_credentials.yml")
+creds <- yaml::read_yaml("path/to/local-credentials.yml")
 
 # pull in the credentials
 if(args[2] == "production"){
@@ -155,7 +161,7 @@ if(args[2] == "production"){
 
 ```
 
-```{bash filename="shell_trigger_script.sh"}
+```{bash filename="shell-trigger-script.sh"}
 # Run the production code
 $ Rscript -e "source('path/script_in_repo.R');" production
 
@@ -163,8 +169,51 @@ $ Rscript -e "source('path/script_in_repo.R');" production
 $ Rscript -e "source('path/script_in_repo.R');" test 
 ```
 :::
+::::
 
-### Safe Guards - Prevent Accidental Leaks!!!
+{{< pagebreak >}}
+
+<!-- Content for pdf --->
+
+::::{.content-visible unless-format="html"}
+
+We can even get more specific and add an `if-else` statement to specify which credential we want to select. This can be helpful if we have a CI/CD pipeline and have a script automatically run on a task scheduler or cron job. We can call the credentials we want in the command line and have the command line code run in my task scheduler. That way we can use multiple different versions of the same script and have all of it be automated. 
+
+For example, the middle panel uses the `commandArgs()` to pull any arguments passed to the script in a shell/command line script. In the right panel, the shell script has `production` and `test` as second arguments. These are passed to the R script as `arg[2]`. Now we can use `arg[2]` in the if-else statement to conditionally select credentials and do it automatically.
+
+```{r filename="script-in-repo.R"}
+#| source-line-numbers: "1,9-14"
+args <- commandArgs(TRUE)
+
+# this script is in the repo, but credentials are hidden
+library(yaml)
+
+# read in the local credentials yaml file
+creds <- yaml::read_yaml("path/to/local-credentials.yml")
+
+# pull in the credentials
+if(args[2] == "production"){
+  server_name <- creds$default$conn_list_wdrs$server
+} else if(args[2] == "test"){
+  server_name <- creds$test$conn_list_wdrs$server
+}
+
+```
+
+```{bash filename="shell-trigger-script.sh"}
+# Run the production code
+$ Rscript -e "source('path/script_in_repo.R');" production
+
+# Run the test/dev code
+$ Rscript -e "source('path/script_in_repo.R');" test 
+```
+
+::::
+
+{{< pagebreak >}}
+
+
+### Safe Guards - Prevent Accidental Leaks!
 
 Once you have the credentials.yml template in your repo, make sure that nobody on your team (or anyone with write access..) is able to accidentally push changes to the template. We don't want someone's passwords or API tokens to exist in GitHub.
 
@@ -197,6 +246,8 @@ And to get a list of files that are "skipped", use this code:
 git ls-files -v . | grep ^S
 ```
 :::
+
+{{< pagebreak >}}
 
 # Security Guardrails
 
@@ -282,6 +333,8 @@ Pre-commit hooks run a process locally when the user attempts to commit code to 
 We can't use the "Non capture group" feature of regex. Meaning we can't use patterns like this in our regex: (?:abc) -- see https://regexr.com IMPORTANT: Tab separate your regex expressions. Making new lines caused a bit of chaos and took really long to figure out. (you can use multiple tabs to separate them more visually)
 :::
 
+{{< pagebreak >}}
+
 ## Pre-Recieve Hooks
 
 These are still being investigated. They are remote hooks (not local like pre-commit hooks) that can be deployed throughout the Github organization. They can block certain commits from ever being pushed to the remote repo. They may make things unnecessarily complicated
@@ -298,13 +351,7 @@ There are a few ways to do this, but the easiest way is to copy the clean privat
 ![](images/public_repo3.PNG){.myframe}
 :::
 
-<br>
-
-{{< fa circle-exclamation >}} The private repository on the left still contains sensitive information in the git history. The public repository on the right has a clean git history because we copied only the current clean files from the private repo and did not attach its git history (which lives in the hidden `.git` folder)
-
-<br>
-
-<br>
+{{< fa exclamation >}} The private repository on the left still contains sensitive information in the git history. The public repository on the right has a clean git history because we copied only the current clean files from the private repo and did not attach its git history (which lives in the hidden `.git` folder)
 
 # Code Reviewers/Github Operations Team
 
@@ -312,6 +359,6 @@ With the guardrails above in place there should be few chances that credentials 
 
 It may be useful to have a team within the organization that helps with repo set-up. The team would help avoid a scenario where a person opens up a repo without reading this documentation and understanding the rules (and thus potentially breaking security rules).
 
-This Github Operations Team could also be helpful in managing permissions for members in the organization. See the video below on how the company Qualcomm manages their Github organization and how they use a Github Operations Team to guide new members access/repo development
+This Github Operations Team could also be helpful in managing permissions for members in the organization. See the video below on how the company [Qualcomm manages their Github organization](https://www.youtube.com/embed/1T4HAPBFbb0?si=YRsUYXIxLPhdr41T) and how they use a Github Operations Team to guide new members access/repo development
 
 {{< video https://www.youtube.com/embed/1T4HAPBFbb0?si=YRsUYXIxLPhdr41T >}}
