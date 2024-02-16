@@ -25,6 +25,9 @@ website:
             text: "1: Choosing a License"
           - href: std/policies.qmd
             text: "2: Repo Policies"
+          - href: std/reproduce.qmd
+            text: "3: Reproducibility"
+            
       - text: Guides
         href: tools/index.qmd
 
