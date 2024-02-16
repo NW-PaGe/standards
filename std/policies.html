@@ -145,6 +145,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="../std/policies.html">
  <span class="dropdown-text">2: Repo Policies</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../std/reproduce.html">
+ <span class="dropdown-text">3: Reproducibility</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
@@ -209,7 +213,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#iac" id="toc-iac" class="nav-link" data-scroll-target="#iac"><span class="header-section-number">3</span> IaC</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/std/policies.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/std/policies.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/std/policies.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/std/policies.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="policies.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -218,7 +222,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div class="note medframe">
-<p><i class="fa-solid fa-file-circle-check fa-3x" aria-label="file-circle-check"></i> <strong>Objectives</strong></p>
+<p><i class="fa-solid fa-unlock fa-3x" aria-label="unlock"></i> <strong>Objectives</strong></p>
 <ul>
 <li>Ensure that all repos in the org have the required documents</li>
 <li>Set policy rules at the Organization level</li>
@@ -226,7 +230,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Repos need to have documentation</li>
 </ul>
 </div>
-<p><br></p>
 <p>In the Github Organization we may require all repositories to contain certain documents. For example, we want to make sure that every repo has a <code>CODE OF CONDUCT</code> document that is a general policy applied throughout the organization.</p>
 <p>Here’s a list of required documents:</p>
 <section id="readme" class="level2 unnumbered">
@@ -252,7 +255,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="1.1" class="anchored" data-anchor-id="document-requirements-with-.github-repos"><span class="header-section-number">1.1</span> Document Requirements with <code>.github</code> Repos</h2>
 <p>You can set most policy rules and create documents for each repo at the organization level by using a special <code>.github</code> repo. Dot files and dot folders have special functionality in some software. For Github, the <code>.github</code> folder defines workflows for things like Github Actions in a repo. A <code>.github</code> <em>repository</em> on the other hand defines <em>organization level</em> rules and templates.</p>
 <p><img src="images/special.PNG" class="myframe img-fluid"></p>
-<p><br></p>
 <p>In order to write and set these policies at the organization level we can put them at the root of the <code>.github</code> repository and edit them there.</p>
 <div class="smallframe">
 <div class="cell" data-source-line-numbers="4-7">
@@ -274,13 +276,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p><br></p>
 <p>Take a look above. I have the required documents/policies at the root of the <code>.github</code> repo directory. Now if I open up any given repo in the organization I will find a link to those files:</p>
 <p><img src="images/code_of_conduct.PNG" class="myframe img-fluid"></p>
-<p><br></p>
 <p>If you click on the <code>CODE_OF_CONDUCT</code> link it will take you right to the <code>.github</code> repo and open the <code>CODE_OF_CONDUCT.md</code> file there:</p>
 <p><img src="images/code_of_conduct.gif" class="myframe img-fluid"></p>
-<p><br></p>
 <p>Now you can set organization level policies from the <code>.github</code> repo and they will automatically populate in <em>all</em> existing and new repositories <em>unless there are repo specific policies in place</em>. If a repo already has its own policies they will not be overwritten.</p>
 </section>
 </section>
@@ -289,7 +288,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Aside from policy documents, you can make templates at the organization level. Two commonly used templates are issue templates and discussion templates.</p>
 <p>In the public repos there may be end users that may have limited experience using Github. If they want to submit an issue or ask a question they get lost. Templates can help them form a question or idea. Templates can also help standardize how issues and discussions are maintained throughout the organization.</p>
 <p>Structuring the format of issues and discussions can make the author and the end-user’s lives easier.</p>
-<p><br></p>
 <p>In the <code>.github</code> repo I made a <em>folder</em> called <code>.github</code>. This is a special folder that can hold Github Action workflows and more, as mentioned above.</p>
 <p>In the <code>.github</code> <em>folder</em> I have a folder called <code>DISCUSSION_TEMPLATE</code> and another called <code>ISSUE_TEMPLATE</code>. These are special folders that Github recognizes as discussion and issue folders that will set templates at the repo (or in this case the org) level.</p>
 <div class="smallframe">
@@ -330,32 +328,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
-<pre><strong>bug_report.yml</strong></pre>
+<pre><strong>bug-report.yml</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> 🐛Bug Report</span></span>
+<div class="sourceCode cell-code" id="cb3" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Bug Report</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> File a bug report here</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"[BUG]: "</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">labels</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"bug"</span><span class="kw">]</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">assignees</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"DOH-FAA3303"</span><span class="kw">]</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">body</span><span class="kw">:</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> markdown</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> markdown</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">attributes</span><span class="kw">:</span></span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">      value</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        Thanks for taking the time to fill out this bug report 🤗</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        Make sure there aren't any open/closed issues for this topic 😃</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        Thanks for taking the time to fill out this bug report </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        Make sure there aren't any open/closed issues for this topic </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
-<p><br></p>
 <p>Now, when someone clicks on the <code>Issues</code> tab in a repo in this organization they will be met with the <code>Bug Report</code> template:</p>
 <p><img src="images/bug_report.gif" class="myframe img-fluid"></p>
-<p><br></p>
 <p>Notice that in the template you can create text areas and pre-fill those areas with suggestions. You can even require that someone fills out those areas before they can submit the issue:</p>
 <div class="smallframe">
 <div class="cell" data-source-line-numbers="1,6-10,11-12">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
-<pre><strong>bug_report.yml</strong></pre>
+<pre><strong>bug-report.yml</strong></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4" data-source-line-numbers="1,6-10,11-12" data-code-line-numbers="1,6-10,11-12"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">type</span><span class="kw">:</span><span class="at"> textarea</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">id</span><span class="kw">:</span><span class="at"> steps-to-reproduce</span></span>

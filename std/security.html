@@ -145,6 +145,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="../std/policies.html">
  <span class="dropdown-text">2: Repo Policies</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../std/reproduce.html">
+ <span class="dropdown-text">3: Reproducibility</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
@@ -200,7 +204,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#create-a-private-credentials-file" id="toc-create-a-private-credentials-file" class="nav-link" data-scroll-target="#create-a-private-credentials-file"><span class="header-section-number">0.0.1</span> Create a private credentials file</a></li>
   <li><a href="#creds.yml-details" id="toc-creds.yml-details" class="nav-link" data-scroll-target="#creds.yml-details"><span class="header-section-number">0.0.2</span> <code>creds.yml</code> details</a></li>
   <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
-  <li><a href="#safe-guards---prevent-accidental-leaks" id="toc-safe-guards---prevent-accidental-leaks" class="nav-link" data-scroll-target="#safe-guards---prevent-accidental-leaks"><span class="header-section-number">0.0.3</span> Safe Guards - Prevent Accidental Leaks!!!</a></li>
+  <li><a href="#safe-guards---prevent-accidental-leaks" id="toc-safe-guards---prevent-accidental-leaks" class="nav-link" data-scroll-target="#safe-guards---prevent-accidental-leaks"><span class="header-section-number">0.0.3</span> Safe Guards - Prevent Accidental Leaks!</a></li>
   </ul></li>
   <li><a href="#security-guardrails" id="toc-security-guardrails" class="nav-link" data-scroll-target="#security-guardrails"><span class="header-section-number">1</span> Security Guardrails</a>
   <ul class="collapse">
@@ -210,7 +214,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#code-reviewersgithub-operations-team" id="toc-code-reviewersgithub-operations-team" class="nav-link" data-scroll-target="#code-reviewersgithub-operations-team"><span class="header-section-number">2</span> Code Reviewers/Github Operations Team</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/std/security.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/std/security.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/std/security.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/std/security.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="security.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
@@ -219,14 +223,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div class="note medframe">
-<p><i class="fa-solid fa-unlock fa-3x" aria-label="unlock"></i><strong>Objectives</strong></p>
+<p><i class="fa-solid fa-unlock fa-3x" aria-label="unlock"></i> <strong>Objectives</strong></p>
 <ul>
 <li>Prevent sensitive information leaks to Github</li>
 <li>Set up guardrails, <code>.gitignore</code>, hooks</li>
 <li>Scrub private repos before they go public</li>
 </ul>
 </div>
-<p><br></p>
 <p>If sensitive information is leaked and commited to the remote repo, then they will stay in the git history (and will require a lot of effort to remove them from the history). The following cannot be included in any repo <strong>or any local commit!</strong>:</p>
 <table class="table">
 <colgroup>
@@ -273,7 +276,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<p><br></p>
 <section id="prevent-credential-leaks-with-env-variables" class="level2 unnumbered page-columns page-full">
 <h2 class="unnumbered anchored" data-anchor-id="prevent-credential-leaks-with-env-variables">Prevent Credential Leaks with Env Variables</h2>
 <p>There are a number of ways to do this. We typically use a yaml file that can be filled out with personal credentials locally. The file will not be committed to the remote repo</p>
@@ -289,7 +291,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
-<pre><strong>local_credentials.yml</strong></pre>
+<pre><strong>local-credentials.yml</strong></pre>
 </div>
 <div class="sourceCode cell-code" id="cb1" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Default is needed to distinguish values.</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Leave a blank line (NO SPACES) as the last line in this file or things will break</span></span>
@@ -313,7 +315,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell" data-source-line-numbers="4-5,16-17">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
-<pre><strong>local_credentials.yml</strong></pre>
+<pre><strong>local-credentials.yml</strong></pre>
 </div>
 <div class="sourceCode cell-code" id="cb2" data-source-line-numbers="4-5,16-17" data-code-line-numbers="4-5,16-17"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Default is needed to distinguish values.</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Leave a blank line (NO SPACES) as the last line in this file or things will break</span></span>
@@ -345,19 +347,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
-<pre><strong>script_in_repo.R</strong></pre>
+<pre><strong>script-in-repo.R</strong></pre>
 </div>
 <div class="sourceCode cell-code" id="cb3" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># this script is in the repo, but credentials are hidden</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(yaml)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># read in the local credentials yaml file</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>creds <span class="ot">&lt;-</span> yaml<span class="sc">::</span><span class="fu">read_yaml</span>(<span class="st">"path/to/local_credentials.yml"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>creds <span class="ot">&lt;-</span> yaml<span class="sc">::</span><span class="fu">read_yaml</span>(<span class="st">"path/to/local-credentials.yml"</span>)</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># pull in the credentials</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>server_name <span class="ot">&lt;-</span> creds<span class="sc">$</span>default<span class="sc">$</span>conn_list_wdrs<span class="sc">$</span>server</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
+<div style="page-break-after: always;"></div>
+<!-- Content for HTML --->
 </section>
 <section id="section" class="level3 unnumbered page-columns page-full">
 <h3 class="unnumbered anchored" data-anchor-id="section"></h3>
@@ -369,7 +373,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell quarto-layout-cell" data-source-line-numbers="1,9-14" style="flex-basis: 33.3%;justify-content: center;">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
-<pre><strong>script_in_repo.R</strong></pre>
+<pre><strong>script-in-repo.R</strong></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4" data-source-line-numbers="1,9-14" data-code-line-numbers="1,9-14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>args <span class="ot">&lt;-</span> <span class="fu">commandArgs</span>(<span class="cn">TRUE</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -377,7 +381,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(yaml)</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># read in the local credentials yaml file</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>creds <span class="ot">&lt;-</span> yaml<span class="sc">::</span><span class="fu">read_yaml</span>(<span class="st">"path/to/local_credentials.yml"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>creds <span class="ot">&lt;-</span> yaml<span class="sc">::</span><span class="fu">read_yaml</span>(<span class="st">"path/to/local-credentials.yml"</span>)</span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># pull in the credentials</span></span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(args[<span class="dv">2</span>] <span class="sc">==</span> <span class="st">"production"</span>){</span>
@@ -390,7 +394,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
-<pre><strong>shell_trigger_script.sh</strong></pre>
+<pre><strong>shell-trigger-script.sh</strong></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the production code</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript <span class="at">-e</span> <span class="st">"source('path/script_in_repo.R');"</span> production</span>
@@ -401,9 +405,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<div style="page-break-after: always;"></div>
+<!-- Content for pdf --->
+<div style="page-break-after: always;"></div>
 </section>
 <section id="safe-guards---prevent-accidental-leaks" class="level3" data-number="0.0.3">
-<h3 data-number="0.0.3" class="anchored" data-anchor-id="safe-guards---prevent-accidental-leaks"><span class="header-section-number">0.0.3</span> Safe Guards - Prevent Accidental Leaks!!!</h3>
+<h3 data-number="0.0.3" class="anchored" data-anchor-id="safe-guards---prevent-accidental-leaks"><span class="header-section-number">0.0.3</span> Safe Guards - Prevent Accidental Leaks!</h3>
 <p>Once you have the credentials.yml template in your repo, make sure that nobody on your team (or anyone with write access..) is able to accidentally push changes to the template. We don’t want someone’s passwords or API tokens to exist in GitHub.</p>
 <p><a href="https://stackoverflow.com/a/39776107">This link shows how to skip any changes made to the specific file</a>. If someone makes local changes to the template, the changes will not show in their commit. It is a safe guard.</p>
 <section id="for-all-individual-users-run-this-code" class="level4" data-number="0.0.3.1">
@@ -429,6 +436,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb8" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> ls-files <span class="at">-v</span> . <span class="kw">|</span> <span class="fu">grep</span> ^S</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
+<div style="page-break-after: always;"></div>
 </section>
 </section>
 </section>
@@ -530,6 +538,7 @@ Note
 <p>We can’t use the “Non capture group” feature of regex. Meaning we can’t use patterns like this in our regex: (?:abc) – see https://regexr.com IMPORTANT: Tab separate your regex expressions. Making new lines caused a bit of chaos and took really long to figure out. (you can use multiple tabs to separate them more visually)</p>
 </div>
 </div>
+<div style="page-break-after: always;"></div>
 </section>
 <section id="pre-recieve-hooks" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="pre-recieve-hooks"><span class="header-section-number">1.2</span> Pre-Recieve Hooks</h2>
@@ -549,17 +558,14 @@ Note
 </div>
 </div>
 </div>
-<p><br></p>
-<p><i class="fa-solid fa-circle-exclamation" aria-label="circle-exclamation"></i> The private repository on the left still contains sensitive information in the git history. The public repository on the right has a clean git history because we copied only the current clean files from the private repo and did not attach its git history (which lives in the hidden <code>.git</code> folder)</p>
-<p><br></p>
-<p><br></p>
+<p><i class="fa-solid fa-exclamation" aria-label="exclamation"></i> The private repository on the left still contains sensitive information in the git history. The public repository on the right has a clean git history because we copied only the current clean files from the private repo and did not attach its git history (which lives in the hidden <code>.git</code> folder)</p>
 </section>
 </section>
 <section id="code-reviewersgithub-operations-team" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Code Reviewers/Github Operations Team</h1>
 <p>With the guardrails above in place there should be few chances that credentials get pushed to a repo. However accidents may still happen. We want to make sure that anyone who opens up a repo in the Github organization adheres to the rules, has the proper credential/coding set-up, and installs their local pre-commit hooks properly.</p>
 <p>It may be useful to have a team within the organization that helps with repo set-up. The team would help avoid a scenario where a person opens up a repo without reading this documentation and understanding the rules (and thus potentially breaking security rules).</p>
-<p>This Github Operations Team could also be helpful in managing permissions for members in the organization. See the video below on how the company Qualcomm manages their Github organization and how they use a Github Operations Team to guide new members access/repo development</p>
+<p>This Github Operations Team could also be helpful in managing permissions for members in the organization. See the video below on how the company <a href="https://www.youtube.com/embed/1T4HAPBFbb0?si=YRsUYXIxLPhdr41T">Qualcomm manages their Github organization</a> and how they use a Github Operations Team to guide new members access/repo development</p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/1T4HAPBFbb0?si=YRsUYXIxLPhdr41T" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 
 

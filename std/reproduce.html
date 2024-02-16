@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Data and Code Democratization - how to make your code reproducible">
 
-<title>🌲 Github Policies – creds</title>
+<title>🌲 Github Policies - Reproducibility</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -39,6 +40,9 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -107,6 +111,10 @@ ul.task-list li input[type="checkbox"] {
     <a class="dropdown-item" href="../std/policies.html">
  <span class="dropdown-text">2: Repo Policies</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../std/reproduce.html">
+ <span class="dropdown-text">3: Reproducibility</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
@@ -128,11 +136,46 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Reproducibility</h1>
+                  <div>
+        <div class="description">
+          Data and Code Democratization - how to make your code reproducible
+        </div>
+      </div>
+                </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#data-and-code-democratization" id="toc-data-and-code-democratization" class="nav-link active" data-scroll-target="#data-and-code-democratization"><span class="header-section-number">1</span> Data and Code Democratization</a></li>
+  <li><a href="#github-codespaces" id="toc-github-codespaces" class="nav-link" data-scroll-target="#github-codespaces"><span class="header-section-number">2</span> Github Codespaces</a>
+  <ul class="collapse">
+  <li><a href="#open-a-codespace" id="toc-open-a-codespace" class="nav-link" data-scroll-target="#open-a-codespace"><span class="header-section-number">2.1</span> Open a Codespace</a></li>
+  <li><a href="#devcontainers" id="toc-devcontainers" class="nav-link" data-scroll-target="#devcontainers"><span class="header-section-number">2.2</span> Devcontainers</a></li>
+  </ul></li>
+  <li><a href="#virtual-environments" id="toc-virtual-environments" class="nav-link" data-scroll-target="#virtual-environments"><span class="header-section-number">3</span> Virtual Environments</a></li>
+  <li><a href="#github-releases" id="toc-github-releases" class="nav-link" data-scroll-target="#github-releases"><span class="header-section-number">4</span> Github Releases</a></li>
+  <li><a href="#documentation" id="toc-documentation" class="nav-link" data-scroll-target="#documentation"><span class="header-section-number">5</span> Documentation</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/std/reproduce.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/std/reproduce.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="reproduce.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -140,7 +183,83 @@ ul.task-list li input[type="checkbox"] {
 
 
 
+<div class="note medframe">
+<p><i class="fa-solid fa-tags fa-3x" aria-label="tags"></i> <strong>Objectives</strong></p>
+<ul>
+<li>Data and Code Democratization</li>
+<li>Github Codespaces</li>
+<li>Package reproducibility with virtual environments</li>
+<li>Github Releases</li>
+<li>Documentation</li>
+</ul>
+</div>
+<section id="data-and-code-democratization" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Data and Code Democratization</h1>
+<p>Data and code in our repositories need to be accessible to end users and developers. There should be no bottlenecks or difficulties with installing software, executing code, finding documentation, and using test datasets.</p>
+<p>The goal is for any user to run code without needing to install anything on their personal machine and run your code with minimal set up. This may not be possible in every scenario, but there are tools available in Github to make this possible for the majority of our repos.</p>
+</section>
+<section id="github-codespaces" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Github Codespaces</h1>
+<p><a href="https://github.com/features/codespaces">Github Codespaces</a> are virtual machines (VMs) owned by Github that are connected to each repository. They let a user open the repo in a browser IDE (Integrated Development Environment) and execute the code in that environment. There is no set up or installation necessary for them.</p>
+<p>The VMs are free for up to 60 hours a month of use and there are more hours added for Github users with paid memberships. 60 hours/month should be plenty for our purposes. Users are responsible for their own Codespace, so if they go over the limit they will be responsible for adding more hours and paying for the service.</p>
+<section id="open-a-codespace" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="open-a-codespace"><span class="header-section-number">2.1</span> Open a Codespace</h2>
+<p>At the root of the repo, click on the <strong>Code</strong> drop down button</p>
+<ol type="1">
+<li>On the right there is a tab called Codespaces.</li>
+<li>Click the <strong>+</strong> sign and a Codespace will launch</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/codespace.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">open up a codespace</figcaption>
+</figure>
+</div>
+<p>This will open up a VS Code window in your browser. There are also options to open up a Jupyter Notebook or Jetbrains IDE (Pycharm). You can also install an Rstudio IDE into the codespace. It will look something like this - note that the repository is already linked and checked out into the codespace:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/codespace_vscode.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">VS Code IDE in Github Codespaces</figcaption>
+</figure>
+</div>
+<p>Here you can install most software. You can also customize the Codespace so that whenever someone opens one in your repo it will come with software pre-installed. More on that in the devcontainers section</p>
+</section>
+<section id="devcontainers" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="devcontainers"><span class="header-section-number">2.2</span> Devcontainers</h2>
+<p><a href="https://docs.github.com/en/codespaces/setting-up-your-project-for-codespaces/adding-a-dev-container-configuration/introduction-to-dev-containers">Devcontainers</a> are a way to install software into a Codespace so that whenever a user opens up the Codespace they won’t need to install anything themselves. Making a container can be a little tricky, so we’ve made Github templates that have devcontainers already made. See <a href="../tools/templates.html">templates</a>. There are R, Python, and general default templates. These containers will install R, Rstudio, Python, and all the packages in the repo’s virtual environments (venv, conda, pip, renv, etc) so that the user can run all the code in your repo within a couple minutes.</p>
+<p>To set up a devcontainer for yourself;</p>
+<ol type="1">
+<li>Click on `Code &gt; Codespaces &gt; Configure dev container</li>
+</ol>
+<p><img src="images/devcontainer.jpg" class="img-fluid"></p>
+<ol start="2" type="1">
+<li>This will make a folder named <code>.devcontainer</code> at the root of your repo</li>
+<li>In that folder it will make a file named <code>devcontainer.json</code></li>
+<li>On the right there is a searchable marketplace for software to add to your container</li>
+</ol>
+<p><img src="images/devmarket.jpg" class="img-fluid"></p>
+<ol start="5" type="1">
+<li>Each one comes with instructions on how to add the software to the <code>.devcontainer.json</code></li>
+</ol>
+<p>For more information about Codespaces, <a href="../tools/codespaces.html">see the guides here</a></p>
+</section>
+</section>
+<section id="virtual-environments" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Virtual Environments</h1>
+<p>Virtual Environments are another great way to make sure aspects of your repo are reproducible. They are commonly used to record package versions that the code/project uses. For more on virtual environments, <a href="../tools/renv.html">please see the venv guide.</a></p>
+</section>
+<section id="github-releases" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Github Releases</h1>
+<p>Github Releases save code snapshots, versions, and changelogs of your repo. They are a great way for end users and developers to use different versions of their code and visualize changes that happened with each version. Please see the <a href="../tools/release.html">Github Releases guide</a> for more information.</p>
+</section>
+<section id="documentation" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Documentation</h1>
+<p>Your code should be well documented so that end users (and developers) can understand what code is doing, how to install the software, and the utility of the project.</p>
+<p>In general, you should have a README.md file in your repo that explains at least a high level summary of the code in the repo and what it does, how to install the code, outputs, and how to contribute to the repo. In addition, it may be a good idea to make a Github Page (a static website hosted in your repo) that explains the code in more detail. <a href="../tools/how_to.html">See the documentation guides here.</a></p>
+<p>Having a Github Page is necessary if you have a package. Consider using software like <code>pkgdown</code> for R or <code>quartodoc</code> for Python (or other related software that helps link code to your documentation automatically). <a href="../tools/pkgdoc.html">See more about package documentation here.</a></p>
 
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -509,7 +628,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/std/creds.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/std/creds.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    </div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
@@ -519,4 +638,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
+<script src="../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 </body></html>
