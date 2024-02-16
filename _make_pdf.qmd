@@ -65,18 +65,6 @@ This document details the policies and guidelines for the Northwest Pathogen Gen
 
 For more information, tutorials and code examples, please see the policies website here https://nw-page.github.io/standards/.
 
-<!-- remove the intro to site chunk for pdf
-```{r}
-#| output: asis
-#| echo: false
-#| eval: true
-#| message: false
-#| warning: false
-idx <- process_qmd("index.qmd")
-cat(unlist(idx), sep = '\n')
-```
--->
-
 # Security
 
 ```{r}

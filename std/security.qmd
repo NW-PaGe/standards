@@ -132,6 +132,8 @@ server_name <- creds$default$conn_list_wdrs$server
 ```
 :::
 
+{{< pagebreak >}}
+
 <!-- Content for HTML --->
 ::::{.content-visible unless-format="pdf"}
 
@@ -168,6 +170,8 @@ $ Rscript -e "source('path/script_in_repo.R');" test
 ```
 :::
 ::::
+
+{{< pagebreak >}}
 
 <!-- Content for pdf --->
 
@@ -206,6 +210,8 @@ $ Rscript -e "source('path/script_in_repo.R');" test
 
 ::::
 
+{{< pagebreak >}}
+
 
 ### Safe Guards - Prevent Accidental Leaks!
 
@@ -240,6 +246,8 @@ And to get a list of files that are "skipped", use this code:
 git ls-files -v . | grep ^S
 ```
 :::
+
+{{< pagebreak >}}
 
 # Security Guardrails
 
@@ -324,6 +332,8 @@ Pre-commit hooks run a process locally when the user attempts to commit code to 
 ::: callout-note
 We can't use the "Non capture group" feature of regex. Meaning we can't use patterns like this in our regex: (?:abc) -- see https://regexr.com IMPORTANT: Tab separate your regex expressions. Making new lines caused a bit of chaos and took really long to figure out. (you can use multiple tabs to separate them more visually)
 :::
+
+{{< pagebreak >}}
 
 ## Pre-Recieve Hooks
 
