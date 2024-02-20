@@ -23,6 +23,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -172,7 +206,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">February 16, 2024</p>
+        <p class="date-modified">February 20, 2024</p>
       </div>
     </div>
       
@@ -183,7 +217,19 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#intro" id="toc-intro" class="nav-link active" data-scroll-target="#intro"><span class="header-section-number">1</span> Intro</a></li>
+  <li><a href="#before-writing-code" id="toc-before-writing-code" class="nav-link" data-scroll-target="#before-writing-code"><span class="header-section-number">2</span> Before writing code</a></li>
+  <li><a href="#switch-to-feature-branch" id="toc-switch-to-feature-branch" class="nav-link" data-scroll-target="#switch-to-feature-branch"><span class="header-section-number">3</span> Switch to feature branch</a></li>
+  <li><a href="#making-changes" id="toc-making-changes" class="nav-link" data-scroll-target="#making-changes"><span class="header-section-number">4</span> Making changes</a></li>
+  <li><a href="#committing-changes-to-the-feature-branch" id="toc-committing-changes-to-the-feature-branch" class="nav-link" data-scroll-target="#committing-changes-to-the-feature-branch"><span class="header-section-number">5</span> Committing changes to the feature branch</a></li>
+  <li><a href="#making-a-pull-request" id="toc-making-a-pull-request" class="nav-link" data-scroll-target="#making-a-pull-request"><span class="header-section-number">6</span> Making a pull request</a></li>
+  <li><a href="#for-reviewers" id="toc-for-reviewers" class="nav-link" data-scroll-target="#for-reviewers"><span class="header-section-number">7</span> For Reviewers</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/tools/git.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/tools/git.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -191,8 +237,147 @@ ul.task-list li input[type="checkbox"] {
 
 
 
+<div class="cell">
+<style type="text/css">
+h1, .h1, h2, .h2, h3, .h3 {
+    margin-top: 84px;
+}
+
+.watch {
+  background-color: lightpurple;
+  border: 3px solid purple;
+  font-weight: bold;
+}
+</style>
+</div>
+<section id="intro" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Intro</h1>
+<p>Showing how to create and work off of a feature branch using <code>git</code> and github.</p>
+</section>
+<section id="before-writing-code" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Before writing code</h1>
+<p><strong>First check to see if your main branch is up to date</strong> and has the most recent commits added. This should be the first thing you do before running/writing any code.</p>
+<p><code>git status</code> will tell you:</p>
+<ol type="1">
+<li>Which branch you are in</li>
+<li>If your local branch is up to date when comparing to that branch in the remote repo</li>
+<li>If you have any files waiting to be committed</li>
+</ol>
+<p><code>git fetch</code> will:</p>
+<ol type="1">
+<li>Refresh your branch</li>
+<li>Search for any differences between your local clone and the repo in github. If there are changes, it will display a message</li>
+</ol>
+<p><code>git pull</code> will pull all the changes in the remote repo into your local clone branch</p>
+<p><br> <br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="watch"><code>On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged &lt;file&gt;..." to unstage)
+    new file:   images/gitdesk.gif
+    new file:   images/gitdesk23-01.gif
+    new file:   images/gitdesk23.gif
+    new file:   images/gitdesk233-01.gif
+    new file:   images/gitdesk233.gif
+    new file:   images/gitdesk2333-01.gif
+    new file:   images/gitdesk2333.gif
+
+Changes not staged for commit:
+  (use "git add &lt;file&gt;..." to update what will be committed)
+  (use "git restore &lt;file&gt;..." to discard changes in working directory)
+    modified:   git.qmd
+
+Untracked files:
+  (use "git add &lt;file&gt;..." to include in what will be committed)
+    ../nul
+    git.rmarkdown</code></pre>
+</div>
+</div>
+<p><br> <br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> fetch</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br> <br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="watch"><code>Already up to date.</code></pre>
+</div>
+</div>
+<p>It’s the same in the git desktop app. Make sure you are in the branch you want to be in, then click fetch and pull to update that branch to include the most recent commits in the remote repo</p>
+<p><img src="https://content.codecademy.com/articles/Git-and-GitHub-Desktop/what-is-git-pull-origin.jpg" class="img-fluid"></p>
+</section>
+<section id="switch-to-feature-branch" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Switch to feature branch</h1>
+<p>If we want to make changes to code, first <strong>make a new branch off the main</strong>.</p>
+<p><code>git branch</code> will show all the branches in the repo and the one you are currently in</p>
+<p><code>git checkout -b new-branch-name</code> will create a new branch. In this case, we already have our feature branch called <code>test-dcipher-cases</code></p>
+<p><code>git checkout branch-name</code> will <em>switch</em> to a branch. In this case we can switch to <code>test-dcipher-cases</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre class="watch"><code>  listings
+* main</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout test-dcipher-cases</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Or in the desktop app</p>
+<p><img src="images/gitdesk.gif" class="img-fluid"></p>
+</section>
+<section id="making-changes" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Making changes</h1>
+<p>If we want to make a change to the code, make a new branch off of <code>test-dcipher-cases</code> and switch to that branch</p>
+<p><br></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">-b</span> test-frank2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br></p>
+<p>and in the desktop app:</p>
+<p><img src="images/gitdesk23-01.gif" class="img-fluid"></p>
+<p><br></p>
+</section>
+<section id="committing-changes-to-the-feature-branch" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Committing changes to the feature branch</h1>
+<p>Now you can make changes in your R script and when you save them they will be ready to be committed to this new branch.</p>
+<p><code>git add</code> to stage your changes</p>
+<p><code>git commit -am "messge"</code> to commit those changes to the new branch with a message</p>
+<p><code>git push --set-upstream origin test-dcipher-cases</code> to push those changes to the remote repo on the new branch</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-am</span> <span class="st">"this is a test- pls delete"</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">--set-upstream</span> origin test-dcipher-cases</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="images/gitdesk233-01.gif" class="img-fluid"></p>
+<p><br></p>
+</section>
+<section id="making-a-pull-request" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Making a pull request</h1>
+<p>This part happens in github.</p>
+<ol type="1">
+<li>Select who you want to review your code and assign yourself.</li>
+<li>Use labels to tag what this pull request refers to (very helpful in search for changes when managing the project) and</li>
+<li>Add a milestone if it applies.</li>
+</ol>
+<p>This should automatically send an email to the reviewers that there is code needed to be merged to a branch.</p>
+<p><img src="images/gitdesk2333-01.gif" class="img-fluid"></p>
+</section>
+<section id="for-reviewers" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> For Reviewers</h1>
+<p>When reviewing changes, <strong>make sure the commit/changes are being merged to the correct branch</strong>.</p>
+<p>Github automatically compares to the main branch, so you will have to manually click on the base branch and change it to <code>test-dcipher-cases</code></p>
+<p><img src="images/paste-F8997DE3.png" class="img-fluid"></p>
+<p><img src="images/paste-9103DFBF.png" class="img-fluid"></p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -561,7 +746,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/tools/git.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/tools/git.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    </div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
