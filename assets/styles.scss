@@ -198,6 +198,16 @@ div.obj>p:first-child {
   padding-left: 15%;
 }
 
+.quarto-title .quarto-categories {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: .5em;
+    column-gap: .4em;
+    padding-bottom: .5em;
+    margin-top: .75em;
+    padding-left: 15%;
+}
+
 
 /* Make cool hover tabs for front page */
 
