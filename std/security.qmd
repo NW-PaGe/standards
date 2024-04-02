@@ -341,7 +341,9 @@ We can't use the "Non capture group" feature of regex. Meaning we can't use patt
 
 2. If secret scanning is taking too long, you might want to check certain files first. I've found that HTML files take a _very_ long time to scan for secrets. If you're using linux or macOS you should be able to scan certain files via grob like this `git secrets --scan path/to/files*`. If you're using windows it probably won't work. In that case, if you only want certain file extentsions to be scanned, use this function in powershell below. Download the file here: 
 
-{{< downloadthis assets/secret_scanner.ps1 dname=secretscanner label="Download Secret Scanner Script" >}}
+{{< downloadthis secret_scanner.ps1 dname=secretscanner label="Download Secret Scanner Script" >}}
+
+
 
 ::: myframe
 ```{bash filename="secret-scanner9000.ps1"}
