@@ -23,12 +23,10 @@ citation-location: margin
 ::: {.note .medframe}
 {{< fa unlock size="3x" >}} **Objectives**
 
-- Prevent sensitive information leaks to Github
-- Set up guardrails, `.gitignore`, hooks
-- Scrub private repos before they go public
-
+-   Prevent sensitive information leaks to Github
+-   Set up guardrails, `.gitignore`, hooks
+-   Scrub private repos before they go public
 :::
-
 
 If sensitive information is leaked and commited to the remote repo, then they will stay in the git history (and will require a lot of effort to remove them from the history). The following cannot be included in any repo **or any local commit!**:
 
@@ -50,7 +48,6 @@ If sensitive information is leaked and commited to the remote repo, then they wi
 |                          | -   Names                               |
 |                          | -   Any PHI                             |
 +--------------------------+-----------------------------------------+
-
 
 ## Prevent Credential Leaks with Env Variables {.unnumbered}
 
@@ -135,8 +132,8 @@ server_name <- creds$default$conn_list_wdrs$server
 {{< pagebreak >}}
 
 <!-- Content for HTML --->
-::::{.content-visible unless-format="pdf"}
 
+::: {.content-visible unless-format="pdf"}
 ###  {.unnumbered}
 
 ::: {.column-screen-inset-shaded layout-nrow="1"}
@@ -169,15 +166,14 @@ $ Rscript -e "source('path/script_in_repo.R');" production
 $ Rscript -e "source('path/script_in_repo.R');" test 
 ```
 :::
-::::
+:::
 
 {{< pagebreak >}}
 
 <!-- Content for pdf --->
 
-::::{.content-visible unless-format="html"}
-
-We can even get more specific and add an `if-else` statement to specify which credential we want to select. This can be helpful if we have a CI/CD pipeline and have a script automatically run on a task scheduler or cron job. We can call the credentials we want in the command line and have the command line code run in my task scheduler. That way we can use multiple different versions of the same script and have all of it be automated. 
+::: {.content-visible unless-format="html"}
+We can even get more specific and add an `if-else` statement to specify which credential we want to select. This can be helpful if we have a CI/CD pipeline and have a script automatically run on a task scheduler or cron job. We can call the credentials we want in the command line and have the command line code run in my task scheduler. That way we can use multiple different versions of the same script and have all of it be automated.
 
 For example, the middle panel uses the `commandArgs()` to pull any arguments passed to the script in a shell/command line script. In the right panel, the shell script has `production` and `test` as second arguments. These are passed to the R script as `arg[2]`. Now we can use `arg[2]` in the if-else statement to conditionally select credentials and do it automatically.
 
@@ -207,11 +203,9 @@ $ Rscript -e "source('path/script_in_repo.R');" production
 # Run the test/dev code
 $ Rscript -e "source('path/script_in_repo.R');" test 
 ```
-
-::::
+:::
 
 {{< pagebreak >}}
-
 
 ### Safe Guards - Prevent Accidental Leaks!
 
@@ -286,9 +280,11 @@ Pre-commit hooks run a process locally when the user attempts to commit code to 
     ```
     :::
 
-6.  Copy the regex file containing the secret patterns into your folder. -- make text file -- discuss with team what all we want to make illegal.
+6.  Make or copy the regex file called `secrets_key` containing the secret patterns into your folder. -- make text file -- discuss with team what all we want to make illegal.
 
-7.  Run git secrets --add-provider -- cat ./secrets_key
+7.  Make sure the file `secrets_key` is in your `.gitignore`. We can't push that to the remote repo.
+
+8.  Run `git secrets --add-provider -- cat ./secrets_key`
 
     ::: smallframe
     ```{bash filename="PowerShell"}
@@ -311,7 +307,7 @@ Pre-commit hooks run a process locally when the user attempts to commit code to 
     ```
     :::
 
-8.  Test Git history by running
+9.  Test Git history by running
 
     ::: smallframe
     ```{bash filename="PowerShell"}
@@ -319,19 +315,64 @@ Pre-commit hooks run a process locally when the user attempts to commit code to 
     ```
     :::
 
-9.  If something gets flagged and you don't care about your history anymore: Delete .git folder and reinitialize repository
+10. If something gets flagged and you don't care about your history anymore: Delete .git folder and reinitialize repository
 
     I would take caution about this point. There might be better ways to clean your git history if you don't want to get rid of everything.
 
-10. Test on one of my projects to see if rebasing is a sustainable option
+11. Test on one of my projects to see if rebasing is a sustainable option
 
-11. Make repo public
+12. Make repo public
 
-12. Will automatically scan on every commit and won't let it commit unless it's clean - Create a few files to show it working
+13. Will automatically scan on every commit and won't let it commit unless it's clean - Create a few files to show it working
 
 ::: callout-note
 We can't use the "Non capture group" feature of regex. Meaning we can't use patterns like this in our regex: (?:abc) -- see https://regexr.com IMPORTANT: Tab separate your regex expressions. Making new lines caused a bit of chaos and took really long to figure out. (you can use multiple tabs to separate them more visually)
 :::
+
+::: {.note .medframe}
+{{< fa unlock size="3x" >}} **NOTE!!**
+
+-   The REGEX strings used in the `secrets_key` file may be decieving
+-   Make sure to test that the regex flags what you want it to
+-   `git secrets --scan-history` may take a very long time to run
+:::
+
+1. Check that the `secrets_key` regex is working by running the process on a repo that you know has secrets in it. For example, in a different folder, run all the pre-commit hook steps above and add a known "bad" string into the regex. For example, in the regex put `bad_string` and in a file in that folder put `bad_string`. When you scan it should get flagged.
+
+2. If secret scanning is taking too long, you might want to check certain files first. I've found that HTML files take a _very_ long time to scan for secrets. If you only want certain file extentsions to be scanned, use this function in powershell below. Copy the code and save it as `secret-scanner.ps1`:
+
+::: myframe
+```{bash filename="secret-scanner9000.ps1"}
+# Example Usage
+# write this in the powershell terminal, adjust for the file type(s) you want to scan - can be multiple types: $fileExtensions = @(".R", ".py")
+# then execute this in the terminal: ScanFiles -FileExtensions $fileExtensions
+
+# It will give you an output of any secrets that are contained in those files
+
+Function ScanFiles{
+  param (
+      [string]$filePath = (Get-Location).Path,
+      [string[]]$fileExtensions
+) 
+  Get-ChildItem $filePath -recurse | Where-Object {$_.extension -in $fileExtensions} | 
+  Foreach-Object {
+
+      git secrets --scan $_.FullName | Out-File $logFile -Append
+
+  }
+}
+```
+:::
+
+Now, you can scan your secrets by copying and pasting the code into a powershell terminal like this:
+::: smallframe
+```{bash filename="PowerShell"}
+$fileExtensions = @(".R",".py",".Rmd",".qmd")
+ScanFiles -FileExtensions $fileExtensions
+```
+:::
+
+
 
 {{< pagebreak >}}
 
