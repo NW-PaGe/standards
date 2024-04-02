@@ -365,6 +365,7 @@ Function ScanFiles{
 :::
 
 Now, you can scan your secrets by copying and pasting the code into a powershell terminal like this:
+
 ::: smallframe
 ```{bash filename="PowerShell"}
 $fileExtensions = @(".R",".py",".Rmd",".qmd")
