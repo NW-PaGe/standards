@@ -1,5 +1,152 @@
 [
   {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "This site was made with Quarto. It can execute code and render the outputs into the html."
+  },
+  {
+    "objectID": "std/security.html",
+    "href": "std/security.html",
+    "title": "Security Policies",
+    "section": "",
+    "text": "Objectives\n\nPrevent sensitive information leaks to Github\nSet up guardrails, .gitignore, hooks\nScrub private repos before they go public\nIf sensitive information is leaked and commited to the remote repo, then they will stay in the git history (and will require a lot of effort to remove them from the history). The following cannot be included in any repo or any local commit!:"
+  },
+  {
+    "objectID": "std/security.html#prevent-credential-leaks-with-env-variables",
+    "href": "std/security.html#prevent-credential-leaks-with-env-variables",
+    "title": "Security Policies",
+    "section": "Prevent Credential Leaks with Env Variables",
+    "text": "Prevent Credential Leaks with Env Variables\nThere are a number of ways to do this. We typically use a yaml file that can be filled out with personal credentials locally. The file will not be committed to the remote repo\n\n0.0.1 Create a private credentials file\nThe scripts use a .yml file that contains a list of API tokens, server names, and usernames/passwords specific to each individual user. There are two .yml files. One is a template (containing no actual passwords..) that exists in the repo and serves as a template so every individual user can keep up to date with new credential additions. The other is the individual creds.yml that is in the repo’s .gitignore. This file will never exist in the repo and only exist locally (in the user’s C drive).\n\n\n0.0.2 creds.yml details\nThe .yml file can work with multiple programming languages including R and Python. They are read in the same way and can be easily adjusted when adding new passwords or using them as configuration files.\nThey look like this:\n\n\n\n\nlocal-credentials.yml\n\n# Default is needed to distinguish values.\n# Leave a blank line (NO SPACES) as the last line in this file or things will break\n# Quotes aren't necessary, but can be used.\ndefault: \n  conn_list_wdrs:\n    Driver: \"SQL Server Native Client 11.0\"\n    Server: \n    Database: \n    Trusted_connection: \n    ApplicationIntent: \n    \n  fulgent:\n    username: &lt;USERNAME&gt;\n    password: &lt;PASSWORD&gt;\n\n\n\nYou can have different variables assigned to unique lists, which allows for easy configuration. For example, the list starting with default has variables conn_list_wdrs and fulgent. You can have a different list of variables within the same file like this:\n\n\n\n\nlocal-credentials.yml\n\n# Default is needed to distinguish values.\n# Leave a blank line (NO SPACES) as the last line in this file or things will break\n# Quotes aren't necessary, but can be used.\ndefault: \n  conn_list_wdrs:\n    Driver: \"SQL Server Native Client 11.0\"\n    Server: \n    Database: \n    Trusted_connection: \n    ApplicationIntent: \n    \n  fulgent:\n    username: &lt;USERNAME&gt;\n    password: &lt;PASSWORD&gt;\n\ntest:\n  conn_list_wdrs:\n    Driver: \"SQL Server Native Client 11.0\"\n    Server: \n    Database: \n    Trusted_connection: \n    ApplicationIntent: \n\n\n\nNow there is a test list with its own variables. This lets us switch a set of variables within our scripts. default applies to the main credentials where test can distinguish which variables should be test or dev scripts specific. Notice below that you can now call the credentials from a .yml file into an R or Python script and the actual credentials will never exist in the code pushed to the repo.\n\n\n\n\nscript-in-repo.R\n\n# this script is in the repo, but credentials are hidden\nlibrary(yaml)\n\n# read in the local credentials yaml file\ncreds &lt;- yaml::read_yaml(\"path/to/local-credentials.yml\")\n\n# pull in the credentials\nserver_name &lt;- creds$default$conn_list_wdrs$server\n\n\n\n\n\n\n\n\n\n\n\nWe can even get more specific and add an if-else statement to specify which credential we want to select. This can be helpful if we have a CI/CD pipeline and have a script automatically run on a task scheduler or cron job. We can call the credentials we want in the command line and have the command line code run in my task scheduler. That way we can use multiple different versions of the same script and have all of it be automated. For example, the middle panel uses the commandArgs() to pull any arguments passed to the script in a shell/command line script. In the right panel, the shell script has production and test as second arguments. These are passed to the R script as arg[2]. Now we can use arg[2] in the if-else statement to conditionally select credentials and do it automatically.\n\n\n\n\nscript-in-repo.R\n\nargs &lt;- commandArgs(TRUE)\n\n# this script is in the repo, but credentials are hidden\nlibrary(yaml)\n\n# read in the local credentials yaml file\ncreds &lt;- yaml::read_yaml(\"path/to/local-credentials.yml\")\n\n# pull in the credentials\nif(args[2] == \"production\"){\n  server_name &lt;- creds$default$conn_list_wdrs$server\n} else if(args[2] == \"test\"){\n  server_name &lt;- creds$test$conn_list_wdrs$server\n}\n\n\n\n\n\nshell-trigger-script.sh\n\n# Run the production code\n$ Rscript -e \"source('path/script_in_repo.R');\" production\n\n# Run the test/dev code\n$ Rscript -e \"source('path/script_in_repo.R');\" test \n\n\n\n\n\n\n\n\n\n0.0.3 Safe Guards - Prevent Accidental Leaks!\nOnce you have the credentials.yml template in your repo, make sure that nobody on your team (or anyone with write access..) is able to accidentally push changes to the template. We don’t want someone’s passwords or API tokens to exist in GitHub.\nThis link shows how to skip any changes made to the specific file. If someone makes local changes to the template, the changes will not show in their commit. It is a safe guard.\n\n0.0.3.1 For all individual users, run this code:\n\n\ngit update-index --skip-worktree creds_TEMPLATE.yml\n\n\nThis will tell your local git to ignore any changes made to creds_TEMPLATE.yml, but also allow it to exist in the repo (since .gitignore will prevent it from being in the repo)\n\n\n0.0.3.2 If you need to update the template file run this:\n\n\ngit update-index --no-skip-worktree creds_TEMPLATE.yml\n\n\nThis will allow changes to the template. So when you need to update the template, use this code\nAnd to get a list of files that are “skipped”, use this code:\n\n\ngit ls-files -v . | grep ^S"
+  },
+  {
+    "objectID": "std/security.html#pre-commit-hooks",
+    "href": "std/security.html#pre-commit-hooks",
+    "title": "Security Policies",
+    "section": "1.1 Pre-commit Hooks",
+    "text": "1.1 Pre-commit Hooks\nPre-commit hooks run a process locally when the user attempts to commit code to a git branch. Hooks have many uses. Here we can use them as a security guardrail to prevent accidental credential leaks in committed code.\n\nClone or download the AWS Git Secrets repo from awslabs GitHub\n\nExtract zip\nOpen folder and right click install.ps1\n\nRun in Power Shell\nType Y to give permission\n\nCD to a directory where you have the git repository you want to upload, either in PowerShell or R studio terminal \n\n\n\n\nPowerShell\n\nPS &gt; cd path/to/repo/root\n\n\n\nRun git secrets –install\n\n\n\n\nPowerShell\n\ngit secrets --install\n\n\n\nMake or copy the regex file called secrets_key containing the secret patterns into your folder. – make text file – discuss with team what all we want to make illegal.\nMake sure the file secrets_key is in your .gitignore. We can’t push that to the remote repo.\nRun git secrets --add-provider -- cat ./secrets_key\n\n\n\n\nPowerShell\n\ngit secrets --add-provider -- cat ./secrets_key\n\n\n\nYou can also add prohibited patterns like this\n\n\n\n\nPowerShell\n\n# add a pattern\ngit secrets --add '[A-Z0-9]{20}'\n\n# add a literal string, the + is escaped\ngit secrets --add --literal 'foo+bar'\n\n# add an allowed pattern\ngit secrets --add -a 'allowed pattern'\n\n\n\nTest Git history by running\n\n\n\n\nPowerShell\n\ngit secrets --scan-history\n\n\n\nIf something gets flagged and you don’t care about your history anymore: Delete .git folder and reinitialize repository\nI would take caution about this point. There might be better ways to clean your git history if you don’t want to get rid of everything.\nTest on one of my projects to see if rebasing is a sustainable option\nMake repo public\nWill automatically scan on every commit and won’t let it commit unless it’s clean - Create a few files to show it working\n\n\n\n\n\n\n\nNote\n\n\n\nWe can’t use the “Non capture group” feature of regex. Meaning we can’t use patterns like this in our regex: (?:abc) – see https://regexr.com IMPORTANT: Tab separate your regex expressions. Making new lines caused a bit of chaos and took really long to figure out. (you can use multiple tabs to separate them more visually)\n\n\n\n NOTE!!\n\nThe REGEX strings used in the secrets_key file may be decieving\nMake sure to test that the regex flags what you want it to\ngit secrets --scan-history may take a very long time to run\n\n\n\nCheck that the secrets_key regex is working by running the process on a repo that you know has secrets in it. For example, in a different folder, run all the pre-commit hook steps above and add a known “bad” string into the regex. For example, in the regex put bad_string and in a file in that folder put bad_string. When you scan it should get flagged.\nIf secret scanning is taking too long, you might want to check certain files first. I’ve found that HTML files take a very long time to scan for secrets. If you’re using linux or macOS you should be able to scan certain files via grob like this git secrets --scan path/to/files*. If you’re using windows it probably won’t work. In that case, if you only want certain file extentsions to be scanned, use this function in powershell below. Download the file here:\n\n Download Secret Scanner Script \n\n\n\n\nsecret-scanner9000.ps1\n\n# Example Usage\n# write this in the powershell terminal, adjust for the file type(s) you want to scan - can be multiple types: $fileExtensions = @(\".R\", \".py\")\n# then execute this in the terminal: ScanFiles -FileExtensions $fileExtensions\n\n# It will give you an output of any secrets that are contained in those files\n\nFunction ScanFiles{\n  param (\n      [string]$filePath = (Get-Location).Path,\n      [string[]]$fileExtensions\n) \n  Get-ChildItem $filePath -recurse | Where-Object {$_.extension -in $fileExtensions} | \n  Foreach-Object {\n\n      git secrets --scan $_.FullName | Out-File $logFile -Append\n\n  }\n}\n\n\n\nNow, you can scan your secrets by copying and pasting the code into a powershell terminal like this:\n\n\n\n\nPowerShell\n\n$fileExtensions = @(\".R\",\".py\",\".Rmd\",\".qmd\")\nScanFiles -FileExtensions $fileExtensions"
+  },
+  {
+    "objectID": "std/security.html#pre-recieve-hooks",
+    "href": "std/security.html#pre-recieve-hooks",
+    "title": "Security Policies",
+    "section": "1.2 Pre-Recieve Hooks",
+    "text": "1.2 Pre-Recieve Hooks\nThese are still being investigated. They are remote hooks (not local like pre-commit hooks) that can be deployed throughout the Github organization. They can block certain commits from ever being pushed to the remote repo. They may make things unnecessarily complicated"
+  },
+  {
+    "objectID": "std/security.html#pushing-private-code-to-public-repos",
+    "href": "std/security.html#pushing-private-code-to-public-repos",
+    "title": "Security Policies",
+    "section": "1.3 Pushing Private Code to Public Repos",
+    "text": "1.3 Pushing Private Code to Public Repos\nWe may wish to take private codes and push them to a public repo. We need to make sure that the public code doesn’t not contain sensitive or forbidden data/code, so cleaning up the private repo is important before pushing.\nThere are a few ways to do this, but the easiest way is to copy the clean private code to the public repo, that is, copy all the files you want to add publicly but do not copy the .git folder. If the private repo has a dirty git history we will not want that history in the public repo because the sensitive data will then be publicly available.\n\n\n\n\n\n\n\n\n\n\n The private repository on the left still contains sensitive information in the git history. The public repository on the right has a clean git history because we copied only the current clean files from the private repo and did not attach its git history (which lives in the hidden .git folder)"
+  },
+  {
+    "objectID": "std/lic.html",
+    "href": "std/lic.html",
+    "title": "Licensing",
+    "section": "",
+    "text": "Summary\n\nLicenses prevent code theft and inappropriate redistribution of code.\nReview common open-source licenses\nLicense types vary depending on repo goals\n\n\n\n\n1 General License Info\nBelow is a list of common open-source licenses.\n\n\nThere isn’t a one size fits all license, so thankfully there are a variety of options. Here are two common ones:\n\n\n2 GNU GPL licenses\n\nThese are the strong licenses\nPrevents someone from taking our code and privatizing it (and making money off of it)\nSomeone can still use our code, they just need to ensure that what they’re doing with it is open-source\n“Copyright and license notices must be preserved.”\n“Contributors provide an express grant of patent rights. When a modified version is used to provide a service over a network, the complete source code of the modified version must be made available.”\n\n\n\n3 MIT license\n\nI think this is the most commonly used one\n“short and simple permissive license… only requiring preservation of copyright and license notices”\n“Licensed works, modifications, and larger works may be distributed under different terms and without source code.”\nSomeone could basically do whatever they want with the code.\nNextstain/ncov repo is currently using this\n\nAnd here are a couple of youtube videos that were helping in explaining licensing"
+  },
+  {
+    "objectID": "tools/how_to.html",
+    "href": "tools/how_to.html",
+    "title": "Code and Repo Documentation",
+    "section": "",
+    "text": "This site was created using Quarto, Github, and uses a Github Action to automatically render when a commit is pushed to the main branch of this repository.\nQuarto is a framework for creating documentation, slideshows, articles, blogs, books and websites using markdown. It can execute R, Python and other programming languages within the document.\nGithub Actions uses a .yml file in the repository to trigger an action based on a certain event. In this case, when a commit is pushed to the main branch the .yml will trigger this Quarto website to render to the gh-pages branch of the repository and publish the github page. This section will give details on how to\n\nCreate the website\nCreate, edit, and troubleshoot the Github Action to render the site"
+  },
+  {
+    "objectID": "tools/how_to.html#editadd-sections-and-chapters",
+    "href": "tools/how_to.html#editadd-sections-and-chapters",
+    "title": "Code and Repo Documentation",
+    "section": "3.1 Edit/Add Sections and Chapters",
+    "text": "3.1 Edit/Add Sections and Chapters\nTo add a section, open up the _quarto.yml file and scroll to the navbar section\n\n\n\n\n_quarto.yml\n\nproject:\n  type: website\nwebsite:\n  title: \"COE Github Standards\"\n  search: true\n  \n  navbar: \n    background: primary\n    left: \n      - text: Home\n        href: index.qmd\n      - text: Github Organization Standards\n        menu: \n          - href: std/security.qmd\n            text: \"0: Security Standards\"\n          - href: std/lic.qmd\n            text: \"1: Choosing a License\"\n          - href: std/templates.qmd\n            text: \"2: Org Policy Setting\"\n\n\n\n\nThis is where all of the qmd files are sourced and the instructions on how to format and style the navigation bar in the website.\nCurrently, the project is set up to have each section have it’s own drop down menu in the navbar. In a section, use - href: to specify a file and text: to give the file a custom name in the website.\nEach chapter exists within a sub-folder, so to add a chapter make sure create the qmd in its sub-folder and then reference the sub-folder and chapter in the .yml. For example, if you make a new chapter called new-chapter.qmd and it exists in the covid section/sub-folder, you need to reference it in the .yml file like: covid/new-chapter.qmd"
+  },
+  {
+    "objectID": "tools/how_to.html#website-style",
+    "href": "tools/how_to.html#website-style",
+    "title": "Code and Repo Documentation",
+    "section": "3.2 Website Style",
+    "text": "3.2 Website Style\nYou can customize many aspects of the website in the .yml file itself with the format: function. There are a ton of themes included in Quarto here and you can also add a custom css and/or scss file to your project. I think you can even go super in depth and customize the javascript components of the site, but I’m not entirely sure how to do that yet. This website has a ton of custom css components with Quarto, and possibly uses custom javascript, so it could be a place to start if you’re interested. Basically, you need to embed the css file into your _quarto.yml file\n\n\n\n\n_quarto.yml\n\nformat:\n  html:\n    theme: \n      - cosmo\n      - assets/styles.scss\n    scss: assets/styles.scss\n    # css: styles.css\n    toc: true\n    highlight-style: assets/custom.theme"
+  },
+  {
+    "objectID": "tools/how_to.html#open-the-r-project",
+    "href": "tools/how_to.html#open-the-r-project",
+    "title": "Code and Repo Documentation",
+    "section": "4.1 Open the R project",
+    "text": "4.1 Open the R project\nThis is a Quarto website that is contained in a .rproj file path. The R project contains all the documents used to create this website. Begin by opening the R project when should be in your local clone under C:\\Users\\XXXXXXX\\Projects\\Sequencing_2.0\\sequencing_documentation\\sequencing_documentation.Rproj"
+  },
+  {
+    "objectID": "tools/how_to.html#open-the-files",
+    "href": "tools/how_to.html#open-the-files",
+    "title": "Code and Repo Documentation",
+    "section": "4.2 Open the files",
+    "text": "4.2 Open the files\nThis project has .qmd files (Quarto Markdown files) that each represent a chapter in the website. All of the .qmd files are knitted together (using R knitr) which compiles all of the files to be sourced into htmls.\nThis website is set up to have each major section contain multiple chapters. To open a chapter, the bottom right pane in your R Studio window should contain folders for each section, highlighted below\n\n\n$ tree /f\nC:.\n│   .gitignore\n│   about.qmd\n│   index.qmd\n│   standards.Rproj\n│   _quarto.yml\n│\n├───assets\n│       custom.theme\n│       styles.css\n│       styles.scss\n│\n├───std\n│   │   creds.qmd\n│   │   lic.qmd\n│   │   public_code.qmd\n│   │   security.qmd\n│   │   templates.qmd\n│   │\n│   └───images\n│\n├───tools\n│   │   how_to.qmd\n│   │   iac.qmd\n│   │   link_code.qmd\n│   │   readme.qmd\n│   │   release.qmd\n│   │   renv.qmd\n│   │   teams.qmd\n│   │\n│   └───images\n\nError in running command bash\n\n\n\n\nThe .qmd files are inside of these folders. Select one to edit."
+  },
+  {
+    "objectID": "tools/how_to.html#commit-changes",
+    "href": "tools/how_to.html#commit-changes",
+    "title": "Code and Repo Documentation",
+    "section": "4.3 Commit changes",
+    "text": "4.3 Commit changes\nOnce you’re done editing, push the change to the main branch (or make a new branch, and then a pull request for the main branch). More one this in the git chapter"
+  },
+  {
+    "objectID": "tools/how_to.html#example-yaml-workflow",
+    "href": "tools/how_to.html#example-yaml-workflow",
+    "title": "Code and Repo Documentation",
+    "section": "6.1 Example YAML Workflow",
+    "text": "6.1 Example YAML Workflow\nThe .yml workflow for this project looks something like this:\non: is a tag indicating when the action will run. Right now it will run when any code gets pushed to the main branch in the documentation folder or lineages_public_repo.R script\n\n\n\n\nquarto-publish.yml\n\non: \n  push:\n    branches:\n      - main\n    paths:\n      - documentation/**\n      - lineages_public_repo.R\n\n\n\njobs: is a tag that tells a Github virtual machine what to run and what operating system to run it on. In this case ubuntu with the latest version. This can be windows, linux or macOS.\n\n\n\n\nquarto-publish.yml\n\nname: Render and Publish\n\njobs:\n  build-deploy:\n    runs-on: ubuntu-latest\n\n\n\n\nNow we have the steps:\n\nenv will find the renv folder\nuses: actions/checkout@v3 will refresh the repo and pull the latest changes\nuses: quarto-dev/quarto-actions/setup@v2 will install quarto\nuses: actions/cache@v1 and the code below it will set up renv and use the cached packages to install them onto the Github virtual machine\n\n\n\n\n\nquarto-publish.yml\n\n    env:\n      RENV_PATHS_ROOT: ~/.cache/R/renv\n      \n    steps:\n      - name: Check out repository\n        uses: actions/checkout@v3\n        \n      - name: Set up Quarto\n        uses: quarto-dev/quarto-actions/setup@v2\n        \n      - name: Prep CURL install\n        run: sudo apt-get update\n\n      - name: Install CURL Headers\n        run: sudo apt-get install libcurl4-openssl-dev\n\n      # - name: Setup Renv\n      #   uses: r-lib/actions/setup-renv@v2\n  \n      - name: Cache packages\n        uses: actions/cache@v1\n        with:\n          path: ${{ env.RENV_PATHS_ROOT }}\n          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}\n          restore-keys: |\n            ${{ runner.os }}-renv-\n      \n      - name: Restore packages\n        shell: Rscript {0}\n        run: |\n          if (!requireNamespace(\"renv\", quietly = TRUE)) install.packages(\"renv\")\n          renv::restore()\n\n\n\n\nAnd finally,\n\nuses: quarto-dev/quarto-actions/publish@v2 will render the site by running quarto render\nwith: target: gh-pages path: documentation/_site lets you know which branch and path to render the site to\n\n\n\n\n\nquarto-publish.yml\n\n      - name: Publish to GitHub Pages (and render)\n        uses: quarto-dev/quarto-actions/publish@v2\n        with:\n          target: gh-pages\n          path: documentation/_site\n        env:\n          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this secret is always available for github actions"
+  },
+  {
+    "objectID": "tools/how_to.html#using-renv-in-the-gh-action",
+    "href": "tools/how_to.html#using-renv-in-the-gh-action",
+    "title": "Code and Repo Documentation",
+    "section": "6.2 Using renv in the GH Action",
+    "text": "6.2 Using renv in the GH Action\nIf you need to constantly update your website with code chunk, this is the best way to do it. It is also probably safer and better than the _freeze way, but it requires a better understanding of Github Actions and virtual environments.\nrenv is an R package for creating a project level virtual environment. In other words, renv will create project specific folders that contain the specific R package versions you use in an project. More on this here\nTo use renv in a Github Action, you can put\n\n\n\n\nquarto-publish.yml\n\n- name: Setup Renv\n  uses: r-lib/actions/setup-renv@v2\n\n\n\nor use the renv cache code in the yaml section above"
+  },
+  {
+    "objectID": "tools/how_to.html#using-a-_freeze-file",
+    "href": "tools/how_to.html#using-a-_freeze-file",
+    "title": "Code and Repo Documentation",
+    "section": "6.3 Using a _freeze file",
+    "text": "6.3 Using a _freeze file\nIf you only need to execute the code once or just need to render a non-executable code chunk once, make sure you have this code in your _quarto.yml file:\n\n\n\n\n_quarto.yml\n\nexecute:\n  error: true\n  freeze: true\n\n\n\nand then run this in your terminal window:\nquarto render name-of-specific-document-or-chapter.qmd\nThis will render that specific document in the website, execute code chunks if they are set to execute (eval: true) and then it will create a _freeze file. The _freeze file will save a snapshot of that specific document and not re-render it in the Github Action. This means you can render other parts of the website, but any files in the _freeze folder will stay the same as they are in the freeze. If you need to make changes to a freeze document, run the quarto render code again after making changes.\nThis is also documented in the Quarto dev documentation"
+  },
+  {
+    "objectID": "tools/how_to.html#troubleshooting",
+    "href": "tools/how_to.html#troubleshooting",
+    "title": "Code and Repo Documentation",
+    "section": "6.4 Troubleshooting",
+    "text": "6.4 Troubleshooting\nSo you did these steps:\n\nCreate the quarto-publish.yml\nRun quarto publish gh-pages in the terminal\nPush all the files in your git to the main branch\n\nIf this works on your first try then the universe is taking extra special care of you.\nIf not, you are like the rest of us poor souls:/\n\nThe first thing I would check is the error in your Github repo’s Action tab.\nIf the error is something like jsonlite not installed or some package not installed then it most likely means your are trying to commit a chunk of code in the documentation. Even if you are not executing the code, Github Actions will punish you. There are a couple options to fix this, depending on your priorities.\n\nIf you don’t care about executing your code and/or only need to push that part of the script once, consider using the _freeze option\nIf you need to execute code or need to programmtically render the document with code chunks often, consider using renv or a similar package installation method"
+  },
+  {
+    "objectID": "tools/index.html",
+    "href": "tools/index.html",
+    "title": "Guides and Templates",
+    "section": "",
+    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\nReading Time\n\n\n\n\n\n\n\n\n\nSep 1, 2023\n\n\nCode and Repo Documentation\n\n\nFrank Aragona\n\n\n13 min\n\n\n\n\n\n\n\nFeb 1, 2023\n\n\nGit\n\n\nFrank Aragona\n\n\n3 min\n\n\n\n\n\n\n\nFeb 1, 2023\n\n\nGithub Codespaces\n\n\nFrank Aragona\n\n\n1 min\n\n\n\n\n\n\n\nApr 2, 2024\n\n\nLink external R code to the documentation\n\n\nFrank Aragona\n\n\n1 min\n\n\n\n\n\n\n\nSep 1, 2023\n\n\nPackage Documentation\n\n\nFrank Aragona\n\n\n1 min\n\n\n\n\n\n\n\nSep 1, 2023\n\n\nRelease Cycles\n\n\nFrank Aragona\n\n\n6 min\n\n\n\n\n\n\n\nSep 1, 2023\n\n\nTemplates\n\n\nFrank Aragona\n\n\n1 min\n\n\n\n\n\n\n\nFeb 1, 2023\n\n\nVirtual Environments\n\n\nFrank Aragona\n\n\n11 min\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "tools/git.html",
+    "href": "tools/git.html",
+    "title": "Git",
+    "section": "",
+    "text": "1 Intro\nShowing how to create and work off of a feature branch using git and github.\n\n\n2 Before writing code\nFirst check to see if your main branch is up to date and has the most recent commits added. This should be the first thing you do before running/writing any code.\ngit status will tell you:\n\nWhich branch you are in\nIf your local branch is up to date when comparing to that branch in the remote repo\nIf you have any files waiting to be committed\n\ngit fetch will:\n\nRefresh your branch\nSearch for any differences between your local clone and the repo in github. If there are changes, it will display a message\n\ngit pull will pull all the changes in the remote repo into your local clone branch\n \n\ngit status\n\nOn branch main\nYour branch is up to date with 'origin/main'.\n\nChanges to be committed:\n  (use \"git restore --staged &lt;file&gt;...\" to unstage)\n    new file:   images/gitdesk.gif\n    new file:   images/gitdesk23-01.gif\n    new file:   images/gitdesk23.gif\n    new file:   images/gitdesk233-01.gif\n    new file:   images/gitdesk233.gif\n    new file:   images/gitdesk2333-01.gif\n    new file:   images/gitdesk2333.gif\n\nChanges not staged for commit:\n  (use \"git add &lt;file&gt;...\" to update what will be committed)\n  (use \"git restore &lt;file&gt;...\" to discard changes in working directory)\n    modified:   git.qmd\n\nUntracked files:\n  (use \"git add &lt;file&gt;...\" to include in what will be committed)\n    ../nul\n    git.rmarkdown\n\n\n \n\ngit fetch\n\n \n\ngit pull\n\nAlready up to date.\n\n\nIt’s the same in the git desktop app. Make sure you are in the branch you want to be in, then click fetch and pull to update that branch to include the most recent commits in the remote repo\n\n\n\n3 Switch to feature branch\nIf we want to make changes to code, first make a new branch off the main.\ngit branch will show all the branches in the repo and the one you are currently in\ngit checkout -b new-branch-name will create a new branch. In this case, we already have our feature branch called test-dcipher-cases\ngit checkout branch-name will switch to a branch. In this case we can switch to test-dcipher-cases\n\ngit branch\n\n  listings\n* main\n\n\n\ngit checkout test-dcipher-cases\n\nOr in the desktop app\n\n\n\n4 Making changes\nIf we want to make a change to the code, make a new branch off of test-dcipher-cases and switch to that branch\n\n\ngit checkout -b test-frank2\n\n\nand in the desktop app:\n\n\n\n\n5 Committing changes to the feature branch\nNow you can make changes in your R script and when you save them they will be ready to be committed to this new branch.\ngit add to stage your changes\ngit commit -am \"messge\" to commit those changes to the new branch with a message\ngit push --set-upstream origin test-dcipher-cases to push those changes to the remote repo on the new branch\n\ngit add\n\ngit commit -am \"this is a test- pls delete\"\n\ngit push --set-upstream origin test-dcipher-cases\n\n\n\n\n\n6 Making a pull request\nThis part happens in github.\n\nSelect who you want to review your code and assign yourself.\nUse labels to tag what this pull request refers to (very helpful in search for changes when managing the project) and\nAdd a milestone if it applies.\n\nThis should automatically send an email to the reviewers that there is code needed to be merged to a branch.\n\n\n\n7 For Reviewers\nWhen reviewing changes, make sure the commit/changes are being merged to the correct branch.\nGithub automatically compares to the main branch, so you will have to manually click on the base branch and change it to test-dcipher-cases"
+  },
+  {
+    "objectID": "tools/release.html",
+    "href": "tools/release.html",
+    "title": "Release Cycles",
+    "section": "",
+    "text": "Summary\n\nGithub Releases\nHelps devs and end users\nChangelogs and semantic versioning\nAutomate the release process"
+  },
+  {
+    "objectID": "tools/release.html#github-action-for-auto-releases",
+    "href": "tools/release.html#github-action-for-auto-releases",
+    "title": "Release Cycles",
+    "section": "4.1 Github Action for auto releases",
+    "text": "4.1 Github Action for auto releases\nI recommend first creating a test repo for this. In the repo, create a Github Action workflow called changelog.yml. You can copy the full file below:\n\n\n\n\n.github/workflows/changelog.yml\n\nname: Changelog\non:\n  push:\n    branches:\n      - main\n\njobs:\n  changelog:\n    runs-on: ubuntu-latest\n    \n    permissions:\n      # write permission is required to create a github release\n      contents: write\n\n    steps:\n      - uses: actions/checkout@v2\n\n      - name: Conventional Changelog Action\n        id: changelog\n        uses: TriPSs/conventional-changelog-action@v3\n        with:\n          github-token: ${{ secrets.github_token }}\n          create-summary: true\n\n      - name: Create Release\n        uses: actions/create-release@v1\n        if: ${{ steps.changelog.outputs.skipped == 'false' }}\n        env:\n          GITHUB_TOKEN: ${{ secrets.github_token }}\n        with:\n          prerelease: false\n          tag_name: ${{ steps.changelog.outputs.tag }}\n          release_name: ${{ steps.changelog.outputs.tag }}\n          body: ${{ steps.changelog.outputs.clean_changelog }}"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "🌲 Github Policies",
@@ -12,76 +159,6 @@
     "title": "🌲 Github Policies",
     "section": "Quickstart",
     "text": "Quickstart\nThis is a static website documenting the proposed policies and standards for public Github use at the Pacific Northwest Genomic Center of Excellence. There are documents on\n\nSecurity and how to protect credential and private process leaks \nLicensing to protect against re-sale or theft of code \nOur Github rules, policies, and templates \nGithub user guides \n\nIf there are any questions please reach out to\n\n\n\n\n Personal or network credentials, tokens, server names and more are prohibited from being published to our public repos. Protect security and credentials with good coding practices. Using local environment files along with .gitignore can prevent credentials from being accidentally pushed into your repo. Other guardrails like pre-commit hooks can be used to further prevent accidental credential leaks. See more details on our security policies here\n\n\n\n\nlocal_credentials.yml\n\n# local yaml file that will NOT be pushed to the repo\n# add this file to the .gitignore to prevent leaks\nmy_credentials:\n  username: super_secret_user_name\n  password: 12345terriblepassword\n  \n  \n  \n  \n\n\n\n\n\nscript_in_repo.R\n\n# this script is in the repo, but credentials are hidden\nlibrary(yaml)\n\n# read in the local credentials yaml file\ncreds &lt;- yaml::read_yaml(\"path/to/local_credentials.yml\")\n\n# pull in the credentials\nusername &lt;- creds$my_credentials$username\npassword &lt;- creds$my_credentials$password\n\n\n\n\n\n\n\n Each repo in the organization should have a license. Licenses can help prevent your work from being stolen and/or used inappropriately. Licensing details here\n\n\n This organization requires each repo to have certain documents, such as a CODE_OF_CONDUCT. The organization uses a special repo called .github to ensure all repos adhere to the policies and have the right documents.\n\n\n If you’re looking to build a repository, check out the Github user guide tabs for best practices on reproducibility, documentation in the repo, and more."
-  },
-  {
-    "objectID": "std/reproduce.html",
-    "href": "std/reproduce.html",
-    "title": "Reproducibility",
-    "section": "",
-    "text": "Objectives\n\nData and Code Democratization\nGithub Codespaces\nPackage reproducibility with virtual environments\nGithub Releases\nDocumentation"
-  },
-  {
-    "objectID": "std/reproduce.html#open-a-codespace",
-    "href": "std/reproduce.html#open-a-codespace",
-    "title": "Reproducibility",
-    "section": "2.1 Open a Codespace",
-    "text": "2.1 Open a Codespace\nAt the root of the repo, click on the Code drop down button\n\nOn the right there is a tab called Codespaces.\nClick the + sign and a Codespace will launch\n\n\n\n\nopen up a codespace\n\n\nThis will open up a VS Code window in your browser. There are also options to open up a Jupyter Notebook or Jetbrains IDE (Pycharm). You can also install an Rstudio IDE into the codespace. It will look something like this - note that the repository is already linked and checked out into the codespace:\n\n\n\nVS Code IDE in Github Codespaces\n\n\nHere you can install most software. You can also customize the Codespace so that whenever someone opens one in your repo it will come with software pre-installed. More on that in the devcontainers section"
-  },
-  {
-    "objectID": "std/reproduce.html#devcontainers",
-    "href": "std/reproduce.html#devcontainers",
-    "title": "Reproducibility",
-    "section": "2.2 Devcontainers",
-    "text": "2.2 Devcontainers\nDevcontainers are a way to install software into a Codespace so that whenever a user opens up the Codespace they won’t need to install anything themselves. Making a container can be a little tricky, so we’ve made Github templates that have devcontainers already made. See templates. There are R, Python, and general default templates. These containers will install R, Rstudio, Python, and all the packages in the repo’s virtual environments (venv, conda, pip, renv, etc) so that the user can run all the code in your repo within a couple minutes.\nTo set up a devcontainer for yourself;\n\nClick on `Code &gt; Codespaces &gt; Configure dev container\n\n\n\nThis will make a folder named .devcontainer at the root of your repo\nIn that folder it will make a file named devcontainer.json\nOn the right there is a searchable marketplace for software to add to your container\n\n\n\nEach one comes with instructions on how to add the software to the .devcontainer.json\n\nFor more information about Codespaces, see the guides here"
-  },
-  {
-    "objectID": "std/policies.html",
-    "href": "std/policies.html",
-    "title": "Github Organization Policies",
-    "section": "",
-    "text": "Objectives\n\nEnsure that all repos in the org have the required documents\nSet policy rules at the Organization level\nRepos need to have reproducible code\nRepos need to have documentation\nIn the Github Organization we may require all repositories to contain certain documents. For example, we want to make sure that every repo has a CODE OF CONDUCT document that is a general policy applied throughout the organization.\nHere’s a list of required documents:"
-  },
-  {
-    "objectID": "std/policies.html#readme",
-    "href": "std/policies.html#readme",
-    "title": "Github Organization Policies",
-    "section": "README",
-    "text": "README\nREADME files are instructions or documentation on how to use your software. It should give a quick introduction to the repo and instructions on how to install or run the code."
-  },
-  {
-    "objectID": "std/policies.html#code_of_conduct",
-    "href": "std/policies.html#code_of_conduct",
-    "title": "Github Organization Policies",
-    "section": "CODE_OF_CONDUCT",
-    "text": "CODE_OF_CONDUCT\nA Code of Conduct can let a user know what the rules of the organization are and how any wrongful behavior will be addressed. The document will provide the “standards for how to engage in a community”"
-  },
-  {
-    "objectID": "std/policies.html#contributing.md",
-    "href": "std/policies.html#contributing.md",
-    "title": "Github Organization Policies",
-    "section": "CONTRIBUTING.md",
-    "text": "CONTRIBUTING.md\nThis file should appear in the issue tab in a repo. It lets a user know how they can contribute to the project and if they need to sign any forms before contributing. Some larger organizations require that a person knows what they are contributing to and they must sign a form acknowledging that any software/code contributions to the project will be used and cannot be retracted by the user. The code submitted may also be used to develop processes but the organization will not pay the individual contributor (since this is open-source, we only look for open-source contributions)"
-  },
-  {
-    "objectID": "std/policies.html#license",
-    "href": "std/policies.html#license",
-    "title": "Github Organization Policies",
-    "section": "LICENSE",
-    "text": "LICENSE\nThese should be and are set at the repo level. There will be many different licenses to choose from that will depend on the specific repo. More on that here."
-  },
-  {
-    "objectID": "std/policies.html#document-requirements-with-.github-repos",
-    "href": "std/policies.html#document-requirements-with-.github-repos",
-    "title": "Github Organization Policies",
-    "section": "1.1 Document Requirements with .github Repos",
-    "text": "1.1 Document Requirements with .github Repos\nYou can set most policy rules and create documents for each repo at the organization level by using a special .github repo. Dot files and dot folders have special functionality in some software. For Github, the .github folder defines workflows for things like Github Actions in a repo. A .github repository on the other hand defines organization level rules and templates.\n\nIn order to write and set these policies at the organization level we can put them at the root of the .github repository and edit them there.\n\n\n\n\nPowerShell\n\n$ tree /f\nC:.\n│   .gitignore\n│   CODE_OF_CONDUCT.md\n│   CONTRIBUTING.md\n│   LICENSE\n│   README.md\n│\n├───.github\n└───profile\n        README.md\n\n\n\nTake a look above. I have the required documents/policies at the root of the .github repo directory. Now if I open up any given repo in the organization I will find a link to those files:\n\nIf you click on the CODE_OF_CONDUCT link it will take you right to the .github repo and open the CODE_OF_CONDUCT.md file there:\n\nNow you can set organization level policies from the .github repo and they will automatically populate in all existing and new repositories unless there are repo specific policies in place. If a repo already has its own policies they will not be overwritten."
-  },
-  {
-    "objectID": "std/policies.html#commit-sign-off-requirement---github-apps",
-    "href": "std/policies.html#commit-sign-off-requirement---github-apps",
-    "title": "Github Organization Policies",
-    "section": "2.1 Commit Sign-Off Requirement - Github Apps",
-    "text": "2.1 Commit Sign-Off Requirement - Github Apps\nWe may want to require authors or reviewers to sign-off on commits to a repo. This is sometimes established in projects to “ensure that copyrighted code not released under an appropriate free software (open source) license is not included in the kernel.”\nYou can install a Github App in the organization and it will be applied to all repos. The DCO App (Developer Certificate of Origin) is popular and lightweight. To install it in the organization, click on Configure and it will give you the option to configure it with the organization of choice."
   },
   {
     "objectID": "tools/templates.html",
@@ -105,18 +182,11 @@
     "text": "2 Purpledoc Quarto Template\nThis is a Quarto template that contains the style and images used in this site\n\n\n\nquarto use template coe-test-org/purpledoc\nThis will install the extension and create an example qmd file that you can use as a starting place for your report.\nYou may also use this format with an existing Quarto project or document. From the quarto project or document directory, run the following command to install this format:\nquarto add coe-test-org/purpledoc"
   },
   {
-    "objectID": "tools/index.html",
-    "href": "tools/index.html",
-    "title": "Guides and Templates",
+    "objectID": "tools/link_code.html",
+    "href": "tools/link_code.html",
+    "title": "Link external R code to the documentation",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\nReading Time\n\n\n\n\n\n\n\n\n\nSep 1, 2023\n\n\nCode and Repo Documentation\n\n\nFrank Aragona\n\n\n13 min\n\n\n\n\n\n\n\nFeb 1, 2023\n\n\nGit\n\n\nFrank Aragona\n\n\n3 min\n\n\n\n\n\n\n\nFeb 1, 2023\n\n\nGithub Codespaces\n\n\nFrank Aragona\n\n\n1 min\n\n\n\n\n\n\n\nApr 2, 2024\n\n\nLink external R code to the documentation\n\n\nFrank Aragona\n\n\n1 min\n\n\n\n\n\n\n\nSep 1, 2023\n\n\nPackage Documentation\n\n\nFrank Aragona\n\n\n1 min\n\n\n\n\n\n\n\nSep 1, 2023\n\n\nRelease Cycles\n\n\nFrank Aragona\n\n\n6 min\n\n\n\n\n\n\n\nSep 1, 2023\n\n\nTemplates\n\n\nFrank Aragona\n\n\n1 min\n\n\n\n\n\n\n\nFeb 1, 2023\n\n\nVirtual Environments\n\n\nFrank Aragona\n\n\n11 min\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "tools/git.html",
-    "href": "tools/git.html",
-    "title": "Git",
-    "section": "",
-    "text": "1 Intro\nShowing how to create and work off of a feature branch using git and github.\n\n\n2 Before writing code\nFirst check to see if your main branch is up to date and has the most recent commits added. This should be the first thing you do before running/writing any code.\ngit status will tell you:\n\nWhich branch you are in\nIf your local branch is up to date when comparing to that branch in the remote repo\nIf you have any files waiting to be committed\n\ngit fetch will:\n\nRefresh your branch\nSearch for any differences between your local clone and the repo in github. If there are changes, it will display a message\n\ngit pull will pull all the changes in the remote repo into your local clone branch\n \n\ngit status\n\nOn branch main\nYour branch is up to date with 'origin/main'.\n\nChanges to be committed:\n  (use \"git restore --staged &lt;file&gt;...\" to unstage)\n    new file:   images/gitdesk.gif\n    new file:   images/gitdesk23-01.gif\n    new file:   images/gitdesk23.gif\n    new file:   images/gitdesk233-01.gif\n    new file:   images/gitdesk233.gif\n    new file:   images/gitdesk2333-01.gif\n    new file:   images/gitdesk2333.gif\n\nChanges not staged for commit:\n  (use \"git add &lt;file&gt;...\" to update what will be committed)\n  (use \"git restore &lt;file&gt;...\" to discard changes in working directory)\n    modified:   git.qmd\n\nUntracked files:\n  (use \"git add &lt;file&gt;...\" to include in what will be committed)\n    ../nul\n    git.rmarkdown\n\n\n \n\ngit fetch\n\n \n\ngit pull\n\nAlready up to date.\n\n\nIt’s the same in the git desktop app. Make sure you are in the branch you want to be in, then click fetch and pull to update that branch to include the most recent commits in the remote repo\n\n\n\n3 Switch to feature branch\nIf we want to make changes to code, first make a new branch off the main.\ngit branch will show all the branches in the repo and the one you are currently in\ngit checkout -b new-branch-name will create a new branch. In this case, we already have our feature branch called test-dcipher-cases\ngit checkout branch-name will switch to a branch. In this case we can switch to test-dcipher-cases\n\ngit branch\n\n  listings\n* main\n\n\n\ngit checkout test-dcipher-cases\n\nOr in the desktop app\n\n\n\n4 Making changes\nIf we want to make a change to the code, make a new branch off of test-dcipher-cases and switch to that branch\n\n\ngit checkout -b test-frank2\n\n\nand in the desktop app:\n\n\n\n\n5 Committing changes to the feature branch\nNow you can make changes in your R script and when you save them they will be ready to be committed to this new branch.\ngit add to stage your changes\ngit commit -am \"messge\" to commit those changes to the new branch with a message\ngit push --set-upstream origin test-dcipher-cases to push those changes to the remote repo on the new branch\n\ngit add\n\ngit commit -am \"this is a test- pls delete\"\n\ngit push --set-upstream origin test-dcipher-cases\n\n\n\n\n\n6 Making a pull request\nThis part happens in github.\n\nSelect who you want to review your code and assign yourself.\nUse labels to tag what this pull request refers to (very helpful in search for changes when managing the project) and\nAdd a milestone if it applies.\n\nThis should automatically send an email to the reviewers that there is code needed to be merged to a branch.\n\n\n\n7 For Reviewers\nWhen reviewing changes, make sure the commit/changes are being merged to the correct branch.\nGithub automatically compares to the main branch, so you will have to manually click on the base branch and change it to test-dcipher-cases"
+    "text": "The code in this website is automatically linked to the code in the repository. This lets us update the code and not need to copy and paste any new changes to the documentation/github page\nTo do this, open your external R script in your repo. In this case we’re using lineages_public_repo.R. Now wrap the chunks of code you want to link with comments like this, ## ---- libraries and ## ---- stop:\n\n\n\n## ---- libraries\nlibrary(pacman)\np_load(\n  reticulate,\n  fs,\n  lubridate,\n  dplyr,\n  stringr,\n  magrittr,\n  readr,\n  httr\n)\n## ---- stop\n\n\n\nThe ## ---- libraries signals the beginning of a chunk. the ## ---- stop signals the end of a chunk.\n\nNow you can call this chunk in your github page/quarto document like this:\nScan the external R script for code chunks:\n\n```{r setup}\n#| echo: false\nknitr::read_chunk(file.path(getwd(),\"lineages_public_repo.R\"))\n```\n\n\nCall the code chunk you want in the {r} header within the chunk. like this {r libraries}:\n\n```{r libraries}\n\n```\n\n\nAnd now the document will output any code in that code chunk and can also execute that code chunk if you want. Here’s what the output will look like in this case:"
   },
   {
     "objectID": "tools/renv.html",
@@ -203,139 +273,6 @@
     "text": "5.2 Using renv in a project\n\n5.2.1 Step 1: Open the .Rproj for your repo\nAny time you need to code or run code from the repo, open up the .Rproj file that contains the sequencing 2.0 project. In your file explorer, go to the repo and open Sequencing_2.0 .Rproj\n\nThis will open up an R window with the repo file path as a root directory. It will also utilize the renv. Your console should say something about renv, like this\n\n\n\n5.2.2 Step 2: Load renv packages\nThe first time you use renv you will need to configure it to your local machine. To do this, type:\n\nrenv::restore() in your console.\nThis will create a new environment for your R in your local machine using the lock file packages.\n\n\nNow you’re ready to use the scripts! Way less complicated than conda"
   },
   {
-    "objectID": "tools/release.html",
-    "href": "tools/release.html",
-    "title": "Release Cycles",
-    "section": "",
-    "text": "Summary\n\nGithub Releases\nHelps devs and end users\nChangelogs and semantic versioning\nAutomate the release process"
-  },
-  {
-    "objectID": "tools/release.html#github-action-for-auto-releases",
-    "href": "tools/release.html#github-action-for-auto-releases",
-    "title": "Release Cycles",
-    "section": "4.1 Github Action for auto releases",
-    "text": "4.1 Github Action for auto releases\nI recommend first creating a test repo for this. In the repo, create a Github Action workflow called changelog.yml. You can copy the full file below:\n\n\n\n\n.github/workflows/changelog.yml\n\nname: Changelog\non:\n  push:\n    branches:\n      - main\n\njobs:\n  changelog:\n    runs-on: ubuntu-latest\n    \n    permissions:\n      # write permission is required to create a github release\n      contents: write\n\n    steps:\n      - uses: actions/checkout@v2\n\n      - name: Conventional Changelog Action\n        id: changelog\n        uses: TriPSs/conventional-changelog-action@v3\n        with:\n          github-token: ${{ secrets.github_token }}\n          create-summary: true\n\n      - name: Create Release\n        uses: actions/create-release@v1\n        if: ${{ steps.changelog.outputs.skipped == 'false' }}\n        env:\n          GITHUB_TOKEN: ${{ secrets.github_token }}\n        with:\n          prerelease: false\n          tag_name: ${{ steps.changelog.outputs.tag }}\n          release_name: ${{ steps.changelog.outputs.tag }}\n          body: ${{ steps.changelog.outputs.clean_changelog }}"
-  },
-  {
-    "objectID": "tools/link_code.html",
-    "href": "tools/link_code.html",
-    "title": "Link external R code to the documentation",
-    "section": "",
-    "text": "The code in this website is automatically linked to the code in the repository. This lets us update the code and not need to copy and paste any new changes to the documentation/github page\nTo do this, open your external R script in your repo. In this case we’re using lineages_public_repo.R. Now wrap the chunks of code you want to link with comments like this, ## ---- libraries and ## ---- stop:\n\n\n\n## ---- libraries\nlibrary(pacman)\np_load(\n  reticulate,\n  fs,\n  lubridate,\n  dplyr,\n  stringr,\n  magrittr,\n  readr,\n  httr\n)\n## ---- stop\n\n\n\nThe ## ---- libraries signals the beginning of a chunk. the ## ---- stop signals the end of a chunk.\n\nNow you can call this chunk in your github page/quarto document like this:\nScan the external R script for code chunks:\n\n```{r setup}\n#| echo: false\nknitr::read_chunk(file.path(getwd(),\"lineages_public_repo.R\"))\n```\n\n\nCall the code chunk you want in the {r} header within the chunk. like this {r libraries}:\n\n```{r libraries}\n\n```\n\n\nAnd now the document will output any code in that code chunk and can also execute that code chunk if you want. Here’s what the output will look like in this case:"
-  },
-  {
-    "objectID": "tools/how_to.html",
-    "href": "tools/how_to.html",
-    "title": "Code and Repo Documentation",
-    "section": "",
-    "text": "This site was created using Quarto, Github, and uses a Github Action to automatically render when a commit is pushed to the main branch of this repository.\nQuarto is a framework for creating documentation, slideshows, articles, blogs, books and websites using markdown. It can execute R, Python and other programming languages within the document.\nGithub Actions uses a .yml file in the repository to trigger an action based on a certain event. In this case, when a commit is pushed to the main branch the .yml will trigger this Quarto website to render to the gh-pages branch of the repository and publish the github page. This section will give details on how to\n\nCreate the website\nCreate, edit, and troubleshoot the Github Action to render the site"
-  },
-  {
-    "objectID": "tools/how_to.html#editadd-sections-and-chapters",
-    "href": "tools/how_to.html#editadd-sections-and-chapters",
-    "title": "Code and Repo Documentation",
-    "section": "3.1 Edit/Add Sections and Chapters",
-    "text": "3.1 Edit/Add Sections and Chapters\nTo add a section, open up the _quarto.yml file and scroll to the navbar section\n\n\n\n\n_quarto.yml\n\nproject:\n  type: website\nwebsite:\n  title: \"COE Github Standards\"\n  search: true\n  \n  navbar: \n    background: primary\n    left: \n      - text: Home\n        href: index.qmd\n      - text: Github Organization Standards\n        menu: \n          - href: std/security.qmd\n            text: \"0: Security Standards\"\n          - href: std/lic.qmd\n            text: \"1: Choosing a License\"\n          - href: std/templates.qmd\n            text: \"2: Org Policy Setting\"\n\n\n\n\nThis is where all of the qmd files are sourced and the instructions on how to format and style the navigation bar in the website.\nCurrently, the project is set up to have each section have it’s own drop down menu in the navbar. In a section, use - href: to specify a file and text: to give the file a custom name in the website.\nEach chapter exists within a sub-folder, so to add a chapter make sure create the qmd in its sub-folder and then reference the sub-folder and chapter in the .yml. For example, if you make a new chapter called new-chapter.qmd and it exists in the covid section/sub-folder, you need to reference it in the .yml file like: covid/new-chapter.qmd"
-  },
-  {
-    "objectID": "tools/how_to.html#website-style",
-    "href": "tools/how_to.html#website-style",
-    "title": "Code and Repo Documentation",
-    "section": "3.2 Website Style",
-    "text": "3.2 Website Style\nYou can customize many aspects of the website in the .yml file itself with the format: function. There are a ton of themes included in Quarto here and you can also add a custom css and/or scss file to your project. I think you can even go super in depth and customize the javascript components of the site, but I’m not entirely sure how to do that yet. This website has a ton of custom css components with Quarto, and possibly uses custom javascript, so it could be a place to start if you’re interested. Basically, you need to embed the css file into your _quarto.yml file\n\n\n\n\n_quarto.yml\n\nformat:\n  html:\n    theme: \n      - cosmo\n      - assets/styles.scss\n    scss: assets/styles.scss\n    # css: styles.css\n    toc: true\n    highlight-style: assets/custom.theme"
-  },
-  {
-    "objectID": "tools/how_to.html#open-the-r-project",
-    "href": "tools/how_to.html#open-the-r-project",
-    "title": "Code and Repo Documentation",
-    "section": "4.1 Open the R project",
-    "text": "4.1 Open the R project\nThis is a Quarto website that is contained in a .rproj file path. The R project contains all the documents used to create this website. Begin by opening the R project when should be in your local clone under C:\\Users\\XXXXXXX\\Projects\\Sequencing_2.0\\sequencing_documentation\\sequencing_documentation.Rproj"
-  },
-  {
-    "objectID": "tools/how_to.html#open-the-files",
-    "href": "tools/how_to.html#open-the-files",
-    "title": "Code and Repo Documentation",
-    "section": "4.2 Open the files",
-    "text": "4.2 Open the files\nThis project has .qmd files (Quarto Markdown files) that each represent a chapter in the website. All of the .qmd files are knitted together (using R knitr) which compiles all of the files to be sourced into htmls.\nThis website is set up to have each major section contain multiple chapters. To open a chapter, the bottom right pane in your R Studio window should contain folders for each section, highlighted below\n\n\n$ tree /f\nC:.\n│   .gitignore\n│   about.qmd\n│   index.qmd\n│   standards.Rproj\n│   _quarto.yml\n│\n├───assets\n│       custom.theme\n│       styles.css\n│       styles.scss\n│\n├───std\n│   │   creds.qmd\n│   │   lic.qmd\n│   │   public_code.qmd\n│   │   security.qmd\n│   │   templates.qmd\n│   │\n│   └───images\n│\n├───tools\n│   │   how_to.qmd\n│   │   iac.qmd\n│   │   link_code.qmd\n│   │   readme.qmd\n│   │   release.qmd\n│   │   renv.qmd\n│   │   teams.qmd\n│   │\n│   └───images\n\nError in running command bash\n\n\n\n\nThe .qmd files are inside of these folders. Select one to edit."
-  },
-  {
-    "objectID": "tools/how_to.html#commit-changes",
-    "href": "tools/how_to.html#commit-changes",
-    "title": "Code and Repo Documentation",
-    "section": "4.3 Commit changes",
-    "text": "4.3 Commit changes\nOnce you’re done editing, push the change to the main branch (or make a new branch, and then a pull request for the main branch). More one this in the git chapter"
-  },
-  {
-    "objectID": "tools/how_to.html#example-yaml-workflow",
-    "href": "tools/how_to.html#example-yaml-workflow",
-    "title": "Code and Repo Documentation",
-    "section": "6.1 Example YAML Workflow",
-    "text": "6.1 Example YAML Workflow\nThe .yml workflow for this project looks something like this:\non: is a tag indicating when the action will run. Right now it will run when any code gets pushed to the main branch in the documentation folder or lineages_public_repo.R script\n\n\n\n\nquarto-publish.yml\n\non: \n  push:\n    branches:\n      - main\n    paths:\n      - documentation/**\n      - lineages_public_repo.R\n\n\n\njobs: is a tag that tells a Github virtual machine what to run and what operating system to run it on. In this case ubuntu with the latest version. This can be windows, linux or macOS.\n\n\n\n\nquarto-publish.yml\n\nname: Render and Publish\n\njobs:\n  build-deploy:\n    runs-on: ubuntu-latest\n\n\n\n\nNow we have the steps:\n\nenv will find the renv folder\nuses: actions/checkout@v3 will refresh the repo and pull the latest changes\nuses: quarto-dev/quarto-actions/setup@v2 will install quarto\nuses: actions/cache@v1 and the code below it will set up renv and use the cached packages to install them onto the Github virtual machine\n\n\n\n\n\nquarto-publish.yml\n\n    env:\n      RENV_PATHS_ROOT: ~/.cache/R/renv\n      \n    steps:\n      - name: Check out repository\n        uses: actions/checkout@v3\n        \n      - name: Set up Quarto\n        uses: quarto-dev/quarto-actions/setup@v2\n        \n      - name: Prep CURL install\n        run: sudo apt-get update\n\n      - name: Install CURL Headers\n        run: sudo apt-get install libcurl4-openssl-dev\n\n      # - name: Setup Renv\n      #   uses: r-lib/actions/setup-renv@v2\n  \n      - name: Cache packages\n        uses: actions/cache@v1\n        with:\n          path: ${{ env.RENV_PATHS_ROOT }}\n          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}\n          restore-keys: |\n            ${{ runner.os }}-renv-\n      \n      - name: Restore packages\n        shell: Rscript {0}\n        run: |\n          if (!requireNamespace(\"renv\", quietly = TRUE)) install.packages(\"renv\")\n          renv::restore()\n\n\n\n\nAnd finally,\n\nuses: quarto-dev/quarto-actions/publish@v2 will render the site by running quarto render\nwith: target: gh-pages path: documentation/_site lets you know which branch and path to render the site to\n\n\n\n\n\nquarto-publish.yml\n\n      - name: Publish to GitHub Pages (and render)\n        uses: quarto-dev/quarto-actions/publish@v2\n        with:\n          target: gh-pages\n          path: documentation/_site\n        env:\n          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this secret is always available for github actions"
-  },
-  {
-    "objectID": "tools/how_to.html#using-renv-in-the-gh-action",
-    "href": "tools/how_to.html#using-renv-in-the-gh-action",
-    "title": "Code and Repo Documentation",
-    "section": "6.2 Using renv in the GH Action",
-    "text": "6.2 Using renv in the GH Action\nIf you need to constantly update your website with code chunk, this is the best way to do it. It is also probably safer and better than the _freeze way, but it requires a better understanding of Github Actions and virtual environments.\nrenv is an R package for creating a project level virtual environment. In other words, renv will create project specific folders that contain the specific R package versions you use in an project. More on this here\nTo use renv in a Github Action, you can put\n\n\n\n\nquarto-publish.yml\n\n- name: Setup Renv\n  uses: r-lib/actions/setup-renv@v2\n\n\n\nor use the renv cache code in the yaml section above"
-  },
-  {
-    "objectID": "tools/how_to.html#using-a-_freeze-file",
-    "href": "tools/how_to.html#using-a-_freeze-file",
-    "title": "Code and Repo Documentation",
-    "section": "6.3 Using a _freeze file",
-    "text": "6.3 Using a _freeze file\nIf you only need to execute the code once or just need to render a non-executable code chunk once, make sure you have this code in your _quarto.yml file:\n\n\n\n\n_quarto.yml\n\nexecute:\n  error: true\n  freeze: true\n\n\n\nand then run this in your terminal window:\nquarto render name-of-specific-document-or-chapter.qmd\nThis will render that specific document in the website, execute code chunks if they are set to execute (eval: true) and then it will create a _freeze file. The _freeze file will save a snapshot of that specific document and not re-render it in the Github Action. This means you can render other parts of the website, but any files in the _freeze folder will stay the same as they are in the freeze. If you need to make changes to a freeze document, run the quarto render code again after making changes.\nThis is also documented in the Quarto dev documentation"
-  },
-  {
-    "objectID": "tools/how_to.html#troubleshooting",
-    "href": "tools/how_to.html#troubleshooting",
-    "title": "Code and Repo Documentation",
-    "section": "6.4 Troubleshooting",
-    "text": "6.4 Troubleshooting\nSo you did these steps:\n\nCreate the quarto-publish.yml\nRun quarto publish gh-pages in the terminal\nPush all the files in your git to the main branch\n\nIf this works on your first try then the universe is taking extra special care of you.\nIf not, you are like the rest of us poor souls:/\n\nThe first thing I would check is the error in your Github repo’s Action tab.\nIf the error is something like jsonlite not installed or some package not installed then it most likely means your are trying to commit a chunk of code in the documentation. Even if you are not executing the code, Github Actions will punish you. There are a couple options to fix this, depending on your priorities.\n\nIf you don’t care about executing your code and/or only need to push that part of the script once, consider using the _freeze option\nIf you need to execute code or need to programmtically render the document with code chunks often, consider using renv or a similar package installation method"
-  },
-  {
-    "objectID": "std/lic.html",
-    "href": "std/lic.html",
-    "title": "Licensing",
-    "section": "",
-    "text": "Summary\n\nLicenses prevent code theft and inappropriate redistribution of code.\nReview common open-source licenses\nLicense types vary depending on repo goals\n\n\n\n\n1 General License Info\nBelow is a list of common open-source licenses.\n\n\nThere isn’t a one size fits all license, so thankfully there are a variety of options. Here are two common ones:\n\n\n2 GNU GPL licenses\n\nThese are the strong licenses\nPrevents someone from taking our code and privatizing it (and making money off of it)\nSomeone can still use our code, they just need to ensure that what they’re doing with it is open-source\n“Copyright and license notices must be preserved.”\n“Contributors provide an express grant of patent rights. When a modified version is used to provide a service over a network, the complete source code of the modified version must be made available.”\n\n\n\n3 MIT license\n\nI think this is the most commonly used one\n“short and simple permissive license… only requiring preservation of copyright and license notices”\n“Licensed works, modifications, and larger works may be distributed under different terms and without source code.”\nSomeone could basically do whatever they want with the code.\nNextstain/ncov repo is currently using this\n\nAnd here are a couple of youtube videos that were helping in explaining licensing"
-  },
-  {
-    "objectID": "std/security.html",
-    "href": "std/security.html",
-    "title": "Security Policies",
-    "section": "",
-    "text": "Objectives\n\nPrevent sensitive information leaks to Github\nSet up guardrails, .gitignore, hooks\nScrub private repos before they go public\nIf sensitive information is leaked and commited to the remote repo, then they will stay in the git history (and will require a lot of effort to remove them from the history). The following cannot be included in any repo or any local commit!:"
-  },
-  {
-    "objectID": "std/security.html#prevent-credential-leaks-with-env-variables",
-    "href": "std/security.html#prevent-credential-leaks-with-env-variables",
-    "title": "Security Policies",
-    "section": "Prevent Credential Leaks with Env Variables",
-    "text": "Prevent Credential Leaks with Env Variables\nThere are a number of ways to do this. We typically use a yaml file that can be filled out with personal credentials locally. The file will not be committed to the remote repo\n\n0.0.1 Create a private credentials file\nThe scripts use a .yml file that contains a list of API tokens, server names, and usernames/passwords specific to each individual user. There are two .yml files. One is a template (containing no actual passwords..) that exists in the repo and serves as a template so every individual user can keep up to date with new credential additions. The other is the individual creds.yml that is in the repo’s .gitignore. This file will never exist in the repo and only exist locally (in the user’s C drive).\n\n\n0.0.2 creds.yml details\nThe .yml file can work with multiple programming languages including R and Python. They are read in the same way and can be easily adjusted when adding new passwords or using them as configuration files.\nThey look like this:\n\n\n\n\nlocal-credentials.yml\n\n# Default is needed to distinguish values.\n# Leave a blank line (NO SPACES) as the last line in this file or things will break\n# Quotes aren't necessary, but can be used.\ndefault: \n  conn_list_wdrs:\n    Driver: \"SQL Server Native Client 11.0\"\n    Server: \n    Database: \n    Trusted_connection: \n    ApplicationIntent: \n    \n  fulgent:\n    username: &lt;USERNAME&gt;\n    password: &lt;PASSWORD&gt;\n\n\n\nYou can have different variables assigned to unique lists, which allows for easy configuration. For example, the list starting with default has variables conn_list_wdrs and fulgent. You can have a different list of variables within the same file like this:\n\n\n\n\nlocal-credentials.yml\n\n# Default is needed to distinguish values.\n# Leave a blank line (NO SPACES) as the last line in this file or things will break\n# Quotes aren't necessary, but can be used.\ndefault: \n  conn_list_wdrs:\n    Driver: \"SQL Server Native Client 11.0\"\n    Server: \n    Database: \n    Trusted_connection: \n    ApplicationIntent: \n    \n  fulgent:\n    username: &lt;USERNAME&gt;\n    password: &lt;PASSWORD&gt;\n\ntest:\n  conn_list_wdrs:\n    Driver: \"SQL Server Native Client 11.0\"\n    Server: \n    Database: \n    Trusted_connection: \n    ApplicationIntent: \n\n\n\nNow there is a test list with its own variables. This lets us switch a set of variables within our scripts. default applies to the main credentials where test can distinguish which variables should be test or dev scripts specific. Notice below that you can now call the credentials from a .yml file into an R or Python script and the actual credentials will never exist in the code pushed to the repo.\n\n\n\n\nscript-in-repo.R\n\n# this script is in the repo, but credentials are hidden\nlibrary(yaml)\n\n# read in the local credentials yaml file\ncreds &lt;- yaml::read_yaml(\"path/to/local-credentials.yml\")\n\n# pull in the credentials\nserver_name &lt;- creds$default$conn_list_wdrs$server\n\n\n\n\n\n\n\n\n\n\n\nWe can even get more specific and add an if-else statement to specify which credential we want to select. This can be helpful if we have a CI/CD pipeline and have a script automatically run on a task scheduler or cron job. We can call the credentials we want in the command line and have the command line code run in my task scheduler. That way we can use multiple different versions of the same script and have all of it be automated. For example, the middle panel uses the commandArgs() to pull any arguments passed to the script in a shell/command line script. In the right panel, the shell script has production and test as second arguments. These are passed to the R script as arg[2]. Now we can use arg[2] in the if-else statement to conditionally select credentials and do it automatically.\n\n\n\n\nscript-in-repo.R\n\nargs &lt;- commandArgs(TRUE)\n\n# this script is in the repo, but credentials are hidden\nlibrary(yaml)\n\n# read in the local credentials yaml file\ncreds &lt;- yaml::read_yaml(\"path/to/local-credentials.yml\")\n\n# pull in the credentials\nif(args[2] == \"production\"){\n  server_name &lt;- creds$default$conn_list_wdrs$server\n} else if(args[2] == \"test\"){\n  server_name &lt;- creds$test$conn_list_wdrs$server\n}\n\n\n\n\n\nshell-trigger-script.sh\n\n# Run the production code\n$ Rscript -e \"source('path/script_in_repo.R');\" production\n\n# Run the test/dev code\n$ Rscript -e \"source('path/script_in_repo.R');\" test \n\n\n\n\n\n\n\n\n\n0.0.3 Safe Guards - Prevent Accidental Leaks!\nOnce you have the credentials.yml template in your repo, make sure that nobody on your team (or anyone with write access..) is able to accidentally push changes to the template. We don’t want someone’s passwords or API tokens to exist in GitHub.\nThis link shows how to skip any changes made to the specific file. If someone makes local changes to the template, the changes will not show in their commit. It is a safe guard.\n\n0.0.3.1 For all individual users, run this code:\n\n\ngit update-index --skip-worktree creds_TEMPLATE.yml\n\n\nThis will tell your local git to ignore any changes made to creds_TEMPLATE.yml, but also allow it to exist in the repo (since .gitignore will prevent it from being in the repo)\n\n\n0.0.3.2 If you need to update the template file run this:\n\n\ngit update-index --no-skip-worktree creds_TEMPLATE.yml\n\n\nThis will allow changes to the template. So when you need to update the template, use this code\nAnd to get a list of files that are “skipped”, use this code:\n\n\ngit ls-files -v . | grep ^S"
-  },
-  {
-    "objectID": "std/security.html#pre-commit-hooks",
-    "href": "std/security.html#pre-commit-hooks",
-    "title": "Security Policies",
-    "section": "1.1 Pre-commit Hooks",
-    "text": "1.1 Pre-commit Hooks\nPre-commit hooks run a process locally when the user attempts to commit code to a git branch. Hooks have many uses. Here we can use them as a security guardrail to prevent accidental credential leaks in committed code.\n\nClone or download the AWS Git Secrets repo from awslabs GitHub\n\nExtract zip\nOpen folder and right click install.ps1\n\nRun in Power Shell\nType Y to give permission\n\nCD to a directory where you have the git repository you want to upload, either in PowerShell or R studio terminal \n\n\n\n\nPowerShell\n\nPS &gt; cd path/to/repo/root\n\n\n\nRun git secrets –install\n\n\n\n\nPowerShell\n\ngit secrets --install\n\n\n\nMake or copy the regex file called secrets_key containing the secret patterns into your folder. – make text file – discuss with team what all we want to make illegal.\nMake sure the file secrets_key is in your .gitignore. We can’t push that to the remote repo.\nRun git secrets --add-provider -- cat ./secrets_key\n\n\n\n\nPowerShell\n\ngit secrets --add-provider -- cat ./secrets_key\n\n\n\nYou can also add prohibited patterns like this\n\n\n\n\nPowerShell\n\n# add a pattern\ngit secrets --add '[A-Z0-9]{20}'\n\n# add a literal string, the + is escaped\ngit secrets --add --literal 'foo+bar'\n\n# add an allowed pattern\ngit secrets --add -a 'allowed pattern'\n\n\n\nTest Git history by running\n\n\n\n\nPowerShell\n\ngit secrets --scan-history\n\n\n\nIf something gets flagged and you don’t care about your history anymore: Delete .git folder and reinitialize repository\nI would take caution about this point. There might be better ways to clean your git history if you don’t want to get rid of everything.\nTest on one of my projects to see if rebasing is a sustainable option\nMake repo public\nWill automatically scan on every commit and won’t let it commit unless it’s clean - Create a few files to show it working\n\n\n\n\n\n\n\nNote\n\n\n\nWe can’t use the “Non capture group” feature of regex. Meaning we can’t use patterns like this in our regex: (?:abc) – see https://regexr.com IMPORTANT: Tab separate your regex expressions. Making new lines caused a bit of chaos and took really long to figure out. (you can use multiple tabs to separate them more visually)\n\n\n\n NOTE!!\n\nThe REGEX strings used in the secrets_key file may be decieving\nMake sure to test that the regex flags what you want it to\ngit secrets --scan-history may take a very long time to run\n\n\n\nCheck that the secrets_key regex is working by running the process on a repo that you know has secrets in it. For example, in a different folder, run all the pre-commit hook steps above and add a known “bad” string into the regex. For example, in the regex put bad_string and in a file in that folder put bad_string. When you scan it should get flagged.\nIf secret scanning is taking too long, you might want to check certain files first. I’ve found that HTML files take a very long time to scan for secrets. If you’re using linux or macOS you should be able to scan certain files via grob like this git secrets --scan path/to/files*. If you’re using windows it probably won’t work. In that case, if you only want certain file extentsions to be scanned, use this function in powershell below. Download the file here:\n\n\n\n\n\nsecret-scanner9000.ps1\n\n# Example Usage\n# write this in the powershell terminal, adjust for the file type(s) you want to scan - can be multiple types: $fileExtensions = @(\".R\", \".py\")\n# then execute this in the terminal: ScanFiles -FileExtensions $fileExtensions\n\n# It will give you an output of any secrets that are contained in those files\n\nFunction ScanFiles{\n  param (\n      [string]$filePath = (Get-Location).Path,\n      [string[]]$fileExtensions\n) \n  Get-ChildItem $filePath -recurse | Where-Object {$_.extension -in $fileExtensions} | \n  Foreach-Object {\n\n      git secrets --scan $_.FullName | Out-File $logFile -Append\n\n  }\n}\n\n\n\nNow, you can scan your secrets by copying and pasting the code into a powershell terminal like this:\n\n\n\n\nPowerShell\n\n$fileExtensions = @(\".R\",\".py\",\".Rmd\",\".qmd\")\nScanFiles -FileExtensions $fileExtensions"
-  },
-  {
-    "objectID": "std/security.html#pre-recieve-hooks",
-    "href": "std/security.html#pre-recieve-hooks",
-    "title": "Security Policies",
-    "section": "1.2 Pre-Recieve Hooks",
-    "text": "1.2 Pre-Recieve Hooks\nThese are still being investigated. They are remote hooks (not local like pre-commit hooks) that can be deployed throughout the Github organization. They can block certain commits from ever being pushed to the remote repo. They may make things unnecessarily complicated"
-  },
-  {
-    "objectID": "std/security.html#pushing-private-code-to-public-repos",
-    "href": "std/security.html#pushing-private-code-to-public-repos",
-    "title": "Security Policies",
-    "section": "1.3 Pushing Private Code to Public Repos",
-    "text": "1.3 Pushing Private Code to Public Repos\nWe may wish to take private codes and push them to a public repo. We need to make sure that the public code doesn’t not contain sensitive or forbidden data/code, so cleaning up the private repo is important before pushing.\nThere are a few ways to do this, but the easiest way is to copy the clean private code to the public repo, that is, copy all the files you want to add publicly but do not copy the .git folder. If the private repo has a dirty git history we will not want that history in the public repo because the sensitive data will then be publicly available.\n\n\n\n\n\n\n\n\n\n\n The private repository on the left still contains sensitive information in the git history. The public repository on the right has a clean git history because we copied only the current clean files from the private repo and did not attach its git history (which lives in the hidden .git folder)"
-  },
-  {
     "objectID": "std/index.html",
     "href": "std/index.html",
     "title": "Monash Quarto Templates",
@@ -385,10 +322,73 @@
     "text": "6 Rmarkdown templates\nThese are all based on my Rmarkdown templates which are distributed via the monash R package."
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "std/reproduce.html",
+    "href": "std/reproduce.html",
+    "title": "Reproducibility",
     "section": "",
-    "text": "This site was made with Quarto. It can execute code and render the outputs into the html."
+    "text": "Objectives\n\nData and Code Democratization\nGithub Codespaces\nPackage reproducibility with virtual environments\nGithub Releases\nDocumentation"
+  },
+  {
+    "objectID": "std/reproduce.html#open-a-codespace",
+    "href": "std/reproduce.html#open-a-codespace",
+    "title": "Reproducibility",
+    "section": "2.1 Open a Codespace",
+    "text": "2.1 Open a Codespace\nAt the root of the repo, click on the Code drop down button\n\nOn the right there is a tab called Codespaces.\nClick the + sign and a Codespace will launch\n\n\n\n\nopen up a codespace\n\n\nThis will open up a VS Code window in your browser. There are also options to open up a Jupyter Notebook or Jetbrains IDE (Pycharm). You can also install an Rstudio IDE into the codespace. It will look something like this - note that the repository is already linked and checked out into the codespace:\n\n\n\nVS Code IDE in Github Codespaces\n\n\nHere you can install most software. You can also customize the Codespace so that whenever someone opens one in your repo it will come with software pre-installed. More on that in the devcontainers section"
+  },
+  {
+    "objectID": "std/reproduce.html#devcontainers",
+    "href": "std/reproduce.html#devcontainers",
+    "title": "Reproducibility",
+    "section": "2.2 Devcontainers",
+    "text": "2.2 Devcontainers\nDevcontainers are a way to install software into a Codespace so that whenever a user opens up the Codespace they won’t need to install anything themselves. Making a container can be a little tricky, so we’ve made Github templates that have devcontainers already made. See templates. There are R, Python, and general default templates. These containers will install R, Rstudio, Python, and all the packages in the repo’s virtual environments (venv, conda, pip, renv, etc) so that the user can run all the code in your repo within a couple minutes.\nTo set up a devcontainer for yourself;\n\nClick on `Code &gt; Codespaces &gt; Configure dev container\n\n\n\nThis will make a folder named .devcontainer at the root of your repo\nIn that folder it will make a file named devcontainer.json\nOn the right there is a searchable marketplace for software to add to your container\n\n\n\nEach one comes with instructions on how to add the software to the .devcontainer.json\n\nFor more information about Codespaces, see the guides here"
+  },
+  {
+    "objectID": "std/policies.html",
+    "href": "std/policies.html",
+    "title": "Github Organization Policies",
+    "section": "",
+    "text": "Objectives\n\nEnsure that all repos in the org have the required documents\nSet policy rules at the Organization level\nRepos need to have reproducible code\nRepos need to have documentation\nIn the Github Organization we may require all repositories to contain certain documents. For example, we want to make sure that every repo has a CODE OF CONDUCT document that is a general policy applied throughout the organization.\nHere’s a list of required documents:"
+  },
+  {
+    "objectID": "std/policies.html#readme",
+    "href": "std/policies.html#readme",
+    "title": "Github Organization Policies",
+    "section": "README",
+    "text": "README\nREADME files are instructions or documentation on how to use your software. It should give a quick introduction to the repo and instructions on how to install or run the code."
+  },
+  {
+    "objectID": "std/policies.html#code_of_conduct",
+    "href": "std/policies.html#code_of_conduct",
+    "title": "Github Organization Policies",
+    "section": "CODE_OF_CONDUCT",
+    "text": "CODE_OF_CONDUCT\nA Code of Conduct can let a user know what the rules of the organization are and how any wrongful behavior will be addressed. The document will provide the “standards for how to engage in a community”"
+  },
+  {
+    "objectID": "std/policies.html#contributing.md",
+    "href": "std/policies.html#contributing.md",
+    "title": "Github Organization Policies",
+    "section": "CONTRIBUTING.md",
+    "text": "CONTRIBUTING.md\nThis file should appear in the issue tab in a repo. It lets a user know how they can contribute to the project and if they need to sign any forms before contributing. Some larger organizations require that a person knows what they are contributing to and they must sign a form acknowledging that any software/code contributions to the project will be used and cannot be retracted by the user. The code submitted may also be used to develop processes but the organization will not pay the individual contributor (since this is open-source, we only look for open-source contributions)"
+  },
+  {
+    "objectID": "std/policies.html#license",
+    "href": "std/policies.html#license",
+    "title": "Github Organization Policies",
+    "section": "LICENSE",
+    "text": "LICENSE\nThese should be and are set at the repo level. There will be many different licenses to choose from that will depend on the specific repo. More on that here."
+  },
+  {
+    "objectID": "std/policies.html#document-requirements-with-.github-repos",
+    "href": "std/policies.html#document-requirements-with-.github-repos",
+    "title": "Github Organization Policies",
+    "section": "1.1 Document Requirements with .github Repos",
+    "text": "1.1 Document Requirements with .github Repos\nYou can set most policy rules and create documents for each repo at the organization level by using a special .github repo. Dot files and dot folders have special functionality in some software. For Github, the .github folder defines workflows for things like Github Actions in a repo. A .github repository on the other hand defines organization level rules and templates.\n\nIn order to write and set these policies at the organization level we can put them at the root of the .github repository and edit them there.\n\n\n\n\nPowerShell\n\n$ tree /f\nC:.\n│   .gitignore\n│   CODE_OF_CONDUCT.md\n│   CONTRIBUTING.md\n│   LICENSE\n│   README.md\n│\n├───.github\n└───profile\n        README.md\n\n\n\nTake a look above. I have the required documents/policies at the root of the .github repo directory. Now if I open up any given repo in the organization I will find a link to those files:\n\nIf you click on the CODE_OF_CONDUCT link it will take you right to the .github repo and open the CODE_OF_CONDUCT.md file there:\n\nNow you can set organization level policies from the .github repo and they will automatically populate in all existing and new repositories unless there are repo specific policies in place. If a repo already has its own policies they will not be overwritten."
+  },
+  {
+    "objectID": "std/policies.html#commit-sign-off-requirement---github-apps",
+    "href": "std/policies.html#commit-sign-off-requirement---github-apps",
+    "title": "Github Organization Policies",
+    "section": "2.1 Commit Sign-Off Requirement - Github Apps",
+    "text": "2.1 Commit Sign-Off Requirement - Github Apps\nWe may want to require authors or reviewers to sign-off on commits to a repo. This is sometimes established in projects to “ensure that copyrighted code not released under an appropriate free software (open source) license is not included in the kernel.”\nYou can install a Github App in the organization and it will be applied to all repos. The DCO App (Developer Certificate of Origin) is popular and lightweight. To install it in the organization, click on Configure and it will give you the option to configure it with the organization of choice."
   }
 ]
