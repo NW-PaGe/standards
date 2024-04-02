@@ -339,7 +339,7 @@ We can't use the "Non capture group" feature of regex. Meaning we can't use patt
 
 1. Check that the `secrets_key` regex is working by running the process on a repo that you know has secrets in it. For example, in a different folder, run all the pre-commit hook steps above and add a known "bad" string into the regex. For example, in the regex put `bad_string` and in a file in that folder put `bad_string`. When you scan it should get flagged.
 
-2. If secret scanning is taking too long, you might want to check certain files first. I've found that HTML files take a _very_ long time to scan for secrets. If you only want certain file extentsions to be scanned, use this function in powershell below. Copy the code and save it as `secret-scanner.ps1`:
+2. If secret scanning is taking too long, you might want to check certain files first. I've found that HTML files take a _very_ long time to scan for secrets. If you're using linux or macOS you should be able to scan certain files via grob like this `git secrets --scan path/to/files*`. If you're using windows it probably won't work. In that case, if you only want certain file extentsions to be scanned, use this function in powershell below. Copy the code and save it as `secret-scanner.ps1`:
 
 ::: myframe
 ```{bash filename="secret-scanner9000.ps1"}
