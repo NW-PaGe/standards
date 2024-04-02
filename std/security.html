@@ -549,7 +549,7 @@ Note
 </div>
 <ol type="1">
 <li><p>Check that the <code>secrets_key</code> regex is working by running the process on a repo that you know has secrets in it. For example, in a different folder, run all the pre-commit hook steps above and add a known “bad” string into the regex. For example, in the regex put <code>bad_string</code> and in a file in that folder put <code>bad_string</code>. When you scan it should get flagged.</p></li>
-<li><p>If secret scanning is taking too long, you might want to check certain files first. I’ve found that HTML files take a <em>very</em> long time to scan for secrets. If you only want certain file extentsions to be scanned, use this function in powershell below. Copy the code and save it as <code>secret-scanner.ps1</code>:</p></li>
+<li><p>If secret scanning is taking too long, you might want to check certain files first. I’ve found that HTML files take a <em>very</em> long time to scan for secrets. If you’re using linux or macOS you should be able to scan certain files via grob like this <code>git secrets --scan path/to/files*</code>. If you’re using windows it probably won’t work. In that case, if you only want certain file extentsions to be scanned, use this function in powershell below. Copy the code and save it as <code>secret-scanner.ps1</code>:</p></li>
 </ol>
 <div class="myframe">
 <div class="cell">
@@ -578,7 +578,8 @@ Note
 </div>
 </div>
 </div>
-<p>Now, you can scan your secrets by copying and pasting the code into a powershell terminal like this: ::: smallframe</p>
+<p>Now, you can scan your secrets by copying and pasting the code into a powershell terminal like this:</p>
+<div class="smallframe">
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -588,7 +589,7 @@ Note
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">ScanFiles</span> <span class="at">-FileExtensions</span> <span class="va">$fileExtensions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<p>:::</p>
+</div>
 <div style="page-break-after: always;"></div>
 </section>
 <section id="pre-recieve-hooks" class="level2" data-number="1.2">
