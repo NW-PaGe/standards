@@ -1,76 +1,58 @@
----
-# title: "Github Policies"
-# description: Github Policies
-format: 
-  html: 
-    toc: false
-    number-sections: false
-    title-block-banner: false
-    page-layout: full
-about:
-  id: about
-  template: jolla
-  image-shape: rectangle
-  image: images/nwpage_logo.png
-  image-width: "40em"
-  links:
-    - icon: info-circle
-      href: about.qmd
-    # - icon: download
-    #   href: install.qmd
-    # - icon: book
-    #   href: tutorials/getting_started.qmd
-    - icon: github
-      text: GitHub
-      href: https://github.com/NW-PaGe
-    - icon: zulip
-      href: https://github.com/NW-PaGe/standards/issues/new
-      text: Chat
-execute: 
-  eval: false
-  freeze: true
----
+# Introduction {.unnumbered .unlisted}
 
+### Editors {.unnumbered .unlisted}
 
-:::{#about}
+Person 1, person 2, etc
+
+### Contributors {.unnumbered .unlisted}
+
+::: columns
+::: {.column width="30%"}
+-   Frank Aragona
+-   Pauline Trinh
+-   Kathleen Conery
+-   Marcela Torres
+-   Lauren Frisbie
+-   Cory Yun
+-   Philip Crain
+-   Paul Lloyd
+-   Alli Black
+-   Alex Cox
+
 :::
 
+::: {.column width="30%"}
+-   Emily Nebergall
+-   Cameron Ashton
+-   Peter J Gibson
+-   Allison Warren
+-   Laura Beilsmith
+-   Xichi Zhang
+-   Allison Thibodeau
+-   Sarah Jinsiwale
+-   Topias Lemetyinen
 
-<center>
-
-:::{.hover-button}
-<body>
-    <a href="#collapseQuickstart" class="hover-button" data-bs-toggle="collapse"
-    role="button" aria-expanded="false" aria-controls="collapseQuickstart">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        Get Started
-    </a>
-        
-</body>
+:::
 :::
 
-</center>
+This is a static website documenting the proposed policies and standards for public Github use at the Pacific Northwest Genomic Center of Excellence. There are documents on
 
-::: {#collapseQuickstart .collapse}
+1.  Security and how to protect credential and private process leaks {{< fa unlock >}}
+2.  Licensing to protect against re-sale or theft of code {{< fa file >}}
+3.  Our Github rules, policies, and templates {{< fa book >}}
+4.  Github user guides {{< fa file >}}
 
-## Quickstart
+If there are any questions please reach out to Frank Aragona
 
-This is a static website documenting the proposed policies and standards for public Github use at the Pacific Northwest Genomic Center of Excellence. There are documents on 
+# Github Policies
 
-1.    Security and how to protect credential and private process leaks {{< fa unlock >}}
-2.    Licensing to protect against re-sale or theft of code {{< fa file >}}
-3.    Our Github rules, policies, and templates {{< fa book >}}
-4.    Github user guides {{< fa file >}}
+Add crossreferences to the GH policies section and a brief intro here.
 
+# AWS Policies
 
-If there are any questions please reach out to 
+# Azure Policies
 
 <!-- Content for HTML --->
-
-:::{.column-screen-inset-shaded layout-nrow="1"}
 
 {{< fa unlock >}} **Personal or network credentials, tokens, server names and more are prohibited from being published to our public repos.** Protect security and credentials with good coding practices. Using local environment files along with `.gitignore` can prevent credentials from being accidentally pushed into your repo. Other guardrails like **pre-commit hooks** can be used to further prevent accidental credential leaks. [**See more details on our security policies here**](std/security.qmd)
 
@@ -98,20 +80,8 @@ username <- creds$my_credentials$username
 password <- creds$my_credentials$password
 ```
 
-
-
-:::
-
-:::{.column-screen-inset-shaded layout-nrow="1"}
-
 {{< fa file >}} Each repo in the organization should have a license. Licenses can help prevent your work from being stolen and/or used inappropriately. [Licensing details here](std/lic.qmd)
 
 {{< fa book >}} This organization requires each repo to have [certain documents](std/templates.qmd), such as a CODE_OF_CONDUCT. The organization uses a special repo called **.github** to ensure all repos adhere to the policies and have the right documents.
 
-
 {{< fa file >}} If you're looking to build a repository, [check out the Github user guide tabs](tools/how_to.qmd) for best practices on reproducibility, documentation in the repo, and more.
-
-:::
-
-:::
-

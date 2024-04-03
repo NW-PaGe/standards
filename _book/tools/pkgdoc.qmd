@@ -1,0 +1,24 @@
+---
+title: "Package Documentation"
+description: pkgdown and Quartodoc for R and Python package documentation
+date: September 1, 2023
+date-modified: today
+author: 
+  - name: Frank Aragona
+    email: frank.aragona@doh.wa.gov
+    affiliations:
+      - Washington Department of Health
+      - Data Integration/Quality Assurance
+knitr: true
+editor: 
+  markdown: 
+    wrap: 72
+filters: 
+  - line-highlight
+categories:
+  - data democratization
+  - documentation
+  - Quarto
+  - pkgdown
+  - rmarkdown
+---

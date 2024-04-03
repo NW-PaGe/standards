@@ -1,0 +1,215 @@
+---
+title: "Release Cycles"
+description: Utilizing and automating Github Releases in your repo
+date: September 1, 2023
+date-modified: today
+author: 
+  - name: Frank Aragona
+    email: frank.aragona@doh.wa.gov
+    affiliations:
+      - Washington Department of Health
+      - Data Integration/Quality Assurance
+knitr: true
+filters: 
+  - line-highlight
+categories:
+  - data democratization
+  - release cycles
+  - Github
+---
+
+:::{.note .medframe}
+{{< fa file-circle-check size="3x" >}} **Summary**
+
+-   Github Releases
+-   Helps devs and end users
+-   Changelogs and semantic versioning 
+-   Automate the release process
+:::
+
+<br>
+
+# Github Releases
+
+In the right panel of your Github repo there is a section labeled Releases. Here you can create or find a version of your repo's code base. Each version comes with a changelog, tags, and downloadable source code. Developers and end-users may find this helpful to navigate to what the repo contained at specific release versions and have the source code available for download at the specific version.
+
+![](images/releases.PNG){.myframe}
+
+<br>
+
+If you click on the releases you can see different release tags/versions. Each comes with a changelog, tag, git hash number, and zip files to download the repo *at the time the specific version was released*. This means you can automatically save repo snapshots and backups whenever your project cycle is released.
+
+![](images/releases_nav.gif){.myframe}
+
+<br>
+
+you can flip through different releases and tags here
+
+![](images/releases_nav2.gif){.myframe}
+
+<br>
+
+You can click on a tag and it will take you to the repo *at the time the specific version was released*
+
+![](images/releases_tags.gif){.myframe}
+
+# Semantic Versioning
+
+Software projects often label their releases using semantic versioning. It looks like this, where the software version numbers all have a definition:
+
+::: pic-border
+[![https://www.softwarecraftsperson.com/2020/12/06/semantic-versioning-semver-introduction/](images/semver.png)](https://www.softwarecraftsperson.com/2020/12/06/semantic-versioning-semver-introduction/)
+:::
+
+# Conventional Commits {#sec-cc}
+
+To create the release cycle in your repo you may want to use Conventional Commits.
+
+Conventional Commits are a way to format and standardize your commit messages, which can be used to then automate the repo's release cycle. For example, one conventional naming method is to label any commit associated with a new feature as `feat:` plus a commit message.
+
+-   The word `feat:` can trigger a Github Action to add that commit to your changelog under the **Features** header,
+-   and it will up-version the minor release version number.
+-   So if you are on release 1.0.0, a new `feat` will up-version the cycle to 1.1.0
+-   Commit titles that start with the word `fix:` as in a bug fix will up-version the patch number of the, i.e. 1.0.0 to 1.0.1
+
+```{=html}
+<iframe width="780" height="500" src="https://www.conventionalcommits.org/en/v1.0.0/" title="Github Licenses"></iframe>
+```
+# Automating The Release Cycle
+
+You should consider automating your release cycle so that your project cycle is consistent and predictable. There are many different ways to approach this.
+
+Some repos have semi-automatic cycles where there is some manual component of releasing their software, whereas others are fully automated. Manual releases can work too for some scenarios.
+
+## Github Action for auto releases
+
+I recommend first creating a test repo for this. In the repo, create a Github Action workflow called `changelog.yml`. You can copy the full file below:
+
+::: myframe
+```{yaml filename=".github/workflows/changelog.yml"}
+name: Changelog
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  changelog:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      # write permission is required to create a github release
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Conventional Changelog Action
+        id: changelog
+        uses: TriPSs/conventional-changelog-action@v3
+        with:
+          github-token: ${{ secrets.github_token }}
+          create-summary: true
+
+      - name: Create Release
+        uses: actions/create-release@v1
+        if: ${{ steps.changelog.outputs.skipped == 'false' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.github_token }}
+        with:
+          prerelease: false
+          tag_name: ${{ steps.changelog.outputs.tag }}
+          release_name: ${{ steps.changelog.outputs.tag }}
+          body: ${{ steps.changelog.outputs.clean_changelog }}
+```
+:::
+
+
+# {.unnumbered}
+
+This workflow will be triggered everytime a branch is merged to main. If that branch has [conventinal commit messages](@sec-cc) the commits will be summarized in the changelog. See an example workflow below:
+
+:::{.column-screen-inset-shaded layout-nrow="1"}
+![](images/fix.PNG){.myframe}
+
+![](images/fix2.PNG){.myframe}
+:::
+
+<br>
+
+If I make a branch off of main, I can add features, bug fixes, and more. If I used conventional commit messages in the title (i.e. `feat: message`, `fix: message`) the Github Action workflow will detect the trigger word in the title and divide the commit accordingly in the changelog. Notice how the commit title message gets output automatically into the changelog under the header **Bug Fixes** and the commit + commit hash number are generated. 
+
+A new version will be released, and since this was just a bug fix the version number went from `v2.1.4` to `v2.1.5` since bug fixes only up-version the patch numbers
+
+
+<!--
+
+::: {.column-screen-inset-shaded layout-nrow="1"}
+If I make a branch off of main, I can add features, bug fixes, and more. If I used conventional commit messages in the title (i.e. `feat: message`, `fix: message`) the Github Action workflow will detect the trigger word in the title and divide the commit accordingly in the changelog. Notice how the commit title message gets output automatically into the changelog under the header **Bug Fixes** and the commit + commit hash number are generated. A new version will be released, and since this was just a bug fix the version number went from `v2.1.4` to `v2.1.5` since bug fixes only up-version the patch numbers
+
+![](images/fix.PNG){.myframe}
+
+![](images/fix2.PNG){.myframe}
+:::
+
+
+<br>
+
+
+::: {.column-screen-inset-shaded layout-nrow="1"}
+If you add multiple commit types to one branch and merge it to main the changelog will reflect all the commits (only for feat or fix) and _will up-version only one time._ If there one or more `feat` commits it will up-version the minor release. If there are no `feat` commits and only bug fixes it will only up-version the patch release number
+
+
+
+![](images/minor.PNG){.myframe}
+
+See how the version number went from `v2.1.5` in the last release to `v2.2.0`. This happened because there is at least one `feat` commit in the new release. And since all of the other commits were included into on branch they are all included in this release cycle.
+:::
+
+-->
+
+# {.unnumbered} 
+
+The first step uses the Github Action `TriPSs/conventional-changelog-action@v3` which will scan your
+
+:::{.myframe}
+```{yaml filename=".github/workflows/changelog.yml"}
+steps:
+  - uses: actions/checkout@v2
+
+  - name: Conventional Changelog Action
+    id: changelog
+    uses: TriPSs/conventional-changelog-action@v3
+    with:
+      github-token: ${{ secrets.github_token }}
+      create-summary: true
+```
+:::
+
+The second step uses the Github Action `actions/create-release@v1` which will create git tags with the version number and a changelog with downloadable source code
+
+:::{.myframe}
+```{yaml filename=".github/workflows/changelog.yml"}
+- name: Create Release
+  uses: actions/create-release@v1
+  if: ${{ steps.changelog.outputs.skipped == 'false' }}
+  env:
+    GITHUB_TOKEN: ${{ secrets.github_token }}
+  with:
+    prerelease: false
+    tag_name: ${{ steps.changelog.outputs.tag }}
+    release_name: ${{ steps.changelog.outputs.tag }}
+    body: ${{ steps.changelog.outputs.clean_changelog }}
+```
+
+:::
+
+
+
+# Resources
+
+These videos are excellent summaries of how to use Github Releases and semantic versioning
+
+{{< video https://www.youtube.com/embed/fcHJZ4pMzBs?si=jb-1lgaYevGqOUU9 >}}
+
+{{< video https://www.youtube.com/embed/q3qE2nJRuYM?si=7nQ7itJFt3oUtgaL >}}

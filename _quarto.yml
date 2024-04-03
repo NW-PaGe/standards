@@ -1,100 +1,107 @@
 project:
-  type: website
+  type: book
 
-# comments: 
-#   hypothesis: true
-
-website:
-  title: "🌲 Github Policies"
+book:
+  title: "🌲 NW-PaGe Policies and Guidelines"
   # author: DIQA 
   # date: today
   search: true
   repo-url: https://github.com/NW-PaGe/standards
   repo-actions: [source,edit,issue]
-  
-  navbar: 
-    background: primary
-    left: 
-      - text: Home
-        href: index.qmd
-      - text: Github Policies
-        menu:
-          - href: gh/security.qmd
-            text: "0: Security Standards"
-          - href: gh/lic.qmd
-            text: "1: Choosing a License"
-          - href: gh/policies.qmd
-            text: "2: Repo Policies"
-          - href: gh/reproduce.qmd
-            text: "3: Reproducibility"
-      - text: AWS Policies
-        menu:
-          - href: aws/aws_index.qmd
-            text: "0: AWS Policies"
-      - text: Azure Policies
-        menu:
-          - href: azure/azure_index.qmd
-            text: "0: Azure Policies"
-      
-            
-      # where should this go? could be internal resource, 
-      # specific to what we do should be internal
-      # maybe eventually move out when restructure needed
-      - text: Guides
-        href: tools/index.qmd
-
-
-            
-            
+  favicon: 🌲
+  cover-image: images/nwpage_tree_logo.png
+  downloads: [pdf]
+  sidebar:
+    style: "floating"
+    collapse-level: 1
+    border: true
     search: true
-    # logo: images/doh_logo.png
-    pinned: false
-    
-    right:
-      - icon: github
-        href: https://github.com/NW-PaGe/standards
-        aria-label: GitHub
-    
   page-footer:
-    left: "🍦"
-    background: "#440154ff"
+    left: |
+      All content licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) <br> &copy; Bernd Bischl, Raphael Sonabend, Lars Kotthoff, Michel Lang.
+    center: "[Website](https://mlr-org.com) | [GitHub](https://github.com/mlr-org/mlr3book) | [Gallery](https://mlr-org.com/gallery) | [Mattermost](https://lmmisld-lmu-stats-slds.srv.mwn.de/mlr_invite/)"
+    right: Built with [Quarto](https://quarto.org/).
+    background: "#f8f9fa"
+  chapters:
+    - index.qmd
+    - part: Github Policies
+      chapters:
+      - gh/security.qmd
+      - gh/policies.qmd
+      - gh/lic.qmd
+      - gh/reproduce.qmd
+    - part: AWS Policies
+      chapters:
+      - aws/aws_index.qmd
+    - part: Azure Policies
+      chapters:
+      - azure/azure_index.qmd
     
-    
-
-# bibliography: references.bib
-
-
+  
 format:
   html:
-    grid:
-      sidebar-width: 200px
-      body-width: 1000px
-    #   margin-width: 300px
-    #   gutter-width: 1.5rem
-    theme: 
-      - cosmo
-      - assets/styles.scss
-    scss: assets/styles.scss
-    title-block-banner: true
-    # css: styles.css
-    toc: true
-    # number-depth: 3
-    # toc-depth: 3
-    highlight-style: assets/custom.theme
-    link-external-newwindow: true
-    number-sections: true
-    # code-fold: show
+    theme:
+      light: [default, assets/custom.scss]
+    fontsize: "15px"
+    linestretch: 1.6
+    mainfont: "Roboto"
+    monofont: "Fira Mono"
+    smooth-scroll: true
+    toc-depth: 3
+    code-link: true
+    code-tools:
+      toggle: true
+    code-fold: false
+    highlight-style: printing
+    code-block-bg: true
     code-overflow: wrap
-    # page-layout: full
-    backgroundcolor: "#f8f9fa"
-    # header-includes: |
-    #   <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/metropolitano" type="text/css"/>
-# mainfont: Franklin Gothic   
-    
-    
-execute: 
-  error: true
-  freeze: false
+    reference-location: margin
+    mermaid:
+      theme: neutral
+
+execute:
+  knitr: true
+  eval: false
+
+  
+            
+ # see https://pandoc.org/MANUAL.html for all options
+  pdf:
+    lof: false
+    lot: false
+    toc: false
+    toc-depth: 2
+    fig-cap-location: bottom
+    tbl-cap-location: top
+    urlcolor: "blue"
+    linkcolor: "black"
+    biblio-style: apalike
+    keep-tex: true
+    code-block-bg: "#f2f2f2"
+    code-block-border-left: "#f2f2f2"
+    code-overflow: wrap
+    mermaid:
+      theme: neutral
+    output-file: "nw-page-github-policies"
+    output-ext:  "pdf"
+
+latex-auto-install: true
+
+knitr:
+  opts_chunk:
+    cache: true
+    cache.lazy: false
+    dpi: 600
+    fig.width: 5.5
+    fig.height: 3
+    out.width: "100%"
+    split: true
+    R.options:
+      knitr.graphics.auto_pdf: true
+      datatable.print.nrows: 10
+      datatable.print.class: false
+      datatable.print.keys: false
+      datatable.print.trunc.cols: TRUE
 
 
 

@@ -133,42 +133,6 @@ server_name <- creds$default$conn_list_wdrs$server
 
 <!-- Content for HTML --->
 
-::: {.content-visible unless-format="pdf"}
-###  {.unnumbered}
-
-::: {.column-screen-inset-shaded layout-nrow="1"}
-We can even get more specific and add an `if-else` statement to specify which credential we want to select. This can be helpful if we have a CI/CD pipeline and have a script automatically run on a task scheduler or cron job. We can call the credentials we want in the command line and have the command line code run in my task scheduler. That way we can use multiple different versions of the same script and have all of it be automated. For example, the middle panel uses the `commandArgs()` to pull any arguments passed to the script in a shell/command line script. In the right panel, the shell script has `production` and `test` as second arguments. These are passed to the R script as `arg[2]`. Now we can use `arg[2]` in the if-else statement to conditionally select credentials and do it automatically.
-
-```{r filename="script-in-repo.R"}
-#| source-line-numbers: "1,9-14"
-args <- commandArgs(TRUE)
-
-# this script is in the repo, but credentials are hidden
-library(yaml)
-
-# read in the local credentials yaml file
-creds <- yaml::read_yaml("path/to/local-credentials.yml")
-
-# pull in the credentials
-if(args[2] == "production"){
-  server_name <- creds$default$conn_list_wdrs$server
-} else if(args[2] == "test"){
-  server_name <- creds$test$conn_list_wdrs$server
-}
-
-```
-
-```{bash filename="shell-trigger-script.sh"}
-# Run the production code
-$ Rscript -e "source('path/script_in_repo.R');" production
-
-# Run the test/dev code
-$ Rscript -e "source('path/script_in_repo.R');" test 
-```
-:::
-:::
-
-{{< pagebreak >}}
 
 <!-- Content for pdf --->
 

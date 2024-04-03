@@ -1,0 +1,199 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "🌲 NW-PaGe Policies and Guidelines",
+    "section": "",
+    "text": "Introduction\n\nEditors\nPerson 1, person 2, etc\n\n\nContributors\n\n\n\nFrank Aragona\nPauline Trinh\nKathleen Conery\nMarcela Torres\nLauren Frisbie\nCory Yun\nPhilip Crain\nPaul Lloyd\nAlli Black\nAlex Cox\n\n\n\nEmily Nebergall\nCameron Ashton\nPeter J Gibson\nAllison Warren\nLaura Beilsmith\nXichi Zhang\nAllison Thibodeau\nSarah Jinsiwale\nTopias Lemetyinen\n\n\n\nThis is a static website documenting the proposed policies and standards for public Github use at the Pacific Northwest Genomic Center of Excellence. There are documents on\n\nSecurity and how to protect credential and private process leaks \nLicensing to protect against re-sale or theft of code \nOur Github rules, policies, and templates \nGithub user guides \n\nIf there are any questions please reach out to Frank Aragona\n\n\n\nGithub Policies\nAdd crossreferences to the GH policies section and a brief intro here.\n\n\nAWS Policies\n\n\nAzure Policies\n\n Personal or network credentials, tokens, server names and more are prohibited from being published to our public repos. Protect security and credentials with good coding practices. Using local environment files along with .gitignore can prevent credentials from being accidentally pushed into your repo. Other guardrails like pre-commit hooks can be used to further prevent accidental credential leaks. See more details on our security policies here\n\n\n\nlocal_credentials.yml\n\n# local yaml file that will NOT be pushed to the repo\n# add this file to the .gitignore to prevent leaks\nmy_credentials:\n  username: super_secret_user_name\n  password: 12345terriblepassword\n  \n  \n  \n  \n\n\n\n\n\nscript_in_repo.R\n\n# this script is in the repo, but credentials are hidden\nlibrary(yaml)\n\n# read in the local credentials yaml file\ncreds &lt;- yaml::read_yaml(\"path/to/local_credentials.yml\")\n\n# pull in the credentials\nusername &lt;- creds$my_credentials$username\npassword &lt;- creds$my_credentials$password\n\n\n Each repo in the organization should have a license. Licenses can help prevent your work from being stolen and/or used inappropriately. Licensing details here\n This organization requires each repo to have certain documents, such as a CODE_OF_CONDUCT. The organization uses a special repo called .github to ensure all repos adhere to the policies and have the right documents.\n If you’re looking to build a repository, check out the Github user guide tabs for best practices on reproducibility, documentation in the repo, and more.",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "gh/security.html",
+    "href": "gh/security.html",
+    "title": "1  Security Policies",
+    "section": "",
+    "text": "Prevent Credential Leaks with Env Variables\nThere are a number of ways to do this. We typically use a yaml file that can be filled out with personal credentials locally. The file will not be committed to the remote repo",
+    "crumbs": [
+      "Github Policies",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Security Policies</span>"
+    ]
+  },
+  {
+    "objectID": "gh/security.html#prevent-credential-leaks-with-env-variables",
+    "href": "gh/security.html#prevent-credential-leaks-with-env-variables",
+    "title": "1  Security Policies",
+    "section": "",
+    "text": "1.0.1 Create a private credentials file\nThe scripts use a .yml file that contains a list of API tokens, server names, and usernames/passwords specific to each individual user. There are two .yml files. One is a template (containing no actual passwords..) that exists in the repo and serves as a template so every individual user can keep up to date with new credential additions. The other is the individual creds.yml that is in the repo’s .gitignore. This file will never exist in the repo and only exist locally (in the user’s C drive).\n\n\n1.0.2 creds.yml details\nThe .yml file can work with multiple programming languages including R and Python. They are read in the same way and can be easily adjusted when adding new passwords or using them as configuration files.\nThey look like this:\n\n\n\n\nlocal-credentials.yml\n\n# Default is needed to distinguish values.\n# Leave a blank line (NO SPACES) as the last line in this file or things will break\n# Quotes aren't necessary, but can be used.\ndefault: \n  conn_list_wdrs:\n    Driver: \"SQL Server Native Client 11.0\"\n    Server: \n    Database: \n    Trusted_connection: \n    ApplicationIntent: \n    \n  fulgent:\n    username: &lt;USERNAME&gt;\n    password: &lt;PASSWORD&gt;\n\n\n\nYou can have different variables assigned to unique lists, which allows for easy configuration. For example, the list starting with default has variables conn_list_wdrs and fulgent. You can have a different list of variables within the same file like this:\n\n\n\n\nlocal-credentials.yml\n\n# Default is needed to distinguish values.\n# Leave a blank line (NO SPACES) as the last line in this file or things will break\n# Quotes aren't necessary, but can be used.\ndefault: \n  conn_list_wdrs:\n    Driver: \"SQL Server Native Client 11.0\"\n    Server: \n    Database: \n    Trusted_connection: \n    ApplicationIntent: \n    \n  fulgent:\n    username: &lt;USERNAME&gt;\n    password: &lt;PASSWORD&gt;\n\ntest:\n  conn_list_wdrs:\n    Driver: \"SQL Server Native Client 11.0\"\n    Server: \n    Database: \n    Trusted_connection: \n    ApplicationIntent: \n\n\n\nNow there is a test list with its own variables. This lets us switch a set of variables within our scripts. default applies to the main credentials where test can distinguish which variables should be test or dev scripts specific. Notice below that you can now call the credentials from a .yml file into an R or Python script and the actual credentials will never exist in the code pushed to the repo.\n\n\n\n\nscript-in-repo.R\n\n# this script is in the repo, but credentials are hidden\nlibrary(yaml)\n\n# read in the local credentials yaml file\ncreds &lt;- yaml::read_yaml(\"path/to/local-credentials.yml\")\n\n# pull in the credentials\nserver_name &lt;- creds$default$conn_list_wdrs$server\n\n\n\n\n\n\n\n\n\n1.0.3 Safe Guards - Prevent Accidental Leaks!\nOnce you have the credentials.yml template in your repo, make sure that nobody on your team (or anyone with write access..) is able to accidentally push changes to the template. We don’t want someone’s passwords or API tokens to exist in GitHub.\nThis link shows how to skip any changes made to the specific file. If someone makes local changes to the template, the changes will not show in their commit. It is a safe guard.\n\n1.0.3.1 For all individual users, run this code:\n\n\ngit update-index --skip-worktree creds_TEMPLATE.yml\n\n\nThis will tell your local git to ignore any changes made to creds_TEMPLATE.yml, but also allow it to exist in the repo (since .gitignore will prevent it from being in the repo)\n\n\n1.0.3.2 If you need to update the template file run this:\n\n\ngit update-index --no-skip-worktree creds_TEMPLATE.yml\n\n\nThis will allow changes to the template. So when you need to update the template, use this code\nAnd to get a list of files that are “skipped”, use this code:\n\n\ngit ls-files -v . | grep ^S",
+    "crumbs": [
+      "Github Policies",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Security Policies</span>"
+    ]
+  },
+  {
+    "objectID": "gh/security.html#pre-commit-hooks",
+    "href": "gh/security.html#pre-commit-hooks",
+    "title": "1  Security Policies",
+    "section": "2.1 Pre-commit Hooks",
+    "text": "2.1 Pre-commit Hooks\nPre-commit hooks run a process locally when the user attempts to commit code to a git branch. Hooks have many uses. Here we can use them as a security guardrail to prevent accidental credential leaks in committed code.\n\nClone or download the AWS Git Secrets repo from awslabs GitHub\n\nExtract zip\nOpen folder and right click install.ps1\n\nRun in Power Shell\nType Y to give permission\n\nCD to a directory where you have the git repository you want to upload, either in PowerShell or R studio terminal \n\n\n\n\nPowerShell\n\nPS &gt; cd path/to/repo/root\n\n\n\nRun git secrets –install\n\n\n\n\nPowerShell\n\ngit secrets --install\n\n\n\nMake or copy the regex file called secrets_key containing the secret patterns into your folder. – make text file – discuss with team what all we want to make illegal.\nMake sure the file secrets_key is in your .gitignore. We can’t push that to the remote repo.\nRun git secrets --add-provider -- cat ./secrets_key\n\n\n\n\nPowerShell\n\ngit secrets --add-provider -- cat ./secrets_key\n\n\n\nYou can also add prohibited patterns like this\n\n\n\n\nPowerShell\n\n# add a pattern\ngit secrets --add '[A-Z0-9]{20}'\n\n# add a literal string, the + is escaped\ngit secrets --add --literal 'foo+bar'\n\n# add an allowed pattern\ngit secrets --add -a 'allowed pattern'\n\n\n\nTest Git history by running\n\n\n\n\nPowerShell\n\ngit secrets --scan-history\n\n\n\nIf something gets flagged and you don’t care about your history anymore: Delete .git folder and reinitialize repository\nI would take caution about this point. There might be better ways to clean your git history if you don’t want to get rid of everything.\nTest on one of my projects to see if rebasing is a sustainable option\nMake repo public\nWill automatically scan on every commit and won’t let it commit unless it’s clean - Create a few files to show it working\n\n\n\n\n\n\n\nNote\n\n\n\nWe can’t use the “Non capture group” feature of regex. Meaning we can’t use patterns like this in our regex: (?:abc) – see https://regexr.com IMPORTANT: Tab separate your regex expressions. Making new lines caused a bit of chaos and took really long to figure out. (you can use multiple tabs to separate them more visually)\n\n\n\n NOTE!!\n\nThe REGEX strings used in the secrets_key file may be decieving\nMake sure to test that the regex flags what you want it to\ngit secrets --scan-history may take a very long time to run\n\n\n\nCheck that the secrets_key regex is working by running the process on a repo that you know has secrets in it. For example, in a different folder, run all the pre-commit hook steps above and add a known “bad” string into the regex. For example, in the regex put bad_string and in a file in that folder put bad_string. When you scan it should get flagged.\nIf secret scanning is taking too long, you might want to check certain files first. I’ve found that HTML files take a very long time to scan for secrets. If you’re using linux or macOS you should be able to scan certain files via grob like this git secrets --scan path/to/files*. If you’re using windows it probably won’t work. In that case, if you only want certain file extentsions to be scanned, use this function in powershell below. Download the file here:\n\n Download Secret Scanner Script \n\n\n\n\nsecret-scanner9000.ps1\n\n# Example Usage\n# write this in the powershell terminal, adjust for the file type(s) you want to scan - can be multiple types: $fileExtensions = @(\".R\", \".py\")\n# then execute this in the terminal: ScanFiles -FileExtensions $fileExtensions\n\n# It will give you an output of any secrets that are contained in those files\n\nFunction ScanFiles{\n  param (\n      [string]$filePath = (Get-Location).Path,\n      [string[]]$fileExtensions\n) \n  Get-ChildItem $filePath -recurse | Where-Object {$_.extension -in $fileExtensions} | \n  Foreach-Object {\n\n      git secrets --scan $_.FullName | Out-File $logFile -Append\n\n  }\n}\n\n\n\nNow, you can scan your secrets by copying and pasting the code into a powershell terminal like this:\n\n\n\n\nPowerShell\n\n$fileExtensions = @(\".R\",\".py\",\".Rmd\",\".qmd\")\nScanFiles -FileExtensions $fileExtensions",
+    "crumbs": [
+      "Github Policies",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Security Policies</span>"
+    ]
+  },
+  {
+    "objectID": "gh/security.html#pre-recieve-hooks",
+    "href": "gh/security.html#pre-recieve-hooks",
+    "title": "1  Security Policies",
+    "section": "2.2 Pre-Recieve Hooks",
+    "text": "2.2 Pre-Recieve Hooks\nThese are still being investigated. They are remote hooks (not local like pre-commit hooks) that can be deployed throughout the Github organization. They can block certain commits from ever being pushed to the remote repo. They may make things unnecessarily complicated",
+    "crumbs": [
+      "Github Policies",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Security Policies</span>"
+    ]
+  },
+  {
+    "objectID": "gh/security.html#pushing-private-code-to-public-repos",
+    "href": "gh/security.html#pushing-private-code-to-public-repos",
+    "title": "1  Security Policies",
+    "section": "2.3 Pushing Private Code to Public Repos",
+    "text": "2.3 Pushing Private Code to Public Repos\nWe may wish to take private codes and push them to a public repo. We need to make sure that the public code doesn’t not contain sensitive or forbidden data/code, so cleaning up the private repo is important before pushing.\nThere are a few ways to do this, but the easiest way is to copy the clean private code to the public repo, that is, copy all the files you want to add publicly but do not copy the .git folder. If the private repo has a dirty git history we will not want that history in the public repo because the sensitive data will then be publicly available.\n\n\n\n\n\n\n\n\n\n\n\n\n\n The private repository on the left still contains sensitive information in the git history. The public repository on the right has a clean git history because we copied only the current clean files from the private repo and did not attach its git history (which lives in the hidden .git folder)",
+    "crumbs": [
+      "Github Policies",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Security Policies</span>"
+    ]
+  },
+  {
+    "objectID": "gh/policies.html",
+    "href": "gh/policies.html",
+    "title": "2  Github Organization Policies",
+    "section": "",
+    "text": "README\nREADME files are instructions or documentation on how to use your software. It should give a quick introduction to the repo and instructions on how to install or run the code.",
+    "crumbs": [
+      "Github Policies",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Github Organization Policies</span>"
+    ]
+  },
+  {
+    "objectID": "gh/policies.html#code_of_conduct",
+    "href": "gh/policies.html#code_of_conduct",
+    "title": "2  Github Organization Policies",
+    "section": "CODE_OF_CONDUCT",
+    "text": "CODE_OF_CONDUCT\nA Code of Conduct can let a user know what the rules of the organization are and how any wrongful behavior will be addressed. The document will provide the “standards for how to engage in a community”",
+    "crumbs": [
+      "Github Policies",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Github Organization Policies</span>"
+    ]
+  },
+  {
+    "objectID": "gh/policies.html#contributing.md",
+    "href": "gh/policies.html#contributing.md",
+    "title": "2  Github Organization Policies",
+    "section": "CONTRIBUTING.md",
+    "text": "CONTRIBUTING.md\nThis file should appear in the issue tab in a repo. It lets a user know how they can contribute to the project and if they need to sign any forms before contributing. Some larger organizations require that a person knows what they are contributing to and they must sign a form acknowledging that any software/code contributions to the project will be used and cannot be retracted by the user. The code submitted may also be used to develop processes but the organization will not pay the individual contributor (since this is open-source, we only look for open-source contributions)",
+    "crumbs": [
+      "Github Policies",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Github Organization Policies</span>"
+    ]
+  },
+  {
+    "objectID": "gh/policies.html#license",
+    "href": "gh/policies.html#license",
+    "title": "2  Github Organization Policies",
+    "section": "LICENSE",
+    "text": "LICENSE\nThese should be and are set at the repo level. There will be many different licenses to choose from that will depend on the specific repo. More on that here.",
+    "crumbs": [
+      "Github Policies",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Github Organization Policies</span>"
+    ]
+  },
+  {
+    "objectID": "gh/policies.html#document-requirements-with-.github-repos",
+    "href": "gh/policies.html#document-requirements-with-.github-repos",
+    "title": "2  Github Organization Policies",
+    "section": "3.1 Document Requirements with .github Repos",
+    "text": "3.1 Document Requirements with .github Repos\nYou can set most policy rules and create documents for each repo at the organization level by using a special .github repo. Dot files and dot folders have special functionality in some software. For Github, the .github folder defines workflows for things like Github Actions in a repo. A .github repository on the other hand defines organization level rules and templates.\n\nIn order to write and set these policies at the organization level we can put them at the root of the .github repository and edit them there.\n\n\n\n\nPowerShell\n\n$ tree /f\nC:.\n│   .gitignore\n│   CODE_OF_CONDUCT.md\n│   CONTRIBUTING.md\n│   LICENSE\n│   README.md\n│\n├───.github\n└───profile\n        README.md\n\n\n\nTake a look above. I have the required documents/policies at the root of the .github repo directory. Now if I open up any given repo in the organization I will find a link to those files:\n\nIf you click on the CODE_OF_CONDUCT link it will take you right to the .github repo and open the CODE_OF_CONDUCT.md file there:\n\nNow you can set organization level policies from the .github repo and they will automatically populate in all existing and new repositories unless there are repo specific policies in place. If a repo already has its own policies they will not be overwritten.",
+    "crumbs": [
+      "Github Policies",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Github Organization Policies</span>"
+    ]
+  },
+  {
+    "objectID": "gh/policies.html#commit-sign-off-requirement---github-apps",
+    "href": "gh/policies.html#commit-sign-off-requirement---github-apps",
+    "title": "2  Github Organization Policies",
+    "section": "4.1 Commit Sign-Off Requirement - Github Apps",
+    "text": "4.1 Commit Sign-Off Requirement - Github Apps\nWe may want to require authors or reviewers to sign-off on commits to a repo. This is sometimes established in projects to “ensure that copyrighted code not released under an appropriate free software (open source) license is not included in the kernel.”\nYou can install a Github App in the organization and it will be applied to all repos. The DCO App (Developer Certificate of Origin) is popular and lightweight. To install it in the organization, click on Configure and it will give you the option to configure it with the organization of choice.",
+    "crumbs": [
+      "Github Policies",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Github Organization Policies</span>"
+    ]
+  },
+  {
+    "objectID": "gh/lic.html",
+    "href": "gh/lic.html",
+    "title": "3  Licensing",
+    "section": "",
+    "text": "Summary\n\nLicenses prevent code theft and inappropriate redistribution of code.\nReview common open-source licenses\nLicense types vary depending on repo goals\n\n\n\n\n4 General License Info\nBelow is a list of common open-source licenses.\n\n\nThere isn’t a one size fits all license, so thankfully there are a variety of options. Here are two common ones:\n\n\n5 GNU GPL licenses\n\nThese are the strong licenses\nPrevents someone from taking our code and privatizing it (and making money off of it)\nSomeone can still use our code, they just need to ensure that what they’re doing with it is open-source\n“Copyright and license notices must be preserved.”\n“Contributors provide an express grant of patent rights. When a modified version is used to provide a service over a network, the complete source code of the modified version must be made available.”\n\n\n\n6 MIT license\n\nI think this is the most commonly used one\n“short and simple permissive license… only requiring preservation of copyright and license notices”\n“Licensed works, modifications, and larger works may be distributed under different terms and without source code.”\nSomeone could basically do whatever they want with the code.\nNextstain/ncov repo is currently using this\n\nAnd here are a couple of youtube videos that were helping in explaining licensing",
+    "crumbs": [
+      "Github Policies",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Licensing</span>"
+    ]
+  },
+  {
+    "objectID": "gh/reproduce.html",
+    "href": "gh/reproduce.html",
+    "title": "4  Reproducibility",
+    "section": "",
+    "text": "5 Data and Code Democratization\nData and code in our repositories need to be accessible to end users and developers. There should be no bottlenecks or difficulties with installing software, executing code, finding documentation, and using test datasets.\nThe goal is for any user to run code without needing to install anything on their personal machine and run your code with minimal set up. This may not be possible in every scenario, but there are tools available in Github to make this possible for the majority of our repos.",
+    "crumbs": [
+      "Github Policies",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Reproducibility</span>"
+    ]
+  },
+  {
+    "objectID": "gh/reproduce.html#open-a-codespace",
+    "href": "gh/reproduce.html#open-a-codespace",
+    "title": "4  Reproducibility",
+    "section": "6.1 Open a Codespace",
+    "text": "6.1 Open a Codespace\nAt the root of the repo, click on the Code drop down button\n\nOn the right there is a tab called Codespaces.\nClick the + sign and a Codespace will launch\n\n\n\n\nopen up a codespace\n\n\nThis will open up a VS Code window in your browser. There are also options to open up a Jupyter Notebook or Jetbrains IDE (Pycharm). You can also install an Rstudio IDE into the codespace. It will look something like this - note that the repository is already linked and checked out into the codespace:\n\n\n\nVS Code IDE in Github Codespaces\n\n\nHere you can install most software. You can also customize the Codespace so that whenever someone opens one in your repo it will come with software pre-installed. More on that in the devcontainers section",
+    "crumbs": [
+      "Github Policies",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Reproducibility</span>"
+    ]
+  },
+  {
+    "objectID": "gh/reproduce.html#devcontainers",
+    "href": "gh/reproduce.html#devcontainers",
+    "title": "4  Reproducibility",
+    "section": "6.2 Devcontainers",
+    "text": "6.2 Devcontainers\nDevcontainers are a way to install software into a Codespace so that whenever a user opens up the Codespace they won’t need to install anything themselves. Making a container can be a little tricky, so we’ve made Github templates that have devcontainers already made. See templates. There are R, Python, and general default templates. These containers will install R, Rstudio, Python, and all the packages in the repo’s virtual environments (venv, conda, pip, renv, etc) so that the user can run all the code in your repo within a couple minutes.\nTo set up a devcontainer for yourself;\n\nClick on `Code &gt; Codespaces &gt; Configure dev container\n\n\n\nThis will make a folder named .devcontainer at the root of your repo\nIn that folder it will make a file named devcontainer.json\nOn the right there is a searchable marketplace for software to add to your container\n\n\n\nEach one comes with instructions on how to add the software to the .devcontainer.json\n\nFor more information about Codespaces, see the guides here",
+    "crumbs": [
+      "Github Policies",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Reproducibility</span>"
+    ]
+  },
+  {
+    "objectID": "aws/aws_index.html",
+    "href": "aws/aws_index.html",
+    "title": "",
+    "section": "",
+    "text": "AWS Policies5  aws_index.html Code",
+    "crumbs": [
+      "AWS Policies",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>aws_index.html</span>"
+    ]
+  },
+  {
+    "objectID": "azure/azure_index.html",
+    "href": "azure/azure_index.html",
+    "title": "",
+    "section": "",
+    "text": "Azure Policies6  azure_index.html Code",
+    "crumbs": [
+      "Azure Policies",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>azure_index.html</span>"
+    ]
+  }
+]
