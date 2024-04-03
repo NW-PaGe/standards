@@ -6,11 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Frank Aragona">
-<meta name="dcterms.date" content="2023-09-01">
-<meta name="description" content="Make your code reproducible and easy to use for end users">
+<meta name="description" content="Information on which license to choose for you repository">
 
-<title>🌲 Github Policies - Guides and Templates</title>
+<title>🌲 Github Policies - Licensing</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,8 +31,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-listing/list.min.js"></script>
-<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -44,7 +40,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -71,38 +68,7 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-image','listing-date','listing-title','listing-author','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -173,7 +139,7 @@ ul.task-list li input[type="checkbox"] {
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link active" href="../tools/index.html" aria-current="page"> 
+    <a class="nav-link" href="../tools/index.html"> 
 <span class="menu-text">Guides</span></a>
   </li>  
 </ul>
@@ -194,48 +160,20 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Guides and Templates</h1>
+      <h1 class="title">Licensing</h1>
                   <div>
         <div class="description">
-          Make your code reproducible and easy to use for end users
+          Information on which license to choose for you repository
         </div>
       </div>
                 </div>
   </div>
     
-  <div class="quarto-title-meta-author">
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-heading">Affiliations</div>
-    
-      <div class="quarto-title-meta-contents">
-      <p class="author">Frank Aragona <a href="mailto:frank.aragona@doh.wa.gov" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
-    </div>
-      <div class="quarto-title-meta-contents">
-          <p class="affiliation">
-              Washington Department of Health
-            </p>
-          <p class="affiliation">
-              Data Integration/Quality Assurance
-            </p>
-        </div>
-      </div>
-
+  
   <div class="quarto-title-meta">
 
-        
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">September 1, 2023</p>
-      </div>
-    </div>
+      
     
-      <div>
-      <div class="quarto-title-meta-heading">Modified</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date-modified">April 3, 2024</p>
-      </div>
-    </div>
       
     </div>
     
@@ -244,206 +182,65 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(8)</span></div><div class="category" data-category="Git">Git <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Github">Github <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Quarto">Quarto <span class="quarto-category-count">(4)</span></div><div class="category" data-category="data democratization">data democratization <span class="quarto-category-count">(6)</span></div><div class="category" data-category="docker">docker <span class="quarto-category-count">(1)</span></div><div class="category" data-category="documentation">documentation <span class="quarto-category-count">(3)</span></div><div class="category" data-category="pkgdown">pkgdown <span class="quarto-category-count">(1)</span></div><div class="category" data-category="release cycles">release cycles <span class="quarto-category-count">(1)</span></div><div class="category" data-category="renv">renv <span class="quarto-category-count">(1)</span></div><div class="category" data-category="reproducibility">reproducibility <span class="quarto-category-count">(3)</span></div><div class="category" data-category="rmarkdown">rmarkdown <span class="quarto-category-count">(1)</span></div><div class="category" data-category="templates">templates <span class="quarto-category-count">(1)</span></div><div class="category" data-category="venv">venv <span class="quarto-category-count">(1)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#general-license-info" id="toc-general-license-info" class="nav-link active" data-scroll-target="#general-license-info"><span class="header-section-number">1</span> General License Info</a></li>
+  <li><a href="#gnu-gpl-licenses" id="toc-gnu-gpl-licenses" class="nav-link" data-scroll-target="#gnu-gpl-licenses"><span class="header-section-number">2</span> GNU GPL licenses</a></li>
+  <li><a href="#mit-license" id="toc-mit-license" class="nav-link" data-scroll-target="#mit-license"><span class="header-section-number">3</span> MIT license</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/gh/lic.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/gh/lic.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="lic.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
-
-
-
-
-<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
-<div class="listing-actions-group">
-   <div class="input-group input-group-sm quarto-listing-sort">
-     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-     <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
-       <option value="" disabled="" selected="" hidden="">Order By</option>
-       <option value="index" data-direction="asc">Default</option>
-         <option value="listing-date-sort" data-direction="asc">
-          Date - Oldest
-        </option>
-         <option value="listing-date-sort" data-direction="desc">
-          Date - Newest
-        </option>
-         <option value="listing-title-sort" data-direction="asc">
-          Title
-        </option>
-         <option value="listing-author" data-direction="asc">
-          Author
-        </option>
-     </select>
-  </div>
-    <div class="input-group input-group-sm quarto-listing-filter">
-      <span class="input-group-text"><i class="bi bi-search"></i></span>
-      <input type="text" class="search form-control" placeholder="Filter">
-    </div>
+<div class="note medframe">
+<p><i class="fa-solid fa-file fa-3x" aria-label="file"></i> <strong>Summary</strong></p>
+<ul>
+<li>Licenses prevent code theft and inappropriate redistribution of code.</li>
+<li>Review common open-source licenses</li>
+<li>License types vary depending on repo goals</li>
+</ul>
 </div>
-<table class="quarto-listing-table table">
-<thead>
-<tr>
-<th>
-</th>
-<th>
-<a class="sort" data-sort="listing-date-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Date</a>
-</th>
-<th>
-<a class="sort" data-sort="listing-title-sort" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Title</a>
-</th>
-<th>
-<a class="sort" data-sort="listing-author" onclick="if (this.classList.contains('sort-asc')) { this.classList.add('sort-desc'); this.classList.remove('sort-asc') } else { this.classList.add('sort-asc'); this.classList.remove('sort-desc')} return false;">Author</a>
-</th>
-<th>
-Reading Time
-</th>
-</tr>
-</thead>
-<tbody class="list">
-<tr data-index="0" data-categories="data democratization,documentation,Quarto" data-listing-date-sort="1693526400000" data-listing-file-modified-sort="1712169342579" data-listing-date-modified-sort="1712102400000" data-listing-reading-time-sort="13" data-listing-word-count-sort="2573" data-listing-title-sort="Code and Repo Documentation" data-listing-filename-sort="how_to.qmd">
-<td>
-<span class="listing-image"><p class="card-img-top"><img src="images/nwpage_tree_logo.png" alt="Hex logo that says "Data Science in a Box"" style="height: 40px;"  class="thumbnail-image card-img"/></p></span>
-</td>
-<td>
-<span class="listing-date">Sep 1, 2023</span>
-</td>
-<td>
-<a href="../tools/how_to.html" class="title listing-title">Code and Repo Documentation</a>
-</td>
-<td>
-<span class="listing-author">Frank Aragona</span>
-</td>
-<td>
-<span class="listing-reading-time">13 min</span>
-</td>
-</tr>
-<tr data-index="1" data-categories="reproducibility,Git,Github" data-listing-date-sort="1675209600000" data-listing-file-modified-sort="1712169342579" data-listing-date-modified-sort="1712102400000" data-listing-reading-time-sort="3" data-listing-word-count-sort="516" data-listing-title-sort="Git" data-listing-filename-sort="git.qmd">
-<td>
-<span class="listing-image"><div class="listing-item-img-placeholder card-img-top" style="height: 40px;">&nbsp;</div></span>
-</td>
-<td>
-<span class="listing-date">Feb 1, 2023</span>
-</td>
-<td>
-<a href="../tools/git.html" class="title listing-title">Git</a>
-</td>
-<td>
-<span class="listing-author">Frank Aragona</span>
-</td>
-<td>
-<span class="listing-reading-time">3 min</span>
-</td>
-</tr>
-<tr data-index="2" data-categories="data democratization,docker,Github,reproducibility" data-listing-date-sort="1675209600000" data-listing-file-modified-sort="1712169342579" data-listing-date-modified-sort="1712102400000" data-listing-reading-time-sort="1" data-listing-word-count-sort="1" data-listing-title-sort="Github Codespaces" data-listing-filename-sort="codespaces.qmd">
-<td>
-<span class="listing-image"><div class="listing-item-img-placeholder card-img-top" style="height: 40px;">&nbsp;</div></span>
-</td>
-<td>
-<span class="listing-date">Feb 1, 2023</span>
-</td>
-<td>
-<a href="../tools/codespaces.html" class="title listing-title">Github Codespaces</a>
-</td>
-<td>
-<span class="listing-author">Frank Aragona</span>
-</td>
-<td>
-<span class="listing-reading-time">1 min</span>
-</td>
-</tr>
-<tr data-index="3" data-categories="documentation,Quarto" data-listing-date-sort="1712102400000" data-listing-file-modified-sort="1712169342779" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="178" data-listing-title-sort="Link external R code to the documentation" data-listing-filename-sort="link_code.qmd">
-<td>
-<span class="listing-image"><p class="card-img-top"><img src="images/code-chunk.PNG" style="height: 40px;"  class="thumbnail-image card-img"/></p></span>
-</td>
-<td>
-<span class="listing-date">Apr 3, 2024</span>
-</td>
-<td>
-<a href="../tools/link_code.html" class="title listing-title">Link external R code to the documentation</a>
-</td>
-<td>
-<span class="listing-author">Frank Aragona</span>
-</td>
-<td>
-<span class="listing-reading-time">1 min</span>
-</td>
-</tr>
-<tr data-index="4" data-categories="data democratization,documentation,Quarto,pkgdown,rmarkdown" data-listing-date-sort="1693526400000" data-listing-file-modified-sort="1712169342779" data-listing-date-modified-sort="1712102400000" data-listing-reading-time-sort="1" data-listing-word-count-sort="1" data-listing-title-sort="Package Documentation" data-listing-filename-sort="pkgdoc.qmd">
-<td>
-<span class="listing-image"><div class="listing-item-img-placeholder card-img-top" style="height: 40px;">&nbsp;</div></span>
-</td>
-<td>
-<span class="listing-date">Sep 1, 2023</span>
-</td>
-<td>
-<a href="../tools/pkgdoc.html" class="title listing-title">Package Documentation</a>
-</td>
-<td>
-<span class="listing-author">Frank Aragona</span>
-</td>
-<td>
-<span class="listing-reading-time">1 min</span>
-</td>
-</tr>
-<tr data-index="5" data-categories="data democratization,release cycles,Github" data-listing-date-sort="1693526400000" data-listing-file-modified-sort="1712169342779" data-listing-date-modified-sort="1712102400000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1167" data-listing-title-sort="Release Cycles" data-listing-filename-sort="release.qmd">
-<td>
-<span class="listing-image"><p class="card-img-top"><img src="images/releases.PNG" style="height: 40px;"  class="thumbnail-image card-img"/></p></span>
-</td>
-<td>
-<span class="listing-date">Sep 1, 2023</span>
-</td>
-<td>
-<a href="../tools/release.html" class="title listing-title">Release Cycles</a>
-</td>
-<td>
-<span class="listing-author">Frank Aragona</span>
-</td>
-<td>
-<span class="listing-reading-time">6 min</span>
-</td>
-</tr>
-<tr data-index="6" data-categories="data democratization,templates,Quarto" data-listing-date-sort="1693526400000" data-listing-file-modified-sort="1712169342779" data-listing-date-modified-sort="1712102400000" data-listing-reading-time-sort="1" data-listing-word-count-sort="157" data-listing-title-sort="Templates" data-listing-filename-sort="templates.qmd">
-<td>
-<span class="listing-image"><p class="card-img-top"><img src="images/r_template.PNG" style="height: 40px;"  class="thumbnail-image card-img"/></p></span>
-</td>
-<td>
-<span class="listing-date">Sep 1, 2023</span>
-</td>
-<td>
-<a href="../tools/templates.html" class="title listing-title">Templates</a>
-</td>
-<td>
-<span class="listing-author">Frank Aragona</span>
-</td>
-<td>
-<span class="listing-reading-time">1 min</span>
-</td>
-</tr>
-<tr data-index="7" data-categories="data democratization,venv,renv,reproducibility" data-listing-date-sort="1675209600000" data-listing-file-modified-sort="1712169342779" data-listing-date-modified-sort="1712102400000" data-listing-reading-time-sort="11" data-listing-word-count-sort="2163" data-listing-title-sort="Virtual Environments" data-listing-filename-sort="renv.qmd">
-<td>
-<span class="listing-image"><p class="card-img-top"><img src="images/nwpage_tree_logo.png" alt="Hex logo that says "Data Science in a Box"" style="height: 40px;"  class="thumbnail-image card-img"/></p></span>
-</td>
-<td>
-<span class="listing-date">Feb 1, 2023</span>
-</td>
-<td>
-<a href="../tools/renv.html" class="title listing-title">Virtual Environments</a>
-</td>
-<td>
-<span class="listing-author">Frank Aragona</span>
-</td>
-<td>
-<span class="listing-reading-time">11 min</span>
-</td>
-</tr>
-</tbody>
-</table>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+<p><br></p>
+<section id="general-license-info" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> General License Info</h1>
+<p><a href="https://choosealicense.com/licenses/">Below is a list of common open-source licenses.</a></p>
+<!-- Content for HTML --->
+<iframe width="780" height="500" src="https://choosealicense.com/licenses/" title="Github Licenses"></iframe>
+<p>There isn’t a one size fits all license, so thankfully there are a variety of options. Here are two common ones:</p>
+</section>
+<section id="gnu-gpl-licenses" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> GNU GPL licenses</h1>
+<ol type="a">
+<li>These are the strong licenses</li>
+<li>Prevents someone from taking our code and privatizing it (and making money off of it)</li>
+<li>Someone can still use our code, they just need to ensure that what they’re doing with it is open-source</li>
+<li>“Copyright and license notices must be preserved.”</li>
+<li>“Contributors provide an express grant of patent rights. When a modified version is used to provide a service over a network, the complete source code of the modified version must be made available.”</li>
+</ol>
+</section>
+<section id="mit-license" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> MIT license</h1>
+<ol type="a">
+<li>I think this is the most commonly used one</li>
+<li>“short and simple permissive license… only requiring preservation of copyright and license notices”</li>
+<li>“Licensed works, modifications, and larger works may be distributed under different terms and without source code.”</li>
+<li>Someone could basically do whatever they want with the code.</li>
+<li>Nextstain/ncov repo is currently using this</li>
+</ol>
+<p>And here are a couple of youtube videos that were helping in explaining licensing</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/rbQg9DY_4y0?si=OvU9vLBHX43dTIcA" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/ndORMSnb2nw?si=tkUzjwZYWKfrLTEU" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+
+
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -810,7 +607,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/tools/index.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/tools/index.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    </div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
@@ -820,5 +617,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<script src="../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 </body></html>

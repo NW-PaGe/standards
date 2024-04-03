@@ -130,25 +130,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-policies" role="button" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Policies</span>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-github-policies" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Github Policies</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-policies">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-github-policies">    
         <li>
-    <a class="dropdown-item" href="../std/security.html">
+    <a class="dropdown-item" href="../gh/security.html">
  <span class="dropdown-text">0: Security Standards</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../std/lic.html">
+    <a class="dropdown-item" href="../gh/lic.html">
  <span class="dropdown-text">1: Choosing a License</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../std/policies.html">
+    <a class="dropdown-item" href="../gh/policies.html">
  <span class="dropdown-text">2: Repo Policies</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../std/reproduce.html">
+    <a class="dropdown-item" href="../gh/reproduce.html">
  <span class="dropdown-text">3: Reproducibility</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-aws-policies" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">AWS Policies</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-aws-policies">    
+        <li>
+    <a class="dropdown-item" href="../aws/aws_index.html">
+ <span class="dropdown-text">0: AWS Policies</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-azure-policies" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Azure Policies</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-azure-policies">    
+        <li>
+    <a class="dropdown-item" href="../azure/azure_index.html">
+ <span class="dropdown-text">0: Azure Policies</span></a>
   </li>  
     </ul>
   </li>
@@ -215,7 +237,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#code-reviewersgithub-operations-team" id="toc-code-reviewersgithub-operations-team" class="nav-link" data-scroll-target="#code-reviewersgithub-operations-team"><span class="header-section-number">2</span> Code Reviewers/Github Operations Team</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/std/security.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/std/security.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="security.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/gh/security.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/gh/security.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="security.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
@@ -552,7 +574,7 @@ Note
 <li><p>Check that the <code>secrets_key</code> regex is working by running the process on a repo that you know has secrets in it. For example, in a different folder, run all the pre-commit hook steps above and add a known “bad” string into the regex. For example, in the regex put <code>bad_string</code> and in a file in that folder put <code>bad_string</code>. When you scan it should get flagged.</p></li>
 <li><p>If secret scanning is taking too long, you might want to check certain files first. I’ve found that HTML files take a <em>very</em> long time to scan for secrets. If you’re using linux or macOS you should be able to scan certain files via grob like this <code>git secrets --scan path/to/files*</code>. If you’re using windows it probably won’t work. In that case, if you only want certain file extentsions to be scanned, use this function in powershell below. Download the file here:</p></li>
 </ol>
-<p><a href="#dnldts11651" onclick="fetch('data:text/plain;base64,IyBSRUFETUUKCiMjIFRoaXMgc2NyaXB0IHJlcXVpcmVzIEFXUyBHaXQgU2VjcmV0cyBhbmQgcmVjb21tZW5kcyBjdXN0b20gcmVnZXggc2VjcmV0cy4KIyMgZm9yIG1vcmUgZGV0YWlscyBhbmQgaW5zdGFsbCBpbnN0cnVjdGlvbnMsIHBsZWFzZSBmb2xsb3cgaHR0cHM6Ly9udy1wYWdlLmdpdGh1Yi5pby9zdGFuZGFyZHMvc3RkL3NlY3VyaXR5Lmh0bWwjcHJlLWNvbW1pdC1ob29rcwoKIyBFeGFtcGxlIFVzYWdlCiMgd3JpdGUgdGhpcyBpbiB0aGUgcG93ZXJzaGVsbCB0ZXJtaW5hbCwgYWRqdXN0IGZvciB0aGUgZmlsZSB0eXBlKHMpIHlvdSB3YW50IHRvIHNjYW4gLSBjYW4gYmUgbXVsdGlwbGUgdHlwZXM6ICRmaWxlRXh0ZW5zaW9ucyA9IEAoIi5SIiwgIi5weSIpCiMgdGhlbiBleGVjdXRlIHRoaXMgaW4gdGhlIHRlcm1pbmFsOiBTY2FuRmlsZXMgLUZpbGVFeHRlbnNpb25zICRmaWxlRXh0ZW5zaW9ucwoKIyBUaGVyZSdzIGFuIG9wdGlvbmFsIHBhcmFtZXRlciBjYWxsZWQgJGZpbGVQYXRoLiBJdCB3aWxsIGF1dG9tYXRpY2FsbHkgc2V0IHRvIHlvdXIgY3VycmVudCBmb2xkZXIKIyBZb3UgY2FuIGNoYW5nZSBpdCBpZiB5b3UgbmVlZCBsaWtlIHRoaXM6ICRmaWxlUGF0aCA9ICJwYXRoL3RvL2ZvbGRlciIKCiMgSXQgd2lsbCBnaXZlIHlvdSBhbiBvdXRwdXQgb2YgYW55IHNlY3JldHMgdGhhdCBhcmUgY29udGFpbmVkIGluIHRob3NlIGZpbGVzCgpGdW5jdGlvbiBTY2FuRmlsZXN7CiAgICBwYXJhbSAoCiAgICAgICAgW3N0cmluZ10kZmlsZVBhdGggPSAoR2V0LUxvY2F0aW9uKS5QYXRoLAogICAgICAgIFtzdHJpbmdbXV0kZmlsZUV4dGVuc2lvbnMKICApIAogICAgR2V0LUNoaWxkSXRlbSAkZmlsZVBhdGggLXJlY3Vyc2UgfCBXaGVyZS1PYmplY3QgeyRfLmV4dGVuc2lvbiAtaW4gJGZpbGVFeHRlbnNpb25zfSB8IAogICAgRm9yZWFjaC1PYmplY3QgewoKICAgICAgICBnaXQgc2VjcmV0cyAtLXNjYW4gJF8uRnVsbE5hbWUgfCBPdXQtRmlsZSAkbG9nRmlsZSAtQXBwZW5kCgogICAgfQogIH0=').then(res => res.blob()).then(blob => {
+<p><a href="#dnldts36443" onclick="fetch('data:text/plain;base64,IyBSRUFETUUKCiMjIFRoaXMgc2NyaXB0IHJlcXVpcmVzIEFXUyBHaXQgU2VjcmV0cyBhbmQgcmVjb21tZW5kcyBjdXN0b20gcmVnZXggc2VjcmV0cy4KIyMgZm9yIG1vcmUgZGV0YWlscyBhbmQgaW5zdGFsbCBpbnN0cnVjdGlvbnMsIHBsZWFzZSBmb2xsb3cgaHR0cHM6Ly9udy1wYWdlLmdpdGh1Yi5pby9zdGFuZGFyZHMvc3RkL3NlY3VyaXR5Lmh0bWwjcHJlLWNvbW1pdC1ob29rcwoKIyBFeGFtcGxlIFVzYWdlCiMgd3JpdGUgdGhpcyBpbiB0aGUgcG93ZXJzaGVsbCB0ZXJtaW5hbCwgYWRqdXN0IGZvciB0aGUgZmlsZSB0eXBlKHMpIHlvdSB3YW50IHRvIHNjYW4gLSBjYW4gYmUgbXVsdGlwbGUgdHlwZXM6ICRmaWxlRXh0ZW5zaW9ucyA9IEAoIi5SIiwgIi5weSIpCiMgdGhlbiBleGVjdXRlIHRoaXMgaW4gdGhlIHRlcm1pbmFsOiBTY2FuRmlsZXMgLUZpbGVFeHRlbnNpb25zICRmaWxlRXh0ZW5zaW9ucwoKIyBUaGVyZSdzIGFuIG9wdGlvbmFsIHBhcmFtZXRlciBjYWxsZWQgJGZpbGVQYXRoLiBJdCB3aWxsIGF1dG9tYXRpY2FsbHkgc2V0IHRvIHlvdXIgY3VycmVudCBmb2xkZXIKIyBZb3UgY2FuIGNoYW5nZSBpdCBpZiB5b3UgbmVlZCBsaWtlIHRoaXM6ICRmaWxlUGF0aCA9ICJwYXRoL3RvL2ZvbGRlciIKCiMgSXQgd2lsbCBnaXZlIHlvdSBhbiBvdXRwdXQgb2YgYW55IHNlY3JldHMgdGhhdCBhcmUgY29udGFpbmVkIGluIHRob3NlIGZpbGVzCgpGdW5jdGlvbiBTY2FuRmlsZXN7CiAgICBwYXJhbSAoCiAgICAgICAgW3N0cmluZ10kZmlsZVBhdGggPSAoR2V0LUxvY2F0aW9uKS5QYXRoLAogICAgICAgIFtzdHJpbmdbXV0kZmlsZUV4dGVuc2lvbnMKICApIAogICAgR2V0LUNoaWxkSXRlbSAkZmlsZVBhdGggLXJlY3Vyc2UgfCBXaGVyZS1PYmplY3QgeyRfLmV4dGVuc2lvbiAtaW4gJGZpbGVFeHRlbnNpb25zfSB8IAogICAgRm9yZWFjaC1PYmplY3QgewoKICAgICAgICBnaXQgc2VjcmV0cyAtLXNjYW4gJF8uRnVsbE5hbWUgfCBPdXQtRmlsZSAkbG9nRmlsZSAtQXBwZW5kCgogICAgfQogIH0=').then(res => res.blob()).then(blob => {
       const downloadURL = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       document.body.appendChild(a);
@@ -560,7 +582,7 @@ Note
       a.download = 'secretscanner.ps1'; a.click();
       window.URL.revokeObjectURL(downloadURL);
       document.body.removeChild(a);
-        });"><button class="btn btn-default downloadthis  " id="dnldts11651"><i class="bi bi-download"></i> Download Secret Scanner Script </button></a></p>
+        });"><button class="btn btn-default downloadthis  " id="dnldts36443"><i class="bi bi-download"></i> Download Secret Scanner Script </button></a></p>
 <div class="myframe">
 <div class="cell">
 <div class="code-with-filename">
