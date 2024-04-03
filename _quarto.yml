@@ -17,17 +17,29 @@ website:
     left: 
       - text: Home
         href: index.qmd
-      - text: Policies
+      - text: Github Policies
         menu:
-          - href: std/security.qmd
+          - href: gh/security.qmd
             text: "0: Security Standards"
-          - href: std/lic.qmd
+          - href: gh/lic.qmd
             text: "1: Choosing a License"
-          - href: std/policies.qmd
+          - href: gh/policies.qmd
             text: "2: Repo Policies"
-          - href: std/reproduce.qmd
+          - href: gh/reproduce.qmd
             text: "3: Reproducibility"
+      - text: AWS Policies
+        menu:
+          - href: aws/aws_index.qmd
+            text: "0: AWS Policies"
+      - text: Azure Policies
+        menu:
+          - href: azure/azure_index.qmd
+            text: "0: Azure Policies"
+      
             
+      # where should this go? could be internal resource, 
+      # specific to what we do should be internal
+      # maybe eventually move out when restructure needed
       - text: Guides
         href: tools/index.qmd
 
