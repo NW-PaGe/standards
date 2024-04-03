@@ -22,6 +22,7 @@ format:
     output-ext:  "pdf"
     margin-width: 10px
     gutter-width: 1.5rem
+    fig-pos: "H" # this makes sure that the figures output where they're supposed to in pdf 
     # linkcolor: RSSblue
     # urlcolor: RSSblue
     include-in-header:
@@ -73,7 +74,7 @@ For more information, tutorials and code examples, please see the policies websi
 #| eval: true
 #| message: false
 #| warning: false
-why <- process_qmd("std/security.qmd", fpath_in = "images/", fpath_out = "std/images/")
+why <- process_qmd("gh/security.qmd", fpath_in = "images/", fpath_out = "gh/images/")
 cat(unlist(why), sep = '\n')
 ```
 
@@ -85,7 +86,7 @@ cat(unlist(why), sep = '\n')
 #| eval: true
 #| message: false
 #| warning: false
-why <- process_qmd("std/lic.qmd", fpath_in = "images/", fpath_out = "std/images/")
+why <- process_qmd("gh/lic.qmd", fpath_in = "images/", fpath_out = "gh/images/")
 cat(unlist(why), sep = '\n')
 ```
 
@@ -97,7 +98,7 @@ cat(unlist(why), sep = '\n')
 #| eval: true
 #| message: false
 #| warning: false
-why <- process_qmd("std/policies.qmd", fpath_in = "images/", fpath_out = "std/images/")
+why <- process_qmd("gh/policies.qmd", fpath_in = "images/", fpath_out = "gh/images/")
 cat(unlist(why), sep = '\n')
 ```
 
@@ -109,6 +110,6 @@ cat(unlist(why), sep = '\n')
 #| eval: true
 #| message: false
 #| warning: false
-why <- process_qmd("std/reproduce.qmd", fpath_in = "images/", fpath_out = "std/images/")
+why <- process_qmd("gh/reproduce.qmd", fpath_in = "images/", fpath_out = "gh/images/")
 cat(unlist(why), sep = '\n')
 ```
