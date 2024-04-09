@@ -361,7 +361,7 @@ Function ScanFiles{
   Get-ChildItem $filePath -recurse | Where-Object {$_.extension -in $fileExtensions} | 
   Foreach-Object {
 
-      git secrets --scan $_.FullName | Out-File $logFile -Append
+      git secrets --scan $_.FullName
 
   }
 }
