@@ -11,10 +11,12 @@ $gray-800: #343a40;
 $gray-900: #212529;
 $black: #000;
 
-$primary: #440154ff;
+// $primary: #440154ff;
+$primary: #f8f5f9;
 $secondary: #20A486ff;
 $secondaryalt: #155D64;
 $secondaryalt2: #efe8f1;
+$secondaryalt3: #c3e0fa;
 $tertiary: #75D054ff;
 
 $theme-white: #F7F8F9;
@@ -22,13 +24,84 @@ $theme-yellow: #E8D4AD;
 $theme-darksand: #D0927D;
 $theme-night: #060708;
 $theme-ground: #416270;
-$navbar-fg: #f5eff6;
+// navbar text
+// $navbar-fg: #f5eff6;
+$navbar-fg: $theme-night;
+$light-bg: #f8f5f9;
+
+// fonts
+$font-family-sans-serif: 'Manrope', sans-serif;
+// $presentation-heading-font: 'IBM Plex Serif', serif;
+
+// fonts
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Manrope:wght@200..800&display=swap');
+
 
 
 /*-- scss:rules --*/
 
-h1, h2, h3 {
-  font-family: "Franklin Gothic", Georgia, serif;
+// h1, h2, h3 {
+//   font-family: "Franklin Gothic", Georgia, serif;
+// }
+
+.css-qp8v3 {
+  font-weight: 500;
+  font-size: 4em;
+  line-height: 1.15;
+  letter-spacing: -0.03;
+  margin-bottom: 24px;
+}
+
+.css-nzw60t {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+}
+
+
+.splash-page {
+  padding: 50px 0;
+  width: 100%;
+  background-color: #e9ecef;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+  
+}
+
+
+.content {
+  flex: 1;
+}
+
+.image {
+  max-width: 100%;
+  height: auto;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: $gray-900;
+  color: $gray-100;
+  border: 1px solid black;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: transform 0.2s ease-in-out;
+  font-weight: bold;
+}
+
+.button:hover {
+  transform: translateY(-3px);
 }
 
 h2, .h2 {
@@ -173,7 +246,6 @@ div.obj>p:first-child {
     background: #e9ecef;
 }
 
-
 /* Add logo to title block margin */
 .quarto-title-block .quarto-title-banner {
   background-image: url(images/nwpage_tree_logo.png);
@@ -208,106 +280,4 @@ div.obj>p:first-child {
     padding-left: 15%;
 }
 
-
-/* Make cool hover tabs for front page */
-
-.hover-button {
-    body
-  {
-      margin: 0 auto;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      background: #031321;
-      font-family: roboto;
-      font-weight: bold;
-  }
-  
-  a {
-      position: relative;
-      display: inline-block;
-      padding: 15px 30px;
-      color: $primary;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      text-decoration: none;
-      font-size: 24px;
-      overflow: hidden;
-      transition: 0.2s;
-  }
-  
-  a:hover {
-      color: $secondary;
-      // background: $primary;
-      // box-shadow: 0 0 10px $primary,
-      //   0 0 40px $primary,
-      //   0 0 80px $primary;
-      transition-delay: 1s;
-  }
-  
-  a span {
-      position: absolute;
-      display: block;
-  }
-  
-  a span:nth-child(1) {
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg,transparent,$primary);
-  }
-  
-  a:hover span:nth-child(1) {
-      left: 100%;
-      transition: 1s;
-  }
-  
-  a span:nth-child(3) {
-      bottom: 0;
-      right: -100%;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(270deg,transparent,$primary);
-  }
-  
-  a:hover span:nth-child(3) {
-      right: 100%;
-      transition: 1s;
-      transition-delay: 0.5s;
-  
-  }
-  
-  
-  a span:nth-child(2) {
-      top: -100%;
-      right: 0;
-      width: 2px;
-      height: 100%;
-      background: linear-gradient(180deg,transparent,$primary);
-  }
-  
-  a:hover span:nth-child(2) {
-      top: 100%;
-      transition: 1s;
-      transition-delay: 0.25s;
-  }
-  
-  
-  a span:nth-child(4) {
-      bottom: -100%;
-      left: 0;
-      width: 2px;
-      height: 100%;
-      background: linear-gradient(360deg,transparent,$primary);
-  }
-  
-  a:hover span:nth-child(4) {
-      bottom: 100%;
-      transition: 1s;
-      transition-delay: 0.75s;
-  }
-}
 
