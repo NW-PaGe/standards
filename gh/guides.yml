@@ -1,0 +1,25 @@
+- title: Policies
+  subtitle: NW-PaGe Github policies on repo security, licensing, and organization requirements
+  links:
+    - text: Repo Security Rules
+      href: security.qmd
+    - text: Licensing
+      href: lic.qmd
+    - text: Organization Requirements
+      href: policies.qmd
+    - text: Code Requirements
+      href: reproduce.qmd
+
+- title: Tutorials
+  subtitle: NW-PaGe Github repo tutorials
+  links:
+    - text: Release Cycles
+      href: release.qmd
+    - text: Virtual Environments
+      href: renv.qmd
+    - text: Github and Quarto Templates
+      href: templates.qmd
+    - text: Git Basics
+      href: git.qmd
+    - text: Repo Documentation/Github Pages and Quarto
+      href: how_to.qmd

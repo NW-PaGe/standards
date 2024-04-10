@@ -1,77 +1,103 @@
 ---
-# title: "Github Policies"
-# description: Github Policies
+# title: "NW-PaGe Open-Source Policies"
+# description: Github, Azure, AWS policies and guidelines
 format: 
   html: 
     toc: false
     number-sections: false
     title-block-banner: false
-    page-layout: full
-about:
-  id: about
-  template: jolla
-  image-shape: rectangle
-  image: images/nwpage_logo.png
-  image-width: "40em"
-  links:
-    - icon: info-circle
-      href: about.qmd
-    # - icon: download
-    #   href: install.qmd
-    # - icon: book
-    #   href: tutorials/getting_started.qmd
-    - icon: github
-      text: GitHub
-      href: https://github.com/NW-PaGe
-    - icon: zulip
-      href: https://github.com/NW-PaGe/standards/issues/new
-      text: Chat
+    mainfont: Manrope
+    # page-layout: custom
 execute: 
   eval: false
   freeze: true
 ---
 
+::: container
+::: content
+<h1 class="css-qp8v3">
 
-:::{#about}
+::: css-nzw60t
+NORTHWEST PATHOGEN GENOMICS CENTER OF EXCELLENCE
 :::
 
+Policies and Guidelines
 
-<center>
+</h1>
 
-:::{.hover-button}
-<body>
-    <a href="#collapseQuickstart" class="hover-button" data-bs-toggle="collapse"
-    role="button" aria-expanded="false" aria-controls="collapseQuickstart">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        Get Started
-    </a>
-        
-</body>
+This is a static website documenting the policies and guidelines for public Github use at the Pacific Northwest Genomic Center of Excellence. Scroll below to see overviews on Github, Azure, and AWS policies.
+
+<a href="#collapseQuickstart" class="button">Get started</a>
+
+<!-- {{< bi github size=2em href="https://github.com/NW-PaGe/standards" >}} -->
 :::
 
-</center>
+::: image
+![](images/nwpage_tree_logo.png){width="250"}
+:::
+:::
 
-::: {#collapseQuickstart .collapse}
+<br> <br> <br>
 
+:::: {.splash-page}
+
+
+::: {#collapseQuickstart .column-page}
+::: {.column width="33%"}
+{{< bi github size=4em >}}
+
+**Github Policies**
+
+-   Repo security rules {{< fa unlock >}}
+-   Licensing {{< fa file >}}
+-   Templates and guides {{< fa book >}}
+
+<a href="gh/index.qmd" class="button">**gh guides**</a>
+:::
+
+::: {.column width="33%"}
+{{< bi amazon size=4em >}}
+
+**AWS Policies**
+
+-   Repo AWS rules {{< fa unlock >}}
+-   Documentation {{< fa file >}}
+-   User guides {{< fa book >}}
+
+
+<a href="aws/aws_index.qmd" class="button">**aws guides**</a>
+:::
+
+::: {.column width="33%"}
+{{< bi cloud-fog-fill size=4em >}}
+
+**Azure Policies**
+
+-   Repo Azure/Databricks rules {{< fa unlock >}}
+-   Documentation {{< fa file >}}
+-   User guides {{< fa book >}}
+
+<a href="azure/azure_index.qmd" class="button">**azure guides**</a>
+:::
+:::
+
+::::
+
+````{=html}
+<!--
 ## Quickstart
 
-This is a static website documenting the proposed policies and standards for public Github use at the Pacific Northwest Genomic Center of Excellence. There are documents on 
+This is a static website documenting the proposed policies and standards for public Github use at the Pacific Northwest Genomic Center of Excellence. There are documents on
 
-1.    Security and how to protect credential and private process leaks {{< fa unlock >}}
-2.    Licensing to protect against re-sale or theft of code {{< fa file >}}
-3.    Our Github rules, policies, and templates {{< fa book >}}
-4.    Github user guides {{< fa file >}}
+1.  Security and how to protect credential and private process leaks {{< fa unlock >}}
+2.  Licensing to protect against re-sale or theft of code {{< fa file >}}
+3.  Our Github rules, policies, and templates {{< fa book >}}
+4.  Github user guides {{< fa file >}}
+
+If there are any questions please reach out to
 
 
-If there are any questions please reach out to 
-
-<!-- Content for HTML --->
-
-:::{.column-screen-inset-shaded layout-nrow="1"}
-
+::: {.column-screen-inset-shaded layout-nrow="1"}
 {{< fa unlock >}} **Personal or network credentials, tokens, server names and more are prohibited from being published to our public repos.** Protect security and credentials with good coding practices. Using local environment files along with `.gitignore` can prevent credentials from being accidentally pushed into your repo. Other guardrails like **pre-commit hooks** can be used to further prevent accidental credential leaks. [**See more details on our security policies here**](std/security.qmd)
 
 ```{yaml filename="local_credentials.yml"}
@@ -97,21 +123,14 @@ creds <- yaml::read_yaml("path/to/local_credentials.yml")
 username <- creds$my_credentials$username
 password <- creds$my_credentials$password
 ```
-
-
-
 :::
 
-:::{.column-screen-inset-shaded layout-nrow="1"}
-
+::: {.column-screen-inset-shaded layout-nrow="1"}
 {{< fa file >}} Each repo in the organization should have a license. Licenses can help prevent your work from being stolen and/or used inappropriately. [Licensing details here](std/lic.qmd)
 
 {{< fa book >}} This organization requires each repo to have [certain documents](std/templates.qmd), such as a CODE_OF_CONDUCT. The organization uses a special repo called **.github** to ensure all repos adhere to the policies and have the right documents.
 
-
 {{< fa file >}} If you're looking to build a repository, [check out the Github user guide tabs](tools/how_to.qmd) for best practices on reproducibility, documentation in the repo, and more.
-
 :::
-
-:::
-
+-->
+````

@@ -1,6 +1,9 @@
 ---
 title: "Reproducibility"
 description: Data and Code Democratization - how to make your code reproducible
+author: Frank Aragona
+date: 4/9/2023
+date-modified: today
 format: 
   html:
     code-fold: false
@@ -16,6 +19,13 @@ filters:
   - line-highlight
 reference-location: margin
 citation-location: margin
+categories:
+  - data democratization
+  - reproducibility
+  - docker
+  - virutal environments
+  - Github
+  - Git
 ---
 
 ::: {.note .medframe}

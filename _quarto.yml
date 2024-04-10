@@ -5,47 +5,49 @@ project:
 #   hypothesis: true
 
 website:
-  title: "🌲 Github Policies"
+  title: 🌲
   # author: DIQA 
   # date: today
   search: true
   repo-url: https://github.com/NW-PaGe/standards
   repo-actions: [source,edit,issue]
   
+  # navbar: 
+  #   background: primary
+  #   left: 
+  #     - text: Home
+  #       href: index.qmd
+  #     - text: Github Policies
+  #       menu:
+  #         - href: gh/security.qmd
+  #           text: "0: Security Standards"
+  #         - href: gh/lic.qmd
+  #           text: "1: Choosing a License"
+  #         - href: gh/policies.qmd
+  #           text: "2: Repo Policies"
+  #         - href: gh/reproduce.qmd
+  #           text: "3: Reproducibility"
+  #     - text: AWS Policies
+  #       menu:
+  #         - href: aws/aws_index.qmd
+  #           text: "0: AWS Policies"
+  #     - text: Azure Policies
+  #       menu:
+  #         - href: azure/azure_index.qmd
+  #           text: "0: Azure Policies"
+
   navbar: 
     background: primary
     left: 
-      - text: Home
-        href: index.qmd
+      - text: "Home"
+        file: index.qmd
       - text: Github Policies
-        menu:
-          - href: gh/security.qmd
-            text: "0: Security Standards"
-          - href: gh/lic.qmd
-            text: "1: Choosing a License"
-          - href: gh/policies.qmd
-            text: "2: Repo Policies"
-          - href: gh/reproduce.qmd
-            text: "3: Reproducibility"
+        file: gh/index.qmd
       - text: AWS Policies
-        menu:
-          - href: aws/aws_index.qmd
-            text: "0: AWS Policies"
+        file: aws/aws_index.qmd
       - text: Azure Policies
-        menu:
-          - href: azure/azure_index.qmd
-            text: "0: Azure Policies"
-      
-            
-      # where should this go? could be internal resource, 
-      # specific to what we do should be internal
-      # maybe eventually move out when restructure needed
-      - text: Guides
-        href: tools/index.qmd
+        file: azure/azure_index.qmd
 
-
-            
-            
     search: true
     # logo: images/doh_logo.png
     pinned: false
@@ -54,10 +56,61 @@ website:
       - icon: github
         href: https://github.com/NW-PaGe/standards
         aria-label: GitHub
+
+  sidebar:
+    # background: '#f8f9fa'
+    # alignment: left
+    # style: floating
+    # border: true
+    # search: true
+    - id: gh
+      collapse-level: 2
+      contents:
+        - section: "Guide"
+          href: gh/index.qmd
+          contents: 
+          - section: "Policies"
+            contents:
+              - gh/security.qmd
+              - gh/policies.qmd
+              - gh/lic.qmd
+              - gh/reproduce.qmd
+          - section: "Tutorials"
+            contents:
+              - gh/release.qmd
+              - gh/renv.qmd
+              - gh/templates.qmd
+              - gh/git.qmd
+              - gh/how_to.qmd
+              # - gh/*.qmd # this glob should work but it's not...
+
+    - id: aws
+    - title: "AWS Policies"
+      collapse-level: 2
+      background: '#f8f9fa'
+      alignment: left
+      style: floating
+      border: true
+      search: true
+      align: left
+      contents:
+        - aws/aws_index.qmd
+
+    - id: azure
+    - title: "Azure Policies"
+      collapse-level: 2
+      background: '#f8f9fa'
+      alignment: left
+      style: floating
+      border: true
+      search: true
+      align: left
+      contents:
+        - azure/azure_index.qmd
     
   page-footer:
     left: "🍦"
-    background: "#440154ff"
+    background: "#e9ecef"
     
     
 
@@ -75,7 +128,7 @@ format:
       - cosmo
       - assets/styles.scss
     scss: assets/styles.scss
-    title-block-banner: true
+    title-block-banner: false
     # css: styles.css
     toc: true
     # number-depth: 3
