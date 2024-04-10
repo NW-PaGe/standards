@@ -1,6 +1,9 @@
 ---
 title: "Licensing"
 description: Information on which license to choose for you repository
+author: Frank Aragona
+date: 4/9/2023
+date-modified: today
 editor: 
   markdown: 
     wrap: 72
@@ -8,6 +11,9 @@ format:
   html: 
     code-fold: false
   pdf: default
+categories:
+  - licensing
+  - Github
 ---
 
 :::{.note .medframe}

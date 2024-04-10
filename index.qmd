@@ -6,26 +6,8 @@ format:
     toc: false
     number-sections: false
     title-block-banner: false
+    mainfont: Manrope
     # page-layout: custom
-# about:
-#   id: about
-#   template: jolla
-#   image-shape: rectangle
-#   image: images/nwpage_logo.png
-#   image-width: "40em"
-#   links:
-#     - icon: info-circle
-#       href: about.qmd
-#     # - icon: download
-#     #   href: install.qmd
-#     # - icon: book
-#     #   href: tutorials/getting_started.qmd
-#     - icon: github
-#       text: GitHub
-#       href: https://github.com/NW-PaGe
-#     - icon: zulip
-#       href: https://github.com/NW-PaGe/standards/issues/new
-#       text: Chat
 execute: 
   eval: false
   freeze: true
@@ -57,18 +39,20 @@ This is a static website documenting the policies and guidelines for public Gith
 
 <br> <br> <br>
 
+:::: {.splash-page}
+
+
 ::: {#collapseQuickstart .column-page}
 ::: {.column width="33%"}
 {{< bi github size=4em >}}
 
 **Github Policies**
 
--   Security and how to protect credential and private process leaks {{< fa unlock >}}
--   Licensing to protect against re-sale or theft of code {{< fa file >}}
--   Our Github rules, policies, and templates {{< fa book >}}
--   Github user guides {{< fa file >}}
+-   Repo security rules {{< fa unlock >}}
+-   Licensing {{< fa file >}}
+-   Templates and guides {{< fa book >}}
 
-<a href="#collapseQuickstart" class="button">**gh start**</a>
+<a href="gh/index.qmd" class="button">**gh guides**</a>
 :::
 
 ::: {.column width="33%"}
@@ -76,12 +60,12 @@ This is a static website documenting the policies and guidelines for public Gith
 
 **AWS Policies**
 
--   Security and how to protect credential and private process leaks {{< fa unlock >}}
--   Licensing to protect against re-sale or theft of code {{< fa file >}}
--   Our Github rules, policies, and templates {{< fa book >}}
--   Github user guides {{< fa file >}}
+-   Repo AWS rules {{< fa unlock >}}
+-   Documentation {{< fa file >}}
+-   User guides {{< fa book >}}
 
-<a href="#collapseQuickstart" class="button">**aws start**</a>
+
+<a href="aws/aws_index.qmd" class="button">**aws guides**</a>
 :::
 
 ::: {.column width="33%"}
@@ -89,14 +73,15 @@ This is a static website documenting the policies and guidelines for public Gith
 
 **Azure Policies**
 
--   Security and how to protect credential and private process leaks {{< fa unlock >}}
--   Licensing to protect against re-sale or theft of code {{< fa file >}}
--   Our Github rules, policies, and templates {{< fa book >}}
--   Github user guides {{< fa file >}}
+-   Repo Azure/Databricks rules {{< fa unlock >}}
+-   Documentation {{< fa file >}}
+-   User guides {{< fa book >}}
 
-<a href="#collapseQuickstart" class="button">**azure start**</a>
+<a href="azure/azure_index.qmd" class="button">**azure guides**</a>
 :::
 :::
+
+::::
 
 ````{=html}
 <!--

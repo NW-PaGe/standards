@@ -1,6 +1,9 @@
 ---
-title: "Github Organization Policies"
+title: "Org Policies"
 description: Coding at the Organization level to ensure policies are reflected in each repo
+author: Frank Aragona
+date: 4/9/2023
+date-modified: today
 format: 
   html:
     code-fold: false
@@ -13,6 +16,11 @@ execute:
   eval: false
 filters: 
   - line-highlight
+categories:
+  - policies
+  - licensing
+  - Github
+  - Git
 ---
 
 :::{.note .medframe}

@@ -5,7 +5,7 @@ project:
 #   hypothesis: true
 
 website:
-  # title: "🌲 Github Policies"
+  title: 🌲
   # author: DIQA 
   # date: today
   search: true
@@ -47,11 +47,7 @@ website:
         file: aws/aws_index.qmd
       - text: Azure Policies
         file: azure/azure_index.qmd
-      # where should this go? could be internal resource, 
-      # specific to what we do should be internal
-      # maybe eventually move out when restructure needed
-      - text: Guides
-        file: tools/index.qmd
+
     search: true
     # logo: images/doh_logo.png
     pinned: false
@@ -62,36 +58,59 @@ website:
         aria-label: GitHub
 
   sidebar:
+    # background: '#f8f9fa'
+    # alignment: left
+    # style: floating
+    # border: true
+    # search: true
     - id: gh
-    - title: "Github Policies"
-      style: "docked"
-      collapse-level: 1
-      align: left
-      # background: light
+      collapse-level: 2
       contents:
-        - gh/index.qmd
-        - gh/security.qmd
-        - gh/policies.qmd
+        - section: "Guide"
+          href: gh/index.qmd
+          contents: 
+          - section: "Policies"
+            contents:
+              - gh/security.qmd
+              - gh/policies.qmd
+              - gh/lic.qmd
+              - gh/reproduce.qmd
+          - section: "Tutorials"
+            contents:
+              - gh/release.qmd
+              - gh/renv.qmd
+              - gh/templates.qmd
+              - gh/git.qmd
+              - gh/how_to.qmd
+              # - gh/*.qmd # this glob should work but it's not...
 
     - id: aws
     - title: "AWS Policies"
-      style: "docked"
-      collapse-level: 1
+      collapse-level: 2
+      background: '#f8f9fa'
+      alignment: left
+      style: floating
+      border: true
+      search: true
       align: left
       contents:
         - aws/aws_index.qmd
 
     - id: azure
     - title: "Azure Policies"
-      style: "docked"
-      collapse-level: 1
+      collapse-level: 2
+      background: '#f8f9fa'
+      alignment: left
+      style: floating
+      border: true
+      search: true
       align: left
       contents:
         - azure/azure_index.qmd
     
   page-footer:
     left: "🍦"
-    # background: "#440154ff"
+    background: "#e9ecef"
     
     
 

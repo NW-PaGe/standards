@@ -1,28 +1,52 @@
 ---
 title: "Github Policies"
-description: Protect your credentials, tokens, data and more
-author: Frank Aragona
-date: 4/8/2024
-date-modified: today
-format: 
-  html:
-    code-fold: false
-    code-overflow: wrap
-    toc: true
-    number-sections: true
-  pdf:
-    margin-width: 10px
-    gutter-width: 1.5rem
-execute: 
-  eval: false
-  freeze: false
-knitr: true
-filters: 
-  - line-highlight
-reference-location: margin
-citation-location: margin
-listing:
-    id: gh
-    contents:
-      - "*.qmd"
+description: Github rules and standards. Here you can find guides on making your repos secure, reproducible, and functional
+page-layout: article
+anchor-sections: false
+number-sections: false
+# listing:
+#   id: gh
+#   # fields: [date, title, author, reading-time]
+#   type: table
+#   contents: guides.yml
+#   # categories: true
+#   template: ../links.ejs
 ---
+
+<!-- ::: {#gh .column-screen-inset-right style="max-width: 850px;"}
+::: -->
+
+:::{.container}
+::: {.column width="50%"}
+{{< bi file-earmark-check-fill size=4em >}}
+
+
+### Policies and Rules
+
+NW-PaGe Github policies
+
+- [Repo Security Rules](security.qmd)
+- [Licensing](lic.qmd)
+- [Organization Requirements](policies.qmd)
+- [Code Requirements](reproduce.qmd)
+
+
+:::
+
+::: {.column width="50%"}
+
+{{< bi rocket-takeoff size=4em >}}
+
+
+### Tutorials
+
+NW-PaGe Github repo tutorials
+
+- [Release Cycles](release.qmd)
+- [Virtual Environments](renv.qmd)
+- [Github and Quarto Templates](templates.qmd)
+- [Git Basics](git.qmd)
+- [Repo Documentation/Github Pages and Quarto](how_to.qmd)
+
+:::
+:::
