@@ -193,7 +193,6 @@ $ Rscript -e "source('path/script_in_repo.R');" test
 
 {{< pagebreak >}}
 
-<!-- Content for pdf --->
 
 ::: {.content-visible unless-format="html"}
 We can even get more specific and add an `if-else` statement to specify which credential we want to select. This can be helpful if we have a CI/CD pipeline and have a script automatically run on a task scheduler or cron job. We can call the credentials we want in the command line and have the command line code run in my task scheduler. That way we can use multiple different versions of the same script and have all of it be automated.
@@ -235,7 +234,7 @@ $ Rscript -e "source('path/script_in_repo.R');" test
 
 Once you have the credentials.yml template in your repo, make sure that nobody on your team (or anyone with write access..) is able to accidentally push changes to the template. We don't want someone's passwords or API tokens to exist in GitHub.
 
-[This link shows how to skip any changes made to the specific file](https://stackoverflow.com/a/39776107). If someone makes local changes to the template, the changes will not show in their commit. It is a safe guard.
+This link shows how to skip any changes made to the specific file https://stackoverflow.com/a/39776107. If someone makes local changes to the template, the changes will not show in their commit. It is a safe guard.
 
 #### For all individual users, run this code:
 
@@ -277,71 +276,63 @@ Hooks are processes that run in the background and can prevent code from being p
 
 Pre-commit hooks run a process locally when the user attempts to commit code to a git branch. Hooks have many uses. Here we can use them as a security guardrail to prevent accidental credential leaks in committed code.
 
-1.  Clone or download the AWS Git Secrets repo from [awslabs GitHub](https://github.com/awslabs/git-secrets/blob/master/install.ps1)
-
-    ![](images/gh_secrets.PNG){.myframe}
-
+1.  Clone or download the AWS Git Secrets repo from awslabs GitHub https://github.com/awslabs/git-secrets/blob/master/install.ps1
 2.  Extract zip
-
 3.  Open folder and right click install.ps1
-
     a.  Run in Power Shell
     b.  Type Y to give permission
-
 4.  CD to a directory where you have the git repository you want to upload, either in PowerShell or R studio terminal {{< fa terminal >}}
 
-    ::: smallframe
-    ```{bash filename="PowerShell"}
-    PS > cd path/to/repo/root
-    ```
-    :::
+::: smallframe
+```{bash filename="PowerShell"}
+PS > cd path/to/repo/root
+```
+:::
 
 5.  Run git secrets --install
 
-    ::: smallframe
-    ```{bash filename="PowerShell"}
-    git secrets --install
-    ```
-    :::
+::: smallframe
+```{bash filename="PowerShell"}
+git secrets --install
+```
+:::
 
 6.  Make or copy the regex file called `secrets_key` containing the secret patterns into your folder. -- make text file -- discuss with team what all we want to make illegal.
-
 7.  Make sure the file `secrets_key` is in your `.gitignore`. We can't push that to the remote repo.
-
 8.  Run `git secrets --add-provider -- cat ./secrets_key`
 
-    ::: smallframe
-    ```{bash filename="PowerShell"}
-    git secrets --add-provider -- cat ./secrets_key
-    ```
-    :::
+::: smallframe
+```{bash filename="PowerShell"}
+git secrets --add-provider -- cat ./secrets_key
+```
+:::
 
-    You can also add prohibited patterns like this
+You can also add prohibited patterns like this
 
-    ::: smallframe
-    ```{bash filename="PowerShell"}
-    # add a pattern
-    git secrets --add '[A-Z0-9]{20}'
+::: smallframe
+```{bash filename="PowerShell"}
+# add a pattern
+git secrets --add '[A-Z0-9]{20}'
 
-    # add a literal string, the + is escaped
-    git secrets --add --literal 'foo+bar'
+# add a literal string, the + is escaped
+git secrets --add --literal 'foo+bar'
 
-    # add an allowed pattern
-    git secrets --add -a 'allowed pattern'
-    ```
-    :::
+# add an allowed pattern
+git secrets --add -a 'allowed pattern'
+```
+:::
 
 9.  Test Git history by running
 
-    ::: smallframe
-    ```{bash filename="PowerShell"}
-    git secrets --scan-history
-    ```
-    :::
+::: smallframe
+```{bash filename="PowerShell"}
+git secrets --scan-history
+```
+:::
 
 10. If something gets flagged and you don't care about your history anymore: Delete .git folder and reinitialize repository
 
-    I would take caution about this point. There might be better ways to clean your git history if you don't want to get rid of everything.
+I would take caution about this point. There might be better ways to clean your git history if you don't want to get rid of everything.
 
 11. Test on one of my projects to see if rebasing is a sustainable option
 
@@ -363,7 +354,7 @@ We can't use the "Non capture group" feature of regex. Meaning we can't use patt
 
 1. Check that the `secrets_key` regex is working by running the process on a repo that you know has secrets in it. For example, in a different folder, run all the pre-commit hook steps above and add a known "bad" string into the regex. For example, in the regex put `bad_string` and in a file in that folder put `bad_string`. When you scan it should get flagged.
 
-2. If secret scanning is taking too long, you might want to check certain files first. I've found that HTML files take a _very_ long time to scan for secrets. If you're using linux or macOS you should be able to scan certain files via grob like this `git secrets --scan path/to/files*`. If you're using windows it probably won't work. In that case, if you only want certain file extentsions to be scanned, use this function in powershell below. Download the file here: 
+2. If secret scanning is taking too long, you might want to check certain files first. I've found that HTML files take a _very_ long time to scan for secrets. If you're using linux or macOS you should be able to scan certain files via grob like this `git secrets --scan path/to/files*`. If you're using windows it probably won't work. In that case, if you only want certain file extensions to be scanned, use this function in powershell below. Download the file here: 
 
 :::: {.content-visible unless-format="pdf"}
 {{< downloadthis secret_scanner.ps1 dname=secretscanner label="Download Secret Scanner Script" >}}
@@ -420,11 +411,14 @@ We may wish to take private codes and push them to a public repo. We need to mak
 
 There are a few ways to do this, but the easiest way is to copy the clean private code to the public repo, that is, copy all the files you want to add publicly but **do not copy the `.git`** folder. If the private repo has a dirty git history we will not want that history in the public repo because the sensitive data will then be publicly available.
 
+:::: {.content-visible when-format="html"}
 ::: {.column-screen-inset-shaded layout-nrow="1"}
 ![](images/private_repo3.PNG){.myframe}
 
 ![](images/public_repo3.PNG){.myframe}
 :::
+::::
+
 
 {{< fa exclamation >}} The private repository on the left still contains sensitive information in the git history. The public repository on the right has a clean git history because we copied only the current clean files from the private repo and did not attach its git history (which lives in the hidden `.git` folder)
 
@@ -434,6 +428,6 @@ With the guardrails above in place there should be few chances that credentials 
 
 It may be useful to have a team within the organization that helps with repo set-up. The team would help avoid a scenario where a person opens up a repo without reading this documentation and understanding the rules (and thus potentially breaking security rules).
 
-This Github Operations Team could also be helpful in managing permissions for members in the organization. See the video below on how the company [Qualcomm manages their Github organization](https://www.youtube.com/embed/1T4HAPBFbb0?si=YRsUYXIxLPhdr41T) and how they use a Github Operations Team to guide new members access/repo development
+This Github Operations Team could also be helpful in managing permissions for members in the organization. See the video below on how the company Qualcomm manages their Github organization https://www.youtube.com/embed/1T4HAPBFbb0?si=YRsUYXIxLPhdr41T and how they use a Github Operations Team to guide new members access/repo development
 
 {{< video https://www.youtube.com/embed/1T4HAPBFbb0?si=YRsUYXIxLPhdr41T >}}
