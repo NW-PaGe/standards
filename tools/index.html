@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.358">
+<meta name="generator" content="quarto-1.5.22">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2023-09-01">
 <meta name="description" content="Make your code reproducible and easy to use for end users">
 
-<title>🌲 Github Policies - Guides and Templates</title>
+<title>🌲 – Guides and Templates</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -51,7 +51,7 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
@@ -66,6 +66,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -104,17 +105,44 @@ ul.task-list li input[type="checkbox"] {
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 </head>
 
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">🌲 Github Policies</span>
+    <span class="navbar-title">🌲</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -127,54 +155,17 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-github-policies" role="button" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Github Policies</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-github-policies">    
-        <li>
-    <a class="dropdown-item" href="../gh/security.html">
- <span class="dropdown-text">0: Security Standards</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../gh/lic.html">
- <span class="dropdown-text">1: Choosing a License</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../gh/policies.html">
- <span class="dropdown-text">2: Repo Policies</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../gh/reproduce.html">
- <span class="dropdown-text">3: Reproducibility</span></a>
-  </li>  
-    </ul>
-  </li>
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-aws-policies" role="button" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">AWS Policies</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-aws-policies">    
-        <li>
-    <a class="dropdown-item" href="../aws/aws_index.html">
- <span class="dropdown-text">0: AWS Policies</span></a>
-  </li>  
-    </ul>
-  </li>
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-azure-policies" role="button" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Azure Policies</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-azure-policies">    
-        <li>
-    <a class="dropdown-item" href="../azure/azure_index.html">
- <span class="dropdown-text">0: Azure Policies</span></a>
-  </li>  
-    </ul>
-  </li>
   <li class="nav-item">
-    <a class="nav-link active" href="../tools/index.html" aria-current="page"> 
-<span class="menu-text">Guides</span></a>
+    <a class="nav-link" href="../gh/index.html"> 
+<span class="menu-text">Github Policies</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../aws/aws_index.html"> 
+<span class="menu-text">AWS Policies</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../azure/azure_index.html"> 
+<span class="menu-text">Azure Policies</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
@@ -185,71 +176,71 @@ ul.task-list li input[type="checkbox"] {
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">Guides and Templates</h1>
-                  <div>
-        <div class="description">
-          Make your code reproducible and easy to use for end users
-        </div>
-      </div>
-                </div>
-  </div>
-    
-  <div class="quarto-title-meta-author">
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-heading">Affiliations</div>
-    
-      <div class="quarto-title-meta-contents">
-      <p class="author">Frank Aragona <a href="mailto:frank.aragona@doh.wa.gov" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
-    </div>
-      <div class="quarto-title-meta-contents">
-          <p class="affiliation">
-              Washington Department of Health
-            </p>
-          <p class="affiliation">
-              Data Integration/Quality Assurance
-            </p>
-        </div>
-      </div>
-
-  <div class="quarto-title-meta">
-
-        
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">September 1, 2023</p>
-      </div>
-    </div>
-    
-      <div>
-      <div class="quarto-title-meta-heading">Modified</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date-modified">April 9, 2024</p>
-      </div>
-    </div>
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(8)</span></div><div class="category" data-category="Git">Git <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Github">Github <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Quarto">Quarto <span class="quarto-category-count">(4)</span></div><div class="category" data-category="data democratization">data democratization <span class="quarto-category-count">(6)</span></div><div class="category" data-category="docker">docker <span class="quarto-category-count">(1)</span></div><div class="category" data-category="documentation">documentation <span class="quarto-category-count">(3)</span></div><div class="category" data-category="pkgdown">pkgdown <span class="quarto-category-count">(1)</span></div><div class="category" data-category="release cycles">release cycles <span class="quarto-category-count">(1)</span></div><div class="category" data-category="renv">renv <span class="quarto-category-count">(1)</span></div><div class="category" data-category="reproducibility">reproducibility <span class="quarto-category-count">(3)</span></div><div class="category" data-category="rmarkdown">rmarkdown <span class="quarto-category-count">(1)</span></div><div class="category" data-category="templates">templates <span class="quarto-category-count">(1)</span></div><div class="category" data-category="venv">venv <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(7)</span></div><div class="category" data-category="Git">Git <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Github">Github <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Quarto">Quarto <span class="quarto-category-count">(4)</span></div><div class="category" data-category="data democratization">data democratization <span class="quarto-category-count">(5)</span></div><div class="category" data-category="documentation">documentation <span class="quarto-category-count">(3)</span></div><div class="category" data-category="pkgdown">pkgdown <span class="quarto-category-count">(1)</span></div><div class="category" data-category="release cycles">release cycles <span class="quarto-category-count">(1)</span></div><div class="category" data-category="renv">renv <span class="quarto-category-count">(1)</span></div><div class="category" data-category="reproducibility">reproducibility <span class="quarto-category-count">(2)</span></div><div class="category" data-category="rmarkdown">rmarkdown <span class="quarto-category-count">(1)</span></div><div class="category" data-category="templates">templates <span class="quarto-category-count">(1)</span></div><div class="category" data-category="venv">venv <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Guides and Templates</h1>
+</div>
+
+<div>
+  <div class="description">
+    Make your code reproducible and easy to use for end users
+  </div>
+</div>
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliations</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Frank Aragona <a href="mailto:frank.aragona@doh.wa.gov" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Washington Department of Health
+          </p>
+        <p class="affiliation">
+            Data Integration/Quality Assurance
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 1, 2023</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">April 10, 2024</p>
+    </div>
+  </div>
+    
+  </div>
+  
 
 
+</header>
 
 
 
@@ -302,7 +293,7 @@ Reading Time
 </tr>
 </thead>
 <tbody class="list">
-<tr data-index="0" data-categories="data democratization,documentation,Quarto" data-listing-date-sort="1693526400000" data-listing-file-modified-sort="1712694864041" data-listing-date-modified-sort="1712620800000" data-listing-reading-time-sort="13" data-listing-word-count-sort="2573" data-listing-title-sort="Code and Repo Documentation" data-listing-filename-sort="how_to.qmd">
+<tr data-index="0" data-categories="data democratization,documentation,Quarto" data-listing-date-sort="1693526400000" data-listing-file-modified-sort="1712712619118" data-listing-date-modified-sort="1712707200000" data-listing-reading-time-sort="13" data-listing-word-count-sort="2573" data-listing-title-sort="Code and Repo Documentation" data-listing-filename-sort="how_to.qmd">
 <td>
 <span class="listing-image"><p class="card-img-top"><img src="images/nwpage_tree_logo.png" alt="Hex logo that says "Data Science in a Box"" style="height: 40px;"  class="thumbnail-image card-img"/></p></span>
 </td>
@@ -319,7 +310,7 @@ Reading Time
 <span class="listing-reading-time">13 min</span>
 </td>
 </tr>
-<tr data-index="1" data-categories="reproducibility,Git,Github" data-listing-date-sort="1675209600000" data-listing-file-modified-sort="1712694864041" data-listing-date-modified-sort="1712620800000" data-listing-reading-time-sort="3" data-listing-word-count-sort="516" data-listing-title-sort="Git" data-listing-filename-sort="git.qmd">
+<tr data-index="1" data-categories="reproducibility,Git,Github" data-listing-date-sort="1675209600000" data-listing-file-modified-sort="1712712619118" data-listing-date-modified-sort="1712707200000" data-listing-reading-time-sort="3" data-listing-word-count-sort="516" data-listing-title-sort="Git" data-listing-filename-sort="git.qmd">
 <td>
 <span class="listing-image"><div class="listing-item-img-placeholder card-img-top" style="height: 40px;">&nbsp;</div></span>
 </td>
@@ -336,29 +327,12 @@ Reading Time
 <span class="listing-reading-time">3 min</span>
 </td>
 </tr>
-<tr data-index="2" data-categories="data democratization,docker,Github,reproducibility" data-listing-date-sort="1675209600000" data-listing-file-modified-sort="1712694864041" data-listing-date-modified-sort="1712620800000" data-listing-reading-time-sort="1" data-listing-word-count-sort="1" data-listing-title-sort="Github Codespaces" data-listing-filename-sort="codespaces.qmd">
-<td>
-<span class="listing-image"><div class="listing-item-img-placeholder card-img-top" style="height: 40px;">&nbsp;</div></span>
-</td>
-<td>
-<span class="listing-date">Feb 1, 2023</span>
-</td>
-<td>
-<a href="../tools/codespaces.html" class="title listing-title">Github Codespaces</a>
-</td>
-<td>
-<span class="listing-author">Frank Aragona</span>
-</td>
-<td>
-<span class="listing-reading-time">1 min</span>
-</td>
-</tr>
-<tr data-index="3" data-categories="documentation,Quarto" data-listing-date-sort="1712620800000" data-listing-file-modified-sort="1712694864233" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="178" data-listing-title-sort="Link external R code to the documentation" data-listing-filename-sort="link_code.qmd">
+<tr data-index="2" data-categories="documentation,Quarto" data-listing-date-sort="1712707200000" data-listing-file-modified-sort="1712712619306" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="178" data-listing-title-sort="Link external R code to the documentation" data-listing-filename-sort="link_code.qmd">
 <td>
 <span class="listing-image"><p class="card-img-top"><img src="images/code-chunk.PNG" style="height: 40px;"  class="thumbnail-image card-img"/></p></span>
 </td>
 <td>
-<span class="listing-date">Apr 9, 2024</span>
+<span class="listing-date">Apr 10, 2024</span>
 </td>
 <td>
 <a href="../tools/link_code.html" class="title listing-title">Link external R code to the documentation</a>
@@ -370,7 +344,7 @@ Reading Time
 <span class="listing-reading-time">1 min</span>
 </td>
 </tr>
-<tr data-index="4" data-categories="data democratization,documentation,Quarto,pkgdown,rmarkdown" data-listing-date-sort="1693526400000" data-listing-file-modified-sort="1712694864233" data-listing-date-modified-sort="1712620800000" data-listing-reading-time-sort="1" data-listing-word-count-sort="1" data-listing-title-sort="Package Documentation" data-listing-filename-sort="pkgdoc.qmd">
+<tr data-index="3" data-categories="data democratization,documentation,Quarto,pkgdown,rmarkdown" data-listing-date-sort="1693526400000" data-listing-file-modified-sort="1712712619306" data-listing-date-modified-sort="1712707200000" data-listing-reading-time-sort="1" data-listing-word-count-sort="1" data-listing-title-sort="Package Documentation" data-listing-filename-sort="pkgdoc.qmd">
 <td>
 <span class="listing-image"><div class="listing-item-img-placeholder card-img-top" style="height: 40px;">&nbsp;</div></span>
 </td>
@@ -387,7 +361,7 @@ Reading Time
 <span class="listing-reading-time">1 min</span>
 </td>
 </tr>
-<tr data-index="5" data-categories="data democratization,release cycles,Github" data-listing-date-sort="1693526400000" data-listing-file-modified-sort="1712694864233" data-listing-date-modified-sort="1712620800000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1167" data-listing-title-sort="Release Cycles" data-listing-filename-sort="release.qmd">
+<tr data-index="4" data-categories="data democratization,release cycles,Github" data-listing-date-sort="1693526400000" data-listing-file-modified-sort="1712712619306" data-listing-date-modified-sort="1712707200000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1167" data-listing-title-sort="Release Cycles" data-listing-filename-sort="release.qmd">
 <td>
 <span class="listing-image"><p class="card-img-top"><img src="images/releases.PNG" style="height: 40px;"  class="thumbnail-image card-img"/></p></span>
 </td>
@@ -404,7 +378,7 @@ Reading Time
 <span class="listing-reading-time">6 min</span>
 </td>
 </tr>
-<tr data-index="6" data-categories="data democratization,templates,Quarto" data-listing-date-sort="1693526400000" data-listing-file-modified-sort="1712694864233" data-listing-date-modified-sort="1712620800000" data-listing-reading-time-sort="1" data-listing-word-count-sort="157" data-listing-title-sort="Templates" data-listing-filename-sort="templates.qmd">
+<tr data-index="5" data-categories="data democratization,templates,Quarto" data-listing-date-sort="1693526400000" data-listing-file-modified-sort="1712712619306" data-listing-date-modified-sort="1712707200000" data-listing-reading-time-sort="1" data-listing-word-count-sort="157" data-listing-title-sort="Templates" data-listing-filename-sort="templates.qmd">
 <td>
 <span class="listing-image"><p class="card-img-top"><img src="images/r_template.PNG" style="height: 40px;"  class="thumbnail-image card-img"/></p></span>
 </td>
@@ -421,7 +395,7 @@ Reading Time
 <span class="listing-reading-time">1 min</span>
 </td>
 </tr>
-<tr data-index="7" data-categories="data democratization,venv,renv,reproducibility" data-listing-date-sort="1675209600000" data-listing-file-modified-sort="1712694864233" data-listing-date-modified-sort="1712620800000" data-listing-reading-time-sort="11" data-listing-word-count-sort="2163" data-listing-title-sort="Virtual Environments" data-listing-filename-sort="renv.qmd">
+<tr data-index="6" data-categories="data democratization,venv,renv,reproducibility" data-listing-date-sort="1675209600000" data-listing-file-modified-sort="1712712619306" data-listing-date-modified-sort="1712707200000" data-listing-reading-time-sort="11" data-listing-word-count-sort="2163" data-listing-title-sort="Virtual Environments" data-listing-filename-sort="renv.qmd">
 <td>
 <span class="listing-image"><p class="card-img-top"><img src="images/nwpage_tree_logo.png" alt="Hex logo that says "Data Science in a Box"" style="height: 40px;"  class="thumbnail-image card-img"/></p></span>
 </td>
@@ -523,6 +497,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/NW-PaGe\.github\.io\/standards\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -557,7 +554,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -572,15 +573,28 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id.startsWith('sec-')) {
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
         }
         return container.innerHTML
       } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -589,7 +603,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      return note.innerHTML;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -631,6 +653,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
       }
     }, function(instance) {
     });
@@ -706,7 +751,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     window.addEventListener(
       "resize",
       throttle(() => {
-        console.log("RESIZE");
         elRect = undefined;
         if (selectedAnnoteEl) {
           selectCodeLines(selectedAnnoteEl);
@@ -786,20 +830,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp("https:\/\/NW-PaGe\.github\.io\/standards\/");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-          // target, if specified
-          link.setAttribute("target", "_blank");
-      }
-    }
 });
 </script>
 </div> <!-- /content -->
