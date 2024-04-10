@@ -16,14 +16,16 @@ categories:
   - data democratization
   - release cycles
   - Github
+execute: 
+  eval: false
 ---
 
-:::{.note .medframe}
+::: {.note .medframe}
 {{< fa file-circle-check size="3x" >}} **Summary**
 
 -   Github Releases
 -   Helps devs and end users
--   Changelogs and semantic versioning 
+-   Changelogs and semantic versioning
 -   Automate the release process
 :::
 
@@ -124,12 +126,11 @@ jobs:
 ```
 :::
 
-
-# {.unnumbered}
+#  {.unnumbered}
 
 This workflow will be triggered everytime a branch is merged to main. If that branch has [conventinal commit messages](@sec-cc) the commits will be summarized in the changelog. See an example workflow below:
 
-:::{.column-screen-inset-shaded layout-nrow="1"}
+::: {.column-screen-inset-shaded layout-nrow="1"}
 ![](images/fix.PNG){.myframe}
 
 ![](images/fix2.PNG){.myframe}
@@ -137,42 +138,15 @@ This workflow will be triggered everytime a branch is merged to main. If that br
 
 <br>
 
-If I make a branch off of main, I can add features, bug fixes, and more. If I used conventional commit messages in the title (i.e. `feat: message`, `fix: message`) the Github Action workflow will detect the trigger word in the title and divide the commit accordingly in the changelog. Notice how the commit title message gets output automatically into the changelog under the header **Bug Fixes** and the commit + commit hash number are generated. 
+If I make a branch off of main, I can add features, bug fixes, and more. If I used conventional commit messages in the title (i.e. `feat: message`, `fix: message`) the Github Action workflow will detect the trigger word in the title and divide the commit accordingly in the changelog. Notice how the commit title message gets output automatically into the changelog under the header **Bug Fixes** and the commit + commit hash number are generated.
 
 A new version will be released, and since this was just a bug fix the version number went from `v2.1.4` to `v2.1.5` since bug fixes only up-version the patch numbers
 
-
-<!--
-
-::: {.column-screen-inset-shaded layout-nrow="1"}
-If I make a branch off of main, I can add features, bug fixes, and more. If I used conventional commit messages in the title (i.e. `feat: message`, `fix: message`) the Github Action workflow will detect the trigger word in the title and divide the commit accordingly in the changelog. Notice how the commit title message gets output automatically into the changelog under the header **Bug Fixes** and the commit + commit hash number are generated. A new version will be released, and since this was just a bug fix the version number went from `v2.1.4` to `v2.1.5` since bug fixes only up-version the patch numbers
-
-![](images/fix.PNG){.myframe}
-
-![](images/fix2.PNG){.myframe}
-:::
-
-
-<br>
-
-
-::: {.column-screen-inset-shaded layout-nrow="1"}
-If you add multiple commit types to one branch and merge it to main the changelog will reflect all the commits (only for feat or fix) and _will up-version only one time._ If there one or more `feat` commits it will up-version the minor release. If there are no `feat` commits and only bug fixes it will only up-version the patch release number
-
-
-
-![](images/minor.PNG){.myframe}
-
-See how the version number went from `v2.1.5` in the last release to `v2.2.0`. This happened because there is at least one `feat` commit in the new release. And since all of the other commits were included into on branch they are all included in this release cycle.
-:::
-
--->
-
-# {.unnumbered} 
+#  {.unnumbered}
 
 The first step uses the Github Action `TriPSs/conventional-changelog-action@v3` which will scan your
 
-:::{.myframe}
+::: myframe
 ```{yaml filename=".github/workflows/changelog.yml"}
 steps:
   - uses: actions/checkout@v2
@@ -188,7 +162,7 @@ steps:
 
 The second step uses the Github Action `actions/create-release@v1` which will create git tags with the version number and a changelog with downloadable source code
 
-:::{.myframe}
+::: myframe
 ```{yaml filename=".github/workflows/changelog.yml"}
 - name: Create Release
   uses: actions/create-release@v1
@@ -201,10 +175,129 @@ The second step uses the Github Action `actions/create-release@v1` which will cr
     release_name: ${{ steps.changelog.outputs.tag }}
     body: ${{ steps.changelog.outputs.clean_changelog }}
 ```
-
 :::
 
+# Step by Step Instructions
 
+1.  Make a test repo in Github, then clone it locally
+2.  Make a folder in the root of the repo named `.github`
+3.  In the `.github` folder make another folder named `workflows` . the `.github/workflows` folder needs to be spelled the same and in the in exact same place for a github action to work.
+4.  In the `workflows` folder make a file called `changelog.yml` and paste code below in it:
+
+::: myframe
+```{yaml filename=".github/workflows/changelog.yml"}
+name: Changelog
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  changelog:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      # write permission is required to create a github release
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Conventional Changelog Action
+        id: changelog
+        uses: TriPSs/conventional-changelog-action@v3
+        with:
+          github-token: ${{ secrets.github_token }}
+          create-summary: true
+
+      - name: Create Release
+        uses: actions/create-release@v1
+        if: ${{ steps.changelog.outputs.skipped == 'false' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.github_token }}
+        with:
+          prerelease: false
+          tag_name: ${{ steps.changelog.outputs.tag }}
+          release_name: ${{ steps.changelog.outputs.tag }}
+          body: ${{ steps.changelog.outputs.clean_changelog }}
+```
+:::
+
+::: callout-note
+Now when you commit something to the repo and have a convential commit message it will trigger the Github Action to make a changelog.
+
+For example, if you make a commit with a bug fix and in the commit title you write the word `fix:` like this - `fix: this commit is a bugfix` - the action will get triggered to make a new changelog with the commit and bump up the minor version (like from v1.0.0 to v1.0.1)
+:::
+
+**This is great, but if you do not write a conventional commit message it will not work**. Step 5 has instructions on how to make sure everyone on your team writes conventional commits. It uses a pre-commit hook, which will prevent any commit that does not have a conventional commit message from being pushed to the repo.
+
+For example, this commit message will error out and not be pushed to the repo - `this commit is a feature`. But this commit message will work - `feat: this commit is a feature`
+
+5.  (Optional, but recommended) Make a pre-commit hook
+
+    -   Open a Windows Command Prompt
+    -   [Install pre-commit](https://pre-commit.com/#intro) with the code below
+
+    ::: smallframe
+    ```{bash filename="Command Prompt"}
+    pip install pre-commit
+    ```
+    :::
+
+    -   Check that pre-commit is working by running the code below. If you get an error message with this you may need to install `pip`
+
+    ::: smallframe
+    ```{bash filename="Command Prompt"}
+    pre-commit --version
+    ```
+    :::
+
+    -   In the **root** of you repo, make a file called `.pre-commit-config.yaml` and put the following code in it (note the `.` is necessary in the file name):
+
+    ::: smallframe
+    ```{yaml filename=".pre-commit-config.yaml"}
+    repos:
+    - repo: https://github.com/compilerla/conventional-pre-commit
+      rev: v2.4.0
+      hooks:
+        - id: conventional-pre-commit
+          stages: [commit-msg]
+          args: []
+      # args is optional: list of Conventional Commits types to allow e.g. [feat, fix, ci, chore, test]
+    ```
+    :::
+
+    -   Last, in the Windows Command Prompt, run this:
+
+    ::: smallframe
+    ```{bash filename="Command Prompt"}
+    pre-commit install --hook-type commit-msg
+    ```
+    :::
+
+Now you will be required to use conventional commit messages when pushing new code to the repo.
+
+Here's a common guide:
+
++-----------------------------------------------------------+------------------------------------------------------------------------+
+| conventional commit keyword                               | expected outcome                                                       |
++===========================================================+========================================================================+
+| feat:                                                     | new changelog, bump up the minor release version (i.e, 1.0.0 to 1.1.0) |
++-----------------------------------------------------------+------------------------------------------------------------------------+
+| fix:                                                      | new changelog, bump up the patch release version (i.e, 1.0.0 to 1.0.1) |
++-----------------------------------------------------------+------------------------------------------------------------------------+
+| chore:                                                    | no changes                                                             |
+|                                                           |                                                                        |
+| docs:                                                     |                                                                        |
+|                                                           |                                                                        |
+| test:                                                     |                                                                        |
++-----------------------------------------------------------+------------------------------------------------------------------------+
+| any keyword plus `BREAKING CHANGE:` in the commit message | new changelog, bump up the MAJOR release version (i.e, 1.0.0 to 2.0.0) |
++-----------------------------------------------------------+------------------------------------------------------------------------+
+
+**NOTE**: breaking changes need to be written like this:
+
+![](images/paste-1.png)
 
 # Resources
 
