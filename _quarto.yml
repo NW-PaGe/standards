@@ -134,7 +134,7 @@ format:
     # number-depth: 3
     # toc-depth: 3
     highlight-style: assets/custom.theme
-    link-external-newwindow: true
+    link-external-newwindow: false
     number-sections: true
     # code-fold: show
     code-overflow: wrap
