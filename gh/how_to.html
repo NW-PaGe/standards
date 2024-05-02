@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2023-09-01">
 <meta name="description" content="READMEs and using Github Pages and Quarto to make websites for documentation">
 
-<title>🌲 – Repo Documentation</title>
+<title>NW-COE Policies – Repo Documentation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -115,8 +115,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../images/nwpage_tree_logo.png" alt="" class="navbar-logo">
+    </a>
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">🌲</span>
+    <span class="navbar-title">NW-COE Policies</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -126,25 +129,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
-<span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link active" href="../gh/index.html" aria-current="page"> 
-<span class="menu-text">Github Policies</span></a>
+<span class="menu-text">Github</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../aws/aws_index.html"> 
-<span class="menu-text">AWS Policies</span></a>
+<span class="menu-text">AWS</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../azure/azure_index.html"> 
-<span class="menu-text">Azure Policies</span></a>
+<span class="menu-text">Azure</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/NW-PaGe/standards"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://nwpage.org/"> <i class="bi bi-file-richtext" role="img" aria-label="NW-PaGe">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -268,26 +272,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
-  <li><a href="#create-a-quarto-website" id="toc-create-a-quarto-website" class="nav-link" data-scroll-target="#create-a-quarto-website"><span class="header-section-number">2</span> Create a Quarto Website</a></li>
-  <li><a href="#how-to-edit-the-website-add-chapters-and-change-the-style" id="toc-how-to-edit-the-website-add-chapters-and-change-the-style" class="nav-link" data-scroll-target="#how-to-edit-the-website-add-chapters-and-change-the-style"><span class="header-section-number">3</span> How to edit the website (add chapters and change the style)</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#create-a-quarto-website" id="toc-create-a-quarto-website" class="nav-link" data-scroll-target="#create-a-quarto-website">Create a Quarto Website</a></li>
+  <li><a href="#how-to-edit-the-website-add-chapters-and-change-the-style" id="toc-how-to-edit-the-website-add-chapters-and-change-the-style" class="nav-link" data-scroll-target="#how-to-edit-the-website-add-chapters-and-change-the-style">How to edit the website (add chapters and change the style)</a>
   <ul class="collapse">
-  <li><a href="#editadd-sections-and-chapters" id="toc-editadd-sections-and-chapters" class="nav-link" data-scroll-target="#editadd-sections-and-chapters"><span class="header-section-number">3.1</span> Edit/Add Sections and Chapters</a></li>
-  <li><a href="#website-style" id="toc-website-style" class="nav-link" data-scroll-target="#website-style"><span class="header-section-number">3.2</span> Website Style</a></li>
+  <li><a href="#editadd-sections-and-chapters" id="toc-editadd-sections-and-chapters" class="nav-link" data-scroll-target="#editadd-sections-and-chapters">Edit/Add Sections and Chapters</a></li>
+  <li><a href="#website-style" id="toc-website-style" class="nav-link" data-scroll-target="#website-style">Website Style</a></li>
   </ul></li>
-  <li><a href="#how-to-edit-a-chapter" id="toc-how-to-edit-a-chapter" class="nav-link" data-scroll-target="#how-to-edit-a-chapter"><span class="header-section-number">4</span> How to edit a chapter</a>
+  <li><a href="#how-to-edit-a-chapter" id="toc-how-to-edit-a-chapter" class="nav-link" data-scroll-target="#how-to-edit-a-chapter">How to edit a chapter</a>
   <ul class="collapse">
-  <li><a href="#open-the-r-project" id="toc-open-the-r-project" class="nav-link" data-scroll-target="#open-the-r-project"><span class="header-section-number">4.1</span> Open the R project</a></li>
-  <li><a href="#open-the-files" id="toc-open-the-files" class="nav-link" data-scroll-target="#open-the-files"><span class="header-section-number">4.2</span> Open the files</a></li>
-  <li><a href="#commit-changes" id="toc-commit-changes" class="nav-link" data-scroll-target="#commit-changes"><span class="header-section-number">4.3</span> Commit changes</a></li>
+  <li><a href="#open-the-r-project" id="toc-open-the-r-project" class="nav-link" data-scroll-target="#open-the-r-project">Open the R project</a></li>
+  <li><a href="#open-the-files" id="toc-open-the-files" class="nav-link" data-scroll-target="#open-the-files">Open the files</a></li>
+  <li><a href="#commit-changes" id="toc-commit-changes" class="nav-link" data-scroll-target="#commit-changes">Commit changes</a></li>
   </ul></li>
-  <li><a href="#how-to-link-external-code-to-the-site" id="toc-how-to-link-external-code-to-the-site" class="nav-link" data-scroll-target="#how-to-link-external-code-to-the-site"><span class="header-section-number">5</span> How to link external code to the site</a></li>
-  <li><a href="#publish-the-sitegithub-actions" id="toc-publish-the-sitegithub-actions" class="nav-link" data-scroll-target="#publish-the-sitegithub-actions"><span class="header-section-number">6</span> Publish the site/Github Actions</a>
+  <li><a href="#how-to-link-external-code-to-the-site" id="toc-how-to-link-external-code-to-the-site" class="nav-link" data-scroll-target="#how-to-link-external-code-to-the-site">How to link external code to the site</a></li>
+  <li><a href="#publish-the-sitegithub-actions" id="toc-publish-the-sitegithub-actions" class="nav-link" data-scroll-target="#publish-the-sitegithub-actions">Publish the site/Github Actions</a>
   <ul class="collapse">
-  <li><a href="#example-yaml-workflow" id="toc-example-yaml-workflow" class="nav-link" data-scroll-target="#example-yaml-workflow"><span class="header-section-number">6.1</span> Example <code>YAML</code> Workflow</a></li>
-  <li><a href="#using-renv-in-the-gh-action" id="toc-using-renv-in-the-gh-action" class="nav-link" data-scroll-target="#using-renv-in-the-gh-action"><span class="header-section-number">6.2</span> Using <code>renv</code> in the GH Action</a></li>
-  <li><a href="#using-a-_freeze-file" id="toc-using-a-_freeze-file" class="nav-link" data-scroll-target="#using-a-_freeze-file"><span class="header-section-number">6.3</span> Using a <code>_freeze</code> file</a></li>
-  <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting"><span class="header-section-number">6.4</span> Troubleshooting</a></li>
+  <li><a href="#example-yaml-workflow" id="toc-example-yaml-workflow" class="nav-link" data-scroll-target="#example-yaml-workflow">Example <code>YAML</code> Workflow</a></li>
+  <li><a href="#using-renv-in-the-gh-action" id="toc-using-renv-in-the-gh-action" class="nav-link" data-scroll-target="#using-renv-in-the-gh-action">Using <code>renv</code> in the GH Action</a></li>
+  <li><a href="#using-a-_freeze-file" id="toc-using-a-_freeze-file" class="nav-link" data-scroll-target="#using-a-_freeze-file">Using a <code>_freeze</code> file</a></li>
+  <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/gh/how_to.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/gh/how_to.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -298,12 +302,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../gh/index.html">Guide</a></li><li class="breadcrumb-item"><a href="../gh/release.html">Tutorials</a></li><li class="breadcrumb-item"><a href="../gh/how_to.html">Repo Documentation</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Repo Documentation</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">data democratization</div>
-    <div class="quarto-category">documentation</div>
-    <div class="quarto-category">Quarto</div>
-  </div>
-  </div>
+</div>
 
 <div>
   <div class="description">
@@ -341,7 +340,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">April 10, 2024</p>
+      <p class="date-modified">May 2, 2024</p>
     </div>
   </div>
     
@@ -352,8 +351,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introduction" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
 <div class="quarto-figure quarto-figure-right">
 <figure class="figure">
 <p><img src="images/nwpage_tree_logo.png" class="img-fluid quarto-figure quarto-figure-right figure-img" style="float: right;" alt="Hex logo that says &quot;Data Science in a Box&quot;" width="250"></p>
@@ -367,21 +366,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Create, edit, and troubleshoot the Github Action to render the site</li>
 </ol>
 </section>
-<section id="create-a-quarto-website" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Create a Quarto Website</h1>
+<section id="create-a-quarto-website" class="level1">
+<h1>Create a Quarto Website</h1>
 <p>Go to: <code>File &gt; New Project… &gt; New Directory &gt; Quarto Website &gt; Create Project</code></p>
 <p>There is an option to use <code>renv</code> which is a virtual environment for the R project. This is helpful, but if you’re unfamiliar with <code>renv</code> you can un-check it.</p>
 <p><img src="images/create_quarto.gif" class="img-fluid"></p>
 <p><br></p>
 <p>The Quarto project will come with a <code>_quarto.yml</code> file. This is similar to an rmarkdown <code>yml</code> header where you can specify how you want your document to be style and what format to output it to.</p>
 </section>
-<section id="how-to-edit-the-website-add-chapters-and-change-the-style" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> How to edit the website (add chapters and change the style)</h1>
+<section id="how-to-edit-the-website-add-chapters-and-change-the-style" class="level1">
+<h1>How to edit the website (add chapters and change the style)</h1>
 <p>Most websites have a main file that sources all the htmls, css, javascript and other files into one. Quarto is the same - it sources all the markdown files and css files into one <code>.yml</code> file that dictates the output appearance and functionality of the site as a whole. Think of <code>.yml</code> files or headers as instructions for a document’s style, output, and functions. It is the same thing as the <code>yaml</code> header in rmarkdown files.</p>
-<section id="editadd-sections-and-chapters" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="editadd-sections-and-chapters"><span class="header-section-number">3.1</span> Edit/Add Sections and Chapters</h2>
+<section id="editadd-sections-and-chapters" class="level2">
+<h2 class="anchored" data-anchor-id="editadd-sections-and-chapters">Edit/Add Sections and Chapters</h2>
 <p>To add a section, open up the <code>_quarto.yml</code> file and scroll to the <code>navbar</code> section</p>
-<div class="myframe">
 <div class="cell" data-source-line-numbers="7-40">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -408,16 +406,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="at">            </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">"2: Org Policy Setting"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-</div>
 <p><br></p>
 <p>This is where all of the <code>qmd</code> files are sourced and the instructions on how to format and style the navigation bar in the website.</p>
 <p>Currently, the project is set up to have each section have it’s own drop down menu in the navbar. In a section, use <code>- href:</code> to specify a file and <code>text:</code> to give the file a custom name in the website.</p>
 <p>Each chapter exists within a sub-folder, so to add a chapter make sure create the qmd in its sub-folder and then reference the sub-folder and chapter in the <code>.yml</code>. For example, if you make a new chapter called <code>new-chapter.qmd</code> and it exists in the <code>covid</code> section/sub-folder, you need to reference it in the <code>.yml</code> file like: <code>covid/new-chapter.qmd</code></p>
 </section>
-<section id="website-style" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="website-style"><span class="header-section-number">3.2</span> Website Style</h2>
+<section id="website-style" class="level2">
+<h2 class="anchored" data-anchor-id="website-style">Website Style</h2>
 <p>You can customize many aspects of the website in the <code>.yml</code> file itself with the <code>format:</code> function. There are a ton of themes included in Quarto <a href="https://bootswatch.com/">here</a> and you can also add a <a href="https://quarto.org/docs/output-formats/html-themes.html#custom-themes">custom <code>css</code> and/or <code>scss</code></a> file to your project. I <em>think</em> you can even go super in depth and customize the javascript components of the site, but I’m not entirely sure how to do that yet. <a href="https://nbdev.fast.ai/">This website</a> has a ton of custom <code>css</code> components with Quarto, and possibly uses custom javascript, so it could be a place to start if you’re interested. Basically, you need to embed the <code>css</code> file into your <code>_quarto.yml</code> file</p>
-<div class="myframe">
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -434,11 +430,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">highlight-style</span><span class="kw">:</span><span class="at"> assets/custom.theme</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-</div>
 </section>
 </section>
-<section id="how-to-edit-a-chapter" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> How to edit a chapter</h1>
+<section id="how-to-edit-a-chapter" class="level1">
+<h1>How to edit a chapter</h1>
 <p>First you must clone our github repository. For more information on cloning the repo, <a href="../gh/git.html#Clone this repository">follow these instructions</a></p>
 <p>Once you have a local clone you can start editing these files and push updates.</p>
 <p>Basic steps:</p>
@@ -449,16 +444,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Save the change and push to the main branch (or make a pull request to the main branch)</li>
 </ol>
 <p>Once a commit is push to the main branch, it will trigger a Github Action to re-render the website and publish it to the main github repository</p>
-<section id="open-the-r-project" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="open-the-r-project"><span class="header-section-number">4.1</span> Open the R project</h2>
+<section id="open-the-r-project" class="level2">
+<h2 class="anchored" data-anchor-id="open-the-r-project">Open the R project</h2>
 <p>This is a Quarto website that is contained in a <code>.rproj</code> file path. The R project contains all the documents used to create this website. Begin by opening the R project when should be in your local clone under <code>C:\Users\XXXXXXX\Projects\Sequencing_2.0\sequencing_documentation\sequencing_documentation.Rproj</code></p>
 <p><img src="images/open_doc.gif" class="img-fluid"></p>
 </section>
-<section id="open-the-files" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="open-the-files"><span class="header-section-number">4.2</span> Open the files</h2>
+<section id="open-the-files" class="level2">
+<h2 class="anchored" data-anchor-id="open-the-files">Open the files</h2>
 <p>This project has <code>.qmd</code> files (Quarto Markdown files) that each represent a chapter in the website. All of the <code>.qmd</code> files are knitted together (using R <code>knitr</code>) which compiles all of the files to be sourced into htmls.</p>
 <p>This website is set up to have each major section contain multiple chapters. To open a chapter, the bottom right pane in your R Studio window should contain folders for each section, highlighted below</p>
-<div class="myframe">
 <div class="cell" data-source-line-numbers="14-21,23-30">
 <div class="sourceCode cell-code" id="cb3" data-source-line-numbers="14-21,23-30" data-code-line-numbers="14-21,23-30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> tree /f</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">C:.</span></span>
@@ -496,17 +490,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre data-code-line-numbers=""><code>Error in running command bash</code></pre>
 </div>
 </div>
-</div>
 <p><br></p>
 <p>The <code>.qmd</code> files are inside of these folders. Select one to edit.</p>
 </section>
-<section id="commit-changes" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="commit-changes"><span class="header-section-number">4.3</span> Commit changes</h2>
+<section id="commit-changes" class="level2">
+<h2 class="anchored" data-anchor-id="commit-changes">Commit changes</h2>
 <p>Once you’re done editing, push the change to the main branch (or make a new branch, and then a pull request for the main branch). More one this in the <a href="../gh/git.html">git</a> chapter</p>
 </section>
 </section>
-<section id="how-to-link-external-code-to-the-site" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> How to link external code to the site</h1>
+<section id="how-to-link-external-code-to-the-site" class="level1">
+<h1>How to link external code to the site</h1>
 <p>The code in this website is automatically linked to the code in the repository. This lets us update the code and not need to copy and paste any new changes to the documentation/github page</p>
 <p>To do this, open your <em>external</em> R script in your repo. In this case we’re using <code>external_script.R</code>. Now wrap the chunks of code you want to link with comments like this, <code>## ---- libraries</code> and <code>## ---- stop</code>:</p>
 <div class="smallframe">
@@ -552,8 +545,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>And now the document will output any code in that code chunk and can also execute that code chunk if you want. Here’s what the output will look like in this case:</p>
 <p><img src="images/code-chunk.PNG" class="img-fluid"></p>
 </section>
-<section id="publish-the-sitegithub-actions" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Publish the site/Github Actions</h1>
+<section id="publish-the-sitegithub-actions" class="level1">
+<h1>Publish the site/Github Actions</h1>
 <p>Github Actions allow you to automate tasks in your repository. Quarto has functions for Github Actions that allow you to automatically render your Quarto document and publish it to Github Pages. <a href="https://pages.github.com/">Github Pages</a> is a free service from Github to host a website. Documentation for R and Python code is usually found in a Github Page within the package repository</p>
 <p>To create this process, I followed the <a href="https://github.com/quarto-dev/quarto-actions/blob/main/examples/example-01-basics.md#quarto-actions-basics">Quarto dev documentation</a>:</p>
 <blockquote class="blockquote">
@@ -567,11 +560,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Note that GitHub Pages uses a gh-pages branch in your repository, which will be automatically created if one doesn’t exist.</p>
 </blockquote>
 <p><br></p>
-<section id="example-yaml-workflow" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="example-yaml-workflow"><span class="header-section-number">6.1</span> Example <code>YAML</code> Workflow</h2>
+<section id="example-yaml-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="example-yaml-workflow">Example <code>YAML</code> Workflow</h2>
 <p>The <code>.yml</code> workflow for this project looks something like this:</p>
 <p><code>on:</code> is a tag indicating when the action will run. Right now it will run when any code gets pushed to the main branch in the documentation folder or <code>lineages_public_repo.R</code> script</p>
-<div class="myframe">
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -586,9 +578,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> lineages_public_repo.R</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-</div>
 <p><code>jobs:</code> is a tag that tells a Github virtual machine what to run and what operating system to run it on. In this case <code>ubuntu</code> with the <code>latest</code> version. This can be <code>windows</code>, <code>linux</code> or <code>macOS</code>.</p>
-<div class="myframe">
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -601,7 +591,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-</div>
 <p><br></p>
 <p>Now we have the steps:</p>
 <ul>
@@ -610,7 +599,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>uses: quarto-dev/quarto-actions/setup@v2</code> will install quarto</li>
 <li><code>uses: actions/cache@v1</code> and the code below it will set up <code>renv</code> and use the cached packages to install them onto the Github virtual machine</li>
 </ul>
-<div class="myframe">
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -650,14 +638,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>          renv::restore()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-</div>
 <p><br></p>
 <p>And finally,</p>
 <ul>
 <li><code>uses: quarto-dev/quarto-actions/publish@v2</code> will render the site by running <code>quarto render</code></li>
 <li><code>with: target: gh-pages path: documentation/_site</code> lets you know which branch and path to render the site to</li>
 </ul>
-<div class="myframe">
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -672,10 +658,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">GITHUB_TOKEN</span><span class="kw">:</span><span class="at"> ${{ secrets.GITHUB_TOKEN }}</span><span class="co"> # this secret is always available for github actions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-</div>
 </section>
-<section id="using-renv-in-the-gh-action" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="using-renv-in-the-gh-action"><span class="header-section-number">6.2</span> Using <code>renv</code> in the GH Action</h2>
+<section id="using-renv-in-the-gh-action" class="level2">
+<h2 class="anchored" data-anchor-id="using-renv-in-the-gh-action">Using <code>renv</code> in the GH Action</h2>
 <p>If you need to constantly update your website with code chunk, this is the best way to do it. It is also probably safer and better than the <code>_freeze</code> way, but it requires a better understanding of Github Actions and virtual environments.</p>
 <p><code>renv</code> is an R package for creating a project level virtual environment. In other words, <code>renv</code> will create project specific folders that contain the specific R package versions you use in an project. <a href="../wiki/venv.qmd">More on this here</a></p>
 <p>To use <code>renv</code> in a Github Action, you can put</p>
@@ -692,8 +677,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>or use the renv cache code in the <code>yaml</code> section above</p>
 </section>
-<section id="using-a-_freeze-file" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="using-a-_freeze-file"><span class="header-section-number">6.3</span> Using a <code>_freeze</code> file</h2>
+<section id="using-a-_freeze-file" class="level2">
+<h2 class="anchored" data-anchor-id="using-a-_freeze-file">Using a <code>_freeze</code> file</h2>
 <p>If you only need to execute the code once or just need to render a non-executable code chunk once, make sure you have this code in your <code>_quarto.yml</code> file:</p>
 <div class="smallframe">
 <div class="cell">
@@ -712,8 +697,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This will render that specific document in the website, execute code chunks if they are set to execute (<code>eval: true</code>) and then it will create a <strong><code>_freeze</code></strong> file. The <code>_freeze</code> file will save a snapshot of that specific document and <em>not</em> re-render it in the Github Action. This means you can render other parts of the website, but any files in the <code>_freeze</code> folder will stay the same as they are in the freeze. If you need to make changes to a freeze document, run the quarto render code again after making changes.</p>
 <p>This is also documented in the <a href="https://github.com/quarto-dev/quarto-actions/blob/main/examples/example-01-basics.md#quarto-actions-basics">Quarto dev documentation</a></p>
 </section>
-<section id="troubleshooting" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="troubleshooting"><span class="header-section-number">6.4</span> Troubleshooting</h2>
+<section id="troubleshooting" class="level2">
+<h2 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h2>
 <p>So you did these steps:</p>
 <ol type="1">
 <li>Create the <code>quarto-publish.yml</code></li>

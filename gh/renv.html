@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2023-02-01">
 <meta name="description" content="How to configure R and Python package dependencies to this repo for reproducibility">
 
-<title>🌲 – Virtual Environments</title>
+<title>NW-COE Policies – Virtual Environments</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -80,8 +80,11 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../images/nwpage_tree_logo.png" alt="" class="navbar-logo">
+    </a>
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">🌲</span>
+    <span class="navbar-title">NW-COE Policies</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -91,25 +94,26 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
-<span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link active" href="../gh/index.html" aria-current="page"> 
-<span class="menu-text">Github Policies</span></a>
+<span class="menu-text">Github</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../aws/aws_index.html"> 
-<span class="menu-text">AWS Policies</span></a>
+<span class="menu-text">AWS</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../azure/azure_index.html"> 
-<span class="menu-text">Azure Policies</span></a>
+<span class="menu-text">Azure</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/NW-PaGe/standards"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://nwpage.org/"> <i class="bi bi-file-richtext" role="img" aria-label="NW-PaGe">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -233,48 +237,48 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
-  <li><a href="#python---conda-environment-setup" id="toc-python---conda-environment-setup" class="nav-link" data-scroll-target="#python---conda-environment-setup"><span class="header-section-number">2</span> Python - Conda Environment Setup</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#python---conda-environment-setup" id="toc-python---conda-environment-setup" class="nav-link" data-scroll-target="#python---conda-environment-setup">Python - Conda Environment Setup</a>
   <ul class="collapse">
-  <li><a href="#step-1-set-up-anaconda" id="toc-step-1-set-up-anaconda" class="nav-link" data-scroll-target="#step-1-set-up-anaconda"><span class="header-section-number">2.1</span> Step 1: Set Up Anaconda</a></li>
-  <li><a href="#step-2-open-anaconda-prompt" id="toc-step-2-open-anaconda-prompt" class="nav-link" data-scroll-target="#step-2-open-anaconda-prompt"><span class="header-section-number">2.2</span> Step 2: Open Anaconda Prompt</a></li>
-  <li><a href="#step-3-change-directories" id="toc-step-3-change-directories" class="nav-link" data-scroll-target="#step-3-change-directories"><span class="header-section-number">2.3</span> Step 3: Change Directories</a></li>
-  <li><a href="#step-4-copy-the-repo-env" id="toc-step-4-copy-the-repo-env" class="nav-link" data-scroll-target="#step-4-copy-the-repo-env"><span class="header-section-number">2.4</span> Step 4: Copy the repo env</a></li>
-  <li><a href="#step-5-activate-the-environment" id="toc-step-5-activate-the-environment" class="nav-link" data-scroll-target="#step-5-activate-the-environment"><span class="header-section-number">2.5</span> Step 5: Activate the environment</a></li>
+  <li><a href="#step-1-set-up-anaconda" id="toc-step-1-set-up-anaconda" class="nav-link" data-scroll-target="#step-1-set-up-anaconda">Step 1: Set Up Anaconda</a></li>
+  <li><a href="#step-2-open-anaconda-prompt" id="toc-step-2-open-anaconda-prompt" class="nav-link" data-scroll-target="#step-2-open-anaconda-prompt">Step 2: Open Anaconda Prompt</a></li>
+  <li><a href="#step-3-change-directories" id="toc-step-3-change-directories" class="nav-link" data-scroll-target="#step-3-change-directories">Step 3: Change Directories</a></li>
+  <li><a href="#step-4-copy-the-repo-env" id="toc-step-4-copy-the-repo-env" class="nav-link" data-scroll-target="#step-4-copy-the-repo-env">Step 4: Copy the repo env</a></li>
+  <li><a href="#step-5-activate-the-environment" id="toc-step-5-activate-the-environment" class="nav-link" data-scroll-target="#step-5-activate-the-environment">Step 5: Activate the environment</a></li>
   </ul></li>
-  <li><a href="#python---programming-setup" id="toc-python---programming-setup" class="nav-link" data-scroll-target="#python---programming-setup"><span class="header-section-number">3</span> Python - Programming Setup</a>
+  <li><a href="#python---programming-setup" id="toc-python---programming-setup" class="nav-link" data-scroll-target="#python---programming-setup">Python - Programming Setup</a>
   <ul class="collapse">
-  <li><a href="#ide-setup---vs-code" id="toc-ide-setup---vs-code" class="nav-link" data-scroll-target="#ide-setup---vs-code"><span class="header-section-number">3.1</span> IDE Setup - VS Code</a>
+  <li><a href="#ide-setup---vs-code" id="toc-ide-setup---vs-code" class="nav-link" data-scroll-target="#ide-setup---vs-code">IDE Setup - VS Code</a>
   <ul class="collapse">
-  <li><a href="#step-1-select-a-python-interpreter" id="toc-step-1-select-a-python-interpreter" class="nav-link" data-scroll-target="#step-1-select-a-python-interpreter"><span class="header-section-number">3.1.1</span> Step 1: Select a Python Interpreter</a></li>
-  <li><a href="#step-2-write-code" id="toc-step-2-write-code" class="nav-link" data-scroll-target="#step-2-write-code"><span class="header-section-number">3.1.2</span> Step 2: Write code</a></li>
+  <li><a href="#step-1-select-a-python-interpreter" id="toc-step-1-select-a-python-interpreter" class="nav-link" data-scroll-target="#step-1-select-a-python-interpreter">Step 1: Select a Python Interpreter</a></li>
+  <li><a href="#step-2-write-code" id="toc-step-2-write-code" class="nav-link" data-scroll-target="#step-2-write-code">Step 2: Write code</a></li>
   </ul></li>
-  <li><a href="#ide-setup---pycharm" id="toc-ide-setup---pycharm" class="nav-link" data-scroll-target="#ide-setup---pycharm"><span class="header-section-number">3.2</span> IDE Setup - PyCharm</a>
+  <li><a href="#ide-setup---pycharm" id="toc-ide-setup---pycharm" class="nav-link" data-scroll-target="#ide-setup---pycharm">IDE Setup - PyCharm</a>
   <ul class="collapse">
-  <li><a href="#step-1-select-a-python-interpreter-1" id="toc-step-1-select-a-python-interpreter-1" class="nav-link" data-scroll-target="#step-1-select-a-python-interpreter-1"><span class="header-section-number">3.2.1</span> Step 1: Select a Python Interpreter</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#python---installing-new-packages" id="toc-python---installing-new-packages" class="nav-link" data-scroll-target="#python---installing-new-packages"><span class="header-section-number">4</span> Python - Installing New Packages</a>
-  <ul class="collapse">
-  <li><a href="#step-1-install-a-new-package" id="toc-step-1-install-a-new-package" class="nav-link" data-scroll-target="#step-1-install-a-new-package"><span class="header-section-number">4.1</span> Step 1: Install a new package</a></li>
-  <li><a href="#step-2-save-the-package-to-the-repo" id="toc-step-2-save-the-package-to-the-repo" class="nav-link" data-scroll-target="#step-2-save-the-package-to-the-repo"><span class="header-section-number">4.2</span> Step 2: Save the package to the repo</a></li>
-  </ul></li>
-  <li><a href="#r-package-management--renv" id="toc-r-package-management--renv" class="nav-link" data-scroll-target="#r-package-management--renv"><span class="header-section-number">5</span> R Package Management -<code>renv</code></a>
-  <ul class="collapse">
-  <li><a href="#creating-renv-in-a-project" id="toc-creating-renv-in-a-project" class="nav-link" data-scroll-target="#creating-renv-in-a-project"><span class="header-section-number">5.1</span> Creating <code>renv</code> in a project</a>
-  <ul class="collapse">
-  <li><a href="#step-1-open-the-.rproj-in-your-repo" id="toc-step-1-open-the-.rproj-in-your-repo" class="nav-link" data-scroll-target="#step-1-open-the-.rproj-in-your-repo"><span class="header-section-number">5.1.1</span> Step 1: Open the <code>.Rproj</code> in your repo</a></li>
-  <li><a href="#step-2-initialize-renv-for-the-repo" id="toc-step-2-initialize-renv-for-the-repo" class="nav-link" data-scroll-target="#step-2-initialize-renv-for-the-repo"><span class="header-section-number">5.1.2</span> Step 2: Initialize <code>renv</code> for the repo</a></li>
-  <li><a href="#step-3-push-to-github" id="toc-step-3-push-to-github" class="nav-link" data-scroll-target="#step-3-push-to-github"><span class="header-section-number">5.1.3</span> Step 3: Push to Github</a></li>
-  </ul></li>
-  <li><a href="#using-renv-in-a-project" id="toc-using-renv-in-a-project" class="nav-link" data-scroll-target="#using-renv-in-a-project"><span class="header-section-number">5.2</span> Using <code>renv</code> in a project</a>
-  <ul class="collapse">
-  <li><a href="#step-1-open-the-.rproj-for-your-repo" id="toc-step-1-open-the-.rproj-for-your-repo" class="nav-link" data-scroll-target="#step-1-open-the-.rproj-for-your-repo"><span class="header-section-number">5.2.1</span> Step 1: Open the <code>.Rproj</code> for your repo</a></li>
-  <li><a href="#step-2-load-renv-packages" id="toc-step-2-load-renv-packages" class="nav-link" data-scroll-target="#step-2-load-renv-packages"><span class="header-section-number">5.2.2</span> Step 2: Load <code>renv</code> packages</a></li>
+  <li><a href="#step-1-select-a-python-interpreter-1" id="toc-step-1-select-a-python-interpreter-1" class="nav-link" data-scroll-target="#step-1-select-a-python-interpreter-1">Step 1: Select a Python Interpreter</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#r-installing-new-packages" id="toc-r-installing-new-packages" class="nav-link" data-scroll-target="#r-installing-new-packages"><span class="header-section-number">6</span> R Installing New Packages</a></li>
-  <li><a href="#using-reticulate-with-conda-env" id="toc-using-reticulate-with-conda-env" class="nav-link" data-scroll-target="#using-reticulate-with-conda-env"><span class="header-section-number">7</span> Using Reticulate with Conda Env</a></li>
+  <li><a href="#python---installing-new-packages" id="toc-python---installing-new-packages" class="nav-link" data-scroll-target="#python---installing-new-packages">Python - Installing New Packages</a>
+  <ul class="collapse">
+  <li><a href="#step-1-install-a-new-package" id="toc-step-1-install-a-new-package" class="nav-link" data-scroll-target="#step-1-install-a-new-package">Step 1: Install a new package</a></li>
+  <li><a href="#step-2-save-the-package-to-the-repo" id="toc-step-2-save-the-package-to-the-repo" class="nav-link" data-scroll-target="#step-2-save-the-package-to-the-repo">Step 2: Save the package to the repo</a></li>
+  </ul></li>
+  <li><a href="#r-package-management--renv" id="toc-r-package-management--renv" class="nav-link" data-scroll-target="#r-package-management--renv">R Package Management -<code>renv</code></a>
+  <ul class="collapse">
+  <li><a href="#creating-renv-in-a-project" id="toc-creating-renv-in-a-project" class="nav-link" data-scroll-target="#creating-renv-in-a-project">Creating <code>renv</code> in a project</a>
+  <ul class="collapse">
+  <li><a href="#step-1-open-the-.rproj-in-your-repo" id="toc-step-1-open-the-.rproj-in-your-repo" class="nav-link" data-scroll-target="#step-1-open-the-.rproj-in-your-repo">Step 1: Open the <code>.Rproj</code> in your repo</a></li>
+  <li><a href="#step-2-initialize-renv-for-the-repo" id="toc-step-2-initialize-renv-for-the-repo" class="nav-link" data-scroll-target="#step-2-initialize-renv-for-the-repo">Step 2: Initialize <code>renv</code> for the repo</a></li>
+  <li><a href="#step-3-push-to-github" id="toc-step-3-push-to-github" class="nav-link" data-scroll-target="#step-3-push-to-github">Step 3: Push to Github</a></li>
+  </ul></li>
+  <li><a href="#using-renv-in-a-project" id="toc-using-renv-in-a-project" class="nav-link" data-scroll-target="#using-renv-in-a-project">Using <code>renv</code> in a project</a>
+  <ul class="collapse">
+  <li><a href="#step-1-open-the-.rproj-for-your-repo" id="toc-step-1-open-the-.rproj-for-your-repo" class="nav-link" data-scroll-target="#step-1-open-the-.rproj-for-your-repo">Step 1: Open the <code>.Rproj</code> for your repo</a></li>
+  <li><a href="#step-2-load-renv-packages" id="toc-step-2-load-renv-packages" class="nav-link" data-scroll-target="#step-2-load-renv-packages">Step 2: Load <code>renv</code> packages</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#r-installing-new-packages" id="toc-r-installing-new-packages" class="nav-link" data-scroll-target="#r-installing-new-packages">R Installing New Packages</a></li>
+  <li><a href="#using-reticulate-with-conda-env" id="toc-using-reticulate-with-conda-env" class="nav-link" data-scroll-target="#using-reticulate-with-conda-env">Using Reticulate with Conda Env</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/gh/renv.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/gh/renv.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -284,13 +288,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../gh/index.html">Guide</a></li><li class="breadcrumb-item"><a href="../gh/release.html">Tutorials</a></li><li class="breadcrumb-item"><a href="../gh/renv.html">Virtual Environments</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Virtual Environments</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">data democratization</div>
-    <div class="quarto-category">venv</div>
-    <div class="quarto-category">renv</div>
-    <div class="quarto-category">reproducibility</div>
-  </div>
-  </div>
+</div>
 
 <div>
   <div class="description">
@@ -318,7 +316,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">April 10, 2024</p>
+      <p class="date-modified">May 2, 2024</p>
     </div>
   </div>
     
@@ -329,8 +327,8 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
 <div class="quarto-figure quarto-figure-right">
 <figure class="figure">
 <p><img src="images/nwpage_tree_logo.png" class="img-fluid quarto-figure quarto-figure-right figure-img" style="float: right;" alt="Hex logo that says &quot;Data Science in a Box&quot;" width="250"></p>
@@ -352,16 +350,16 @@ Important
 </div>
 </div>
 </section>
-<section id="python---conda-environment-setup" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Python - Conda Environment Setup</h1>
+<section id="python---conda-environment-setup" class="level1">
+<h1>Python - Conda Environment Setup</h1>
 <p>This repo has a file named <code>environment.yml</code>. It contains a list of all packages and versions used for Python software. This file can be used as a set of instructions for your local machine when configuring your local environment.</p>
-<section id="step-1-set-up-anaconda" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="step-1-set-up-anaconda"><span class="header-section-number">2.1</span> Step 1: Set Up Anaconda</h2>
+<section id="step-1-set-up-anaconda" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-set-up-anaconda">Step 1: Set Up Anaconda</h2>
 <p>You should already have Anaconda installed on your machine if not..</p>
 <p>under construction</p>
 </section>
-<section id="step-2-open-anaconda-prompt" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="step-2-open-anaconda-prompt"><span class="header-section-number">2.2</span> Step 2: Open Anaconda Prompt</h2>
+<section id="step-2-open-anaconda-prompt" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-open-anaconda-prompt">Step 2: Open Anaconda Prompt</h2>
 <p>You may have different Anaconda prompts (prompts aligned with different shells, like PowerShell, bash, etc). There should be a generic Anaconda prompt. Open that one:</p>
 <p><img src="images/open_prompt.gif" class="img-fluid"></p>
 <p><br></p>
@@ -369,8 +367,8 @@ Important
 <p><code>conda deactivate</code></p>
 <p>and it will bring you back to your base environment.</p>
 </section>
-<section id="step-3-change-directories" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="step-3-change-directories"><span class="header-section-number">2.3</span> Step 3: Change Directories</h2>
+<section id="step-3-change-directories" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-change-directories">Step 3: Change Directories</h2>
 <p>Change the directory of the prompt to the repo’s directory. The code is</p>
 <p><code>cd C:/Users/XXXXXXX/Projects/Sequencing_2.0</code></p>
 <p>If you are already in your user directory, you can just type</p>
@@ -380,8 +378,8 @@ Important
 <p><br></p>
 <p>Notice that the folder path is now changed to the sequencing repo folder.</p>
 </section>
-<section id="step-4-copy-the-repo-env" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="step-4-copy-the-repo-env"><span class="header-section-number">2.4</span> Step 4: Copy the repo env</h2>
+<section id="step-4-copy-the-repo-env" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-copy-the-repo-env">Step 4: Copy the repo env</h2>
 <p>Now we’re ready to create a new environment based on the repo’s environment.</p>
 <p>Type: <code>conda env create --name seq_env --file=environment.yml</code></p>
 <p>Note that how you name your environment doesn’t really matter, but name it something that resembles the repo. This will save the headache of having random environments for random repos that you can’t remember..</p>
@@ -394,8 +392,8 @@ Important
 <p>Note: I sped up the gif below. The whole process may take a few minutes</p>
 <p><img src="images/conda_create.gif" class="img-fluid"></p>
 </section>
-<section id="step-5-activate-the-environment" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="step-5-activate-the-environment"><span class="header-section-number">2.5</span> Step 5: Activate the environment</h2>
+<section id="step-5-activate-the-environment" class="level2">
+<h2 class="anchored" data-anchor-id="step-5-activate-the-environment">Step 5: Activate the environment</h2>
 <p>You can switch between environments in the conda prompt or in a programming IDE (or both? idk). To activate and switch the env, write:</p>
 <p><code>conda activate &lt;env_name&gt;</code></p>
 <p>in this case</p>
@@ -417,25 +415,25 @@ Note
 </div>
 </section>
 </section>
-<section id="python---programming-setup" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Python - Programming Setup</h1>
+<section id="python---programming-setup" class="level1">
+<h1>Python - Programming Setup</h1>
 <p>Now that your virtual conda environment is set up, let’s set up your programming IDE to be able to recognize your environment.</p>
-<section id="ide-setup---vs-code" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="ide-setup---vs-code"><span class="header-section-number">3.1</span> IDE Setup - VS Code</h2>
+<section id="ide-setup---vs-code" class="level2">
+<h2 class="anchored" data-anchor-id="ide-setup---vs-code">IDE Setup - VS Code</h2>
 <p>VS Code has a lot built in to use a conda environment. Since your env is already activated, if you have VS Code installed, you can type</p>
 <p><code>code</code></p>
 <p>into the anaconda prompt and it will open a VS Code window</p>
 <p><img src="images/vscode_open.gif" class="img-fluid"></p>
-<section id="step-1-select-a-python-interpreter" class="level3" data-number="3.1.1">
-<h3 data-number="3.1.1" class="anchored" data-anchor-id="step-1-select-a-python-interpreter"><span class="header-section-number">3.1.1</span> Step 1: Select a Python Interpreter</h3>
+<section id="step-1-select-a-python-interpreter" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-select-a-python-interpreter">Step 1: Select a Python Interpreter</h3>
 <p>First we need to select a python interpreter, which is in our env. On your keyboard, press</p>
 <p><code>CTRL+SHIFT+P</code></p>
 <p>This should bring up a window with an option that says <code>Python: Select Interpreter</code>. You may need to search for it.</p>
 <p>Click it and you should see your new environment <code>seq_env</code> in the list. Click it</p>
 <p><img src="images/vscode_int.gif" class="img-fluid"></p>
 </section>
-<section id="step-2-write-code" class="level3" data-number="3.1.2">
-<h3 data-number="3.1.2" class="anchored" data-anchor-id="step-2-write-code"><span class="header-section-number">3.1.2</span> Step 2: Write code</h3>
+<section id="step-2-write-code" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-write-code">Step 2: Write code</h3>
 <p>Now your VS Code is using your environment and the python version/packages in that environment. Check to see that your terminal is using the correct env.</p>
 <p>Open the terminal (terminal &gt; new terminal) and confirm that you are in a cmd prompt in the terminal. On the right side of the terminal it should say <code>cmd</code>. If it says <code>powershell</code> or something else, let’s change it.. See the pic below. There’s a drop down that gives you shell types. Change your default to Command Prompt</p>
 <p><img src="images/image-1580735047.png" class="img-fluid"></p>
@@ -444,11 +442,11 @@ Note
 <p><img src="images/vscode_run.gif" class="img-fluid"></p>
 </section>
 </section>
-<section id="ide-setup---pycharm" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="ide-setup---pycharm"><span class="header-section-number">3.2</span> IDE Setup - PyCharm</h2>
+<section id="ide-setup---pycharm" class="level2">
+<h2 class="anchored" data-anchor-id="ide-setup---pycharm">IDE Setup - PyCharm</h2>
 <p>PyCharm also works great with a conda environment.</p>
-<section id="step-1-select-a-python-interpreter-1" class="level3" data-number="3.2.1">
-<h3 data-number="3.2.1" class="anchored" data-anchor-id="step-1-select-a-python-interpreter-1"><span class="header-section-number">3.2.1</span> Step 1: Select a Python Interpreter</h3>
+<section id="step-1-select-a-python-interpreter-1" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-select-a-python-interpreter-1">Step 1: Select a Python Interpreter</h3>
 <p>You may also be able to open a PyCharm window from an Anaconda prompt like with VS Code (if it’s installed in your env). To do so, write <code>pycharm</code> in the prompt and it should open a new window with the env activated.</p>
 <p>If that doesn’t work, open PyCharm and on the bottom right there is a python version and interpreter selected. Click it and open “Add New Interpreter” &gt; “Add local interpreter”. This opens a new window. Click “Conda Environment” and under “Interpreter” click the dropdown. You should be able to see your new environment there. If not, click away and click the dropdown again. It’s weird sometimes.</p>
 <p>Then click okay. Close and reopen the Python Console window and it should have your environment path for the python.exe. Also, the Python Libraries window should have all of the libraries in your environment now.</p>
@@ -458,11 +456,11 @@ Note
 </section>
 </section>
 </section>
-<section id="python---installing-new-packages" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Python - Installing New Packages</h1>
+<section id="python---installing-new-packages" class="level1">
+<h1>Python - Installing New Packages</h1>
 <p>Let’s say you want to add a new python package to the repo. I recommend doing this in an Anaconda prompt and then saving it over the environment.yml. Then you can push the new environment.yml with the new changes to github. Use these steps:</p>
-<section id="step-1-install-a-new-package" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="step-1-install-a-new-package"><span class="header-section-number">4.1</span> Step 1: Install a new package</h2>
+<section id="step-1-install-a-new-package" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-install-a-new-package">Step 1: Install a new package</h2>
 <p>Go to the Anaconda prompt, make sure you’re in the repo file path (<code>cd projects/sequencing_2.0</code>) and make sure you’re in the right conda env (<code>conda activate seq_env</code>).</p>
 <p>Now, install the package. Usually packages can be installed with <code>pip install</code> or <code>conda install</code> or <code>conda install -c conda forge &lt;package&gt;</code>. This depends on the packages. Some need pip, others need conda. Google it to find out. Here i’m going to download a package from NCBI to demonstrate. The package is called <code>ncbi-datasets-cli</code>.</p>
 <ul>
@@ -471,8 +469,8 @@ Note
 </ul>
 <p><img src="images/add_pack.gif" class="img-fluid"></p>
 </section>
-<section id="step-2-save-the-package-to-the-repo" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="step-2-save-the-package-to-the-repo"><span class="header-section-number">4.2</span> Step 2: Save the package to the repo</h2>
+<section id="step-2-save-the-package-to-the-repo" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-save-the-package-to-the-repo">Step 2: Save the package to the repo</h2>
 <p>Now we need to save this package to the repo’s <code>environment.yml</code></p>
 <ul>
 <li>Type <code>conda env export &gt; environment.yml</code></li>
@@ -482,8 +480,8 @@ Note
 <p><img src="images/add_yml.gif" class="img-fluid"></p>
 </section>
 </section>
-<section id="r-package-management--renv" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> R Package Management -<code>renv</code></h1>
+<section id="r-package-management--renv" class="level1">
+<h1>R Package Management -<code>renv</code></h1>
 <p>Managing R packages is much easier than managing Python packages. The R environment uses a package called <code>renv</code>. It will save a list of packages to a lock file, similar to <code>environment.yml</code>. Then, every time you or another teammate opens the R project in your repo the <code>renv</code> package will activate in the background and determine if any packages are not aligned with the repo’s lock file. <strong>It will ensure that everyone is using the same package versions</strong></p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -498,15 +496,15 @@ Important
 <p>Your repo should have a <code>.Rproj</code> file at the <em>root</em> of the directory. If it doesn’t you can create it by opening <code>Rstudio &gt; File &gt; New Project... &gt; Existing Directory (or New Directory)</code> <strong>Make sure <code>.Rproj</code> files are NOT in your <code>.gitignore</code></strong></p>
 </div>
 </div>
-<section id="creating-renv-in-a-project" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="creating-renv-in-a-project"><span class="header-section-number">5.1</span> Creating <code>renv</code> in a project</h2>
-<section id="step-1-open-the-.rproj-in-your-repo" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1" class="anchored" data-anchor-id="step-1-open-the-.rproj-in-your-repo"><span class="header-section-number">5.1.1</span> Step 1: Open the <code>.Rproj</code> in your repo</h3>
+<section id="creating-renv-in-a-project" class="level2">
+<h2 class="anchored" data-anchor-id="creating-renv-in-a-project">Creating <code>renv</code> in a project</h2>
+<section id="step-1-open-the-.rproj-in-your-repo" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-open-the-.rproj-in-your-repo">Step 1: Open the <code>.Rproj</code> in your repo</h3>
 <p>The R project will open up Rstudio at the root of you directory path.</p>
 <p><img src="images/open_r.gif" class="img-fluid"></p>
 </section>
-<section id="step-2-initialize-renv-for-the-repo" class="level3" data-number="5.1.2">
-<h3 data-number="5.1.2" class="anchored" data-anchor-id="step-2-initialize-renv-for-the-repo"><span class="header-section-number">5.1.2</span> Step 2: Initialize <code>renv</code> for the repo</h3>
+<section id="step-2-initialize-renv-for-the-repo" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-initialize-renv-for-the-repo">Step 2: Initialize <code>renv</code> for the repo</h3>
 <p>Now that we’re in the root of your repo directory, let’s initialize <code>renv</code>.</p>
 <p>First install <code>renv</code> - <code>install.packages("renv")</code></p>
 <p>Then in your console write <code>renv::init()</code> and run it.</p>
@@ -530,8 +528,8 @@ Consider removing or reinstalling these packages.</code></pre>
 <li>It also saved things like an <code>activate</code> R script which will activate that <code>renv</code> every time the repo is opened from the <code>.Rproj</code></li>
 </ol>
 </section>
-<section id="step-3-push-to-github" class="level3" data-number="5.1.3">
-<h3 data-number="5.1.3" class="anchored" data-anchor-id="step-3-push-to-github"><span class="header-section-number">5.1.3</span> Step 3: Push to Github</h3>
+<section id="step-3-push-to-github" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-push-to-github">Step 3: Push to Github</h3>
 <p>Now look at your git stage and you will see all the files <code>renv</code> created.</p>
 <p>We have</p>
 <ol type="1">
@@ -544,17 +542,17 @@ Consider removing or reinstalling these packages.</code></pre>
 <p><img src="images/renv_git.gif" class="img-fluid"></p>
 </section>
 </section>
-<section id="using-renv-in-a-project" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="using-renv-in-a-project"><span class="header-section-number">5.2</span> Using <code>renv</code> in a project</h2>
-<section id="step-1-open-the-.rproj-for-your-repo" class="level3" data-number="5.2.1">
-<h3 data-number="5.2.1" class="anchored" data-anchor-id="step-1-open-the-.rproj-for-your-repo"><span class="header-section-number">5.2.1</span> Step 1: Open the <code>.Rproj</code> for your repo</h3>
+<section id="using-renv-in-a-project" class="level2">
+<h2 class="anchored" data-anchor-id="using-renv-in-a-project">Using <code>renv</code> in a project</h2>
+<section id="step-1-open-the-.rproj-for-your-repo" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-open-the-.rproj-for-your-repo">Step 1: Open the <code>.Rproj</code> for your repo</h3>
 <p>Any time you need to code or run code from the repo, open up the <code>.Rproj</code> file that contains the sequencing 2.0 project. In your file explorer, go to the repo and open Sequencing_2.0 <code>.Rproj</code></p>
 <p><br></p>
 <p>This will open up an R window with the repo file path as a root directory. It will also utilize the <code>renv</code>. Your console should say something about <code>renv</code>, like this</p>
 <p><img src="images/image-664157118.png" class="img-fluid"></p>
 </section>
-<section id="step-2-load-renv-packages" class="level3" data-number="5.2.2">
-<h3 data-number="5.2.2" class="anchored" data-anchor-id="step-2-load-renv-packages"><span class="header-section-number">5.2.2</span> Step 2: Load <code>renv</code> packages</h3>
+<section id="step-2-load-renv-packages" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-load-renv-packages">Step 2: Load <code>renv</code> packages</h3>
 <p>The first time you use <code>renv</code> you will need to configure it to your local machine. To do this, type:</p>
 <ul>
 <li><code>renv::restore()</code> in your console.</li>
@@ -565,8 +563,8 @@ Consider removing or reinstalling these packages.</code></pre>
 </section>
 </section>
 </section>
-<section id="r-installing-new-packages" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> R Installing New Packages</h1>
+<section id="r-installing-new-packages" class="level1">
+<h1>R Installing New Packages</h1>
 <p>If you need to install a new package and want to put it in the repo, you will need to update the lock file. To do this:</p>
 <ul>
 <li><code>renv::install()</code>, <code>pak::pkg_install("&lt;PACKAGE_NAME&gt;")</code> (the safe way) or even <code>install.packages()</code></li>
@@ -589,8 +587,8 @@ Warning
 <p><img src="images/r_save.gif" class="img-fluid"></p>
 <p>The video at the bottom of this page explains in detail <code>renv</code> and its capabilities https://solutions.posit.co/envs-pkgs/environments/upgrades/</p>
 </section>
-<section id="using-reticulate-with-conda-env" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> Using Reticulate with Conda Env</h1>
+<section id="using-reticulate-with-conda-env" class="level1">
+<h1>Using Reticulate with Conda Env</h1>
 <p>Now that your R and Python environments are set up, if you have code that uses the <code>reticulate</code> package in R, it might still be pointing to your base Python environment. So, if you need to write python code in R (using reticulate), the code may break. Here’s what you need to do to make sure your <code>reticulate</code> python path is pointing towards your conda environment:</p>
 <ol type="1">
 <li>Open an anaconda prompt</li>

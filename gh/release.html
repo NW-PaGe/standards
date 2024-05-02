@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2023-09-01">
 <meta name="description" content="Utilizing and automating Github Releases in your repo">
 
-<title>🌲 – Release Cycles</title>
+<title>NW-COE Policies – Release Cycles</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -117,8 +117,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../images/nwpage_tree_logo.png" alt="" class="navbar-logo">
+    </a>
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">🌲</span>
+    <span class="navbar-title">NW-COE Policies</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -128,25 +131,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
-<span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link active" href="../gh/index.html" aria-current="page"> 
-<span class="menu-text">Github Policies</span></a>
+<span class="menu-text">Github</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../aws/aws_index.html"> 
-<span class="menu-text">AWS Policies</span></a>
+<span class="menu-text">AWS</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../azure/azure_index.html"> 
-<span class="menu-text">Azure Policies</span></a>
+<span class="menu-text">Azure</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/NW-PaGe/standards"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://nwpage.org/"> <i class="bi bi-file-richtext" role="img" aria-label="NW-PaGe">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -270,17 +274,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#github-releases" id="toc-github-releases" class="nav-link active" data-scroll-target="#github-releases"><span class="header-section-number">1</span> Github Releases</a></li>
-  <li><a href="#semantic-versioning" id="toc-semantic-versioning" class="nav-link" data-scroll-target="#semantic-versioning"><span class="header-section-number">2</span> Semantic Versioning</a></li>
-  <li><a href="#sec-cc" id="toc-sec-cc" class="nav-link" data-scroll-target="#sec-cc"><span class="header-section-number">3</span> Conventional Commits</a></li>
-  <li><a href="#automating-the-release-cycle" id="toc-automating-the-release-cycle" class="nav-link" data-scroll-target="#automating-the-release-cycle"><span class="header-section-number">4</span> Automating The Release Cycle</a>
+  <li><a href="#github-releases" id="toc-github-releases" class="nav-link active" data-scroll-target="#github-releases">Github Releases</a></li>
+  <li><a href="#semantic-versioning" id="toc-semantic-versioning" class="nav-link" data-scroll-target="#semantic-versioning">Semantic Versioning</a></li>
+  <li><a href="#sec-cc" id="toc-sec-cc" class="nav-link" data-scroll-target="#sec-cc">Conventional Commits</a></li>
+  <li><a href="#automating-the-release-cycle" id="toc-automating-the-release-cycle" class="nav-link" data-scroll-target="#automating-the-release-cycle">Automating The Release Cycle</a>
   <ul class="collapse">
-  <li><a href="#github-action-for-auto-releases" id="toc-github-action-for-auto-releases" class="nav-link" data-scroll-target="#github-action-for-auto-releases"><span class="header-section-number">4.1</span> Github Action for auto releases</a></li>
+  <li><a href="#github-action-for-auto-releases" id="toc-github-action-for-auto-releases" class="nav-link" data-scroll-target="#github-action-for-auto-releases">Github Action for auto releases</a></li>
   </ul></li>
   <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
   <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
-  <li><a href="#step-by-step-instructions" id="toc-step-by-step-instructions" class="nav-link" data-scroll-target="#step-by-step-instructions"><span class="header-section-number">5</span> Step by Step Instructions</a></li>
-  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources"><span class="header-section-number">6</span> Resources</a></li>
+  <li><a href="#step-by-step-instructions" id="toc-step-by-step-instructions" class="nav-link" data-scroll-target="#step-by-step-instructions">Step by Step Instructions</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/gh/release.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/gh/release.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -290,12 +294,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../gh/index.html">Guide</a></li><li class="breadcrumb-item"><a href="../gh/release.html">Tutorials</a></li><li class="breadcrumb-item"><a href="../gh/release.html">Release Cycles</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Release Cycles</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">data democratization</div>
-    <div class="quarto-category">release cycles</div>
-    <div class="quarto-category">Github</div>
-  </div>
-  </div>
+</div>
 
 <div>
   <div class="description">
@@ -333,7 +332,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">April 10, 2024</p>
+      <p class="date-modified">May 2, 2024</p>
     </div>
   </div>
     
@@ -354,8 +353,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 <p><br></p>
-<section id="github-releases" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Github Releases</h1>
+<section id="github-releases" class="level1">
+<h1>Github Releases</h1>
 <p>In the right panel of your Github repo there is a section labeled Releases. Here you can create or find a version of your repo’s code base. Each version comes with a changelog, tags, and downloadable source code. Developers and end-users may find this helpful to navigate to what the repo contained at specific release versions and have the source code available for download at the specific version.</p>
 <p><img src="images/releases.PNG" class="myframe img-fluid"></p>
 <p><br></p>
@@ -368,8 +367,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>You can click on a tag and it will take you to the repo <em>at the time the specific version was released</em></p>
 <p><img src="images/releases_tags.gif" class="myframe img-fluid"></p>
 </section>
-<section id="semantic-versioning" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Semantic Versioning</h1>
+<section id="semantic-versioning" class="level1">
+<h1>Semantic Versioning</h1>
 <p>Software projects often label their releases using semantic versioning. It looks like this, where the software version numbers all have a definition:</p>
 <div class="pic-border">
 <div class="quarto-figure quarto-figure-center">
@@ -380,8 +379,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="sec-cc" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Conventional Commits</h1>
+<section id="sec-cc" class="level1">
+<h1>Conventional Commits</h1>
 <p>To create the release cycle in your repo you may want to use Conventional Commits.</p>
 <p>Conventional Commits are a way to format and standardize your commit messages, which can be used to then automate the repo’s release cycle. For example, one conventional naming method is to label any commit associated with a new feature as <code>feat:</code> plus a commit message.</p>
 <ul>
@@ -392,14 +391,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <iframe width="780" height="500" src="https://www.conventionalcommits.org/en/v1.0.0/" title="Github Licenses"></iframe>
 </section>
-<section id="automating-the-release-cycle" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Automating The Release Cycle</h1>
+<section id="automating-the-release-cycle" class="level1">
+<h1>Automating The Release Cycle</h1>
 <p>You should consider automating your release cycle so that your project cycle is consistent and predictable. There are many different ways to approach this.</p>
 <p>Some repos have semi-automatic cycles where there is some manual component of releasing their software, whereas others are fully automated. Manual releases can work too for some scenarios.</p>
-<section id="github-action-for-auto-releases" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="github-action-for-auto-releases"><span class="header-section-number">4.1</span> Github Action for auto releases</h2>
+<section id="github-action-for-auto-releases" class="level2">
+<h2 class="anchored" data-anchor-id="github-action-for-auto-releases">Github Action for auto releases</h2>
 <p>I recommend first creating a test repo for this. In the repo, create a Github Action workflow called <code>changelog.yml</code>. You can copy the full file below:</p>
-<div class="myframe">
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -441,7 +439,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">body</span><span class="kw">:</span><span class="at"> ${{ steps.changelog.outputs.clean_changelog }}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-</div>
 </section>
 </section>
 <section id="section" class="level1 unnumbered page-columns page-full">
@@ -467,7 +464,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="section-1" class="level1 unnumbered">
 <h1 class="unnumbered"></h1>
 <p>The first step uses the Github Action <code>TriPSs/conventional-changelog-action@v3</code> which will scan your</p>
-<div class="myframe">
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -484,9 +480,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">create-summary</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-</div>
 <p>The second step uses the Github Action <code>actions/create-release@v1</code> which will create git tags with the version number and a changelog with downloadable source code</p>
-<div class="myframe">
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -504,17 +498,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">body</span><span class="kw">:</span><span class="at"> ${{ steps.changelog.outputs.clean_changelog }}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-</div>
 </section>
-<section id="step-by-step-instructions" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Step by Step Instructions</h1>
+<section id="step-by-step-instructions" class="level1">
+<h1>Step by Step Instructions</h1>
 <ol type="1">
 <li>Make a test repo in Github, then clone it locally</li>
 <li>Make a folder in the root of the repo named <code>.github</code></li>
 <li>In the <code>.github</code> folder make another folder named <code>workflows</code> . the <code>.github/workflows</code> folder needs to be spelled the same and in the in exact same place for a github action to work.</li>
 <li>In the <code>workflows</code> folder make a file called <code>changelog.yml</code> and paste code below in it:</li>
 </ol>
-<div class="myframe">
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -554,7 +546,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">tag_name</span><span class="kw">:</span><span class="at"> ${{ steps.changelog.outputs.tag }}</span></span>
 <span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">release_name</span><span class="kw">:</span><span class="at"> ${{ steps.changelog.outputs.tag }}</span></span>
 <span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">body</span><span class="kw">:</span><span class="at"> ${{ steps.changelog.outputs.clean_changelog }}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -673,8 +664,8 @@ Note
 <p><strong>NOTE</strong>: breaking changes need to be written like this:</p>
 <p><img src="images/paste-1.png" class="img-fluid"></p>
 </section>
-<section id="resources" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Resources</h1>
+<section id="resources" class="level1">
+<h1>Resources</h1>
 <p>These videos are excellent summaries of how to use Github Releases and semantic versioning</p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/fcHJZ4pMzBs?si=jb-1lgaYevGqOUU9" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/q3qE2nJRuYM?si=7nQ7itJFt3oUtgaL" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>

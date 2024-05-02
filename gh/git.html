@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2023-02-01">
 <meta name="description" content="Basic Git usage guide">
 
-<title>🌲 – Git</title>
+<title>NW-COE Policies – Git</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -114,8 +114,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../images/nwpage_tree_logo.png" alt="" class="navbar-logo">
+    </a>
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">🌲</span>
+    <span class="navbar-title">NW-COE Policies</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -125,25 +128,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
-<span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link active" href="../gh/index.html" aria-current="page"> 
-<span class="menu-text">Github Policies</span></a>
+<span class="menu-text">Github</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../aws/aws_index.html"> 
-<span class="menu-text">AWS Policies</span></a>
+<span class="menu-text">AWS</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../azure/azure_index.html"> 
-<span class="menu-text">Azure Policies</span></a>
+<span class="menu-text">Azure</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/NW-PaGe/standards"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://nwpage.org/"> <i class="bi bi-file-richtext" role="img" aria-label="NW-PaGe">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -267,13 +271,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#intro" id="toc-intro" class="nav-link active" data-scroll-target="#intro"><span class="header-section-number">1</span> Intro</a></li>
-  <li><a href="#before-writing-code" id="toc-before-writing-code" class="nav-link" data-scroll-target="#before-writing-code"><span class="header-section-number">2</span> Before writing code</a></li>
-  <li><a href="#switch-to-feature-branch" id="toc-switch-to-feature-branch" class="nav-link" data-scroll-target="#switch-to-feature-branch"><span class="header-section-number">3</span> Switch to feature branch</a></li>
-  <li><a href="#making-changes" id="toc-making-changes" class="nav-link" data-scroll-target="#making-changes"><span class="header-section-number">4</span> Making changes</a></li>
-  <li><a href="#committing-changes-to-the-feature-branch" id="toc-committing-changes-to-the-feature-branch" class="nav-link" data-scroll-target="#committing-changes-to-the-feature-branch"><span class="header-section-number">5</span> Committing changes to the feature branch</a></li>
-  <li><a href="#making-a-pull-request" id="toc-making-a-pull-request" class="nav-link" data-scroll-target="#making-a-pull-request"><span class="header-section-number">6</span> Making a pull request</a></li>
-  <li><a href="#for-reviewers" id="toc-for-reviewers" class="nav-link" data-scroll-target="#for-reviewers"><span class="header-section-number">7</span> For Reviewers</a></li>
+  <li><a href="#intro" id="toc-intro" class="nav-link active" data-scroll-target="#intro">Intro</a></li>
+  <li><a href="#before-writing-code" id="toc-before-writing-code" class="nav-link" data-scroll-target="#before-writing-code">Before writing code</a></li>
+  <li><a href="#switch-to-feature-branch" id="toc-switch-to-feature-branch" class="nav-link" data-scroll-target="#switch-to-feature-branch">Switch to feature branch</a></li>
+  <li><a href="#making-changes" id="toc-making-changes" class="nav-link" data-scroll-target="#making-changes">Making changes</a></li>
+  <li><a href="#committing-changes-to-the-feature-branch" id="toc-committing-changes-to-the-feature-branch" class="nav-link" data-scroll-target="#committing-changes-to-the-feature-branch">Committing changes to the feature branch</a></li>
+  <li><a href="#making-a-pull-request" id="toc-making-a-pull-request" class="nav-link" data-scroll-target="#making-a-pull-request">Making a pull request</a></li>
+  <li><a href="#for-reviewers" id="toc-for-reviewers" class="nav-link" data-scroll-target="#for-reviewers">For Reviewers</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/gh/git.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/gh/git.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -316,7 +320,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">April 10, 2024</p>
+      <p class="date-modified">May 2, 2024</p>
     </div>
   </div>
     
@@ -340,12 +344,12 @@ h1, .h1, h2, .h2, h3, .h3 {
 }
 </style>
 </div>
-<section id="intro" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Intro</h1>
+<section id="intro" class="level1">
+<h1>Intro</h1>
 <p>Showing how to create and work off of a feature branch using <code>git</code> and github.</p>
 </section>
-<section id="before-writing-code" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Before writing code</h1>
+<section id="before-writing-code" class="level1">
+<h1>Before writing code</h1>
 <p><strong>First check to see if your main branch is up to date</strong> and has the most recent commits added. This should be the first thing you do before running/writing any code.</p>
 <p><code>git status</code> will tell you:</p>
 <ol type="1">
@@ -383,8 +387,8 @@ h1, .h1, h2, .h2, h3, .h3 {
 <p>It’s the same in the git desktop app. Make sure you are in the branch you want to be in, then click fetch and pull to update that branch to include the most recent commits in the remote repo</p>
 <p><img src="https://content.codecademy.com/articles/Git-and-GitHub-Desktop/what-is-git-pull-origin.jpg" class="img-fluid"></p>
 </section>
-<section id="switch-to-feature-branch" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Switch to feature branch</h1>
+<section id="switch-to-feature-branch" class="level1">
+<h1>Switch to feature branch</h1>
 <p>If we want to make changes to code, first <strong>make a new branch off the main</strong>.</p>
 <p><code>git branch</code> will show all the branches in the repo and the one you are currently in</p>
 <p><code>git checkout -b new-branch-name</code> will create a new branch. In this case, we already have our feature branch called <code>test-dcipher-cases</code></p>
@@ -401,8 +405,8 @@ h1, .h1, h2, .h2, h3, .h3 {
 <p>Or in the desktop app</p>
 <p><img src="images/gitdesk.gif" class="img-fluid"></p>
 </section>
-<section id="making-changes" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Making changes</h1>
+<section id="making-changes" class="level1">
+<h1>Making changes</h1>
 <p>If we want to make a change to the code, make a new branch off of <code>test-dcipher-cases</code> and switch to that branch</p>
 <p><br></p>
 <div class="cell">
@@ -413,8 +417,8 @@ h1, .h1, h2, .h2, h3, .h3 {
 <p><img src="images/gitdesk23-01.gif" class="img-fluid"></p>
 <p><br></p>
 </section>
-<section id="committing-changes-to-the-feature-branch" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Committing changes to the feature branch</h1>
+<section id="committing-changes-to-the-feature-branch" class="level1">
+<h1>Committing changes to the feature branch</h1>
 <p>Now you can make changes in your R script and when you save them they will be ready to be committed to this new branch.</p>
 <p><code>git add</code> to stage your changes</p>
 <p><code>git commit -am "messge"</code> to commit those changes to the new branch with a message</p>
@@ -429,8 +433,8 @@ h1, .h1, h2, .h2, h3, .h3 {
 <p><img src="images/gitdesk233-01.gif" class="img-fluid"></p>
 <p><br></p>
 </section>
-<section id="making-a-pull-request" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Making a pull request</h1>
+<section id="making-a-pull-request" class="level1">
+<h1>Making a pull request</h1>
 <p>This part happens in github.</p>
 <ol type="1">
 <li>Select who you want to review your code and assign yourself.</li>
@@ -440,8 +444,8 @@ h1, .h1, h2, .h2, h3, .h3 {
 <p>This should automatically send an email to the reviewers that there is code needed to be merged to a branch.</p>
 <p><img src="images/gitdesk2333-01.gif" class="img-fluid"></p>
 </section>
-<section id="for-reviewers" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> For Reviewers</h1>
+<section id="for-reviewers" class="level1">
+<h1>For Reviewers</h1>
 <p>When reviewing changes, <strong>make sure the commit/changes are being merged to the correct branch</strong>.</p>
 <p>Github automatically compares to the main branch, so you will have to manually click on the base branch and change it to <code>test-dcipher-cases</code></p>
 <p><img src="images/paste-F8997DE3.png" class="img-fluid"></p>

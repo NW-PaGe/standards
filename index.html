@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>🌲</title>
+<title>NW-COE Policies</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -80,8 +80,11 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/nwpage_tree_logo.png" alt="" class="navbar-logo">
+    </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">🌲</span>
+    <span class="navbar-title">NW-COE Policies</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -91,25 +94,26 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
-<span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="./gh/index.html"> 
-<span class="menu-text">Github Policies</span></a>
+<span class="menu-text">Github</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./aws/aws_index.html"> 
-<span class="menu-text">AWS Policies</span></a>
+<span class="menu-text">AWS</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./azure/azure_index.html"> 
-<span class="menu-text">Azure Policies</span></a>
+<span class="menu-text">Azure</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/NW-PaGe/standards"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://nwpage.org/"> <i class="bi bi-file-richtext" role="img" aria-label="NW-PaGe">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -149,8 +153,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <p><br> <br> <br></p>
 <div class="splash-page page-columns page-full">
-<div id="collapseQuickstart" class="column-page">
-<div class="column" style="width:33%;">
+<div id="collapseQuickstart" class="column-screen-inset">
+<div class="column box cyan" style="width:25%;">
 <p><i class="bi-github " style="font-size: 4em;" role="img" aria-hidden="true"></i></p>
 <p><strong>Github Policies</strong></p>
 <ul>
@@ -160,7 +164,7 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p><a href="./gh/index.html" class="button"><strong>gh guides</strong></a></p>
 </div>
-<div class="column" style="width:33%;">
+<div class="column box cyan" style="width:25%;">
 <p><i class="bi-amazon " style="font-size: 4em;" role="img" aria-hidden="true"></i></p>
 <p><strong>AWS Policies</strong></p>
 <ul>
@@ -170,7 +174,7 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p><a href="./aws/aws_index.html" class="button"><strong>aws guides</strong></a></p>
 </div>
-<div class="column" style="width:33%;">
+<div class="column box cyan" style="width:25%;">
 <p><i class="bi-cloud-fog-fill " style="font-size: 4em;" role="img" aria-hidden="true"></i></p>
 <p><strong>Azure Policies</strong></p>
 <ul>
@@ -182,61 +186,6 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<!--
-## Quickstart
-
-This is a static website documenting the proposed policies and standards for public Github use at the Pacific Northwest Genomic Center of Excellence. There are documents on
-
-1.  Security and how to protect credential and private process leaks 
-2.  Licensing to protect against re-sale or theft of code 
-3.  Our Github rules, policies, and templates 
-4.  Github user guides 
-
-If there are any questions please reach out to
-
-
-::: {.column-screen-inset-shaded layout-nrow="1"}
- **Personal or network credentials, tokens, server names and more are prohibited from being published to our public repos.** Protect security and credentials with good coding practices. Using local environment files along with `.gitignore` can prevent credentials from being accidentally pushed into your repo. Other guardrails like **pre-commit hooks** can be used to further prevent accidental credential leaks. [**See more details on our security policies here**](std/security.qmd)
-
-::: {.cell filename='local_credentials.yml'}
-
-```{.yaml .cell-code}
-# local yaml file that will NOT be pushed to the repo
-# add this file to the .gitignore to prevent leaks
-my_credentials:
-  username: super_secret_user_name
-  password: 12345terriblepassword
-  
-  
-  
-  
-```
-:::
-
-::: {.cell filename='script_in_repo.R'}
-
-```{.r .cell-code}
-# this script is in the repo, but credentials are hidden
-library(yaml)
-
-# read in the local credentials yaml file
-creds <- yaml::read_yaml("path/to/local_credentials.yml")
-
-# pull in the credentials
-username <- creds$my_credentials$username
-password <- creds$my_credentials$password
-```
-:::
-:::
-
-::: {.column-screen-inset-shaded layout-nrow="1"}
- Each repo in the organization should have a license. Licenses can help prevent your work from being stolen and/or used inappropriately. [Licensing details here](std/lic.qmd)
-
- This organization requires each repo to have [certain documents](std/templates.qmd), such as a CODE_OF_CONDUCT. The organization uses a special repo called **.github** to ensure all repos adhere to the policies and have the right documents.
-
- If you're looking to build a repository, [check out the Github user guide tabs](tools/how_to.qmd) for best practices on reproducibility, documentation in the repo, and more.
-:::
--->
 
 
 

@@ -11,7 +11,7 @@
 <meta name="dcterms.date" content="2023-04-09">
 <meta name="description" content="Protect your credentials, tokens, data and more">
 
-<title>🌲 – Repo Security</title>
+<title>NW-COE Policies – Repo Security</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -119,8 +119,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../images/nwpage_tree_logo.png" alt="" class="navbar-logo">
+    </a>
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">🌲</span>
+    <span class="navbar-title">NW-COE Policies</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -130,25 +133,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
-<span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link active" href="../gh/index.html" aria-current="page"> 
-<span class="menu-text">Github Policies</span></a>
+<span class="menu-text">Github</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../aws/aws_index.html"> 
-<span class="menu-text">AWS Policies</span></a>
+<span class="menu-text">AWS</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../azure/azure_index.html"> 
-<span class="menu-text">Azure Policies</span></a>
+<span class="menu-text">Azure</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/NW-PaGe/standards"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://nwpage.org/"> <i class="bi bi-file-richtext" role="img" aria-label="NW-PaGe">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -274,18 +278,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#prevent-credential-leaks-with-env-variables" id="toc-prevent-credential-leaks-with-env-variables" class="nav-link active" data-scroll-target="#prevent-credential-leaks-with-env-variables">Prevent Credential Leaks with Env Variables</a>
   <ul class="collapse">
-  <li><a href="#create-a-private-credentials-file" id="toc-create-a-private-credentials-file" class="nav-link" data-scroll-target="#create-a-private-credentials-file"><span class="header-section-number">0.0.1</span> Create a private credentials file</a></li>
-  <li><a href="#creds.yml-details" id="toc-creds.yml-details" class="nav-link" data-scroll-target="#creds.yml-details"><span class="header-section-number">0.0.2</span> <code>creds.yml</code> details</a></li>
+  <li><a href="#create-a-private-credentials-file" id="toc-create-a-private-credentials-file" class="nav-link" data-scroll-target="#create-a-private-credentials-file">Create a private credentials file</a></li>
+  <li><a href="#creds.yml-details" id="toc-creds.yml-details" class="nav-link" data-scroll-target="#creds.yml-details"><code>creds.yml</code> details</a></li>
   <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
-  <li><a href="#safe-guards---prevent-accidental-leaks" id="toc-safe-guards---prevent-accidental-leaks" class="nav-link" data-scroll-target="#safe-guards---prevent-accidental-leaks"><span class="header-section-number">0.0.3</span> Safe Guards - Prevent Accidental Leaks!</a></li>
+  <li><a href="#safe-guards---prevent-accidental-leaks" id="toc-safe-guards---prevent-accidental-leaks" class="nav-link" data-scroll-target="#safe-guards---prevent-accidental-leaks">Safe Guards - Prevent Accidental Leaks!</a></li>
   </ul></li>
-  <li><a href="#security-guardrails" id="toc-security-guardrails" class="nav-link" data-scroll-target="#security-guardrails"><span class="header-section-number">1</span> Security Guardrails</a>
+  <li><a href="#security-guardrails" id="toc-security-guardrails" class="nav-link" data-scroll-target="#security-guardrails">Security Guardrails</a>
   <ul class="collapse">
-  <li><a href="#pre-commit-hooks" id="toc-pre-commit-hooks" class="nav-link" data-scroll-target="#pre-commit-hooks"><span class="header-section-number">1.1</span> Pre-commit Hooks</a></li>
-  <li><a href="#pre-recieve-hooks" id="toc-pre-recieve-hooks" class="nav-link" data-scroll-target="#pre-recieve-hooks"><span class="header-section-number">1.2</span> Pre-Recieve Hooks</a></li>
-  <li><a href="#pushing-private-code-to-public-repos" id="toc-pushing-private-code-to-public-repos" class="nav-link" data-scroll-target="#pushing-private-code-to-public-repos"><span class="header-section-number">1.3</span> Pushing Private Code to Public Repos</a></li>
+  <li><a href="#pre-commit-hooks" id="toc-pre-commit-hooks" class="nav-link" data-scroll-target="#pre-commit-hooks">Pre-commit Hooks</a></li>
+  <li><a href="#pre-recieve-hooks" id="toc-pre-recieve-hooks" class="nav-link" data-scroll-target="#pre-recieve-hooks">Pre-Recieve Hooks</a></li>
+  <li><a href="#pushing-private-code-to-public-repos" id="toc-pushing-private-code-to-public-repos" class="nav-link" data-scroll-target="#pushing-private-code-to-public-repos">Pushing Private Code to Public Repos</a></li>
   </ul></li>
-  <li><a href="#code-reviewersgithub-operations-team" id="toc-code-reviewersgithub-operations-team" class="nav-link" data-scroll-target="#code-reviewersgithub-operations-team"><span class="header-section-number">2</span> Code Reviewers/Github Operations Team</a></li>
+  <li><a href="#code-reviewersgithub-operations-team" id="toc-code-reviewersgithub-operations-team" class="nav-link" data-scroll-target="#code-reviewersgithub-operations-team">Code Reviewers/Github Operations Team</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/gh/security.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/gh/security.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="security.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
@@ -295,13 +299,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../gh/index.html">Guide</a></li><li class="breadcrumb-item"><a href="../gh/security.html">Policies</a></li><li class="breadcrumb-item"><a href="../gh/security.html">Repo Security</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Repo Security</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">credentials</div>
-    <div class="quarto-category">security</div>
-    <div class="quarto-category">Github</div>
-    <div class="quarto-category">Git</div>
-  </div>
-  </div>
+</div>
 
 <div>
   <div class="description">
@@ -330,7 +328,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">April 10, 2024</p>
+      <p class="date-modified">May 2, 2024</p>
     </div>
   </div>
     
@@ -398,15 +396,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="prevent-credential-leaks-with-env-variables" class="level2 unnumbered page-columns page-full">
 <h2 class="unnumbered anchored" data-anchor-id="prevent-credential-leaks-with-env-variables">Prevent Credential Leaks with Env Variables</h2>
 <p>There are a number of ways to do this. We typically use a yaml file that can be filled out with personal credentials locally. The file will not be committed to the remote repo</p>
-<section id="create-a-private-credentials-file" class="level3" data-number="0.0.1">
-<h3 data-number="0.0.1" class="anchored" data-anchor-id="create-a-private-credentials-file"><span class="header-section-number">0.0.1</span> Create a private credentials file</h3>
+<section id="create-a-private-credentials-file" class="level3">
+<h3 class="anchored" data-anchor-id="create-a-private-credentials-file">Create a private credentials file</h3>
 <p>The scripts use a <code>.yml</code> file that contains a list of API tokens, server names, and usernames/passwords specific to each individual user. There are two <code>.yml</code> files. One is a template (containing no actual passwords..) that exists in the repo and serves as a template so every individual user can keep up to date with new credential additions. The other is the individual <code>creds.yml</code> that is in the repo’s <code>.gitignore</code>. This file will never exist in the repo and only exist locally (in the user’s C drive).</p>
 </section>
-<section id="creds.yml-details" class="level3" data-number="0.0.2">
-<h3 data-number="0.0.2" class="anchored" data-anchor-id="creds.yml-details"><span class="header-section-number">0.0.2</span> <code>creds.yml</code> details</h3>
+<section id="creds.yml-details" class="level3">
+<h3 class="anchored" data-anchor-id="creds.yml-details"><code>creds.yml</code> details</h3>
 <p>The <code>.yml</code> file can work with multiple programming languages including R and Python. They are read in the same way and can be easily adjusted when adding new passwords or using them as configuration files.</p>
 <p>They look like this:</p>
-<div class="myframe">
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -428,9 +425,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">password</span><span class="kw">:</span><span class="at"> &lt;PASSWORD&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-</div>
 <p>You can have different variables assigned to unique lists, which allows for easy configuration. For example, the list starting with <code>default</code> has variables <code>conn_list_wdrs</code> and <code>fulgent</code>. You can have a different list of variables within the same file like this:</p>
-<div class="myframe">
 <div class="cell" data-source-line-numbers="4-5,16-17">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -460,9 +455,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ApplicationIntent</span><span class="kw">:</span><span class="at"> </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-</div>
 <p>Now there is a <code>test</code> list with its own variables. This lets us switch a set of variables within our scripts. <code>default</code> applies to the main credentials where <code>test</code> can distinguish which variables should be test or dev scripts specific. Notice below that you can now call the credentials from a <code>.yml</code> file into an R or Python script and the actual credentials will never exist in the code pushed to the repo.</p>
-<div class="myframe">
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -476,7 +469,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># pull in the credentials</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>server_name <span class="ot">&lt;-</span> creds<span class="sc">$</span>default<span class="sc">$</span>conn_list_wdrs<span class="sc">$</span>server</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 </div>
 </div>
 <div style="page-break-after: always;"></div>
@@ -529,12 +521,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div style="page-break-after: always;"></div>
 <div style="page-break-after: always;"></div>
 </section>
-<section id="safe-guards---prevent-accidental-leaks" class="level3" data-number="0.0.3">
-<h3 data-number="0.0.3" class="anchored" data-anchor-id="safe-guards---prevent-accidental-leaks"><span class="header-section-number">0.0.3</span> Safe Guards - Prevent Accidental Leaks!</h3>
+<section id="safe-guards---prevent-accidental-leaks" class="level3">
+<h3 class="anchored" data-anchor-id="safe-guards---prevent-accidental-leaks">Safe Guards - Prevent Accidental Leaks!</h3>
 <p>Once you have the credentials.yml template in your repo, make sure that nobody on your team (or anyone with write access..) is able to accidentally push changes to the template. We don’t want someone’s passwords or API tokens to exist in GitHub.</p>
 <p>This link shows how to skip any changes made to the specific file https://stackoverflow.com/a/39776107. If someone makes local changes to the template, the changes will not show in their commit. It is a safe guard.</p>
-<section id="for-all-individual-users-run-this-code" class="level4" data-number="0.0.3.1">
-<h4 data-number="0.0.3.1" class="anchored" data-anchor-id="for-all-individual-users-run-this-code"><span class="header-section-number">0.0.3.1</span> For all individual users, run this code:</h4>
+<section id="for-all-individual-users-run-this-code" class="level4">
+<h4 class="anchored" data-anchor-id="for-all-individual-users-run-this-code">For all individual users, run this code:</h4>
 <div class="smallframe">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> update-index <span class="at">--skip-worktree</span> creds_TEMPLATE.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -542,8 +534,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>This will tell your local git to ignore any changes made to <code>creds_TEMPLATE.yml</code>, but also allow it to exist in the repo (since <code>.gitignore</code> will prevent it from being in the repo)</p>
 </section>
-<section id="if-you-need-to-update-the-template-file-run-this" class="level4" data-number="0.0.3.2">
-<h4 data-number="0.0.3.2" class="anchored" data-anchor-id="if-you-need-to-update-the-template-file-run-this"><span class="header-section-number">0.0.3.2</span> If you need to update the template file run this:</h4>
+<section id="if-you-need-to-update-the-template-file-run-this" class="level4">
+<h4 class="anchored" data-anchor-id="if-you-need-to-update-the-template-file-run-this">If you need to update the template file run this:</h4>
 <div class="smallframe">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> update-index <span class="at">--no-skip-worktree</span> creds_TEMPLATE.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -560,12 +552,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </section>
 </section>
-<section id="security-guardrails" class="level1 page-columns page-full" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Security Guardrails</h1>
+<section id="security-guardrails" class="level1 page-columns page-full">
+<h1>Security Guardrails</h1>
 <p>Using a <code>.gitignore</code> file for environmental variables/credentials is an excellent guardrail and promotes good coding habits, but we may also want additional guardrails such as hooks.</p>
 <p>Hooks are processes that run in the background and can prevent code from being pushed if there is a security flaw. There are two hooks we could use for security; pre-commit hooks and pre-receive hooks</p>
-<section id="pre-commit-hooks" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="pre-commit-hooks"><span class="header-section-number">1.1</span> Pre-commit Hooks</h2>
+<section id="pre-commit-hooks" class="level2">
+<h2 class="anchored" data-anchor-id="pre-commit-hooks">Pre-commit Hooks</h2>
 <p>Pre-commit hooks run a process locally when the user attempts to commit code to a git branch. Hooks have many uses. Here we can use them as a security guardrail to prevent accidental credential leaks in committed code.</p>
 <ol type="1">
 <li>Clone or download the AWS Git Secrets repo from awslabs GitHub https://github.com/awslabs/git-secrets/blob/master/install.ps1</li>
@@ -680,7 +672,7 @@ Note
 <li><p>Check that the <code>secrets_key</code> regex is working by running the process on a repo that you know has secrets in it. For example, in a different folder, run all the pre-commit hook steps above and add a known “bad” string into the regex. For example, in the regex put <code>bad_string</code> and in a file in that folder put <code>bad_string</code>. When you scan it should get flagged.</p></li>
 <li><p>If secret scanning is taking too long, you might want to check certain files first. I’ve found that HTML files take a <em>very</em> long time to scan for secrets. If you’re using linux or macOS you should be able to scan certain files via grob like this <code>git secrets --scan path/to/files*</code>. If you’re using windows it probably won’t work. In that case, if you only want certain file extensions to be scanned, use this function in powershell below. Download the file here:</p></li>
 </ol>
-<p><a href="#dnldts52254" onclick="fetch('data:text/plain;base64,IyBSRUFETUUKCiMjIFRoaXMgc2NyaXB0IHJlcXVpcmVzIEFXUyBHaXQgU2VjcmV0cyBhbmQgcmVjb21tZW5kcyBjdXN0b20gcmVnZXggc2VjcmV0cy4KIyMgZm9yIG1vcmUgZGV0YWlscyBhbmQgaW5zdGFsbCBpbnN0cnVjdGlvbnMsIHBsZWFzZSBmb2xsb3cgaHR0cHM6Ly9udy1wYWdlLmdpdGh1Yi5pby9zdGFuZGFyZHMvc3RkL3NlY3VyaXR5Lmh0bWwjcHJlLWNvbW1pdC1ob29rcwoKIyBFeGFtcGxlIFVzYWdlCiMgd3JpdGUgdGhpcyBpbiB0aGUgcG93ZXJzaGVsbCB0ZXJtaW5hbCwgYWRqdXN0IGZvciB0aGUgZmlsZSB0eXBlKHMpIHlvdSB3YW50IHRvIHNjYW4gLSBjYW4gYmUgbXVsdGlwbGUgdHlwZXM6ICRmaWxlRXh0ZW5zaW9ucyA9IEAoIi5SIiwgIi5weSIpCiMgdGhlbiBleGVjdXRlIHRoaXMgaW4gdGhlIHRlcm1pbmFsOiBTY2FuRmlsZXMgLUZpbGVFeHRlbnNpb25zICRmaWxlRXh0ZW5zaW9ucwoKIyBUaGVyZSdzIGFuIG9wdGlvbmFsIHBhcmFtZXRlciBjYWxsZWQgJGZpbGVQYXRoLiBJdCB3aWxsIGF1dG9tYXRpY2FsbHkgc2V0IHRvIHlvdXIgY3VycmVudCBmb2xkZXIKIyBZb3UgY2FuIGNoYW5nZSBpdCBpZiB5b3UgbmVlZCBsaWtlIHRoaXM6ICRmaWxlUGF0aCA9ICJwYXRoL3RvL2ZvbGRlciIKCiMgSXQgd2lsbCBnaXZlIHlvdSBhbiBvdXRwdXQgb2YgYW55IHNlY3JldHMgdGhhdCBhcmUgY29udGFpbmVkIGluIHRob3NlIGZpbGVzCgpGdW5jdGlvbiBTY2FuRmlsZXN7CiAgICBwYXJhbSAoCiAgICAgICAgW3N0cmluZ10kZmlsZVBhdGggPSAoR2V0LUxvY2F0aW9uKS5QYXRoLAogICAgICAgIFtzdHJpbmdbXV0kZmlsZUV4dGVuc2lvbnMKICApIAogICAgR2V0LUNoaWxkSXRlbSAkZmlsZVBhdGggLXJlY3Vyc2UgfCBXaGVyZS1PYmplY3QgeyRfLmV4dGVuc2lvbiAtaW4gJGZpbGVFeHRlbnNpb25zfSB8IAogICAgRm9yZWFjaC1PYmplY3QgewoKICAgICAgICBnaXQgc2VjcmV0cyAtLXNjYW4gJF8uRnVsbE5hbWUgfCBPdXQtRmlsZSAkbG9nRmlsZSAtQXBwZW5kCgogICAgfQogIH0=').then(res => res.blob()).then(blob => {
+<p><a href="#dnldts25158" onclick="fetch('data:text/plain;base64,IyBSRUFETUUKCiMjIFRoaXMgc2NyaXB0IHJlcXVpcmVzIEFXUyBHaXQgU2VjcmV0cyBhbmQgcmVjb21tZW5kcyBjdXN0b20gcmVnZXggc2VjcmV0cy4KIyMgZm9yIG1vcmUgZGV0YWlscyBhbmQgaW5zdGFsbCBpbnN0cnVjdGlvbnMsIHBsZWFzZSBmb2xsb3cgaHR0cHM6Ly9udy1wYWdlLmdpdGh1Yi5pby9zdGFuZGFyZHMvc3RkL3NlY3VyaXR5Lmh0bWwjcHJlLWNvbW1pdC1ob29rcwoKIyBFeGFtcGxlIFVzYWdlCiMgd3JpdGUgdGhpcyBpbiB0aGUgcG93ZXJzaGVsbCB0ZXJtaW5hbCwgYWRqdXN0IGZvciB0aGUgZmlsZSB0eXBlKHMpIHlvdSB3YW50IHRvIHNjYW4gLSBjYW4gYmUgbXVsdGlwbGUgdHlwZXM6ICRmaWxlRXh0ZW5zaW9ucyA9IEAoIi5SIiwgIi5weSIpCiMgdGhlbiBleGVjdXRlIHRoaXMgaW4gdGhlIHRlcm1pbmFsOiBTY2FuRmlsZXMgLUZpbGVFeHRlbnNpb25zICRmaWxlRXh0ZW5zaW9ucwoKIyBUaGVyZSdzIGFuIG9wdGlvbmFsIHBhcmFtZXRlciBjYWxsZWQgJGZpbGVQYXRoLiBJdCB3aWxsIGF1dG9tYXRpY2FsbHkgc2V0IHRvIHlvdXIgY3VycmVudCBmb2xkZXIKIyBZb3UgY2FuIGNoYW5nZSBpdCBpZiB5b3UgbmVlZCBsaWtlIHRoaXM6ICRmaWxlUGF0aCA9ICJwYXRoL3RvL2ZvbGRlciIKCiMgSXQgd2lsbCBnaXZlIHlvdSBhbiBvdXRwdXQgb2YgYW55IHNlY3JldHMgdGhhdCBhcmUgY29udGFpbmVkIGluIHRob3NlIGZpbGVzCgpGdW5jdGlvbiBTY2FuRmlsZXN7CiAgICBwYXJhbSAoCiAgICAgICAgW3N0cmluZ10kZmlsZVBhdGggPSAoR2V0LUxvY2F0aW9uKS5QYXRoLAogICAgICAgIFtzdHJpbmdbXV0kZmlsZUV4dGVuc2lvbnMKICApIAogICAgR2V0LUNoaWxkSXRlbSAkZmlsZVBhdGggLXJlY3Vyc2UgfCBXaGVyZS1PYmplY3QgeyRfLmV4dGVuc2lvbiAtaW4gJGZpbGVFeHRlbnNpb25zfSB8IAogICAgRm9yZWFjaC1PYmplY3QgewoKICAgICAgICBnaXQgc2VjcmV0cyAtLXNjYW4gJF8uRnVsbE5hbWUgfCBPdXQtRmlsZSAkbG9nRmlsZSAtQXBwZW5kCgogICAgfQogIH0=').then(res => res.blob()).then(blob => {
       const downloadURL = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       document.body.appendChild(a);
@@ -688,8 +680,7 @@ Note
       a.download = 'secretscanner.ps1'; a.click();
       window.URL.revokeObjectURL(downloadURL);
       document.body.removeChild(a);
-        });"><button class="btn btn-default downloadthis  " id="dnldts52254"><i class="bi bi-download"></i> Download Secret Scanner Script </button></a></p>
-<div class="myframe">
+        });"><button class="btn btn-default downloadthis  " id="dnldts25158"><i class="bi bi-download"></i> Download Secret Scanner Script </button></a></p>
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -715,7 +706,6 @@ Note
 <span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-</div>
 <p>Now, you can scan your secrets by copying and pasting the code into a powershell terminal like this:</p>
 <div class="smallframe">
 <div class="cell">
@@ -730,12 +720,12 @@ Note
 </div>
 <div style="page-break-after: always;"></div>
 </section>
-<section id="pre-recieve-hooks" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="pre-recieve-hooks"><span class="header-section-number">1.2</span> Pre-Recieve Hooks</h2>
+<section id="pre-recieve-hooks" class="level2">
+<h2 class="anchored" data-anchor-id="pre-recieve-hooks">Pre-Recieve Hooks</h2>
 <p>These are still being investigated. They are remote hooks (not local like pre-commit hooks) that can be deployed throughout the Github organization. They can block certain commits from ever being pushed to the remote repo. They may make things unnecessarily complicated</p>
 </section>
-<section id="pushing-private-code-to-public-repos" class="level2 page-columns page-full" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="pushing-private-code-to-public-repos"><span class="header-section-number">1.3</span> Pushing Private Code to Public Repos</h2>
+<section id="pushing-private-code-to-public-repos" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="pushing-private-code-to-public-repos">Pushing Private Code to Public Repos</h2>
 <p>We may wish to take private codes and push them to a public repo. We need to make sure that the public code doesn’t not contain sensitive or forbidden data/code, so cleaning up the private repo is important before pushing.</p>
 <p>There are a few ways to do this, but the easiest way is to copy the clean private code to the public repo, that is, copy all the files you want to add publicly but <strong>do not copy the <code>.git</code></strong> folder. If the private repo has a dirty git history we will not want that history in the public repo because the sensitive data will then be publicly available.</p>
 <div>
@@ -754,8 +744,8 @@ Note
 <p><i class="fa-solid fa-exclamation" aria-label="exclamation"></i> The private repository on the left still contains sensitive information in the git history. The public repository on the right has a clean git history because we copied only the current clean files from the private repo and did not attach its git history (which lives in the hidden <code>.git</code> folder)</p>
 </section>
 </section>
-<section id="code-reviewersgithub-operations-team" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Code Reviewers/Github Operations Team</h1>
+<section id="code-reviewersgithub-operations-team" class="level1">
+<h1>Code Reviewers/Github Operations Team</h1>
 <p>With the guardrails above in place there should be few chances that credentials get pushed to a repo. However accidents may still happen. We want to make sure that anyone who opens up a repo in the Github organization adheres to the rules, has the proper credential/coding set-up, and installs their local pre-commit hooks properly.</p>
 <p>It may be useful to have a team within the organization that helps with repo set-up. The team would help avoid a scenario where a person opens up a repo without reading this documentation and understanding the rules (and thus potentially breaking security rules).</p>
 <p>This Github Operations Team could also be helpful in managing permissions for members in the organization. See the video below on how the company Qualcomm manages their Github organization https://www.youtube.com/embed/1T4HAPBFbb0?si=YRsUYXIxLPhdr41T and how they use a Github Operations Team to guide new members access/repo development</p>
