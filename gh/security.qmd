@@ -11,9 +11,9 @@ format:
     code-fold: false
     code-overflow: wrap
     toc: true
-  pdf:
-    margin-width: 10px
-    gutter-width: 1.5rem
+  # pdf:
+  #   margin-width: 10px
+  #   gutter-width: 1.5rem
 execute: 
   eval: false
   freeze: false
@@ -133,7 +133,7 @@ server_name <- creds$default$conn_list_wdrs$server
 ```
 
 
-{{< pagebreak >}}
+<br>
 
 :::: {.content-visible when-format="html"}
 ###  {.unnumbered}
@@ -185,7 +185,7 @@ $ Rscript -e "source('path/script_in_repo.R');" test
 
 ::::
 
-{{< pagebreak >}}
+<br>
 
 
 ::: {.content-visible unless-format="html"}
@@ -222,7 +222,7 @@ $ Rscript -e "source('path/script_in_repo.R');" test
 
 :::
 
-{{< pagebreak >}}
+<br>
 
 ### Safe Guards - Prevent Accidental Leaks!
 
@@ -258,7 +258,7 @@ git ls-files -v . | grep ^S
 ```
 :::
 
-{{< pagebreak >}}
+<br>
 
 # Security Guardrails
 
@@ -488,7 +488,7 @@ ScanFiles -FileExtensions $fileExtensions
 
 
 
-{{< pagebreak >}}
+<br>
 
 ## Pre-Recieve Hooks
 

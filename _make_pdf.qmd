@@ -1,8 +1,8 @@
 ---
-title: NW-PaGe Github Organization Policies
-subtitle: Security policies, repo guides and templates for pushing code to the Github Org
-date: September 1, 2023
-date-modified: today
+# title: NW-PaGe Github Organization Policies
+# subtitle: Security policies, repo guides and templates for pushing code to the Github Org
+# date: September 1, 2023
+# date-modified: today
 author: 
   - name: Frank Aragona
     email: frank.aragona@doh.wa.gov
@@ -13,20 +13,29 @@ author:
 nocite: |
   @*
 format:
-  pdf:
-    toc: true
-    toc-depth: 2
-    number-sections: true
-    number-depth: 2
+  typst:
     output-file: "nw-page-github-policies"
     output-ext:  "pdf"
-    margin-width: 10px
-    gutter-width: 1.5rem
-    fig-pos: "H" # this makes sure that the figures output where they're supposed to in pdf 
-    # linkcolor: RSSblue
-    # urlcolor: RSSblue
-    include-in-header:
-       - "styles.tex"
+    columns: 1
+    template-partials:
+        - assets/typst-template.typ
+        - assets/typst-show.typ
+    number-sections: true
+
+  # pdf:
+  #   toc: true
+  #   toc-depth: 2
+  #   number-sections: true
+  #   number-depth: 2
+  #   output-file: "nw-page-github-policies"
+  #   output-ext:  "pdf"
+  #   margin-width: 10px
+  #   gutter-width: 1.5rem
+  #   fig-pos: "H" # this makes sure that the figures output where they're supposed to in pdf 
+  #   # linkcolor: RSSblue
+  #   # urlcolor: RSSblue
+  #   include-in-header:
+  #      - "styles.tex"
 editor: source
 execute: 
   warning: false
