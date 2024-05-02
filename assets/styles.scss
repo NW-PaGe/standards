@@ -196,8 +196,7 @@ $body-color: $gray-700;
   width: 400px;
   /*margin: auto !important;*/
   max-width: calc(100% - 20px);
-  margin: 0 auto;
-  padding: 0 10px;
+  margin: 0;
   
 }
 
@@ -210,8 +209,7 @@ $body-color: $gray-700;
   width: 700px;
   /*margin: auto !important;*/
   max-width: calc(100% - 20px);
-  margin: 0 auto;
-  padding: 0 10px;
+  margin: 0;
   
 }
 
@@ -284,7 +282,7 @@ div.puzzle, div.fyi, div.demo, div.note {
 div.note>p:first-child{
   padding-top: 0;
   margin-top: 0 !important;
-  //font-family: "Source Sans Pro";
+  font-family: "Hanken Grotesk";
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }

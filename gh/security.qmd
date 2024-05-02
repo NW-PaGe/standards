@@ -233,7 +233,7 @@ This link shows how to skip any changes made to the specific file https://stacko
 #### For all individual users, run this code:
 
 ::: smallframe
-```{bash}
+```{bash filename="PowerShell"}
 git update-index --skip-worktree creds_TEMPLATE.yml
 ```
 :::
@@ -243,7 +243,7 @@ This will tell your local git to ignore any changes made to `creds_TEMPLATE.yml`
 #### If you need to update the template file run this:
 
 ::: smallframe
-```{bash}
+```{bash filename="PowerShell"}
 git update-index --no-skip-worktree creds_TEMPLATE.yml
 ```
 :::
@@ -253,7 +253,7 @@ This will allow changes to the template. **So when you need to update the templa
 And to get a list of files that are "skipped", use this code:
 
 ::: smallframe
-```{bash}
+```{bash filename="PowerShell"}
 git ls-files -v . | grep ^S
 ```
 :::
