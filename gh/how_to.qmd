@@ -452,8 +452,7 @@ and virtual environments.
 
 `renv` is an R package for creating a project level virtual environment.
 In other words, `renv` will create project specific folders that contain
-the specific R package versions you use in an project. [More on this
-here](../wiki/venv.qmd)
+the specific R package versions you use in an project. [More on virtual environments here](renv.qmd)
 
 To use `renv` in a Github Action, you can put
 

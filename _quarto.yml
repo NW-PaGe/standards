@@ -68,7 +68,7 @@ website:
     - id: gh
       collapse-level: 2
       contents:
-        - section: "Guide"
+        - section: "Github"
           href: gh/index.qmd
           contents: 
           - section: "Policies"

@@ -268,14 +268,23 @@ Hooks are processes that run in the background and can prevent code from being p
 
 ## Pre-commit Hooks
 
-Pre-commit hooks run a process locally when the user attempts to commit code to a git branch. Hooks have many uses. Here we can use them as a security guardrail to prevent accidental credential leaks in committed code.
+Pre-commit hooks run a process locally when the user attempts to commit code to a git branch. Hooks have many uses. Here we can use them as a security guardrail to prevent accidental credential leaks in committed code. For example, if someone accidentally pushes a server name to the public repo, the hook will prevent that code from ever getting into the remote repo and will give the user a local error.
 
-1.  Clone or download the AWS Git Secrets repo from awslabs GitHub https://github.com/awslabs/git-secrets/blob/master/install.ps1
-2.  Extract zip
-3.  Open folder and right click install.ps1
+::::{.panel-tabset}
+
+### Windows
+
+1.  Clone or download the zip from the [AWS Git Secrets repo](https://github.com/awslabs/git-secrets/) 
+
+2.  Extract zip or `cd` to the repo
+
+3.  Open folder and right click install.ps1.
     a.  Run in Power Shell
     b.  Type Y to give permission
-4.  CD to a directory where you have the git repository you want to upload, either in PowerShell or R studio terminal {{< fa terminal >}}
+
+    Alternatively, in the powershel terminal you can change directories `cd` to the repo and `.\install.ps1`
+
+4.  CD `cd` to a directory where you have the git repository you want to upload, either in PowerShell or R studio terminal {{< fa terminal >}}
 
 ::: smallframe
 ```{bash filename="PowerShell"}
@@ -291,8 +300,11 @@ git secrets --install
 ```
 :::
 
-6.  Make or copy the regex file called `secrets_key` containing the secret patterns into your folder. -- make text file -- discuss with team what all we want to make illegal.
+6.  Make or copy the regex file called `secrets_key` containing the secret patterns into your folder. 
+    - This file should be given to you by your supervisor. It contains a regex of potential secrets
+
 7.  Make sure the file `secrets_key` is in your `.gitignore`. We can't push that to the remote repo.
+
 8.  Run `git secrets --add-provider -- cat ./secrets_key`
 
 ::: smallframe
@@ -325,8 +337,7 @@ git secrets --scan-history
 :::
 
 10. If something gets flagged and you don't care about your history anymore: Delete .git folder and reinitialize repository
-
-I would take caution about this point. There might be better ways to clean your git history if you don't want to get rid of everything.
+    - I would take caution about this point. There might be better ways to clean your git history if you don't want to get rid of everything.
 
 11. Test on one of my projects to see if rebasing is a sustainable option
 
@@ -337,6 +348,92 @@ I would take caution about this point. There might be better ways to clean your 
 ::: callout-note
 We can't use the "Non capture group" feature of regex. Meaning we can't use patterns like this in our regex: (?:abc) -- see https://regexr.com IMPORTANT: Tab separate your regex expressions. Making new lines caused a bit of chaos and took really long to figure out. (you can use multiple tabs to separate them more visually)
 :::
+
+### WSL/Linux
+
+1.  Clone the [AWS Git Secrets repo](https://github.com/awslabs/git-secrets/) 
+
+2.  In the terminal, `cd` to the repo
+
+3.  Install the command:
+
+:::{.smallframe}
+```{bash filename="terminal"}
+sudo make install
+```
+:::
+
+4.  `cd` to a directory where you have the git repository you want to push to
+
+::: smallframe
+```{bash filename="terminal"}
+cd path/to/repo/root
+```
+:::
+
+5.  Run git secrets --install
+
+::: smallframe
+```{bash filename="terminal"}
+git secrets --install
+```
+:::
+
+6.  Make or copy the regex file called `secrets_key` containing the secret patterns into your folder. 
+    - This file should be given to you by your supervisor. It contains a regex of potential secrets
+
+7.  Make sure the file `secrets_key` is in your `.gitignore`. We can't push that to the remote repo.
+
+8.  Run `git secrets --add-provider -- cat ./secrets_key`
+
+::: smallframe
+```{bash filename="terminal"}
+git secrets --add-provider -- cat ./secrets_key
+```
+:::
+
+You can also add prohibited patterns like this
+
+::: smallframe
+```{bash filename="terminal"}
+# add a pattern
+git secrets --add '[A-Z0-9]{20}'
+
+# add a literal string, the + is escaped
+git secrets --add --literal 'foo+bar'
+
+# add an allowed pattern
+git secrets --add -a 'allowed pattern'
+```
+:::
+
+9.  Test Git history by running
+
+::: smallframe
+```{bash filename="terminal"}
+git secrets --scan-history
+```
+:::
+
+10. If something gets flagged and you don't care about your history anymore: Delete .git folder and reinitialize repository
+    - I would take caution about this point. There might be better ways to clean your git history if you don't want to get rid of everything.
+
+11. Test on one of my projects to see if rebasing is a sustainable option
+
+12. Make repo public
+
+13. Will automatically scan on every commit and won't let it commit unless it's clean - Create a few files to show it working
+
+::: callout-note
+We can't use the "Non capture group" feature of regex. Meaning we can't use patterns like this in our regex: (?:abc) -- see https://regexr.com IMPORTANT: Tab separate your regex expressions. Making new lines caused a bit of chaos and took really long to figure out. (you can use multiple tabs to separate them more visually)
+:::
+
+::::
+
+
+
+
+
 
 ::: {.note .medframe}
 {{< fa unlock size="3x" >}} **NOTE!!**
@@ -387,6 +484,7 @@ $fileExtensions = @(".R",".py",".Rmd",".qmd")
 ScanFiles -FileExtensions $fileExtensions
 ```
 :::
+
 
 
 
