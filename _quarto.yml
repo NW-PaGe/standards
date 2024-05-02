@@ -5,7 +5,7 @@ project:
 #   hypothesis: true
 
 website:
-  title: 🌲
+  title: NW-COE Policies
   # author: DIQA 
   # date: today
   search: true
@@ -37,15 +37,14 @@ website:
   #           text: "0: Azure Policies"
 
   navbar: 
+    logo: images/nwpage_tree_logo.png
     background: primary
     left: 
-      - text: "Home"
-        file: index.qmd
-      - text: Github Policies
+      - text: Github
         file: gh/index.qmd
-      - text: AWS Policies
+      - text: AWS
         file: aws/aws_index.qmd
-      - text: Azure Policies
+      - text: Azure
         file: azure/azure_index.qmd
 
     search: true
@@ -56,6 +55,9 @@ website:
       - icon: github
         href: https://github.com/NW-PaGe/standards
         aria-label: GitHub
+      - icon: file-richtext
+        href: https://nwpage.org/
+        aria-label: NW-PaGe
 
   sidebar:
     # background: '#f8f9fa'
@@ -110,7 +112,7 @@ website:
     
   page-footer:
     left: "🍦"
-    background: "#e9ecef"
+    background: "#fdfdfd"
     
     
 
@@ -121,7 +123,7 @@ format:
   html:
     grid:
       sidebar-width: 200px
-      body-width: 1000px
+      body-width: 1100px
     #   margin-width: 300px
     #   gutter-width: 1.5rem
     theme: 
@@ -133,13 +135,14 @@ format:
     toc: true
     # number-depth: 3
     # toc-depth: 3
-    highlight-style: assets/custom.theme
+    # highlight-style: assets/custom.theme
+    highlight-style: printing
     link-external-newwindow: false
-    number-sections: true
+    number-sections: false
     # code-fold: show
     code-overflow: wrap
     # page-layout: full
-    backgroundcolor: "#f8f9fa"
+    backgroundcolor: "#fdfdfd"
     # header-includes: |
     #   <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/metropolitano" type="text/css"/>
 # mainfont: Franklin Gothic   

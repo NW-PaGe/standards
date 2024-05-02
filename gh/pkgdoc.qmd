@@ -15,10 +15,10 @@ editor:
     wrap: 72
 filters: 
   - line-highlight
-categories:
-  - data democratization
-  - documentation
-  - Quarto
-  - pkgdown
-  - rmarkdown
+# categories:
+#   - data democratization
+#   - documentation
+#   - Quarto
+#   - pkgdown
+#   - rmarkdown
 ---

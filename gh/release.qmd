@@ -12,10 +12,10 @@ author:
 knitr: true
 filters: 
   - line-highlight
-categories:
-  - data democratization
-  - release cycles
-  - Github
+# categories:
+#   - data democratization
+#   - release cycles
+#   - Github
 execute: 
   eval: false
 ---
@@ -87,7 +87,6 @@ Some repos have semi-automatic cycles where there is some manual component of re
 
 I recommend first creating a test repo for this. In the repo, create a Github Action workflow called `changelog.yml`. You can copy the full file below:
 
-::: myframe
 ```{yaml filename=".github/workflows/changelog.yml"}
 name: Changelog
 on:
@@ -124,7 +123,6 @@ jobs:
           release_name: ${{ steps.changelog.outputs.tag }}
           body: ${{ steps.changelog.outputs.clean_changelog }}
 ```
-:::
 
 #  {.unnumbered}
 
@@ -146,7 +144,6 @@ A new version will be released, and since this was just a bug fix the version nu
 
 The first step uses the Github Action `TriPSs/conventional-changelog-action@v3` which will scan your
 
-::: myframe
 ```{yaml filename=".github/workflows/changelog.yml"}
 steps:
   - uses: actions/checkout@v2
@@ -158,11 +155,10 @@ steps:
       github-token: ${{ secrets.github_token }}
       create-summary: true
 ```
-:::
+
 
 The second step uses the Github Action `actions/create-release@v1` which will create git tags with the version number and a changelog with downloadable source code
 
-::: myframe
 ```{yaml filename=".github/workflows/changelog.yml"}
 - name: Create Release
   uses: actions/create-release@v1
@@ -175,7 +171,6 @@ The second step uses the Github Action `actions/create-release@v1` which will cr
     release_name: ${{ steps.changelog.outputs.tag }}
     body: ${{ steps.changelog.outputs.clean_changelog }}
 ```
-:::
 
 # Step by Step Instructions
 
@@ -184,7 +179,6 @@ The second step uses the Github Action `actions/create-release@v1` which will cr
 3.  In the `.github` folder make another folder named `workflows` . the `.github/workflows` folder needs to be spelled the same and in the in exact same place for a github action to work.
 4.  In the `workflows` folder make a file called `changelog.yml` and paste code below in it:
 
-::: myframe
 ```{yaml filename=".github/workflows/changelog.yml"}
 name: Changelog
 on:
@@ -221,7 +215,6 @@ jobs:
           release_name: ${{ steps.changelog.outputs.tag }}
           body: ${{ steps.changelog.outputs.clean_changelog }}
 ```
-:::
 
 ::: callout-note
 Now when you commit something to the repo and have a convential commit message it will trigger the Github Action to make a changelog.

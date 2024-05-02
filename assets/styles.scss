@@ -1,7 +1,7 @@
 /*-- scss:defaults --*/
 $white: #fff;
 $gray-100: #f8f9fa;
-$gray-200: #e9ecef;
+$gray-200: #fdfdfd;
 $gray-300: #dee2e6;
 $gray-400: #ced4da;
 $gray-500: #adb5bd;
@@ -12,7 +12,7 @@ $gray-900: #212529;
 $black: #000;
 
 // $primary: #440154ff;
-$primary: #e9ecef;
+$primary: #fdfdfd;
 $secondary: #20A486ff;
 $secondaryalt: #155D64;
 $secondaryalt2: #efe8f1;
@@ -28,10 +28,10 @@ $theme-ground: #416270;
 // $navbar-fg: #f5eff6;
 $navbar-fg: $theme-night;
 $light-bg: #f8f5f9;
-$link-color: $theme-night;
+$link-color: $theme-night; 
 
 // fonts
-$font-family-sans-serif: 'Roboto', sans-serif;
+$font-family-sans-serif: 'Hanken Grotesk', sans-serif;
 // $presentation-heading-font: 'IBM Plex Serif', serif;
 
 // fonts
@@ -39,12 +39,34 @@ $font-family-sans-serif: 'Roboto', sans-serif;
 
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Manrope:wght@200..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
+@import url("https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Manrope:wght@200..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
 
 /*-- scss:rules --*/
 
 // h1, h2, h3 {
 //   font-family: "Franklin Gothic", Georgia, serif;
 // }
+
+// navbar
+
+.navbar-container {
+  width: 90%;
+  height: 100px;
+  font-size: large;
+}
+
+.navbar-brand {
+    font-family: 'Hanken Grotesk';
+    font-weight: 900;
+    font-size: 30px;
+    color: $theme-ground;
+}
+
+.navbar-logo {
+  max-height: 60px;
+  width: auto;
+  padding-right: 4px;
+}
 
 .css-qp8v3 {
   font-weight: 500;
@@ -67,7 +89,9 @@ $font-family-sans-serif: 'Roboto', sans-serif;
 .splash-page {
   padding: 50px 0;
   width: 100%;
-  background-color: #e9ecef;
+  background-color: #fdfdfd;
+  translate: 120px;
+
 }
 
 .container {
@@ -112,6 +136,21 @@ $font-family-sans-serif: 'Roboto', sans-serif;
   transform: translateY(-3px);
 }
 
+// box around splash options
+.box {
+  border-radius: 5px;
+  // box-shadow: 0px 30px 40px -20px var(--grayishBlue);
+  padding: 30px;
+  margin: 20px; 
+  border-style: solid;
+  border-width: 3px;
+  border-color: black;
+}
+
+.cyan {
+  background-color: #86dde9;
+}
+
 h2, .h2 {
     border-bottom: 1px solid $theme-night;
     padding-bottom: .5rem;
@@ -150,10 +189,10 @@ $body-color: $gray-700;
 
 .smallframe {
   /*box-shadow: $back-blue 10px 5px 5px 0px;*/
-  border: none;
-  border-radius: 5px;
-  margin-bottom: 10px !important;
-  box-shadow: 0 20px 47px rgb(0 0 0 / 55%);
+  // border: none;
+  // border-radius: 5px;
+  // margin-bottom: 10px !important;
+  // box-shadow: 0 20px 47px rgb(0 0 0 / 55%);
   width: 400px;
   /*margin: auto !important;*/
   
@@ -161,10 +200,10 @@ $body-color: $gray-700;
 
 .medframe {
   /*box-shadow: $back-blue 10px 5px 5px 0px;*/
-  border: none;
-  border-radius: 5px;
-  margin-bottom: 10px !important;
-  box-shadow: 0 20px 47px rgb(0 0 0 / 55%);
+  // border: none;
+  // border-radius: 5px;
+  // margin-bottom: 10px !important;
+  // box-shadow: 0 20px 47px rgb(0 0 0 / 55%);
   width: 700px;
   /*margin: auto !important;*/
   
@@ -179,6 +218,27 @@ $body-color: $gray-700;
   box-shadow: 0 20px 47px rgb(0 0 0 / 55%);
   /*margin: auto !important;*/
   
+}
+
+// color for highlight style
+pre code {
+  padding-left: 5%;
+}
+
+pre code.sourceCode {
+  padding-left: 0;
+  font-family: "Source Code Pro", monospace;
+}
+
+.downlit code a:any-link {
+  text-decoration: underline;
+  text-decoration-color: #ccc;
+}
+
+div.sourceCode {
+  background-color: rgba(192,192,192,.16);
+  border: 1px solid rgba(192,192,192,.16);
+  border-radius: .25rem;
 }
 
 .pic-border {
@@ -296,8 +356,8 @@ table.quarto-listing-table a {
 
 // sidebar color
 
-div.sidebar.sidebar-navigation.rollup.quarto-sidebar-toggle-contents, nav.sidebar.sidebar-navigation:not(.rollup) {
-  background-color: #f8f9fa;
-}
+// div.sidebar.sidebar-navigation.rollup.quarto-sidebar-toggle-contents, nav.sidebar.sidebar-navigation:not(.rollup) {
+//   background-color: #f8f9fa;
+// }
 
 

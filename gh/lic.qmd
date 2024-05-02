@@ -11,9 +11,9 @@ format:
   html: 
     code-fold: false
   pdf: default
-categories:
-  - licensing
-  - Github
+# categories:
+#   - licensing
+#   - Github
 ---
 
 :::{.note .medframe}

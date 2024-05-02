@@ -19,13 +19,13 @@ filters:
   - line-highlight
 reference-location: margin
 citation-location: margin
-categories:
-  - data democratization
-  - reproducibility
-  - docker
-  - virutal environments
-  - Github
-  - Git
+# categories:
+#   - data democratization
+#   - reproducibility
+#   - docker
+#   - virutal environments
+#   - Github
+#   - Git
 ---
 
 ::: {.note .medframe}

@@ -17,10 +17,10 @@ editor:
     wrap: 72
 filters: 
   - line-highlight
-categories:
-  - data democratization
-  - templates
-  - Quarto
+# categories:
+#   - data democratization
+#   - templates
+#   - Quarto
 ---
 
 

@@ -42,8 +42,8 @@ This is a static website documenting the policies and guidelines for public Gith
 :::: {.splash-page}
 
 
-::: {#collapseQuickstart .column-page}
-::: {.column width="33%"}
+::: {#collapseQuickstart .column-screen-inset}
+::: {.column .box .cyan width="25%"}
 {{< bi github size=4em >}}
 
 **Github Policies**
@@ -55,7 +55,7 @@ This is a static website documenting the policies and guidelines for public Gith
 <a href="gh/index.qmd" class="button">**gh guides**</a>
 :::
 
-::: {.column width="33%"}
+::: {.column .box .cyan width="25%"}
 {{< bi amazon size=4em >}}
 
 **AWS Policies**
@@ -68,7 +68,7 @@ This is a static website documenting the policies and guidelines for public Gith
 <a href="aws/aws_index.qmd" class="button">**aws guides**</a>
 :::
 
-::: {.column width="33%"}
+::: {.column .box .cyan width="25%"}
 {{< bi cloud-fog-fill size=4em >}}
 
 **Azure Policies**
@@ -82,55 +82,3 @@ This is a static website documenting the policies and guidelines for public Gith
 :::
 
 ::::
-
-````{=html}
-<!--
-## Quickstart
-
-This is a static website documenting the proposed policies and standards for public Github use at the Pacific Northwest Genomic Center of Excellence. There are documents on
-
-1.  Security and how to protect credential and private process leaks {{< fa unlock >}}
-2.  Licensing to protect against re-sale or theft of code {{< fa file >}}
-3.  Our Github rules, policies, and templates {{< fa book >}}
-4.  Github user guides {{< fa file >}}
-
-If there are any questions please reach out to
-
-
-::: {.column-screen-inset-shaded layout-nrow="1"}
-{{< fa unlock >}} **Personal or network credentials, tokens, server names and more are prohibited from being published to our public repos.** Protect security and credentials with good coding practices. Using local environment files along with `.gitignore` can prevent credentials from being accidentally pushed into your repo. Other guardrails like **pre-commit hooks** can be used to further prevent accidental credential leaks. [**See more details on our security policies here**](std/security.qmd)
-
-```{yaml filename="local_credentials.yml"}
-# local yaml file that will NOT be pushed to the repo
-# add this file to the .gitignore to prevent leaks
-my_credentials:
-  username: super_secret_user_name
-  password: 12345terriblepassword
-  
-  
-  
-  
-```
-
-```{r filename="script_in_repo.R"}
-# this script is in the repo, but credentials are hidden
-library(yaml)
-
-# read in the local credentials yaml file
-creds <- yaml::read_yaml("path/to/local_credentials.yml")
-
-# pull in the credentials
-username <- creds$my_credentials$username
-password <- creds$my_credentials$password
-```
-:::
-
-::: {.column-screen-inset-shaded layout-nrow="1"}
-{{< fa file >}} Each repo in the organization should have a license. Licenses can help prevent your work from being stolen and/or used inappropriately. [Licensing details here](std/lic.qmd)
-
-{{< fa book >}} This organization requires each repo to have [certain documents](std/templates.qmd), such as a CODE_OF_CONDUCT. The organization uses a special repo called **.github** to ensure all repos adhere to the policies and have the right documents.
-
-{{< fa file >}} If you're looking to build a repository, [check out the Github user guide tabs](tools/how_to.qmd) for best practices on reproducibility, documentation in the repo, and more.
-:::
--->
-````

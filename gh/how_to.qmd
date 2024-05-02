@@ -15,10 +15,10 @@ editor:
     wrap: 72
 filters: 
   - line-highlight
-categories:
-  - data democratization
-  - documentation
-  - Quarto
+# categories:
+#   - data democratization
+#   - documentation
+#   - Quarto
 ---
 
 # Introduction
@@ -77,7 +77,6 @@ files.
 To add a section, open up the `_quarto.yml` file and scroll to the
 `navbar` section
 
-::: myframe
 ```{yaml filename="_quarto.yml"}
 #| source-line-numbers: "7-40"
 project:
@@ -100,7 +99,6 @@ website:
           - href: std/templates.qmd
             text: "2: Org Policy Setting"
 ```
-:::
 
 <br>
 
@@ -131,7 +129,6 @@ ton of custom `css` components with Quarto, and possibly uses custom
 javascript, so it could be a place to start if you're interested.
 Basically, you need to embed the `css` file into your `_quarto.yml` file
 
-::: myframe
 ```{yaml filename="_quarto.yml"}
 format:
   html:
@@ -143,7 +140,6 @@ format:
     toc: true
     highlight-style: assets/custom.theme
 ```
-:::
 
 # How to edit a chapter
 
@@ -187,7 +183,6 @@ This website is set up to have each major section contain multiple
 chapters. To open a chapter, the bottom right pane in your R Studio
 window should contain folders for each section, highlighted below
 
-::: myframe
 ```{bash}
 #| source-line-numbers: "14-21,23-30"
 $ tree /f
@@ -223,7 +218,6 @@ C:.
 │   │
 │   └───images
 ```
-:::
 
 <br>
 
@@ -351,7 +345,6 @@ The `.yml` workflow for this project looks something like this:
 run when any code gets pushed to the main branch in the documentation
 folder or `lineages_public_repo.R` script
 
-::: myframe
 ```{yaml filename="quarto-publish.yml"}
 #| eval: false
 #| echo: true
@@ -363,13 +356,11 @@ on:
       - documentation/**
       - lineages_public_repo.R
 ```
-:::
 
 `jobs:` is a tag that tells a Github virtual machine what to run and
 what operating system to run it on. In this case `ubuntu` with the
 `latest` version. This can be `windows`, `linux` or `macOS`.
 
-::: myframe
 ```{yaml filename="quarto-publish.yml"}
 #| eval: false
 #| echo: true
@@ -379,7 +370,6 @@ jobs:
   build-deploy:
     runs-on: ubuntu-latest
 ```
-:::
 
 <br>
 
@@ -393,7 +383,6 @@ Now we have the steps:
     and use the cached packages to install them onto the Github virtual
     machine
 
-::: myframe
 ```{yaml filename="quarto-publish.yml"}
 #| eval: false
 #| echo: true
@@ -430,7 +419,6 @@ Now we have the steps:
           if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
           renv::restore()
 ```
-:::
 
 <br>
 
@@ -441,7 +429,6 @@ And finally,
 -   `with: target: gh-pages path: documentation/_site` lets you know
     which branch and path to render the site to
 
-::: myframe
 ```{yaml filename="quarto-publish.yml"}
 #| eval: false
 #| echo: true
@@ -454,7 +441,7 @@ And finally,
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this secret is always available for github actions
 
 ```
-:::
+
 
 ## Using `renv` in the GH Action
 

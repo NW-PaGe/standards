@@ -11,7 +11,6 @@ format:
     code-fold: false
     code-overflow: wrap
     toc: true
-    number-sections: true
   pdf:
     margin-width: 10px
     gutter-width: 1.5rem
@@ -23,11 +22,11 @@ filters:
   - line-highlight
 reference-location: margin
 citation-location: margin
-categories:
-  - credentials
-  - security
-  - Github
-  - Git
+# categories:
+#   - credentials
+#   - security
+#   - Github
+#   - Git
 ---
 
 ::: {.note .medframe}
@@ -73,7 +72,6 @@ The `.yml` file can work with multiple programming languages including R and Pyt
 
 They look like this:
 
-::: myframe
 ```{yaml filename="local-credentials.yml"}
 # Default is needed to distinguish values.
 # Leave a blank line (NO SPACES) as the last line in this file or things will break
@@ -91,11 +89,9 @@ default:
     password: <PASSWORD>
 
 ```
-:::
 
 You can have different variables assigned to unique lists, which allows for easy configuration. For example, the list starting with `default` has variables `conn_list_wdrs` and `fulgent`. You can have a different list of variables within the same file like this:
 
-::: myframe
 ```{yaml filename="local-credentials.yml"}
 #| source-line-numbers: "4-5,16-17"
 # Default is needed to distinguish values.
@@ -122,11 +118,9 @@ test:
     ApplicationIntent: 
 
 ```
-:::
 
 Now there is a `test` list with its own variables. This lets us switch a set of variables within our scripts. `default` applies to the main credentials where `test` can distinguish which variables should be test or dev scripts specific. Notice below that you can now call the credentials from a `.yml` file into an R or Python script and the actual credentials will never exist in the code pushed to the repo.
 
-::: myframe
 ```{r filename="script-in-repo.R"}
 # this script is in the repo, but credentials are hidden
 library(yaml)
@@ -137,7 +131,7 @@ creds <- yaml::read_yaml("path/to/local-credentials.yml")
 # pull in the credentials
 server_name <- creds$default$conn_list_wdrs$server
 ```
-:::
+
 
 {{< pagebreak >}}
 
@@ -364,8 +358,6 @@ We can't use the "Non capture group" feature of regex. Meaning we can't use patt
 https://github.com/NW-PaGe/standards/blob/main/gh/secret_scanner.ps1
 ::::
 
-
-::: myframe
 ```{bash filename="secret-scanner9000.ps1"}
 # Example Usage
 # write this in the powershell terminal, adjust for the file type(s) you want to scan - can be multiple types: $fileExtensions = @(".R", ".py")
@@ -386,7 +378,6 @@ Function ScanFiles{
   }
 }
 ```
-:::
 
 Now, you can scan your secrets by copying and pasting the code into a powershell terminal like this:
 

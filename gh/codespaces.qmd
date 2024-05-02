@@ -4,9 +4,9 @@ description: How to use Github Codespaces for reproducibility/data democratizati
 date: February 1, 2023
 date-modified: today
 author: Frank Aragona
-categories:
-  - data democratization
-  - docker
-  - Github
-  - reproducibility
----
+# categories:
+#   - data democratization
+#   - docker
+#   - Github
+#   - reproducibility
+# ---

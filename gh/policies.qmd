@@ -9,18 +9,17 @@ format:
     code-fold: false
     code-overflow: wrap
     toc: true
-    number-sections: true
   pdf: default
 knitr: true
 execute: 
   eval: false
 filters: 
   - line-highlight
-categories:
-  - policies
-  - licensing
-  - Github
-  - Git
+# categories:
+#   - policies
+#   - licensing
+#   - Github
+#   - Git
 ---
 
 :::{.note .medframe}
