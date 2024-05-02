@@ -195,6 +195,9 @@ $body-color: $gray-700;
   // box-shadow: 0 20px 47px rgb(0 0 0 / 55%);
   width: 400px;
   /*margin: auto !important;*/
+  max-width: calc(100% - 20px);
+  margin: 0 auto;
+  padding: 0 10px;
   
 }
 
@@ -206,6 +209,9 @@ $body-color: $gray-700;
   // box-shadow: 0 20px 47px rgb(0 0 0 / 55%);
   width: 700px;
   /*margin: auto !important;*/
+  max-width: calc(100% - 20px);
+  margin: 0 auto;
+  padding: 0 10px;
   
 }
 
@@ -257,8 +263,8 @@ div.sourceCode {
 /*----------DIV TIPS------------*/
 
 div.puzzle, div.fyi, div.demo, div.note {
-    padding: 1em;
-    margin: 1em 0;
+    // padding: 1em;
+    // margin: 1em 0;
     //padding-left: 100px;
     background-size: 70px;
     background-repeat: no-repeat;
@@ -268,6 +274,10 @@ div.puzzle, div.fyi, div.demo, div.note {
     background-color: $secondaryalt2;
     border: solid 5px $theme-night;
     font-family: "Calibri";
+    max-width: calc(100% - 20px);
+    margin: 0 auto;
+    padding: 0 10px;
+  
   }
   
 div.note>p:first-child{
@@ -356,8 +366,8 @@ table.quarto-listing-table a {
 
 // sidebar color
 
-// div.sidebar.sidebar-navigation.rollup.quarto-sidebar-toggle-contents, nav.sidebar.sidebar-navigation:not(.rollup) {
-//   background-color: #f8f9fa;
-// }
+div.sidebar.sidebar-navigation.rollup.quarto-sidebar-toggle-contents, nav.sidebar.sidebar-navigation:not(.rollup) {
+  background-color: $primary;
+}
 
 
