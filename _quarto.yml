@@ -58,6 +58,9 @@ website:
       - icon: file-richtext
         href: https://nwpage.org/
         aria-label: NW-PaGe
+      - icon: file-earmark-pdf-fill
+        href: https://github.com/NW-PaGe/standards/blob/main/nw-page-github-policies.pdf
+        aria-label: NW-PaGe PDF
 
   sidebar:
     # background: '#f8f9fa'
