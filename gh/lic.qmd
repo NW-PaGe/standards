@@ -10,7 +10,6 @@ editor:
 format: 
   html: 
     code-fold: false
-  pdf: default
 # categories:
 #   - licensing
 #   - Github

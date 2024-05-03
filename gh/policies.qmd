@@ -9,7 +9,6 @@ format:
     code-fold: false
     code-overflow: wrap
     toc: true
-  pdf: default
 knitr: true
 execute: 
   eval: false
