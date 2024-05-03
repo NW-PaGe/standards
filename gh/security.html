@@ -281,12 +281,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#prevent-credential-leaks-with-env-variables" id="toc-prevent-credential-leaks-with-env-variables" class="nav-link active" data-scroll-target="#prevent-credential-leaks-with-env-variables">Prevent Credential Leaks with Env Variables</a>
+  <li><a href="#protect-credentials-with-.gitignore" id="toc-protect-credentials-with-.gitignore" class="nav-link active" data-scroll-target="#protect-credentials-with-.gitignore">Protect Credentials with .gitignore</a>
   <ul class="collapse">
-  <li><a href="#create-a-private-credentials-file" id="toc-create-a-private-credentials-file" class="nav-link" data-scroll-target="#create-a-private-credentials-file">Create a private credentials file</a></li>
-  <li><a href="#creds.yml-details" id="toc-creds.yml-details" class="nav-link" data-scroll-target="#creds.yml-details"><code>creds.yml</code> details</a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#environment-variables-.gitignore" id="toc-environment-variables-.gitignore" class="nav-link" data-scroll-target="#environment-variables-.gitignore">Environment Variables + .gitignore</a>
+  <ul class="collapse">
   <li><a href="#safe-guards---prevent-accidental-leaks" id="toc-safe-guards---prevent-accidental-leaks" class="nav-link" data-scroll-target="#safe-guards---prevent-accidental-leaks">Safe Guards - Prevent Accidental Leaks!</a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#security-guardrails" id="toc-security-guardrails" class="nav-link" data-scroll-target="#security-guardrails">Security Guardrails</a>
   <ul class="collapse">
@@ -398,134 +398,293 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<section id="prevent-credential-leaks-with-env-variables" class="level2 unnumbered page-columns page-full">
-<h2 class="unnumbered anchored" data-anchor-id="prevent-credential-leaks-with-env-variables">Prevent Credential Leaks with Env Variables</h2>
-<p>There are a number of ways to do this. We typically use a yaml file that can be filled out with personal credentials locally. The file will not be committed to the remote repo</p>
-<section id="create-a-private-credentials-file" class="level3">
-<h3 class="anchored" data-anchor-id="create-a-private-credentials-file">Create a private credentials file</h3>
-<p>The scripts use a <code>.yml</code> file that contains a list of API tokens, server names, and usernames/passwords specific to each individual user. There are two <code>.yml</code> files. One is a template (containing no actual passwords..) that exists in the repo and serves as a template so every individual user can keep up to date with new credential additions. The other is the individual <code>creds.yml</code> that is in the repo’s <code>.gitignore</code>. This file will never exist in the repo and only exist locally (in the user’s C drive).</p>
-</section>
-<section id="creds.yml-details" class="level3">
-<h3 class="anchored" data-anchor-id="creds.yml-details"><code>creds.yml</code> details</h3>
-<p>The <code>.yml</code> file can work with multiple programming languages including R and Python. They are read in the same way and can be easily adjusted when adding new passwords or using them as configuration files.</p>
-<p>They look like this:</p>
+<section id="protect-credentials-with-.gitignore" class="level1">
+<h1>Protect Credentials with .gitignore</h1>
+<p>It is bad practice and a security risk to add private credentials to a script. If your script contains things like passwords, server names, or network drives, be aware that that information will be publicly visible when you push it to a remote git/github repo. Many of our scripts must call passwords and server names in order for them to work properly, so we need a way to hide that information from the public but still be able to run the scripts locally. <code>.gitignore</code> can help achieve this.</p>
+<p>In the root of your repo there should be a file called <code>.gitignore</code>. This files contains a list of file types that we don’t want to be added to the remote git repo. Here’s an example:</p>
+<p>consider this <code>.gitignore</code>:</p>
+<div class="smallframe">
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
-<pre><strong>local-credentials.yml</strong></pre>
+<pre><strong>.gitignore</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb1" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Default is needed to distinguish values.</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Leave a blank line (NO SPACES) as the last line in this file or things will break</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Quotes aren't necessary, but can be used.</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">default</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">conn_list_wdrs</span><span class="kw">:</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">Driver</span><span class="kw">:</span><span class="at"> </span><span class="st">"SQL Server Native Client 11.0"</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">Server</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">Database</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">Trusted_connection</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ApplicationIntent</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">fulgent</span><span class="kw">:</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">username</span><span class="kw">:</span><span class="at"> &lt;USERNAME&gt;</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">password</span><span class="kw">:</span><span class="at"> &lt;PASSWORD&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># excel files</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>*.xlsx</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>*.xls</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu"># logs</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>*.log</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu"># text files</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>*.txt</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu"># RDS Objects</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>*.RDS</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<p>You can have different variables assigned to unique lists, which allows for easy configuration. For example, the list starting with <code>default</code> has variables <code>conn_list_wdrs</code> and <code>fulgent</code>. You can have a different list of variables within the same file like this:</p>
-<div class="cell" data-source-line-numbers="4-5,16-17">
+</div>
+<p>It contains anything with an excel, log, txt or RDS extension. This means that any file with those extensions that you create in your local clone of the repo will exist for you, but the file cannot and will not ever be pushed to the remote repo.</p>
+<section id="environment-variables-.gitignore" class="level2">
+<h2 class="anchored" data-anchor-id="environment-variables-.gitignore">Environment Variables + .gitignore</h2>
+<p>We can store private information in local files and make sure that the do not get pushed to the public remote repo by using <code>.gitignore</code>. There are a number of ways to do this. We typically use a yaml file that can be filled out with personal credentials locally. The file will not be committed to the remote repo.</p>
+<p>There are many ways to achieve this. If you have a more simple workflow that uses R, consider the <code>.Renviron</code> approach. If you have a more complex workflow that has multiple languages and many credentials, consider the <code>yaml</code> approach</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">.Renviron</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">yaml</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>If you’re using just R in your repo and have just a few things you want private, consider using a <code>.Renviron</code> file in addition to <code>.gitignore</code>.</p>
+<ol type="1">
+<li>In the <code>.gitignore</code>, add <code>.Renviron</code>:</li>
+</ol>
+<div class="smallframe">
+<div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
-<pre><strong>local-credentials.yml</strong></pre>
+<pre><strong>.gitignore</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb2" data-source-line-numbers="4-5,16-17" data-code-line-numbers="4-5,16-17"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Default is needed to distinguish values.</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Leave a blank line (NO SPACES) as the last line in this file or things will break</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Quotes aren't necessary, but can be used.</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">default</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">conn_list_wdrs</span><span class="kw">:</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">Driver</span><span class="kw">:</span><span class="at"> </span><span class="st">"SQL Server Native Client 11.0"</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">Server</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">Database</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">Trusted_connection</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ApplicationIntent</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">fulgent</span><span class="kw">:</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">username</span><span class="kw">:</span><span class="at"> &lt;USERNAME&gt;</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">password</span><span class="kw">:</span><span class="at"> &lt;PASSWORD&gt;</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="fu">test</span><span class="kw">:</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">conn_list_wdrs</span><span class="kw">:</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">Driver</span><span class="kw">:</span><span class="at"> </span><span class="st">"SQL Server Native Client 11.0"</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">Server</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">Database</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">Trusted_connection</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ApplicationIntent</span><span class="kw">:</span><span class="at"> </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># R Environment Variables</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>.Renviron</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<p>Now there is a <code>test</code> list with its own variables. This lets us switch a set of variables within our scripts. <code>default</code> applies to the main credentials where <code>test</code> can distinguish which variables should be test or dev scripts specific. Notice below that you can now call the credentials from a <code>.yml</code> file into an R or Python script and the actual credentials will never exist in the code pushed to the repo.</p>
+</div>
+<ol start="2" type="1">
+<li><p>Create a <code>.Renviron</code> file at the root of you local repo</p></li>
+<li><p>Add the things you want to be kept private</p></li>
+</ol>
+<div class="smallframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>.Renviron</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>my_password="thisismypassword123"</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<ol start="4" type="1">
+<li>Now in an R script you can call that password <em>and</em> hide the credentials instead of writting the password in the script for everyone to see:</li>
+</ol>
+<div class="container">
+<div class="smallframe column" data-padding="10px" style="width:40%;">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>good_script.R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>my_password <span class="ot">&lt;-</span> <span class="fu">Sys.getenv</span>(<span class="st">'my_password'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<div class="smallframe column" data-padding="10px" style="width:40%;">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>bad_script.R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>my_password <span class="ot">&lt;-</span> <span class="st">"thisismypassword123"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+<p><code>Sys.getenv()</code> looks for the <code>.Renviron</code> file and the variables inside of it. This means you can get all your credentials from the <code>.Renviron</code> but also keep that information</p>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>Here’s another way to add credentials that may be more robust.</p>
+<p>Many of our scripts use a <code>.yml</code> file that contains a list of API tokens, server names, and usernames/passwords specific to each individual user. There are two <code>.yml</code> files. One is a template (containing no actual passwords..) that exists in the repo and serves as a template so every individual user can keep up to date with new credential additions. The other is the individual <code>creds.yml</code> that is in the repo’s <code>.gitignore</code>. This file will never exist in the repo and only exist locally (in the user’s C drive).</p>
+<p>The <code>.yml</code> file can work with multiple programming languages including R and Python. They are read in the same way and can be easily adjusted when adding new passwords or using them as configuration files. It can work like this:</p>
+<ol type="1">
+<li>In your <code>.gitignore</code>, add a new line that says <code>creds.yml</code>.</li>
+</ol>
+<div class="smallframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>.gitignore</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># creds files</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>creds.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<ol start="2" type="1">
+<li><p>In the root of you local git clone, make a file called <code>creds.yml</code>.</p></li>
+<li><p>In the yaml file you can nest values. For example, under <code>conn_list_wdrs</code> I have all the parameters needed to make a SQL server connection string in R/Python:</p></li>
+</ol>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>creds.yml</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Default is needed to distinguish values.</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Leave a blank line (NO SPACES) as the last line in this file or things will break</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Quotes aren't necessary, but can be used.</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">default</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">conn_list_wdrs</span><span class="kw">:</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">Driver</span><span class="kw">:</span><span class="at"> </span><span class="st">"SQL Server Native Client 11.0"</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">Server</span><span class="kw">:</span><span class="at"> </span><span class="st">"someservername"</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">Database</span><span class="kw">:</span><span class="at"> </span><span class="st">"db"</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">Trusted_connection</span><span class="kw">:</span><span class="at"> </span><span class="st">"yes"</span><span class="at"> </span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ApplicationIntent</span><span class="kw">:</span><span class="at"> </span><span class="st">"readonly"</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">fulgent</span><span class="kw">:</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">username</span><span class="kw">:</span><span class="at"> &lt;USERNAME&gt;</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">password</span><span class="kw">:</span><span class="at"> &lt;PASSWORD&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<ol start="4" type="1">
+<li>To call these credentials in R or Python it will look like this:</li>
+</ol>
+<div class="container">
+<div class="smallframe column" data-padding="10px" style="width:40%;">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>script.R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(yaml)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># read in the local credentials yaml file</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>creds <span class="ot">&lt;-</span> yaml<span class="sc">::</span><span class="fu">read_yaml</span>(<span class="st">"creds.yml"</span>)<span class="sc">$</span>default</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># call in the variables</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>connection <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbConnect</span>(</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  odbc<span class="sc">::</span><span class="fu">odbc</span>(), </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">Driver =</span> creds<span class="sc">$</span>conn_list_wdrs<span class="sc">$</span>Driver, </span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">Server =</span> creds<span class="sc">$</span>conn_list_wdrs<span class="sc">$</span>Server, </span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">Database =</span> creds<span class="sc">$</span>conn_list_wdrs<span class="sc">$</span>Database, </span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">Trusted_connection =</span> creds<span class="sc">$</span>conn_list_wdrs<span class="sc">$</span>Trusted_connection, </span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">ApplicationIntent =</span> creds<span class="sc">$</span>conn_list_wdrs<span class="sc">$</span>ApplicationIntent</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<div class="smallframe column" data-padding="10px" style="width:40%;">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>script.py</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> yaml</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># read credentials</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="ss">f"creds.yml"</span>) <span class="im">as</span> f:</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    creds <span class="op">=</span> yaml.safe_load(f)[<span class="st">'default'</span>]</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>conn <span class="op">=</span> pyodbc.<span class="ex">connect</span>(</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  DRIVER<span class="op">=</span>creds[<span class="st">'conn_list_wdrs'</span>][<span class="st">'Driver'</span>],</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  SERVER<span class="op">=</span>creds[<span class="st">'conn_list_wdrs'</span>][<span class="st">'Server'</span>],</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  DATABASE<span class="op">=</span>creds[<span class="st">'conn_list_wdrs'</span>][<span class="st">'Database'</span>],</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  Trusted_Connection<span class="op">=</span>creds[<span class="st">'conn_list_wdrs'</span>][<span class="st">'Trusted_connection'</span>],</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  ApplicationIntent<span class="op">=</span>creds[<span class="st">'conn_list_wdrs'</span>][<span class="st">'ApplicationIntent'</span>]</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+<ol start="5" type="1">
+<li>You can add more nested sections besides default, like this, where I added a <code>test</code> parameter:</li>
+</ol>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>creds.yml</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Default is needed to distinguish values.</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Leave a blank line (NO SPACES) as the last line in this file or things will break</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Quotes aren't necessary, but can be used.</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">default</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">conn_list_wdrs</span><span class="kw">:</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">Driver</span><span class="kw">:</span><span class="at"> </span><span class="st">"SQL Server Native Client 11.0"</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">Server</span><span class="kw">:</span><span class="at"> </span><span class="st">"someservername"</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">Database</span><span class="kw">:</span><span class="at"> </span><span class="st">"db"</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">Trusted_connection</span><span class="kw">:</span><span class="at"> </span><span class="st">"yes"</span><span class="at"> </span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ApplicationIntent</span><span class="kw">:</span><span class="at"> </span><span class="st">"readonly"</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">fulgent</span><span class="kw">:</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">username</span><span class="kw">:</span><span class="at"> &lt;USERNAME&gt;</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">password</span><span class="kw">:</span><span class="at"> &lt;PASSWORD&gt;</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="fu">test</span><span class="kw">:</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">conn_list_wdrs</span><span class="kw">:</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">Driver</span><span class="kw">:</span><span class="at"> </span><span class="st">"SQL Server Native Client 11.0"</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">Server</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">Database</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">Trusted_connection</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ApplicationIntent</span><span class="kw">:</span><span class="at"> </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>This is useful to organized and automatically call different parameters. Now there is a <code>test</code> list with its own variables. This lets us switch a set of variables within our scripts. <code>default</code> applies to the main credentials where <code>test</code> can distinguish which variables should be test or dev scripts specific. Notice below that you can now call the credentials from a <code>.yml</code> file into an R or Python script and the actual credentials will never exist in the code pushed to the repo.</p>
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>script-in-repo.R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># this script is in the repo, but credentials are hidden</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(yaml)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># read in the local credentials yaml file</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>creds <span class="ot">&lt;-</span> yaml<span class="sc">::</span><span class="fu">read_yaml</span>(<span class="st">"path/to/local-credentials.yml"</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># pull in the credentials</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>server_name <span class="ot">&lt;-</span> creds<span class="sc">$</span>default<span class="sc">$</span>conn_list_wdrs<span class="sc">$</span>server</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># this script is in the repo, but credentials are hidden</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(yaml)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># read in the local credentials yaml file</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>creds <span class="ot">&lt;-</span> yaml<span class="sc">::</span><span class="fu">read_yaml</span>(<span class="st">"path/to/local-credentials.yml"</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># pull in the credentials</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>server_name <span class="ot">&lt;-</span> creds<span class="sc">$</span>default<span class="sc">$</span>conn_list_wdrs<span class="sc">$</span>server</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<p><br></p>
-</section>
-<section id="section" class="level3 unnumbered page-columns page-full">
-<h3 class="unnumbered anchored" data-anchor-id="section"></h3>
-<div class="column-page">
-<div class="column" style="width:33%;">
+<section id="automating-with-yaml-creds" class="level4">
+<h4 class="anchored" data-anchor-id="automating-with-yaml-creds">Automating With Yaml Creds</h4>
 <p>We can even get more specific and add an <code>if-else</code> statement to specify which credential we want to select. This can be helpful if we have a CI/CD pipeline and have a script automatically run on a task scheduler or cron job. We can call the credentials we want in the command line and have the command line code run in my task scheduler. That way we can use multiple different versions of the same script and have all of it be automated.</p>
-<p>For example, the middle panel uses the <code>commandArgs()</code> to pull any arguments passed to the script in a shell/command line script. In the right panel, the shell script has <code>production</code> and <code>test</code> as second arguments. These are passed to the R script as <code>arg[2]</code>. Now we can use <code>arg[2]</code> in the if-else statement to conditionally select credentials and do it automatically.</p>
-</div>
-<div class="column" style="width:33%;">
+<p>For example,</p>
+<ul>
+<li>the R script on the left uses the <code>commandArgs()</code> to pull any arguments passed to the script in a shell/command line script.</li>
+<li>on the right, the shell script has <code>production</code> and <code>test</code> as second arguments.</li>
+<li>these are passed to the R script as <code>arg[2]</code>.</li>
+<li>now we can use <code>arg[2]</code> in the if-else statement to conditionally select credentials and do it automatically in a pipeline.</li>
+</ul>
+<div class="container">
+<div class="smallframe column" style="width:40%;">
 <div class="cell" data-source-line-numbers="1,9-14">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>script-in-repo.R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb4" data-source-line-numbers="1,9-14" data-code-line-numbers="1,9-14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>args <span class="ot">&lt;-</span> <span class="fu">commandArgs</span>(<span class="cn">TRUE</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># this script is in the repo, but credentials are hidden</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(yaml)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># read in the local credentials yaml file</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>creds <span class="ot">&lt;-</span> yaml<span class="sc">::</span><span class="fu">read_yaml</span>(<span class="st">"path/to/local-credentials.yml"</span>)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># pull in the credentials</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(args[<span class="dv">2</span>] <span class="sc">==</span> <span class="st">"production"</span>){</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  server_name <span class="ot">&lt;-</span> creds<span class="sc">$</span>default<span class="sc">$</span>conn_list_wdrs<span class="sc">$</span>server</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span>(args[<span class="dv">2</span>] <span class="sc">==</span> <span class="st">"test"</span>){</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  server_name <span class="ot">&lt;-</span> creds<span class="sc">$</span>test<span class="sc">$</span>conn_list_wdrs<span class="sc">$</span>server</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12" data-source-line-numbers="1,9-14" data-code-line-numbers="1,9-14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>args <span class="ot">&lt;-</span> <span class="fu">commandArgs</span>(<span class="cn">TRUE</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># this script is in the repo, but credentials are hidden</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(yaml)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># read in the local credentials yaml file</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>creds <span class="ot">&lt;-</span> yaml<span class="sc">::</span><span class="fu">read_yaml</span>(<span class="st">"path/to/local-credentials.yml"</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># pull in the credentials</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(args[<span class="dv">2</span>] <span class="sc">==</span> <span class="st">"production"</span>){</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  server_name <span class="ot">&lt;-</span> creds<span class="sc">$</span>default<span class="sc">$</span>conn_list_wdrs<span class="sc">$</span>server</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span>(args[<span class="dv">2</span>] <span class="sc">==</span> <span class="st">"test"</span>){</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  server_name <span class="ot">&lt;-</span> creds<span class="sc">$</span>test<span class="sc">$</span>conn_list_wdrs<span class="sc">$</span>server</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
-<div class="column" style="width:33%;">
+<div class="smallframe column" style="width:40%;">
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>shell-trigger-script.sh</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the production code</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript <span class="at">-e</span> <span class="st">"source('path/script_in_repo.R');"</span> production</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the test/dev code</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript <span class="at">-e</span> <span class="st">"source('path/script_in_repo.R');"</span> test </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the production code</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript <span class="at">-e</span> <span class="st">"source('path/script_in_repo.R');"</span> production</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the test/dev code</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> Rscript <span class="at">-e</span> <span class="st">"source('path/script_in_repo.R');"</span> test </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </div>
-<p><br></p>
-<p><br></p>
 </section>
+</div>
+</div>
+</div>
+<p><br></p>
 <section id="safe-guards---prevent-accidental-leaks" class="level3">
 <h3 class="anchored" data-anchor-id="safe-guards---prevent-accidental-leaks">Safe Guards - Prevent Accidental Leaks!</h3>
 <p>Once you have the credentials.yml template in your repo, make sure that nobody on your team (or anyone with write access..) is able to accidentally push changes to the template. We don’t want someone’s passwords or API tokens to exist in GitHub.</p>
@@ -538,7 +697,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-with-filename-file">
 <pre><strong>PowerShell</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> update-index <span class="at">--skip-worktree</span> creds_TEMPLATE.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> update-index <span class="at">--skip-worktree</span> creds_TEMPLATE.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -552,7 +711,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-with-filename-file">
 <pre><strong>PowerShell</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> update-index <span class="at">--no-skip-worktree</span> creds_TEMPLATE.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> update-index <span class="at">--no-skip-worktree</span> creds_TEMPLATE.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -564,11 +723,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-with-filename-file">
 <pre><strong>PowerShell</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> ls-files <span class="at">-v</span> . <span class="kw">|</span> <span class="fu">grep</span> ^S</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> ls-files <span class="at">-v</span> . <span class="kw">|</span> <span class="fu">grep</span> ^S</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 <p><br></p>
+</section>
 </section>
 </section>
 </section>
@@ -580,9 +740,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="pre-commit-hooks">Pre-commit Hooks</h2>
 <p>Pre-commit hooks run a process locally when the user attempts to commit code to a git branch. Hooks have many uses. Here we can use them as a security guardrail to prevent accidental credential leaks in committed code. For example, if someone accidentally pushes a server name to the public repo, the hook will prevent that code from ever getting into the remote repo and will give the user a local error.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Windows</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">WSL/Linux</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Windows</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">WSL/Linux</a></li></ul>
 <div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <ol type="1">
 <li><p>Clone or download the zip from the <a href="https://github.com/awslabs/git-secrets/">AWS Git Secrets repo</a></p></li>
 <li><p>Extract zip or <code>cd</code> to the repo</p></li>
@@ -600,7 +760,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-with-filename-file">
 <pre><strong>PowerShell</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PS</span> <span class="op">&gt;</span> cd path/to/repo/root</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">PS</span> <span class="op">&gt;</span> cd path/to/repo/root</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -613,7 +773,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-with-filename-file">
 <pre><strong>PowerShell</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--install</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--install</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -631,7 +791,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-with-filename-file">
 <pre><strong>PowerShell</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add-provider</span> <span class="at">--</span> cat ./secrets_key</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add-provider</span> <span class="at">--</span> cat ./secrets_key</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -642,14 +802,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-with-filename-file">
 <pre><strong>PowerShell</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb12" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add a pattern</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add</span> <span class="st">'[A-Z0-9]{20}'</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># add a literal string, the + is escaped</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add</span> <span class="at">--literal</span> <span class="st">'foo+bar'</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># add an allowed pattern</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add</span> <span class="at">-a</span> <span class="st">'allowed pattern'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add a pattern</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add</span> <span class="st">'[A-Z0-9]{20}'</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># add a literal string, the + is escaped</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add</span> <span class="at">--literal</span> <span class="st">'foo+bar'</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># add an allowed pattern</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add</span> <span class="at">-a</span> <span class="st">'allowed pattern'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -662,7 +822,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-with-filename-file">
 <pre><strong>PowerShell</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--scan-history</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--scan-history</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -689,7 +849,7 @@ Note
 </div>
 </div>
 </div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
 <ol type="1">
 <li><p>Clone the <a href="https://github.com/awslabs/git-secrets/">AWS Git Secrets repo</a></p></li>
 <li><p>In the terminal, <code>cd</code> to the repo</p></li>
@@ -701,7 +861,7 @@ Note
 <div class="code-with-filename-file">
 <pre><strong>terminal</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> make install</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> make install</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -714,7 +874,7 @@ Note
 <div class="code-with-filename-file">
 <pre><strong>terminal</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb15" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> path/to/repo/root</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> path/to/repo/root</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -727,7 +887,7 @@ Note
 <div class="code-with-filename-file">
 <pre><strong>terminal</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb16" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--install</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--install</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -745,7 +905,7 @@ Note
 <div class="code-with-filename-file">
 <pre><strong>terminal</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb17" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add-provider</span> <span class="at">--</span> cat ./secrets_key</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add-provider</span> <span class="at">--</span> cat ./secrets_key</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -756,14 +916,14 @@ Note
 <div class="code-with-filename-file">
 <pre><strong>terminal</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb18" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add a pattern</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add</span> <span class="st">'[A-Z0-9]{20}'</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># add a literal string, the + is escaped</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add</span> <span class="at">--literal</span> <span class="st">'foo+bar'</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># add an allowed pattern</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add</span> <span class="at">-a</span> <span class="st">'allowed pattern'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add a pattern</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add</span> <span class="st">'[A-Z0-9]{20}'</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># add a literal string, the + is escaped</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add</span> <span class="at">--literal</span> <span class="st">'foo+bar'</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co"># add an allowed pattern</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add</span> <span class="at">-a</span> <span class="st">'allowed pattern'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -776,7 +936,7 @@ Note
 <div class="code-with-filename-file">
 <pre><strong>terminal</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb19" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--scan-history</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--scan-history</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -817,7 +977,7 @@ Note
 <li><p>Check that the <code>secrets_key</code> regex is working by running the process on a repo that you know has secrets in it. For example, in a different folder, run all the pre-commit hook steps above and add a known “bad” string into the regex. For example, in the regex put <code>bad_string</code> and in a file in that folder put <code>bad_string</code>. When you scan it should get flagged.</p></li>
 <li><p>If secret scanning is taking too long, you might want to check certain files first. I’ve found that HTML files take a <em>very</em> long time to scan for secrets. If you’re using linux or macOS you should be able to scan certain files via grob like this <code>git secrets --scan path/to/files*</code>. If you’re using windows it probably won’t work. In that case, if you only want certain file extensions to be scanned, use this function in powershell below. Download the file here:</p></li>
 </ol>
-<p><a href="#dnldts31323" onclick="fetch('data:text/plain;base64,IyBSRUFETUUKCiMjIFRoaXMgc2NyaXB0IHJlcXVpcmVzIEFXUyBHaXQgU2VjcmV0cyBhbmQgcmVjb21tZW5kcyBjdXN0b20gcmVnZXggc2VjcmV0cy4KIyMgZm9yIG1vcmUgZGV0YWlscyBhbmQgaW5zdGFsbCBpbnN0cnVjdGlvbnMsIHBsZWFzZSBmb2xsb3cgaHR0cHM6Ly9udy1wYWdlLmdpdGh1Yi5pby9zdGFuZGFyZHMvc3RkL3NlY3VyaXR5Lmh0bWwjcHJlLWNvbW1pdC1ob29rcwoKIyBFeGFtcGxlIFVzYWdlCiMgd3JpdGUgdGhpcyBpbiB0aGUgcG93ZXJzaGVsbCB0ZXJtaW5hbCwgYWRqdXN0IGZvciB0aGUgZmlsZSB0eXBlKHMpIHlvdSB3YW50IHRvIHNjYW4gLSBjYW4gYmUgbXVsdGlwbGUgdHlwZXM6ICRmaWxlRXh0ZW5zaW9ucyA9IEAoIi5SIiwgIi5weSIpCiMgdGhlbiBleGVjdXRlIHRoaXMgaW4gdGhlIHRlcm1pbmFsOiBTY2FuRmlsZXMgLUZpbGVFeHRlbnNpb25zICRmaWxlRXh0ZW5zaW9ucwoKIyBUaGVyZSdzIGFuIG9wdGlvbmFsIHBhcmFtZXRlciBjYWxsZWQgJGZpbGVQYXRoLiBJdCB3aWxsIGF1dG9tYXRpY2FsbHkgc2V0IHRvIHlvdXIgY3VycmVudCBmb2xkZXIKIyBZb3UgY2FuIGNoYW5nZSBpdCBpZiB5b3UgbmVlZCBsaWtlIHRoaXM6ICRmaWxlUGF0aCA9ICJwYXRoL3RvL2ZvbGRlciIKCiMgSXQgd2lsbCBnaXZlIHlvdSBhbiBvdXRwdXQgb2YgYW55IHNlY3JldHMgdGhhdCBhcmUgY29udGFpbmVkIGluIHRob3NlIGZpbGVzCgpGdW5jdGlvbiBTY2FuRmlsZXN7CiAgICBwYXJhbSAoCiAgICAgICAgW3N0cmluZ10kZmlsZVBhdGggPSAoR2V0LUxvY2F0aW9uKS5QYXRoLAogICAgICAgIFtzdHJpbmdbXV0kZmlsZUV4dGVuc2lvbnMKICApIAogICAgR2V0LUNoaWxkSXRlbSAkZmlsZVBhdGggLXJlY3Vyc2UgfCBXaGVyZS1PYmplY3QgeyRfLmV4dGVuc2lvbiAtaW4gJGZpbGVFeHRlbnNpb25zfSB8IAogICAgRm9yZWFjaC1PYmplY3QgewoKICAgICAgICBnaXQgc2VjcmV0cyAtLXNjYW4gJF8uRnVsbE5hbWUgfCBPdXQtRmlsZSAkbG9nRmlsZSAtQXBwZW5kCgogICAgfQogIH0=').then(res => res.blob()).then(blob => {
+<p><a href="#dnldts48617" onclick="fetch('data:text/plain;base64,IyBSRUFETUUKCiMjIFRoaXMgc2NyaXB0IHJlcXVpcmVzIEFXUyBHaXQgU2VjcmV0cyBhbmQgcmVjb21tZW5kcyBjdXN0b20gcmVnZXggc2VjcmV0cy4KIyMgZm9yIG1vcmUgZGV0YWlscyBhbmQgaW5zdGFsbCBpbnN0cnVjdGlvbnMsIHBsZWFzZSBmb2xsb3cgaHR0cHM6Ly9udy1wYWdlLmdpdGh1Yi5pby9zdGFuZGFyZHMvc3RkL3NlY3VyaXR5Lmh0bWwjcHJlLWNvbW1pdC1ob29rcwoKIyBFeGFtcGxlIFVzYWdlCiMgd3JpdGUgdGhpcyBpbiB0aGUgcG93ZXJzaGVsbCB0ZXJtaW5hbCwgYWRqdXN0IGZvciB0aGUgZmlsZSB0eXBlKHMpIHlvdSB3YW50IHRvIHNjYW4gLSBjYW4gYmUgbXVsdGlwbGUgdHlwZXM6ICRmaWxlRXh0ZW5zaW9ucyA9IEAoIi5SIiwgIi5weSIpCiMgdGhlbiBleGVjdXRlIHRoaXMgaW4gdGhlIHRlcm1pbmFsOiBTY2FuRmlsZXMgLUZpbGVFeHRlbnNpb25zICRmaWxlRXh0ZW5zaW9ucwoKIyBUaGVyZSdzIGFuIG9wdGlvbmFsIHBhcmFtZXRlciBjYWxsZWQgJGZpbGVQYXRoLiBJdCB3aWxsIGF1dG9tYXRpY2FsbHkgc2V0IHRvIHlvdXIgY3VycmVudCBmb2xkZXIKIyBZb3UgY2FuIGNoYW5nZSBpdCBpZiB5b3UgbmVlZCBsaWtlIHRoaXM6ICRmaWxlUGF0aCA9ICJwYXRoL3RvL2ZvbGRlciIKCiMgSXQgd2lsbCBnaXZlIHlvdSBhbiBvdXRwdXQgb2YgYW55IHNlY3JldHMgdGhhdCBhcmUgY29udGFpbmVkIGluIHRob3NlIGZpbGVzCgpGdW5jdGlvbiBTY2FuRmlsZXN7CiAgICBwYXJhbSAoCiAgICAgICAgW3N0cmluZ10kZmlsZVBhdGggPSAoR2V0LUxvY2F0aW9uKS5QYXRoLAogICAgICAgIFtzdHJpbmdbXV0kZmlsZUV4dGVuc2lvbnMKICApIAogICAgR2V0LUNoaWxkSXRlbSAkZmlsZVBhdGggLXJlY3Vyc2UgfCBXaGVyZS1PYmplY3QgeyRfLmV4dGVuc2lvbiAtaW4gJGZpbGVFeHRlbnNpb25zfSB8IAogICAgRm9yZWFjaC1PYmplY3QgewoKICAgICAgICBnaXQgc2VjcmV0cyAtLXNjYW4gJF8uRnVsbE5hbWUgfCBPdXQtRmlsZSAkbG9nRmlsZSAtQXBwZW5kCgogICAgfQogIH0=').then(res => res.blob()).then(blob => {
       const downloadURL = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       document.body.appendChild(a);
@@ -825,30 +985,30 @@ Note
       a.download = 'secretscanner.ps1'; a.click();
       window.URL.revokeObjectURL(downloadURL);
       document.body.removeChild(a);
-        });"><button class="btn btn-default downloadthis  " id="dnldts31323"><i class="bi bi-download"></i> Download Secret Scanner Script </button></a></p>
+        });"><button class="btn btn-default downloadthis  " id="dnldts48617"><i class="bi bi-download"></i> Download Secret Scanner Script </button></a></p>
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>secret-scanner9000.ps1</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb20" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example Usage</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># write this in the powershell terminal, adjust for the file type(s) you want to scan - can be multiple types: $fileExtensions = @(".R", ".py")</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># then execute this in the terminal: ScanFiles -FileExtensions $fileExtensions</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># It will give you an output of any secrets that are contained in those files</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Function</span> ScanFiles{</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="ex">param</span> <span class="er">(</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>      <span class="ex">[string]</span><span class="va">$filePath</span> = <span class="er">(</span><span class="ex">Get-Location</span><span class="kw">)</span><span class="ex">.Path,</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>      <span class="ex">[string[]]</span><span class="va">$fileExtensions</span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="kw">)</span> </span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="ex">Get-ChildItem</span> <span class="va">$filePath</span> <span class="at">-recurse</span> <span class="kw">|</span> <span class="ex">Where-Object</span> {<span class="va">$_</span>.extension <span class="at">-in</span> <span class="va">$fileExtensions</span>} <span class="kw">|</span> </span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  <span class="ex">Foreach-Object</span> {</span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">git</span> secrets <span class="at">--scan</span> <span class="va">$_</span>.FullName</span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>  <span class="er">}</span></span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example Usage</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># write this in the powershell terminal, adjust for the file type(s) you want to scan - can be multiple types: $fileExtensions = @(".R", ".py")</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># then execute this in the terminal: ScanFiles -FileExtensions $fileExtensions</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co"># It will give you an output of any secrets that are contained in those files</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Function</span> ScanFiles{</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="ex">param</span> <span class="er">(</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>      <span class="ex">[string]</span><span class="va">$filePath</span> = <span class="er">(</span><span class="ex">Get-Location</span><span class="kw">)</span><span class="ex">.Path,</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>      <span class="ex">[string[]]</span><span class="va">$fileExtensions</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="kw">)</span> </span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>  <span class="ex">Get-ChildItem</span> <span class="va">$filePath</span> <span class="at">-recurse</span> <span class="kw">|</span> <span class="ex">Where-Object</span> {<span class="va">$_</span>.extension <span class="at">-in</span> <span class="va">$fileExtensions</span>} <span class="kw">|</span> </span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>  <span class="ex">Foreach-Object</span> {</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">git</span> secrets <span class="at">--scan</span> <span class="va">$_</span>.FullName</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>  <span class="er">}</span></span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <p>Now, you can scan your secrets by copying and pasting the code into a powershell terminal like this:</p>
@@ -858,8 +1018,8 @@ Note
 <div class="code-with-filename-file">
 <pre><strong>PowerShell</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb21" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="va">$fileExtensions</span> = <span class="pp">@(</span><span class="st">".R"</span>,<span class="st">".py"</span>,<span class="st">".Rmd"</span>,<span class="st">".qmd"</span><span class="pp">)</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">ScanFiles</span> <span class="at">-FileExtensions</span> <span class="va">$fileExtensions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="va">$fileExtensions</span> = <span class="pp">@(</span><span class="st">".R"</span>,<span class="st">".py"</span>,<span class="st">".Rmd"</span>,<span class="st">".qmd"</span><span class="pp">)</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="ex">ScanFiles</span> <span class="at">-FileExtensions</span> <span class="va">$fileExtensions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
