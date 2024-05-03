@@ -58,31 +58,116 @@ If sensitive information is leaked and commited to the remote repo, then they wi
 |                          | -   Any PHI                             |
 +--------------------------+-----------------------------------------+
 
-## Prevent Credential Leaks with Env Variables {.unnumbered}
+# Protect Credentials with .gitignore
 
-There are a number of ways to do this. We typically use a yaml file that can be filled out with personal credentials locally. The file will not be committed to the remote repo
+It is bad practice and a security risk to add private credentials to a script. If your script contains things like passwords, server names, or network drives, be aware that that information will be publicly visible when you push it to a remote git/github repo. Many of our scripts must call passwords and server names in order for them to work properly, so we need a way to hide that information from the public but still be able to run the scripts locally. `.gitignore` can help achieve this.
 
-### Create a private credentials file
+In the root of your repo there should be a file called `.gitignore`. This files contains a list of file types that we don't want to be added to the remote git repo. Here's an example:
 
-The scripts use a `.yml` file that contains a list of API tokens, server names, and usernames/passwords specific to each individual user. There are two `.yml` files. One is a template (containing no actual passwords..) that exists in the repo and serves as a template so every individual user can keep up to date with new credential additions. The other is the individual `creds.yml` that is in the repo's `.gitignore`. This file will never exist in the repo and only exist locally (in the user's C drive).
+consider this `.gitignore`:
 
-### `creds.yml` details
+:::{.smallframe}
+```{md filename=".gitignore"}
+# excel files
+*.xlsx
+*.xls
 
-The `.yml` file can work with multiple programming languages including R and Python. They are read in the same way and can be easily adjusted when adding new passwords or using them as configuration files.
+# logs
+*.log
 
-They look like this:
+# text files
+*.txt
 
-```{yaml filename="local-credentials.yml"}
+# RDS Objects
+*.RDS
+```
+:::
+
+It contains anything with an excel, log, txt or RDS extension. This means that any file with those extensions that you create in your local clone of the repo will exist for you, but the file cannot and will not ever be pushed to the remote repo.
+
+
+## Environment Variables + .gitignore
+
+We can store private information in local files and make sure that the do not get pushed to the public remote repo by using `.gitignore`. There are a number of ways to do this. We typically use a yaml file that can be filled out with personal credentials locally. The file will not be committed to the remote repo.
+
+There are many ways to achieve this. If you have a more simple workflow that uses R, consider the `.Renviron` approach. If you have a more complex workflow that has multiple languages and many credentials, consider the `yaml` approach
+
+::::{.panel-tabset}
+
+### .Renviron
+
+If you're using just R in your repo and have just a few things you want private, consider using a `.Renviron` file in addition to `.gitignore`.
+
+1. In the `.gitignore`, add `.Renviron`:
+
+:::{.smallframe}
+```{md filename=".gitignore"}
+# R Environment Variables
+.Renviron
+```
+:::
+
+2. Create a `.Renviron` file at the root of you local repo
+
+3. Add the things you want to be kept private
+
+:::{.smallframe}
+```{md filename=".Renviron"}
+my_password="thisismypassword123"
+```
+:::
+
+4. Now in an R script you can call that password _and_ hide the credentials instead of writting the password in the script for everyone to see:
+
+::::{.container}
+:::{.smallframe .column width="40%" padding="10px"}
+```{r filename="good_script.R"}
+my_password <- Sys.getenv('my_password')
+```
+:::
+
+:::{.smallframe .column width="40%" padding="10px"}
+```{r filename="bad_script.R"}
+my_password <- "thisismypassword123"
+```
+:::
+::::
+
+`Sys.getenv()` looks for the `.Renviron` file and the variables inside of it. This means you can get all your credentials from the `.Renviron` but also keep that information 
+
+### yaml
+
+Here's another way to add credentials that may be more robust.
+
+Many of our scripts use a `.yml` file that contains a list of API tokens, server names, and usernames/passwords specific to each individual user. There are two `.yml` files. One is a template (containing no actual passwords..) that exists in the repo and serves as a template so every individual user can keep up to date with new credential additions. The other is the individual `creds.yml` that is in the repo's `.gitignore`. This file will never exist in the repo and only exist locally (in the user's C drive).
+
+The `.yml` file can work with multiple programming languages including R and Python. They are read in the same way and can be easily adjusted when adding new passwords or using them as configuration files. It can work like this:
+
+1. In your `.gitignore`, add a new line that says `creds.yml`.
+
+:::{.smallframe}
+```{markdown filename=".gitignore"}
+# creds files
+creds.yml
+```
+:::
+
+
+2. In the root of you local git clone, make a file called `creds.yml`. 
+
+3. In the yaml file you can nest values. For example, under `conn_list_wdrs` I have all the parameters needed to make a SQL server connection string in R/Python:
+
+```{yaml filename="creds.yml"}
 # Default is needed to distinguish values.
 # Leave a blank line (NO SPACES) as the last line in this file or things will break
 # Quotes aren't necessary, but can be used.
 default: 
   conn_list_wdrs:
     Driver: "SQL Server Native Client 11.0"
-    Server: 
-    Database: 
-    Trusted_connection: 
-    ApplicationIntent: 
+    Server: "someservername"
+    Database: "db"
+    Trusted_connection: "yes" 
+    ApplicationIntent: "readonly"
     
   fulgent:
     username: <USERNAME>
@@ -90,20 +175,62 @@ default:
 
 ```
 
-You can have different variables assigned to unique lists, which allows for easy configuration. For example, the list starting with `default` has variables `conn_list_wdrs` and `fulgent`. You can have a different list of variables within the same file like this:
+4. To call these credentials in R or Python it will look like this:
 
-```{yaml filename="local-credentials.yml"}
-#| source-line-numbers: "4-5,16-17"
+::::{.container}
+:::{.smallframe .column width="40%" padding="10px"}
+```{r filename="script.R"}
+library(yaml)
+
+# read in the local credentials yaml file
+creds <- yaml::read_yaml("creds.yml")$default
+
+# call in the variables
+
+connection <- DBI::dbConnect(
+  odbc::odbc(), 
+  Driver = creds$conn_list_wdrs$Driver, 
+  Server = creds$conn_list_wdrs$Server, 
+  Database = creds$conn_list_wdrs$Database, 
+  Trusted_connection = creds$conn_list_wdrs$Trusted_connection, 
+  ApplicationIntent = creds$conn_list_wdrs$ApplicationIntent
+)
+```
+:::
+
+:::{.smallframe .column width="40%" padding="10px"}
+```{python filename="script.py"}
+import yaml
+
+# read credentials
+with open(f"creds.yml") as f:
+    creds = yaml.safe_load(f)['default']
+
+conn = pyodbc.connect(
+  DRIVER=creds['conn_list_wdrs']['Driver'],
+  SERVER=creds['conn_list_wdrs']['Server'],
+  DATABASE=creds['conn_list_wdrs']['Database'],
+  Trusted_Connection=creds['conn_list_wdrs']['Trusted_connection'],
+  ApplicationIntent=creds['conn_list_wdrs']['ApplicationIntent']
+  )
+```
+:::
+::::
+
+
+5. You can add more nested sections besides default, like this, where I added a `test` parameter:
+
+```{yaml filename="creds.yml"}
 # Default is needed to distinguish values.
 # Leave a blank line (NO SPACES) as the last line in this file or things will break
 # Quotes aren't necessary, but can be used.
 default: 
   conn_list_wdrs:
     Driver: "SQL Server Native Client 11.0"
-    Server: 
-    Database: 
-    Trusted_connection: 
-    ApplicationIntent: 
+    Server: "someservername"
+    Database: "db"
+    Trusted_connection: "yes" 
+    ApplicationIntent: "readonly"
     
   fulgent:
     username: <USERNAME>
@@ -119,7 +246,7 @@ test:
 
 ```
 
-Now there is a `test` list with its own variables. This lets us switch a set of variables within our scripts. `default` applies to the main credentials where `test` can distinguish which variables should be test or dev scripts specific. Notice below that you can now call the credentials from a `.yml` file into an R or Python script and the actual credentials will never exist in the code pushed to the repo.
+This is useful to organized and automatically call different parameters. Now there is a `test` list with its own variables. This lets us switch a set of variables within our scripts. `default` applies to the main credentials where `test` can distinguish which variables should be test or dev scripts specific. Notice below that you can now call the credentials from a `.yml` file into an R or Python script and the actual credentials will never exist in the code pushed to the repo.
 
 ```{r filename="script-in-repo.R"}
 # this script is in the repo, but credentials are hidden
@@ -132,22 +259,19 @@ creds <- yaml::read_yaml("path/to/local-credentials.yml")
 server_name <- creds$default$conn_list_wdrs$server
 ```
 
+#### Automating With Yaml Creds
 
-<br>
-
-:::: {.content-visible when-format="html"}
-###  {.unnumbered}
-
-::: {.column-page}
-
-:::{.column width="33%"}
 We can even get more specific and add an `if-else` statement to specify which credential we want to select. This can be helpful if we have a CI/CD pipeline and have a script automatically run on a task scheduler or cron job. We can call the credentials we want in the command line and have the command line code run in my task scheduler. That way we can use multiple different versions of the same script and have all of it be automated. 
 
-For example, the middle panel uses the `commandArgs()` to pull any arguments passed to the script in a shell/command line script. In the right panel, the shell script has `production` and `test` as second arguments. These are passed to the R script as `arg[2]`. Now we can use `arg[2]` in the if-else statement to conditionally select credentials and do it automatically.
+For example, 
 
-:::
+- the R script on the left uses the `commandArgs()` to pull any arguments passed to the script in a shell/command line script. 
+- on the right, the shell script has `production` and `test` as second arguments. 
+- these are passed to the R script as `arg[2]`. 
+- now we can use `arg[2]` in the if-else statement to conditionally select credentials and do it automatically in a pipeline.
 
-:::{.column width="33%"}
+::::{.container}
+:::{.smallframe .column width="40%"}
 ```{r filename="script-in-repo.R"}
 #| source-line-numbers: "1,9-14"
 args <- commandArgs(TRUE)
@@ -169,7 +293,7 @@ if(args[2] == "production"){
 
 :::
 
-:::{.column width="33%"}
+:::{.smallframe .column width="40%"}
 
 ```{bash filename="shell-trigger-script.sh"}
 # Run the production code
@@ -178,49 +302,16 @@ $ Rscript -e "source('path/script_in_repo.R');" production
 # Run the test/dev code
 $ Rscript -e "source('path/script_in_repo.R');" test 
 ```
-
-:::
 
 :::
 
 ::::
 
-<br>
 
 
-::: {.content-visible unless-format="html"}
-We can even get more specific and add an `if-else` statement to specify which credential we want to select. This can be helpful if we have a CI/CD pipeline and have a script automatically run on a task scheduler or cron job. We can call the credentials we want in the command line and have the command line code run in my task scheduler. That way we can use multiple different versions of the same script and have all of it be automated.
+::::
 
-For example, the middle panel uses the `commandArgs()` to pull any arguments passed to the script in a shell/command line script. In the right panel, the shell script has `production` and `test` as second arguments. These are passed to the R script as `arg[2]`. Now we can use `arg[2]` in the if-else statement to conditionally select credentials and do it automatically.
 
-```{r filename="script-in-repo.R"}
-#| source-line-numbers: "1,9-14"
-args <- commandArgs(TRUE)
-
-# this script is in the repo, but credentials are hidden
-library(yaml)
-
-# read in the local credentials yaml file
-creds <- yaml::read_yaml("path/to/local-credentials.yml")
-
-# pull in the credentials
-if(args[2] == "production"){
-  server_name <- creds$default$conn_list_wdrs$server
-} else if(args[2] == "test"){
-  server_name <- creds$test$conn_list_wdrs$server
-}
-
-```
-
-```{bash filename="shell-trigger-script.sh"}
-# Run the production code
-$ Rscript -e "source('path/script_in_repo.R');" production
-
-# Run the test/dev code
-$ Rscript -e "source('path/script_in_repo.R');" test 
-```
-
-:::
 
 <br>
 
