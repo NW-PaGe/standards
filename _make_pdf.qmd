@@ -47,6 +47,7 @@ execute:
 #| eval: true
 # see this discussion for more details
 # https://github.com/quarto-dev/quarto-cli/discussions/5782
+library(reticulate)
 process_qmd <- function(
     file,
     fpath_in = "images/",
