@@ -66,7 +66,7 @@ In the root of your repo there should be a file called `.gitignore`. This files 
 
 consider this `.gitignore`:
 
-:::{.smallframe}
+::: smallframe
 ```{md filename=".gitignore"}
 # excel files
 *.xlsx
@@ -85,55 +85,53 @@ consider this `.gitignore`:
 
 It contains anything with an excel, log, txt or RDS extension. This means that any file with those extensions that you create in your local clone of the repo will exist for you, but the file cannot and will not ever be pushed to the remote repo.
 
-
 ## Environment Variables + .gitignore
 
 We can store private information in local files and make sure that the do not get pushed to the public remote repo by using `.gitignore`. There are a number of ways to do this. We typically use a yaml file that can be filled out with personal credentials locally. The file will not be committed to the remote repo.
 
 There are many ways to achieve this. If you have a more simple workflow that uses R, consider the `.Renviron` approach. If you have a more complex workflow that has multiple languages and many credentials, consider the `yaml` approach
 
-::::{.panel-tabset}
-
+::: panel-tabset
 ### .Renviron
 
 If you're using just R in your repo and have just a few things you want private, consider using a `.Renviron` file in addition to `.gitignore`.
 
-1. In the `.gitignore`, add `.Renviron`:
+1.  In the `.gitignore`, add `.Renviron`:
 
-:::{.smallframe}
-```{md filename=".gitignore"}
-# R Environment Variables
-.Renviron
-```
-:::
+    ::: smallframe
+    ```{md filename=".gitignore"}
+    # R Environment Variables
+    .Renviron
+    ```
+    :::
 
-2. Create a `.Renviron` file at the root of you local repo
+2.  Create a `.Renviron` file at the root of you local repo
 
-3. Add the things you want to be kept private
+3.  Add the things you want to be kept private
 
-:::{.smallframe}
-```{md filename=".Renviron"}
-my_password="thisismypassword123"
-```
-:::
+    ::: smallframe
+    ```{md filename=".Renviron"}
+    my_password="thisismypassword123"
+    ```
+    :::
 
-4. Now in an R script you can call that password _and_ hide the credentials instead of writting the password in the script for everyone to see:
+4.  Now in an R script you can call that password *and* hide the credentials instead of writting the password in the script for everyone to see:
 
-::::{.container}
-:::{.smallframe .column width="40%" padding="10px"}
+::: container
+::: {.smallframe .column width="40%" padding="10px"}
 ```{r filename="good_script.R"}
 my_password <- Sys.getenv('my_password')
 ```
 :::
 
-:::{.smallframe .column width="40%" padding="10px"}
+::: {.smallframe .column width="40%" padding="10px"}
 ```{r filename="bad_script.R"}
 my_password <- "thisismypassword123"
 ```
 :::
-::::
+:::
 
-`Sys.getenv()` looks for the `.Renviron` file and the variables inside of it. This means you can get all your credentials from the `.Renviron` but also keep that information 
+`Sys.getenv()` looks for the `.Renviron` file and the variables inside of it. This means you can get all your credentials from the `.Renviron` but also keep that information
 
 ### yaml
 
@@ -143,19 +141,18 @@ Many of our scripts use a `.yml` file that contains a list of API tokens, server
 
 The `.yml` file can work with multiple programming languages including R and Python. They are read in the same way and can be easily adjusted when adding new passwords or using them as configuration files. It can work like this:
 
-1. In your `.gitignore`, add a new line that says `creds.yml`.
+1.  In your `.gitignore`, add a new line that says `creds.yml`.
 
-:::{.smallframe}
+::: smallframe
 ```{markdown filename=".gitignore"}
 # creds files
 creds.yml
 ```
 :::
 
+2.  In the root of you local git clone, make a file called `creds.yml`.
 
-2. In the root of you local git clone, make a file called `creds.yml`. 
-
-3. In the yaml file you can nest values. For example, under `conn_list_wdrs` I have all the parameters needed to make a SQL server connection string in R/Python:
+3.  In the yaml file you can nest values. For example, under `conn_list_wdrs` I have all the parameters needed to make a SQL server connection string in R/Python:
 
 ```{yaml filename="creds.yml"}
 # Default is needed to distinguish values.
@@ -175,10 +172,10 @@ default:
 
 ```
 
-4. To call these credentials in R or Python it will look like this:
+4.  To call these credentials in R or Python it will look like this:
 
-::::{.container}
-:::{.smallframe .column width="40%" padding="10px"}
+::: container
+::: {.smallframe .column width="40%" padding="10px"}
 ```{r filename="script.R"}
 library(yaml)
 
@@ -198,7 +195,7 @@ connection <- DBI::dbConnect(
 ```
 :::
 
-:::{.smallframe .column width="40%" padding="10px"}
+::: {.smallframe .column width="40%" padding="10px"}
 ```{python filename="script.py"}
 import yaml
 
@@ -215,10 +212,9 @@ conn = pyodbc.connect(
   )
 ```
 :::
-::::
+:::
 
-
-5. You can add more nested sections besides default, like this, where I added a `test` parameter:
+5.  You can add more nested sections besides default, like this, where I added a `test` parameter:
 
 ```{yaml filename="creds.yml"}
 # Default is needed to distinguish values.
@@ -261,17 +257,17 @@ server_name <- creds$default$conn_list_wdrs$server
 
 #### Automating With Yaml Creds
 
-We can even get more specific and add an `if-else` statement to specify which credential we want to select. This can be helpful if we have a CI/CD pipeline and have a script automatically run on a task scheduler or cron job. We can call the credentials we want in the command line and have the command line code run in my task scheduler. That way we can use multiple different versions of the same script and have all of it be automated. 
+We can even get more specific and add an `if-else` statement to specify which credential we want to select. This can be helpful if we have a CI/CD pipeline and have a script automatically run on a task scheduler or cron job. We can call the credentials we want in the command line and have the command line code run in my task scheduler. That way we can use multiple different versions of the same script and have all of it be automated.
 
-For example, 
+For example,
 
-- the R script on the left uses the `commandArgs()` to pull any arguments passed to the script in a shell/command line script. 
-- on the right, the shell script has `production` and `test` as second arguments. 
-- these are passed to the R script as `arg[2]`. 
-- now we can use `arg[2]` in the if-else statement to conditionally select credentials and do it automatically in a pipeline.
+-   the R script on the left uses the `commandArgs()` to pull any arguments passed to the script in a shell/command line script.
+-   on the right, the shell script has `production` and `test` as second arguments.
+-   these are passed to the R script as `arg[2]`.
+-   now we can use `arg[2]` in the if-else statement to conditionally select credentials and do it automatically in a pipeline.
 
-::::{.container}
-:::{.smallframe .column width="40%"}
+::: container
+::: {.smallframe .column width="40%"}
 ```{r filename="script-in-repo.R"}
 #| source-line-numbers: "1,9-14"
 args <- commandArgs(TRUE)
@@ -290,11 +286,9 @@ if(args[2] == "production"){
 }
 
 ```
-
 :::
 
-:::{.smallframe .column width="40%"}
-
+::: {.smallframe .column width="40%"}
 ```{bash filename="shell-trigger-script.sh"}
 # Run the production code
 $ Rscript -e "source('path/script_in_repo.R');" production
@@ -302,20 +296,18 @@ $ Rscript -e "source('path/script_in_repo.R');" production
 # Run the test/dev code
 $ Rscript -e "source('path/script_in_repo.R');" test 
 ```
-
+:::
 :::
 
-::::
+#### yaml Template
 
-### yaml Template
+You can put a template creds.yml file in your repo so that others can see what credentials they need in order for the code to run.
 
-You can put a template creds.yml file in your repo so that others can see what credentials they need in order for the code to run. 
+**This is a *template* file, so it will not have any passwords/secrets in it**. Its only purpose is to provide an example copy of what a user's `creds.yml` file needs to look like.
 
-**This is a _template_ file, so it will not have any passwords/secrets in it**. Its only purpose is to provide an example copy of what a user's `creds.yml` file needs to look like.
+1.  Make a template called `creds_TEMPLATE.yml`
 
-1. Make a template called `creds_TEMPLATE.yml`
-
-2. Remove any passwords, usernames, secrets, etc to have it be a file that looks like this:
+2.  Remove any passwords, usernames, secrets, etc to have it be a file that looks like this:
 
 ```{yaml filename="creds_TEMPLATE.yml"}
 # Default is needed to distinguish values.
@@ -343,28 +335,27 @@ test:
 
 ```
 
-
-3. Once you have the `creds_TEMPLATE.yml` template in your repo, make sure that nobody on your team (or anyone with write access..) is able to accidentally push changes to the template. We don't want someone's passwords or API tokens to exist in GitHub.
+3.  Once you have the `creds_TEMPLATE.yml` template in your repo, make sure that nobody on your team (or anyone with write access..) is able to accidentally push changes to the template. We don't want someone's passwords or API tokens to exist in GitHub.
 
 This link shows how to skip any changes made to the specific file https://stackoverflow.com/a/39776107. If someone makes local changes to the template, the changes will not show in their commit. It is a safe guard.
 
-4. For all individual users, run this code:
+4.  For all individual users, run this code:
 
-::: smallframe
-```{bash filename="PowerShell"}
-git update-index --skip-worktree creds_TEMPLATE.yml
-```
-:::
+    ::: smallframe
+    ```{bash filename="PowerShell"}
+    git update-index --skip-worktree creds_TEMPLATE.yml
+    ```
+    :::
 
 This will tell your local git to ignore any changes made to `creds_TEMPLATE.yml`, but also allow it to exist in the repo (since `.gitignore` will prevent it from being in the repo)
 
-5. If you need to update the template file run this:
+5.  If you need to update the template file run this:
 
-::: smallframe
-```{bash filename="PowerShell"}
-git update-index --no-skip-worktree creds_TEMPLATE.yml
-```
-:::
+    ::: smallframe
+    ```{bash filename="PowerShell"}
+    git update-index --no-skip-worktree creds_TEMPLATE.yml
+    ```
+    :::
 
 This will allow changes to the template. **So when you need to update the template, use this code**
 
@@ -375,16 +366,9 @@ And to get a list of files that are "skipped", use this code:
 git ls-files -v . | grep ^S
 ```
 :::
-
-
-
-::::
-
-
+:::
 
 <br>
-
-
 
 <br>
 
@@ -398,15 +382,15 @@ Hooks are processes that run in the background and can prevent code from being p
 
 Pre-commit hooks run a process locally when the user attempts to commit code to a git branch. Hooks have many uses. Here we can use them as a security guardrail to prevent accidental credential leaks in committed code. For example, if someone accidentally pushes a server name to the public repo, the hook will prevent that code from ever getting into the remote repo and will give the user a local error.
 
-::::{.panel-tabset}
-
+::: panel-tabset
 ### Windows
 
-1.  Clone or download the zip from the [AWS Git Secrets repo](https://github.com/awslabs/git-secrets/) 
+1.  Clone or download the zip from the [AWS Git Secrets repo](https://github.com/awslabs/git-secrets/)
 
 2.  Extract zip or `cd` to the repo
 
 3.  Open folder and right click install.ps1.
+
     a.  Run in Power Shell
     b.  Type Y to give permission
 
@@ -414,32 +398,33 @@ Pre-commit hooks run a process locally when the user attempts to commit code to 
 
 4.  CD `cd` to a directory where you have the git repository you want to upload, either in PowerShell or R studio terminal {{< fa terminal >}}
 
-::: smallframe
-```{bash filename="PowerShell"}
-PS > cd path/to/repo/root
-```
-:::
+    ::: smallframe
+    ```{bash filename="PowerShell"}
+    PS > cd path/to/repo/root
+    ```
+    :::
 
 5.  Run git secrets --install
 
-::: smallframe
-```{bash filename="PowerShell"}
-git secrets --install
-```
-:::
+    ::: smallframe
+    ```{bash filename="PowerShell"}
+    git secrets --install
+    ```
+    :::
 
-6.  Make or copy the regex file called `secrets_key` containing the secret patterns into your folder. 
-    - This file should be given to you by your supervisor. It contains a regex of potential secrets
+6.  Make or copy the regex file called `secrets_key` containing the secret patterns into your folder.
+
+    -   This file should be given to you by your supervisor. It contains a regex of potential secrets
 
 7.  Make sure the file `secrets_key` is in your `.gitignore`. We can't push that to the remote repo.
 
 8.  Run `git secrets --add-provider -- cat ./secrets_key`
 
-::: smallframe
-```{bash filename="PowerShell"}
-git secrets --add-provider -- cat ./secrets_key
-```
-:::
+    ::: smallframe
+    ```{bash filename="PowerShell"}
+    git secrets --add-provider -- cat ./secrets_key
+    ```
+    :::
 
 You can also add prohibited patterns like this
 
@@ -458,14 +443,15 @@ git secrets --add -a 'allowed pattern'
 
 9.  Test Git history by running
 
-::: smallframe
-```{bash filename="PowerShell"}
-git secrets --scan-history
-```
-:::
+    ::: smallframe
+    ```{bash filename="PowerShell"}
+    git secrets --scan-history
+    ```
+    :::
 
 10. If something gets flagged and you don't care about your history anymore: Delete .git folder and reinitialize repository
-    - I would take caution about this point. There might be better ways to clean your git history if you don't want to get rid of everything.
+
+    -   I would take caution about this point. There might be better ways to clean your git history if you don't want to get rid of everything.
 
 11. Test on one of my projects to see if rebasing is a sustainable option
 
@@ -479,68 +465,77 @@ We can't use the "Non capture group" feature of regex. Meaning we can't use patt
 
 ### WSL/Linux
 
-1.  Clone the [AWS Git Secrets repo](https://github.com/awslabs/git-secrets/) 
+1.  Clone the [AWS Git Secrets repo](https://github.com/awslabs/git-secrets/)
 
 2.  In the terminal, `cd` to the repo
 
 3.  Install the command:
 
-:::{.smallframe}
-```{bash filename="terminal"}
-sudo make install
-```
-:::
+    ::: smallframe
+    ```{bash filename="terminal"}
+    sudo make install
+    ```
+    :::
 
 4.  `cd` to a directory where you have the git repository you want to push to
 
-::: smallframe
-```{bash filename="terminal"}
-cd path/to/repo/root
-```
-:::
+    ::: smallframe
+    ```{bash filename="terminal"}
+    cd path/to/repo/root
+    ```
+    :::
 
-5. You may need to add this file to your $PATH variables.
+5.  You may need to add this file to your \$PATH variables.
 
-    - run `nano .bashrc` to get your bash profile:
+    -   run `nano .bashrc` to get your bash profile:
 
-::: smallframe
-```{bash filename="terminal"}
-nano .bashrc
-```
-:::
+        ::: smallframe
+        ```{bash filename="terminal"}
+        nano .bashrc
+        ```
+        :::
 
-    - then down arrow key to get to the last line in the file
-    - add the path like this `echo PATH=$PATH:/user/local/bin/git-secrets`
-    - hit `CTRL + O` then `ENTER` to save
-    - hit `CTRL + X` to exit
-    - start a new terminal and write this to see your path variables. `git-secrets` should be in there somewhere now
+    -   then down arrow key to get to the last line in the file
+    -   add the path like this:
 
-::: smallframe
-```{bash filename="terminal"}
-echo $PATH
-```
-:::
+        ::: smallframe
+        ```{bash filename="terminal"}
+        export PATH=$PATH:/user/local/bin/git-secrets\
+        ```
+        :::
+
+    -   hit `CTRL + O` then `ENTER` to save
+    -   hit `CTRL + X` to exit
+    -   start a new terminal and write this to see your path variables. 
+    -   `git-secrets` should be in there somewhere now
+
+        ::: smallframe
+        ```{bash filename="terminal"}
+        echo $PATH
+        ```
+        :::
 
 6.  Run git secrets --install
 
-::: smallframe
-```{bash filename="terminal"}
-git secrets --install
-```
-:::
+    ::: smallframe
+    ```{bash filename="terminal"}
+    git secrets --install
+    ```
+    :::
 
-7.  Make or copy the regex file called `secrets_key` containing the secret patterns into your folder. 
-    - This file should be given to you by your supervisor. It contains a regex of potential secrets
+7.  Make or copy the regex file called `secrets_key` containing the secret patterns into your folder.
+
+    -   This file should be given to you by your supervisor. It contains a regex of potential secrets
 
 8.  Make sure the file `secrets_key` is in your `.gitignore`. We can't push that to the remote repo.
 
 9.  Run `git secrets --add-provider -- cat ./secrets_key`
 
-::: smallframe
-```{bash filename="terminal"}
-git secrets --add-provider -- cat ./secrets_key
-```
-:::
+    ::: smallframe
+    ```{bash filename="terminal"}
+    git secrets --add-provider -- cat ./secrets_key
+    ```
+    :::
 
 You can also add prohibited patterns like this
 
@@ -557,16 +552,17 @@ git secrets --add -a 'allowed pattern'
 ```
 :::
 
-10.  Test Git history by running
+10. Test Git history by running
 
-::: smallframe
-```{bash filename="terminal"}
-git secrets --scan-history
-```
-:::
+    ::: smallframe
+    ```{bash filename="terminal"}
+    git secrets --scan-history
+    ```
+    :::
 
 11. If something gets flagged and you don't care about your history anymore: Delete .git folder and reinitialize repository
-    - I would take caution about this point. There might be better ways to clean your git history if you don't want to get rid of everything.
+
+    -   I would take caution about this point. There might be better ways to clean your git history if you don't want to get rid of everything.
 
 12. Test on one of my projects to see if rebasing is a sustainable option
 
@@ -577,9 +573,7 @@ git secrets --scan-history
 ::: callout-note
 We can't use the "Non capture group" feature of regex. Meaning we can't use patterns like this in our regex: (?:abc) -- see https://regexr.com IMPORTANT: Tab separate your regex expressions. Making new lines caused a bit of chaos and took really long to figure out. (you can use multiple tabs to separate them more visually)
 :::
-
-::::
-
+:::
 
 ::: {.note .medframe}
 {{< fa unlock size="3x" >}} **NOTE!!**
@@ -589,17 +583,17 @@ We can't use the "Non capture group" feature of regex. Meaning we can't use patt
 -   `git secrets --scan-history` may take a very long time to run
 :::
 
-1. Check that the `secrets_key` regex is working by running the process on a repo that you know has secrets in it. For example, in a different folder, run all the pre-commit hook steps above and add a known "bad" string into the regex. For example, in the regex put `bad_string` and in a file in that folder put `bad_string`. When you scan it should get flagged.
+1.  Check that the `secrets_key` regex is working by running the process on a repo that you know has secrets in it. For example, in a different folder, run all the pre-commit hook steps above and add a known "bad" string into the regex. For example, in the regex put `bad_string` and in a file in that folder put `bad_string`. When you scan it should get flagged.
 
-2. If secret scanning is taking too long, you might want to check certain files first. I've found that HTML files take a _very_ long time to scan for secrets. If you're using linux or macOS you should be able to scan certain files via grob like this `git secrets --scan path/to/files*`. If you're using windows it probably won't work. In that case, if you only want certain file extensions to be scanned, use this function in powershell below. Download the file here: 
+2.  If secret scanning is taking too long, you might want to check certain files first. I've found that HTML files take a *very* long time to scan for secrets. If you're using linux or macOS you should be able to scan certain files via grob like this `git secrets --scan path/to/files*`. If you're using windows it probably won't work. In that case, if you only want certain file extensions to be scanned, use this function in powershell below. Download the file here:
 
-:::: {.content-visible unless-format="pdf"}
+::: {.content-visible unless-format="pdf"}
 {{< downloadthis secret_scanner.ps1 dname=secretscanner label="Download Secret Scanner Script" >}}
-::::
+:::
 
-:::: {.content-visible unless-format="html"}
+::: {.content-visible unless-format="html"}
 https://github.com/NW-PaGe/standards/blob/main/gh/secret_scanner.ps1
-::::
+:::
 
 ```{bash filename="secret-scanner9000.ps1"}
 # Example Usage
@@ -631,9 +625,6 @@ ScanFiles -FileExtensions $fileExtensions
 ```
 :::
 
-
-
-
 <br>
 
 ## Pre-Recieve Hooks
@@ -646,14 +637,13 @@ We may wish to take private codes and push them to a public repo. We need to mak
 
 There are a few ways to do this, but the easiest way is to copy the clean private code to the public repo, that is, copy all the files you want to add publicly but **do not copy the `.git`** folder. If the private repo has a dirty git history we will not want that history in the public repo because the sensitive data will then be publicly available.
 
-:::: {.content-visible when-format="html"}
+::: {.content-visible when-format="html"}
 ::: {.column-screen-inset-shaded layout-nrow="1"}
 ![](images/private_repo3.PNG){.myframe}
 
 ![](images/public_repo3.PNG){.myframe}
 :::
-::::
-
+:::
 
 {{< fa exclamation >}} The private repository on the left still contains sensitive information in the git history. The public repository on the right has a clean git history because we copied only the current clean files from the private repo and did not attach its git history (which lives in the hidden `.git` folder)
 
