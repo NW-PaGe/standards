@@ -307,21 +307,48 @@ $ Rscript -e "source('path/script_in_repo.R');" test
 
 ::::
 
+### yaml Template
+
+You can put a template creds.yml file in your repo so that others can see what credentials they need in order for the code to run. 
+
+**This is a _template_ file, so it will not have any passwords/secrets in it**. Its only purpose is to provide an example copy of what a user's `creds.yml` file needs to look like.
+
+1. Make a template called `creds_TEMPLATE.yml`
+
+2. Remove any passwords, usernames, secrets, etc to have it be a file that looks like this:
+
+```{yaml filename="creds_TEMPLATE.yml"}
+# Default is needed to distinguish values.
+# Leave a blank line (NO SPACES) as the last line in this file or things will break
+# Quotes aren't necessary, but can be used.
+default: 
+  conn_list_wdrs:
+    Driver: 
+    Server: 
+    Database: 
+    Trusted_connection: 
+    ApplicationIntent: 
+    
+  fulgent:
+    username: 
+    password: 
+
+test:
+  conn_list_wdrs:
+    Driver: 
+    Server: 
+    Database: 
+    Trusted_connection: 
+    ApplicationIntent: 
+
+```
 
 
-::::
-
-
-
-<br>
-
-### Safe Guards - Prevent Accidental Leaks!
-
-Once you have the credentials.yml template in your repo, make sure that nobody on your team (or anyone with write access..) is able to accidentally push changes to the template. We don't want someone's passwords or API tokens to exist in GitHub.
+3. Once you have the `creds_TEMPLATE.yml` template in your repo, make sure that nobody on your team (or anyone with write access..) is able to accidentally push changes to the template. We don't want someone's passwords or API tokens to exist in GitHub.
 
 This link shows how to skip any changes made to the specific file https://stackoverflow.com/a/39776107. If someone makes local changes to the template, the changes will not show in their commit. It is a safe guard.
 
-#### For all individual users, run this code:
+4. For all individual users, run this code:
 
 ::: smallframe
 ```{bash filename="PowerShell"}
@@ -331,7 +358,7 @@ git update-index --skip-worktree creds_TEMPLATE.yml
 
 This will tell your local git to ignore any changes made to `creds_TEMPLATE.yml`, but also allow it to exist in the repo (since `.gitignore` will prevent it from being in the repo)
 
-#### If you need to update the template file run this:
+5. If you need to update the template file run this:
 
 ::: smallframe
 ```{bash filename="PowerShell"}
@@ -348,6 +375,16 @@ And to get a list of files that are "skipped", use this code:
 git ls-files -v . | grep ^S
 ```
 :::
+
+
+
+::::
+
+
+
+<br>
+
+
 
 <br>
 
@@ -462,7 +499,29 @@ cd path/to/repo/root
 ```
 :::
 
-5.  Run git secrets --install
+5. You may need to add this file to your $PATH variables.
+
+    - run `nano .bashrc` to get your bash profile:
+
+::: smallframe
+```{bash filename="terminal"}
+nano .bashrc
+```
+:::
+
+    - then down arrow key to get to the last line in the file
+    - add the path like this `echo PATH=$PATH:/user/local/bin/git-secrets`
+    - hit `CTRL + O` then `ENTER` to save
+    - hit `CTRL + X` to exit
+    - start a new terminal and write this to see your path variables. `git-secrets` should be in there somewhere now
+
+::: smallframe
+```{bash filename="terminal"}
+echo $PATH
+```
+:::
+
+6.  Run git secrets --install
 
 ::: smallframe
 ```{bash filename="terminal"}
@@ -470,12 +529,12 @@ git secrets --install
 ```
 :::
 
-6.  Make or copy the regex file called `secrets_key` containing the secret patterns into your folder. 
+7.  Make or copy the regex file called `secrets_key` containing the secret patterns into your folder. 
     - This file should be given to you by your supervisor. It contains a regex of potential secrets
 
-7.  Make sure the file `secrets_key` is in your `.gitignore`. We can't push that to the remote repo.
+8.  Make sure the file `secrets_key` is in your `.gitignore`. We can't push that to the remote repo.
 
-8.  Run `git secrets --add-provider -- cat ./secrets_key`
+9.  Run `git secrets --add-provider -- cat ./secrets_key`
 
 ::: smallframe
 ```{bash filename="terminal"}
@@ -498,7 +557,7 @@ git secrets --add -a 'allowed pattern'
 ```
 :::
 
-9.  Test Git history by running
+10.  Test Git history by running
 
 ::: smallframe
 ```{bash filename="terminal"}
@@ -506,24 +565,20 @@ git secrets --scan-history
 ```
 :::
 
-10. If something gets flagged and you don't care about your history anymore: Delete .git folder and reinitialize repository
+11. If something gets flagged and you don't care about your history anymore: Delete .git folder and reinitialize repository
     - I would take caution about this point. There might be better ways to clean your git history if you don't want to get rid of everything.
 
-11. Test on one of my projects to see if rebasing is a sustainable option
+12. Test on one of my projects to see if rebasing is a sustainable option
 
-12. Make repo public
+13. Make repo public
 
-13. Will automatically scan on every commit and won't let it commit unless it's clean - Create a few files to show it working
+14. Will automatically scan on every commit and won't let it commit unless it's clean - Create a few files to show it working
 
 ::: callout-note
 We can't use the "Non capture group" feature of regex. Meaning we can't use patterns like this in our regex: (?:abc) -- see https://regexr.com IMPORTANT: Tab separate your regex expressions. Making new lines caused a bit of chaos and took really long to figure out. (you can use multiple tabs to separate them more visually)
 :::
 
 ::::
-
-
-
-
 
 
 ::: {.note .medframe}
