@@ -8,9 +8,9 @@
 
 <meta name="author" content="Frank Aragona">
 <meta name="dcterms.date" content="2023-02-01">
-<meta name="description" content="Basic Git usage guide">
+<meta name="description" content="How to contribute and a basic Git/Github usage guide for the NW-PaGe Github Organization">
 
-<title>NW-COE Policies – Git</title>
+<title>NW-COE Policies – Contribution Guide</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -76,6 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/bootstrap-icons-1.11.1/all.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -167,7 +168,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../gh/index.html">Github</a></li><li class="breadcrumb-item"><a href="../gh/release.html">Tutorials</a></li><li class="breadcrumb-item"><a href="../gh/git.html">Git Basics</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../gh/index.html">Github</a></li><li class="breadcrumb-item"><a href="../gh/contribute.html">Policies</a></li><li class="breadcrumb-item"><a href="../gh/contribute.html">Contribution Guide</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -190,16 +191,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
  <span class="menu-text">Policies</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../gh/contribute.html" class="sidebar-item-text sidebar-link">
+  <a href="../gh/contribute.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Contribution Guide</span></a>
   </div>
 </li>
@@ -231,13 +232,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
  <span class="menu-text">Tutorials</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../gh/release.html" class="sidebar-item-text sidebar-link">
@@ -258,7 +259,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../gh/git.html" class="sidebar-item-text sidebar-link active">
+  <a href="../gh/git.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Git Basics</span></a>
   </div>
 </li>
@@ -282,32 +283,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#intro" id="toc-intro" class="nav-link active" data-scroll-target="#intro">Intro</a></li>
-  <li><a href="#before-writing-code" id="toc-before-writing-code" class="nav-link" data-scroll-target="#before-writing-code">Before writing code</a></li>
-  <li><a href="#switch-to-feature-branch" id="toc-switch-to-feature-branch" class="nav-link" data-scroll-target="#switch-to-feature-branch">Switch to feature branch</a></li>
-  <li><a href="#making-changes" id="toc-making-changes" class="nav-link" data-scroll-target="#making-changes">Making changes</a></li>
-  <li><a href="#committing-changes-to-the-feature-branch" id="toc-committing-changes-to-the-feature-branch" class="nav-link" data-scroll-target="#committing-changes-to-the-feature-branch">Committing changes to the feature branch</a></li>
-  <li><a href="#making-a-pull-request" id="toc-making-a-pull-request" class="nav-link" data-scroll-target="#making-a-pull-request">Making a pull request</a></li>
-  <li><a href="#for-reviewers" id="toc-for-reviewers" class="nav-link" data-scroll-target="#for-reviewers">For Reviewers</a></li>
+  <li><a href="#git-basics" id="toc-git-basics" class="nav-link active" data-scroll-target="#git-basics">Git Basics</a></li>
+  <li><a href="#github-basics" id="toc-github-basics" class="nav-link" data-scroll-target="#github-basics">Github Basics</a></li>
+  <li><a href="#contributing" id="toc-contributing" class="nav-link" data-scroll-target="#contributing">Contributing</a></li>
+  <li><a href="#sec-clone" id="toc-sec-clone" class="nav-link" data-scroll-target="#sec-clone">Cloning a Repo</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/gh/git.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/gh/git.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/gh/contribute.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/gh/contribute.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../gh/index.html">Github</a></li><li class="breadcrumb-item"><a href="../gh/release.html">Tutorials</a></li><li class="breadcrumb-item"><a href="../gh/git.html">Git Basics</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../gh/index.html">Github</a></li><li class="breadcrumb-item"><a href="../gh/contribute.html">Policies</a></li><li class="breadcrumb-item"><a href="../gh/contribute.html">Contribution Guide</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Git</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">reproducibility</div>
-    <div class="quarto-category">Git</div>
-    <div class="quarto-category">Github</div>
-  </div>
-  </div>
+<h1 class="title">Contribution Guide</h1>
+</div>
 
 <div>
   <div class="description">
-    Basic Git usage guide
+    How to contribute and a basic Git/Github usage guide for the NW-PaGe Github Organization
   </div>
 </div>
 
@@ -342,125 +335,270 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<div class="note medframe">
+<p><i class="bi-journals " style="font-size: 3em;" role="img" aria-hidden="true"></i> <strong>Summary</strong></p>
+<ul>
+<li>The Northwest Pathogen Genomics Center of Excellence (NW-PaGe) uses a public Github organization to host our code.</li>
+<li>If you want to contribute to the organization, please read this guide and our <a href="../gh/security.html">security guidelines</a>.</li>
+</ul>
+</div>
+<p><strong>You will need Git and Github to make code contributions:</strong></p>
+<ul>
+<li>Git is a <a href="https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F">version control software</a>.</li>
+<li>Github is a <a href="https://en.wikipedia.org/wiki/GitHub">platform for developers</a> that utilizes Git</li>
+<li>In order to contribute to this organization you must have Git installed and a Github account</li>
+</ul>
+<section id="git-basics" class="level1">
+<h1>Git Basics</h1>
+<ul>
+<li>You need to install Git on your machine <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">follow here for help</a>.</li>
+<li>For a tutorial on how Git works, <a href="../gh/git.html">follow our Git page here</a></li>
+</ul>
+</section>
+<section id="github-basics" class="level1">
+<h1>Github Basics</h1>
+<ul>
+<li>Go to the <a href="https://github.com/">Github website</a> to create an account.</li>
+<li>Bookmark the <a href="https://github.com/NW-PaGe">NW-PaGe Github Org</a></li>
+</ul>
+</section>
+<section id="contributing" class="level1">
+<h1>Contributing</h1>
+<p>There are multiple ways to contribute to a Github repo, whether it is to report a bug, request a feature, or actively contribute to the code base.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Bug Report</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Feature Request</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Discussions</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Contribute Code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>To report a bug,</p>
+<ol type="1">
+<li><p>click on a repo and click on the <code>Issues</code> tab.</p></li>
+<li><p>click the <code>New issue</code> button</p></li>
+<li><p>click on the <code>Bug Report</code> tab</p></li>
+</ol>
+<p>From here you will need to fill out the bug report along with steps to reproduce the behavior you’re seeing.</p>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>Do you have a feature that you want included in the code base?</p>
+<ol type="1">
+<li><p>click on a repo and click on the <code>Issues</code> tab.</p></li>
+<li><p>click the <code>New issue</code> button</p></li>
+<li><p>click on the <code>Feature Request</code> tab</p></li>
+</ol>
+<p>From here you will need to fill out the feature request along with details</p>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<p>There is a discussions tab in our Github org. You can start discussions, ask questions, and share ideas here.</p>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
+<p>To contribute to a public repo in our Github org, please contact the repo owner to request read/write access. If you want to create a repo in the org, please contact <code>frank.aragona@doh.wa.gov</code>.</p>
+<p>Before contributing any code, please read our <a href="../gh/security.html">security policies</a>. There you will find our repo rules and instructions on how to set up pre-commit hooks.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-clone" class="level1">
+<h1>Cloning a Repo</h1>
+<p>To make a local clone of a repo, click on the green <code>Code</code> button when you’re in the main repo’s web page. In the local tab there are multiple ways to clone. For most of our work, I suggest creating an SSH key. If you are new to git/Github and on a Windows machine, I recommend installing the <a href="https://desktop.github.com/">Github Desktop app</a> and following the instructions below.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">HTTPS</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">SSH</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false">GitHub CLI</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-4" role="tab" aria-controls="tabset-2-4" aria-selected="false">Open with GitHub Desktop</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p>Cloning via HTTPS is a relatively quick process.</p>
+<ol type="1">
+<li>Start by navigating to the repo in Github and selecting the <code>Code</code> button:</li>
+</ol>
+<p><img src="images/https.png" class="img-fluid"></p>
+<ol start="2" type="1">
+<li><p>Copy the path that starts with <code>https://</code>, in this case it’s <code>https://github.com/NW-PaGe/standards.git</code></p></li>
+<li><p>In a terminal/command prompt, navigate to a folder of your choice (in windows I would make a folder called Projects here: <code>C:/Users/&lt;username&gt;/Projects</code>)</p></li>
+</ol>
+<div class="smallframe">
 <div class="cell">
-<style type="text/css">
-h1, .h1, h2, .h2, h3, .h3 {
-    margin-top: 84px;
-}
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>terminal</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> C:/Users/<span class="op">&lt;</span>your_username<span class="op">&gt;</span>/Projects</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<ol start="4" type="1">
+<li>Use git clone and replace the <code>https://github.com/NW-PaGe/standards.git</code> with your path:</li>
+</ol>
+<div class="smallframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>terminal</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/NW-PaGe/standards.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<ol start="5" type="1">
+<li>Check if things ran by executing this code:</li>
+</ol>
+<div class="smallframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>terminal</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p><strong>NOTE:</strong> the HTTPS method is good but it will require you to enter your username and a token every time you push a commit to the remote repo in Github. You will need to create a Personal Access Token (PAT) whenever you want to make a commit. If this is annoying to you, use the SSH or Github Desktop App methods.</p>
+<section id="make-a-pat" class="level3">
+<h3 class="anchored" data-anchor-id="make-a-pat">Make a PAT</h3>
+<p>Here’s a guide on <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic">making a PAT</a></p>
+<ol type="1">
+<li><p>Click on you Github profile icon in the upper right</p></li>
+<li><p>Click Settings</p></li>
+<li><p>Scroll down to <code>Developer Settings</code></p></li>
+<li><p>Select Personal access tokens (classic) and then Generate new token</p></li>
+<li><p>When you make a commit you will need to input this personal access token when it asks for your password.</p></li>
+</ol>
+<p><strong>Do not store this token anywhere! Especially make sure it is not stored in your repo. This has tons of security risks and needs to be for singular use only</strong></p>
+</section>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p>SSH is an excellent option for cloning a repo. It is similar to using an identifier to tell Github that you are, in fact, you. <a href="https://www.youtube.com/watch?v=8X4u9sca3Io">This video below</a> is a great resource on how to set up the key. I will also write out the steps in the video below. Also, see the <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh">Github documentation</a> for more information.</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/8X4u9sca3Io?si=bHKQHA28VBz2PXUP" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<ol type="1">
+<li>In a terminal, write the following and replace the email with your email:</li>
+</ol>
+<div class="medframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>terminal</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-t</span> ed25519 <span class="at">-C</span> your@email.com</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<ol start="2" type="1">
+<li><p>It should then ask if you want to make a passphrase. I recommend doing this</p></li>
+<li><p>Get the pid</p></li>
+</ol>
+<div class="smallframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>terminal</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">eval</span> <span class="st">"</span><span class="va">$(</span><span class="fu">ssh-agent</span> <span class="at">-s</span><span class="va">)</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<ol start="4" type="1">
+<li>Make a config file</li>
+</ol>
+<div class="smallframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>terminal</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> ~/.ssh/config</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<ol start="5" type="1">
+<li>If the file doesn’t open, you can open it like this</li>
+</ol>
+<div class="smallframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>terminal</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> ~/.ssh/config</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<ol start="6" type="1">
+<li>Add this to the config file. it will use your passkey and recognize you</li>
+</ol>
+<div class="medframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>terminal</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Host</span> <span class="pp">*</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">IgnoreUnknown</span> AddKeysToAgent,UseKeychain</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">AddKeysToAgent</span> yes</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">IdentityFile</span> ~/.ssh/id_ed25519</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="ex">UseKeychain</span> yes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<ol start="7" type="1">
+<li>Add the identity</li>
+</ol>
+<div class="medframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>terminal</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-add</span> ~/.ssh/id_ed25519</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<ol start="8" type="1">
+<li><p>In Github, go to your profile and the <code>SSH + GPG Keys</code> section</p></li>
+<li><p>Click SSH Keys, add a title, and in the key location write your key. You can find your key in your terminal by writing:</p></li>
+</ol>
+<div class="medframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>terminal</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> ~/.ssh/id_ed25519.pub</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p><strong>Copy the whole output including your email and paste it into the Github key location</strong></p>
+<ol start="10" type="1">
+<li>Test it by writing this:</li>
+</ol>
+<div class="medframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>terminal</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-T</span> git@github.com</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<ol start="11" type="1">
+<li>Use the key to clone a repo.</li>
+</ol>
+<p>Now you can clone a repo using the SSH key. Copy the SSH path and write this (replace the string after clone with your repo of choice):</p>
+<div class="medframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>terminal</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone git@github.com:org/reponame.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
 
-.watch {
-  background-color: lightpurple;
-  border: 3px solid purple;
-  font-weight: bold;
-}
-</style>
 </div>
-<section id="intro" class="level1">
-<h1>Intro</h1>
-<p>Showing how to create and work off of a feature branch using <code>git</code> and github.</p>
-</section>
-<section id="before-writing-code" class="level1">
-<h1>Before writing code</h1>
-<p><strong>First check to see if your main branch is up to date</strong> and has the most recent commits added. This should be the first thing you do before running/writing any code.</p>
-<p><code>git status</code> will tell you:</p>
-<ol type="1">
-<li>Which branch you are in</li>
-<li>If your local branch is up to date when comparing to that branch in the remote repo</li>
-<li>If you have any files waiting to be committed</li>
-</ol>
-<p><code>git fetch</code> will:</p>
-<ol type="1">
-<li>Refresh your branch</li>
-<li>Search for any differences between your local clone and the repo in github. If there are changes, it will display a message</li>
-</ol>
-<p><code>git pull</code> will pull all the changes in the remote repo into your local clone branch</p>
-<p><br> <br></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre class="watch"><code>Error in running command C:/Users/FAA3303/new_git/Git/bin/bash.exe</code></pre>
+<div id="tabset-2-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-4-tab">
+
 </div>
 </div>
-<p><br> <br></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> fetch</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre class="watch"><code>Error in running command C:/Users/FAA3303/new_git/Git/bin/bash.exe</code></pre>
 </div>
-</div>
-<p><br> <br></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre class="watch"><code>Error in running command C:/Users/FAA3303/new_git/Git/bin/bash.exe</code></pre>
-</div>
-</div>
-<p>It’s the same in the git desktop app. Make sure you are in the branch you want to be in, then click fetch and pull to update that branch to include the most recent commits in the remote repo</p>
-<p><img src="https://content.codecademy.com/articles/Git-and-GitHub-Desktop/what-is-git-pull-origin.jpg" class="img-fluid"></p>
-</section>
-<section id="switch-to-feature-branch" class="level1">
-<h1>Switch to feature branch</h1>
-<p>If we want to make changes to code, first <strong>make a new branch off the main</strong>.</p>
-<p><code>git branch</code> will show all the branches in the repo and the one you are currently in</p>
-<p><code>git checkout -b new-branch-name</code> will create a new branch. In this case, we already have our feature branch called <code>test-dcipher-cases</code></p>
-<p><code>git checkout branch-name</code> will <em>switch</em> to a branch. In this case we can switch to <code>test-dcipher-cases</code></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre class="watch"><code>Error in running command C:/Users/FAA3303/new_git/Git/bin/bash.exe</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout test-dcipher-cases</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Or in the desktop app</p>
-<p><img src="images/gitdesk.gif" class="img-fluid"></p>
-</section>
-<section id="making-changes" class="level1">
-<h1>Making changes</h1>
-<p>If we want to make a change to the code, make a new branch off of <code>test-dcipher-cases</code> and switch to that branch</p>
-<p><br></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> checkout <span class="at">-b</span> test-frank2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><br></p>
-<p>and in the desktop app:</p>
-<p><img src="images/gitdesk23-01.gif" class="img-fluid"></p>
-<p><br></p>
-</section>
-<section id="committing-changes-to-the-feature-branch" class="level1">
-<h1>Committing changes to the feature branch</h1>
-<p>Now you can make changes in your R script and when you save them they will be ready to be committed to this new branch.</p>
-<p><code>git add</code> to stage your changes</p>
-<p><code>git commit -am "messge"</code> to commit those changes to the new branch with a message</p>
-<p><code>git push --set-upstream origin test-dcipher-cases</code> to push those changes to the remote repo on the new branch</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-am</span> <span class="st">"this is a test- pls delete"</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">--set-upstream</span> origin test-dcipher-cases</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><img src="images/gitdesk233-01.gif" class="img-fluid"></p>
-<p><br></p>
-</section>
-<section id="making-a-pull-request" class="level1">
-<h1>Making a pull request</h1>
-<p>This part happens in github.</p>
-<ol type="1">
-<li>Select who you want to review your code and assign yourself.</li>
-<li>Use labels to tag what this pull request refers to (very helpful in search for changes when managing the project) and</li>
-<li>Add a milestone if it applies.</li>
-</ol>
-<p>This should automatically send an email to the reviewers that there is code needed to be merged to a branch.</p>
-<p><img src="images/gitdesk2333-01.gif" class="img-fluid"></p>
-</section>
-<section id="for-reviewers" class="level1">
-<h1>For Reviewers</h1>
-<p>When reviewing changes, <strong>make sure the commit/changes are being merged to the correct branch</strong>.</p>
-<p>Github automatically compares to the main branch, so you will have to manually click on the base branch and change it to <code>test-dcipher-cases</code></p>
-<p><img src="images/paste-F8997DE3.png" class="img-fluid"></p>
-<p><img src="images/paste-9103DFBF.png" class="img-fluid"></p>
 
 
 </section>
@@ -883,7 +1021,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/gh/git.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/gh/git.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/gh/contribute.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/gh/contribute.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
