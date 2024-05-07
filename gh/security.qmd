@@ -414,7 +414,7 @@ Pre-commit hooks run a process locally when the user attempts to commit code to 
 
 6.  Make or copy the regex file called `secrets_key` containing the secret patterns into your folder.
 
-    -   This file should be given to you by your supervisor. It contains a regex of potential secrets
+    -   This file should be given to you by the Github admins. It contains a regex of potential secrets. Contact `frank.aragona@doh.wa.gov` for more information.
 
 7.  Make sure the file `secrets_key` is in your `.gitignore`. We can't push that to the remote repo.
 
@@ -525,7 +525,7 @@ We can't use the "Non capture group" feature of regex. Meaning we can't use patt
 
 7.  Make or copy the regex file called `secrets_key` containing the secret patterns into your folder.
 
-    -   This file should be given to you by your supervisor. It contains a regex of potential secrets
+    -   This file should be given to you by the Github admins. It contains a regex of potential secrets. Contact `frank.aragona@doh.wa.gov` for more information.
 
 8.  Make sure the file `secrets_key` is in your `.gitignore`. We can't push that to the remote repo.
 

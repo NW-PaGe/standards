@@ -25,6 +25,7 @@ number-sections: false
 
 NW-PaGe Github policies
 
+- [Code Contribution Guide](contribute.qmd)
 - [Repo Security Rules](security.qmd)
 - [Licensing](lic.qmd)
 - [Organization Requirements](policies.qmd)

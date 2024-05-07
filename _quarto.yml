@@ -76,6 +76,7 @@ website:
           contents: 
           - section: "Policies"
             contents:
+              - gh/contribute.qmd
               - gh/security.qmd
               - gh/policies.qmd
               - gh/lic.qmd
