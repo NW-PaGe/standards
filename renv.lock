@@ -3,7 +3,7 @@
     "Version": "4.4.0",
     "Repositories": [
       {
-        "Name": "CRAN",
+        "Name": "PPM",
         "URL": "https://packagemanager.posit.co/cran/latest"
       }
     ]
@@ -24,7 +24,7 @@
       "Package": "Matrix",
       "Version": "1.7-0",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "https://packagemanager.posit.co/cran/__linux__/jammy/latest",
       "Requirements": [
         "R",
         "grDevices",
@@ -62,7 +62,7 @@
       "Package": "RcppTOML",
       "Version": "0.2.2",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "https://packagemanager.posit.co/cran/__linux__/jammy/latest",
       "Requirements": [
         "R",
         "Rcpp"
@@ -226,7 +226,7 @@
       "Package": "here",
       "Version": "1.0.1",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "https://packagemanager.posit.co/cran/__linux__/jammy/latest",
       "Requirements": [
         "rprojroot"
       ],
@@ -313,7 +313,7 @@
       "Package": "lattice",
       "Version": "0.22-6",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "https://packagemanager.posit.co/cran/__linux__/jammy/latest",
       "Requirements": [
         "R",
         "grDevices",
@@ -372,7 +372,7 @@
       "Package": "odbc",
       "Version": "1.4.2",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "DBI",
         "R",
@@ -400,7 +400,7 @@
       "Package": "png",
       "Version": "0.1-8",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "https://packagemanager.posit.co/cran/__linux__/jammy/latest",
       "Requirements": [
         "R"
       ],
@@ -430,7 +430,7 @@
       "Package": "reticulate",
       "Version": "1.36.1",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "https://packagemanager.posit.co/cran/__linux__/jammy/latest",
       "Requirements": [
         "Matrix",
         "R",
@@ -463,7 +463,7 @@
       "Package": "rmarkdown",
       "Version": "2.26",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "https://packagemanager.posit.co/cran/__linux__/jammy/latest",
       "Requirements": [
         "R",
         "bslib",
@@ -486,7 +486,7 @@
       "Package": "rprojroot",
       "Version": "2.0.4",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "https://packagemanager.posit.co/cran/__linux__/jammy/latest",
       "Requirements": [
         "R"
       ],
@@ -510,7 +510,7 @@
       "Package": "stringi",
       "Version": "1.8.3",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "https://packagemanager.posit.co/cran/__linux__/jammy/latest",
       "Requirements": [
         "R",
         "stats",
@@ -523,7 +523,7 @@
       "Package": "stringr",
       "Version": "1.5.1",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "https://packagemanager.posit.co/cran/__linux__/jammy/latest",
       "Requirements": [
         "R",
         "cli",
@@ -540,7 +540,7 @@
       "Package": "tinytex",
       "Version": "0.50",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "https://packagemanager.posit.co/cran/__linux__/jammy/latest",
       "Requirements": [
         "xfun"
       ],
@@ -564,7 +564,7 @@
       "Package": "withr",
       "Version": "3.0.0",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "https://packagemanager.posit.co/cran/__linux__/jammy/latest",
       "Requirements": [
         "R",
         "grDevices",
