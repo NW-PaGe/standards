@@ -204,7 +204,7 @@ nano ~/.ssh/config
 6. Add this to the config file. it will use your passkey and recognize you
 
 :::{.medframe}
-```{bash filename="terminal"}
+```{bash filename="ssh/config"}
 Host *
   IgnoreUnknown AddKeysToAgent,UseKeychain
   AddKeysToAgent yes
@@ -212,6 +212,8 @@ Host *
   UseKeychain yes
 ```
 :::
+
+To save this file in nano, on your keyboard write `CRTL+O` then `ENTER` to save the file. Then `CTRL+X` to exit back to the terminal. You can also open this file through a notepad or other software. You could also search for the file in your file explorer and edit it in notepad if that is easier.
 
 7. Add the identity
 
