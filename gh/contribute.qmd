@@ -256,6 +256,79 @@ git clone git@github.com:org/reponame.git
 
 ## GitHub CLI
 
+The [GitHub CLI](https://cli.github.com/) is an excellent tool for not just cloning your repo, but for managing repositories and organizations from a terminal. 
+
+:::{.panel-tabset}
+
+### Windows
+
+### WSL/Linux
+
+To install in a linux terminal, I'm following the instructions provided in the [Github CLI repo](https://github.com/cli/cli/blob/trunk/docs/install_linux.md).
+
+1. Paste this code into your bash terminal and execute it.
+
+```{bash filename="terminal"}
+(type -p wget >/dev/null || (sudo apt update && sudo apt-get install wget -y)) \
+&& sudo mkdir -p -m 755 /etc/apt/keyrings \
+&& wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
+&& sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
+&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+&& sudo apt update \
+&& sudo apt install gh -y
+```
+
+2. Then upgrate the command with the code below
+
+:::{.smallframe}
+```{bash filename="terminal"}
+sudo apt update
+sudo apt install gh
+```
+:::
+
+3. You now need to authorize yourself as a user. 
+
+:::{.smallframe}
+```{bash filename="terminal"}
+gh auth login
+```
+:::
+
+4. It will ask you to authorize in a browser or with a personal access token
+
+  I created a [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens). In linux there are some issues with the command and using a browser fyi.
+
+5. Now you can clone a repo like this:
+
+:::{.smallframe}
+```{bash filename="terminal"}
+gh repo clone org/repo-name
+```
+:::
+
+You can also now do some cool things with your org/repo like searching for strings, creating issues, and more. For example, here are the issues in this repo:
+
+:::{.smallframe}
+```{bash filename="terminal"}
+gh issue list
+```
+:::
+
+```{markdown filename="output"}
+Showing 3 of 3 open issues in NW-PaGe/standards
+
+ID  TITLE                                      LABELS         UPDATED           
+#7  add .gitignore documentation                              about 2 months ago
+#3  Make sure all references are added to ...  documentation  about 5 months ago
+#2  Fix cross reference links                  documentation  about 5 months ago
+```
+
+
+
+:::
+
+
 ## Open with GitHub Desktop
 
 :::
