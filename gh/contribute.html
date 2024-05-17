@@ -598,58 +598,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Windows</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">WSL/Linux</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
-
-</div>
-<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
-<p>To install in a linux terminal, I’m following the instructions provided in the <a href="https://github.com/cli/cli/blob/trunk/docs/install_linux.md">Github CLI repo</a>.</p>
+<p>To install the CLI in Windos, I follwed the instructions provided in the <a href="https://github.com/cli/cli?tab=readme-ov-file#windows">Github CLI repo</a>.</p>
+<p>I normally install commands using Scoop, but you have many options here.</p>
 <ol type="1">
-<li>Paste this code into your bash terminal and execute it.</li>
+<li>Paste this code into a powershell window and execute it</li>
 </ol>
+<div class="smallframe">
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
-<pre><strong>terminal</strong></pre>
+<pre><strong>powershell</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="bu">type</span> <span class="at">-p</span> wget <span class="op">&gt;</span>/dev/null <span class="kw">||</span> <span class="kw">(</span><span class="fu">sudo</span> apt update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt-get install wget <span class="at">-y</span><span class="kw">))</span> <span class="dt">\</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> mkdir <span class="at">-p</span> <span class="at">-m</span> 755 /etc/apt/keyrings <span class="dt">\</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&amp;&amp;</span> <span class="fu">wget</span> <span class="at">-qO-</span> https://cli.github.com/packages/githubcli-archive-keyring.gpg <span class="kw">|</span> <span class="fu">sudo</span> tee /etc/apt/keyrings/githubcli-archive-keyring.gpg <span class="op">&gt;</span> /dev/null <span class="dt">\</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg <span class="dt">\</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">"deb [arch=</span><span class="va">$(</span><span class="ex">dpkg</span> <span class="at">--print-architecture</span><span class="va">)</span><span class="st"> signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main"</span> <span class="kw">|</span> <span class="fu">sudo</span> tee /etc/apt/sources.list.d/github-cli.list <span class="op">&gt;</span> /dev/null <span class="dt">\</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt update <span class="dt">\</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt install gh <span class="at">-y</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">winget</span> install <span class="at">--id</span> GitHub.cli</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 </div>
 <ol start="2" type="1">
-<li>Then upgrate the command with the code below</li>
+<li>Now update the package</li>
 </ol>
 <div class="smallframe">
 <div class="cell">
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>terminal</strong></pre>
-</div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install gh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">winget</span> upgrade <span class="at">--id</span> GitHub.cli</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <ol start="3" type="1">
-<li>You now need to authorize yourself as a user.</li>
+<li>You will need to authorize your github account like this:</li>
 </ol>
 <div class="smallframe">
 <div class="cell">
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>terminal</strong></pre>
-</div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gh</span> auth login</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 </div>
 </div>
 <ol start="4" type="1">
 <li>It will ask you to authorize in a browser or with a personal access token</li>
 </ol>
-<p>I created a <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens">personal access token</a>. In linux there are some issues with the command and using a browser fyi.</p>
+<p>I created a <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens">personal access token</a>.</p>
 <ol start="5" type="1">
 <li>Now you can clone a repo like this:</li>
 </ol>
@@ -688,11 +671,106 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p>To install in a linux terminal, I’m following the instructions provided in the <a href="https://github.com/cli/cli/blob/trunk/docs/install_linux.md">Github CLI repo</a>.</p>
+<ol type="1">
+<li>Paste this code into your bash terminal and execute it.</li>
+</ol>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>terminal</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="bu">type</span> <span class="at">-p</span> wget <span class="op">&gt;</span>/dev/null <span class="kw">||</span> <span class="kw">(</span><span class="fu">sudo</span> apt update <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt-get install wget <span class="at">-y</span><span class="kw">))</span> <span class="dt">\</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> mkdir <span class="at">-p</span> <span class="at">-m</span> 755 /etc/apt/keyrings <span class="dt">\</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&amp;&amp;</span> <span class="fu">wget</span> <span class="at">-qO-</span> https://cli.github.com/packages/githubcli-archive-keyring.gpg <span class="kw">|</span> <span class="fu">sudo</span> tee /etc/apt/keyrings/githubcli-archive-keyring.gpg <span class="op">&gt;</span> /dev/null <span class="dt">\</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg <span class="dt">\</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">"deb [arch=</span><span class="va">$(</span><span class="ex">dpkg</span> <span class="at">--print-architecture</span><span class="va">)</span><span class="st"> signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main"</span> <span class="kw">|</span> <span class="fu">sudo</span> tee /etc/apt/sources.list.d/github-cli.list <span class="op">&gt;</span> /dev/null <span class="dt">\</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt update <span class="dt">\</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> apt install gh <span class="at">-y</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<ol start="2" type="1">
+<li>Then upgrate the command with the code below</li>
+</ol>
+<div class="smallframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>terminal</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install gh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<ol start="3" type="1">
+<li>You now need to authorize yourself as a user.</li>
+</ol>
+<div class="smallframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>terminal</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gh</span> auth login</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<ol start="4" type="1">
+<li>It will ask you to authorize in a browser or with a personal access token</li>
+</ol>
+<p>I created a <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens">personal access token</a>. In linux there are some issues with the command and using a browser fyi.</p>
+<ol start="5" type="1">
+<li>Now you can clone a repo like this:</li>
+</ol>
+<div class="smallframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>terminal</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gh</span> repo clone org/repo-name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p>You can also now do some cool things with your org/repo like searching for strings, creating issues, and more. For example, here are the issues in this repo:</p>
+<div class="smallframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>terminal</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gh</span> issue list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>output</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>Showing 3 of 3 open issues in NW-PaGe/standards</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>ID  TITLE                                      LABELS         UPDATED           </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>#7  add .gitignore documentation                              about 2 months ago</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>#3  Make sure all references are added to ...  documentation  about 5 months ago</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>#2  Fix cross reference links                  documentation  about 5 months ago</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="tabset-3-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-4-tab">
-
+<p>If you’re new to Git or Github and are using a Windows machine, the GitHub Desktop app is a great option for managing git workflows.</p>
+<ol type="1">
+<li><p>Install the <a href="https://desktop.github.com/">app</a></p></li>
+<li><p>You will need to <a href="https://docs.github.com/en/desktop/installing-and-authenticating-to-github-desktop/authenticating-to-github-in-github-desktop">authenticate</a> your account</p></li>
+<li><p>Now you should be able to clone repos through the app. In Github, when you click on the Code tab you will see the option to open in Github Desktop:</p></li>
+</ol>
+<p><img src="images/gh-desktop.png" class="img-fluid"></p>
+<p>This will open up the desktop app and let you choose a file path for your Github repos. I recommend putting your repos into a Github or Projects folder in your local C drive, like this - <code>C:/Users/yourname/Projects/&lt;your-repo&gt;/</code>. If you’re cloning many repos you should put the repos into folders separated by the Github org -<code>C:/Users/yourname/Projects/&lt;gh-org-name&gt;/&lt;repo-in-org&gt;/</code></p>
 </div>
 </div>
 </div>
