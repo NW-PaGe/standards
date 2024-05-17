@@ -9,7 +9,7 @@ author: Frank Aragona
 #   - Git
 #   - Github
 execute: 
-  freeze: true
+  # freeze: true
   eval: false
 ---
 
