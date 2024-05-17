@@ -406,7 +406,13 @@ If you're new to Git or Github and are using a Windows machine, the GitHub Deskt
 
 ![](images/gh-desktop.png)
 
-This will open up the desktop app and let you choose a file path for your Github repos. I recommend putting your repos into a Github or Projects folder in your local C drive, like this - `C:/Users/yourname/Projects/<your-repo>/`. If you're cloning many repos you should put the repos into folders separated by the Github org -`C:/Users/yourname/Projects/<gh-org-name>/<repo-in-org>/` 
+This will open up the desktop app and let you choose a file path for your Github repos. I recommend putting your repos into a Github or Projects folder in your local C drive, like this 
+
+- `C:/Users/yourname/Projects/<your-repo>/` 
+
+If you're cloning many repos you should put the repos into folders separated by the Github org 
+
+- `C:/Users/yourname/Projects/<gh-org-name>/<repo-in-org>/` 
 
 :::
 
