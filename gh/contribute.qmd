@@ -262,6 +262,73 @@ The [GitHub CLI](https://cli.github.com/) is an excellent tool for not just clon
 
 ### Windows
 
+To install the CLI in Windos, I follwed the instructions provided in the [Github CLI repo](https://github.com/cli/cli?tab=readme-ov-file#windows).
+
+I normally install commands using Scoop, but you have many options here.
+
+1. Paste this code into a powershell window and execute it
+
+:::{.smallframe}
+
+
+```{bash filename="powershell"}
+winget install --id GitHub.cli
+
+```
+
+:::
+
+2. Now update the package
+
+:::{.smallframe}
+
+```{bash}
+winget upgrade --id GitHub.cli
+```
+
+:::
+
+3. You will need to authorize your github account like this:
+
+:::{.smallframe}
+
+```{bash}
+gh auth login
+```
+
+:::
+
+4. It will ask you to authorize in a browser or with a personal access token
+
+  I created a [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
+
+5. Now you can clone a repo like this:
+
+:::{.smallframe}
+```{bash filename="terminal"}
+gh repo clone org/repo-name
+```
+:::
+
+You can also now do some cool things with your org/repo like searching for strings, creating issues, and more. For example, here are the issues in this repo:
+
+:::{.smallframe}
+```{bash filename="terminal"}
+gh issue list
+```
+:::
+
+```{markdown filename="output"}
+Showing 3 of 3 open issues in NW-PaGe/standards
+
+ID  TITLE                                      LABELS         UPDATED           
+#7  add .gitignore documentation                              about 2 months ago
+#3  Make sure all references are added to ...  documentation  about 5 months ago
+#2  Fix cross reference links                  documentation  about 5 months ago
+```
+
+
+
 ### WSL/Linux
 
 To install in a linux terminal, I'm following the instructions provided in the [Github CLI repo](https://github.com/cli/cli/blob/trunk/docs/install_linux.md).
@@ -324,12 +391,22 @@ ID  TITLE                                      LABELS         UPDATED
 #2  Fix cross reference links                  documentation  about 5 months ago
 ```
 
-
-
 :::
 
 
 ## Open with GitHub Desktop
+
+If you're new to Git or Github and are using a Windows machine, the GitHub Desktop app is a great option for managing git workflows. 
+
+1. Install the [app](https://desktop.github.com/)
+
+2. You will need to [authenticate](https://docs.github.com/en/desktop/installing-and-authenticating-to-github-desktop/authenticating-to-github-in-github-desktop) your account 
+
+3. Now you should be able to clone repos through the app. In Github, when you click on the Code tab you will see the option to open in Github Desktop:
+
+![](images/gh-desktop.png)
+
+This will open up the desktop app and let you choose a file path for your Github repos. I recommend putting your repos into a Github or Projects folder in your local C drive, like this - `C:/Users/yourname/Projects/<your-repo>/`. If you're cloning many repos you should put the repos into folders separated by the Github org -`C:/Users/yourname/Projects/<gh-org-name>/<repo-in-org>/` 
 
 :::
 
