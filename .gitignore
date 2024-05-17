@@ -1,3 +1,6 @@
+# AWS secrets key
+secrets_key
+
 # History files
 .Rhistory
 .Rapp.history
