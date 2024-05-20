@@ -78,7 +78,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/downloadthis-1.9.1/downloadthis.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -291,12 +290,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#environment-variables-.gitignore" id="toc-environment-variables-.gitignore" class="nav-link" data-scroll-target="#environment-variables-.gitignore">Environment Variables + .gitignore</a></li>
   </ul></li>
-  <li><a href="#security-guardrails" id="toc-security-guardrails" class="nav-link" data-scroll-target="#security-guardrails">Security Guardrails</a>
-  <ul class="collapse">
+  <li><a href="#security-guardrails" id="toc-security-guardrails" class="nav-link" data-scroll-target="#security-guardrails">Security Guardrails</a></li>
   <li><a href="#pre-commit-hooks" id="toc-pre-commit-hooks" class="nav-link" data-scroll-target="#pre-commit-hooks">Pre-commit Hooks</a></li>
+  <li><a href="#secret-scanning" id="toc-secret-scanning" class="nav-link" data-scroll-target="#secret-scanning">Secret Scanning</a>
+  <ul class="collapse">
+  <li><a href="#instructions" id="toc-instructions" class="nav-link" data-scroll-target="#instructions">Instructions</a></li>
+  </ul></li>
   <li><a href="#pre-recieve-hooks" id="toc-pre-recieve-hooks" class="nav-link" data-scroll-target="#pre-recieve-hooks">Pre-Recieve Hooks</a></li>
   <li><a href="#pushing-private-code-to-public-repos" id="toc-pushing-private-code-to-public-repos" class="nav-link" data-scroll-target="#pushing-private-code-to-public-repos">Pushing Private Code to Public Repos</a></li>
-  </ul></li>
   <li><a href="#code-reviewersgithub-operations-team" id="toc-code-reviewersgithub-operations-team" class="nav-link" data-scroll-target="#code-reviewersgithub-operations-team">Code Reviewers/Github Operations Team</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/gh/security.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/gh/security.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -336,7 +337,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">May 17, 2024</p>
+      <p class="date-modified">May 20, 2024</p>
     </div>
   </div>
     
@@ -768,13 +769,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><br></p>
 </section>
 </section>
-<section id="security-guardrails" class="level1 page-columns page-full">
+<section id="security-guardrails" class="level1">
 <h1>Security Guardrails</h1>
 <p>Using a <code>.gitignore</code> file for environmental variables/credentials is an excellent guardrail and promotes good coding habits, but we may also want additional guardrails such as hooks.</p>
 <p>Hooks are processes that run in the background and can prevent code from being pushed if there is a security flaw. There are two hooks we could use for security; pre-commit hooks and pre-receive hooks</p>
-<section id="pre-commit-hooks" class="level2">
-<h2 class="anchored" data-anchor-id="pre-commit-hooks">Pre-commit Hooks</h2>
+</section>
+<section id="pre-commit-hooks" class="level1">
+<h1>Pre-commit Hooks</h1>
 <p>Pre-commit hooks run a process locally when the user attempts to commit code to a git branch. Hooks have many uses. Here we can use them as a security guardrail to prevent accidental credential leaks in committed code. For example, if someone accidentally pushes a server name to the public repo, the hook will prevent that code from ever getting into the remote repo and will give the user a local error.</p>
+<p>Follow the instructions below to set up pre-commit hooks in your repo.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Windows</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">WSL/Linux</a></li></ul>
 <div class="tab-content">
@@ -1027,27 +1030,41 @@ Note
 </div>
 </div>
 </div>
+<p><br></p>
+<p><br></p>
 <div class="note medframe">
 <p><i class="fa-solid fa-unlock fa-3x" aria-label="unlock"></i> <strong>NOTE!!</strong></p>
 <ul>
 <li>The REGEX strings used in the <code>secrets_key</code> file may be decieving</li>
 <li>Make sure to test that the regex flags what you want it to</li>
 <li><code>git secrets --scan-history</code> may take a very long time to run</li>
+<li>Follow the Secret Scanning instructions below for more help</li>
 </ul>
 </div>
+</section>
+<section id="secret-scanning" class="level1">
+<h1>Secret Scanning</h1>
+<p>Now that the pre-commit hook is set up, any future commits to your repo will be scanned for secrets. If you are pushing a pre-existing repo to a public repo for the first time, you should scan the existing code in the repo because the pre-commit hook will not automatically do that. They are really set up to prevent any <em>future</em> secrets from being pushed to the repo, not to scan what is <em>currently</em> in the repo.</p>
+<p>There are a few ways to scan the history of your repo for secrets. The <code>git secrets</code> command comes with a few options to scan the history, but I have found that it is a bit broken.</p>
+<ul>
+<li>the <code>git secrets --scan-history</code> command will run forever if you have a large repo (especially if you have html files in it)</li>
+<li>globs have not worked for me (specifying the file types you want to scan for <code>git secrets --scan *glob</code>)</li>
+<li>likewise, scanning specific folders have not worked for me like this <code>git secrets --scan directory/*</code></li>
+</ul>
+<section id="instructions" class="level2">
+<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
 <ol type="1">
 <li><p>Check that the <code>secrets_key</code> regex is working by running the process on a repo that you know has secrets in it. For example, in a different folder, run all the pre-commit hook steps above and add a known “bad” string into the regex. For example, in the regex put <code>bad_string</code> and in a file in that folder put <code>bad_string</code>. When you scan it should get flagged.</p></li>
-<li><p>If secret scanning is taking too long, you might want to check certain files first. I’ve found that HTML files take a <em>very</em> long time to scan for secrets. If you’re using linux or macOS you should be able to scan certain files via grob like this <code>git secrets --scan path/to/files*</code>. If you’re using windows it probably won’t work. In that case, if you only want certain file extensions to be scanned, use this function in powershell below. Download the file here:</p></li>
+<li><p>If secret scanning is taking too long, you might want to check certain files first. I’ve found that HTML files take a <em>very</em> long time to scan for secrets.</p></li>
 </ol>
-<p><a href="#dnldts53607" onclick="fetch('data:text/plain;base64,IyBSRUFETUUKCiMjIFRoaXMgc2NyaXB0IHJlcXVpcmVzIEFXUyBHaXQgU2VjcmV0cyBhbmQgcmVjb21tZW5kcyBjdXN0b20gcmVnZXggc2VjcmV0cy4KIyMgZm9yIG1vcmUgZGV0YWlscyBhbmQgaW5zdGFsbCBpbnN0cnVjdGlvbnMsIHBsZWFzZSBmb2xsb3cgaHR0cHM6Ly9udy1wYWdlLmdpdGh1Yi5pby9zdGFuZGFyZHMvc3RkL3NlY3VyaXR5Lmh0bWwjcHJlLWNvbW1pdC1ob29rcwoKIyBFeGFtcGxlIFVzYWdlCiMgd3JpdGUgdGhpcyBpbiB0aGUgcG93ZXJzaGVsbCB0ZXJtaW5hbCwgYWRqdXN0IGZvciB0aGUgZmlsZSB0eXBlKHMpIHlvdSB3YW50IHRvIHNjYW4gLSBjYW4gYmUgbXVsdGlwbGUgdHlwZXM6ICRmaWxlRXh0ZW5zaW9ucyA9IEAoIi5SIiwgIi5weSIpCiMgdGhlbiBleGVjdXRlIHRoaXMgaW4gdGhlIHRlcm1pbmFsOiBTY2FuRmlsZXMgLUZpbGVFeHRlbnNpb25zICRmaWxlRXh0ZW5zaW9ucwoKIyBUaGVyZSdzIGFuIG9wdGlvbmFsIHBhcmFtZXRlciBjYWxsZWQgJGZpbGVQYXRoLiBJdCB3aWxsIGF1dG9tYXRpY2FsbHkgc2V0IHRvIHlvdXIgY3VycmVudCBmb2xkZXIKIyBZb3UgY2FuIGNoYW5nZSBpdCBpZiB5b3UgbmVlZCBsaWtlIHRoaXM6ICRmaWxlUGF0aCA9ICJwYXRoL3RvL2ZvbGRlciIKCiMgSXQgd2lsbCBnaXZlIHlvdSBhbiBvdXRwdXQgb2YgYW55IHNlY3JldHMgdGhhdCBhcmUgY29udGFpbmVkIGluIHRob3NlIGZpbGVzCgpGdW5jdGlvbiBTY2FuRmlsZXN7CiAgICBwYXJhbSAoCiAgICAgICAgW3N0cmluZ10kZmlsZVBhdGggPSAoR2V0LUxvY2F0aW9uKS5QYXRoLAogICAgICAgIFtzdHJpbmdbXV0kZmlsZUV4dGVuc2lvbnMKICApIAogICAgR2V0LUNoaWxkSXRlbSAkZmlsZVBhdGggLXJlY3Vyc2UgfCBXaGVyZS1PYmplY3QgeyRfLmV4dGVuc2lvbiAtaW4gJGZpbGVFeHRlbnNpb25zfSB8IAogICAgRm9yZWFjaC1PYmplY3QgewoKICAgICAgICBnaXQgc2VjcmV0cyAtLXNjYW4gJF8uRnVsbE5hbWUgfCBPdXQtRmlsZSAkbG9nRmlsZSAtQXBwZW5kCgogICAgfQogIH0=').then(res => res.blob()).then(blob => {
-      const downloadURL = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      document.body.appendChild(a);
-      a.href = downloadURL;
-      a.download = 'secretscanner.ps1'; a.click();
-      window.URL.revokeObjectURL(downloadURL);
-      document.body.removeChild(a);
-        });"><button class="btn btn-default downloadthis  " id="dnldts53607"><i class="bi bi-download"></i> Download Secret Scanner Script </button></a></p>
+<p>Follow the instructions below to scan for specific files. The script will scan for all the file types that you select. For example, if you want to only scan R files, it will only scan R files.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">Windows</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">WSL/Linux</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<ol type="1">
+<li>In PowerShell, navigate to your repo and paste this code:</li>
+</ol>
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -1073,26 +1090,58 @@ Note
 <span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<p>Now, you can scan your secrets by copying and pasting the code into a powershell terminal like this:</p>
-<div class="smallframe">
+<ol start="2" type="1">
+<li>Write the file extensions you want to scan for in a PowerShell Terminal window like this:</li>
+</ol>
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>PowerShell</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb33" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="va">$fileExtensions</span> = <span class="pp">@(</span><span class="st">".R"</span>,<span class="st">".py"</span>,<span class="st">".Rmd"</span>,<span class="st">".qmd"</span><span class="pp">)</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="ex">ScanFiles</span> <span class="at">-FileExtensions</span> <span class="va">$fileExtensions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="va">$fileExtensions</span> = <span class="pp">@(</span><span class="st">".R"</span>,<span class="st">".py"</span>,<span class="st">".Rmd"</span>,<span class="st">".qmd"</span><span class="pp">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Now, you can scan your secrets by copying and pasting this code into PowerShell:</li>
+</ol>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>PowerShell</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ScanFiles</span> <span class="at">-FileExtensions</span> <span class="va">$fileExtensions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
-<p><br></p>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<ol type="1">
+<li>In a bash/Ubuntu terminal, navigate to your repo and paste this code:</li>
+</ol>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>bash</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-type</span> f <span class="dt">\(</span> <span class="at">-name</span> <span class="st">"*.R"</span> <span class="at">-o</span> <span class="at">-name</span> <span class="st">"*.py"</span> <span class="at">-o</span> <span class="at">-name</span> <span class="st">"*.qmd"</span> <span class="at">-o</span> <span class="at">-name</span> <span class="st">"*.rmd"</span> <span class="at">-o</span> <span class="at">-name</span> <span class="st">"*.md"</span> <span class="dt">\)</span> <span class="at">-print0</span> <span class="kw">|</span> <span class="fu">xargs</span> <span class="at">-0</span> <span class="at">-I</span> {} git secrets <span class="at">--scan</span> {}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<ol start="2" type="1">
+<li>This is set to scan all R, Python, QMD, RMD, or MD files. If you want to add another file type, do it like this where you add <code>-o -name "*.NEW_TYPE"</code> to the <code>find</code> command args:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-type</span> f <span class="dt">\(</span> <span class="at">-name</span> <span class="st">"*.R"</span> <span class="at">-o</span> <span class="at">-name</span> <span class="st">"*.py"</span> <span class="at">-o</span> <span class="at">-name</span> <span class="st">"*.qmd"</span> <span class="at">-o</span> <span class="at">-name</span> <span class="st">"*.rmd"</span> <span class="at">-o</span> <span class="at">-name</span> <span class="st">"*.md"</span> <span class="at">-o</span> <span class="at">-name</span> <span class="st">"*.NEW_TYPE"</span>  <span class="dt">\)</span> <span class="at">-print0</span> <span class="kw">|</span> <span class="fu">xargs</span> <span class="at">-0</span> <span class="at">-I</span> {} git secrets <span class="at">--scan</span> {}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
 </section>
-<section id="pre-recieve-hooks" class="level2">
-<h2 class="anchored" data-anchor-id="pre-recieve-hooks">Pre-Recieve Hooks</h2>
+</section>
+<section id="pre-recieve-hooks" class="level1">
+<h1>Pre-Recieve Hooks</h1>
 <p>These are still being investigated. They are remote hooks (not local like pre-commit hooks) that can be deployed throughout the Github organization. They can block certain commits from ever being pushed to the remote repo. They may make things unnecessarily complicated</p>
 </section>
-<section id="pushing-private-code-to-public-repos" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="pushing-private-code-to-public-repos">Pushing Private Code to Public Repos</h2>
+<section id="pushing-private-code-to-public-repos" class="level1 page-columns page-full">
+<h1>Pushing Private Code to Public Repos</h1>
 <p>We may wish to take private codes and push them to a public repo. We need to make sure that the public code doesn’t not contain sensitive or forbidden data/code, so cleaning up the private repo is important before pushing.</p>
 <p>There are a few ways to do this, but the easiest way is to copy the clean private code to the public repo, that is, copy all the files you want to add publicly but <strong>do not copy the <code>.git</code></strong> folder. If the private repo has a dirty git history we will not want that history in the public repo because the sensitive data will then be publicly available.</p>
 <div>
@@ -1109,7 +1158,6 @@ Note
 </div>
 </div>
 <p><i class="fa-solid fa-exclamation" aria-label="exclamation"></i> The private repository on the left still contains sensitive information in the git history. The public repository on the right has a clean git history because we copied only the current clean files from the private repo and did not attach its git history (which lives in the hidden <code>.git</code> folder)</p>
-</section>
 </section>
 <section id="code-reviewersgithub-operations-team" class="level1">
 <h1>Code Reviewers/Github Operations Team</h1>
