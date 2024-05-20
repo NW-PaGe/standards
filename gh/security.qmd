@@ -378,12 +378,14 @@ Using a `.gitignore` file for environmental variables/credentials is an excellen
 
 Hooks are processes that run in the background and can prevent code from being pushed if there is a security flaw. There are two hooks we could use for security; pre-commit hooks and pre-receive hooks
 
-## Pre-commit Hooks
+# Pre-commit Hooks
 
 Pre-commit hooks run a process locally when the user attempts to commit code to a git branch. Hooks have many uses. Here we can use them as a security guardrail to prevent accidental credential leaks in committed code. For example, if someone accidentally pushes a server name to the public repo, the hook will prevent that code from ever getting into the remote repo and will give the user a local error.
 
+Follow the instructions below to set up pre-commit hooks in your repo.
+
 ::: panel-tabset
-### Windows
+## Windows
 
 1.  Clone or download the zip from the [AWS Git Secrets repo](https://github.com/awslabs/git-secrets/)
 
@@ -463,7 +465,7 @@ git secrets --add -a 'allowed pattern'
 We can't use the "Non capture group" feature of regex. Meaning we can't use patterns like this in our regex: (?:abc) -- see https://regexr.com IMPORTANT: Tab separate your regex expressions. Making new lines caused a bit of chaos and took really long to figure out. (you can use multiple tabs to separate them more visually)
 :::
 
-### WSL/Linux
+## WSL/Linux
 
 1.  Clone the [AWS Git Secrets repo](https://github.com/awslabs/git-secrets/)
 
@@ -575,25 +577,45 @@ We can't use the "Non capture group" feature of regex. Meaning we can't use patt
 :::
 :::
 
+<br>
+
+<br>
+
 ::: {.note .medframe}
 {{< fa unlock size="3x" >}} **NOTE!!**
 
 -   The REGEX strings used in the `secrets_key` file may be decieving
 -   Make sure to test that the regex flags what you want it to
 -   `git secrets --scan-history` may take a very long time to run
+-   Follow the Secret Scanning instructions below for more help
 :::
+
+
+# Secret Scanning
+
+Now that the pre-commit hook is set up, any future commits to your repo will be scanned for secrets. If you are pushing a pre-existing repo to a public repo for the first time, you should scan the existing code in the repo because the pre-commit hook will not automatically do that. They are really set up to prevent any _future_ secrets from being pushed to the repo, not to scan what is _currently_ in the repo.
+
+There are a few ways to scan the history of your repo for secrets. The `git secrets` command comes with a few options to scan the history, but I have found that it is a bit broken. 
+
+- the `git secrets --scan-history` command will run forever if you have a large repo (especially if you have html files in it)
+- globs have not worked for me (specifying the file types you want to scan for `git secrets --scan *glob`)
+- likewise, scanning specific folders have not worked for me like this `git secrets --scan directory/*`
+
+
+## Instructions
 
 1.  Check that the `secrets_key` regex is working by running the process on a repo that you know has secrets in it. For example, in a different folder, run all the pre-commit hook steps above and add a known "bad" string into the regex. For example, in the regex put `bad_string` and in a file in that folder put `bad_string`. When you scan it should get flagged.
 
-2.  If secret scanning is taking too long, you might want to check certain files first. I've found that HTML files take a *very* long time to scan for secrets. If you're using linux or macOS you should be able to scan certain files via grob like this `git secrets --scan path/to/files*`. If you're using windows it probably won't work. In that case, if you only want certain file extensions to be scanned, use this function in powershell below. Download the file here:
+2.  If secret scanning is taking too long, you might want to check certain files first. I've found that HTML files take a *very* long time to scan for secrets.
 
-::: {.content-visible unless-format="pdf"}
-{{< downloadthis secret_scanner.ps1 dname=secretscanner label="Download Secret Scanner Script" >}}
-:::
+Follow the instructions below to scan for specific files. The script will scan for all the file types that you select. For example, if you want to only scan R files, it will only scan R files.
 
-::: {.content-visible unless-format="html"}
-https://github.com/NW-PaGe/standards/blob/main/gh/secret_scanner.ps1
-:::
+:::{.panel-tabset}
+
+### Windows
+
+
+1. In PowerShell, navigate to your repo and paste this code:
 
 ```{bash filename="secret-scanner9000.ps1"}
 # Example Usage
@@ -616,22 +638,44 @@ Function ScanFiles{
 }
 ```
 
-Now, you can scan your secrets by copying and pasting the code into a powershell terminal like this:
+2. Write the file extensions you want to scan for in a PowerShell Terminal window like this: 
 
-::: smallframe
+
 ```{bash filename="PowerShell"}
 $fileExtensions = @(".R",".py",".Rmd",".qmd")
+```
+
+3. Now, you can scan your secrets by copying and pasting this code into PowerShell:
+
+```{bash filename="PowerShell"}
 ScanFiles -FileExtensions $fileExtensions
 ```
+
+### WSL/Linux
+
+1. In a bash/Ubuntu terminal, navigate to your repo and paste this code:
+
+
+```{bash filename="bash"}
+find . -type f \( -name "*.R" -o -name "*.py" -o -name "*.qmd" -o -name "*.rmd" -o -name "*.md" \) -print0 | xargs -0 -I {} git secrets --scan {}
+
+```
+
+2. This is set to scan all R, Python, QMD, RMD, or MD files. If you want to add another file type, do it like this where you add `-o -name "*.NEW_TYPE"` to the `find` command args:
+
+
+```{bash}
+find . -type f \( -name "*.R" -o -name "*.py" -o -name "*.qmd" -o -name "*.rmd" -o -name "*.md" -o -name "*.NEW_TYPE"  \) -print0 | xargs -0 -I {} git secrets --scan {}
+```
+
 :::
 
-<br>
 
-## Pre-Recieve Hooks
+# Pre-Recieve Hooks
 
 These are still being investigated. They are remote hooks (not local like pre-commit hooks) that can be deployed throughout the Github organization. They can block certain commits from ever being pushed to the remote repo. They may make things unnecessarily complicated
 
-## Pushing Private Code to Public Repos
+# Pushing Private Code to Public Repos
 
 We may wish to take private codes and push them to a public repo. We need to make sure that the public code doesn't not contain sensitive or forbidden data/code, so cleaning up the private repo is important before pushing.
 
