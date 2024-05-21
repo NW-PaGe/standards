@@ -76,6 +76,20 @@ This document details the policies and guidelines for the Northwest Pathogen Gen
 
 For more information, tutorials and code examples, please see the policies website here https://nw-page.github.io/standards/.
 
+# Contribute
+
+```{r}
+#| output: asis
+#| echo: false
+#| eval: true
+#| message: false
+#| warning: false
+why <- process_qmd("gh/contribute.qmd", fpath_in = "images/", fpath_out = "gh/images/")
+cat(unlist(why), sep = '\n')
+```
+
+
+
 # Security
 
 ```{r}
