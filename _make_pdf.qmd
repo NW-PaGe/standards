@@ -14,7 +14,7 @@ nocite: |
   @*
 format:
   typst:
-    output-file: "nw-page-github-policies"
+    output-file: "nw-page-policies"
     output-ext:  "pdf"
     columns: 1
     template-partials:
