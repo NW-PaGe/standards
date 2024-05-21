@@ -74,3 +74,7 @@ jobs:
           target: gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this secret is always available for github actions
+
+      # Commit all changed files back to the repository
+      # Trying this because the pdf would not write to the repo
+      - uses: stefanzweifel/git-auto-commit-action@v5
