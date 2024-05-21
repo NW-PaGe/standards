@@ -56,10 +56,10 @@ jobs:
       #     install.packages(c("knitr", "rmarkdown", "quarto", "stringr"))
       #   shell: Rscript {0}
 
-      - name: Render PDF
-        run: |
-            quarto install tinytex
-            quarto render _make_pdf.qmd
+      # - name: Render PDF
+      #   run: |
+      #       quarto install tinytex
+      #       quarto render _make_pdf.qmd
       
       - name: Render PDF
         run: |
