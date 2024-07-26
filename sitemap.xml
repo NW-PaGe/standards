@@ -2,106 +2,110 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://NW-PaGe.github.io/standards/azure/azure_index.html</loc>
-    <lastmod>2024-05-21T22:12:57.633Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NW-PaGe.github.io/standards/index.html</loc>
-    <lastmod>2024-05-21T22:12:57.861Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NW-PaGe.github.io/standards/gh/how_to.html</loc>
-    <lastmod>2024-05-21T22:12:57.633Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NW-PaGe.github.io/standards/gh/release.html</loc>
-    <lastmod>2024-05-21T22:12:57.849Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NW-PaGe.github.io/standards/gh/contribute.html</loc>
-    <lastmod>2024-05-21T22:12:57.633Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NW-PaGe.github.io/standards/gh/codespaces.html</loc>
-    <lastmod>2024-05-21T22:12:57.633Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NW-PaGe.github.io/standards/gh/index.html</loc>
-    <lastmod>2024-05-21T22:12:57.849Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NW-PaGe.github.io/standards/gh/security.html</loc>
-    <lastmod>2024-05-21T22:12:57.849Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NW-PaGe.github.io/standards/gh/git.html</loc>
-    <lastmod>2024-05-21T22:12:57.633Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NW-PaGe.github.io/standards/tools/templates.html</loc>
-    <lastmod>2024-05-21T22:12:58.057Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NW-PaGe.github.io/standards/tools/renv.html</loc>
-    <lastmod>2024-05-21T22:12:58.057Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NW-PaGe.github.io/standards/tools/index.html</loc>
-    <lastmod>2024-05-21T22:12:58.057Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NW-PaGe.github.io/standards/tools/git.html</loc>
-    <lastmod>2024-05-21T22:12:57.865Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NW-PaGe.github.io/standards/about.html</loc>
-    <lastmod>2024-05-21T22:12:57.629Z</lastmod>
+    <lastmod>2024-07-26T23:36:17.091Z</lastmod>
   </url>
   <url>
     <loc>https://NW-PaGe.github.io/standards/tools/pkgdoc.html</loc>
-    <lastmod>2024-05-21T22:12:58.057Z</lastmod>
+    <lastmod>2024-07-26T23:36:17.515Z</lastmod>
   </url>
   <url>
     <loc>https://NW-PaGe.github.io/standards/tools/link_code.html</loc>
-    <lastmod>2024-05-21T22:12:58.057Z</lastmod>
+    <lastmod>2024-07-26T23:36:17.515Z</lastmod>
   </url>
   <url>
     <loc>https://NW-PaGe.github.io/standards/tools/release.html</loc>
-    <lastmod>2024-05-21T22:12:58.057Z</lastmod>
+    <lastmod>2024-07-26T23:36:17.515Z</lastmod>
   </url>
   <url>
-    <loc>https://NW-PaGe.github.io/standards/tools/how_to.html</loc>
-    <lastmod>2024-05-21T22:12:57.865Z</lastmod>
+    <loc>https://NW-PaGe.github.io/standards/tools/renv.html</loc>
+    <lastmod>2024-07-26T23:36:17.515Z</lastmod>
   </url>
   <url>
-    <loc>https://NW-PaGe.github.io/standards/gh/policies.html</loc>
-    <lastmod>2024-05-21T22:12:57.849Z</lastmod>
-  </url>
-  <url>
-    <loc>https://NW-PaGe.github.io/standards/gh/pkgdoc.html</loc>
-    <lastmod>2024-05-21T22:12:57.849Z</lastmod>
+    <loc>https://NW-PaGe.github.io/standards/gh/security.html</loc>
+    <lastmod>2024-07-26T23:36:17.311Z</lastmod>
   </url>
   <url>
     <loc>https://NW-PaGe.github.io/standards/gh/reproduce.html</loc>
-    <lastmod>2024-05-21T22:12:57.849Z</lastmod>
+    <lastmod>2024-07-26T23:36:17.311Z</lastmod>
   </url>
   <url>
-    <loc>https://NW-PaGe.github.io/standards/gh/link_code.html</loc>
-    <lastmod>2024-05-21T22:12:57.849Z</lastmod>
+    <loc>https://NW-PaGe.github.io/standards/gh/index.html</loc>
+    <lastmod>2024-07-26T23:36:17.311Z</lastmod>
   </url>
   <url>
-    <loc>https://NW-PaGe.github.io/standards/gh/renv.html</loc>
-    <lastmod>2024-05-21T22:12:57.849Z</lastmod>
+    <loc>https://NW-PaGe.github.io/standards/gh/codespaces.html</loc>
+    <lastmod>2024-07-26T23:36:17.091Z</lastmod>
   </url>
   <url>
     <loc>https://NW-PaGe.github.io/standards/gh/templates.html</loc>
-    <lastmod>2024-05-21T22:12:57.849Z</lastmod>
+    <lastmod>2024-07-26T23:36:17.311Z</lastmod>
   </url>
   <url>
     <loc>https://NW-PaGe.github.io/standards/gh/lic.html</loc>
-    <lastmod>2024-05-21T22:12:57.849Z</lastmod>
+    <lastmod>2024-07-26T23:36:17.311Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NW-PaGe.github.io/standards/gh/renv.html</loc>
+    <lastmod>2024-07-26T23:36:17.311Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NW-PaGe.github.io/standards/gh/policies.html</loc>
+    <lastmod>2024-07-26T23:36:17.311Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NW-PaGe.github.io/standards/about.html</loc>
+    <lastmod>2024-07-26T23:36:17.091Z</lastmod>
   </url>
   <url>
     <loc>https://NW-PaGe.github.io/standards/aws/aws_index.html</loc>
-    <lastmod>2024-05-21T22:12:57.633Z</lastmod>
+    <lastmod>2024-07-26T23:36:17.091Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NW-PaGe.github.io/standards/gh/how_to.html</loc>
+    <lastmod>2024-07-26T23:36:17.091Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NW-PaGe.github.io/standards/gh/git.html</loc>
+    <lastmod>2024-07-26T23:36:17.091Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NW-PaGe.github.io/standards/gh/release.html</loc>
+    <lastmod>2024-07-26T23:36:17.311Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NW-PaGe.github.io/standards/gh/contribute.html</loc>
+    <lastmod>2024-07-26T23:36:17.091Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NW-PaGe.github.io/standards/gh/link_code.html</loc>
+    <lastmod>2024-07-26T23:36:17.311Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NW-PaGe.github.io/standards/gh/practices.html</loc>
+    <lastmod>2024-07-26T23:36:17.311Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NW-PaGe.github.io/standards/gh/pkgdoc.html</loc>
+    <lastmod>2024-07-26T23:36:17.311Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NW-PaGe.github.io/standards/tools/how_to.html</loc>
+    <lastmod>2024-07-26T23:36:17.327Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NW-PaGe.github.io/standards/tools/git.html</loc>
+    <lastmod>2024-07-26T23:36:17.327Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NW-PaGe.github.io/standards/tools/templates.html</loc>
+    <lastmod>2024-07-26T23:36:17.515Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NW-PaGe.github.io/standards/tools/index.html</loc>
+    <lastmod>2024-07-26T23:36:17.515Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NW-PaGe.github.io/standards/index.html</loc>
+    <lastmod>2024-07-26T23:36:17.323Z</lastmod>
   </url>
 </urlset>
