@@ -456,7 +456,7 @@ Code collaboration can vary widely depending on the team and owner of the repo. 
 :::{.panel-tabset}
 
 ## Before you make code changes
-After [creating a repo](#sec-create-repo) and/or [cloning the repo](#sec-clone) into a your local machine, you can start writing and contributing code to the remote code base in Github.
+After creating a repo (@sec-create-repo) and/or cloning the repo (@sec-clone) into a your local machine, you can start writing and contributing code to the remote code base in Github.
 
 1. Check that you have your local clone linked to the remote repo by running git status. It should tell you that you're on the main branch
 
@@ -515,7 +515,7 @@ git commit -m "feat: this is a new feature!" "this is a description. I made this
 ```
 :::
 
-Also note that I am using the word `feat` in the commit message. This is important word that can trigger a github action. We'll cover it below in [the Release Cycles and Changelogs section](#sec-changelog)
+Also note that I am using the word `feat` in the commit message. This is important word that can trigger a github action. We'll cover it below in @sec-changelog
 
 ## Make a pull request
 
@@ -628,3 +628,4 @@ For more details, follow the [release cycles guide](release.qmd)
 Milestones, projects, labels, etc. 
 
 :::
+
