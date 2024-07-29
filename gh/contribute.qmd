@@ -99,7 +99,7 @@ To contribute to a public repo in our Github org, please contact the repo owner 
 
 Before contributing any code, please read our [security policies](security.qmd). There you will find our repo rules and instructions on how to set up pre-commit hooks.
 
-Once granted access, follow the steps below to create a repo and/or collaborate on code.
+Once granted access, follow the steps below to create a repo (@sec-create-repo) and/or collaborate on code (@sec-collab).
 
 :::
 
@@ -449,11 +449,10 @@ If you're cloning many repos you should put the repos into folders separated by 
 
 :::
 
-# Code Collaboration
+# Code Collaboration {#sec-collab}
 
 Code collaboration can vary widely depending on the team and owner of the repo. Below I will describe how our team collaborates in Github. To summarize, in our system we prioritize preserving the main branch of a repo for production level code, and when we want to make changes we do it locally in a separate branch. We have rules for our commit messages, making pull requests (merging changes into the main branch), taging issues, release cycles, and documenting changes. 
 
-:::{.panel-tabset}
 
 ## Before you make code changes
 After creating a repo (@sec-create-repo) and/or cloning the repo (@sec-clone) into a your local machine, you can start writing and contributing code to the remote code base in Github.
@@ -627,5 +626,4 @@ For more details, follow the [release cycles guide](release.qmd)
 
 Milestones, projects, labels, etc. 
 
-:::
 
