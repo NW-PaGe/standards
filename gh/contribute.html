@@ -294,7 +294,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#contributing" id="toc-contributing" class="nav-link" data-scroll-target="#contributing">Contributing</a></li>
   <li><a href="#sec-create-repo" id="toc-sec-create-repo" class="nav-link" data-scroll-target="#sec-create-repo">Create a Repo</a></li>
   <li><a href="#sec-clone" id="toc-sec-clone" class="nav-link" data-scroll-target="#sec-clone">Cloning a Repo</a></li>
-  <li><a href="#code-collaboration" id="toc-code-collaboration" class="nav-link" data-scroll-target="#code-collaboration">Code Collaboration</a></li>
+  <li><a href="#sec-collab" id="toc-sec-collab" class="nav-link" data-scroll-target="#sec-collab">Code Collaboration</a>
+  <ul class="collapse">
+  <li><a href="#before-you-make-code-changes" id="toc-before-you-make-code-changes" class="nav-link" data-scroll-target="#before-you-make-code-changes">Before you make code changes</a></li>
+  <li><a href="#committing-your-changes" id="toc-committing-your-changes" class="nav-link" data-scroll-target="#committing-your-changes">Committing your changes</a></li>
+  <li><a href="#make-a-pull-request" id="toc-make-a-pull-request" class="nav-link" data-scroll-target="#make-a-pull-request">Make a pull request</a></li>
+  <li><a href="#sec-merge" id="toc-sec-merge" class="nav-link" data-scroll-target="#sec-merge">Merging a branch to main</a></li>
+  <li><a href="#sec-changelog" id="toc-sec-changelog" class="nav-link" data-scroll-target="#sec-changelog">Release Cycles and Changelogs</a></li>
+  <li><a href="#github-project-management" id="toc-github-project-management" class="nav-link" data-scroll-target="#github-project-management">Github project management</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/gh/contribute.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/gh/contribute.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -332,7 +340,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">July 27, 2024</p>
+      <p class="date-modified">July 29, 2024</p>
     </div>
   </div>
     
@@ -400,7 +408,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
 <p>To contribute to a public repo in our Github org, please contact the repo owner to request read/write access. If you want to create a repo in the org, please contact <code>frank.aragona@doh.wa.gov</code>.</p>
 <p>Before contributing any code, please read our <a href="../gh/security.html">security policies</a>. There you will find our repo rules and instructions on how to set up pre-commit hooks.</p>
-<p>Once granted access, follow the steps below to create a repo and/or collaborate on code.</p>
+<p>Once granted access, follow the steps below to create a repo (<a href="#sec-create-repo" class="quarto-xref">Section&nbsp;4</a>) and/or collaborate on code (<a href="#sec-collab" class="quarto-xref">Section&nbsp;6</a>).</p>
 </div>
 </div>
 </div>
@@ -819,13 +827,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="code-collaboration" class="level1 page-columns page-full">
+<section id="sec-collab" class="level1 page-columns page-full">
 <h1>Code Collaboration</h1>
 <p>Code collaboration can vary widely depending on the team and owner of the repo. Below I will describe how our team collaborates in Github. To summarize, in our system we prioritize preserving the main branch of a repo for production level code, and when we want to make changes we do it locally in a separate branch. We have rules for our commit messages, making pull requests (merging changes into the main branch), taging issues, release cycles, and documenting changes.</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset page-columns page-full">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true">Before you make code changes</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false">Committing your changes</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-3" role="tab" aria-controls="tabset-5-3" aria-selected="false">Make a pull request</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-4" role="tab" aria-controls="tabset-5-4" aria-selected="false">Merging a branch to main</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-5" role="tab" aria-controls="tabset-5-5" aria-selected="false">Release Cycles and Changelogs</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-6-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-6" role="tab" aria-controls="tabset-5-6" aria-selected="false">Github project management</a></li></ul>
-<div class="tab-content page-columns page-full">
-<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<section id="before-you-make-code-changes" class="level2">
+<h2 class="anchored" data-anchor-id="before-you-make-code-changes">Before you make code changes</h2>
 <p>After creating a repo (<a href="#sec-create-repo" class="quarto-xref">Section&nbsp;4</a>) and/or cloning the repo (<a href="#sec-clone" class="quarto-xref">Section&nbsp;5</a>) into a your local machine, you can start writing and contributing code to the remote code base in Github.</p>
 <ol type="1">
 <li>Check that you have your local clone linked to the remote repo by running git status. It should tell you that you’re on the main branch</li>
@@ -881,8 +887,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Now you are working in the local branch that you created and you can begin writing code or making updates.</p>
-</div>
-<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+</section>
+<section id="committing-your-changes" class="level2">
+<h2 class="anchored" data-anchor-id="committing-your-changes">Committing your changes</h2>
 <p>Once you make changes you can commit them to the local branch you created. This is like saving your work to the branch. The branch can be pushed to the remote repo in Github, so you can continually make changes and push them to the remote where they will be stored safely.</p>
 <p>To make a commit, save your work and then in the terminal write <code>git commit -m "&lt;your message here"</code>, like this:</p>
 <div class="smallframe">
@@ -906,9 +913,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Also note that I am using the word <code>feat</code> in the commit message. This is important word that can trigger a github action. We’ll cover it below in <strong>?@sec-changelog</strong></p>
-</div>
-<div id="tabset-5-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-3-tab">
+<p>Also note that I am using the word <code>feat</code> in the commit message. This is important word that can trigger a github action. We’ll cover it below in <a href="#sec-changelog" class="quarto-xref">Section&nbsp;6.5</a></p>
+</section>
+<section id="make-a-pull-request" class="level2">
+<h2 class="anchored" data-anchor-id="make-a-pull-request">Make a pull request</h2>
 <p>Now you have committed your changes, but your code has only been committed to a <em>branch</em>. In order to have your changes implemented in the main codebase you need to merge your branch into the main branch.</p>
 <p>When working in a collaborative team setting it is important to have your team review the changes you made before implementing them into the main branch. Everyone makes mistakes, and this is an opportunity to vet your code and have everyone sign off on the changes you want.</p>
 <p>After you make your commits, go back to Github in your browser and go to your repo. There should be a box that appears showing your commit and a button that says <code>Compare &amp; pull request</code></p>
@@ -922,8 +930,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Note that labels, milestones, and projects are a way to keep track of changes and issues in your project. I highly recommend setting them up, more below.</p>
 <p>This should automatically send an email to the reviewers that there is code needed to be merged to a branch.</p>
 <p><img src="images/gitdesk2333-01.gif" class="img-fluid"></p>
-</div>
-<div id="tabset-5-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-4-tab">
+</section>
+<section id="sec-merge" class="level2">
+<h2 class="anchored" data-anchor-id="sec-merge">Merging a branch to main</h2>
 <p>Typically your teammates and the repo admin will review your code and merge your branch into the main branch.</p>
 <p>In Github, click on the <code>Pull requests</code> tab. Here you will see open pull requests and you can click on the one you want to merge.</p>
 <div class="quarto-figure quarto-figure-center">
@@ -978,8 +987,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 <p>After approval, hopefully you have a message that says <em>This branch has no conflicts with the base branch</em>. If there are conflicts it will prevent you from merging. We require the user who made the commit to resolve merge conflicts. The conflict typically happens when your branch is out of date and it is not lined up with the current main branch. You sometimes need to merge the main branch into your local branch and then commit those changes. This is very scenario dependent and requires some googling. Please reach out to us for help if this happens!</p>
-</div>
-<div id="tabset-5-5" class="tab-pane page-columns page-full" role="tabpanel" aria-labelledby="tabset-5-5-tab">
+</section>
+<section id="sec-changelog" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="sec-changelog">Release Cycles and Changelogs</h2>
 <p>As I mentioned before, I used special trigger words like <code>feat</code> or <code>fix</code> in commit messages. These words indicate that a commit contains a new code feature or a bug fix. They trigger a github action that will produce a changelog, documentation, and a version change in the code based when the branch gets merged to main. Please read more about this topic in <a href="../gh/release.html">release cycles</a>. In summary, there are key words you can add to your commit message that will trigger certain actions.</p>
 <p>For example, the word <code>bug</code> will trigger the version <em>patch</em> number to increase, meaning if your current codebase is on version v1.0.0 it will increase the version to v1.0.1 . Here’s what it looks like in Github:</p>
 <div>
@@ -1016,14 +1026,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>It documents all of you conversations and changes (+1 for transparency! ➕)</li>
 </ul>
 <p>For more details, follow the <a href="../gh/release.html">release cycles guide</a></p>
-</div>
-<div id="tabset-5-6" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-6-tab">
+</section>
+<section id="github-project-management" class="level2">
+<h2 class="anchored" data-anchor-id="github-project-management">Github project management</h2>
 <p>Milestones, projects, labels, etc.</p>
-</div>
-</div>
-</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
