@@ -9,13 +9,15 @@ author:
 ---
 
 
-If you need to make a public repo, this guide is for you. It is a quick start on what steps you need to take, as well as links to further documentation that I **highly** recommend going through. Please meet with Frank Aragona frank.aragona@doh.wa.gov before creating a public repo. 
+If you need to make a public repo, this quick start guide is for you. Please meet with Frank Aragona frank.aragona@doh.wa.gov before creating a public repo. 
 
 
 1. Get access to make a public repo
 2. Github Security
 3. Convert an existing private repo into a public repo
 4. Licensing 
+
+:::{.panel-tabset}
 
 # Access
 
@@ -32,7 +34,7 @@ The guide will go over
 - converting private code to public repositories
 - installation of pre-commit hooks to prevent leaks
 
-# Building a Public Repo based on a Private Repo
+# Building a Public Repo 
 
 If you have an existing private repo that needs to be public, please follow these steps:
 
@@ -49,5 +51,6 @@ If you have an existing private repo that needs to be public, please follow thes
 - [make your repo reproducible](https://nw-page.github.io/standards/gh/reproduce.html)
 - [repo documentation](https://nw-page.github.io/standards/gh/how_to.html)
 - [virtual environments](https://nw-page.github.io/standards/gh/renv.html)
-- [git/github help, and how to collaborate on a repo](collaborate.qmd)
+- [git/github help, and how to collaborate on a repo](contribute.qmd)
 
+:::
