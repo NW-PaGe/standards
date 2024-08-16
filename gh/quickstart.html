@@ -8,9 +8,9 @@
 
 <meta name="author" content="Frank Aragona">
 <meta name="dcterms.date" content="2024-08-16">
-<meta name="description" content="How to link your repo code automatically to the github page">
+<meta name="description" content="Steps you need to follow to create a public repo and make sure it is secure">
 
-<title>NW-COE Policies – Link external R code to the documentation</title>
+<title>NW-COE Policies – Quickstart - Create a Public Repo</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,40 +22,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -107,7 +73,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -128,7 +94,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../gh/index.html"> 
+    <a class="nav-link active" href="../gh/index.html" aria-current="page"> 
 <span class="menu-text">Github</span></a>
   </li>  
   <li class="nav-item">
@@ -162,29 +128,151 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../gh/index.html">Github</a></li><li class="breadcrumb-item"><a href="../gh/quickstart.html">Policies</a></li><li class="breadcrumb-item"><a href="../gh/quickstart.html">Quickstart - Create a Public Repo</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../gh/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Github</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Policies</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../gh/quickstart.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Quickstart - Create a Public Repo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../gh/contribute.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Contribution/Collaboration Guide</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../gh/security.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Repo Security</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../gh/policies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Org Policies</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../gh/lic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Licensing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../gh/reproduce.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reproducibility</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Tutorials</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../gh/release.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Release Cycles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../gh/renv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Virtual Environments</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../gh/templates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Templates</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../gh/git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Git Basics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../gh/how_to.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Repo Documentation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#access" id="toc-access" class="nav-link active" data-scroll-target="#access">Access</a></li>
+  <li><a href="#github-security" id="toc-github-security" class="nav-link" data-scroll-target="#github-security">Github Security</a></li>
+  <li><a href="#building-a-public-repo-based-on-a-private-repo" id="toc-building-a-public-repo-based-on-a-private-repo" class="nav-link" data-scroll-target="#building-a-public-repo-based-on-a-private-repo">Building a Public Repo based on a Private Repo</a></li>
+  <li><a href="#licensing" id="toc-licensing" class="nav-link" data-scroll-target="#licensing">Licensing</a></li>
+  <li><a href="#repo-tipsadvice" id="toc-repo-tipsadvice" class="nav-link" data-scroll-target="#repo-tipsadvice">Repo tips/advice</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/gh/quickstart.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/gh/quickstart.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../gh/index.html">Github</a></li><li class="breadcrumb-item"><a href="../gh/quickstart.html">Policies</a></li><li class="breadcrumb-item"><a href="../gh/quickstart.html">Quickstart - Create a Public Repo</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Link external R code to the documentation</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">documentation</div>
-    <div class="quarto-category">Quarto</div>
-  </div>
-  </div>
+<h1 class="title">Quickstart - Create a Public Repo</h1>
+</div>
 
 <div>
   <div class="description">
-    How to link your repo code automatically to the github page
+    Steps you need to follow to create a public repo and make sure it is secure
   </div>
 </div>
 
@@ -194,7 +282,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Frank Aragona </p>
+             <p>Frank Aragona <a href="mailto:frank.aragona@doh.wa.gov" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
           </div>
   </div>
     
@@ -205,6 +293,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </div>
   </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">August 16, 2024</p>
+    </div>
+  </div>
     
   </div>
   
@@ -213,49 +307,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>The code in this website is automatically linked to the code in the repository. This lets us update the code and not need to copy and paste any new changes to the documentation/github page</p>
-<p>To do this, open your <em>external</em> R script in your repo. In this case we’re using <code>lineages_public_repo.R</code>. Now wrap the chunks of code you want to link with comments like this, <code>## ---- libraries</code> and <code>## ---- stop</code>:</p>
-<!-- <center> -->
-<div class="smallframe">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## ---- libraries</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  reticulate,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  fs,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  lubridate,</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  dplyr,</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  stringr,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  magrittr,</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  readr,</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  httr</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="do">## ---- stop</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<!-- </center> -->
-<p>The <code>## ---- libraries</code> signals the beginning of a chunk. the <code>## ---- stop</code> signals the end of a chunk.</p>
-<p><br></p>
-<p>Now you can call this chunk in your <em>github page/quarto document</em> like this:</p>
-<p>Scan the external R script for code chunks:</p>
-<div class="smallframe">
-<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup}</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="in">#| echo: false</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::read_chunk(file.path(getwd(),"lineages_public_repo.R"))</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><br></p>
-<p>Call the code chunk you want in the <code>{r}</code> header within the chunk. like this <code>{r libraries}</code>:</p>
-<div class="smallframe">
-<div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r libraries}</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><br></p>
-<p>And now the document will output any code in that code chunk and can also execute that code chunk if you want. Here’s what the output will look like in this case:</p>
-<p><img src="images/code-chunk.PNG" class="img-fluid"></p>
+<p>If you need to make a public repo, this guide is for you. It is a quick start on what steps you need to take, as well as links to further documentation that I <strong>highly</strong> recommend going through. Please meet with Frank Aragona frank.aragona@doh.wa.gov before creating a public repo.</p>
+<ol type="1">
+<li>Get access to make a public repo</li>
+<li>Github Security</li>
+<li>Convert an existing private repo into a public repo</li>
+<li>Licensing</li>
+</ol>
+<section id="access" class="level1">
+<h1>Access</h1>
+<p>Our organization has multiple public Github orgs. If you are internal to Washington Department of Health, you will need to submit a Service Central Request for access. Please reach out to frank.aragona@doh.wa.gov for help.</p>
+</section>
+<section id="github-security" class="level1">
+<h1>Github Security</h1>
+<p><strong>Please read all of the <a href="../gh/security.html">security guidelines here</a></strong></p>
+<p>The guide will go over</p>
+<ul>
+<li>what data/code is not allowed in a public repo</li>
+<li>security layers you need to prevent leaks</li>
+<li>converting private code to public repositories</li>
+<li>installation of pre-commit hooks to prevent leaks</li>
+</ul>
+</section>
+<section id="building-a-public-repo-based-on-a-private-repo" class="level1">
+<h1>Building a Public Repo based on a Private Repo</h1>
+<p>If you have an existing private repo that needs to be public, please follow these steps:</p>
+<ul>
+<li><a href="https://nw-page.github.io/standards/gh/security.html#pushing-private-code-to-public-repos">repo cleaning guides</a></li>
+<li><a href="https://nw-page.github.io/standards/gh/security.html#secret-scanning">code scanning</a></li>
+</ul>
+</section>
+<section id="licensing" class="level1">
+<h1>Licensing</h1>
+<ul>
+<li><a href="https://nw-page.github.io/standards/gh/lic.html">license rules</a></li>
+</ul>
+</section>
+<section id="repo-tipsadvice" class="level1">
+<h1>Repo tips/advice</h1>
+<ul>
+<li><a href="https://nw-page.github.io/standards/gh/policies.html">org policies</a></li>
+<li><a href="https://nw-page.github.io/standards/gh/reproduce.html">make your repo reproducible</a></li>
+<li><a href="https://nw-page.github.io/standards/gh/how_to.html">repo documentation</a></li>
+<li><a href="https://nw-page.github.io/standards/gh/renv.html">virtual environments</a></li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -675,7 +773,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/tools/link_code.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/tools/link_code.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/gh/quickstart.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/gh/quickstart.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
