@@ -76,11 +76,11 @@ website:
           contents: 
           - section: "Policies"
             contents:
+              - gh/quickstart.qmd
               - gh/contribute.qmd
               - gh/security.qmd
               - gh/policies.qmd
               - gh/lic.qmd
-              - gh/practices.qmd
               - gh/reproduce.qmd
           - section: "Tutorials"
             contents:

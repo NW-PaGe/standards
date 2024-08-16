@@ -1,0 +1,52 @@
+---
+title: Quickstart - Create a Public Repo
+description: Steps you need to follow to create a public repo and make sure it is secure
+date: 8/16/2024
+date-modified: last-modified
+author: 
+  - name: Frank Aragona
+    email: frank.aragona@doh.wa.gov
+---
+
+
+If you need to make a public repo, this guide is for you. It is a quick start on what steps you need to take, as well as links to further documentation that I **highly** recommend going through. Please meet with Frank Aragona frank.aragona@doh.wa.gov before creating a public repo. 
+
+
+1. Get access to make a public repo
+2. Github Security
+3. Convert an existing private repo into a public repo
+4. Licensing 
+
+# Access
+
+Our organization has multiple public Github orgs. If you are internal to Washington Department of Health, you will need to submit a Service Central Request for access. Please reach out to frank.aragona@doh.wa.gov for help.
+
+# Github Security
+
+**Please read all of the [security guidelines here](security.qmd)**
+
+The guide will go over
+
+- what data/code is not allowed in a public repo
+- security layers you need to prevent leaks
+- converting private code to public repositories
+- installation of pre-commit hooks to prevent leaks
+
+# Building a Public Repo based on a Private Repo
+
+If you have an existing private repo that needs to be public, please follow these steps:
+
+- [repo cleaning guides](https://nw-page.github.io/standards/gh/security.html#pushing-private-code-to-public-repos)
+- [code scanning](https://nw-page.github.io/standards/gh/security.html#secret-scanning)
+
+# Licensing
+
+- [license rules](https://nw-page.github.io/standards/gh/lic.html)
+
+# Repo tips/advice
+
+- [org policies](https://nw-page.github.io/standards/gh/policies.html)
+- [make your repo reproducible](https://nw-page.github.io/standards/gh/reproduce.html)
+- [repo documentation](https://nw-page.github.io/standards/gh/how_to.html)
+- [virtual environments](https://nw-page.github.io/standards/gh/renv.html)
+
