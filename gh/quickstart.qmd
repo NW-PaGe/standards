@@ -49,4 +49,5 @@ If you have an existing private repo that needs to be public, please follow thes
 - [make your repo reproducible](https://nw-page.github.io/standards/gh/reproduce.html)
 - [repo documentation](https://nw-page.github.io/standards/gh/how_to.html)
 - [virtual environments](https://nw-page.github.io/standards/gh/renv.html)
+- [git/github help, and how to collaborate on a repo](collaborate.qmd)
 
