@@ -382,7 +382,9 @@ Hooks are processes that run in the background and can prevent code from being p
 
 Pre-commit hooks run a process locally when the user attempts to commit code to a git branch. Hooks have many uses. Here we can use them as a security guardrail to prevent accidental credential leaks in committed code. For example, if someone accidentally pushes a server name to the public repo, the hook will prevent that code from ever getting into the remote repo and will give the user a local error.
 
-Follow the instructions below to set up pre-commit hooks in your repo.
+Follow the instructions below to set up pre-commit hooks _for all of your repos_. You can set up different hooks for individual repos, but I recommend setting this up globally so that all of your local clones are covered by the security hook.
+
+[This document](https://sparkbox.com/foundry/git_secrets) goes through setting up git hooks in more detail 
 
 ::: panel-tabset
 ## Windows
@@ -398,11 +400,11 @@ Follow the instructions below to set up pre-commit hooks in your repo.
 
     Alternatively, in the powershel terminal you can change directories `cd` to the repo and `.\install.ps1`
 
-4.  CD `cd` to a directory where you have the git repository you want to upload, either in PowerShell or R studio terminal {{< fa terminal >}}
+4.  Make a directory for a global hook template
 
     ::: smallframe
     ```{bash filename="PowerShell"}
-    PS > cd path/to/repo/root
+    mkdir ~/.git-template
     ```
     :::
 
@@ -410,21 +412,30 @@ Follow the instructions below to set up pre-commit hooks in your repo.
 
     ::: smallframe
     ```{bash filename="PowerShell"}
-    git secrets --install
+    git secrets --install ~/.git-template
     ```
     :::
 
-6.  Make or copy the regex file called `secrets_key` containing the secret patterns into your folder.
-
-    -   This file should be given to you by the Github admins. It contains a regex of potential secrets. Contact `frank.aragona@doh.wa.gov` for more information.
-
-7.  Make sure the file `secrets_key` is in your `.gitignore`. We can't push that to the remote repo.
-
-8.  Run `git secrets --add-provider -- cat ./secrets_key`
+6. Configure git to use that template for all your repos
 
     ::: smallframe
     ```{bash filename="PowerShell"}
-    git secrets --add-provider -- cat ./secrets_key
+    git config --global init.templateDir ’~/.git-template’ 
+    ```
+    :::
+
+
+7.  Make or copy the regex file called `secrets_key` containing the secret patterns **outside of your git repos**.
+
+    -   This file should be given to you by the Github admins. It contains a regex of potential secrets. Contact `frank.aragona@doh.wa.gov` for more information.
+
+8.  Make sure the file `secrets_key` is in your `.gitignore`. We can't push that to the remote repo.
+
+9.  Run `git secrets --add-provider -- cat ./secrets_key`
+
+    ::: smallframe
+    ```{bash filename="PowerShell"}
+    git secrets --add-provider --global -- cat ./secrets_key
     ```
     :::
 
@@ -443,7 +454,7 @@ git secrets --add -a 'allowed pattern'
 ```
 :::
 
-9.  Test Git history by running
+10.  Test Git history by running
 
     ::: smallframe
     ```{bash filename="PowerShell"}
@@ -451,15 +462,15 @@ git secrets --add -a 'allowed pattern'
     ```
     :::
 
-10. If something gets flagged and you don't care about your history anymore: Delete .git folder and reinitialize repository
+11. If something gets flagged and you don't care about your history anymore: Delete .git folder and reinitialize repository
 
     -   I would take caution about this point. There might be better ways to clean your git history if you don't want to get rid of everything.
 
-11. Test on one of my projects to see if rebasing is a sustainable option
+12. Test on one of my projects to see if rebasing is a sustainable option
 
-12. Make repo public
+13. Make repo public
 
-13. Will automatically scan on every commit and won't let it commit unless it's clean - Create a few files to show it working
+14. Will automatically scan on every commit and won't let it commit unless it's clean - Create a few files to show it working
 
 ::: callout-note
 We can't use the "Non capture group" feature of regex. Meaning we can't use patterns like this in our regex: (?:abc) -- see https://regexr.com IMPORTANT: Tab separate your regex expressions. Making new lines caused a bit of chaos and took really long to figure out. (you can use multiple tabs to separate them more visually)
@@ -479,15 +490,7 @@ We can't use the "Non capture group" feature of regex. Meaning we can't use patt
     ```
     :::
 
-4.  `cd` to a directory where you have the git repository you want to push to
-
-    ::: smallframe
-    ```{bash filename="terminal"}
-    cd path/to/repo/root
-    ```
-    :::
-
-5.  You may need to add this file to your \$PATH variables.
+4.  You may need to add this file to your \$PATH variables.
 
     -   run `nano .bashrc` to get your bash profile:
 
@@ -517,25 +520,42 @@ We can't use the "Non capture group" feature of regex. Meaning we can't use patt
         ```
         :::
 
-6.  Run git secrets --install
+5.  Make a git template directory 
 
     ::: smallframe
     ```{bash filename="terminal"}
-    git secrets --install
+    mkdir ~/.git-template
     ```
     :::
 
-7.  Make or copy the regex file called `secrets_key` containing the secret patterns into your folder.
-
-    -   This file should be given to you by the Github admins. It contains a regex of potential secrets. Contact `frank.aragona@doh.wa.gov` for more information.
-
-8.  Make sure the file `secrets_key` is in your `.gitignore`. We can't push that to the remote repo.
-
-9.  Run `git secrets --add-provider -- cat ./secrets_key`
+6.  Install the hooks globally into that template
 
     ::: smallframe
     ```{bash filename="terminal"}
-    git secrets --add-provider -- cat ./secrets_key
+    git secrets --install ~/.git-template    
+    ```
+    :::
+
+7.  Configure git to use that template globally
+
+    ::: smallframe
+    ```{bash filename="terminal"}
+    git config --global init.templateDir '~/git-template'
+    ```
+    :::
+
+
+8.  Make or copy the regex file called `secrets_key` containing the secret patterns into your folder.
+
+    -   This file should be given to you by the Github admins. It contains a regex of potential secrets. Contact `frank.aragona@doh.wa.gov` for more information.
+
+9.  Make sure the file `secrets_key` is in your `.gitignore`. We can't push that to the remote repo.
+
+10.  Run `git secrets --add-provider -- cat ./secrets_key`
+
+    ::: smallframe
+    ```{bash filename="terminal"}
+    git secrets --add-provider --global -- cat ./secrets_key
     ```
     :::
 
@@ -554,7 +574,7 @@ git secrets --add -a 'allowed pattern'
 ```
 :::
 
-10. Test Git history by running
+11. Test Git history by running
 
     ::: smallframe
     ```{bash filename="terminal"}
@@ -562,15 +582,15 @@ git secrets --add -a 'allowed pattern'
     ```
     :::
 
-11. If something gets flagged and you don't care about your history anymore: Delete .git folder and reinitialize repository
+12. If something gets flagged and you don't care about your history anymore: Delete .git folder and reinitialize repository
 
     -   I would take caution about this point. There might be better ways to clean your git history if you don't want to get rid of everything.
 
-12. Test on one of my projects to see if rebasing is a sustainable option
+13. Test on one of my projects to see if rebasing is a sustainable option
 
-13. Make repo public
+14. Make repo public
 
-14. Will automatically scan on every commit and won't let it commit unless it's clean - Create a few files to show it working
+15. Will automatically scan on every commit and won't let it commit unless it's clean - Create a few files to show it working
 
 ::: callout-note
 We can't use the "Non capture group" feature of regex. Meaning we can't use patterns like this in our regex: (?:abc) -- see https://regexr.com IMPORTANT: Tab separate your regex expressions. Making new lines caused a bit of chaos and took really long to figure out. (you can use multiple tabs to separate them more visually)
