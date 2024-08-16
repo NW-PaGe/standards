@@ -249,18 +249,8 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#access" id="toc-access" class="nav-link active" data-scroll-target="#access">Access</a></li>
-  <li><a href="#github-security" id="toc-github-security" class="nav-link" data-scroll-target="#github-security">Github Security</a></li>
-  <li><a href="#building-a-public-repo-based-on-a-private-repo" id="toc-building-a-public-repo-based-on-a-private-repo" class="nav-link" data-scroll-target="#building-a-public-repo-based-on-a-private-repo">Building a Public Repo based on a Private Repo</a></li>
-  <li><a href="#licensing" id="toc-licensing" class="nav-link" data-scroll-target="#licensing">Licensing</a></li>
-  <li><a href="#repo-tipsadvice" id="toc-repo-tipsadvice" class="nav-link" data-scroll-target="#repo-tipsadvice">Repo tips/advice</a></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/gh/quickstart.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/gh/quickstart.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -307,19 +297,20 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>If you need to make a public repo, this guide is for you. It is a quick start on what steps you need to take, as well as links to further documentation that I <strong>highly</strong> recommend going through. Please meet with Frank Aragona frank.aragona@doh.wa.gov before creating a public repo.</p>
+<p>If you need to make a public repo, this quick start guide is for you. Please meet with Frank Aragona frank.aragona@doh.wa.gov before creating a public repo.</p>
 <ol type="1">
 <li>Get access to make a public repo</li>
 <li>Github Security</li>
 <li>Convert an existing private repo into a public repo</li>
 <li>Licensing</li>
 </ol>
-<section id="access" class="level1">
-<h1>Access</h1>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Access</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Github Security</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Building a Public Repo</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Licensing</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-5" role="tab" aria-controls="tabset-1-5" aria-selected="false">Repo tips/advice</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <p>Our organization has multiple public Github orgs. If you are internal to Washington Department of Health, you will need to submit a Service Central Request for access. Please reach out to frank.aragona@doh.wa.gov for help.</p>
-</section>
-<section id="github-security" class="level1">
-<h1>Github Security</h1>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <p><strong>Please read all of the <a href="../gh/security.html">security guidelines here</a></strong></p>
 <p>The guide will go over</p>
 <ul>
@@ -328,33 +319,32 @@ ul.task-list li input[type="checkbox"] {
 <li>converting private code to public repositories</li>
 <li>installation of pre-commit hooks to prevent leaks</li>
 </ul>
-</section>
-<section id="building-a-public-repo-based-on-a-private-repo" class="level1">
-<h1>Building a Public Repo based on a Private Repo</h1>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
 <p>If you have an existing private repo that needs to be public, please follow these steps:</p>
 <ul>
 <li><a href="https://nw-page.github.io/standards/gh/security.html#pushing-private-code-to-public-repos">repo cleaning guides</a></li>
 <li><a href="https://nw-page.github.io/standards/gh/security.html#secret-scanning">code scanning</a></li>
 </ul>
-</section>
-<section id="licensing" class="level1">
-<h1>Licensing</h1>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
 <ul>
 <li><a href="https://nw-page.github.io/standards/gh/lic.html">license rules</a></li>
 </ul>
-</section>
-<section id="repo-tipsadvice" class="level1">
-<h1>Repo tips/advice</h1>
+</div>
+<div id="tabset-1-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-5-tab">
 <ul>
 <li><a href="https://nw-page.github.io/standards/gh/policies.html">org policies</a></li>
 <li><a href="https://nw-page.github.io/standards/gh/reproduce.html">make your repo reproducible</a></li>
 <li><a href="https://nw-page.github.io/standards/gh/how_to.html">repo documentation</a></li>
 <li><a href="https://nw-page.github.io/standards/gh/renv.html">virtual environments</a></li>
-<li><a href="collaborate.qmd">git/github help, and how to collaborate on a repo</a></li>
+<li><a href="../gh/contribute.html">git/github help, and how to collaborate on a repo</a></li>
 </ul>
+</div>
+</div>
+</div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -774,7 +764,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/gh/quickstart.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/gh/quickstart.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/gh/quickstart.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/gh/quickstart.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
