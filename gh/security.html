@@ -343,7 +343,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">August 16, 2024</p>
+      <p class="date-modified">August 27, 2024</p>
     </div>
   </div>
     
@@ -820,12 +820,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div></li>
-<li><p>Configure git to use that template for all your repos</p>
-<p>::: smallframe</p>
-<p>::: {.cell filename=‘PowerShell’}</p>
-<div class="sourceCode cell-code" id="cb20" data-code-line-numbers=""><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> init.templateDir ’~/.git-template’ </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>:::</p>
-<p>:::</p></li>
+<li><p>Configure git to use that template for all your repos</p></li>
+</ol>
+<div class="smallframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>PowerShell</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> init.templateDir ’~/.git-template’ </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<ol start="7" type="1">
 <li><p>Make or copy the regex file called <code>secrets_key</code> containing the secret patterns <strong>outside of your git repos</strong>.</p>
 <ul>
 <li>This file should be given to you by the Github admins. It contains a regex of potential secrets. Contact <code>frank.aragona@doh.wa.gov</code> for more information.</li>
@@ -994,22 +1001,18 @@ Note
 <li>This file should be given to you by the Github admins. It contains a regex of potential secrets. Contact <code>frank.aragona@doh.wa.gov</code> for more information.</li>
 </ul></li>
 <li><p>Make sure the file <code>secrets_key</code> is in your <code>.gitignore</code>. We can’t push that to the remote repo.</p></li>
-<li><p>Run <code>git secrets --add-provider -- cat ./secrets_key</code></p></li>
+<li><p>Add the secrets file to your provider list</p></li>
 </ol>
-<pre data-code-line-numbers=""><code>::: smallframe
-
-
-
-::: {.cell filename='terminal'}
-
-```{.bash .cell-code}
-git secrets --add-provider --global -- cat ./secrets_key
-```
-:::
-
-
-
-:::</code></pre>
+<div class="smallframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>terminal</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add-provider</span> <span class="at">--global</span> <span class="at">--</span> cat ./secrets_key</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 <p>You can also add prohibited patterns like this</p>
 <div class="smallframe">
 <div class="cell">
