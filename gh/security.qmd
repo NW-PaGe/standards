@@ -456,11 +456,11 @@ git secrets --add -a 'allowed pattern'
 
 10.  Test Git history by running
 
-    ::: smallframe
-    ```{bash filename="PowerShell"}
-    git secrets --scan-history
-    ```
-    :::
+::: smallframe
+```{bash filename="PowerShell"}
+git secrets --scan-history
+```
+:::
 
 11. If something gets flagged and you don't care about your history anymore: Delete .git folder and reinitialize repository
 
