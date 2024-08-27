@@ -418,11 +418,11 @@ Follow the instructions below to set up pre-commit hooks _for all of your repos_
 
 6. Configure git to use that template for all your repos
 
-    ::: smallframe
-    ```{bash filename="PowerShell"}
-    git config --global init.templateDir ’~/.git-template’ 
-    ```
-    :::
+::: smallframe
+```{bash filename="PowerShell"}
+git config --global init.templateDir ’~/.git-template’ 
+```
+:::
 
 
 7.  Make or copy the regex file called `secrets_key` containing the secret patterns **outside of your git repos**.
@@ -551,13 +551,13 @@ We can't use the "Non capture group" feature of regex. Meaning we can't use patt
 
 9.  Make sure the file `secrets_key` is in your `.gitignore`. We can't push that to the remote repo.
 
-10.  Run `git secrets --add-provider -- cat ./secrets_key`
+10. Add the secrets file to your provider list 
 
-    ::: smallframe
-    ```{bash filename="terminal"}
-    git secrets --add-provider --global -- cat ./secrets_key
-    ```
-    :::
+::: smallframe
+```{bash filename="terminal"}
+git secrets --add-provider --global -- cat ./secrets_key
+```
+:::
 
 You can also add prohibited patterns like this
 
