@@ -1,5 +1,5 @@
 ---
-title: Quickstart - Create a Public Repo
+title: Checklist
 description: Steps you need to follow to create a public repo and make sure it is secure
 date: 8/16/2024
 date-modified: last-modified

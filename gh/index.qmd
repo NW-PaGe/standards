@@ -25,7 +25,7 @@ number-sections: false
 
 NW-PaGe Github policies
 
-- [Quickstart Guide](quickstart.qmd)
+- [Checklist](quickstart.qmd)
 - [Code Contribution Guide](contribute.qmd)
 - [Repo Security Rules](security.qmd)
 - [Licensing](lic.qmd)
