@@ -292,18 +292,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#protect-credentials-with-.gitignore" id="toc-protect-credentials-with-.gitignore" class="nav-link active" data-scroll-target="#protect-credentials-with-.gitignore">Protect Credentials with .gitignore</a>
+  <li><a href="#sec-creds" id="toc-sec-creds" class="nav-link active" data-scroll-target="#sec-creds">Protect Credentials with .gitignore</a>
   <ul class="collapse">
   <li><a href="#environment-variables-.gitignore" id="toc-environment-variables-.gitignore" class="nav-link" data-scroll-target="#environment-variables-.gitignore">Environment Variables + .gitignore</a></li>
   </ul></li>
-  <li><a href="#security-guardrails" id="toc-security-guardrails" class="nav-link" data-scroll-target="#security-guardrails">Security Guardrails</a></li>
+  <li><a href="#sec-hooks" id="toc-sec-hooks" class="nav-link" data-scroll-target="#sec-hooks">Security Guardrails</a></li>
   <li><a href="#pre-commit-hooks" id="toc-pre-commit-hooks" class="nav-link" data-scroll-target="#pre-commit-hooks">Pre-commit Hooks</a></li>
-  <li><a href="#secret-scanning" id="toc-secret-scanning" class="nav-link" data-scroll-target="#secret-scanning">Secret Scanning</a>
+  <li><a href="#sec-scan" id="toc-sec-scan" class="nav-link" data-scroll-target="#sec-scan">Secret Scanning</a>
   <ul class="collapse">
   <li><a href="#instructions" id="toc-instructions" class="nav-link" data-scroll-target="#instructions">Instructions</a></li>
   </ul></li>
   <li><a href="#pre-recieve-hooks" id="toc-pre-recieve-hooks" class="nav-link" data-scroll-target="#pre-recieve-hooks">Pre-Recieve Hooks</a></li>
-  <li><a href="#pushing-private-code-to-public-repos" id="toc-pushing-private-code-to-public-repos" class="nav-link" data-scroll-target="#pushing-private-code-to-public-repos">Pushing Private Code to Public Repos</a></li>
+  <li><a href="#sec-public" id="toc-sec-public" class="nav-link" data-scroll-target="#sec-public">Pushing Private Code to Public Repos</a></li>
   <li><a href="#code-reviewersgithub-operations-team" id="toc-code-reviewersgithub-operations-team" class="nav-link" data-scroll-target="#code-reviewersgithub-operations-team">Code Reviewers/Github Operations Team</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/gh/security.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/gh/security.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -363,6 +363,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 <p>If sensitive information is leaked and commited to the remote repo, then they will stay in the git history (and will require a lot of effort to remove them from the history). The following cannot be included in any repo <strong>or any local commit!</strong>:</p>
+<div id="tbl-prohibit" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-prohibit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Items prohibited from being in a Github repo
+</figcaption>
+<div aria-describedby="tbl-prohibit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
 <colgroup>
 <col style="width: 37%">
@@ -408,7 +414,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<section id="protect-credentials-with-.gitignore" class="level1">
+</div>
+</figure>
+</div>
+<section id="sec-creds" class="level1">
 <h1>Protect Credentials with .gitignore</h1>
 <p>It is bad practice and a security risk to add private credentials to a script. If your script contains things like passwords, server names, or network drives, be aware that that information will be publicly visible when you push it to a remote git/github repo. Many of our scripts must call passwords and server names in order for them to work properly, so we need a way to hide that information from the public but still be able to run the scripts locally. <code>.gitignore</code> can help achieve this.</p>
 <p>In the root of your repo there should be a file called <code>.gitignore</code>. This files contains a list of file types that we don’t want to be added to the remote git repo. Here’s an example:</p>
@@ -775,7 +784,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><br></p>
 </section>
 </section>
-<section id="security-guardrails" class="level1">
+<section id="sec-hooks" class="level1">
 <h1>Security Guardrails</h1>
 <p>Using a <code>.gitignore</code> file for environmental variables/credentials is an excellent guardrail and promotes good coding habits, but we may also want additional guardrails such as hooks.</p>
 <p>Hooks are processes that run in the background and can prevent code from being pushed if there is a security flaw. There are two hooks we could use for security; pre-commit hooks and pre-receive hooks</p>
@@ -1075,7 +1084,7 @@ Note
 </ul>
 </div>
 </section>
-<section id="secret-scanning" class="level1">
+<section id="sec-scan" class="level1">
 <h1>Secret Scanning</h1>
 <p>Now that the pre-commit hook is set up, any future commits to your repo will be scanned for secrets. If you are pushing a pre-existing repo to a public repo for the first time, you should scan the existing code in the repo because the pre-commit hook will not automatically do that. They are really set up to prevent any <em>future</em> secrets from being pushed to the repo, not to scan what is <em>currently</em> in the repo.</p>
 <p>There are a few ways to scan the history of your repo for secrets. The <code>git secrets</code> command comes with a few options to scan the history, but I have found that it is a bit broken.</p>
@@ -1173,7 +1182,7 @@ Note
 <h1>Pre-Recieve Hooks</h1>
 <p>These are still being investigated. They are remote hooks (not local like pre-commit hooks) that can be deployed throughout the Github organization. They can block certain commits from ever being pushed to the remote repo. They may make things unnecessarily complicated</p>
 </section>
-<section id="pushing-private-code-to-public-repos" class="level1 page-columns page-full">
+<section id="sec-public" class="level1 page-columns page-full">
 <h1>Pushing Private Code to Public Repos</h1>
 <p>We may wish to take private codes and push them to a public repo. We need to make sure that the public code doesn’t not contain sensitive or forbidden data/code, so cleaning up the private repo is important before pushing.</p>
 <p>There are a few ways to do this, but the easiest way is to copy the clean private code to the public repo, that is, copy all the files you want to add publicly but <strong>do not copy the <code>.git</code></strong> folder. If the private repo has a dirty git history we will not want that history in the public repo because the sensitive data will then be publicly available.</p>
