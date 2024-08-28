@@ -9,19 +9,26 @@ author:
 ---
 
 
-If you need to make a public repo, this quick start guide is for you. Please meet with Frank Aragona frank.aragona@doh.wa.gov before creating a public repo. 
+If you need to make a public repo, this quick start guide is for you. **Please meet with Frank Aragona frank.aragona@doh.wa.gov before creating a public repo.** 
 
+# Checklist
 
-1. Get access to make a public repo
-2. Github Security
-3. Convert an existing private repo into a public repo
-4. Licensing 
+- [ ] Submit a request (service central ticket) to join a public GitHub organization
+- [ ] Review items that are **prohibited** from being in a repo
+- [ ] Add security guardrails; `.gitignore`
+- [ ] Create global security hooks for all your repos
+- [ ] Make a _private_ staging repo to make sure everything is clean
+- [ ] Perform secret scanning on your repo
+- [ ] Add a License 
+- [ ] Make branch protections
+- [ ] Copy over the _cleaned_ main branch from private repo into new public repo
+- [ ] Add a README and consider adding a Github page for documentation
 
 :::{.panel-tabset}
 
 # Access
 
-Our organization has multiple public Github orgs. If you are internal to Washington Department of Health, you will need to submit a Service Central Request for access. Please reach out to frank.aragona@doh.wa.gov for help.
+Our organization has multiple public Github orgs. If you are internal to Washington State Department of Health, you will need to submit a Service Central Request for access. Please reach out to frank.aragona@doh.wa.gov for help.
 
 # Github Security
 
