@@ -599,13 +599,13 @@
   {
     "objectID": "gh/quickstart.html",
     "href": "gh/quickstart.html",
-    "title": "Quickstart - Create a Public Repo",
+    "title": "Checklist",
     "section": "",
     "text": "If you need to make a public repo, this quick start guide is for you. Please meet with Frank Aragona frank.aragona@doh.wa.gov before creating a public repo.\n\nChecklist\n\nSubmit a request (service central ticket) to join a public GitHub organization\nReview items that are prohibited from being in a repo\nAdd security guardrails; .gitignore\nCreate global security hooks for all your repos\nMake a private staging repo to make sure everything is clean\nPerform secret scanning on your repo\nAdd a License\nMake branch protections\nCopy over the cleaned main branch from private repo into new public repo\nAdd a README and consider adding a Github page for documentation\n\n\nAccessGithub SecurityBuilding a Public RepoLicensingRepo tips/advice\n\n\nOur organization has multiple public Github orgs. If you are internal to Washington State Department of Health, you will need to submit a Service Central Request for access. Please reach out to frank.aragona@doh.wa.gov for help.\n\n\nPlease read all of the security guidelines here\nThe guide will go over\n\nwhat data/code is not allowed in a public repo\nsecurity layers you need to prevent leaks\nconverting private code to public repositories\ninstallation of pre-commit hooks to prevent leaks\n\n\n\nIf you have an existing private repo that needs to be public, please follow these steps:\n\nrepo cleaning guides\ncode scanning\n\n\n\n\nlicense rules\n\n\n\n\norg policies\nmake your repo reproducible\nrepo documentation\nvirtual environments\ngit/github help, and how to collaborate on a repo",
     "crumbs": [
       "Github",
       "Policies",
-      "Quickstart - Create a Public Repo"
+      "Checklist"
     ]
   },
   {
@@ -793,7 +793,7 @@
     "href": "gh/index.html",
     "title": "Github Policies",
     "section": "",
-    "text": "Policies and Rules\nNW-PaGe Github policies\n\nQuickstart Guide\nCode Contribution Guide\nRepo Security Rules\nLicensing\nOrganization Requirements\nCode Requirements\n\n\n\n\n\n\nTutorials\nNW-PaGe Github repo tutorials\n\nRelease Cycles\nVirtual Environments\nGithub and Quarto Templates\nGit Basics\nRepo Documentation/Github Pages and Quarto",
+    "text": "Policies and Rules\nNW-PaGe Github policies\n\nChecklist\nCode Contribution Guide\nRepo Security Rules\nLicensing\nOrganization Requirements\nCode Requirements\n\n\n\n\n\n\nTutorials\nNW-PaGe Github repo tutorials\n\nRelease Cycles\nVirtual Environments\nGithub and Quarto Templates\nGit Basics\nRepo Documentation/Github Pages and Quarto",
     "crumbs": [
       "Github"
     ]
