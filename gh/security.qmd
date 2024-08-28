@@ -58,7 +58,9 @@ If sensitive information is leaked and commited to the remote repo, then they wi
 |                          | -   Any PHI                             |
 +--------------------------+-----------------------------------------+
 
-# Protect Credentials with .gitignore
+: Items prohibited from being in a Github repo {#tbl-prohibit}
+
+# Protect Credentials with .gitignore {#sec-creds}
 
 It is bad practice and a security risk to add private credentials to a script. If your script contains things like passwords, server names, or network drives, be aware that that information will be publicly visible when you push it to a remote git/github repo. Many of our scripts must call passwords and server names in order for them to work properly, so we need a way to hide that information from the public but still be able to run the scripts locally. `.gitignore` can help achieve this.
 
@@ -372,7 +374,7 @@ git ls-files -v . | grep ^S
 
 <br>
 
-# Security Guardrails
+# Security Guardrails {#sec-hooks}
 
 Using a `.gitignore` file for environmental variables/credentials is an excellent guardrail and promotes good coding habits, but we may also want additional guardrails such as hooks.
 
@@ -611,7 +613,7 @@ We can't use the "Non capture group" feature of regex. Meaning we can't use patt
 :::
 
 
-# Secret Scanning
+# Secret Scanning {#sec-scan}
 
 Now that the pre-commit hook is set up, any future commits to your repo will be scanned for secrets. If you are pushing a pre-existing repo to a public repo for the first time, you should scan the existing code in the repo because the pre-commit hook will not automatically do that. They are really set up to prevent any _future_ secrets from being pushed to the repo, not to scan what is _currently_ in the repo.
 
@@ -695,7 +697,7 @@ find . -type f \( -name "*.R" -o -name "*.py" -o -name "*.qmd" -o -name "*.rmd" 
 
 These are still being investigated. They are remote hooks (not local like pre-commit hooks) that can be deployed throughout the Github organization. They can block certain commits from ever being pushed to the remote repo. They may make things unnecessarily complicated
 
-# Pushing Private Code to Public Repos
+# Pushing Private Code to Public Repos {#sec-public}
 
 We may wish to take private codes and push them to a public repo. We need to make sure that the public code doesn't not contain sensitive or forbidden data/code, so cleaning up the private repo is important before pushing.
 

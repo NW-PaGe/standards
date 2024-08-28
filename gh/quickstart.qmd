@@ -14,21 +14,21 @@ If you need to make a public repo, this quick start guide is for you. **Please m
 # Checklist
 
 - [ ] Submit a request (service central ticket) to join a public GitHub organization
-- [ ] Review items that are **prohibited** from being in a repo
-- [ ] Add security guardrails; `.gitignore`
-- [ ] Create global security hooks for all your repos
+- [ ] Review [items that are **prohibited**](security.qmd#tbl-prohibit) from being in a repo
+- [ ] Add [security guardrails](security.qmd#sec-creds)
+- [ ] Create global [security hooks](security.qmd#sec-hooks) for all your repos
 - [ ] Make a _private_ staging repo to make sure everything is clean
-- [ ] Perform secret scanning on your repo
-- [ ] Add a License 
-- [ ] Make branch protections
-- [ ] Copy over the _cleaned_ main branch from private repo into new public repo
-- [ ] Add a README and consider adding a Github page for documentation
+- [ ] Perform [secret scanning](security.qmd#sec-scan) on your repo
+- [ ] Add a [license](lic.qmd) 
+- [ ] Make [branch protections](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches)
+- [ ] Copy over the _cleaned_ main branch from [private repo into new public repo](security.qmd#sec-public)
+- [ ] Add a README and consider adding a [Github page](how_to.qmd) for documentation
 
 :::{.panel-tabset}
 
 # Access
 
-Our organization has multiple public Github orgs. If you are internal to Washington State Department of Health, you will need to submit a Service Central Request for access. Please reach out to frank.aragona@doh.wa.gov for help.
+Our organization has several public Github orgs. If you are internal to Washington State Department of Health, you will need to submit a Service Central Request for access. Please reach out to frank.aragona@doh.wa.gov for help.
 
 # Github Security
 
