@@ -456,13 +456,7 @@ git secrets --add -a 'allowed pattern'
 ```
 :::
 
-10.  Test Git history by running
-
-::: smallframe
-```{bash filename="PowerShell"}
-git secrets --scan-history
-```
-:::
+10.  Check your git history (@sec-scan)
 
 11. If something gets flagged and you don't care about your history anymore: Delete .git folder and reinitialize repository
 
@@ -576,13 +570,7 @@ git secrets --add -a 'allowed pattern'
 ```
 :::
 
-11. Test Git history by running
-
-    ::: smallframe
-    ```{bash filename="terminal"}
-    git secrets --scan-history
-    ```
-    :::
+11. Check your git history (@sec-scan)
 
 12. If something gets flagged and you don't care about your history anymore: Delete .git folder and reinitialize repository
 
@@ -623,8 +611,36 @@ There are a few ways to scan the history of your repo for secrets. The `git secr
 - globs have not worked for me (specifying the file types you want to scan for `git secrets --scan *glob`)
 - likewise, scanning specific folders have not worked for me like this `git secrets --scan directory/*`
 
+I'll show 2 ways to scan for secrets, one with a native git command `git log`, and the other with `git secrets`
 
-## Instructions
+
+## git log for scanning
+
+This is the easier way to scan _commit history_. 
+
+Navigate to your repo and execute this command:
+
+:::{.medframe}
+```{bash}
+git log -G"<regex here>" -p
+```
+:::
+
+Note that the regex pattern can be imported from the `secrets_key` file. You can also search for simple strings like this
+
+:::{.medframe}
+```{bash}
+git log -S "<string>" -p
+```
+:::
+
+There are a lot of options with the `git log` command and you can [read more here](https://git-scm.com/docs/git-log#Documentation/git-log.txt--Sltstringgt) and [here](https://stackoverflow.com/questions/4468361/search-all-of-git-history-for-a-string)
+
+Basically, the `-G` option stands for `grep`, `-p` will show the diffs of the files, and `-S` is for string.
+
+## git secrets for scanning
+
+This isn't my favorite way to scan code, but it is an option if you want to double check things.
 
 1.  Check that the `secrets_key` regex is working by running the process on a repo that you know has secrets in it. For example, in a different folder, run all the pre-commit hook steps above and add a known "bad" string into the regex. For example, in the regex put `bad_string` and in a file in that folder put `bad_string`. When you scan it should get flagged.
 
