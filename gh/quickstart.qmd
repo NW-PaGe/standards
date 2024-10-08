@@ -9,7 +9,7 @@ author:
 ---
 
 
-If you need to make a public repo, this quick start guide is for you. **Please meet with Frank Aragona frank.aragona@doh.wa.gov before creating a public repo.** 
+If you need to make a public repo, this quick start guide is for you. **Please meet with Frank Aragona DOH.CDS.GenSeqSurvDQ@doh.wa.gov before creating a public repo.** 
 
 # Checklist
 
