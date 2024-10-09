@@ -344,7 +344,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 8, 2024</p>
+      <p class="date-modified">October 9, 2024</p>
     </div>
   </div>
     
@@ -372,8 +372,8 @@ Table&nbsp;1: Items prohibited from being in a Github repo
 <div aria-describedby="tbl-prohibit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
 <colgroup>
-<col style="width: 37%">
-<col style="width: 58%">
+<col style="width: 25%">
+<col style="width: 74%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -400,6 +400,8 @@ Table&nbsp;1: Items prohibited from being in a Github repo
 <td><ul>
 <li>SSH Keys</li>
 <li>Tokens (REDCap, Azure, Github, etc)</li>
+<li>AWS paths</li>
+<li>Bucket connections</li>
 <li>Usernames</li>
 <li>Passwords</li>
 <li>Blob/bucket keys</li>
@@ -411,6 +413,8 @@ Table&nbsp;1: Items prohibited from being in a Github repo
 <li>Addresses</li>
 <li>Names</li>
 <li>Any PHI</li>
+<li>Geographic location (depending on circumstance)</li>
+<li><code>WA</code> ids from PHL for genome sequencing (ids from public repos are okay)</li>
 </ul></td>
 </tr>
 </tbody>
@@ -855,7 +859,18 @@ Table&nbsp;1: Items prohibited from being in a Github repo
 <div class="code-with-filename-file">
 <pre><strong>PowerShell</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb21" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add-provider</span> <span class="at">--global</span> <span class="at">--</span> cat ./secrets_key</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add-provider</span> <span class="at">--global</span> <span class="at">--</span> cat path/to/secrets_key</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div></li>
+<li><p>Make sure the AWS providers are added:</p>
+<div class="smallframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>PowerShell</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--register-aws</span> <span class="at">--global</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div></li>
@@ -867,18 +882,18 @@ Table&nbsp;1: Items prohibited from being in a Github repo
 <div class="code-with-filename-file">
 <pre><strong>PowerShell</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add a pattern</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add</span> <span class="st">'[A-Z0-9]{20}'</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># add a literal string, the + is escaped</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add</span> <span class="at">--literal</span> <span class="st">'foo+bar'</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># add an allowed pattern</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add</span> <span class="at">-a</span> <span class="st">'allowed pattern'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add a pattern</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add</span> <span class="st">'[A-Z0-9]{20}'</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># add a literal string, the + is escaped</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add</span> <span class="at">--literal</span> <span class="st">'foo+bar'</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co"># add an allowed pattern</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add</span> <span class="at">-a</span> <span class="st">'allowed pattern'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
-<ol start="10" type="1">
+<ol start="11" type="1">
 <li><p>Check your git history (<a href="#sec-scan" class="quarto-xref">Section&nbsp;4</a>)</p></li>
 <li><p>If something gets flagged and you don’t care about your history anymore: Delete .git folder and reinitialize repository</p>
 <ul>
@@ -913,7 +928,7 @@ Note
 <div class="code-with-filename-file">
 <pre><strong>terminal</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb23" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> make install</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> make install</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div></li>
@@ -926,7 +941,7 @@ Note
 <div class="code-with-filename-file">
 <pre><strong>terminal</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> .bashrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> .bashrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div></li>
@@ -938,7 +953,7 @@ Note
 <div class="code-with-filename-file">
 <pre><strong>terminal</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb25" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="va">$PATH</span>:/user/local/bin/git-secrets<span class="dt">\</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="va">$PATH</span>:/user/local/bin/git-secrets<span class="dt">\</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div></li>
@@ -952,7 +967,7 @@ Note
 <div class="code-with-filename-file">
 <pre><strong>terminal</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb26" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$PATH</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$PATH</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div></li>
@@ -964,7 +979,7 @@ Note
 <div class="code-with-filename-file">
 <pre><strong>terminal</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb27" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> ~/.git-template</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> ~/.git-template</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div></li>
@@ -975,7 +990,7 @@ Note
 <div class="code-with-filename-file">
 <pre><strong>terminal</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--install</span> ~/.git-template    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--install</span> ~/.git-template    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div></li>
@@ -986,7 +1001,7 @@ Note
 <div class="code-with-filename-file">
 <pre><strong>terminal</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb29" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> init.templateDir <span class="st">'~/git-template'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> init.templateDir <span class="st">'~/git-template'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div></li>
@@ -1003,10 +1018,23 @@ Note
 <div class="code-with-filename-file">
 <pre><strong>terminal</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb30" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add-provider</span> <span class="at">--global</span> <span class="at">--</span> cat ./secrets_key</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add-provider</span> <span class="at">--global</span> <span class="at">--</span> cat ./secrets_key</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
+<ol start="11" type="1">
+<li><p>Make sure the AWS providers are added:</p>
+<div class="smallframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>PowerShell</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--register-aws</span> <span class="at">--global</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div></li>
+</ol>
 <p>You can also add prohibited patterns like this</p>
 <div class="smallframe">
 <div class="cell">
@@ -1014,18 +1042,18 @@ Note
 <div class="code-with-filename-file">
 <pre><strong>terminal</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb31" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add a pattern</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add</span> <span class="st">'[A-Z0-9]{20}'</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co"># add a literal string, the + is escaped</span></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add</span> <span class="at">--literal</span> <span class="st">'foo+bar'</span></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co"># add an allowed pattern</span></span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add</span> <span class="at">-a</span> <span class="st">'allowed pattern'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add a pattern</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add</span> <span class="st">'[A-Z0-9]{20}'</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co"># add a literal string, the + is escaped</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add</span> <span class="at">--literal</span> <span class="st">'foo+bar'</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="co"># add an allowed pattern</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> secrets <span class="at">--add</span> <span class="at">-a</span> <span class="st">'allowed pattern'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
-<ol start="11" type="1">
+<ol start="12" type="1">
 <li><p>Check your git history (<a href="#sec-scan" class="quarto-xref">Section&nbsp;4</a>)</p></li>
 <li><p>If something gets flagged and you don’t care about your history anymore: Delete .git folder and reinitialize repository</p>
 <ul>
@@ -1079,13 +1107,13 @@ Note
 <p>Navigate to your repo and execute this command:</p>
 <div class="medframe">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">-G</span><span class="st">"&lt;regex here&gt;"</span> <span class="at">-p</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">-G</span><span class="st">"&lt;regex here&gt;"</span> <span class="at">-p</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <p>Note that the regex pattern can be imported from the <code>secrets_key</code> file. You can also search for simple strings like this</p>
 <div class="medframe">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">-S</span> <span class="st">"&lt;string&gt;"</span> <span class="at">-p</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">-S</span> <span class="st">"&lt;string&gt;"</span> <span class="at">-p</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <p>There are a lot of options with the <code>git log</code> command and you can <a href="https://git-scm.com/docs/git-log#Documentation/git-log.txt--Sltstringgt">read more here</a> and <a href="https://stackoverflow.com/questions/4468361/search-all-of-git-history-for-a-string">here</a></p>
@@ -1111,24 +1139,24 @@ Note
 <div class="code-with-filename-file">
 <pre><strong>secret-scanner9000.ps1</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb34" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example Usage</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co"># write this in the powershell terminal, adjust for the file type(s) you want to scan - can be multiple types: $fileExtensions = @(".R", ".py")</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co"># then execute this in the terminal: ScanFiles -FileExtensions $fileExtensions</span></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="co"># It will give you an output of any secrets that are contained in those files</span></span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Function</span> ScanFiles{</span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>  <span class="ex">param</span> <span class="er">(</span></span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>      <span class="ex">[string]</span><span class="va">$filePath</span> = <span class="er">(</span><span class="ex">Get-Location</span><span class="kw">)</span><span class="ex">.Path,</span></span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>      <span class="ex">[string[]]</span><span class="va">$fileExtensions</span></span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a><span class="kw">)</span> </span>
-<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>  <span class="ex">Get-ChildItem</span> <span class="va">$filePath</span> <span class="at">-recurse</span> <span class="kw">|</span> <span class="ex">Where-Object</span> {<span class="va">$_</span>.extension <span class="at">-in</span> <span class="va">$fileExtensions</span>} <span class="kw">|</span> </span>
-<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>  <span class="ex">Foreach-Object</span> {</span>
-<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">git</span> secrets <span class="at">--scan</span> <span class="va">$_</span>.FullName</span>
-<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>  <span class="er">}</span></span>
-<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example Usage</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co"># write this in the powershell terminal, adjust for the file type(s) you want to scan - can be multiple types: $fileExtensions = @(".R", ".py")</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co"># then execute this in the terminal: ScanFiles -FileExtensions $fileExtensions</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co"># It will give you an output of any secrets that are contained in those files</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Function</span> ScanFiles{</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="ex">param</span> <span class="er">(</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>      <span class="ex">[string]</span><span class="va">$filePath</span> = <span class="er">(</span><span class="ex">Get-Location</span><span class="kw">)</span><span class="ex">.Path,</span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>      <span class="ex">[string[]]</span><span class="va">$fileExtensions</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="kw">)</span> </span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>  <span class="ex">Get-ChildItem</span> <span class="va">$filePath</span> <span class="at">-recurse</span> <span class="kw">|</span> <span class="ex">Where-Object</span> {<span class="va">$_</span>.extension <span class="at">-in</span> <span class="va">$fileExtensions</span>} <span class="kw">|</span> </span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>  <span class="ex">Foreach-Object</span> {</span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">git</span> secrets <span class="at">--scan</span> <span class="va">$_</span>.FullName</span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>  <span class="er">}</span></span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a><span class="er">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <ol start="2" type="1">
@@ -1139,7 +1167,7 @@ Note
 <div class="code-with-filename-file">
 <pre><strong>PowerShell</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb35" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="va">$fileExtensions</span> = <span class="pp">@(</span><span class="st">".R"</span>,<span class="st">".py"</span>,<span class="st">".Rmd"</span>,<span class="st">".qmd"</span><span class="pp">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="va">$fileExtensions</span> = <span class="pp">@(</span><span class="st">".R"</span>,<span class="st">".py"</span>,<span class="st">".Rmd"</span>,<span class="st">".qmd"</span><span class="pp">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <ol start="3" type="1">
@@ -1150,7 +1178,7 @@ Note
 <div class="code-with-filename-file">
 <pre><strong>PowerShell</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb36" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ScanFiles</span> <span class="at">-FileExtensions</span> <span class="va">$fileExtensions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ScanFiles</span> <span class="at">-FileExtensions</span> <span class="va">$fileExtensions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1163,14 +1191,14 @@ Note
 <div class="code-with-filename-file">
 <pre><strong>bash</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb37" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-type</span> f <span class="dt">\(</span> <span class="at">-name</span> <span class="st">"*.R"</span> <span class="at">-o</span> <span class="at">-name</span> <span class="st">"*.py"</span> <span class="at">-o</span> <span class="at">-name</span> <span class="st">"*.qmd"</span> <span class="at">-o</span> <span class="at">-name</span> <span class="st">"*.rmd"</span> <span class="at">-o</span> <span class="at">-name</span> <span class="st">"*.md"</span> <span class="dt">\)</span> <span class="at">-print0</span> <span class="kw">|</span> <span class="fu">xargs</span> <span class="at">-0</span> <span class="at">-I</span> {} git secrets <span class="at">--scan</span> {}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-type</span> f <span class="dt">\(</span> <span class="at">-name</span> <span class="st">"*.R"</span> <span class="at">-o</span> <span class="at">-name</span> <span class="st">"*.py"</span> <span class="at">-o</span> <span class="at">-name</span> <span class="st">"*.qmd"</span> <span class="at">-o</span> <span class="at">-name</span> <span class="st">"*.rmd"</span> <span class="at">-o</span> <span class="at">-name</span> <span class="st">"*.md"</span> <span class="dt">\)</span> <span class="at">-print0</span> <span class="kw">|</span> <span class="fu">xargs</span> <span class="at">-0</span> <span class="at">-I</span> {} git secrets <span class="at">--scan</span> {}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <ol start="2" type="1">
 <li>This is set to scan all R, Python, QMD, RMD, or MD files. If you want to add another file type, do it like this where you add <code>-o -name "*.NEW_TYPE"</code> to the <code>find</code> command args:</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-type</span> f <span class="dt">\(</span> <span class="at">-name</span> <span class="st">"*.R"</span> <span class="at">-o</span> <span class="at">-name</span> <span class="st">"*.py"</span> <span class="at">-o</span> <span class="at">-name</span> <span class="st">"*.qmd"</span> <span class="at">-o</span> <span class="at">-name</span> <span class="st">"*.rmd"</span> <span class="at">-o</span> <span class="at">-name</span> <span class="st">"*.md"</span> <span class="at">-o</span> <span class="at">-name</span> <span class="st">"*.NEW_TYPE"</span>  <span class="dt">\)</span> <span class="at">-print0</span> <span class="kw">|</span> <span class="fu">xargs</span> <span class="at">-0</span> <span class="at">-I</span> {} git secrets <span class="at">--scan</span> {}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-type</span> f <span class="dt">\(</span> <span class="at">-name</span> <span class="st">"*.R"</span> <span class="at">-o</span> <span class="at">-name</span> <span class="st">"*.py"</span> <span class="at">-o</span> <span class="at">-name</span> <span class="st">"*.qmd"</span> <span class="at">-o</span> <span class="at">-name</span> <span class="st">"*.rmd"</span> <span class="at">-o</span> <span class="at">-name</span> <span class="st">"*.md"</span> <span class="at">-o</span> <span class="at">-name</span> <span class="st">"*.NEW_TYPE"</span>  <span class="dt">\)</span> <span class="at">-print0</span> <span class="kw">|</span> <span class="fu">xargs</span> <span class="at">-0</span> <span class="at">-I</span> {} git secrets <span class="at">--scan</span> {}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
