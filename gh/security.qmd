@@ -39,24 +39,28 @@ citation-location: margin
 
 If sensitive information is leaked and commited to the remote repo, then they will stay in the git history (and will require a lot of effort to remove them from the history). The following cannot be included in any repo **or any local commit!**:
 
-+--------------------------+-----------------------------------------+
-| Type                     | Examples                                |
-+==========================+=========================================+
-| File Paths               | -   Network drives                      |
-|                          | -   Shared internal drives              |
-+--------------------------+-----------------------------------------+
-| Server Names             | -   ODBC Connections                    |
-+--------------------------+-----------------------------------------+
-| Credentials              | -   SSH Keys                            |
-|                          | -   Tokens (REDCap, Azure, Github, etc) |
-|                          | -   Usernames                           |
-|                          | -   Passwords                           |
-|                          | -   Blob/bucket keys                    |
-+--------------------------+-----------------------------------------+
-| Identifiable Information | -   Addresses                           |
-|                          | -   Names                               |
-|                          | -   Any PHI                             |
-+--------------------------+-----------------------------------------+
++--------------------------+------------------------------------------------------------------------------+
+| Type                     | Examples                                                                     |
++==========================+==============================================================================+
+| File Paths               | -   Network drives                                                           |
+|                          | -   Shared internal drives                                                   |
++--------------------------+------------------------------------------------------------------------------+
+| Server Names             | -   ODBC Connections                                                         |
++--------------------------+------------------------------------------------------------------------------+
+| Credentials              | -   SSH Keys                                                                 |
+|                          | -   Tokens (REDCap, Azure, Github, etc)                                      |
+|                          | -   AWS paths                                                                |
+|                          | -   Bucket connections                                                       |
+|                          | -   Usernames                                                                |
+|                          | -   Passwords                                                                |
+|                          | -   Blob/bucket keys                                                         |
++--------------------------+------------------------------------------------------------------------------+
+| Identifiable Information | -   Addresses                                                                |
+|                          | -   Names                                                                    |
+|                          | -   Any PHI                                                                  |
+|                          | -   Geographic location (depending on circumstance)                          |
+|                          | -   `WA` ids from PHL for genome sequencing (ids from public repos are okay) |
++--------------------------+------------------------------------------------------------------------------+
 
 : Items prohibited from being in a Github repo {#tbl-prohibit}
 
@@ -93,7 +97,7 @@ We can store private information in local files and make sure that the do not ge
 
 There are many ways to achieve this. If you have a more simple workflow that uses R, consider the `.Renviron` approach. If you have a more complex workflow that has multiple languages and many credentials, consider the `yaml` approach
 
-::: panel-tabset
+:::::::::::::: panel-tabset
 ### .Renviron
 
 If you're using just R in your repo and have just a few things you want private, consider using a `.Renviron` file in addition to `.gitignore`.
@@ -119,7 +123,7 @@ If you're using just R in your repo and have just a few things you want private,
 
 4.  Now in an R script you can call that password *and* hide the credentials instead of writting the password in the script for everyone to see:
 
-::: container
+::::: container
 ::: {.smallframe .column width="40%" padding="10px"}
 ```{r filename="good_script.R"}
 my_password <- Sys.getenv('my_password')
@@ -131,7 +135,7 @@ my_password <- Sys.getenv('my_password')
 my_password <- "thisismypassword123"
 ```
 :::
-:::
+:::::
 
 `Sys.getenv()` looks for the `.Renviron` file and the variables inside of it. This means you can get all your credentials from the `.Renviron` but also keep that information
 
@@ -176,7 +180,7 @@ default:
 
 4.  To call these credentials in R or Python it will look like this:
 
-::: container
+::::: container
 ::: {.smallframe .column width="40%" padding="10px"}
 ```{r filename="script.R"}
 library(yaml)
@@ -214,7 +218,7 @@ conn = pyodbc.connect(
   )
 ```
 :::
-:::
+:::::
 
 5.  You can add more nested sections besides default, like this, where I added a `test` parameter:
 
@@ -268,7 +272,7 @@ For example,
 -   these are passed to the R script as `arg[2]`.
 -   now we can use `arg[2]` in the if-else statement to conditionally select credentials and do it automatically in a pipeline.
 
-::: container
+::::: container
 ::: {.smallframe .column width="40%"}
 ```{r filename="script-in-repo.R"}
 #| source-line-numbers: "1,9-14"
@@ -299,7 +303,7 @@ $ Rscript -e "source('path/script_in_repo.R');" production
 $ Rscript -e "source('path/script_in_repo.R');" test 
 ```
 :::
-:::
+:::::
 
 #### yaml Template
 
@@ -368,7 +372,7 @@ And to get a list of files that are "skipped", use this code:
 git ls-files -v . | grep ^S
 ```
 :::
-:::
+::::::::::::::
 
 <br>
 
@@ -384,11 +388,11 @@ Hooks are processes that run in the background and can prevent code from being p
 
 Pre-commit hooks run a process locally when the user attempts to commit code to a git branch. Hooks have many uses. Here we can use them as a security guardrail to prevent accidental credential leaks in committed code. For example, if someone accidentally pushes a server name to the public repo, the hook will prevent that code from ever getting into the remote repo and will give the user a local error.
 
-Follow the instructions below to set up pre-commit hooks _for all of your repos_. You can set up different hooks for individual repos, but I recommend setting this up globally so that all of your local clones are covered by the security hook.
+Follow the instructions below to set up pre-commit hooks *for all of your repos*. You can set up different hooks for individual repos, but I recommend setting this up globally so that all of your local clones are covered by the security hook.
 
-[This document](https://sparkbox.com/foundry/git_secrets) goes through setting up git hooks in more detail 
+[This document](https://sparkbox.com/foundry/git_secrets) goes through setting up git hooks in more detail
 
-::: panel-tabset
+::::::::: panel-tabset
 ## Windows
 
 1.  Clone or download the zip from the [AWS Git Secrets repo](https://github.com/awslabs/git-secrets/)
@@ -418,14 +422,13 @@ Follow the instructions below to set up pre-commit hooks _for all of your repos_
     ```
     :::
 
-6. Configure git to use that template for all your repos
+6.  Configure git to use that template for all your repos
 
 ::: smallframe
 ```{bash filename="PowerShell"}
 git config --global init.templateDir ’~/.git-template’ 
 ```
 :::
-
 
 7.  Make or copy the regex file called `secrets_key` containing the secret patterns **outside of your git repos**.
 
@@ -437,7 +440,15 @@ git config --global init.templateDir ’~/.git-template’
 
     ::: smallframe
     ```{bash filename="PowerShell"}
-    git secrets --add-provider --global -- cat ./secrets_key
+    git secrets --add-provider --global -- cat path/to/secrets_key
+    ```
+    :::
+
+10. Make sure the AWS providers are added:
+
+    ::: smallframe
+    ```{bash filename="PowerShell"}
+    git secrets --register-aws --global
     ```
     :::
 
@@ -456,17 +467,17 @@ git secrets --add -a 'allowed pattern'
 ```
 :::
 
-10.  Check your git history (@sec-scan)
+11. Check your git history (@sec-scan)
 
-11. If something gets flagged and you don't care about your history anymore: Delete .git folder and reinitialize repository
+12. If something gets flagged and you don't care about your history anymore: Delete .git folder and reinitialize repository
 
     -   I would take caution about this point. There might be better ways to clean your git history if you don't want to get rid of everything.
 
-12. Test on one of my projects to see if rebasing is a sustainable option
+13. Test on one of my projects to see if rebasing is a sustainable option
 
-13. Make repo public
+14. Make repo public
 
-14. Will automatically scan on every commit and won't let it commit unless it's clean - Create a few files to show it working
+15. Will automatically scan on every commit and won't let it commit unless it's clean - Create a few files to show it working
 
 ::: callout-note
 We can't use the "Non capture group" feature of regex. Meaning we can't use patterns like this in our regex: (?:abc) -- see https://regexr.com IMPORTANT: Tab separate your regex expressions. Making new lines caused a bit of chaos and took really long to figure out. (you can use multiple tabs to separate them more visually)
@@ -497,6 +508,7 @@ We can't use the "Non capture group" feature of regex. Meaning we can't use patt
         :::
 
     -   then down arrow key to get to the last line in the file
+
     -   add the path like this:
 
         ::: smallframe
@@ -506,8 +518,11 @@ We can't use the "Non capture group" feature of regex. Meaning we can't use patt
         :::
 
     -   hit `CTRL + O` then `ENTER` to save
+
     -   hit `CTRL + X` to exit
-    -   start a new terminal and write this to see your path variables. 
+
+    -   start a new terminal and write this to see your path variables.
+
     -   `git-secrets` should be in there somewhere now
 
         ::: smallframe
@@ -516,7 +531,7 @@ We can't use the "Non capture group" feature of regex. Meaning we can't use patt
         ```
         :::
 
-5.  Make a git template directory 
+5.  Make a git template directory
 
     ::: smallframe
     ```{bash filename="terminal"}
@@ -540,20 +555,27 @@ We can't use the "Non capture group" feature of regex. Meaning we can't use patt
     ```
     :::
 
-
 8.  Make or copy the regex file called `secrets_key` containing the secret patterns into your folder.
 
     -   This file should be given to you by the Github admins. It contains a regex of potential secrets. Contact `frank.aragona@doh.wa.gov` for more information.
 
 9.  Make sure the file `secrets_key` is in your `.gitignore`. We can't push that to the remote repo.
 
-10. Add the secrets file to your provider list 
+10. Add the secrets file to your provider list
 
 ::: smallframe
 ```{bash filename="terminal"}
 git secrets --add-provider --global -- cat ./secrets_key
 ```
 :::
+
+11. Make sure the AWS providers are added:
+
+    ::: smallframe
+    ```{bash filename="PowerShell"}
+    git secrets --register-aws --global
+    ```
+    :::
 
 You can also add prohibited patterns like this
 
@@ -570,22 +592,22 @@ git secrets --add -a 'allowed pattern'
 ```
 :::
 
-11. Check your git history (@sec-scan)
+12. Check your git history (@sec-scan)
 
-12. If something gets flagged and you don't care about your history anymore: Delete .git folder and reinitialize repository
+13. If something gets flagged and you don't care about your history anymore: Delete .git folder and reinitialize repository
 
     -   I would take caution about this point. There might be better ways to clean your git history if you don't want to get rid of everything.
 
-13. Test on one of my projects to see if rebasing is a sustainable option
+14. Test on one of my projects to see if rebasing is a sustainable option
 
-14. Make repo public
+15. Make repo public
 
-15. Will automatically scan on every commit and won't let it commit unless it's clean - Create a few files to show it working
+16. Will automatically scan on every commit and won't let it commit unless it's clean - Create a few files to show it working
 
 ::: callout-note
 We can't use the "Non capture group" feature of regex. Meaning we can't use patterns like this in our regex: (?:abc) -- see https://regexr.com IMPORTANT: Tab separate your regex expressions. Making new lines caused a bit of chaos and took really long to figure out. (you can use multiple tabs to separate them more visually)
 :::
-:::
+:::::::::
 
 <br>
 
@@ -600,27 +622,25 @@ We can't use the "Non capture group" feature of regex. Meaning we can't use patt
 -   Follow the Secret Scanning instructions below for more help
 :::
 
-
 # Secret Scanning {#sec-scan}
 
-Now that the pre-commit hook is set up, any future commits to your repo will be scanned for secrets. If you are pushing a pre-existing repo to a public repo for the first time, you should scan the existing code in the repo because the pre-commit hook will not automatically do that. They are really set up to prevent any _future_ secrets from being pushed to the repo, not to scan what is _currently_ in the repo.
+Now that the pre-commit hook is set up, any future commits to your repo will be scanned for secrets. If you are pushing a pre-existing repo to a public repo for the first time, you should scan the existing code in the repo because the pre-commit hook will not automatically do that. They are really set up to prevent any *future* secrets from being pushed to the repo, not to scan what is *currently* in the repo.
 
-There are a few ways to scan the history of your repo for secrets. The `git secrets` command comes with a few options to scan the history, but I have found that it is a bit broken. 
+There are a few ways to scan the history of your repo for secrets. The `git secrets` command comes with a few options to scan the history, but I have found that it is a bit broken.
 
-- the `git secrets --scan-history` command will run forever if you have a large repo (especially if you have html files in it)
-- globs have not worked for me (specifying the file types you want to scan for `git secrets --scan *glob`)
-- likewise, scanning specific folders have not worked for me like this `git secrets --scan directory/*`
+-   the `git secrets --scan-history` command will run forever if you have a large repo (especially if you have html files in it)
+-   globs have not worked for me (specifying the file types you want to scan for `git secrets --scan *glob`)
+-   likewise, scanning specific folders have not worked for me like this `git secrets --scan directory/*`
 
 I'll show 2 ways to scan for secrets, one with a native git command `git log`, and the other with `git secrets`
 
-
 ## git log for scanning
 
-This is the easier way to scan _commit history_. 
+This is the easier way to scan *commit history*.
 
 Navigate to your repo and execute this command:
 
-:::{.medframe}
+::: medframe
 ```{bash}
 git log -G"<regex here>" -p
 ```
@@ -628,7 +648,7 @@ git log -G"<regex here>" -p
 
 Note that the regex pattern can be imported from the `secrets_key` file. You can also search for simple strings like this
 
-:::{.medframe}
+::: medframe
 ```{bash}
 git log -S "<string>" -p
 ```
@@ -648,12 +668,10 @@ This isn't my favorite way to scan code, but it is an option if you want to doub
 
 Follow the instructions below to scan for specific files. The script will scan for all the file types that you select. For example, if you want to only scan R files, it will only scan R files.
 
-:::{.panel-tabset}
-
+::: panel-tabset
 ### Windows
 
-
-1. In PowerShell, navigate to your repo and paste this code:
+1.  In PowerShell, navigate to your repo and paste this code:
 
 ```{bash filename="secret-scanner9000.ps1"}
 # Example Usage
@@ -676,14 +694,13 @@ Function ScanFiles{
 }
 ```
 
-2. Write the file extensions you want to scan for in a PowerShell Terminal window like this: 
-
+2.  Write the file extensions you want to scan for in a PowerShell Terminal window like this:
 
 ```{bash filename="PowerShell"}
 $fileExtensions = @(".R",".py",".Rmd",".qmd")
 ```
 
-3. Now, you can scan your secrets by copying and pasting this code into PowerShell:
+3.  Now, you can scan your secrets by copying and pasting this code into PowerShell:
 
 ```{bash filename="PowerShell"}
 ScanFiles -FileExtensions $fileExtensions
@@ -691,23 +708,19 @@ ScanFiles -FileExtensions $fileExtensions
 
 ### WSL/Linux
 
-1. In a bash/Ubuntu terminal, navigate to your repo and paste this code:
-
+1.  In a bash/Ubuntu terminal, navigate to your repo and paste this code:
 
 ```{bash filename="bash"}
 find . -type f \( -name "*.R" -o -name "*.py" -o -name "*.qmd" -o -name "*.rmd" -o -name "*.md" \) -print0 | xargs -0 -I {} git secrets --scan {}
 
 ```
 
-2. This is set to scan all R, Python, QMD, RMD, or MD files. If you want to add another file type, do it like this where you add `-o -name "*.NEW_TYPE"` to the `find` command args:
-
+2.  This is set to scan all R, Python, QMD, RMD, or MD files. If you want to add another file type, do it like this where you add `-o -name "*.NEW_TYPE"` to the `find` command args:
 
 ```{bash}
 find . -type f \( -name "*.R" -o -name "*.py" -o -name "*.qmd" -o -name "*.rmd" -o -name "*.md" -o -name "*.NEW_TYPE"  \) -print0 | xargs -0 -I {} git secrets --scan {}
 ```
-
 :::
-
 
 # Pre-Recieve Hooks
 
@@ -719,13 +732,13 @@ We may wish to take private codes and push them to a public repo. We need to mak
 
 There are a few ways to do this, but the easiest way is to copy the clean private code to the public repo, that is, copy all the files you want to add publicly but **do not copy the `.git`** folder. If the private repo has a dirty git history we will not want that history in the public repo because the sensitive data will then be publicly available.
 
-::: {.content-visible when-format="html"}
+:::: {.content-visible when-format="html"}
 ::: {.column-screen-inset-shaded layout-nrow="1"}
 ![](images/private_repo3.PNG){.myframe}
 
 ![](images/public_repo3.PNG){.myframe}
 :::
-:::
+::::
 
 {{< fa exclamation >}} The private repository on the left still contains sensitive information in the git history. The public repository on the right has a clean git history because we copied only the current clean files from the private repo and did not attach its git history (which lives in the hidden `.git` folder)
 
