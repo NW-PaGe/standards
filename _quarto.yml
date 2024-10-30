@@ -89,6 +89,7 @@ website:
               - gh/templates.qmd
               - gh/git.qmd
               - gh/how_to.qmd
+              - gh/newrepo.qmd
               # - gh/*.qmd # this glob should work but it's not...
 
     - id: aws
