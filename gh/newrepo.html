@@ -6,11 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Frank Aragona">
-<meta name="dcterms.date" content="2023-09-01">
-<meta name="description" content="Github and Quarto templates for repos and document styles">
+<meta name="author" content="Marcela Torres">
+<meta name="dcterms.date" content="2024-10-30">
+<meta name="description" content="Create a new repo guide">
 
-<title>NW-COE Policies – Templates</title>
+<title>NW-COE Policies – New Repo</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -42,7 +42,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -74,7 +73,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -95,7 +94,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../gh/index.html"> 
+    <a class="nav-link active" href="../gh/index.html" aria-current="page"> 
 <span class="menu-text">Github</span></a>
   </li>  
   <li class="nav-item">
@@ -129,64 +128,180 @@ ul.task-list li input[type="checkbox"] {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../gh/index.html">Github</a></li><li class="breadcrumb-item"><a href="../gh/release.html">Tutorials</a></li><li class="breadcrumb-item"><a href="../gh/newrepo.html">New Repo</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../gh/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Github</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text">Policies</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../gh/quickstart.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Checklist</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../gh/contribute.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Contribution/Collaboration Guide</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../gh/security.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Repo Security</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../gh/policies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Org Policies</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../gh/lic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Licensing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../gh/reproduce.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reproducibility</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Tutorials</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../gh/release.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Release Cycles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../gh/renv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Virtual Environments</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../gh/templates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Templates</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../gh/git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Git Basics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../gh/how_to.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Repo Documentation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../gh/newrepo.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">New Repo</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#r-github-template" id="toc-r-github-template" class="nav-link active" data-scroll-target="#r-github-template">R Github Template</a></li>
-  <li><a href="#purpledoc-quarto-template" id="toc-purpledoc-quarto-template" class="nav-link" data-scroll-target="#purpledoc-quarto-template">Purpledoc Quarto Template</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#steps" id="toc-steps" class="nav-link" data-scroll-target="#steps">Steps</a>
+  <ul class="collapse">
+  <li><a href="#sign-in" id="toc-sign-in" class="nav-link" data-scroll-target="#sign-in">Sign-in</a></li>
+  <li><a href="#create-a-new-repository" id="toc-create-a-new-repository" class="nav-link" data-scroll-target="#create-a-new-repository">Create a new repository</a></li>
+  <li><a href="#fill-out-the-new-repository-fields" id="toc-fill-out-the-new-repository-fields" class="nav-link" data-scroll-target="#fill-out-the-new-repository-fields">Fill out the new repository fields</a></li>
+  <li><a href="#check-out-your-new-repo" id="toc-check-out-your-new-repo" class="nav-link" data-scroll-target="#check-out-your-new-repo">Check out your new repo</a></li>
+  <li><a href="#clone-the-new-repo" id="toc-clone-the-new-repo" class="nav-link" data-scroll-target="#clone-the-new-repo">Clone the new repo</a></li>
+  <li><a href="#safeguard-sensitive-data" id="toc-safeguard-sensitive-data" class="nav-link" data-scroll-target="#safeguard-sensitive-data">Safeguard sensitive data</a></li>
+  <li><a href="#populating-the-repo-via-commits" id="toc-populating-the-repo-via-commits" class="nav-link" data-scroll-target="#populating-the-repo-via-commits">Populating the repo via commits</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/tools/templates.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/tools/templates.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/gh/newrepo.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/gh/newrepo.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../gh/index.html">Github</a></li><li class="breadcrumb-item"><a href="../gh/release.html">Tutorials</a></li><li class="breadcrumb-item"><a href="../gh/newrepo.html">New Repo</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Templates</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">data democratization</div>
-    <div class="quarto-category">templates</div>
-    <div class="quarto-category">Quarto</div>
-  </div>
-  </div>
+<h1 class="title">New Repo</h1>
+</div>
 
 <div>
   <div class="description">
-    Github and Quarto templates for repos and document styles
+    Create a new repo guide
   </div>
 </div>
 
-<div class="quarto-title-meta-author">
-  <div class="quarto-title-meta-heading">Author</div>
-  <div class="quarto-title-meta-heading">Affiliations</div>
-  
-    <div class="quarto-title-meta-contents">
-    <p class="author">Frank Aragona <a href="mailto:frank.aragona@doh.wa.gov" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            Washington Department of Health
-          </p>
-        <p class="affiliation">
-            Data Integration/Quality Assurance
-          </p>
-      </div>
-  </div>
 
 <div class="quarto-title-meta">
 
-      
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Marcela Torres </p>
+          </div>
+  </div>
+    
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 1, 2023</p>
+      <p class="date">October 30, 2024</p>
     </div>
   </div>
   
@@ -204,38 +319,61 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="r-github-template" class="level2">
-<h2 class="anchored" data-anchor-id="r-github-template"><a href="https://github.com/NW-PaGe/R_template">R Github Template</a></h2>
-<p>This is a Github repo template for R projects. It has <code>renv</code> set up and a <code>.devcontainer</code> for reproducibility</p>
-<table>
-<tbody><tr>
-<td valign="top">
-<p>Select <code>Use Template &gt; NW-PaGe/R_template</code> when creating a new repo in the NW-PaGe org. The template comes with a pre-filled <code>README.md</code> file that you can edit to your own needs. It’s recommended to leave the <code>.devconainter</code> folder in this repo. It serves as instructions to install all the software and R packages needed to reproduce the repos code using a Github Codespace. See the <code>README.md</code> for more information.</p>
-</td>
-<td valign="top">
-<a href="https://github.com/NW-PaGe/R_template"><img src="images/r_template.PNG" class="img-fluid" width="1000"></a>
-</td>
-</tr>
-</tbody></table>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>We are often writing scripts that could be useful to others. This tutorial goes over how to make your R scripts accessible to others by making them available in the NW-PAGE GitHub repo.</p>
 </section>
-<section id="purpledoc-quarto-template" class="level2">
-<h2 class="anchored" data-anchor-id="purpledoc-quarto-template"><a href="https://github.com/coe-test-org/purpledoc">Purpledoc Quarto Template</a></h2>
-<p>This is a Quarto template that contains the style and images used in this site</p>
-<table>
-<tbody><tr>
-<td valign="top">
-<pre data-code-line-numbers=""><code>quarto use template coe-test-org/purpledoc</code></pre>
-<p>This will install the extension and create an example qmd file that you can use as a starting place for your report.</p>
-<p>You may also use this format with an existing Quarto project or document. From the quarto project or document directory, run the following command to install this format:</p>
-<pre data-code-line-numbers=""><code>quarto add coe-test-org/purpledoc</code></pre>
-</td>
-<td valign="top">
-<a href="https://github.com/coe-test-org/purpledoc"><img src="images/purpledoc.PNG" class="img-fluid" width="400"></a>
-</td>
-</tr>
-</tbody></table>
+<section id="steps" class="level2">
+<h2 class="anchored" data-anchor-id="steps">Steps</h2>
+<section id="sign-in" class="level3">
+<h3 class="anchored" data-anchor-id="sign-in">Sign-in</h3>
+<p>Sign-in to GitHub using your GitHub credentials. If you are part of WA DOH make sure to use your WA DOH compliant Git Hub account.</p>
+</section>
+<section id="create-a-new-repository" class="level3">
+<h3 class="anchored" data-anchor-id="create-a-new-repository">Create a new repository</h3>
+<p>In the browser, navigate to <code>Repositories</code> and click <code>New repository</code></p>
+<p><img src="images/NewRepository.png" class="img-fluid"></p>
+</section>
+<section id="fill-out-the-new-repository-fields" class="level3">
+<h3 class="anchored" data-anchor-id="fill-out-the-new-repository-fields">Fill out the new repository fields</h3>
+<ol type="1">
+<li>Name your repo</li>
+<li>Select your repo to be private, you can change this later</li>
+<li>Select the option to add a README file</li>
+<li>Select a .gitignore template (R or Python are good options)</li>
+<li>Select the MIT license</li>
+<li>Click <code>Create repository</code></li>
+</ol>
+<p><img src="images/NewRepoInfo.png" class="img-fluid"></p>
+</section>
+<section id="check-out-your-new-repo" class="level3">
+<h3 class="anchored" data-anchor-id="check-out-your-new-repo">Check out your new repo</h3>
+<p>Congratulations you have created a new GitHub repo. Now you have to populate it with information!</p>
+<p><img src="images/SeeNewRepo.png" class="img-fluid"></p>
+</section>
+<section id="clone-the-new-repo" class="level3">
+<h3 class="anchored" data-anchor-id="clone-the-new-repo">Clone the new repo</h3>
+<p>Now you would want to clone your repo in your machine to start uploading content via commits. To do this click <code>Code</code> and either clone your repo using terminal by copying the URL, or click <code>Open with GitHub Desktop</code>. I will demonstrate using the latter option.</p>
+<p><img src="images/OpenwGitHubDesktop.png" class="img-fluid"></p>
+<p>GitHub Desktop will open. Double check the location where you want to close your repo. Click <code>Clone</code> and double check that a folder with the repo name has been created in the local path you provided.</p>
+<p><img src="images/Clone.png" class="img-fluid"></p>
+</section>
+<section id="safeguard-sensitive-data" class="level3">
+<h3 class="anchored" data-anchor-id="safeguard-sensitive-data">Safeguard sensitive data</h3>
+<p>Before making your first commit you would want to make sure to do your due diligence to safe guard important information.</p>
+<ol type="1">
+<li>Check that you are using git secrets which will block commits that contain file paths and server names from being uploaded to your repo</li>
+<li>Add file names that you don’t want to accidentally upload to the repo to the gitignore file</li>
+</ol>
+</section>
+<section id="populating-the-repo-via-commits" class="level3">
+<h3 class="anchored" data-anchor-id="populating-the-repo-via-commits">Populating the repo via commits</h3>
+<p>If your information is saved elsewhere and you need to upload it to the repo simply copy and paste the files inside the folder where you cloned the repo. In this example, I pasted an HTML file inside the folder and then I navigated to GitHub Desktop to make the commit which will upload that file to the repo.</p>
+<p>Remember to select the file, add a title to the commit, click <code>Commit to main</code>, and then click <code>Push origin</code>.</p>
+<p><img src="images/CommitNewRepo.png" class="img-fluid"></p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -656,7 +794,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/tools/templates.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/tools/templates.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/gh/newrepo.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/gh/newrepo.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
@@ -666,5 +804,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<script src="../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
 </body></html>
