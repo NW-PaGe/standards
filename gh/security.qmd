@@ -37,30 +37,39 @@ citation-location: margin
 -   Scrub private repos before they go public
 :::
 
-If sensitive information is leaked and commited to the remote repo, then they will stay in the git history (and will require a lot of effort to remove them from the history). The following cannot be included in any repo **or any local commit!**:
+If sensitive information is leaked and commited to the remote repo, then they will stay in the git history (and will require a lot of effort to remove them from the history).
 
-+--------------------------+------------------------------------------------------------------------------+
-| Type                     | Examples                                                                     |
-+==========================+==============================================================================+
-| File Paths               | -   Network drives                                                           |
-|                          | -   Shared internal drives                                                   |
-+--------------------------+------------------------------------------------------------------------------+
-| Server Names             | -   ODBC Connections                                                         |
-+--------------------------+------------------------------------------------------------------------------+
-| Credentials              | -   SSH Keys                                                                 |
-|                          | -   Tokens (REDCap, Azure, Github, etc)                                      |
-|                          | -   AWS paths                                                                |
-|                          | -   Bucket connections                                                       |
-|                          | -   Usernames                                                                |
-|                          | -   Passwords                                                                |
-|                          | -   Blob/bucket keys                                                         |
-+--------------------------+------------------------------------------------------------------------------+
-| Identifiable Information | -   Addresses                                                                |
-|                          | -   Names                                                                    |
-|                          | -   Any PHI                                                                  |
-|                          | -   Geographic location (depending on circumstance)                          |
-|                          | -   `WA` ids from PHL for genome sequencing (ids from public repos are okay) |
-+--------------------------+------------------------------------------------------------------------------+
+::: callout-caution
+Err on the side of caution: If data isn't already public, it likely shouldn't be made public through a PR or a commit.
+:::
+
+The following cannot be included in any repo **or any local commit!**:
+
++--------------------------+---------------------------------------------------------------------------------------------------------------+
+| Type                     | Examples                                                                                                      |
++==========================+===============================================================================================================+
+| File Paths               | -   Network drives                                                                                            |
+|                          | -   Shared internal drives                                                                                    |
++--------------------------+---------------------------------------------------------------------------------------------------------------+
+| Server Names             | -   ODBC Connections                                                                                          |
++--------------------------+---------------------------------------------------------------------------------------------------------------+
+| Credentials              | -   SSH Keys                                                                                                  |
+|                          | -   Tokens (REDCap, Azure, Github, etc)                                                                       |
+|                          | -   AWS paths                                                                                                 |
+|                          | -   Bucket connections                                                                                        |
+|                          | -   Usernames                                                                                                 |
+|                          | -   Passwords                                                                                                 |
+|                          | -   Blob/bucket keys                                                                                          |
++--------------------------+---------------------------------------------------------------------------------------------------------------+
+| Identifiable Information | -   Case addresses                                                                                            |
+|                          | -   Case names                                                                                                |
+|                          | -   Any private health information (PHI)                                                                      |
+|                          | -   Geographic location (depending on circumstance)                                                           |
+|                          | -   `WA` ids from PHL for genome sequencing (ids from public repos are okay)                                  |
++--------------------------+---------------------------------------------------------------------------------------------------------------+
+| Partners' Information    | -   Names of health facilities (i.e., facilities where healthcare-associated infection samples are collected) |
+|                          | -   Geographic locations for mosquito traps (West Nile Virus surveillance)                                    |
++--------------------------+---------------------------------------------------------------------------------------------------------------+
 
 : Items prohibited from being in a Github repo {#tbl-prohibit}
 
