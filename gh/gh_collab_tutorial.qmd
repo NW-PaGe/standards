@@ -1,8 +1,7 @@
 ---
 title: "Collaborating on GitHub"
 description: Collaborating on GitHub
-date: December 4, 2024
-date-modified: today
+date: today
 author: Pauline Trinh
 # categories:
 #   - collaboration
@@ -10,9 +9,6 @@ author: Pauline Trinh
 #   - Github
 execute: 
   freeze: true
-format:
-  html:
-    code-copy: true
 ---
 
 ## Introduction
@@ -25,7 +21,7 @@ The high-level workflow we recommend following for collaborators within a reposi
 1. Clone the repository.
 2. Create a feature branch.
 3. Make changes, commit, and push the branch. 
-4. Open a pull request. 
+4. Open a pull request from branch to main. 
 5. Conduct reviews and address comments. 
 6. Merge the pull request and delete the branch.
 7. Update your local `main` repo with merged PR. 
@@ -33,7 +29,7 @@ The high-level workflow we recommend following for collaborators within a reposi
 
 ## Steps for Collaborating on GitHub Using the Command Line 
 
-### Sign-in
+### 0. Sign-in
 
 Sign-in to GitHub using your GitHub credentials. If you are part of WA DOH make sure to use your WA DOH is compliant Git Hub account. Every WA DOH GitHub user should have 2-factor authentication enabled. 
 
@@ -44,26 +40,25 @@ Sign-in to GitHub using your GitHub credentials. If you are part of WA DOH make 
 ![](images/gitclonerepo.png)
 
 - Run the following command in your terminal to clone the repo: 
-```bash
+```{bash}
 git clone <repository_url> 
 ```
 - Navigate to the repository folder: 
-```
+```{bash}
 cd <repository_name>
 ```
-
 
 ### 2. Branching Workflow
 #### Step 2.1: Create a branch 
 Branches are created to isolate development tasks. Always branch off the `main` branch. 
 1. Pull the latest change from the `main` branch: 
-```
+```{bash}
 git checkout main 
 git pull origin main 
 ```
 
 2. Create and switch to a new branch 
-```
+```{bash}
 git checkout -b <branch_name> 
 ```
 **Note: Branches can be called whatever you'd like. If you'd like to organize your name conventions you could consider using prefixes like `feature/`,`bugfix/`. This would look like: `git checkout -b feature/add-flu-lbis` 
@@ -77,11 +72,11 @@ git push -u origin <branch_name>
 #### Step 2.2: Develop on the branch 
 1. Make changes to the code/repository. 
 2. Stage the changes: 
-```
+```{bash}
 git add . 
 ```
 3. Commit the changes with a descriptive message: 
-``` 
+``` {bash}
 git commit -m "docs: make changes to readme documentation to include instructions on logging in"
 ```
 **Note: Use clear, description messages. You can follow the format of `<type>:<subject>` for a commit message. Example: `fix: fix bug in merge.py script`. 
@@ -100,36 +95,36 @@ git commit -m "docs: make changes to readme documentation to include instruction
 #### Step 4.1 Update your Branch with `main` 
 Before opening a PR, ensure your branch is up-to-date with the latest changes in `main` to ensure compatability. 
 1. Swith to the `main` brnach and pull the latest changes: 
-```
+```{bash}
 git checkout main 
 git pull origin main 
 ```
 2. Switch back to your branch: 
-```
+```{bash}
 git checkout <branch_name> 
 ```
 3. Merge `main` into your branch 
 - Merge (safe and retains all commit history): 
-```
+```{bash}
 git merge main
 ```
 4. Resolve conflicts, if any: 
 - Edit conflicting files, then stage the changes: 
-```
+```{bash}
 git add <file_name> 
 ```
 - Commit the resolved conflicts: 
-```
+```{bash}
 git commit -m "Resolve merge conflicts with main" 
 ```
 5. Push the updated branch: 
-```
+```{bash}
 git push 
 ```
 
 #### Step 4.2: Open a Pull Request 
 1. Push changes to the feature branch: 
-```
+```{bash}
 git push origin <branch_name> 
 ```
 2. On GitHub, click **Pull Requests > New Pull Request.**
@@ -139,7 +134,7 @@ git push origin <branch_name>
 
 #### Step 4.2: Resolve any Pull Request Feedback 
 1. Address feedback in your branch then commit and push back to the branch 
-```
+```{bash}
 git add . 
 git commit -m "Address PR feedback" 
 git push 
@@ -154,11 +149,11 @@ git push
 ### 6. Pruning Branches 
 #### Step 6.1: Delete Local Branches 
 1. List all local branches 
-```
+```{bash}
 git branch 
 ```
 2. Delete a branch: 
-```
+```{bash}
 git branch -d <branch_name> 
 ```
 **Note: Use `-D` to force delte if the branch isn't merged 
@@ -166,14 +161,115 @@ git branch -d <branch_name>
 ### 7. Update `main` with the merged PR 
 After merging your pull request, it's important to update your local `main` branch to reflect the latest changes from the remote repository. 
 1. Switch to the `main` branch: 
-```
+```{bash}
 git checkout main 
 ```
 2. Pull the latest changes from the remote: 
-``` 
+```{bash} 
 git pull origin main 
 ```
 
 ## Steps for Collaborating on GitHub Using GitHub Desktop (GUI) 
+GitHub Desktop is a user-friendly application that simplifies version control and collaboration. This tutorial walks you through the process of collaborating on a GitHub repository using GitHub Desktop, including cloning a repository, creating branches, making changes, committing, pushing updates, and managing pull requests.
+
+### 0. Install GitHub Desktop 
+GitHub Desktop is free and can be installed on your Windows or Mac machines. Follow the installation instructions [here](https://desktop.github.com/download/). 
+
+### 1. Initial SetUp: Cloning the Repository 
+1. Open GitHub Desktop 
+- Opening up GitHub Desktop should bring you to a UI similar to this where you see tabs for Current repository and Current branch. 
+![](images/GitHubDesktopIntro.png)
+2. Click the drop down arrow for **Current repository > Add > Clone repository** or you can click **File > Clone Repository**
+![](images/github_desktop_clonerepo1.gif)
+
+3. In the dialog box: 
+- Search for the repository that you want to clone
+- Select the location you would like to clone the repository to on your local machine
+4. Click **Clone** 
+
+Note: If you don't have collaborator access to a repository you will not be able to clone the repository. 
+
+![](images/github_desktop_clonerepo2.gif)
+The repo and its contents will be located at the local path you've selected. 
+
+### 2. Creating a Branch 
+1. Ensure the `main` branch is selected in the current repository 
+- if not, click the branch dropdown in the top bar and select `main` 
+2. Make sure that `main` is up to date by clicking `Fetch origin`
+3. Click Branch > New Branch 
+4. Enter a descriptive name for the branch, such as `feature/add-readme` or `bugfix/fix-typo`. 
+5. Ensure that it says "Your new branch will be based on your currently checked out branch (`main`). `main` is the default branch for your repository", then click Create Branch. 
+6. The new branch will now be checked out automatically. 
+
+![](images/github_desktop_create_branch.gif)
+### 3. Make changes and commit those changes to the branch 
+1. Make changes to the files and code in your repository folder 
+2. After making changes: 
+- Go back to GitHub Desktop 
+- You'll see the list of changed files under the Changes tab 
+3. Stage and commit your changes: 
+- Write a short, descriptive commit message in the Summary field (e.g. docs: added details to README)
+- Optionally, add a description for more details
+- Click **Commit to `<branch_name>`** to save your changes locally 
+
+![](images/github_desktop_make_commits.gif)
+
+### 4. Keeping Your Branch Up-to-Date
+To avoid conflicts, ensure your branch is up-to-date with the latest changes from `main` 
+1. Switch to the `main` branch 
+- Click the branch drop down and select `main` 
+- Click **Fetch origin** to pull the latest changes
+2. Switch back to your branch and merge `main`
+- Click **Current branch > Choose a branch to merge into <branch_name>** or you can click at the top **Branch > Merge into Current Branch**
+- Select `main` as the branch to merge. 
+- If the branch is up to date with `main` then the "Create a merge commit" button will not be clickable. 
+- Create a merge commit if there are differences between `main` and your branch. 
+3. Resolve any conflicts (if prompted). 
+4. Make any necessary commits after resolving conflicts 
+
+![](images/github_desktop_update_branch.gif)
+
+### 5. Pushing Changes to GitHub 
+1. After committing your changes, click **Publish branch** in GitHub Desktop to push the new branch to GitHub 
+2. If the branch is already published, click **Push origin** to sync your changes to the remote repository on GitHub. 
+
+
+### 6. Create a Pull Request 
+1. Open GitHub Desktop and click **Branch > Create PUll Request** 
+- This opens the pull request (PR) page on GitHub in your web browser 
+2. Fill out the PR form: 
+- Ensure the source branch is your feature branch and the target branch is `main` at the top of the PR where it should say `base:main <- compare:<branch_name>` 
+- If your repository is in the NW-PaGe organization we have auto-populated Pull Request Templates to remind you to look for sensitive data that may be accidentally included in your commits or the pull request itself. 
+3. Submit the pull request 
+
+![](images/github_desktop_create_PR.gif)
+
+![](images/github_desktop_create_PR_submit_PR.gif)
+
+### 7. Reviewing and Addressing Feedback 
+1. Collaborators may review your pull request and suggest changes. 
+2. If changes are requested: 
+- Make updates locally in your branch 
+- Commit the changes in GitHub Desktop 
+- Push the branch to update the PR automatically 
+
+### 8. Merging the Pull Request 
+1. Once the pull request is approved and all checks pass, click Merge PUll Request on GitHub 
+2. After merging, delete the branch on GitHub by clicking Delete Branch 
+
+![](images/github_desktop_merge_delete_branch.gif)
+
+### 9. Cleaning up Local Branches 
+1. After merging the pull request, delete the local branch to keep your workspace clean. 
+2. In GitHub Desktop: 
+- go to the branch drop down 
+- Select the branch you want to delete
+- Right-click and choose **Delete** 
+
+### 10. Pulling Latest Changes to `main` 
+1. Switch back to the `main` branch in GitHub Desktop 
+2. Click **Fetch origin** to pull the latest changes
+
+![](images/github_desktop_clean_up_branches.gif)
 
 
