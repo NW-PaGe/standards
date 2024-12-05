@@ -20,7 +20,7 @@ The high-level workflow we recommend following for collaborators within a reposi
 
 1. Clone the repository.
 2. Create a feature branch.
-3. Make changes, commit, and push the branch. 
+3. Make changes, commit, update branch with main, and push the branch. 
 4. Open a pull request from branch to main. 
 5. Conduct reviews and address comments. 
 6. Merge the pull request and delete the branch.
@@ -65,7 +65,7 @@ git checkout -b <branch_name>
 
 
 3. Push the new branch to publish on GitHub: 
-```
+```{bash}
 git push -u origin <branch_name> 
 ```
 
@@ -156,7 +156,7 @@ git branch
 ```{bash}
 git branch -d <branch_name> 
 ```
-**Note: Use `-D` to force delte if the branch isn't merged 
+**Note: Use `-D` to force delete if the branch isn't merged 
 
 ### 7. Update `main` with the merged PR 
 After merging your pull request, it's important to update your local `main` branch to reflect the latest changes from the remote repository. 
@@ -181,7 +181,6 @@ GitHub Desktop is free and can be installed on your Windows or Mac machines. Fol
 ![](images/GitHubDesktopIntro.png)
 2. Click the drop down arrow for **Current repository > Add > Clone repository** or you can click **File > Clone Repository**
 ![](images/github_desktop_clonerepo1.gif)
-
 3. In the dialog box: 
 - Search for the repository that you want to clone
 - Select the location you would like to clone the repository to on your local machine
