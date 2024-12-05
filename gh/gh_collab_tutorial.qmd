@@ -36,17 +36,21 @@ Sign-in to GitHub using your GitHub credentials. If you are part of WA DOH make 
 ### 1. Protecting the `main` Branch 
 #### Step 1.1: Enable Branch Protection Rules 
 On your GitHub repository website page: 
-1. Navigate to **Settings > Branches > Branch Protection Rules** in the repository 
-2. Click **Add branch ruleset** and configure
-3. Under **Targets**, click **Add target**: 
-- Either click **Include by pattern** and type in `main` or if `main` is your default branch click **Include default branch** 
-4. Under **Rules**: 
+1. Navigate to **Settings > Branches > Branch Protection Rules** in the repository. 
+2. Click **Add branch ruleset**. 
+3. Enter a name for your ruleset.
+4. Change **Enforcement status**: Active 
+5. Under **Targets**, click **Add target**: 
+- Either click **Include by pattern** and type in `main` or if `main` is your default branch click **Include default branch**. 
+6. Under **Rules**: 
 - Require a pull request before merging. 
 - Restrict deletions. 
 - Block force pushes.
-- Require status checks to pass before merging (optional but recommended for repos with CI/CD checks)
-- Enable Require approvals and specify the number of reviewers under Require a pull request before merging (optional) 
-3. Save changes. 
+- Require status checks to pass before merging (optional but recommended for repos with CI/CD checks).
+- Under Require a pull request before merging: Enable Require approvals and specify the number of reviewers (optional). 
+7. Save changes.
+
+![](images/github_web_create_ruleset.gif)
 
 ### 2. Initial SetUp: Cloning the Repository
 - Locate the repository on GitHub 
@@ -183,17 +187,21 @@ GitHub Desktop is free and can be installed on your Windows or Mac machines. Fol
 ### 1. Protecting the `main` Branch 
 #### Step 1.1: Enable Branch Protection Rules 
 On your GitHub repository website page: 
-1. Navigate to **Settings > Branches > Branch Protection Rules** in the repository 
-2. Click **Add branch ruleset** and configure
-3. Under **Targets**, click **Add target**: 
-- Either click **Include by pattern** and type in `main` or if `main` is your default branch click **Include default branch** 
-4. Under **Rules**: 
+1. Navigate to **Settings > Branches > Branch Protection Rules** in the repository. 
+2. Click **Add branch ruleset**. 
+3. Enter a name for your ruleset.
+4. Change **Enforcement status**: Active 
+5. Under **Targets**, click **Add target**: 
+- Either click **Include by pattern** and type in `main` or if `main` is your default branch click **Include default branch**. 
+6. Under **Rules**: 
 - Require a pull request before merging. 
 - Restrict deletions. 
 - Block force pushes.
-- Require status checks to pass before merging (optional but recommended for repos with CI/CD checks)
-- Enable Require approvals and specify the number of reviewers under Require a pull request before merging (optional) 
-3. Save changes. 
+- Require status checks to pass before merging (optional but recommended for repos with CI/CD checks).
+- Under Require a pull request before merging: Enable Require approvals and specify the number of reviewers (optional). 
+7. Save changes.
+
+![](images/github_web_create_ruleset.gif)
 
 ### 2. Initial SetUp: Cloning the Repository 
 1. Open GitHub Desktop 
