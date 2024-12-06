@@ -350,7 +350,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 30, 2024</p>
+      <p class="date-modified">December 6, 2024</p>
     </div>
   </div>
     
@@ -369,7 +369,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Scrub private repos before they go public</li>
 </ul>
 </div>
-<p>If sensitive information is leaked and commited to the remote repo, then they will stay in the git history (and will require a lot of effort to remove them from the history). The following cannot be included in any repo <strong>or any local commit!</strong>:</p>
+<p>If sensitive information is leaked and commited to the remote repo, then they will stay in the git history (and will require a lot of effort to remove them from the history).</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Err on the side of caution: If data isn’t already public, it likely shouldn’t be made public through a PR or a commit.</p>
+</div>
+</div>
+<p>The following cannot be included in any repo <strong>or any local commit!</strong>:</p>
 <div id="tbl-prohibit" class="quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-prohibit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -378,8 +392,8 @@ Table&nbsp;1: Items prohibited from being in a Github repo
 <div aria-describedby="tbl-prohibit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
 <colgroup>
-<col style="width: 25%">
-<col style="width: 74%">
+<col style="width: 19%">
+<col style="width: 80%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -416,11 +430,18 @@ Table&nbsp;1: Items prohibited from being in a Github repo
 <tr class="even">
 <td>Identifiable Information</td>
 <td><ul>
-<li>Addresses</li>
-<li>Names</li>
-<li>Any PHI</li>
+<li>Case addresses</li>
+<li>Case names</li>
+<li>Any private health information (PHI)</li>
 <li>Geographic location (depending on circumstance)</li>
 <li><code>WA</code> ids from PHL for genome sequencing (ids from public repos are okay)</li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td>Partners’ Information</td>
+<td><ul>
+<li>Names of health facilities (i.e., facilities where healthcare-associated infection samples are collected)</li>
+<li>Geographic locations for mosquito traps (West Nile Virus surveillance)</li>
 </ul></td>
 </tr>
 </tbody>

@@ -244,7 +244,7 @@
     "href": "gh/security.html",
     "title": "Repo Security",
     "section": "",
-    "text": "Objectives\n\nPrevent sensitive information leaks to Github\nSet up guardrails, .gitignore, hooks\nScrub private repos before they go public\nIf sensitive information is leaked and commited to the remote repo, then they will stay in the git history (and will require a lot of effort to remove them from the history). The following cannot be included in any repo or any local commit!:",
+    "text": "Objectives\n\nPrevent sensitive information leaks to Github\nSet up guardrails, .gitignore, hooks\nScrub private repos before they go public\nIf sensitive information is leaked and commited to the remote repo, then they will stay in the git history (and will require a lot of effort to remove them from the history).\nThe following cannot be included in any repo or any local commit!:",
     "crumbs": [
       "Github",
       "Policies",
@@ -448,7 +448,7 @@
     "href": "tools/index.html",
     "title": "Guides and Templates",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\nReading Time\n\n\n\n\n\n\n\n\n\nSep 1, 2023\n\n\nCode and Repo Documentation\n\n\nFrank Aragona\n\n\n13 min\n\n\n\n\n\n\n\nFeb 1, 2023\n\n\nGit\n\n\nFrank Aragona\n\n\n3 min\n\n\n\n\n\n\n\nOct 30, 2024\n\n\nLink external R code to the documentation\n\n\nFrank Aragona\n\n\n1 min\n\n\n\n\n\n\n\nSep 1, 2023\n\n\nPackage Documentation\n\n\nFrank Aragona\n\n\n1 min\n\n\n\n\n\n\n\nSep 1, 2023\n\n\nRelease Cycles\n\n\nFrank Aragona\n\n\n6 min\n\n\n\n\n\n\n\nSep 1, 2023\n\n\nTemplates\n\n\nFrank Aragona\n\n\n1 min\n\n\n\n\n\n\n\nFeb 1, 2023\n\n\nVirtual Environments\n\n\nFrank Aragona\n\n\n11 min\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\nReading Time\n\n\n\n\n\n\n\n\n\nSep 1, 2023\n\n\nCode and Repo Documentation\n\n\nFrank Aragona\n\n\n13 min\n\n\n\n\n\n\n\nFeb 1, 2023\n\n\nGit\n\n\nFrank Aragona\n\n\n3 min\n\n\n\n\n\n\n\nDec 6, 2024\n\n\nLink external R code to the documentation\n\n\nFrank Aragona\n\n\n1 min\n\n\n\n\n\n\n\nSep 1, 2023\n\n\nPackage Documentation\n\n\nFrank Aragona\n\n\n1 min\n\n\n\n\n\n\n\nSep 1, 2023\n\n\nRelease Cycles\n\n\nFrank Aragona\n\n\n6 min\n\n\n\n\n\n\n\nSep 1, 2023\n\n\nTemplates\n\n\nFrank Aragona\n\n\n1 min\n\n\n\n\n\n\n\nFeb 1, 2023\n\n\nVirtual Environments\n\n\nFrank Aragona\n\n\n11 min\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "tools/renv.html",
