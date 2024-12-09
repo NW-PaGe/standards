@@ -77,11 +77,12 @@ website:
           - section: "Policies"
             contents:
               - gh/quickstart.qmd
-              - gh/contribute.qmd
               - gh/security.qmd
+              - gh/gh_collab_tutorial.qmd
               - gh/policies.qmd
               - gh/lic.qmd
               - gh/reproduce.qmd
+              - gh/contribute.qmd
           - section: "Tutorials"
             contents:
               - gh/release.qmd
@@ -127,6 +128,8 @@ website:
 
 format:
   html:
+    comments:
+        hypothesis: true
     grid:
       sidebar-width: 200px
       body-width: 1100px
@@ -157,6 +160,7 @@ format:
 execute: 
   error: true
   freeze: false
+knitr: true
 
 
 

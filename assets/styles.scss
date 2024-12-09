@@ -43,6 +43,29 @@ $font-family-sans-serif: 'Hanken Grotesk', sans-serif;
 
 /*-- scss:rules --*/
 
+.content a:link {
+  color: $theme-night;
+  text-decoration: underline;
+}
+
+/* visited link */
+.content a:visited {
+  color: $theme-night;
+  text-decoration: underline;
+}
+
+/* mouse over link */
+.content a:hover {
+  color: hotpink;
+  text-decoration: underline;
+}
+
+/* selected link */
+.content a:active {
+  color: $theme-night;
+  text-decoration: underline;
+} 
+
 // h1, h2, h3 {
 //   font-family: "Franklin Gothic", Georgia, serif;
 // }
