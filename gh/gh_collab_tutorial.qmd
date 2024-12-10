@@ -2,7 +2,7 @@
 title: "Collaborating on GitHub"
 description: Collaborating on GitHub
 date: today
-author: Pauline Trinh
+author: Pauline Trinh and Frank Aragona
 # categories:
 #   - collaboration
 #   - Git
@@ -83,7 +83,7 @@ On your GitHub repository website page:
 
 4.  Click **Clone**
 
-Note: If you don't have collaborator access to a repository you will not be able to clone the repository.
+Note: If you don't have collaborator access to a private repository you will not be able to clone the repository.
 
 ![](images/github_desktop_clonerepo2.gif) The repo and its contents will be located at the local path you've selected.
 
