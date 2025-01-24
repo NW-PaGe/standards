@@ -14,8 +14,20 @@ jobs:
       RENV_PATHS_ROOT: ~/.cache/R/renv
       
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v3
+      # Step 1: Create GitHub App Token
+      - name: Create GitHub App Token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.YOUR_GITHUB_APP_ID }}
+          private-key: ${{ secrets.YOUR_GITHUB_APP_PRIVATE_KEY }}
+  
+      # Step 2: Checkout repository code using GitHub App Token
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
 
       - name: Install R
         uses: r-lib/actions/setup-r@v2
@@ -76,17 +88,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this secret is always available for github actions
 
       # Commit all changed files back to the repository
-      # Trying this because the pdf would not write to the repo
-      # - uses: stefanzweifel/git-auto-commit-action@v5
-      # Add new files in data folder, commit along with other modified files, push
-      - name: Commit files
-        run: |
-          git config --local user.name actions-user
-          git config --local user.email "actions@github.com"
-          git fetch
-          git add .
-          git commit -am "GH ACTION Headlines $(date)"
-          git push origin main
-        env:
-          repo_token: ${{secrets.GITHUB_TOKEN}}
-          username: github-actions
+      - uses: EndBug/add-and-commit@v9
