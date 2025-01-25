@@ -9,6 +9,8 @@ name: Render and Publish
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
+    if: github.actor != 'github-actions[bot]'  # Prevent action loop
+
     
     env:
       RENV_PATHS_ROOT: ~/.cache/R/renv
@@ -89,3 +91,12 @@ jobs:
 
       # Commit all changed files back to the repository
       - uses: EndBug/add-and-commit@v9
+        with:
+            author_name: 'GitHub Actions'
+            author_email: 'github-actions[bot]@users.noreply.github.com'
+            message: 'Deploy updates to GitHub Pages'
+            add: '.'
+            push: true
+            # Optionally, add a condition here to check if the commit
+            # is really needed, or conditionally disable it.
+            skip_if_empty: true  # Skip commit if nothing changed
