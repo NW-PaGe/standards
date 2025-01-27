@@ -3,8 +3,6 @@ on:
   push:
     branches:
       - main
-    branches-ignore:
-      - gh-pages  # Exclude the gh-pages branch from triggering the workflow
 
 name: Render and Publish
 
@@ -17,6 +15,14 @@ jobs:
       RENV_PATHS_ROOT: ~/.cache/R/renv
       
     steps:
+      # Step 3: Check if the push was to `gh-pages` and skip commit if that's the case
+      - name: Check if we are on gh-pages
+        run: |
+          if [ "${GITHUB_REF}" == "refs/heads/gh-pages" ]; then
+            echo "Skipping commit and push for gh-pages branch to avoid triggering workflow loop"
+            exit 0  # Exit early if we're on gh-pages to avoid committing back to main
+          fi
+          
       # Step 1: Create GitHub App Token
       - name: Create GitHub App Token
         id: app-token
