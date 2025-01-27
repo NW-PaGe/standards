@@ -1,8 +1,10 @@
 on:
   workflow_dispatch:
   push:
-    branches: 
+    branches:
       - main
+    branches-ignore:
+      - gh-pages  # Exclude the gh-pages branch from triggering the workflow
 
 name: Render and Publish
 
