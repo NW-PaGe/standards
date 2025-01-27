@@ -13,6 +13,7 @@ jobs:
 
     env:
       RENV_PATHS_ROOT: ~/.cache/R/renv
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this secret is always available for github actions
       
     steps:
       # Step 3: Check if the push was to `gh-pages` and skip commit if that's the case
@@ -93,8 +94,6 @@ jobs:
         uses: quarto-dev/quarto-actions/publish@v2.0.2
         with:
           target: gh-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this secret is always available for github actions
 
       # Commit all changed files back to the repository
       # - uses: EndBug/add-and-commit@v9
