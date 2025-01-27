@@ -9,9 +9,8 @@ name: Render and Publish
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
-    if: ${{ github.actor != 'github-actions[bot]' && github.event_name != 'push' || github.event.pusher.name != 'github-actions[bot]' }}
+    if: ${{ github.actor != 'github-actions[bot]' && github.actor != 'nwpage-let-me-in' && (github.event_name != 'push' || github.event.pusher.name != 'github-actions[bot]') }}
 
-    
     env:
       RENV_PATHS_ROOT: ~/.cache/R/renv
       
@@ -90,13 +89,34 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this secret is always available for github actions
 
       # Commit all changed files back to the repository
-      - uses: EndBug/add-and-commit@v9
-        with:
-            author_name: 'GitHub Actions'
-            author_email: 'github-actions[bot]@users.noreply.github.com'
-            message: 'Deploy updates to GitHub Pages'
-            add: '.'
-            push: true
-            # Optionally, add a condition here to check if the commit
-            # is really needed, or conditionally disable it.
-            skip_if_empty: true  # Skip commit if nothing changed
+      # - uses: EndBug/add-and-commit@v9
+      #   with:
+      #       author_name: 'GitHub Actions'
+      #       author_email: 'github-actions[bot]@users.noreply.github.com'
+      #       message: 'Deploy updates to GitHub Pages'
+      #       add: '.'
+      #       push: true
+      #       # default_author: github_actions
+      #       # Optionally, add a condition here to check if the commit
+      #       # is really needed, or conditionally disable it.
+      #       skip_if_empty: true  # Skip commit if nothing changed
+      # Commit all changed files back to the repository using Git commands
+      - name: Commit and push changes to main
+        run: |
+          # Configure Git
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Check if there are any changes
+          git add .
+          
+          # Commit changes if there are any
+          if [[ $(git diff --cached --name-only) ]]; then
+            git commit -m "Deploy updates to GitHub Pages"
+            git push origin main
+          else
+            echo "No changes to commit"
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required to push to the repository
+
