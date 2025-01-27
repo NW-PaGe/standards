@@ -93,8 +93,8 @@ jobs:
         uses: quarto-dev/quarto-actions/publish@v2.0.2
         with:
           target: gh-pages
-        # env:
-        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this secret is always available for github actions
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this secret is always available for github actions
 
       # Commit all changed files back to the repository
       # - uses: EndBug/add-and-commit@v9
@@ -109,22 +109,22 @@ jobs:
       #       # is really needed, or conditionally disable it.
       #       skip_if_empty: true  # Skip commit if nothing changed
       # Commit all changed files back to the repository using Git commands
-      - name: Commit and push changes to main
-        run: |
-          # Configure Git
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      # - name: Commit and push changes to main
+      #   run: |
+      #     # Configure Git
+      #     git config --global user.name "GitHub Actions"
+      #     git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Check if there are any changes
-          git add .
+      #     # Check if there are any changes
+      #     git add .
           
-          # Commit changes if there are any
-          if [[ $(git diff --cached --name-only) ]]; then
-            git commit -m "Deploy updates to GitHub Pages"
-            git push origin main
-          else
-            echo "No changes to commit"
-          fi
+      #     # Commit changes if there are any
+      #     if [[ $(git diff --cached --name-only) ]]; then
+      #       git commit -m "Deploy updates to GitHub Pages"
+      #       git push origin main
+      #     else
+      #       echo "No changes to commit"
+      #     fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required to push to the repository
 
