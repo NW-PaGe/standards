@@ -9,7 +9,7 @@ name: Render and Publish
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
-    if: github.actor != 'github-actions[bot]' && github.actor != 'nwpage-let-me-in' # Prevent action loop
+    if: ${{ github.actor != 'github-actions[bot]' && github.event_name != 'push' || github.event.pusher.name != 'github-actions[bot]' }}
 
     
     env:
