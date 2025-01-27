@@ -21,14 +21,13 @@ filters:
 #   - Git
 ---
 
-:::{.note .medframe}
-{{< fa unlock size="3x" >}} **Objectives**
+## Summary
 
 -   Ensure that all repos in the org have the required documents
 -   Set policy rules at the Organization level
 -   Repos need to have reproducible code
 -   Repos need to have documentation
-:::
+-   Set up bots and branch protections
 
 
 In the Github Organization we may require all repositories to contain certain documents. For example, we want to make sure that every repo has a `CODE OF CONDUCT` document that is a general policy applied throughout the organization.
@@ -52,12 +51,12 @@ This file should appear in the issue tab in a repo. It lets a user know how they
 These should be and are set at the repo level. There will be many different licenses to choose from that will depend on the specific repo. More on that here.
 
 
-# Set Policy Rules at Org Level
+## Set Policy Rules at Org Level
 
 Policy rules may include requiring certain documents in each repo or requiring that a person sign every commit.
 
 
-## Document Requirements with `.github` Repos
+### Document Requirements with `.github` Repos
 
 You can set most policy rules and create documents for each repo at the organization level by using a special `.github` repo. Dot files and dot folders have special functionality in some software. For Github, the `.github` folder defines workflows for things like Github Actions in a repo. A `.github` *repository* on the other hand defines *organization level* rules and templates.
 
@@ -97,7 +96,7 @@ If you click on the `CODE_OF_CONDUCT` link it will take you right to the `.githu
 
 Now you can set organization level policies from the `.github` repo and they will automatically populate in *all* existing and new repositories *unless there are repo specific policies in place*. If a repo already has its own policies they will not be overwritten.
 
-# Set Templates at the Org Level
+## Set Templates at the Org Level
 
 Aside from policy documents, you can make templates at the organization level. Two commonly used templates are issue templates and discussion templates.
 
@@ -189,15 +188,150 @@ Notice that in the template you can create text areas and pre-fill those areas w
 
 ![](images/bug_report.jpg){.myframe}
 
-## Commit Sign-Off Requirement - Github Apps
+### Commit Sign-Off Requirement - Github Apps
 
 We may want to require authors or reviewers to sign-off on commits to a repo. This is sometimes established in projects to ["ensure that copyrighted code not released under an appropriate free software (open source) license is not included in the kernel."](https://stackoverflow.com/a/1962112)
 
 You can install a Github App in the organization and it will be applied to all repos. [The DCO App (Developer Certificate of Origin) is popular and lightweight](https://github.com/apps/dco). To install it in the organization, click on Configure and it will give you the option to configure it with the organization of choice.
 
-# IaC
+## IaC
 
 Infrastructure as Code (IaC) can be helpful when managing administration tasks or writing hooks at the org level.
 
+## Branch Protections and GitHub Apps
+
+We want the main branch in our repos to be protected. We can require a pull request to the branch before merging to ensure that all commits are reviewed before being added to the main code base. Follow the steps below to protect your branch.
+
+### 1. Protecting the `main` Branch
+
+#### Step 1.1: Enable Branch Protection Rules
+
+On your GitHub repository website page:
+
+1.  Navigate to **Settings \> Branches \> Branch Protection Rules** in the repository.
+
+2.  Click **Add branch ruleset**.
+
+3.  Enter a name for your ruleset.
+
+4.  Change **Enforcement status**: Active
+
+5.  Under **Targets**, click **Add target**:
+
+    -   Either click **Include by pattern** and type in `main` or if `main` is your default branch click **Include default branch**.
+
+6.  Under **Rules**:
+
+    -   Require a pull request before merging.
+    -   Restrict deletions.
+    -   Block force pushes.
+    -   Require status checks to pass before merging (optional but recommended for repos with CI/CD checks).
+    -   Under Require a pull request before merging: Enable Require approvals and specify the number of reviewers (optional)
+
+7.  Save changes.
+
+![](images/github_web_create_ruleset.gif)
+
+### 2. GitHub App to allow bypass 
+
+Now that the main branch is protected and requires a pull request, our GitHub Actions will not be able to push code automatically because they cannot push to the main branch. You can have the Action make a pull request, but often we want our GitHub Actions to just automatically push code on a cadence or trigger. We need a bot to be able to bypass the branch protections for this [because GitHub refuses to make this an easy option](https://github.com/orgs/community/discussions/13836).
+
+#### Step 2.1 create an app
+
+Go to your Org Settings > scroll all the way down to Developer Settings > Click GitHub Apps > New GitHub App
+
+#### Step 2.2 generate secret
+
+Generate a client secret for the app. This will save a `.pem` file for the app to your local machine. SAVE THIS in a SECURE PLACE!!
+
+#### Step 2.3 install the app
+
+Go to Install App on the left toolbar > under Repository Access click All repositories > then save and Install
+
+#### Step 2.4 store secrets (for admins)
+
+Go to your Org main page > settings > Secrets and variables > New organization secret 
+
+We're going to make two secrets:
+
+1. `YOUR_GITHUB_APP_ID` - you can find this id when clicking on your app under `App ID:`, it should be like 110103202
+2. `YOUR_GITHUB_APP_PRIVATE_KEY` - this is in the `.pem` file that you downloaded above. Copy everything including `-----BEGIN RSA PRIVATE KEY-----` and `-----END RSA PRIVATE KEY-----`. Then paste that into the secret
+
+You won't be able to see these secrets again but you can overwrite them if needed.
+
+#### Step 2.5 (for all users) allow branch protection bypass
+
+Go to Settings > Branches > select your main branch protection (click Edit) > make sure 'Require a pull request before merging' is selected > below it, check the option called 'Allow specified actors to bypass required pull requests' > add `nwpage-let-me-in`
+
+![](images/let-me-in.png)
 
 
+#### Step 2.6 set up a github action
+
+Now we need to use the github app in our github action. Add this step to you GitHub Action workflow:
+
+```yaml
+steps:
+  # Step 1: Create GitHub App Token
+  - name: Create GitHub App Token
+    id: app-token
+    uses: actions/create-github-app-token@v1
+    with:
+      app-id: ${{ secrets.YOUR_GITHUB_APP_ID }}
+      private-key: ${{ secrets.YOUR_GITHUB_APP_PRIVATE_KEY }}
+
+  # Step 2: Checkout repository code using GitHub App Token
+  - name: Check out repository code
+    uses: actions/checkout@v4
+    with:
+      token: ${{ steps.app-token.outputs.token }}
+  - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+```
+
+:::{.callout-warning}
+
+I had tons of problems with the github action making infinite loops and triggering over and over on push to main. **Make sure you don't have multiple steps that make commits!**
+
+:::
+
+<br>
+
+The full yaml will look something like this:
+
+```yaml
+on:
+  workflow_dispatch:
+  push:
+    branches: 
+      - main
+
+name: Render and Publish
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-actions[bot]'  # Prevent action loop
+
+    
+    env:
+      RENV_PATHS_ROOT: ~/.cache/R/renv
+      
+    steps:
+      # Step 1: Create GitHub App Token
+      - name: Create GitHub App Token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.YOUR_GITHUB_APP_ID }}
+          private-key: ${{ secrets.YOUR_GITHUB_APP_PRIVATE_KEY }}
+  
+      # Step 2: Checkout repository code using GitHub App Token
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+
+other-steps-here:
+
+```
