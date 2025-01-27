@@ -85,8 +85,8 @@ jobs:
         uses: quarto-dev/quarto-actions/publish@v2.0.2
         with:
           target: gh-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this secret is always available for github actions
+        # env:
+        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this secret is always available for github actions
 
       # Commit all changed files back to the repository
       # - uses: EndBug/add-and-commit@v9
