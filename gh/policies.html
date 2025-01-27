@@ -77,8 +77,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -309,7 +307,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#readme" id="toc-readme" class="nav-link active" data-scroll-target="#readme"><code>README</code></a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link active" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#readme" id="toc-readme" class="nav-link" data-scroll-target="#readme"><code>README</code></a></li>
   <li><a href="#code_of_conduct" id="toc-code_of_conduct" class="nav-link" data-scroll-target="#code_of_conduct"><code>CODE_OF_CONDUCT</code></a></li>
   <li><a href="#contributing.md" id="toc-contributing.md" class="nav-link" data-scroll-target="#contributing.md"><code>CONTRIBUTING.md</code></a></li>
   <li><a href="#license" id="toc-license" class="nav-link" data-scroll-target="#license"><code>LICENSE</code></a></li>
@@ -322,6 +321,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#commit-sign-off-requirement---github-apps" id="toc-commit-sign-off-requirement---github-apps" class="nav-link" data-scroll-target="#commit-sign-off-requirement---github-apps">Commit Sign-Off Requirement - Github Apps</a></li>
   </ul></li>
   <li><a href="#iac" id="toc-iac" class="nav-link" data-scroll-target="#iac">IaC</a></li>
+  <li><a href="#branch-protections-and-github-apps" id="toc-branch-protections-and-github-apps" class="nav-link" data-scroll-target="#branch-protections-and-github-apps">Branch Protections and GitHub Apps</a>
+  <ul class="collapse">
+  <li><a href="#protecting-the-main-branch" id="toc-protecting-the-main-branch" class="nav-link" data-scroll-target="#protecting-the-main-branch">1. Protecting the <code>main</code> Branch</a></li>
+  <li><a href="#github-app-to-allow-bypass" id="toc-github-app-to-allow-bypass" class="nav-link" data-scroll-target="#github-app-to-allow-bypass">2. GitHub App to allow bypass</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/gh/policies.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/gh/policies.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -370,17 +374,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="note medframe">
-<p><i class="fa-solid fa-unlock fa-3x" aria-label="unlock"></i> <strong>Objectives</strong></p>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
 <ul>
 <li>Ensure that all repos in the org have the required documents</li>
 <li>Set policy rules at the Organization level</li>
 <li>Repos need to have reproducible code</li>
 <li>Repos need to have documentation</li>
+<li>Set up bots and branch protections</li>
 </ul>
-</div>
 <p>In the Github Organization we may require all repositories to contain certain documents. For example, we want to make sure that every repo has a <code>CODE OF CONDUCT</code> document that is a general policy applied throughout the organization.</p>
 <p>Here’s a list of required documents:</p>
+</section>
 <section id="readme" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="readme"><code>README</code></h2>
 <p><code>README</code> files are instructions or documentation on how to use your software. It should give a quick introduction to the repo and instructions on how to install or run the code.</p>
@@ -397,11 +402,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="unnumbered anchored" data-anchor-id="license"><code>LICENSE</code></h2>
 <p>These should be and are set at the repo level. There will be many different licenses to choose from that will depend on the specific repo. More on that here.</p>
 </section>
-<section id="set-policy-rules-at-org-level" class="level1">
-<h1>Set Policy Rules at Org Level</h1>
+<section id="set-policy-rules-at-org-level" class="level2">
+<h2 class="anchored" data-anchor-id="set-policy-rules-at-org-level">Set Policy Rules at Org Level</h2>
 <p>Policy rules may include requiring certain documents in each repo or requiring that a person sign every commit.</p>
-<section id="document-requirements-with-.github-repos" class="level2">
-<h2 class="anchored" data-anchor-id="document-requirements-with-.github-repos">Document Requirements with <code>.github</code> Repos</h2>
+<section id="document-requirements-with-.github-repos" class="level3">
+<h3 class="anchored" data-anchor-id="document-requirements-with-.github-repos">Document Requirements with <code>.github</code> Repos</h3>
 <p>You can set most policy rules and create documents for each repo at the organization level by using a special <code>.github</code> repo. Dot files and dot folders have special functionality in some software. For Github, the <code>.github</code> folder defines workflows for things like Github Actions in a repo. A <code>.github</code> <em>repository</em> on the other hand defines <em>organization level</em> rules and templates.</p>
 <p><img src="images/special.PNG" class="myframe img-fluid"></p>
 <p>In order to write and set these policies at the organization level we can put them at the root of the <code>.github</code> repository and edit them there.</p>
@@ -432,8 +437,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Now you can set organization level policies from the <code>.github</code> repo and they will automatically populate in <em>all</em> existing and new repositories <em>unless there are repo specific policies in place</em>. If a repo already has its own policies they will not be overwritten.</p>
 </section>
 </section>
-<section id="set-templates-at-the-org-level" class="level1">
-<h1>Set Templates at the Org Level</h1>
+<section id="set-templates-at-the-org-level" class="level2">
+<h2 class="anchored" data-anchor-id="set-templates-at-the-org-level">Set Templates at the Org Level</h2>
 <p>Aside from policy documents, you can make templates at the organization level. Two commonly used templates are issue templates and discussion templates.</p>
 <p>In the public repos there may be end users that may have limited experience using Github. If they want to submit an issue or ask a question they get lost. Templates can help them form a question or idea. Templates can also help standardize how issues and discussions are maintained throughout the organization.</p>
 <p>Structuring the format of issues and discussions can make the author and the end-user’s lives easier.</p>
@@ -518,17 +523,147 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><img src="images/bug_report.jpg" class="myframe img-fluid"></p>
-<section id="commit-sign-off-requirement---github-apps" class="level2">
-<h2 class="anchored" data-anchor-id="commit-sign-off-requirement---github-apps">Commit Sign-Off Requirement - Github Apps</h2>
+<section id="commit-sign-off-requirement---github-apps" class="level3">
+<h3 class="anchored" data-anchor-id="commit-sign-off-requirement---github-apps">Commit Sign-Off Requirement - Github Apps</h3>
 <p>We may want to require authors or reviewers to sign-off on commits to a repo. This is sometimes established in projects to <a href="https://stackoverflow.com/a/1962112">“ensure that copyrighted code not released under an appropriate free software (open source) license is not included in the kernel.”</a></p>
 <p>You can install a Github App in the organization and it will be applied to all repos. <a href="https://github.com/apps/dco">The DCO App (Developer Certificate of Origin) is popular and lightweight</a>. To install it in the organization, click on Configure and it will give you the option to configure it with the organization of choice.</p>
 </section>
 </section>
-<section id="iac" class="level1">
-<h1>IaC</h1>
+<section id="iac" class="level2">
+<h2 class="anchored" data-anchor-id="iac">IaC</h2>
 <p>Infrastructure as Code (IaC) can be helpful when managing administration tasks or writing hooks at the org level.</p>
+</section>
+<section id="branch-protections-and-github-apps" class="level2">
+<h2 class="anchored" data-anchor-id="branch-protections-and-github-apps">Branch Protections and GitHub Apps</h2>
+<p>We want the main branch in our repos to be protected. We can require a pull request to the branch before merging to ensure that all commits are reviewed before being added to the main code base. Follow the steps below to protect your branch.</p>
+<section id="protecting-the-main-branch" class="level3">
+<h3 class="anchored" data-anchor-id="protecting-the-main-branch">1. Protecting the <code>main</code> Branch</h3>
+<section id="step-1.1-enable-branch-protection-rules" class="level4">
+<h4 class="anchored" data-anchor-id="step-1.1-enable-branch-protection-rules">Step 1.1: Enable Branch Protection Rules</h4>
+<p>On your GitHub repository website page:</p>
+<ol type="1">
+<li><p>Navigate to <strong>Settings &gt; Branches &gt; Branch Protection Rules</strong> in the repository.</p></li>
+<li><p>Click <strong>Add branch ruleset</strong>.</p></li>
+<li><p>Enter a name for your ruleset.</p></li>
+<li><p>Change <strong>Enforcement status</strong>: Active</p></li>
+<li><p>Under <strong>Targets</strong>, click <strong>Add target</strong>:</p>
+<ul>
+<li>Either click <strong>Include by pattern</strong> and type in <code>main</code> or if <code>main</code> is your default branch click <strong>Include default branch</strong>.</li>
+</ul></li>
+<li><p>Under <strong>Rules</strong>:</p>
+<ul>
+<li>Require a pull request before merging.</li>
+<li>Restrict deletions.</li>
+<li>Block force pushes.</li>
+<li>Require status checks to pass before merging (optional but recommended for repos with CI/CD checks).</li>
+<li>Under Require a pull request before merging: Enable Require approvals and specify the number of reviewers (optional)</li>
+</ul></li>
+<li><p>Save changes.</p></li>
+</ol>
+<p><img src="images/github_web_create_ruleset.gif" class="img-fluid"></p>
+</section>
+</section>
+<section id="github-app-to-allow-bypass" class="level3">
+<h3 class="anchored" data-anchor-id="github-app-to-allow-bypass">2. GitHub App to allow bypass</h3>
+<p>Now that the main branch is protected and requires a pull request, our GitHub Actions will not be able to push code automatically because they cannot push to the main branch. You can have the Action make a pull request, but often we want our GitHub Actions to just automatically push code on a cadence or trigger. We need a bot to be able to bypass the branch protections for this <a href="https://github.com/orgs/community/discussions/13836">because GitHub refuses to make this an easy option</a>.</p>
+<section id="step-2.1-create-an-app" class="level4">
+<h4 class="anchored" data-anchor-id="step-2.1-create-an-app">Step 2.1 create an app</h4>
+<p>Go to your Org Settings &gt; scroll all the way down to Developer Settings &gt; Click GitHub Apps &gt; New GitHub App</p>
+</section>
+<section id="step-2.2-generate-secret" class="level4">
+<h4 class="anchored" data-anchor-id="step-2.2-generate-secret">Step 2.2 generate secret</h4>
+<p>Generate a client secret for the app. This will save a <code>.pem</code> file for the app to your local machine. SAVE THIS in a SECURE PLACE!!</p>
+</section>
+<section id="step-2.3-install-the-app" class="level4">
+<h4 class="anchored" data-anchor-id="step-2.3-install-the-app">Step 2.3 install the app</h4>
+<p>Go to Install App on the left toolbar &gt; under Repository Access click All repositories &gt; then save and Install</p>
+</section>
+<section id="step-2.4-store-secrets-for-admins" class="level4">
+<h4 class="anchored" data-anchor-id="step-2.4-store-secrets-for-admins">Step 2.4 store secrets (for admins)</h4>
+<p>Go to your Org main page &gt; settings &gt; Secrets and variables &gt; New organization secret</p>
+<p>We’re going to make two secrets:</p>
+<ol type="1">
+<li><code>YOUR_GITHUB_APP_ID</code> - you can find this id when clicking on your app under <code>App ID:</code>, it should be like 110103202</li>
+<li><code>YOUR_GITHUB_APP_PRIVATE_KEY</code> - this is in the <code>.pem</code> file that you downloaded above. Copy everything including <code>-----BEGIN RSA PRIVATE KEY-----</code> and <code>-----END RSA PRIVATE KEY-----</code>. Then paste that into the secret</li>
+</ol>
+<p>You won’t be able to see these secrets again but you can overwrite them if needed.</p>
+</section>
+<section id="step-2.5-for-all-users-allow-branch-protection-bypass" class="level4">
+<h4 class="anchored" data-anchor-id="step-2.5-for-all-users-allow-branch-protection-bypass">Step 2.5 (for all users) allow branch protection bypass</h4>
+<p>Go to Settings &gt; Branches &gt; select your main branch protection (click Edit) &gt; make sure ‘Require a pull request before merging’ is selected &gt; below it, check the option called ‘Allow specified actors to bypass required pull requests’ &gt; add <code>nwpage-let-me-in</code></p>
+<p><img src="images/let-me-in.png" class="img-fluid"></p>
+</section>
+<section id="step-2.6-set-up-a-github-action" class="level4">
+<h4 class="anchored" data-anchor-id="step-2.6-set-up-a-github-action">Step 2.6 set up a github action</h4>
+<p>Now we need to use the github app in our github action. Add this step to you GitHub Action workflow:</p>
+<div class="sourceCode" id="cb5" data-code-line-numbers=""><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">  # Step 1: Create GitHub App Token</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Create GitHub App Token</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">id</span><span class="kw">:</span><span class="at"> app-token</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/create-github-app-token@v1</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">app-id</span><span class="kw">:</span><span class="at"> ${{ secrets.YOUR_GITHUB_APP_ID }}</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">private-key</span><span class="kw">:</span><span class="at"> ${{ secrets.YOUR_GITHUB_APP_PRIVATE_KEY }}</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">  # Step 2: Checkout repository code using GitHub App Token</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Check out repository code</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">token</span><span class="kw">:</span><span class="at"> ${{ steps.app-token.outputs.token }}</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">run</span><span class="kw">:</span><span class="at"> echo "💡 The ${{ github.repository }} repository has been cloned to the runner."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>I had tons of problems with the github action making infinite loops and triggering over and over on push to main. <strong>Make sure you don’t have multiple steps that make commits!</strong></p>
+</div>
+</div>
+<p><br></p>
+<p>The full yaml will look something like this:</p>
+<div class="sourceCode" id="cb6" data-code-line-numbers=""><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">workflow_dispatch</span><span class="kw">:</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> main</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Render and Publish</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">build-deploy</span><span class="kw">:</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">if</span><span class="kw">:</span><span class="at"> github.actor != 'github-actions[bot]'</span><span class="co">  # Prevent action loop</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">env</span><span class="kw">:</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">RENV_PATHS_ROOT</span><span class="kw">:</span><span class="at"> ~/.cache/R/renv</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co">      # Step 1: Create GitHub App Token</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Create GitHub App Token</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">id</span><span class="kw">:</span><span class="at"> app-token</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/create-github-app-token@v1</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">app-id</span><span class="kw">:</span><span class="at"> ${{ secrets.YOUR_GITHUB_APP_ID }}</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">private-key</span><span class="kw">:</span><span class="at"> ${{ secrets.YOUR_GITHUB_APP_PRIVATE_KEY }}</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="at">  </span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co">      # Step 2: Checkout repository code using GitHub App Token</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Check out repository code</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">token</span><span class="kw">:</span><span class="at"> ${{ steps.app-token.outputs.token }}</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">run</span><span class="kw">:</span><span class="at"> echo "💡 The ${{ github.repository }} repository has been cloned to the runner."</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="fu">other-steps-here</span><span class="kw">:</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->

@@ -757,7 +757,19 @@
     "href": "gh/policies.html",
     "title": "Org Policies",
     "section": "",
-    "text": "Objectives\n\nEnsure that all repos in the org have the required documents\nSet policy rules at the Organization level\nRepos need to have reproducible code\nRepos need to have documentation\nIn the Github Organization we may require all repositories to contain certain documents. For example, we want to make sure that every repo has a CODE OF CONDUCT document that is a general policy applied throughout the organization.\nHere’s a list of required documents:",
+    "text": "Ensure that all repos in the org have the required documents\nSet policy rules at the Organization level\nRepos need to have reproducible code\nRepos need to have documentation\nSet up bots and branch protections\n\nIn the Github Organization we may require all repositories to contain certain documents. For example, we want to make sure that every repo has a CODE OF CONDUCT document that is a general policy applied throughout the organization.\nHere’s a list of required documents:",
+    "crumbs": [
+      "Github",
+      "Policies",
+      "Org Policies"
+    ]
+  },
+  {
+    "objectID": "gh/policies.html#summary",
+    "href": "gh/policies.html#summary",
+    "title": "Org Policies",
+    "section": "",
+    "text": "Ensure that all repos in the org have the required documents\nSet policy rules at the Organization level\nRepos need to have reproducible code\nRepos need to have documentation\nSet up bots and branch protections\n\nIn the Github Organization we may require all repositories to contain certain documents. For example, we want to make sure that every repo has a CODE OF CONDUCT document that is a general policy applied throughout the organization.\nHere’s a list of required documents:",
     "crumbs": [
       "Github",
       "Policies",
@@ -813,11 +825,11 @@
     ]
   },
   {
-    "objectID": "gh/policies.html#document-requirements-with-.github-repos",
-    "href": "gh/policies.html#document-requirements-with-.github-repos",
+    "objectID": "gh/policies.html#set-policy-rules-at-org-level",
+    "href": "gh/policies.html#set-policy-rules-at-org-level",
     "title": "Org Policies",
-    "section": "Document Requirements with .github Repos",
-    "text": "Document Requirements with .github Repos\nYou can set most policy rules and create documents for each repo at the organization level by using a special .github repo. Dot files and dot folders have special functionality in some software. For Github, the .github folder defines workflows for things like Github Actions in a repo. A .github repository on the other hand defines organization level rules and templates.\n\nIn order to write and set these policies at the organization level we can put them at the root of the .github repository and edit them there.\n\n\n\n\nPowerShell\n\n$ tree /f\nC:.\n│   .gitignore\n│   CODE_OF_CONDUCT.md\n│   CONTRIBUTING.md\n│   LICENSE\n│   README.md\n│\n├───.github\n└───profile\n        README.md\n\n\n\nTake a look above. I have the required documents/policies at the root of the .github repo directory. Now if I open up any given repo in the organization I will find a link to those files:\n\nIf you click on the CODE_OF_CONDUCT link it will take you right to the .github repo and open the CODE_OF_CONDUCT.md file there:\n\nNow you can set organization level policies from the .github repo and they will automatically populate in all existing and new repositories unless there are repo specific policies in place. If a repo already has its own policies they will not be overwritten.",
+    "section": "Set Policy Rules at Org Level",
+    "text": "Set Policy Rules at Org Level\nPolicy rules may include requiring certain documents in each repo or requiring that a person sign every commit.\n\nDocument Requirements with .github Repos\nYou can set most policy rules and create documents for each repo at the organization level by using a special .github repo. Dot files and dot folders have special functionality in some software. For Github, the .github folder defines workflows for things like Github Actions in a repo. A .github repository on the other hand defines organization level rules and templates.\n\nIn order to write and set these policies at the organization level we can put them at the root of the .github repository and edit them there.\n\n\n\n\nPowerShell\n\n$ tree /f\nC:.\n│   .gitignore\n│   CODE_OF_CONDUCT.md\n│   CONTRIBUTING.md\n│   LICENSE\n│   README.md\n│\n├───.github\n└───profile\n        README.md\n\n\n\nTake a look above. I have the required documents/policies at the root of the .github repo directory. Now if I open up any given repo in the organization I will find a link to those files:\n\nIf you click on the CODE_OF_CONDUCT link it will take you right to the .github repo and open the CODE_OF_CONDUCT.md file there:\n\nNow you can set organization level policies from the .github repo and they will automatically populate in all existing and new repositories unless there are repo specific policies in place. If a repo already has its own policies they will not be overwritten.",
     "crumbs": [
       "Github",
       "Policies",
@@ -825,11 +837,35 @@
     ]
   },
   {
-    "objectID": "gh/policies.html#commit-sign-off-requirement---github-apps",
-    "href": "gh/policies.html#commit-sign-off-requirement---github-apps",
+    "objectID": "gh/policies.html#set-templates-at-the-org-level",
+    "href": "gh/policies.html#set-templates-at-the-org-level",
     "title": "Org Policies",
-    "section": "Commit Sign-Off Requirement - Github Apps",
-    "text": "Commit Sign-Off Requirement - Github Apps\nWe may want to require authors or reviewers to sign-off on commits to a repo. This is sometimes established in projects to “ensure that copyrighted code not released under an appropriate free software (open source) license is not included in the kernel.”\nYou can install a Github App in the organization and it will be applied to all repos. The DCO App (Developer Certificate of Origin) is popular and lightweight. To install it in the organization, click on Configure and it will give you the option to configure it with the organization of choice.",
+    "section": "Set Templates at the Org Level",
+    "text": "Set Templates at the Org Level\nAside from policy documents, you can make templates at the organization level. Two commonly used templates are issue templates and discussion templates.\nIn the public repos there may be end users that may have limited experience using Github. If they want to submit an issue or ask a question they get lost. Templates can help them form a question or idea. Templates can also help standardize how issues and discussions are maintained throughout the organization.\nStructuring the format of issues and discussions can make the author and the end-user’s lives easier.\nIn the .github repo I made a folder called .github. This is a special folder that can hold Github Action workflows and more, as mentioned above.\nIn the .github folder I have a folder called DISCUSSION_TEMPLATE and another called ISSUE_TEMPLATE. These are special folders that Github recognizes as discussion and issue folders that will set templates at the repo (or in this case the org) level.\n\n\n\n\nPowerShell\n\n$ tree /f\nC:.\n│   .gitignore\n│   CODE_OF_CONDUCT.md\n│   CONTRIBUTING.md\n│   LICENSE\n│   README.md\n│\n├───.github\n│   │   pull_request_template.md\n│   │\n│   ├───DISCUSSION_TEMPLATE\n│   │       feature-requests.yml\n│   │       q-a.yml\n│   │       show-and-tell.yml\n│   │\n│   └───ISSUE_TEMPLATE\n│           bug_report.yml\n│           config.yml\n│           feature_request.yml\n│\n└───profile\n        README.md\n\n\n\nEach Folder has .yml files in it that are basically Github instructions on how to format issues and discussions.\nFor example, in the ISSUE_TEMPLATE folder I have a .yml file called bug_report.yml. This file contains the structure for how someone can report a bug.\n\n\n\n\nbug-report.yml\n\nname: Bug Report\ndescription: File a bug report here\ntitle: \"[BUG]: \"\nlabels: [\"bug\"]\nassignees: [\"DOH-FAA3303\"]\nbody:\n  type: markdown\n    attributes:\n      value: |\n        Thanks for taking the time to fill out this bug report \n        Make sure there aren't any open/closed issues for this topic \n\n\n\nNow, when someone clicks on the Issues tab in a repo in this organization they will be met with the Bug Report template:\n\nNotice that in the template you can create text areas and pre-fill those areas with suggestions. You can even require that someone fills out those areas before they can submit the issue:\n\n\n\n\nbug-report.yml\n\n- type: textarea\n    id: steps-to-reproduce\n    attributes:\n      label: Steps To Reproduce\n      description: Steps to reproduce the behavior.\n      placeholder: |\n        1. Go to '...'\n        2. Click on '...'\n        3. Scroll down to '...'\n        4. See error\n    validations:\n      required: true\n\n\n\n\n\nCommit Sign-Off Requirement - Github Apps\nWe may want to require authors or reviewers to sign-off on commits to a repo. This is sometimes established in projects to “ensure that copyrighted code not released under an appropriate free software (open source) license is not included in the kernel.”\nYou can install a Github App in the organization and it will be applied to all repos. The DCO App (Developer Certificate of Origin) is popular and lightweight. To install it in the organization, click on Configure and it will give you the option to configure it with the organization of choice.",
+    "crumbs": [
+      "Github",
+      "Policies",
+      "Org Policies"
+    ]
+  },
+  {
+    "objectID": "gh/policies.html#iac",
+    "href": "gh/policies.html#iac",
+    "title": "Org Policies",
+    "section": "IaC",
+    "text": "IaC\nInfrastructure as Code (IaC) can be helpful when managing administration tasks or writing hooks at the org level.",
+    "crumbs": [
+      "Github",
+      "Policies",
+      "Org Policies"
+    ]
+  },
+  {
+    "objectID": "gh/policies.html#branch-protections-and-github-apps",
+    "href": "gh/policies.html#branch-protections-and-github-apps",
+    "title": "Org Policies",
+    "section": "Branch Protections and GitHub Apps",
+    "text": "Branch Protections and GitHub Apps\nWe want the main branch in our repos to be protected. We can require a pull request to the branch before merging to ensure that all commits are reviewed before being added to the main code base. Follow the steps below to protect your branch.\n\n1. Protecting the main Branch\n\nStep 1.1: Enable Branch Protection Rules\nOn your GitHub repository website page:\n\nNavigate to Settings &gt; Branches &gt; Branch Protection Rules in the repository.\nClick Add branch ruleset.\nEnter a name for your ruleset.\nChange Enforcement status: Active\nUnder Targets, click Add target:\n\nEither click Include by pattern and type in main or if main is your default branch click Include default branch.\n\nUnder Rules:\n\nRequire a pull request before merging.\nRestrict deletions.\nBlock force pushes.\nRequire status checks to pass before merging (optional but recommended for repos with CI/CD checks).\nUnder Require a pull request before merging: Enable Require approvals and specify the number of reviewers (optional)\n\nSave changes.\n\n\n\n\n\n2. GitHub App to allow bypass\nNow that the main branch is protected and requires a pull request, our GitHub Actions will not be able to push code automatically because they cannot push to the main branch. You can have the Action make a pull request, but often we want our GitHub Actions to just automatically push code on a cadence or trigger. We need a bot to be able to bypass the branch protections for this because GitHub refuses to make this an easy option.\n\nStep 2.1 create an app\nGo to your Org Settings &gt; scroll all the way down to Developer Settings &gt; Click GitHub Apps &gt; New GitHub App\n\n\nStep 2.2 generate secret\nGenerate a client secret for the app. This will save a .pem file for the app to your local machine. SAVE THIS in a SECURE PLACE!!\n\n\nStep 2.3 install the app\nGo to Install App on the left toolbar &gt; under Repository Access click All repositories &gt; then save and Install\n\n\nStep 2.4 store secrets (for admins)\nGo to your Org main page &gt; settings &gt; Secrets and variables &gt; New organization secret\nWe’re going to make two secrets:\n\nYOUR_GITHUB_APP_ID - you can find this id when clicking on your app under App ID:, it should be like 110103202\nYOUR_GITHUB_APP_PRIVATE_KEY - this is in the .pem file that you downloaded above. Copy everything including -----BEGIN RSA PRIVATE KEY----- and -----END RSA PRIVATE KEY-----. Then paste that into the secret\n\nYou won’t be able to see these secrets again but you can overwrite them if needed.\n\n\nStep 2.5 (for all users) allow branch protection bypass\nGo to Settings &gt; Branches &gt; select your main branch protection (click Edit) &gt; make sure ‘Require a pull request before merging’ is selected &gt; below it, check the option called ‘Allow specified actors to bypass required pull requests’ &gt; add nwpage-let-me-in\n\n\n\nStep 2.6 set up a github action\nNow we need to use the github app in our github action. Add this step to you GitHub Action workflow:\nsteps:\n  # Step 1: Create GitHub App Token\n  - name: Create GitHub App Token\n    id: app-token\n    uses: actions/create-github-app-token@v1\n    with:\n      app-id: ${{ secrets.YOUR_GITHUB_APP_ID }}\n      private-key: ${{ secrets.YOUR_GITHUB_APP_PRIVATE_KEY }}\n\n  # Step 2: Checkout repository code using GitHub App Token\n  - name: Check out repository code\n    uses: actions/checkout@v4\n    with:\n      token: ${{ steps.app-token.outputs.token }}\n  - run: echo \"💡 The ${{ github.repository }} repository has been cloned to the runner.\"\n\n\n\n\n\n\nWarning\n\n\n\nI had tons of problems with the github action making infinite loops and triggering over and over on push to main. Make sure you don’t have multiple steps that make commits!\n\n\n\nThe full yaml will look something like this:\non:\n  workflow_dispatch:\n  push:\n    branches: \n      - main\n\nname: Render and Publish\n\njobs:\n  build-deploy:\n    runs-on: ubuntu-latest\n    if: github.actor != 'github-actions[bot]'  # Prevent action loop\n\n    \n    env:\n      RENV_PATHS_ROOT: ~/.cache/R/renv\n      \n    steps:\n      # Step 1: Create GitHub App Token\n      - name: Create GitHub App Token\n        id: app-token\n        uses: actions/create-github-app-token@v1\n        with:\n          app-id: ${{ secrets.YOUR_GITHUB_APP_ID }}\n          private-key: ${{ secrets.YOUR_GITHUB_APP_PRIVATE_KEY }}\n  \n      # Step 2: Checkout repository code using GitHub App Token\n      - name: Check out repository code\n        uses: actions/checkout@v4\n        with:\n          token: ${{ steps.app-token.outputs.token }}\n      - run: echo \"💡 The ${{ github.repository }} repository has been cloned to the runner.\"\n\nother-steps-here:",
     "crumbs": [
       "Github",
       "Policies",
