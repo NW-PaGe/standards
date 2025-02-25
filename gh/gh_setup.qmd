@@ -105,6 +105,8 @@ Once granted access, follow the steps below to create a repo (@sec-create-repo) 
 
 ## Create a Repo {#sec-create-repo}
 
+Please see our [tutorial for more details.](newrepo.qmd)
+
 Once granted access to create a repo, you can go to [our org](https://github.com/orgs/NW-PaGe/) and click `Repositories > New repository` or [click here](https://github.com/organizations/NW-PaGe/repositories/new)
 
 This will take you to the `Create a new repository` screen. Please follow these instructions when filling it out:
