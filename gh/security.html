@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.22">
+<meta name="generator" content="quarto-1.6.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,7 +11,7 @@
 <meta name="dcterms.date" content="2023-04-09">
 <meta name="description" content="Protect your credentials, tokens, data and more">
 
-<title>NW-COE Policies – Repo Security</title>
+<title>Repo Security – NW-COE Policies</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -37,7 +37,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -73,10 +73,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-4463693438d44bc4a6ba82d70edba7d0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-71f2824f185f7f241352d6490053fe7d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
@@ -117,7 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -132,7 +132,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -174,11 +174,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../gh/index.html">Github</a></li><li class="breadcrumb-item"><a href="../gh/quickstart.html">Policies</a></li><li class="breadcrumb-item"><a href="../gh/security.html">Repo Security</a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav>
@@ -193,16 +193,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="sidebar-item-container"> 
             <a href="../gh/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Github</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">Policies</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -210,13 +210,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../gh/quickstart.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Checklist</span></a>
+ <span class="menu-text">Get Started</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../gh/security.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Repo Security</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../gh/gh_setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Git/GitHub User Setup</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -243,19 +249,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Reproducibility</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../gh/contribute.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Contribution/Collaboration Guide</span></a>
-  </div>
-</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
  <span class="menu-text">Tutorials</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -310,7 +310,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#sec-creds" id="toc-sec-creds" class="nav-link active" data-scroll-target="#sec-creds">Protect Credentials with .gitignore</a>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link active" data-scroll-target="#objectives">Objectives <i class="fa-solid fa-unlock" aria-label="unlock"></i></a></li>
+  <li><a href="#sec-creds" id="toc-sec-creds" class="nav-link" data-scroll-target="#sec-creds">Protect Credentials with .gitignore</a>
   <ul class="collapse">
   <li><a href="#environment-variables-.gitignore" id="toc-environment-variables-.gitignore" class="nav-link" data-scroll-target="#environment-variables-.gitignore">Environment Variables + .gitignore</a></li>
   </ul></li>
@@ -362,7 +363,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">January 27, 2025</p>
+      <p class="date-modified">February 25, 2025</p>
     </div>
   </div>
     
@@ -373,15 +374,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="note medframe">
-<p><i class="fa-solid fa-unlock fa-3x" aria-label="unlock"></i> <strong>Objectives</strong></p>
+<section id="objectives" class="level2 box">
+<h2 class="anchored" data-anchor-id="objectives">Objectives <i class="fa-solid fa-unlock" aria-label="unlock"></i></h2>
 <ul>
 <li>Prevent sensitive information leaks to Github</li>
 <li>Set up guardrails, <code>.gitignore</code>, hooks</li>
 <li>Scrub private repos before they go public</li>
 </ul>
-</div>
 <p>If sensitive information is leaked and commited to the remote repo, then they will stay in the git history (and will require a lot of effort to remove them from the history).</p>
+</section>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -396,13 +397,13 @@ Caution
 </div>
 </div>
 <p>The following cannot be included in any repo <strong>or any local commit!</strong>:</p>
-<div id="tbl-prohibit" class="quarto-float anchored">
+<div id="tbl-prohibit" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-prohibit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;1: Items prohibited from being in a Github repo
 </figcaption>
 <div aria-describedby="tbl-prohibit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 19%">
 <col style="width: 80%">
@@ -410,26 +411,26 @@ Table&nbsp;1: Items prohibited from being in a Github repo
 <thead>
 <tr class="header">
 <th>Type</th>
-<th>Examples</th>
+<th style="text-align: left;">Examples</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>File Paths</td>
-<td><ul>
+<td style="text-align: left;"><ul>
 <li>Network drives</li>
 <li>Shared internal drives</li>
 </ul></td>
 </tr>
 <tr class="even">
 <td>Server Names</td>
-<td><ul>
+<td style="text-align: left;"><ul>
 <li>ODBC Connections</li>
 </ul></td>
 </tr>
 <tr class="odd">
 <td>Credentials</td>
-<td><ul>
+<td style="text-align: left;"><ul>
 <li>SSH Keys</li>
 <li>Tokens (REDCap, Azure, Github, etc)</li>
 <li>AWS paths</li>
@@ -441,7 +442,7 @@ Table&nbsp;1: Items prohibited from being in a Github repo
 </tr>
 <tr class="even">
 <td>Identifiable Information</td>
-<td><ul>
+<td style="text-align: left;"><ul>
 <li>Case addresses</li>
 <li>Case names</li>
 <li>Any private health information (PHI)</li>
@@ -451,7 +452,7 @@ Table&nbsp;1: Items prohibited from being in a Github repo
 </tr>
 <tr class="odd">
 <td>Partners’ Information</td>
-<td><ul>
+<td style="text-align: left;"><ul>
 <li>Names of health facilities (i.e., facilities where healthcare-associated infection samples are collected)</li>
 <li>Geographic locations for mosquito traps (West Nile Virus surveillance)</li>
 </ul></td>
@@ -461,8 +462,8 @@ Table&nbsp;1: Items prohibited from being in a Github repo
 </div>
 </figure>
 </div>
-<section id="sec-creds" class="level1">
-<h1>Protect Credentials with .gitignore</h1>
+<section id="sec-creds" class="level2">
+<h2 class="anchored" data-anchor-id="sec-creds">Protect Credentials with .gitignore</h2>
 <p>It is bad practice and a security risk to add private credentials to a script. If your script contains things like passwords, server names, or network drives, be aware that that information will be publicly visible when you push it to a remote git/github repo. Many of our scripts must call passwords and server names in order for them to work properly, so we need a way to hide that information from the public but still be able to run the scripts locally. <code>.gitignore</code> can help achieve this.</p>
 <p>In the root of your repo there should be a file called <code>.gitignore</code>. This files contains a list of file types that we don’t want to be added to the remote git repo. Here’s an example:</p>
 <p>consider this <code>.gitignore</code>:</p>
@@ -488,8 +489,8 @@ Table&nbsp;1: Items prohibited from being in a Github repo
 </div>
 </div>
 <p>It contains anything with an excel, log, txt or RDS extension. This means that any file with those extensions that you create in your local clone of the repo will exist for you, but the file cannot and will not ever be pushed to the remote repo.</p>
-<section id="environment-variables-.gitignore" class="level2">
-<h2 class="anchored" data-anchor-id="environment-variables-.gitignore">Environment Variables + .gitignore</h2>
+<section id="environment-variables-.gitignore" class="level3">
+<h3 class="anchored" data-anchor-id="environment-variables-.gitignore">Environment Variables + .gitignore</h3>
 <p>We can store private information in local files and make sure that the do not get pushed to the public remote repo by using <code>.gitignore</code>. There are a number of ways to do this. We typically use a yaml file that can be filled out with personal credentials locally. The file will not be committed to the remote repo.</p>
 <p>There are many ways to achieve this. If you have a more simple workflow that uses R, consider the <code>.Renviron</code> approach. If you have a more complex workflow that has multiple languages and many credentials, consider the <code>yaml</code> approach</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
@@ -690,8 +691,8 @@ Table&nbsp;1: Items prohibited from being in a Github repo
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>server_name <span class="ot">&lt;-</span> creds<span class="sc">$</span>default<span class="sc">$</span>conn_list_wdrs<span class="sc">$</span>server</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<section id="automating-with-yaml-creds" class="level4">
-<h4 class="anchored" data-anchor-id="automating-with-yaml-creds">Automating With Yaml Creds</h4>
+<section id="automating-with-yaml-creds" class="level5">
+<h5 class="anchored" data-anchor-id="automating-with-yaml-creds">Automating With Yaml Creds</h5>
 <p>We can even get more specific and add an <code>if-else</code> statement to specify which credential we want to select. This can be helpful if we have a CI/CD pipeline and have a script automatically run on a task scheduler or cron job. We can call the credentials we want in the command line and have the command line code run in my task scheduler. That way we can use multiple different versions of the same script and have all of it be automated.</p>
 <p>For example,</p>
 <ul>
@@ -740,8 +741,8 @@ Table&nbsp;1: Items prohibited from being in a Github repo
 </div>
 </div>
 </section>
-<section id="yaml-template" class="level4">
-<h4 class="anchored" data-anchor-id="yaml-template">yaml Template</h4>
+<section id="yaml-template" class="level5">
+<h5 class="anchored" data-anchor-id="yaml-template">yaml Template</h5>
 <p>You can put a template creds.yml file in your repo so that others can see what credentials they need in order for the code to run.</p>
 <p><strong>This is a <em>template</em> file, so it will not have any passwords/secrets in it</strong>. Its only purpose is to provide an example copy of what a user’s <code>creds.yml</code> file needs to look like.</p>
 <ol type="1">
@@ -828,14 +829,15 @@ Table&nbsp;1: Items prohibited from being in a Github repo
 <p><br></p>
 </section>
 </section>
-<section id="sec-hooks" class="level1">
-<h1>Security Guardrails</h1>
+<section id="sec-hooks" class="level2">
+<h2 class="anchored" data-anchor-id="sec-hooks">Security Guardrails</h2>
 <p>Using a <code>.gitignore</code> file for environmental variables/credentials is an excellent guardrail and promotes good coding habits, but we may also want additional guardrails such as hooks.</p>
 <p>Hooks are processes that run in the background and can prevent code from being pushed if there is a security flaw. There are two hooks we could use for security; pre-commit hooks and pre-receive hooks</p>
 </section>
-<section id="pre-commit-hooks" class="level1">
-<h1>Pre-commit Hooks</h1>
+<section id="pre-commit-hooks" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="pre-commit-hooks">Pre-commit Hooks</h2>
 <p>Pre-commit hooks run a process locally when the user attempts to commit code to a git branch. Hooks have many uses. Here we can use them as a security guardrail to prevent accidental credential leaks in committed code. For example, if someone accidentally pushes a server name to the public repo, the hook will prevent that code from ever getting into the remote repo and will give the user a local error.</p>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">The instructions below work for a single user, but lacks automated security update capabilities. Please reach out to our email [<a href="mailto:DOH.CDS.GenSeqSurvDQ@doh.wa.gov" class="email">DOH.CDS.GenSeqSurvDQ@doh.wa.gov</a>] for access to our automated pre-commit hooks. We require this for all users in our org.</span></div></div>
 <p>Follow the instructions below to set up pre-commit hooks <em>for all of your repos</em>. You can set up different hooks for individual repos, but I recommend setting this up globally so that all of your local clones are covered by the security hook.</p>
 <p><a href="https://sparkbox.com/foundry/git_secrets">This document</a> goes through setting up git hooks in more detail</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
@@ -933,7 +935,7 @@ Table&nbsp;1: Items prohibited from being in a Github repo
 </div>
 </div>
 <ol start="11" type="1">
-<li><p>Check your git history (<a href="#sec-scan" class="quarto-xref">Section&nbsp;4</a>)</p></li>
+<li><p>Check your git history (<a href="#sec-scan" class="quarto-xref">Section&nbsp;5</a>)</p></li>
 <li><p>If something gets flagged and you don’t care about your history anymore: Delete .git folder and reinitialize repository</p>
 <ul>
 <li>I would take caution about this point. There might be better ways to clean your git history if you don’t want to get rid of everything.</li>
@@ -1093,7 +1095,7 @@ Note
 </div>
 </div>
 <ol start="12" type="1">
-<li><p>Check your git history (<a href="#sec-scan" class="quarto-xref">Section&nbsp;4</a>)</p></li>
+<li><p>Check your git history (<a href="#sec-scan" class="quarto-xref">Section&nbsp;5</a>)</p></li>
 <li><p>If something gets flagged and you don’t care about your history anymore: Delete .git folder and reinitialize repository</p>
 <ul>
 <li>I would take caution about this point. There might be better ways to clean your git history if you don’t want to get rid of everything.</li>
@@ -1120,8 +1122,16 @@ Note
 </div>
 <p><br></p>
 <p><br></p>
-<div class="note medframe">
-<p><i class="fa-solid fa-unlock fa-3x" aria-label="unlock"></i> <strong>NOTE!!</strong></p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul>
 <li>The REGEX strings used in the <code>secrets_key</code> file may be decieving</li>
 <li>Make sure to test that the regex flags what you want it to</li>
@@ -1129,9 +1139,10 @@ Note
 <li>Follow the Secret Scanning instructions below for more help</li>
 </ul>
 </div>
+</div>
 </section>
-<section id="sec-scan" class="level1">
-<h1>Secret Scanning</h1>
+<section id="sec-scan" class="level2">
+<h2 class="anchored" data-anchor-id="sec-scan">Secret Scanning</h2>
 <p>Now that the pre-commit hook is set up, any future commits to your repo will be scanned for secrets. If you are pushing a pre-existing repo to a public repo for the first time, you should scan the existing code in the repo because the pre-commit hook will not automatically do that. They are really set up to prevent any <em>future</em> secrets from being pushed to the repo, not to scan what is <em>currently</em> in the repo.</p>
 <p>There are a few ways to scan the history of your repo for secrets. The <code>git secrets</code> command comes with a few options to scan the history, but I have found that it is a bit broken.</p>
 <ul>
@@ -1140,8 +1151,8 @@ Note
 <li>likewise, scanning specific folders have not worked for me like this <code>git secrets --scan directory/*</code></li>
 </ul>
 <p>I’ll show 2 ways to scan for secrets, one with a native git command <code>git log</code>, and the other with <code>git secrets</code></p>
-<section id="git-log-for-scanning" class="level2">
-<h2 class="anchored" data-anchor-id="git-log-for-scanning">git log for scanning</h2>
+<section id="git-log-for-scanning" class="level3">
+<h3 class="anchored" data-anchor-id="git-log-for-scanning">git log for scanning</h3>
 <p>This is the easier way to scan <em>commit history</em>.</p>
 <p>Navigate to your repo and execute this command:</p>
 <div class="medframe">
@@ -1158,8 +1169,8 @@ Note
 <p>There are a lot of options with the <code>git log</code> command and you can <a href="https://git-scm.com/docs/git-log#Documentation/git-log.txt--Sltstringgt">read more here</a> and <a href="https://stackoverflow.com/questions/4468361/search-all-of-git-history-for-a-string">here</a></p>
 <p>Basically, the <code>-G</code> option stands for <code>grep</code>, <code>-p</code> will show the diffs of the files, and <code>-S</code> is for string.</p>
 </section>
-<section id="git-secrets-for-scanning" class="level2">
-<h2 class="anchored" data-anchor-id="git-secrets-for-scanning">git secrets for scanning</h2>
+<section id="git-secrets-for-scanning" class="level3">
+<h3 class="anchored" data-anchor-id="git-secrets-for-scanning">git secrets for scanning</h3>
 <p>This isn’t my favorite way to scan code, but it is an option if you want to double check things.</p>
 <ol type="1">
 <li><p>Check that the <code>secrets_key</code> regex is working by running the process on a repo that you know has secrets in it. For example, in a different folder, run all the pre-commit hook steps above and add a known “bad” string into the regex. For example, in the regex put <code>bad_string</code> and in a file in that folder put <code>bad_string</code>. When you scan it should get flagged.</p></li>
@@ -1244,12 +1255,12 @@ Note
 </div>
 </section>
 </section>
-<section id="pre-recieve-hooks" class="level1">
-<h1>Pre-Recieve Hooks</h1>
+<section id="pre-recieve-hooks" class="level2">
+<h2 class="anchored" data-anchor-id="pre-recieve-hooks">Pre-Recieve Hooks</h2>
 <p>These are still being investigated. They are remote hooks (not local like pre-commit hooks) that can be deployed throughout the Github organization. They can block certain commits from ever being pushed to the remote repo. They may make things unnecessarily complicated</p>
 </section>
-<section id="sec-public" class="level1 page-columns page-full">
-<h1>Pushing Private Code to Public Repos</h1>
+<section id="sec-public" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="sec-public">Pushing Private Code to Public Repos</h2>
 <p>We may wish to take private codes and push them to a public repo. We need to make sure that the public code doesn’t not contain sensitive or forbidden data/code, so cleaning up the private repo is important before pushing.</p>
 <p>There are a few ways to do this, but the easiest way is to copy the clean private code to the public repo, that is, copy all the files you want to add publicly but <strong>do not copy the <code>.git</code></strong> folder. If the private repo has a dirty git history we will not want that history in the public repo because the sensitive data will then be publicly available.</p>
 <div>
@@ -1267,8 +1278,8 @@ Note
 </div>
 <p><i class="fa-solid fa-exclamation" aria-label="exclamation"></i> The private repository on the left still contains sensitive information in the git history. The public repository on the right has a clean git history because we copied only the current clean files from the private repo and did not attach its git history (which lives in the hidden <code>.git</code> folder)</p>
 </section>
-<section id="code-reviewersgithub-operations-team" class="level1">
-<h1>Code Reviewers/Github Operations Team</h1>
+<section id="code-reviewersgithub-operations-team" class="level2">
+<h2 class="anchored" data-anchor-id="code-reviewersgithub-operations-team">Code Reviewers/Github Operations Team</h2>
 <p>With the guardrails above in place there should be few chances that credentials get pushed to a repo. However accidents may still happen. We want to make sure that anyone who opens up a repo in the Github organization adheres to the rules, has the proper credential/coding set-up, and installs their local pre-commit hooks properly.</p>
 <p>It may be useful to have a team within the organization that helps with repo set-up. The team would help avoid a scenario where a person opens up a repo without reading this documentation and understanding the rules (and thus potentially breaking security rules).</p>
 <p>This Github Operations Team could also be helpful in managing permissions for members in the organization. See the video below on how the company Qualcomm manages their Github organization https://www.youtube.com/embed/1T4HAPBFbb0?si=YRsUYXIxLPhdr41T and how they use a Github Operations Team to guide new members access/repo development</p>
@@ -1313,18 +1324,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1356,7 +1356,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp("https:\/\/NW-PaGe\.github\.io\/standards\/");
@@ -1364,7 +1384,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -1461,7 +1481,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
