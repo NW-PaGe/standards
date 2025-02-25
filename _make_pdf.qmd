@@ -76,7 +76,7 @@ This document details the policies and guidelines for the Northwest Pathogen Gen
 
 For more information, tutorials and code examples, please see the policies website here https://nw-page.github.io/standards/.
 
-# Contribute
+# Get Started
 
 ```{r}
 #| output: asis
@@ -84,11 +84,9 @@ For more information, tutorials and code examples, please see the policies websi
 #| eval: true
 #| message: false
 #| warning: false
-why <- process_qmd("gh/contribute.qmd", fpath_in = "images/", fpath_out = "gh/images/")
+why <- process_qmd("gh/quickstart.qmd", fpath_in = "images/", fpath_out = "gh/images/")
 cat(unlist(why), sep = '\n')
 ```
-
-
 
 # Security
 
@@ -101,6 +99,31 @@ cat(unlist(why), sep = '\n')
 why <- process_qmd("gh/security.qmd", fpath_in = "images/", fpath_out = "gh/images/")
 cat(unlist(why), sep = '\n')
 ```
+
+# GitHub Setup
+
+```{r}
+#| output: asis
+#| echo: false
+#| eval: true
+#| message: false
+#| warning: false
+why <- process_qmd("gh/gh_setup.qmd", fpath_in = "images/", fpath_out = "gh/images/")
+cat(unlist(why), sep = '\n')
+```
+
+# Collaboration Guide
+
+```{r}
+#| output: asis
+#| echo: false
+#| eval: true
+#| message: false
+#| warning: false
+why <- process_qmd("gh/gh_collab_tutorial.qmd", fpath_in = "images/", fpath_out = "gh/images/")
+cat(unlist(why), sep = '\n')
+```
+
 
 # Licensing
 
@@ -135,5 +158,68 @@ cat(unlist(why), sep = '\n')
 #| message: false
 #| warning: false
 why <- process_qmd("gh/reproduce.qmd", fpath_in = "images/", fpath_out = "gh/images/")
+cat(unlist(why), sep = '\n')
+```
+
+# Tutorials
+
+## Release Cycles
+
+```{r}
+#| output: asis
+#| echo: false
+#| eval: true
+#| message: false
+#| warning: false
+why <- process_qmd("gh/release.qmd", fpath_in = "images/", fpath_out = "gh/images/")
+cat(unlist(why), sep = '\n')
+```
+
+## Virtual Environments
+
+```{r}
+#| output: asis
+#| echo: false
+#| eval: true
+#| message: false
+#| warning: false
+why <- process_qmd("gh/renv.qmd", fpath_in = "images/", fpath_out = "gh/images/")
+cat(unlist(why), sep = '\n')
+```
+
+## Templates
+
+```{r}
+#| output: asis
+#| echo: false
+#| eval: true
+#| message: false
+#| warning: false
+why <- process_qmd("gh/templates.qmd", fpath_in = "images/", fpath_out = "gh/images/")
+cat(unlist(why), sep = '\n')
+```
+
+
+## Documentation
+
+```{r}
+#| output: asis
+#| echo: false
+#| eval: true
+#| message: false
+#| warning: false
+why <- process_qmd("gh/how_to.qmd", fpath_in = "images/", fpath_out = "gh/images/")
+cat(unlist(why), sep = '\n')
+```
+
+## New Repo
+
+```{r}
+#| output: asis
+#| echo: false
+#| eval: true
+#| message: false
+#| warning: false
+why <- process_qmd("gh/newrepo.qmd", fpath_in = "images/", fpath_out = "gh/images/")
 cat(unlist(why), sep = '\n')
 ```
