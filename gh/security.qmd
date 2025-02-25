@@ -29,15 +29,15 @@ citation-location: margin
 #   - Git
 ---
 
-::: {.note .medframe}
-{{< fa unlock size="3x" >}} **Objectives**
+::: box
+## Objectives {{< fa unlock >}}
 
 -   Prevent sensitive information leaks to Github
 -   Set up guardrails, `.gitignore`, hooks
 -   Scrub private repos before they go public
-:::
 
 If sensitive information is leaked and commited to the remote repo, then they will stay in the git history (and will require a lot of effort to remove them from the history).
+:::
 
 ::: callout-caution
 Err on the side of caution: If data isn't already public, it likely shouldn't be made public through a PR or a commit.
@@ -47,7 +47,7 @@ The following cannot be included in any repo **or any local commit!**:
 
 +--------------------------+---------------------------------------------------------------------------------------------------------------+
 | Type                     | Examples                                                                                                      |
-+==========================+===============================================================================================================+
++==========================+:==============================================================================================================+
 | File Paths               | -   Network drives                                                                                            |
 |                          | -   Shared internal drives                                                                                    |
 +--------------------------+---------------------------------------------------------------------------------------------------------------+
@@ -73,7 +73,7 @@ The following cannot be included in any repo **or any local commit!**:
 
 : Items prohibited from being in a Github repo {#tbl-prohibit}
 
-# Protect Credentials with .gitignore {#sec-creds}
+## Protect Credentials with .gitignore {#sec-creds}
 
 It is bad practice and a security risk to add private credentials to a script. If your script contains things like passwords, server names, or network drives, be aware that that information will be publicly visible when you push it to a remote git/github repo. Many of our scripts must call passwords and server names in order for them to work properly, so we need a way to hide that information from the public but still be able to run the scripts locally. `.gitignore` can help achieve this.
 
@@ -100,14 +100,14 @@ consider this `.gitignore`:
 
 It contains anything with an excel, log, txt or RDS extension. This means that any file with those extensions that you create in your local clone of the repo will exist for you, but the file cannot and will not ever be pushed to the remote repo.
 
-## Environment Variables + .gitignore
+### Environment Variables + .gitignore
 
 We can store private information in local files and make sure that the do not get pushed to the public remote repo by using `.gitignore`. There are a number of ways to do this. We typically use a yaml file that can be filled out with personal credentials locally. The file will not be committed to the remote repo.
 
 There are many ways to achieve this. If you have a more simple workflow that uses R, consider the `.Renviron` approach. If you have a more complex workflow that has multiple languages and many credentials, consider the `yaml` approach
 
 :::::::::::::: panel-tabset
-### .Renviron
+#### .Renviron
 
 If you're using just R in your repo and have just a few things you want private, consider using a `.Renviron` file in addition to `.gitignore`.
 
@@ -148,7 +148,7 @@ my_password <- "thisismypassword123"
 
 `Sys.getenv()` looks for the `.Renviron` file and the variables inside of it. This means you can get all your credentials from the `.Renviron` but also keep that information
 
-### yaml
+#### yaml
 
 Here's another way to add credentials that may be more robust.
 
@@ -270,7 +270,7 @@ creds <- yaml::read_yaml("path/to/local-credentials.yml")
 server_name <- creds$default$conn_list_wdrs$server
 ```
 
-#### Automating With Yaml Creds
+##### Automating With Yaml Creds
 
 We can even get more specific and add an `if-else` statement to specify which credential we want to select. This can be helpful if we have a CI/CD pipeline and have a script automatically run on a task scheduler or cron job. We can call the credentials we want in the command line and have the command line code run in my task scheduler. That way we can use multiple different versions of the same script and have all of it be automated.
 
@@ -314,7 +314,7 @@ $ Rscript -e "source('path/script_in_repo.R');" test
 :::
 :::::
 
-#### yaml Template
+##### yaml Template
 
 You can put a template creds.yml file in your repo so that others can see what credentials they need in order for the code to run.
 
@@ -387,22 +387,24 @@ git ls-files -v . | grep ^S
 
 <br>
 
-# Security Guardrails {#sec-hooks}
+## Security Guardrails {#sec-hooks}
 
 Using a `.gitignore` file for environmental variables/credentials is an excellent guardrail and promotes good coding habits, but we may also want additional guardrails such as hooks.
 
 Hooks are processes that run in the background and can prevent code from being pushed if there is a security flaw. There are two hooks we could use for security; pre-commit hooks and pre-receive hooks
 
-# Pre-commit Hooks
+## Pre-commit Hooks
 
 Pre-commit hooks run a process locally when the user attempts to commit code to a git branch. Hooks have many uses. Here we can use them as a security guardrail to prevent accidental credential leaks in committed code. For example, if someone accidentally pushes a server name to the public repo, the hook will prevent that code from ever getting into the remote repo and will give the user a local error.
+
+[The instructions below work for a single user, but lacks automated security update capabilities. Please reach out to our email [<DOH.CDS.GenSeqSurvDQ@doh.wa.gov>] for access to our automated pre-commit hooks. We require this for all users in our org.]{.aside}
 
 Follow the instructions below to set up pre-commit hooks *for all of your repos*. You can set up different hooks for individual repos, but I recommend setting this up globally so that all of your local clones are covered by the security hook.
 
 [This document](https://sparkbox.com/foundry/git_secrets) goes through setting up git hooks in more detail
 
 ::::::::: panel-tabset
-## Windows
+### Windows
 
 1.  Clone or download the zip from the [AWS Git Secrets repo](https://github.com/awslabs/git-secrets/)
 
@@ -492,7 +494,7 @@ git secrets --add -a 'allowed pattern'
 We can't use the "Non capture group" feature of regex. Meaning we can't use patterns like this in our regex: (?:abc) -- see https://regexr.com IMPORTANT: Tab separate your regex expressions. Making new lines caused a bit of chaos and took really long to figure out. (you can use multiple tabs to separate them more visually)
 :::
 
-## WSL/Linux
+### WSL/Linux
 
 1.  Clone the [AWS Git Secrets repo](https://github.com/awslabs/git-secrets/)
 
@@ -622,8 +624,7 @@ We can't use the "Non capture group" feature of regex. Meaning we can't use patt
 
 <br>
 
-::: {.note .medframe}
-{{< fa unlock size="3x" >}} **NOTE!!**
+::: {.callout-important}
 
 -   The REGEX strings used in the `secrets_key` file may be decieving
 -   Make sure to test that the regex flags what you want it to
@@ -631,7 +632,7 @@ We can't use the "Non capture group" feature of regex. Meaning we can't use patt
 -   Follow the Secret Scanning instructions below for more help
 :::
 
-# Secret Scanning {#sec-scan}
+## Secret Scanning {#sec-scan}
 
 Now that the pre-commit hook is set up, any future commits to your repo will be scanned for secrets. If you are pushing a pre-existing repo to a public repo for the first time, you should scan the existing code in the repo because the pre-commit hook will not automatically do that. They are really set up to prevent any *future* secrets from being pushed to the repo, not to scan what is *currently* in the repo.
 
@@ -643,7 +644,7 @@ There are a few ways to scan the history of your repo for secrets. The `git secr
 
 I'll show 2 ways to scan for secrets, one with a native git command `git log`, and the other with `git secrets`
 
-## git log for scanning
+### git log for scanning
 
 This is the easier way to scan *commit history*.
 
@@ -667,7 +668,7 @@ There are a lot of options with the `git log` command and you can [read more her
 
 Basically, the `-G` option stands for `grep`, `-p` will show the diffs of the files, and `-S` is for string.
 
-## git secrets for scanning
+### git secrets for scanning
 
 This isn't my favorite way to scan code, but it is an option if you want to double check things.
 
@@ -678,7 +679,7 @@ This isn't my favorite way to scan code, but it is an option if you want to doub
 Follow the instructions below to scan for specific files. The script will scan for all the file types that you select. For example, if you want to only scan R files, it will only scan R files.
 
 ::: panel-tabset
-### Windows
+#### Windows
 
 1.  In PowerShell, navigate to your repo and paste this code:
 
@@ -715,7 +716,7 @@ $fileExtensions = @(".R",".py",".Rmd",".qmd")
 ScanFiles -FileExtensions $fileExtensions
 ```
 
-### WSL/Linux
+#### WSL/Linux
 
 1.  In a bash/Ubuntu terminal, navigate to your repo and paste this code:
 
@@ -731,11 +732,11 @@ find . -type f \( -name "*.R" -o -name "*.py" -o -name "*.qmd" -o -name "*.rmd" 
 ```
 :::
 
-# Pre-Recieve Hooks
+## Pre-Recieve Hooks
 
 These are still being investigated. They are remote hooks (not local like pre-commit hooks) that can be deployed throughout the Github organization. They can block certain commits from ever being pushed to the remote repo. They may make things unnecessarily complicated
 
-# Pushing Private Code to Public Repos {#sec-public}
+## Pushing Private Code to Public Repos {#sec-public}
 
 We may wish to take private codes and push them to a public repo. We need to make sure that the public code doesn't not contain sensitive or forbidden data/code, so cleaning up the private repo is important before pushing.
 
@@ -751,7 +752,7 @@ There are a few ways to do this, but the easiest way is to copy the clean privat
 
 {{< fa exclamation >}} The private repository on the left still contains sensitive information in the git history. The public repository on the right has a clean git history because we copied only the current clean files from the private repo and did not attach its git history (which lives in the hidden `.git` folder)
 
-# Code Reviewers/Github Operations Team
+## Code Reviewers/Github Operations Team
 
 With the guardrails above in place there should be few chances that credentials get pushed to a repo. However accidents may still happen. We want to make sure that anyone who opens up a repo in the Github organization adheres to the rules, has the proper credential/coding set-up, and installs their local pre-commit hooks properly.
 

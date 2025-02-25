@@ -26,8 +26,9 @@ number-sections: false
 NW-PaGe Github policies
 
 - [Checklist](quickstart.qmd)
-- [Code Contribution Guide](contribute.qmd)
 - [Repo Security Rules](security.qmd)
+- [GitHub setup](gh_setup.qmd)
+- [Collaboration guide](gh_collab_tutorial.qmd)
 - [Licensing](lic.qmd)
 - [Organization Requirements](policies.qmd)
 - [Code Requirements](reproduce.qmd)

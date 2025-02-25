@@ -27,8 +27,8 @@ citation-location: margin
 #   - Git
 ---
 
-::: {.note .medframe}
-{{< fa tags size="3x" >}} **Objectives**
+::: {.box}
+## **Objectives** {{< fa tags size="3x" >}} 
 
 -   Data and Code Democratization
 -   Github Codespaces
@@ -37,19 +37,19 @@ citation-location: margin
 -   Documentation
 :::
 
-# Data and Code Democratization
+## Data and Code Democratization
 
 Data and code in our repositories need to be accessible to end users and developers. There should be no bottlenecks or difficulties with installing software, executing code, finding documentation, and using test datasets.
 
 The goal is for any user to run code without needing to install anything on their personal machine and run your code with minimal set up. This may not be possible in every scenario, but there are tools available in Github to make this possible for the majority of our repos.
 
-# Github Codespaces
+## Github Codespaces
 
 [Github Codespaces](https://github.com/features/codespaces) are virtual machines (VMs) owned by Github that are connected to each repository. They let a user open the repo in a browser IDE (Integrated Development Environment) and execute the code in that environment. There is no set up or installation necessary for them.
 
 The VMs are free for up to 60 hours a month of use and there are more hours added for Github users with paid memberships. 60 hours/month should be plenty for our purposes. Users are responsible for their own Codespace, so if they go over the limit they will be responsible for adding more hours and paying for the service.
 
-## Open a Codespace
+### Open a Codespace
 
 At the root of the repo, click on the **Code** drop down button
 
@@ -64,7 +64,7 @@ This will open up a VS Code window in your browser. There are also options to op
 
 Here you can install most software. You can also customize the Codespace so that whenever someone opens one in your repo it will come with software pre-installed. More on that in the devcontainers section
 
-## Devcontainers
+### Devcontainers
 
 [Devcontainers](https://docs.github.com/en/codespaces/setting-up-your-project-for-codespaces/adding-a-dev-container-configuration/introduction-to-dev-containers) are a way to install software into a Codespace so that whenever a user opens up the Codespace they won't need to install anything themselves. Making a container can be a little tricky, so we've made Github templates that have devcontainers already made. See [templates](../tools/templates.qmd). There are R, Python, and general default templates. These containers will install R, Rstudio, Python, and all the packages in the repo's virtual environments (venv, conda, pip, renv, etc) so that the user can run all the code in your repo within a couple minutes.
 
@@ -84,15 +84,15 @@ To set up a devcontainer for yourself;
 
 For more information about Codespaces, [see the guides here](../tools/codespaces.qmd)
 
-# Virtual Environments
+## Virtual Environments
 
 Virtual Environments are another great way to make sure aspects of your repo are reproducible. They are commonly used to record package versions that the code/project uses. For more on virtual environments, [please see the venv guide.](../tools/renv.qmd)
 
-# Github Releases
+## Github Releases
 
 Github Releases save code snapshots, versions, and changelogs of your repo. They are a great way for end users and developers to use different versions of their code and visualize changes that happened with each version. Please see the [Github Releases guide](../tools/release.qmd) for more information.
 
-# Documentation
+## Documentation
 
 Your code should be well documented so that end users (and developers) can understand what code is doing, how to install the software, and the utility of the project. 
 

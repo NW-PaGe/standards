@@ -15,8 +15,8 @@ format:
 #   - Github
 ---
 
-:::{.note .medframe}
-{{< fa file size="3x" >}} **Summary**
+:::{.box}
+## **Summary** {{< fa file size="3x" >}} 
 
 -   Licenses prevent code theft and inappropriate redistribution of code. 
 -   Review common open-source licenses 
@@ -25,7 +25,7 @@ format:
 
 <br>
 
-# General License Info
+## General License Info
 
 [Below is a list of common open-source licenses.](https://choosealicense.com/licenses/)
 
@@ -39,7 +39,7 @@ format:
 
 There isn't a one size fits all license, so thankfully there are a variety of options. Here are two common ones:
 
-# GNU GPL licenses
+## GNU GPL licenses
 
 a.  These are the strong licenses
 b.  Prevents someone from taking our code and privatizing it (and making
@@ -52,7 +52,7 @@ e.  "Contributors provide an express grant of patent rights. When a
     complete source code of the modified version must be made
     available."
 
-# MIT license
+## MIT license
 
 a.  I think this is the most commonly used one
 b.  "short and simple permissive license... only requiring preservation

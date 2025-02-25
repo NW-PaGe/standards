@@ -1,5 +1,5 @@
 ---
-title: Checklist
+title: Get Started
 description: Steps you need to follow to create a public repo and make sure it is secure
 date: 8/16/2024
 date-modified: last-modified
@@ -9,11 +9,14 @@ author:
 ---
 
 
+
+:::{.box}
+
+## Checklist
+
 If you need to make a public repo, this quick start guide is for you. **Please meet with Frank Aragona DOH.CDS.GenSeqSurvDQ@doh.wa.gov before creating a public repo.** 
 
-# Checklist
-
-- [ ] Submit a request (service central ticket) to join a public GitHub organization
+- [ ] Submit a request (service central ticket) to join a public GitHub organization (email^[DOH.CDS.GenSeqSurvDQ@doh.wa.gov>] for help)
 - [ ] Review [items that are **prohibited**](security.qmd#tbl-prohibit) from being in a repo
 - [ ] Add [security guardrails](security.qmd#sec-creds)
 - [ ] Create global [security hooks](security.qmd#sec-hooks) for all your repos
@@ -24,13 +27,15 @@ If you need to make a public repo, this quick start guide is for you. **Please m
 - [ ] Copy over the _cleaned_ main branch from [private repo into new public repo](security.qmd#sec-public)
 - [ ] Add a README and consider adding a [Github page](how_to.qmd) for documentation
 
-:::{.panel-tabset}
+:::
 
-# Access
+<br>
+
+## Access
 
 Our organization has several public Github orgs. If you are internal to Washington State Department of Health, you will need to submit a Service Central Request for access. Please reach out to frank.aragona@doh.wa.gov for help.
 
-# Github Security
+## Github Security
 
 **Please read all of the [security guidelines here](security.qmd)**
 
@@ -41,18 +46,18 @@ The guide will go over
 - converting private code to public repositories
 - installation of pre-commit hooks to prevent leaks
 
-# Building a Public Repo 
+## Building a Public Repo 
 
 If you have an existing private repo that needs to be public, please follow these steps:
 
 - [repo cleaning guides](https://nw-page.github.io/standards/gh/security.html#pushing-private-code-to-public-repos)
 - [code scanning](https://nw-page.github.io/standards/gh/security.html#secret-scanning)
 
-# Licensing
+## Licensing
 
 - [license rules](https://nw-page.github.io/standards/gh/lic.html)
 
-# Repo tips/advice
+## Repo tips/advice
 
 - [org policies](https://nw-page.github.io/standards/gh/policies.html)
 - [make your repo reproducible](https://nw-page.github.io/standards/gh/reproduce.html)
@@ -60,4 +65,3 @@ If you have an existing private repo that needs to be public, please follow thes
 - [virtual environments](https://nw-page.github.io/standards/gh/renv.html)
 - [git/github help, and how to collaborate on a repo](contribute.qmd)
 
-:::

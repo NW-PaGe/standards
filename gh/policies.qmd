@@ -21,7 +21,8 @@ filters:
 #   - Git
 ---
 
-## Summary
+:::{.box}
+## **Objectives** {{< bi journals >}}
 
 -   Ensure that all repos in the org have the required documents
 -   Set policy rules at the Organization level
@@ -29,10 +30,10 @@ filters:
 -   Repos need to have documentation
 -   Set up bots and branch protections
 
-
 In the Github Organization we may require all repositories to contain certain documents. For example, we want to make sure that every repo has a `CODE OF CONDUCT` document that is a general policy applied throughout the organization.
 
-Here's a list of required documents:
+Below is a list of required documents
+:::
 
 ## `README` {.unnumbered}
 
