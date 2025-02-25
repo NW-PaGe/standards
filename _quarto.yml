@@ -78,11 +78,12 @@ website:
             contents:
               - gh/quickstart.qmd
               - gh/security.qmd
+              - gh/gh_setup.qmd
               - gh/gh_collab_tutorial.qmd
               - gh/policies.qmd
               - gh/lic.qmd
               - gh/reproduce.qmd
-              - gh/contribute.qmd
+
           - section: "Tutorials"
             contents:
               - gh/release.qmd
