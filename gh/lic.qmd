@@ -16,7 +16,7 @@ format:
 ---
 
 :::{.box}
-## **Summary** {{< fa file size="3x" >}} 
+## **Summary** {{< fa file >}} 
 
 -   Licenses prevent code theft and inappropriate redistribution of code. 
 -   Review common open-source licenses 

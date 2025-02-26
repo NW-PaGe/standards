@@ -20,8 +20,8 @@ execute:
   eval: false
 ---
 
-::: {.note .medframe}
-{{< fa file-circle-check size="3x" >}} **Summary**
+::: {.box}
+## **Summary** {{< fa file-circle-check >}}
 
 -   Github Releases
 -   Helps devs and end users
@@ -31,7 +31,7 @@ execute:
 
 <br>
 
-# Github Releases
+## Github Releases
 
 In the right panel of your Github repo there is a section labeled Releases. Here you can create or find a version of your repo's code base. Each version comes with a changelog, tags, and downloadable source code. Developers and end-users may find this helpful to navigate to what the repo contained at specific release versions and have the source code available for download at the specific version.
 
@@ -55,7 +55,7 @@ You can click on a tag and it will take you to the repo *at the time the specifi
 
 ![](images/releases_tags.gif){.myframe}
 
-# Semantic Versioning
+## Semantic Versioning
 
 Software projects often label their releases using semantic versioning. It looks like this, where the software version numbers all have a definition:
 
@@ -63,7 +63,7 @@ Software projects often label their releases using semantic versioning. It looks
 [![https://www.softwarecraftsperson.com/2020/12/06/semantic-versioning-semver-introduction/](images/semver.png)](https://www.softwarecraftsperson.com/2020/12/06/semantic-versioning-semver-introduction/)
 :::
 
-# Conventional Commits {#sec-cc}
+## Conventional Commits {#sec-cc}
 
 To create the release cycle in your repo you may want to use Conventional Commits.
 
@@ -77,13 +77,13 @@ Conventional Commits are a way to format and standardize your commit messages, w
 ```{=html}
 <iframe width="780" height="500" src="https://www.conventionalcommits.org/en/v1.0.0/" title="Github Licenses"></iframe>
 ```
-# Automating The Release Cycle
+## Automating The Release Cycle
 
 You should consider automating your release cycle so that your project cycle is consistent and predictable. There are many different ways to approach this.
 
 Some repos have semi-automatic cycles where there is some manual component of releasing their software, whereas others are fully automated. Manual releases can work too for some scenarios.
 
-## Github Action for auto releases
+### Github Action for auto releases
 
 I recommend first creating a test repo for this. In the repo, create a Github Action workflow called `changelog.yml`. You can copy the full file below:
 
@@ -124,7 +124,7 @@ jobs:
           body: ${{ steps.changelog.outputs.clean_changelog }}
 ```
 
-#  {.unnumbered}
+##  {.unnumbered}
 
 This workflow will be triggered everytime a branch is merged to main. If that branch has [conventinal commit messages](@sec-cc) the commits will be summarized in the changelog. See an example workflow below:
 
@@ -140,7 +140,7 @@ If I make a branch off of main, I can add features, bug fixes, and more. If I us
 
 A new version will be released, and since this was just a bug fix the version number went from `v2.1.4` to `v2.1.5` since bug fixes only up-version the patch numbers
 
-#  {.unnumbered}
+##  {.unnumbered}
 
 The first step uses the Github Action `TriPSs/conventional-changelog-action@v3` which will scan your
 
@@ -172,7 +172,7 @@ The second step uses the Github Action `actions/create-release@v1` which will cr
     body: ${{ steps.changelog.outputs.clean_changelog }}
 ```
 
-# Step by Step Instructions
+## Step by Step Instructions
 
 1.  Make a test repo in Github, then clone it locally
 2.  Make a folder in the root of the repo named `.github`
@@ -292,7 +292,7 @@ Here's a common guide:
 
 ![](images/paste-1.png)
 
-# Resources
+## Resources
 
 These videos are excellent summaries of how to use Github Releases and semantic versioning
 

@@ -28,7 +28,7 @@ citation-location: margin
 ---
 
 ::: {.box}
-## **Objectives** {{< fa tags size="3x" >}} 
+## **Objectives** {{< fa tags >}} 
 
 -   Data and Code Democratization
 -   Github Codespaces
