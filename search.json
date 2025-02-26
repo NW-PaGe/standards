@@ -638,7 +638,7 @@
     "href": "tools/index.html",
     "title": "Guides and Templates",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\nReading Time\n\n\n\n\n\n\n\n\n\nSep 1, 2023\n\n\nCode and Repo Documentation\n\n\nFrank Aragona\n\n\n13 min\n\n\n\n\n\n\n\nFeb 1, 2023\n\n\nGit\n\n\nFrank Aragona\n\n\n3 min\n\n\n\n\n\n\n\nFeb 25, 2025\n\n\nLink external R code to the documentation\n\n\nFrank Aragona\n\n\n1 min\n\n\n\n\n\n\n\nSep 1, 2023\n\n\nPackage Documentation\n\n\nFrank Aragona\n\n\n1 min\n\n\n\n\n\n\n\nSep 1, 2023\n\n\nRelease Cycles\n\n\nFrank Aragona\n\n\n6 min\n\n\n\n\n\n\n\nSep 1, 2023\n\n\nTemplates\n\n\nFrank Aragona\n\n\n1 min\n\n\n\n\n\n\n\nFeb 1, 2023\n\n\nVirtual Environments\n\n\nFrank Aragona\n\n\n11 min\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\nReading Time\n\n\n\n\n\n\n\n\n\nSep 1, 2023\n\n\nCode and Repo Documentation\n\n\nFrank Aragona\n\n\n13 min\n\n\n\n\n\n\n\nFeb 1, 2023\n\n\nGit\n\n\nFrank Aragona\n\n\n3 min\n\n\n\n\n\n\n\nFeb 26, 2025\n\n\nLink external R code to the documentation\n\n\nFrank Aragona\n\n\n1 min\n\n\n\n\n\n\n\nSep 1, 2023\n\n\nPackage Documentation\n\n\nFrank Aragona\n\n\n1 min\n\n\n\n\n\n\n\nSep 1, 2023\n\n\nRelease Cycles\n\n\nFrank Aragona\n\n\n6 min\n\n\n\n\n\n\n\nSep 1, 2023\n\n\nTemplates\n\n\nFrank Aragona\n\n\n1 min\n\n\n\n\n\n\n\nFeb 1, 2023\n\n\nVirtual Environments\n\n\nFrank Aragona\n\n\n11 min\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "tools/renv.html",
@@ -743,7 +743,7 @@
     "href": "gh/release.html",
     "title": "Release Cycles",
     "section": "",
-    "text": "Summary\n\nGithub Releases\nHelps devs and end users\nChangelogs and semantic versioning\nAutomate the release process",
+    "text": "Github Releases\nHelps devs and end users\nChangelogs and semantic versioning\nAutomate the release process",
     "crumbs": [
       "Github",
       "Tutorials",
@@ -751,11 +751,107 @@
     ]
   },
   {
-    "objectID": "gh/release.html#github-action-for-auto-releases",
-    "href": "gh/release.html#github-action-for-auto-releases",
+    "objectID": "gh/release.html#summary",
+    "href": "gh/release.html#summary",
     "title": "Release Cycles",
-    "section": "Github Action for auto releases",
-    "text": "Github Action for auto releases\nI recommend first creating a test repo for this. In the repo, create a Github Action workflow called changelog.yml. You can copy the full file below:\n\n\n\n.github/workflows/changelog.yml\n\nname: Changelog\non:\n  push:\n    branches:\n      - main\n\njobs:\n  changelog:\n    runs-on: ubuntu-latest\n    \n    permissions:\n      # write permission is required to create a github release\n      contents: write\n\n    steps:\n      - uses: actions/checkout@v2\n\n      - name: Conventional Changelog Action\n        id: changelog\n        uses: TriPSs/conventional-changelog-action@v3\n        with:\n          github-token: ${{ secrets.github_token }}\n          create-summary: true\n\n      - name: Create Release\n        uses: actions/create-release@v1\n        if: ${{ steps.changelog.outputs.skipped == 'false' }}\n        env:\n          GITHUB_TOKEN: ${{ secrets.github_token }}\n        with:\n          prerelease: false\n          tag_name: ${{ steps.changelog.outputs.tag }}\n          release_name: ${{ steps.changelog.outputs.tag }}\n          body: ${{ steps.changelog.outputs.clean_changelog }}",
+    "section": "",
+    "text": "Github Releases\nHelps devs and end users\nChangelogs and semantic versioning\nAutomate the release process",
+    "crumbs": [
+      "Github",
+      "Tutorials",
+      "Release Cycles"
+    ]
+  },
+  {
+    "objectID": "gh/release.html#github-releases",
+    "href": "gh/release.html#github-releases",
+    "title": "Release Cycles",
+    "section": "Github Releases",
+    "text": "Github Releases\nIn the right panel of your Github repo there is a section labeled Releases. Here you can create or find a version of your repo’s code base. Each version comes with a changelog, tags, and downloadable source code. Developers and end-users may find this helpful to navigate to what the repo contained at specific release versions and have the source code available for download at the specific version.\n\n\nIf you click on the releases you can see different release tags/versions. Each comes with a changelog, tag, git hash number, and zip files to download the repo at the time the specific version was released. This means you can automatically save repo snapshots and backups whenever your project cycle is released.\n\n\nyou can flip through different releases and tags here\n\n\nYou can click on a tag and it will take you to the repo at the time the specific version was released",
+    "crumbs": [
+      "Github",
+      "Tutorials",
+      "Release Cycles"
+    ]
+  },
+  {
+    "objectID": "gh/release.html#semantic-versioning",
+    "href": "gh/release.html#semantic-versioning",
+    "title": "Release Cycles",
+    "section": "Semantic Versioning",
+    "text": "Semantic Versioning\nSoftware projects often label their releases using semantic versioning. It looks like this, where the software version numbers all have a definition:\n\n\n\n\nhttps://www.softwarecraftsperson.com/2020/12/06/semantic-versioning-semver-introduction/",
+    "crumbs": [
+      "Github",
+      "Tutorials",
+      "Release Cycles"
+    ]
+  },
+  {
+    "objectID": "gh/release.html#sec-cc",
+    "href": "gh/release.html#sec-cc",
+    "title": "Release Cycles",
+    "section": "Conventional Commits",
+    "text": "Conventional Commits\nTo create the release cycle in your repo you may want to use Conventional Commits.\nConventional Commits are a way to format and standardize your commit messages, which can be used to then automate the repo’s release cycle. For example, one conventional naming method is to label any commit associated with a new feature as feat: plus a commit message.\n\nThe word feat: can trigger a Github Action to add that commit to your changelog under the Features header,\nand it will up-version the minor release version number.\nSo if you are on release 1.0.0, a new feat will up-version the cycle to 1.1.0\nCommit titles that start with the word fix: as in a bug fix will up-version the patch number of the, i.e. 1.0.0 to 1.0.1",
+    "crumbs": [
+      "Github",
+      "Tutorials",
+      "Release Cycles"
+    ]
+  },
+  {
+    "objectID": "gh/release.html#automating-the-release-cycle",
+    "href": "gh/release.html#automating-the-release-cycle",
+    "title": "Release Cycles",
+    "section": "Automating The Release Cycle",
+    "text": "Automating The Release Cycle\nYou should consider automating your release cycle so that your project cycle is consistent and predictable. There are many different ways to approach this.\nSome repos have semi-automatic cycles where there is some manual component of releasing their software, whereas others are fully automated. Manual releases can work too for some scenarios.\n\nGithub Action for auto releases\nI recommend first creating a test repo for this. In the repo, create a Github Action workflow called changelog.yml. You can copy the full file below:\n\n\n\n.github/workflows/changelog.yml\n\nname: Changelog\non:\n  push:\n    branches:\n      - main\n\njobs:\n  changelog:\n    runs-on: ubuntu-latest\n    \n    permissions:\n      # write permission is required to create a github release\n      contents: write\n\n    steps:\n      - uses: actions/checkout@v2\n\n      - name: Conventional Changelog Action\n        id: changelog\n        uses: TriPSs/conventional-changelog-action@v3\n        with:\n          github-token: ${{ secrets.github_token }}\n          create-summary: true\n\n      - name: Create Release\n        uses: actions/create-release@v1\n        if: ${{ steps.changelog.outputs.skipped == 'false' }}\n        env:\n          GITHUB_TOKEN: ${{ secrets.github_token }}\n        with:\n          prerelease: false\n          tag_name: ${{ steps.changelog.outputs.tag }}\n          release_name: ${{ steps.changelog.outputs.tag }}\n          body: ${{ steps.changelog.outputs.clean_changelog }}",
+    "crumbs": [
+      "Github",
+      "Tutorials",
+      "Release Cycles"
+    ]
+  },
+  {
+    "objectID": "gh/release.html#section",
+    "href": "gh/release.html#section",
+    "title": "Release Cycles",
+    "section": "",
+    "text": "This workflow will be triggered everytime a branch is merged to main. If that branch has conventinal commit messages the commits will be summarized in the changelog. See an example workflow below:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIf I make a branch off of main, I can add features, bug fixes, and more. If I used conventional commit messages in the title (i.e. feat: message, fix: message) the Github Action workflow will detect the trigger word in the title and divide the commit accordingly in the changelog. Notice how the commit title message gets output automatically into the changelog under the header Bug Fixes and the commit + commit hash number are generated.\nA new version will be released, and since this was just a bug fix the version number went from v2.1.4 to v2.1.5 since bug fixes only up-version the patch numbers",
+    "crumbs": [
+      "Github",
+      "Tutorials",
+      "Release Cycles"
+    ]
+  },
+  {
+    "objectID": "gh/release.html#section-1",
+    "href": "gh/release.html#section-1",
+    "title": "Release Cycles",
+    "section": "",
+    "text": "The first step uses the Github Action TriPSs/conventional-changelog-action@v3 which will scan your\n\n\n\n.github/workflows/changelog.yml\n\nsteps:\n  - uses: actions/checkout@v2\n\n  - name: Conventional Changelog Action\n    id: changelog\n    uses: TriPSs/conventional-changelog-action@v3\n    with:\n      github-token: ${{ secrets.github_token }}\n      create-summary: true\n\n\nThe second step uses the Github Action actions/create-release@v1 which will create git tags with the version number and a changelog with downloadable source code\n\n\n\n.github/workflows/changelog.yml\n\n- name: Create Release\n  uses: actions/create-release@v1\n  if: ${{ steps.changelog.outputs.skipped == 'false' }}\n  env:\n    GITHUB_TOKEN: ${{ secrets.github_token }}\n  with:\n    prerelease: false\n    tag_name: ${{ steps.changelog.outputs.tag }}\n    release_name: ${{ steps.changelog.outputs.tag }}\n    body: ${{ steps.changelog.outputs.clean_changelog }}",
+    "crumbs": [
+      "Github",
+      "Tutorials",
+      "Release Cycles"
+    ]
+  },
+  {
+    "objectID": "gh/release.html#step-by-step-instructions",
+    "href": "gh/release.html#step-by-step-instructions",
+    "title": "Release Cycles",
+    "section": "Step by Step Instructions",
+    "text": "Step by Step Instructions\n\nMake a test repo in Github, then clone it locally\nMake a folder in the root of the repo named .github\nIn the .github folder make another folder named workflows . the .github/workflows folder needs to be spelled the same and in the in exact same place for a github action to work.\nIn the workflows folder make a file called changelog.yml and paste code below in it:\n\n\n\n\n.github/workflows/changelog.yml\n\nname: Changelog\non:\n  push:\n    branches:\n      - main\n\njobs:\n  changelog:\n    runs-on: ubuntu-latest\n    \n    permissions:\n      # write permission is required to create a github release\n      contents: write\n\n    steps:\n      - uses: actions/checkout@v2\n\n      - name: Conventional Changelog Action\n        id: changelog\n        uses: TriPSs/conventional-changelog-action@v3\n        with:\n          github-token: ${{ secrets.github_token }}\n          create-summary: true\n\n      - name: Create Release\n        uses: actions/create-release@v1\n        if: ${{ steps.changelog.outputs.skipped == 'false' }}\n        env:\n          GITHUB_TOKEN: ${{ secrets.github_token }}\n        with:\n          prerelease: false\n          tag_name: ${{ steps.changelog.outputs.tag }}\n          release_name: ${{ steps.changelog.outputs.tag }}\n          body: ${{ steps.changelog.outputs.clean_changelog }}\n\n\n\n\n\n\n\n\nNote\n\n\n\nNow when you commit something to the repo and have a convential commit message it will trigger the Github Action to make a changelog.\nFor example, if you make a commit with a bug fix and in the commit title you write the word fix: like this - fix: this commit is a bugfix - the action will get triggered to make a new changelog with the commit and bump up the minor version (like from v1.0.0 to v1.0.1)\n\n\nThis is great, but if you do not write a conventional commit message it will not work. Step 5 has instructions on how to make sure everyone on your team writes conventional commits. It uses a pre-commit hook, which will prevent any commit that does not have a conventional commit message from being pushed to the repo.\nFor example, this commit message will error out and not be pushed to the repo - this commit is a feature. But this commit message will work - feat: this commit is a feature\n\n(Optional, but recommended) Make a pre-commit hook\n\nOpen a Windows Command Prompt\nInstall pre-commit with the code below\n\n\n\n\n\nCommand Prompt\n\npip install pre-commit\n\n\n\n\nCheck that pre-commit is working by running the code below. If you get an error message with this you may need to install pip\n\n\n\n\n\nCommand Prompt\n\npre-commit --version\n\n\n\n\nIn the root of you repo, make a file called .pre-commit-config.yaml and put the following code in it (note the . is necessary in the file name):\n\n\n\n\n\n.pre-commit-config.yaml\n\nrepos:\n- repo: https://github.com/compilerla/conventional-pre-commit\n  rev: v2.4.0\n  hooks:\n    - id: conventional-pre-commit\n      stages: [commit-msg]\n      args: []\n  # args is optional: list of Conventional Commits types to allow e.g. [feat, fix, ci, chore, test]\n\n\n\n\nLast, in the Windows Command Prompt, run this:\n\n\n\n\n\nCommand Prompt\n\npre-commit install --hook-type commit-msg\n\n\n\n\nNow you will be required to use conventional commit messages when pushing new code to the repo.\nHere’s a common guide:\n\n\n\n\n\n\n\nconventional commit keyword\nexpected outcome\n\n\n\n\nfeat:\nnew changelog, bump up the minor release version (i.e, 1.0.0 to 1.1.0)\n\n\nfix:\nnew changelog, bump up the patch release version (i.e, 1.0.0 to 1.0.1)\n\n\nchore:\ndocs:\ntest:\nno changes\n\n\nany keyword plus BREAKING CHANGE: in the commit message\nnew changelog, bump up the MAJOR release version (i.e, 1.0.0 to 2.0.0)\n\n\n\nNOTE: breaking changes need to be written like this:",
+    "crumbs": [
+      "Github",
+      "Tutorials",
+      "Release Cycles"
+    ]
+  },
+  {
+    "objectID": "gh/release.html#resources",
+    "href": "gh/release.html#resources",
+    "title": "Release Cycles",
+    "section": "Resources",
+    "text": "Resources\nThese videos are excellent summaries of how to use Github Releases and semantic versioning",
     "crumbs": [
       "Github",
       "Tutorials",

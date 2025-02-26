@@ -309,7 +309,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#github-releases" id="toc-github-releases" class="nav-link active" data-scroll-target="#github-releases">Github Releases</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link active" data-scroll-target="#summary"><strong>Summary</strong> <i class="fa-solid fa-file-circle-check" aria-label="file-circle-check"></i></a></li>
+  <li><a href="#github-releases" id="toc-github-releases" class="nav-link" data-scroll-target="#github-releases">Github Releases</a></li>
   <li><a href="#semantic-versioning" id="toc-semantic-versioning" class="nav-link" data-scroll-target="#semantic-versioning">Semantic Versioning</a></li>
   <li><a href="#sec-cc" id="toc-sec-cc" class="nav-link" data-scroll-target="#sec-cc">Conventional Commits</a></li>
   <li><a href="#automating-the-release-cycle" id="toc-automating-the-release-cycle" class="nav-link" data-scroll-target="#automating-the-release-cycle">Automating The Release Cycle</a>
@@ -367,7 +368,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">February 25, 2025</p>
+      <p class="date-modified">February 26, 2025</p>
     </div>
   </div>
     
@@ -378,18 +379,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="note medframe">
-<p><i class="fa-solid fa-file-circle-check fa-3x" aria-label="file-circle-check"></i> <strong>Summary</strong></p>
+<section id="summary" class="level2 box">
+<h2 class="anchored" data-anchor-id="summary"><strong>Summary</strong> <i class="fa-solid fa-file-circle-check" aria-label="file-circle-check"></i></h2>
 <ul>
 <li>Github Releases</li>
 <li>Helps devs and end users</li>
 <li>Changelogs and semantic versioning</li>
 <li>Automate the release process</li>
 </ul>
-</div>
+</section>
 <p><br></p>
-<section id="github-releases" class="level1">
-<h1>Github Releases</h1>
+<section id="github-releases" class="level2">
+<h2 class="anchored" data-anchor-id="github-releases">Github Releases</h2>
 <p>In the right panel of your Github repo there is a section labeled Releases. Here you can create or find a version of your repo’s code base. Each version comes with a changelog, tags, and downloadable source code. Developers and end-users may find this helpful to navigate to what the repo contained at specific release versions and have the source code available for download at the specific version.</p>
 <p><img src="images/releases.PNG" class="myframe img-fluid"></p>
 <p><br></p>
@@ -402,8 +403,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>You can click on a tag and it will take you to the repo <em>at the time the specific version was released</em></p>
 <p><img src="images/releases_tags.gif" class="myframe img-fluid"></p>
 </section>
-<section id="semantic-versioning" class="level1">
-<h1>Semantic Versioning</h1>
+<section id="semantic-versioning" class="level2">
+<h2 class="anchored" data-anchor-id="semantic-versioning">Semantic Versioning</h2>
 <p>Software projects often label their releases using semantic versioning. It looks like this, where the software version numbers all have a definition:</p>
 <div class="pic-border">
 <div class="quarto-figure quarto-figure-center">
@@ -414,8 +415,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="sec-cc" class="level1">
-<h1>Conventional Commits</h1>
+<section id="sec-cc" class="level2">
+<h2 class="anchored" data-anchor-id="sec-cc">Conventional Commits</h2>
 <p>To create the release cycle in your repo you may want to use Conventional Commits.</p>
 <p>Conventional Commits are a way to format and standardize your commit messages, which can be used to then automate the repo’s release cycle. For example, one conventional naming method is to label any commit associated with a new feature as <code>feat:</code> plus a commit message.</p>
 <ul>
@@ -426,12 +427,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <iframe width="780" height="500" src="https://www.conventionalcommits.org/en/v1.0.0/" title="Github Licenses"></iframe>
 </section>
-<section id="automating-the-release-cycle" class="level1">
-<h1>Automating The Release Cycle</h1>
+<section id="automating-the-release-cycle" class="level2">
+<h2 class="anchored" data-anchor-id="automating-the-release-cycle">Automating The Release Cycle</h2>
 <p>You should consider automating your release cycle so that your project cycle is consistent and predictable. There are many different ways to approach this.</p>
 <p>Some repos have semi-automatic cycles where there is some manual component of releasing their software, whereas others are fully automated. Manual releases can work too for some scenarios.</p>
-<section id="github-action-for-auto-releases" class="level2">
-<h2 class="anchored" data-anchor-id="github-action-for-auto-releases">Github Action for auto releases</h2>
+<section id="github-action-for-auto-releases" class="level3">
+<h3 class="anchored" data-anchor-id="github-action-for-auto-releases">Github Action for auto releases</h3>
 <p>I recommend first creating a test repo for this. In the repo, create a Github Action workflow called <code>changelog.yml</code>. You can copy the full file below:</p>
 <div class="cell">
 <div class="code-with-filename">
@@ -476,8 +477,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="section" class="level1 unnumbered page-columns page-full">
-<h1 class="unnumbered"></h1>
+<section id="section" class="level2 unnumbered page-columns page-full">
+<h2 class="unnumbered anchored" data-anchor-id="section"></h2>
 <p>This workflow will be triggered everytime a branch is merged to main. If that branch has <a href="@sec-cc">conventinal commit messages</a> the commits will be summarized in the changelog. See an example workflow below:</p>
 <div>
 
@@ -496,8 +497,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>If I make a branch off of main, I can add features, bug fixes, and more. If I used conventional commit messages in the title (i.e.&nbsp;<code>feat: message</code>, <code>fix: message</code>) the Github Action workflow will detect the trigger word in the title and divide the commit accordingly in the changelog. Notice how the commit title message gets output automatically into the changelog under the header <strong>Bug Fixes</strong> and the commit + commit hash number are generated.</p>
 <p>A new version will be released, and since this was just a bug fix the version number went from <code>v2.1.4</code> to <code>v2.1.5</code> since bug fixes only up-version the patch numbers</p>
 </section>
-<section id="section-1" class="level1 unnumbered">
-<h1 class="unnumbered"></h1>
+<section id="section-1" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="section-1"></h2>
 <p>The first step uses the Github Action <code>TriPSs/conventional-changelog-action@v3</code> which will scan your</p>
 <div class="cell">
 <div class="code-with-filename">
@@ -534,8 +535,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="step-by-step-instructions" class="level1">
-<h1>Step by Step Instructions</h1>
+<section id="step-by-step-instructions" class="level2">
+<h2 class="anchored" data-anchor-id="step-by-step-instructions">Step by Step Instructions</h2>
 <ol type="1">
 <li>Make a test repo in Github, then clone it locally</li>
 <li>Make a folder in the root of the repo named <code>.github</code></li>
@@ -699,8 +700,8 @@ Note
 <p><strong>NOTE</strong>: breaking changes need to be written like this:</p>
 <p><img src="images/paste-1.png" class="img-fluid"></p>
 </section>
-<section id="resources" class="level1">
-<h1>Resources</h1>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
 <p>These videos are excellent summaries of how to use Github Releases and semantic versioning</p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/fcHJZ4pMzBs?si=jb-1lgaYevGqOUU9" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/q3qE2nJRuYM?si=7nQ7itJFt3oUtgaL" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
