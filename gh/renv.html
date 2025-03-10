@@ -8,7 +8,7 @@
 
 <meta name="author" content="Frank Aragona">
 <meta name="dcterms.date" content="2023-02-01">
-<meta name="description" content="How to configure R and Python package dependencies to this repo for reproducibility">
+<meta name="description" content="How to configure R and Python package dependencies for reproducibility">
 
 <title>Virtual Environments – NW-COE Policies</title>
 <style>
@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -42,6 +76,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-71f2824f185f7f241352d6490053fe7d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/bootstrap-icons-1.11.1/all.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -272,8 +307,23 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#python---conda-environment-setup" id="toc-python---conda-environment-setup" class="nav-link" data-scroll-target="#python---conda-environment-setup">Python - Conda Environment Setup</a>
+  <li><a href="#summary" id="toc-summary" class="nav-link active" data-scroll-target="#summary"><strong>Summary</strong><i class="bi-file-earmark-check-fill " style="" role="img" aria-hidden="true"></i></a></li>
+  <li><a href="#intro" id="toc-intro" class="nav-link" data-scroll-target="#intro">Intro</a></li>
+  <li><a href="#venv" id="toc-venv" class="nav-link" data-scroll-target="#venv">venv</a>
+  <ul>
+  <li><a href="#create-a-venv" id="toc-create-a-venv" class="nav-link" data-scroll-target="#create-a-venv">create a venv</a>
+  <ul class="collapse">
+  <li><a href="#step-1---workspaces" id="toc-step-1---workspaces" class="nav-link" data-scroll-target="#step-1---workspaces">step 1 - Workspaces</a></li>
+  <li><a href="#step-2---install-uv" id="toc-step-2---install-uv" class="nav-link" data-scroll-target="#step-2---install-uv">step 2 - install uv</a></li>
+  <li><a href="#step-3---create-venv" id="toc-step-3---create-venv" class="nav-link" data-scroll-target="#step-3---create-venv">step 3 - create venv</a></li>
+  <li><a href="#step-4---activate-venv" id="toc-step-4---activate-venv" class="nav-link" data-scroll-target="#step-4---activate-venv">step 4 - activate venv</a></li>
+  <li><a href="#step-5---add-packages" id="toc-step-5---add-packages" class="nav-link" data-scroll-target="#step-5---add-packages">step 5 - add packages</a></li>
+  </ul></li>
+  <li><a href="#ide-configurations" id="toc-ide-configurations" class="nav-link" data-scroll-target="#ide-configurations">IDE configurations</a></li>
+  </ul></li>
+  <li><a href="#conda" id="toc-conda" class="nav-link" data-scroll-target="#conda">conda</a>
+  <ul>
+  <li><a href="#create-conda-env" id="toc-create-conda-env" class="nav-link" data-scroll-target="#create-conda-env">create conda env</a>
   <ul class="collapse">
   <li><a href="#step-1-set-up-anaconda" id="toc-step-1-set-up-anaconda" class="nav-link" data-scroll-target="#step-1-set-up-anaconda">Step 1: Set Up Anaconda</a></li>
   <li><a href="#step-2-open-anaconda-prompt" id="toc-step-2-open-anaconda-prompt" class="nav-link" data-scroll-target="#step-2-open-anaconda-prompt">Step 2: Open Anaconda Prompt</a></li>
@@ -281,39 +331,32 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#step-4-copy-the-repo-env" id="toc-step-4-copy-the-repo-env" class="nav-link" data-scroll-target="#step-4-copy-the-repo-env">Step 4: Copy the repo env</a></li>
   <li><a href="#step-5-activate-the-environment" id="toc-step-5-activate-the-environment" class="nav-link" data-scroll-target="#step-5-activate-the-environment">Step 5: Activate the environment</a></li>
   </ul></li>
-  <li><a href="#python---programming-setup" id="toc-python---programming-setup" class="nav-link" data-scroll-target="#python---programming-setup">Python - Programming Setup</a>
-  <ul class="collapse">
-  <li><a href="#ide-setup---vs-code" id="toc-ide-setup---vs-code" class="nav-link" data-scroll-target="#ide-setup---vs-code">IDE Setup - VS Code</a>
-  <ul class="collapse">
-  <li><a href="#step-1-select-a-python-interpreter" id="toc-step-1-select-a-python-interpreter" class="nav-link" data-scroll-target="#step-1-select-a-python-interpreter">Step 1: Select a Python Interpreter</a></li>
-  <li><a href="#step-2-write-code" id="toc-step-2-write-code" class="nav-link" data-scroll-target="#step-2-write-code">Step 2: Write code</a></li>
-  </ul></li>
-  <li><a href="#ide-setup---pycharm" id="toc-ide-setup---pycharm" class="nav-link" data-scroll-target="#ide-setup---pycharm">IDE Setup - PyCharm</a>
-  <ul class="collapse">
-  <li><a href="#step-1-select-a-python-interpreter-1" id="toc-step-1-select-a-python-interpreter-1" class="nav-link" data-scroll-target="#step-1-select-a-python-interpreter-1">Step 1: Select a Python Interpreter</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#python---installing-new-packages" id="toc-python---installing-new-packages" class="nav-link" data-scroll-target="#python---installing-new-packages">Python - Installing New Packages</a>
+  <li><a href="#install-new-packages" id="toc-install-new-packages" class="nav-link" data-scroll-target="#install-new-packages">install new packages</a>
   <ul class="collapse">
   <li><a href="#step-1-install-a-new-package" id="toc-step-1-install-a-new-package" class="nav-link" data-scroll-target="#step-1-install-a-new-package">Step 1: Install a new package</a></li>
   <li><a href="#step-2-save-the-package-to-the-repo" id="toc-step-2-save-the-package-to-the-repo" class="nav-link" data-scroll-target="#step-2-save-the-package-to-the-repo">Step 2: Save the package to the repo</a></li>
   </ul></li>
-  <li><a href="#r-package-management--renv" id="toc-r-package-management--renv" class="nav-link" data-scroll-target="#r-package-management--renv">R Package Management -<code>renv</code></a>
-  <ul class="collapse">
-  <li><a href="#creating-renv-in-a-project" id="toc-creating-renv-in-a-project" class="nav-link" data-scroll-target="#creating-renv-in-a-project">Creating <code>renv</code> in a project</a>
-  <ul class="collapse">
-  <li><a href="#step-1-open-the-.rproj-in-your-repo" id="toc-step-1-open-the-.rproj-in-your-repo" class="nav-link" data-scroll-target="#step-1-open-the-.rproj-in-your-repo">Step 1: Open the <code>.Rproj</code> in your repo</a></li>
-  <li><a href="#step-2-initialize-renv-for-the-repo" id="toc-step-2-initialize-renv-for-the-repo" class="nav-link" data-scroll-target="#step-2-initialize-renv-for-the-repo">Step 2: Initialize <code>renv</code> for the repo</a></li>
-  <li><a href="#step-3-push-to-github" id="toc-step-3-push-to-github" class="nav-link" data-scroll-target="#step-3-push-to-github">Step 3: Push to Github</a></li>
   </ul></li>
-  <li><a href="#using-renv-in-a-project" id="toc-using-renv-in-a-project" class="nav-link" data-scroll-target="#using-renv-in-a-project">Using <code>renv</code> in a project</a>
+  <li><a href="#renv" id="toc-renv" class="nav-link" data-scroll-target="#renv">renv</a>
+  <ul>
+  <li><a href="#create-a-renv" id="toc-create-a-renv" class="nav-link" data-scroll-target="#create-a-renv">create a renv</a>
   <ul class="collapse">
-  <li><a href="#step-1-open-the-.rproj-for-your-repo" id="toc-step-1-open-the-.rproj-for-your-repo" class="nav-link" data-scroll-target="#step-1-open-the-.rproj-for-your-repo">Step 1: Open the <code>.Rproj</code> for your repo</a></li>
-  <li><a href="#step-2-load-renv-packages" id="toc-step-2-load-renv-packages" class="nav-link" data-scroll-target="#step-2-load-renv-packages">Step 2: Load <code>renv</code> packages</a></li>
+  <li><a href="#step-1---workspaces-1" id="toc-step-1---workspaces-1" class="nav-link" data-scroll-target="#step-1---workspaces-1">step 1 - workspaces</a></li>
+  <li><a href="#step-2---install-renv" id="toc-step-2---install-renv" class="nav-link" data-scroll-target="#step-2---install-renv">step 2 - install renv</a></li>
+  <li><a href="#step-3---initialize-renv" id="toc-step-3---initialize-renv" class="nav-link" data-scroll-target="#step-3---initialize-renv">step 3 - initialize renv</a></li>
+  <li><a href="#step-4---activate-renv" id="toc-step-4---activate-renv" class="nav-link" data-scroll-target="#step-4---activate-renv">step 4 - activate renv</a></li>
+  <li><a href="#step-5---add-packages-1" id="toc-step-5---add-packages-1" class="nav-link" data-scroll-target="#step-5---add-packages-1">step 5 - add packages</a></li>
+  <li><a href="#step-6---save-package-updates" id="toc-step-6---save-package-updates" class="nav-link" data-scroll-target="#step-6---save-package-updates">step 6 - save package updates</a></li>
+  <li><a href="#step-7---push-to-github" id="toc-step-7---push-to-github" class="nav-link" data-scroll-target="#step-7---push-to-github">step 7 - push to GitHub</a></li>
+  <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">troubleshooting</a></li>
   </ul></li>
+  <li><a href="#load-renv" id="toc-load-renv" class="nav-link" data-scroll-target="#load-renv">load renv</a>
+  <ul class="collapse">
+  <li><a href="#step-1---open-your-workspace" id="toc-step-1---open-your-workspace" class="nav-link" data-scroll-target="#step-1---open-your-workspace">step 1 - open your workspace</a></li>
+  <li><a href="#step-2---restore-renv" id="toc-step-2---restore-renv" class="nav-link" data-scroll-target="#step-2---restore-renv">step 2 - restore renv</a></li>
   </ul></li>
-  <li><a href="#r-installing-new-packages" id="toc-r-installing-new-packages" class="nav-link" data-scroll-target="#r-installing-new-packages">R Installing New Packages</a></li>
-  <li><a href="#using-reticulate-with-conda-env" id="toc-using-reticulate-with-conda-env" class="nav-link" data-scroll-target="#using-reticulate-with-conda-env">Using Reticulate with Conda Env</a></li>
+  <li><a href="#using-reticulate-python-with-renv" id="toc-using-reticulate-python-with-renv" class="nav-link" data-scroll-target="#using-reticulate-python-with-renv">using reticulate (python) with renv</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/gh/renv.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/gh/renv.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -327,7 +370,7 @@ ul.task-list li input[type="checkbox"] {
 
 <div>
   <div class="description">
-    How to configure R and Python package dependencies to this repo for reproducibility
+    How to configure R and Python package dependencies for reproducibility
   </div>
 </div>
 
@@ -351,7 +394,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">February 26, 2025</p>
+      <p class="date-modified">March 10, 2025</p>
     </div>
   </div>
     
@@ -362,39 +405,298 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
-<div class="quarto-figure quarto-figure-right">
-<figure class="figure">
-<p><img src="images/nwpage_tree_logo.png" class="img-fluid quarto-figure quarto-figure-right figure-img" style="float: right;" alt="Hex logo that says &quot;Data Science in a Box&quot;" width="250"></p>
-</figure>
-</div>
-<p>Virtual environments allow us to execute code while accounting for software/package version differences we have on our local machines. This repo uses virtual environments to configure a user’s R and Python software and packages to the repo’s specific package versions.</p>
-<p>For example, say you have dplyr version 2.0 but this repo uses dplyr version 1.1, you may not be able to run the scripts as intended by the author since the functions in dplyr 1.1 may be different than in 2.0. The virtual environment will allow a given user to use only this repo’s version of dplyr so they can run the code as intended.</p>
-<div class="callout callout-style-default callout-important callout-titled">
+<section id="summary" class="level2 box">
+<h2 class="anchored" data-anchor-id="summary"><strong>Summary</strong><i class="bi-file-earmark-check-fill " style="" role="img" aria-hidden="true"></i></h2>
+<ul>
+<li>Virtual environments are self-contained, isolated workspaces</li>
+<li>They allow you to manage project-specific dependencies</li>
+<li>They help to avoid conflicts between different projects</li>
+</ul>
+<p>This doc will go over how to create and manage:</p>
+<ul>
+<li><strong>venv:</strong> the most common python virtual environment module</li>
+<li><strong>conda:</strong> the hellscape of virtual environments that can be used with both Python and R (i don’t recommend unless you need it)</li>
+<li><strong>renv:</strong> the most commonly used virtual environment package for R (can be mixed with venv and/or conda for bilingual R/Python repos)</li>
+</ul>
+</section>
+<section id="intro" class="level2">
+<h2 class="anchored" data-anchor-id="intro">Intro</h2>
+<p>A virtual environment is a self-contained, isolated workspace that allows you to manage project-specific dependencies and avoid conflicts between different projects. Virtual environments allow us to execute code while accounting for software/package version differences we have on our local machines. This repo uses virtual environments to configure a user’s R and Python software and packages to the repo’s specific package versions.</p>
+<p>For example, say you have dplyr version <code>2.0</code> but this repo uses dplyr version <code>1.1</code>, you may not be able to run the scripts as intended by the author since the functions in dplyr <code>1.1</code> may be different than in <code>2.0</code>. The virtual environment will allow a given user to use only this repo’s version of dplyr so they can run the code as intended.</p>
+</section>
+<section id="venv" class="level2">
+<h2 class="anchored" data-anchor-id="venv">venv</h2>
+<p><code>venv</code> is a module for creating virtual python environments. From the <a href="https://docs.python.org/3/library/venv.html">python venv docs</a>:</p>
+<blockquote class="blockquote">
+<p>The venv module supports creating lightweight “virtual environments”, each with their own independent set of Python packages installed in their site directories.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>A virtual environment is (amongst other things):</p>
+</blockquote>
+<blockquote class="blockquote">
+<ul>
+<li>Used to contain a specific Python interpreter and software libraries and binaries which are needed to support a project (library or application). These are by default isolated from software in other virtual environments and Python interpreters and libraries installed in the operating system.</li>
+<li>Contained in a directory, conventionally named .venv or venv in the project directory, or under a container directory for lots of virtual environments, such as <code>~/.virtualenvs</code>.</li>
+<li>Not checked into source control systems such as Git.</li>
+<li>Considered as disposable – it should be simple to delete and recreate it from scratch. You don’t place any project code in the environment.</li>
+<li>Not considered as movable or copyable – you just recreate the same environment in the target location.</li>
+</ul>
+</blockquote>
+<p>To create a venv in Python we can do it in a terminal window. Below are instructions on how to create one with VS Code (or Positron).</p>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Important
+Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>There are two different virtual environments for this repo, one for R and another for Python. <strong>Your workflows for opening R and Python and how you install packages needs to utilize the virtual environments so that all machines are able to use your code.</strong></p>
+<p>you should create a new venv for every isolated project!</p>
+</div>
+</div>
+<section id="create-a-venv" class="level3">
+<h3 class="anchored" data-anchor-id="create-a-venv">create a venv</h3>
+<p>Positron has all the features of VS Code and Rstudio combined, so it’s much easier to set up for R users looking to get into Python and vice-versa.</p>
+<p>Managing a venv in Positron is a bit easier than in VS Code because the UI is more user friendly for venv and renv.</p>
+<section id="step-1---workspaces" class="level4">
+<h4 class="anchored" data-anchor-id="step-1---workspaces">step 1 - Workspaces</h4>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Positron</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">VS Code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>Open Positron and you will see a screen like this</p>
+<p><img src="images/positron_main.png" class="img-fluid"></p>
+<p>Assuming you already have a project folder, click <code>Open Folder</code> and navigate to the <em>root</em> of the folder you want to work in.</p>
+<p>Workspaces are like isolated projects. Each isolated project needs to have its own virtual environment so that we can avoid unwanted package issues seeping into multiple projects unknowingly.</p>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>Open VS Code and you will see a screen like this</p>
+<p><img src="images/vscode_main.png" class="img-fluid"></p>
+<p>Assuming you already have a project folder, click <code>Open Folder</code> and navigate to the <em>root</em> of the folder you want to work in.</p>
+<p>Workspaces are like isolated projects. Each isolated project needs to have its own virtual environment so that we can avoid unwanted package issues seeping into multiple projects unknowingly.</p>
+</div>
 </div>
 </div>
 </section>
-<section id="python---conda-environment-setup" class="level1">
-<h1>Python - Conda Environment Setup</h1>
-<p>This repo has a file named <code>environment.yml</code>. It contains a list of all packages and versions used for Python software. This file can be used as a set of instructions for your local machine when configuring your local environment.</p>
-<section id="step-1-set-up-anaconda" class="level2">
-<h2 class="anchored" data-anchor-id="step-1-set-up-anaconda">Step 1: Set Up Anaconda</h2>
+<section id="step-2---install-uv" class="level4">
+<h4 class="anchored" data-anchor-id="step-2---install-uv">step 2 - install uv</h4>
+<p>Now you should see a terminal window with your folder in it looking like -</p>
+<div class="medframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>terminal</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">USER@workbench-1:~/path/to/workspace/folder</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p>install <a href="https://docs.astral.sh/uv/configuration/installer/">uv</a>:</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>terminal</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-LsSf</span> https://astral.sh/uv/install.sh <span class="kw">|</span> <span class="fu">env</span> UV_INSTALL_DIR=<span class="st">"/custom/path"</span> sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="step-3---create-venv" class="level4">
+<h4 class="anchored" data-anchor-id="step-3---create-venv">step 3 - create venv</h4>
+<p>now run this to create a virtual environment:</p>
+<div class="smallframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>terminal</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> venv .venv <span class="at">--python</span><span class="op">=</span>python3.10</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p>this is saying create a venv named <code>.venv</code> with a specific python version (<code>3.10</code>, but it can be any version you want for this specific project):</p>
+<p>you should get this message:</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>terminal</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Using</span> CPython 3.10.12 interpreter at: /usr/bin/python3.10</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Creating</span> virtual environment at: .venv</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Activate</span> with: source .venv/bin/activate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="step-4---activate-venv" class="level4">
+<h4 class="anchored" data-anchor-id="step-4---activate-venv">step 4 - activate venv</h4>
+<div class="smallframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>terminal</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p>you should see this with <code>.venv</code> on the left of your username:</p>
+<p><img src="images/venv_activate.png" class="img-fluid"></p>
+</section>
+<section id="step-5---add-packages" class="level4">
+<h4 class="anchored" data-anchor-id="step-5---add-packages">step 5 - add packages</h4>
+<p>Now you are in an <em>isolated</em> virtual environment called <code>.venv</code>. To add packages, run</p>
+<div class="smallframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>terminal</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> pip install <span class="op">&lt;</span>PACKAGE_NAME<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p>for example</p>
+<div class="smallframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>terminal</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> pip install polars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p>if you have a project that has existing packages in a <code>requirements.txt</code> file, you can install all of them like this:</p>
+<div class="smallframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>terminal</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> pip install <span class="at">-r</span> requirements.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="ide-configurations" class="level3">
+<h3 class="anchored" data-anchor-id="ide-configurations">IDE configurations</h3>
+<p>Now that you have your venv named <code>.venv</code>, we still need to tell Positron and VS Code that we want that venv to run our python code.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Positron</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">VS Code</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false">PyCharm</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<section id="step-1---select-python-venv" class="level5">
+<h5 class="anchored" data-anchor-id="step-1---select-python-venv">step 1 - Select Python venv</h5>
+<p>Create a new python script in your folder.</p>
+<p>Now in the upper right you will see a dropdown menu of Python (or R). Click it and you should see the path to the <code>.venv</code> you created in your workspace. Then click the start symbol to start that venv</p>
+<p><img src="images/positron_interpreter.png" class="img-fluid"></p>
+</section>
+<section id="step-2---test-to-see-if-it-worked" class="level5">
+<h5 class="anchored" data-anchor-id="step-2---test-to-see-if-it-worked">step 2 - test to see if it worked</h5>
+<p>In your terminal, install a package that you haven’t installed before and then try to call that package in your python script. To demonstrate:</p>
+<div class="smallframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>terminal</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> pip install great_tables</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p>Now write the import in your python script:</p>
+<div class="smallframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>script.py</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> great_tables <span class="im">as</span> gt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p>Now highlight that code in your script and press <code>CTRL + ENTER</code> and it will execute the code in your Python Console.</p>
+</section>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<section id="step-1---python-select-interpreter" class="level5">
+<h5 class="anchored" data-anchor-id="step-1---python-select-interpreter">step 1 - Python: Select Interpreter</h5>
+<p>Create a new python script in your folder.</p>
+<p>Now go to Settings &gt; Command Palette &gt; and type Python: Select Interpreter</p>
+<p><img src="images/command.png" class="img-fluid"></p>
+</section>
+<section id="step-2---enter-interpreter" class="level5">
+<h5 class="anchored" data-anchor-id="step-2---enter-interpreter">step 2 - Enter Interpreter</h5>
+<p>You should see this: <img src="images/edit_interpreter.png" class="img-fluid"></p>
+<p>Now to Enter your specifc interpreter, click on these options:</p>
+<ul>
+<li>Enter interpreter path…</li>
+<li>Find…</li>
+<li>.venv</li>
+<li>bin</li>
+<li>python3.10</li>
+</ul>
+<p><img src="images/edit_interpreter.gif" class="img-fluid"></p>
+</section>
+<section id="step-3---test-to-see-if-it-worked" class="level5">
+<h5 class="anchored" data-anchor-id="step-3---test-to-see-if-it-worked">step 3 - test to see if it worked</h5>
+<p>In your terminal, install a package that you haven’t installed before and then try to call that package in your python script. To demonstrate:</p>
+<div class="smallframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>terminal</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> pip install great_tables</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p>Now write the import in your python script:</p>
+<div class="smallframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>script.py</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> great_tables <span class="im">as</span> gt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p>and run the code in a Jupyter cell by highlighting the code &gt; right click on it &gt; Run in Interactive Window &gt; Run Selection/Line in Interactive Window</p>
+<p><img src="images/line_jupyter.png" class="img-fluid"></p>
+<p>It should now open a window where you can run your python code and examine your variables at once.</p>
+</section>
+</div>
+<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
+<p>PyCharm also works great with a virtual environment.</p>
+<section id="step-1-select-a-python-interpreter" class="level5">
+<h5 class="anchored" data-anchor-id="step-1-select-a-python-interpreter">Step 1: Select a Python Interpreter</h5>
+<p>You may also be able to open a PyCharm window from an Anaconda prompt like with VS Code (if it’s installed in your env). To do so, write <code>pycharm</code> in the prompt and it should open a new window with the env activated.</p>
+<p>If that doesn’t work, open PyCharm and on the bottom right there is a python version and interpreter selected. Click it and open “Add New Interpreter” &gt; “Add local interpreter”. This opens a new window. Click “Conda Environment” and under “Interpreter” click the dropdown. You should be able to see your new environment there. If not, click away and click the dropdown again. It’s weird sometimes.</p>
+<p>Then click okay. Close and reopen the Python Console window and it should have your environment path for the python.exe. Also, the Python Libraries window should have all of the libraries in your environment now.</p>
+<p><img src="images/pycharm_int.gif" class="img-fluid"></p>
+<p><br></p>
+<p>Notice that now there are a list of interpreters for you to use. You can now switch back and forth between environments. This is great if you have other repos to use or want to test out new packages that aren’t in the main environment.</p>
+</section>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="conda" class="level2">
+<h2 class="anchored" data-anchor-id="conda">conda</h2>
+<p>Repos may have a file named <code>environment.yml</code> for conda environments. It contains a list of all packages and versions used for Python software. This file can be used as a set of instructions for your local machine when configuring your local environment.</p>
+<section id="create-conda-env" class="level3">
+<h3 class="anchored" data-anchor-id="create-conda-env">create conda env</h3>
+<section id="step-1-set-up-anaconda" class="level4">
+<h4 class="anchored" data-anchor-id="step-1-set-up-anaconda">Step 1: Set Up Anaconda</h4>
 <p>You should already have Anaconda installed on your machine if not..</p>
-<p>under construction</p>
 </section>
-<section id="step-2-open-anaconda-prompt" class="level2">
-<h2 class="anchored" data-anchor-id="step-2-open-anaconda-prompt">Step 2: Open Anaconda Prompt</h2>
+<section id="step-2-open-anaconda-prompt" class="level4">
+<h4 class="anchored" data-anchor-id="step-2-open-anaconda-prompt">Step 2: Open Anaconda Prompt</h4>
 <p>You may have different Anaconda prompts (prompts aligned with different shells, like PowerShell, bash, etc). There should be a generic Anaconda prompt. Open that one:</p>
 <p><img src="images/open_prompt.gif" class="img-fluid"></p>
 <p><br></p>
@@ -402,8 +704,8 @@ Important
 <p><code>conda deactivate</code></p>
 <p>and it will bring you back to your base environment.</p>
 </section>
-<section id="step-3-change-directories" class="level2">
-<h2 class="anchored" data-anchor-id="step-3-change-directories">Step 3: Change Directories</h2>
+<section id="step-3-change-directories" class="level4">
+<h4 class="anchored" data-anchor-id="step-3-change-directories">Step 3: Change Directories</h4>
 <p>Change the directory of the prompt to the repo’s directory. The code is</p>
 <p><code>cd C:/Users/XXXXXXX/Projects/Sequencing_2.0</code></p>
 <p>If you are already in your user directory, you can just type</p>
@@ -413,8 +715,8 @@ Important
 <p><br></p>
 <p>Notice that the folder path is now changed to the sequencing repo folder.</p>
 </section>
-<section id="step-4-copy-the-repo-env" class="level2">
-<h2 class="anchored" data-anchor-id="step-4-copy-the-repo-env">Step 4: Copy the repo env</h2>
+<section id="step-4-copy-the-repo-env" class="level4">
+<h4 class="anchored" data-anchor-id="step-4-copy-the-repo-env">Step 4: Copy the repo env</h4>
 <p>Now we’re ready to create a new environment based on the repo’s environment.</p>
 <p>Type: <code>conda env create --name seq_env --file=environment.yml</code></p>
 <p>Note that how you name your environment doesn’t really matter, but name it something that resembles the repo. This will save the headache of having random environments for random repos that you can’t remember..</p>
@@ -427,8 +729,8 @@ Important
 <p>Note: I sped up the gif below. The whole process may take a few minutes</p>
 <p><img src="images/conda_create.gif" class="img-fluid"></p>
 </section>
-<section id="step-5-activate-the-environment" class="level2">
-<h2 class="anchored" data-anchor-id="step-5-activate-the-environment">Step 5: Activate the environment</h2>
+<section id="step-5-activate-the-environment" class="level4">
+<h4 class="anchored" data-anchor-id="step-5-activate-the-environment">Step 5: Activate the environment</h4>
 <p>You can switch between environments in the conda prompt or in a programming IDE (or both? idk). To activate and switch the env, write:</p>
 <p><code>conda activate &lt;env_name&gt;</code></p>
 <p>in this case</p>
@@ -450,52 +752,11 @@ Note
 </div>
 </section>
 </section>
-<section id="python---programming-setup" class="level1">
-<h1>Python - Programming Setup</h1>
-<p>Now that your virtual conda environment is set up, let’s set up your programming IDE to be able to recognize your environment.</p>
-<section id="ide-setup---vs-code" class="level2">
-<h2 class="anchored" data-anchor-id="ide-setup---vs-code">IDE Setup - VS Code</h2>
-<p>VS Code has a lot built in to use a conda environment. Since your env is already activated, if you have VS Code installed, you can type</p>
-<p><code>code</code></p>
-<p>into the anaconda prompt and it will open a VS Code window</p>
-<p><img src="images/vscode_open.gif" class="img-fluid"></p>
-<section id="step-1-select-a-python-interpreter" class="level3">
-<h3 class="anchored" data-anchor-id="step-1-select-a-python-interpreter">Step 1: Select a Python Interpreter</h3>
-<p>First we need to select a python interpreter, which is in our env. On your keyboard, press</p>
-<p><code>CTRL+SHIFT+P</code></p>
-<p>This should bring up a window with an option that says <code>Python: Select Interpreter</code>. You may need to search for it.</p>
-<p>Click it and you should see your new environment <code>seq_env</code> in the list. Click it</p>
-<p><img src="images/vscode_int.gif" class="img-fluid"></p>
-</section>
-<section id="step-2-write-code" class="level3">
-<h3 class="anchored" data-anchor-id="step-2-write-code">Step 2: Write code</h3>
-<p>Now your VS Code is using your environment and the python version/packages in that environment. Check to see that your terminal is using the correct env.</p>
-<p>Open the terminal (terminal &gt; new terminal) and confirm that you are in a cmd prompt in the terminal. On the right side of the terminal it should say <code>cmd</code>. If it says <code>powershell</code> or something else, let’s change it.. See the pic below. There’s a drop down that gives you shell types. Change your default to Command Prompt</p>
-<p><img src="images/image-1580735047.png" class="img-fluid"></p>
-<p><br></p>
-<p>Also notice in the picture that my environment now switches to <code>seq_env</code>. Yours should do the same. You should now be able to run code in a python script. Notice that your terminal will change to run python. If you get an error, write <code>python</code> in the terminal and hit enter. It will change your terminal a little. Now you can run python code and it will output to this terminal.</p>
-<p><img src="images/vscode_run.gif" class="img-fluid"></p>
-</section>
-</section>
-<section id="ide-setup---pycharm" class="level2">
-<h2 class="anchored" data-anchor-id="ide-setup---pycharm">IDE Setup - PyCharm</h2>
-<p>PyCharm also works great with a conda environment.</p>
-<section id="step-1-select-a-python-interpreter-1" class="level3">
-<h3 class="anchored" data-anchor-id="step-1-select-a-python-interpreter-1">Step 1: Select a Python Interpreter</h3>
-<p>You may also be able to open a PyCharm window from an Anaconda prompt like with VS Code (if it’s installed in your env). To do so, write <code>pycharm</code> in the prompt and it should open a new window with the env activated.</p>
-<p>If that doesn’t work, open PyCharm and on the bottom right there is a python version and interpreter selected. Click it and open “Add New Interpreter” &gt; “Add local interpreter”. This opens a new window. Click “Conda Environment” and under “Interpreter” click the dropdown. You should be able to see your new environment there. If not, click away and click the dropdown again. It’s weird sometimes.</p>
-<p>Then click okay. Close and reopen the Python Console window and it should have your environment path for the python.exe. Also, the Python Libraries window should have all of the libraries in your environment now.</p>
-<p><img src="images/pycharm_int.gif" class="img-fluid"></p>
-<p><br></p>
-<p>Notice that now there are a list of interpreters for you to use. You can now switch back and forth between environments. This is great if you have other repos to use or want to test out new packages that aren’t in the main environment.</p>
-</section>
-</section>
-</section>
-<section id="python---installing-new-packages" class="level1">
-<h1>Python - Installing New Packages</h1>
+<section id="install-new-packages" class="level3">
+<h3 class="anchored" data-anchor-id="install-new-packages">install new packages</h3>
 <p>Let’s say you want to add a new python package to the repo. I recommend doing this in an Anaconda prompt and then saving it over the environment.yml. Then you can push the new environment.yml with the new changes to github. Use these steps:</p>
-<section id="step-1-install-a-new-package" class="level2">
-<h2 class="anchored" data-anchor-id="step-1-install-a-new-package">Step 1: Install a new package</h2>
+<section id="step-1-install-a-new-package" class="level4">
+<h4 class="anchored" data-anchor-id="step-1-install-a-new-package">Step 1: Install a new package</h4>
 <p>Go to the Anaconda prompt, make sure you’re in the repo file path (<code>cd projects/sequencing_2.0</code>) and make sure you’re in the right conda env (<code>conda activate seq_env</code>).</p>
 <p>Now, install the package. Usually packages can be installed with <code>pip install</code> or <code>conda install</code> or <code>conda install -c conda forge &lt;package&gt;</code>. This depends on the packages. Some need pip, others need conda. Google it to find out. Here i’m going to download a package from NCBI to demonstrate. The package is called <code>ncbi-datasets-cli</code>.</p>
 <ul>
@@ -504,8 +765,8 @@ Note
 </ul>
 <p><img src="images/add_pack.gif" class="img-fluid"></p>
 </section>
-<section id="step-2-save-the-package-to-the-repo" class="level2">
-<h2 class="anchored" data-anchor-id="step-2-save-the-package-to-the-repo">Step 2: Save the package to the repo</h2>
+<section id="step-2-save-the-package-to-the-repo" class="level4">
+<h4 class="anchored" data-anchor-id="step-2-save-the-package-to-the-repo">Step 2: Save the package to the repo</h4>
 <p>Now we need to save this package to the repo’s <code>environment.yml</code></p>
 <ul>
 <li>Type <code>conda env export &gt; environment.yml</code></li>
@@ -515,9 +776,10 @@ Note
 <p><img src="images/add_yml.gif" class="img-fluid"></p>
 </section>
 </section>
-<section id="r-package-management--renv" class="level1">
-<h1>R Package Management -<code>renv</code></h1>
-<p>Managing R packages is much easier than managing Python packages. The R environment uses a package called <code>renv</code>. It will save a list of packages to a lock file, similar to <code>environment.yml</code>. Then, every time you or another teammate opens the R project in your repo the <code>renv</code> package will activate in the background and determine if any packages are not aligned with the repo’s lock file. <strong>It will ensure that everyone is using the same package versions</strong></p>
+</section>
+<section id="renv" class="level2">
+<h2 class="anchored" data-anchor-id="renv">renv</h2>
+<p>For virtual environments in R, the package called <code>renv</code> is commonly used. It will save a list of packages to a lock file, similar to <code>environment.yml</code> or <code>requirements.txt</code>. Then, every time you or another teammate opens the R project in your repo the <code>renv</code> package will activate in the background and determine if any packages are not aligned with the repo’s lock file. <strong>It will ensure that everyone is using the same package versions</strong></p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -531,28 +793,67 @@ Important
 <p>Your repo should have a <code>.Rproj</code> file at the <em>root</em> of the directory. If it doesn’t you can create it by opening <code>Rstudio &gt; File &gt; New Project... &gt; Existing Directory (or New Directory)</code> <strong>Make sure <code>.Rproj</code> files are NOT in your <code>.gitignore</code></strong></p>
 </div>
 </div>
-<section id="creating-renv-in-a-project" class="level2">
-<h2 class="anchored" data-anchor-id="creating-renv-in-a-project">Creating <code>renv</code> in a project</h2>
-<section id="step-1-open-the-.rproj-in-your-repo" class="level3">
-<h3 class="anchored" data-anchor-id="step-1-open-the-.rproj-in-your-repo">Step 1: Open the <code>.Rproj</code> in your repo</h3>
-<p>The R project will open up Rstudio at the root of you directory path.</p>
-<p><img src="images/open_r.gif" class="img-fluid"></p>
+<section id="create-a-renv" class="level3">
+<h3 class="anchored" data-anchor-id="create-a-renv">create a renv</h3>
+<section id="step-1---workspaces-1" class="level4">
+<h4 class="anchored" data-anchor-id="step-1---workspaces-1">step 1 - workspaces</h4>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">Positron</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">Rstudio</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<p>Open Positron and you will see a screen like this</p>
+<p><img src="images/positron_main.png" class="img-fluid"></p>
+<p>Assuming you already have a project folder, click <code>Open Folder</code> and navigate to the <em>root</em> of the folder you want to work in.</p>
+<p>Workspaces are like isolated projects. Each isolated project needs to have its own virtual environment so that we can avoid unwanted package issues seeping into multiple projects unknowingly.</p>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<section id="step-1.1---projects" class="level6">
+<h6 class="anchored" data-anchor-id="step-1.1---projects">step 1.1 - projects</h6>
+<p>Open up Rstudio and in the upper right, click <code>Project: (None)</code> dropdown and select <code>New Project...</code></p>
+<p><img src="images/rstudio_newproj.png" class="img-fluid"></p>
 </section>
-<section id="step-2-initialize-renv-for-the-repo" class="level3">
-<h3 class="anchored" data-anchor-id="step-2-initialize-renv-for-the-repo">Step 2: Initialize <code>renv</code> for the repo</h3>
+<section id="step-1.2---create-new-project" class="level6">
+<h6 class="anchored" data-anchor-id="step-1.2---create-new-project">step 1.2 - create new project</h6>
+<p>Now create a new project either in a new folder or an existing folder.</p>
+<p><img src="images/rstudio_existing.png" class="img-fluid"></p>
+<p>For existing directories, you can select the folder with Browse and select the R version</p>
+<p><img src="images/rstudio_existing_new.png" class="img-fluid"></p>
+<p>All of this will create a file called <code>&lt;your_project_name&gt;.Rproj</code>. And you should now be in that R project in Rstudio:</p>
+<p><img src="images/rstudio_rproj.png" class="img-fluid"></p>
+</section>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2---install-renv" class="level4">
+<h4 class="anchored" data-anchor-id="step-2---install-renv">step 2 - install renv</h4>
 <p>Now that we’re in the root of your repo directory, let’s initialize <code>renv</code>.</p>
-<p>First install <code>renv</code> - <code>install.packages("renv")</code></p>
-<p>Then in your console write <code>renv::init()</code> and run it.</p>
+<p>First install <code>renv</code>:</p>
+<div class="smallframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Console</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"renv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-3---initialize-renv" class="level4">
+<h4 class="anchored" data-anchor-id="step-3---initialize-renv">step 3 - initialize renv</h4>
+<p>In your console run this:</p>
+<div class="smallframe">
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Console</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">init</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 <p><img src="images/renvinit.gif" class="img-fluid"></p>
-<p>If you already have an existing repo, you will probably see warnings and errors in the renv::init like I did in the gif above. Not to worry! Read the warnings and follow the instructions. Usually you will need to re-install a package. If you get this warning:</p>
-<pre><code>These may be left over from a prior, failed installation attempt.
-Consider removing or reinstalling these packages.</code></pre>
-<ul>
-<li>Then run <code>renv::install("THAT PACKAGE")</code>. It will install the package again,</li>
-<li>and then you need to update the lock file (more on that later) by running <code>renv::snapshot()</code>.</li>
-</ul>
-<p>Now the package will be installed correctly</p>
-<p><img src="images/renv_backports.gif" class="img-fluid"></p>
 <p><code>renv::init()</code> will:</p>
 <ol type="1">
 <li>Search through all R scripts in your repo and find all packages used</li>
@@ -563,49 +864,45 @@ Consider removing or reinstalling these packages.</code></pre>
 <li>It also saved things like an <code>activate</code> R script which will activate that <code>renv</code> every time the repo is opened from the <code>.Rproj</code></li>
 </ol>
 </section>
-<section id="step-3-push-to-github" class="level3">
-<h3 class="anchored" data-anchor-id="step-3-push-to-github">Step 3: Push to Github</h3>
-<p>Now look at your git stage and you will see all the files <code>renv</code> created.</p>
-<p>We have</p>
-<ol type="1">
-<li><code>.Rprofile</code> that contains an <code>renv activate.R</code> script - this will activate the repo’s <code>renv</code> every time the project is opened</li>
-<li>The <code>renv.lock</code> file shows information on each package used in the repo and is used to update collaborator’s environments to match the lock file.</li>
-<li><code>renv/.gitignore</code> I don’t feel like explaining this one right now - i’ll write more later</li>
-<li><code>renv/activate.R</code> this will activate the env whenever the R project is opened</li>
-<li><code>renv/settings.dcf</code> I have no clue what this is</li>
-</ol>
-<p><img src="images/renv_git.gif" class="img-fluid"></p>
+<section id="step-4---activate-renv" class="level4">
+<h4 class="anchored" data-anchor-id="step-4---activate-renv">step 4 - activate renv</h4>
+<p>Restart your R session (Session &gt; Restart for Rstudio, or the Restart button in the console for Positron).</p>
+<p>renv should now automatically activate whenever you are in the project/workspace.</p>
 </section>
+<section id="step-5---add-packages-1" class="level4">
+<h4 class="anchored" data-anchor-id="step-5---add-packages-1">step 5 - add packages</h4>
+<p>If you need to install a new package and want to put it in the repo, you will need to update the lock file. To do either of these:</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Console</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">install</span>(<span class="st">"&lt;PACKAGE_NAME&gt;"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>or</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Console</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"&lt;PACKAGE_NAME"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
 </section>
-<section id="using-renv-in-a-project" class="level2">
-<h2 class="anchored" data-anchor-id="using-renv-in-a-project">Using <code>renv</code> in a project</h2>
-<section id="step-1-open-the-.rproj-for-your-repo" class="level3">
-<h3 class="anchored" data-anchor-id="step-1-open-the-.rproj-for-your-repo">Step 1: Open the <code>.Rproj</code> for your repo</h3>
-<p>Any time you need to code or run code from the repo, open up the <code>.Rproj</code> file that contains the sequencing 2.0 project. In your file explorer, go to the repo and open Sequencing_2.0 <code>.Rproj</code></p>
-<p><br></p>
-<p>This will open up an R window with the repo file path as a root directory. It will also utilize the <code>renv</code>. Your console should say something about <code>renv</code>, like this</p>
-<p><img src="images/image-664157118.png" class="img-fluid"></p>
-</section>
-<section id="step-2-load-renv-packages" class="level3">
-<h3 class="anchored" data-anchor-id="step-2-load-renv-packages">Step 2: Load <code>renv</code> packages</h3>
-<p>The first time you use <code>renv</code> you will need to configure it to your local machine. To do this, type:</p>
-<ul>
-<li><code>renv::restore()</code> in your console.</li>
-<li>This will create a new environment for your R in your local machine using the lock file packages.</li>
-</ul>
-<p><br></p>
-<p>Now you’re ready to use the scripts! Way less complicated than conda</p>
-</section>
-</section>
-</section>
-<section id="r-installing-new-packages" class="level1">
-<h1>R Installing New Packages</h1>
-<p>If you need to install a new package and want to put it in the repo, you will need to update the lock file. To do this:</p>
-<ul>
-<li><code>renv::install()</code>, <code>pak::pkg_install("&lt;PACKAGE_NAME&gt;")</code> (the safe way) or even <code>install.packages()</code></li>
-<li><code>renv::snapshot()</code> this will overwrite the lock file with the packages you added</li>
-<li>Then push to github</li>
-</ul>
+<section id="step-6---save-package-updates" class="level4">
+<h4 class="anchored" data-anchor-id="step-6---save-package-updates">step 6 - save package updates</h4>
+<p>Now if you can check your package updates into version control so that other collaborators can install the same packages with the same versions.</p>
+<p>After you have the packages installed run</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Console</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">snapshot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>This will overwrite the lock file with the packages you added. Now you can push the <code>renv.lock</code> file to github and other collaborators can sync with your changes.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -622,8 +919,76 @@ Warning
 <p><img src="images/r_save.gif" class="img-fluid"></p>
 <p>The video at the bottom of this page explains in detail <code>renv</code> and its capabilities https://solutions.posit.co/envs-pkgs/environments/upgrades/</p>
 </section>
-<section id="using-reticulate-with-conda-env" class="level1">
-<h1>Using Reticulate with Conda Env</h1>
+<section id="step-7---push-to-github" class="level4">
+<h4 class="anchored" data-anchor-id="step-7---push-to-github">step 7 - push to GitHub</h4>
+<p>Now look at your git status and you will see all the files <code>renv</code> created.</p>
+<p>We have</p>
+<ol type="1">
+<li><code>.Rprofile</code> that contains an <code>renv activate.R</code> script - this will activate the repo’s <code>renv</code> every time the project is opened</li>
+<li>The <code>renv.lock</code> file shows information on each package used in the repo and is used to update collaborator’s environments to match the lock file.</li>
+<li><code>renv/.gitignore</code> I don’t feel like explaining this one right now - i’ll write more later</li>
+<li><code>renv/activate.R</code> this will activate the env whenever the R project is opened</li>
+<li><code>renv/settings.dcf</code> I have no clue what this is</li>
+</ol>
+<p><img src="images/renv_git.gif" class="img-fluid"></p>
+</section>
+<section id="troubleshooting" class="level4">
+<h4 class="anchored" data-anchor-id="troubleshooting">troubleshooting</h4>
+<p>If you already have an existing repo, you will probably see warnings and errors in the <code>renv::init()</code> like I did in the gif above. Not to worry! Read the warnings and follow the instructions. Usually you will need to re-install a package. If you get this warning:</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Console</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>These may be left over from a prior, failed installation attempt.</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>Consider removing or reinstalling these packages.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<ul>
+<li>Then run this:</li>
+</ul>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Console</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">install</span>(<span class="st">"&lt;PACKAGE_NAME&gt;"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<ul>
+<li>It will install the package again,</li>
+<li>and then you need to update the lock file (more on that later) by running <code>renv::snapshot()</code>.</li>
+</ul>
+<p>Now the package will be installed correctly</p>
+<p><img src="images/renv_backports.gif" class="img-fluid"></p>
+</section>
+</section>
+<section id="load-renv" class="level3">
+<h3 class="anchored" data-anchor-id="load-renv">load renv</h3>
+<section id="step-1---open-your-workspace" class="level4">
+<h4 class="anchored" data-anchor-id="step-1---open-your-workspace">step 1 - open your workspace</h4>
+<p>For Rstudio, open up the <code>.Rproj</code> file we created above, or the workspace in Positron</p>
+<p><br></p>
+<p>This will open up an R window with the repo file path as a root directory. It will also utilize the <code>renv</code>. Your console should say something about <code>renv</code>, like this</p>
+<p><img src="images/image-664157118.png" class="img-fluid"></p>
+</section>
+<section id="step-2---restore-renv" class="level4">
+<h4 class="anchored" data-anchor-id="step-2---restore-renv">step 2 - restore renv</h4>
+<p>The first time you use <code>renv</code> you will need to configure it to your machine. To do this, run:</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Console</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">restore</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>This will create a new environment for your R in your machine using the lock file packages.</p>
+<p>Now you’re ready to use the scripts! Way less complicated than conda</p>
+</section>
+</section>
+<section id="using-reticulate-python-with-renv" class="level3">
+<h3 class="anchored" data-anchor-id="using-reticulate-python-with-renv">using reticulate (python) with renv</h3>
 <p>Now that your R and Python environments are set up, if you have code that uses the <code>reticulate</code> package in R, it might still be pointing to your base Python environment. So, if you need to write python code in R (using reticulate), the code may break. Here’s what you need to do to make sure your <code>reticulate</code> python path is pointing towards your conda environment:</p>
 <ol type="1">
 <li>Open an anaconda prompt</li>
@@ -637,6 +1002,7 @@ Warning
 </ol>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
