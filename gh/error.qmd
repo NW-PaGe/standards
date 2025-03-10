@@ -1,0 +1,23 @@
+---
+title: "Untitled"
+format: html
+execute:
+    eval: false
+knitr: true
+---
+
+works
+
+```bash
+echo hello
+```
+
+works, kind of..
+```{bash}
+echo hello
+```
+
+doesn't work
+```{bash filename="terminal"}
+echo hello
+```
