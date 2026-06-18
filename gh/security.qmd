@@ -73,6 +73,9 @@ The following cannot be included in any repo **or any local commit!**:
 
 : Items prohibited from being in a Github repo {#tbl-prohibit}
 
+
+If you have any prohibited item in your remove, remove it from the git history @sec-history or consider creating a new repo.
+
 ## Protect Credentials with .gitignore {#sec-creds}
 
 It is bad practice and a security risk to add private credentials to a script. If your script contains things like passwords, server names, or network drives, be aware that that information will be publicly visible when you push it to a remote git/github repo. Many of our scripts must call passwords and server names in order for them to work properly, so we need a way to hide that information from the public but still be able to run the scripts locally. `.gitignore` can help achieve this.
@@ -751,6 +754,48 @@ There are a few ways to do this, but the easiest way is to copy the clean privat
 ::::
 
 {{< fa exclamation >}} The private repository on the left still contains sensitive information in the git history. The public repository on the right has a clean git history because we copied only the current clean files from the private repo and did not attach its git history (which lives in the hidden `.git` folder)
+
+
+## Clean git history {sec-history}
+
+If you have a repo that has secrets or prohibited values in any commit, you can remove them from the git history. If you have a private repo that needs to be made public and it contains bad commits in the history, consider creating a new repo for the public version. If that is not doable, here are steps for removing the prohibited secrets from the git history.
+
+:::{.callout-warning}
+
+This is kinda skecthy. Consider setting up a test repo and practice on it before doing anything. And always make a backup of your work. See Frank or DIQA people for help.
+
+:::
+
+1. Install the [git-filter-repo](https://github.com/newren/git-filter-repo/tree/main#how-do-i-install-it) tool for cleaning the git history. Click that link for instructions, it involves cloning the repo and then putting the folder path in your PATH
+2. In a terminal, navigate to your repo and run 
+
+```{bash}
+git filter-repo --analyze
+```
+
+3. Now clean the history with:
+
+```{bash}
+
+git filter-repo --replace-text C;\path\to\secrets\patterns.txt
+```
+
+Note, you can write a string or a .txt path to that command above and it will remove any string in your git history with those patterns. Since we have patterns already specified from our git secrets tool, use that file here.
+
+4. Check your local clone and see if it properly redacted the files
+
+5. Push the new git history to main/your repo. Must be done by an admin. **Please be careful with this**.
+
+```{bash}
+git push origin main --force
+```
+
+
+It should look like this in GitHub now where strings are replaced with `REMOVED`
+
+![](images/git-filter.png)
+
+
 
 ## Code Reviewers/Github Operations Team
 
