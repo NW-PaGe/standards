@@ -76,7 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-4463693438d44bc4a6ba82d70edba7d0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-71f2824f185f7f241352d6490053fe7d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-7d118e2e19a0aea76dcb4df79de83104.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
@@ -324,6 +324,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#pre-recieve-hooks" id="toc-pre-recieve-hooks" class="nav-link" data-scroll-target="#pre-recieve-hooks">Pre-Recieve Hooks</a></li>
   <li><a href="#sec-public" id="toc-sec-public" class="nav-link" data-scroll-target="#sec-public">Pushing Private Code to Public Repos</a></li>
+  <li><a href="#clean-git-history-sec-history" id="toc-clean-git-history-sec-history" class="nav-link" data-scroll-target="#clean-git-history-sec-history">Clean git history {sec-history}</a></li>
   <li><a href="#code-reviewersgithub-operations-team" id="toc-code-reviewersgithub-operations-team" class="nav-link" data-scroll-target="#code-reviewersgithub-operations-team">Code Reviewers/Github Operations Team</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/NW-PaGe/standards/blob/main/gh/security.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/NW-PaGe/standards/edit/main/gh/security.qmd" class="toc-action"><i class="bi empty"></i>Edit this page</a></li><li><a href="https://github.com/NW-PaGe/standards/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -363,7 +364,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">March 10, 2025</p>
+      <p class="date-modified">June 18, 2026</p>
     </div>
   </div>
     
@@ -462,6 +463,7 @@ Table&nbsp;1: Items prohibited from being in a Github repo
 </div>
 </figure>
 </div>
+<p>If you have any prohibited item in your remove, remove it from the git history <strong>?@sec-history</strong> or consider creating a new repo.</p>
 <section id="sec-creds" class="level2">
 <h2 class="anchored" data-anchor-id="sec-creds">Protect Credentials with .gitignore</h2>
 <p>It is bad practice and a security risk to add private credentials to a script. If your script contains things like passwords, server names, or network drives, be aware that that information will be publicly visible when you push it to a remote git/github repo. Many of our scripts must call passwords and server names in order for them to work properly, so we need a way to hide that information from the public but still be able to run the scripts locally. <code>.gitignore</code> can help achieve this.</p>
@@ -1277,6 +1279,47 @@ Important
 </div>
 </div>
 <p><i class="fa-solid fa-exclamation" aria-label="exclamation"></i> The private repository on the left still contains sensitive information in the git history. The public repository on the right has a clean git history because we copied only the current clean files from the private repo and did not attach its git history (which lives in the hidden <code>.git</code> folder)</p>
+</section>
+<section id="clean-git-history-sec-history" class="level2">
+<h2 class="anchored" data-anchor-id="clean-git-history-sec-history">Clean git history {sec-history}</h2>
+<p>If you have a repo that has secrets or prohibited values in any commit, you can remove them from the git history. If you have a private repo that needs to be made public and it contains bad commits in the history, consider creating a new repo for the public version. If that is not doable, here are steps for removing the prohibited secrets from the git history.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This is kinda skecthy. Consider setting up a test repo and practice on it before doing anything. And always make a backup of your work. See Frank or DIQA people for help.</p>
+</div>
+</div>
+<ol type="1">
+<li>Install the <a href="https://github.com/newren/git-filter-repo/tree/main#how-do-i-install-it">git-filter-repo</a> tool for cleaning the git history. Click that link for instructions, it involves cloning the repo and then putting the folder path in your PATH</li>
+<li>In a terminal, navigate to your repo and run</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> filter-repo <span class="at">--analyze</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="3" type="1">
+<li>Now clean the history with:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> filter-repo <span class="at">--replace-text</span> C<span class="kw">;</span><span class="ex">\path\to\secrets\patterns.txt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Note, you can write a string or a .txt path to that command above and it will remove any string in your git history with those patterns. Since we have patterns already specified from our git secrets tool, use that file here.</p>
+<ol start="4" type="1">
+<li><p>Check your local clone and see if it properly redacted the files</p></li>
+<li><p>Push the new git history to main/your repo. Must be done by an admin. <strong>Please be careful with this</strong>.</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43" data-source-line-numbers="nil" data-code-line-numbers="nil"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin main <span class="at">--force</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>It should look like this in GitHub now where strings are replaced with <code>REMOVED</code></p>
+<p><img src="images/git-filter.png" class="img-fluid"></p>
 </section>
 <section id="code-reviewersgithub-operations-team" class="level2">
 <h2 class="anchored" data-anchor-id="code-reviewersgithub-operations-team">Code Reviewers/Github Operations Team</h2>
