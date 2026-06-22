@@ -795,7 +795,7 @@ It should look like this in GitHub now where strings are replaced with `REMOVED`
 ![](images/git-filter.png)
 
 
-There are many more options for overwriting the git history, such as removing a file instead of just key words. See the documentation for more info: https://github.com/newren/git-filter-repo/tree/main#how-do-i-install-it
+There are many more options for overwriting the git history, such as removing a file instead of just key words. See the [git-filter-repo documentation](https://github.com/newren/git-filter-repo/tree/main#how-do-i-install-it) for more info.
 
 
 
