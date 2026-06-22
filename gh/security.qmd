@@ -756,13 +756,13 @@ There are a few ways to do this, but the easiest way is to copy the clean privat
 {{< fa exclamation >}} The private repository on the left still contains sensitive information in the git history. The public repository on the right has a clean git history because we copied only the current clean files from the private repo and did not attach its git history (which lives in the hidden `.git` folder)
 
 
-## Clean git history {sec-history}
+## Clean git history {#sec-history}
 
 If you have a repo that has secrets or prohibited values in any commit, you can remove them from the git history. If you have a private repo that needs to be made public and it contains bad commits in the history, consider creating a new repo for the public version. If that is not doable, here are steps for removing the prohibited secrets from the git history.
 
 :::{.callout-warning}
 
-This is kinda skecthy. Consider setting up a test repo and practice on it before doing anything. And always make a backup of your work. See Frank or DIQA people for help.
+This is kinda skecthy and irreversible. It involves changing the git history from a local machine. The local clone can destroy code in your repo if it is behind or ahead in commits relative to the main branch in the remote repo. Consider setting up a test repo and practice on it before doing anything. And always make a backup of your work. See Frank or DIQA people for help.
 
 :::
 
@@ -776,8 +776,7 @@ git filter-repo --analyze
 3. Now clean the history with:
 
 ```{bash}
-
-git filter-repo --replace-text C;\path\to\secrets\patterns.txt
+git filter-repo --replace-text C:\path\to\secrets\patterns.txt
 ```
 
 Note, you can write a string or a .txt path to that command above and it will remove any string in your git history with those patterns. Since we have patterns already specified from our git secrets tool, use that file here.
@@ -794,6 +793,9 @@ git push origin main --force
 It should look like this in GitHub now where strings are replaced with `REMOVED`
 
 ![](images/git-filter.png)
+
+
+There are many more options for overwriting the git history, such as removing a file instead of just key words. See the documentation for more info: https://github.com/newren/git-filter-repo/tree/main#how-do-i-install-it
 
 
 
