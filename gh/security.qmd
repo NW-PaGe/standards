@@ -783,10 +783,24 @@ Note, you can write a string or a .txt path to that command above and it will re
 
 4. Check your local clone and see if it properly redacted the files
 
-5. Push the new git history to main/your repo. Must be done by an admin. **Please be careful with this**.
+5. Add the remote back to your clone
+
+By default, these commands remove the link between github and your local folder containing the code (for a good reason). You'll need to create the link again with:
+
+```{bash}
+git remote add origin <repository-url>
+```
+
+6. Push the new git history to main/your repo. Must be done by an admin. **Please be careful with this**.
 
 ```{bash}
 git push origin main --force
+```
+
+if that doesn't work try 
+
+```{bash}
+git push --force --all origin
 ```
 
 
