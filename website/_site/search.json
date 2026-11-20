@@ -1,125 +1,10 @@
 [
   {
-    "objectID": "reference.html",
-    "href": "reference.html",
-    "title": "Reference",
-    "section": "",
-    "text": "This page lists the options of My project. Replace the table with the options of your project.",
-    "crumbs": [
-      "Home",
-      "Reference"
-    ]
-  },
-  {
-    "objectID": "reference.html#options",
-    "href": "reference.html#options",
-    "title": "Reference",
-    "section": "Options",
-    "text": "Options\n\n\n\nOption\nDefault\nUse\n\n\n\n\ntitle\n\"My project\"\nThe name of the site.\n\n\ndescription\nnone\nThe short text for search engines.\n\n\nrepo-url\nnone\nThe address of the repository.",
-    "crumbs": [
-      "Home",
-      "Reference"
-    ]
-  },
-  {
-    "objectID": "reference.html#commands",
-    "href": "reference.html#commands",
-    "title": "Reference",
-    "section": "Commands",
-    "text": "Commands\n\n\n\nCommand\nUse\n\n\n\n\nquarto preview\nShow the site and update it when a file changes.\n\n\nquarto render\nBuild the site in the _site folder.",
-    "crumbs": [
-      "Home",
-      "Reference"
-    ]
-  },
-  {
-    "objectID": "guides/writing.html",
-    "href": "guides/writing.html",
-    "title": "Writing pages",
-    "section": "",
-    "text": "This page shows each element that the template styles. Copy the element that you need and change its text.",
-    "crumbs": [
-      "Home",
-      "Guides",
-      "Writing pages"
-    ]
-  },
-  {
-    "objectID": "guides/writing.html#callouts",
-    "href": "guides/writing.html#callouts",
-    "title": "Writing pages",
-    "section": "Callouts",
-    "text": "Callouts\n\n\n\n\n\n\nNoteA note\n\n\n\nUse a note for extra information.\n\n\n\n\n\n\n\n\nTipA tip\n\n\n\nUse a tip for advice that saves time.\n\n\n\n\n\n\n\n\nWarningA warning\n\n\n\nUse a warning for an action that can cause a problem.\n\n\n\n\n\n\n\n\nNoteA collapsed callout\n\n\n\n\n\nThe reader opens this callout to read more.\n\n\n\n\n\n\n\n\n\nA minimal callout has no title bar.",
-    "crumbs": [
-      "Home",
-      "Guides",
-      "Writing pages"
-    ]
-  },
-  {
-    "objectID": "guides/writing.html#code",
-    "href": "guides/writing.html#code",
-    "title": "Writing pages",
-    "section": "Code",
-    "text": "Code\nA code block can show a file name.\n\n\nhello.py\n\ndef greet(name):\n    return f\"Hello, {name}\"\n\nA code block can number its lines.\n\n\npython\n\nfirst = 1\nsecond = 2\ntotal = first + second\n\nA terminal block shows a command and its output. A line that starts with $ and a space is a command.\n\n\nTerminal\n\necho \"Hello\"\nHello",
-    "crumbs": [
-      "Home",
-      "Guides",
-      "Writing pages"
-    ]
-  },
-  {
-    "objectID": "guides/writing.html#tabs",
-    "href": "guides/writing.html#tabs",
-    "title": "Writing pages",
-    "section": "Tabs",
-    "text": "Tabs\n\nPythonR\n\n\n\n\npython\n\nprint(\"Hello\")\n\n\n\n\n\nr\n\ncat(\"Hello\\n\")",
-    "crumbs": [
-      "Home",
-      "Guides",
-      "Writing pages"
-    ]
-  },
-  {
-    "objectID": "guides/writing.html#figures-and-tables",
-    "href": "guides/writing.html#figures-and-tables",
-    "title": "Writing pages",
-    "section": "Figures and tables",
-    "text": "Figures and tables\n\n\n\n\n\ntext\n\nproject/\n  _quarto.yml\n  _brand.yml\n  index.qmd\n\n\n\nFigure 1: The files that a project holds at first.\n\n\n\n\n\n\nTable 1: The files to change first.\n\n\n\n\n\nFile\nUse\n\n\n\n\n_quarto.yml\nThe options of the site.\n\n\n_brand.yml\nThe colours of the site.\n\n\nindex.qmd\nThe home page.",
-    "crumbs": [
-      "Home",
-      "Guides",
-      "Writing pages"
-    ]
-  },
-  {
     "objectID": "get-started.html",
     "href": "get-started.html",
     "title": "Get started",
     "section": "",
     "text": "This page shows how to install My project. Replace the steps with the steps for your project.",
-    "crumbs": [
-      "Home",
-      "Get started"
-    ]
-  },
-  {
-    "objectID": "get-started.html#install",
-    "href": "get-started.html#install",
-    "title": "Get started",
-    "section": "Install",
-    "text": "Install\nRun the install command in a terminal.\n\n\nTerminal\n\npip install my-project\ninstalled my-project",
-    "crumbs": [
-      "Home",
-      "Get started"
-    ]
-  },
-  {
-    "objectID": "get-started.html#check-the-install",
-    "href": "get-started.html#check-the-install",
-    "title": "Get started",
-    "section": "Check the install",
-    "text": "Check the install\nRun the version command. The output shows the version number.\n\n\nTerminal\n\nmy-project --version\n1.0.0\n\n\n\n\n\n\n\nNoteReplace this page\n\n\n\nWrite the steps that a new reader must do first. Keep each step to one action.",
     "crumbs": [
       "Home",
       "Get started"
@@ -137,160 +22,219 @@
     ]
   },
   {
-    "objectID": "guides/configuration.html",
-    "href": "guides/configuration.html",
-    "title": "Configuration",
-    "section": "",
-    "text": "This guide shows how to change the site. Two files control how the site looks."
-  },
-  {
-    "objectID": "guides/configuration.html#the-site-file",
-    "href": "guides/configuration.html#the-site-file",
-    "title": "Configuration",
-    "section": "The site file",
-    "text": "The site file\nThe file _quarto.yml holds the title, the navigation, and the options of the site. Change the title and the description first.\n\n\n_quarto.yml\n\nwebsite:\n  title: \"My project\"\n  description: \"A short description of my project.\"\n\nChange repo-url to the address of your repository."
-  },
-  {
-    "objectID": "guides/configuration.html#the-brand-file",
-    "href": "guides/configuration.html#the-brand-file",
-    "title": "Configuration",
-    "section": "The brand file",
-    "text": "The brand file\nThe file _brand.yml holds the colours of the site. Each colour has a light value and a dark value. The site uses the primary colour for the current item and for links.\n\n\n_brand.yml\n\ncolor:\n  primary:\n    light: \"#1d5fd1\"\n    dark: \"#7fa8f0\"\n\n\n\n\n\n\n\nTipTest both colour schemes\n\n\n\nChange the colour scheme of your system. Make sure that the text is easy to read in both schemes."
-  },
-  {
-    "objectID": "guides/configuration.html#next-steps",
-    "href": "guides/configuration.html#next-steps",
-    "title": "Configuration",
-    "section": "Next steps",
-    "text": "Next steps\nRead Writing pages to see each element that a page can hold."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "NW-PaGe Policies and Guidelines",
-    "section": "",
-    "text": "This is a static website documenting the policies and guidelines for public Github use at the Pacific Northwest Genomic Center of Excellence. Scroll below to see overviews on Github, Azure, and AWS policies.",
-    "crumbs": [
-      "Home",
-      "NW-PaGe Policies and Guidelines"
-    ]
-  },
-  {
-    "objectID": "index.html#quick-start",
-    "href": "index.html#quick-start",
-    "title": "NW-PaGe Policies and Guidelines",
-    "section": "Quick start",
-    "text": "Quick start\nPreview the site on your computer. The site updates each time you save a file.",
-    "crumbs": [
-      "Home",
-      "NW-PaGe Policies and Guidelines"
-    ]
-  },
-  {
-    "objectID": "index.html#next-steps",
-    "href": "index.html#next-steps",
-    "title": "NW-PaGe Policies and Guidelines",
-    "section": "Next steps",
-    "text": "Next steps\n\nGet started shows how to install the project.\nConfiguration shows how to change the site and its colours.\nWriting pages shows each element that a page can hold.\nReference lists the options of the project.",
-    "crumbs": [
-      "Home",
-      "NW-PaGe Policies and Guidelines"
-    ]
-  },
-  {
-    "objectID": "guides/checklist.html",
-    "href": "guides/checklist.html",
-    "title": "Get Started",
+    "objectID": "policies/checklist.html",
+    "href": "policies/checklist.html",
+    "title": "Checklist",
     "section": "",
     "text": "If you need to make a public repo, this quick start guide is for you. Please meet with Frank Aragona DOH.CDS.GenSeqSurvDQ@doh.wa.gov before creating a public repo.\n\nSubmit a request (service central ticket) to join a public GitHub organization (email1 for help)\nReview items that are prohibited from being in a repo\nAdd security guardrails\nCreate global security hooks for all your repos\nMake a private staging repo to make sure everything is clean\nPerform secret scanning on your repo\nAdd a license\nMake branch protections\nCopy over the cleaned main branch from private repo into new public repo\nAdd a README and consider adding a Github page for documentation",
     "crumbs": [
       "Home",
-      "Guides",
-      "Get Started"
+      "Policies",
+      "Checklist"
     ]
   },
   {
-    "objectID": "guides/checklist.html#checklist",
-    "href": "guides/checklist.html#checklist",
-    "title": "Get Started",
+    "objectID": "policies/checklist.html#checklist",
+    "href": "policies/checklist.html#checklist",
+    "title": "Checklist",
     "section": "",
     "text": "If you need to make a public repo, this quick start guide is for you. Please meet with Frank Aragona DOH.CDS.GenSeqSurvDQ@doh.wa.gov before creating a public repo.\n\nSubmit a request (service central ticket) to join a public GitHub organization (email1 for help)\nReview items that are prohibited from being in a repo\nAdd security guardrails\nCreate global security hooks for all your repos\nMake a private staging repo to make sure everything is clean\nPerform secret scanning on your repo\nAdd a license\nMake branch protections\nCopy over the cleaned main branch from private repo into new public repo\nAdd a README and consider adding a Github page for documentation",
     "crumbs": [
       "Home",
-      "Guides",
-      "Get Started"
+      "Policies",
+      "Checklist"
     ]
   },
   {
-    "objectID": "guides/checklist.html#access",
-    "href": "guides/checklist.html#access",
-    "title": "Get Started",
+    "objectID": "policies/checklist.html#access",
+    "href": "policies/checklist.html#access",
+    "title": "Checklist",
     "section": "Access",
     "text": "Access\nOur organization has several public Github orgs. If you are internal to Washington State Department of Health, you will need to submit a Service Central Request for access. Please reach out to frank.aragona@doh.wa.gov for help.",
     "crumbs": [
       "Home",
-      "Guides",
-      "Get Started"
+      "Policies",
+      "Checklist"
     ]
   },
   {
-    "objectID": "guides/checklist.html#github-security",
-    "href": "guides/checklist.html#github-security",
-    "title": "Get Started",
+    "objectID": "policies/checklist.html#github-security",
+    "href": "policies/checklist.html#github-security",
+    "title": "Checklist",
     "section": "Github Security",
     "text": "Github Security\nPlease read all of the security guidelines here\nThe guide will go over\n\nwhat data/code is not allowed in a public repo\nsecurity layers you need to prevent leaks\nconverting private code to public repositories\ninstallation of pre-commit hooks to prevent leaks",
     "crumbs": [
       "Home",
-      "Guides",
-      "Get Started"
+      "Policies",
+      "Checklist"
     ]
   },
   {
-    "objectID": "guides/checklist.html#building-a-public-repo",
-    "href": "guides/checklist.html#building-a-public-repo",
-    "title": "Get Started",
+    "objectID": "policies/checklist.html#building-a-public-repo",
+    "href": "policies/checklist.html#building-a-public-repo",
+    "title": "Checklist",
     "section": "Building a Public Repo",
     "text": "Building a Public Repo\nIf you have an existing private repo that needs to be public, please follow these steps:\n\nrepo cleaning guides\ncode scanning",
     "crumbs": [
       "Home",
-      "Guides",
-      "Get Started"
+      "Policies",
+      "Checklist"
     ]
   },
   {
-    "objectID": "guides/checklist.html#licensing",
-    "href": "guides/checklist.html#licensing",
-    "title": "Get Started",
+    "objectID": "policies/checklist.html#licensing",
+    "href": "policies/checklist.html#licensing",
+    "title": "Checklist",
     "section": "Licensing",
     "text": "Licensing\n\nlicense rules",
     "crumbs": [
       "Home",
-      "Guides",
-      "Get Started"
+      "Policies",
+      "Checklist"
     ]
   },
   {
-    "objectID": "guides/checklist.html#repo-tipsadvice",
-    "href": "guides/checklist.html#repo-tipsadvice",
-    "title": "Get Started",
+    "objectID": "policies/checklist.html#repo-tipsadvice",
+    "href": "policies/checklist.html#repo-tipsadvice",
+    "title": "Checklist",
     "section": "Repo tips/advice",
     "text": "Repo tips/advice\n\norg policies\nmake your repo reproducible\nrepo documentation\nvirtual environments\ngit/github help, and how to collaborate on a repo",
     "crumbs": [
       "Home",
-      "Guides",
-      "Get Started"
+      "Policies",
+      "Checklist"
     ]
   },
   {
-    "objectID": "guides/checklist.html#footnotes",
-    "href": "guides/checklist.html#footnotes",
-    "title": "Get Started",
+    "objectID": "policies/checklist.html#footnotes",
+    "href": "policies/checklist.html#footnotes",
+    "title": "Checklist",
     "section": "Footnotes",
     "text": "Footnotes\n\n\nDOH.CDS.GenSeqSurvDQ@doh.wa.gov&gt;↩︎",
     "crumbs": [
       "Home",
-      "Guides",
-      "Get Started"
+      "Policies",
+      "Checklist"
+    ]
+  },
+  {
+    "objectID": "policies/security.html",
+    "href": "policies/security.html",
+    "title": "Repo Security",
+    "section": "",
+    "text": "Prevent sensitive information leaks to Github\nSet up guardrails, .gitignore, hooks\nScrub private repos before they go public\n\nIf sensitive information is leaked and commited to the remote repo, then they will stay in the git history (and will require a lot of effort to remove them from the history).\nThe following cannot be included in any repo or any local commit!:\nIf you have any prohibited item in your remove, remove it from the git history Section 8 or consider creating a new repo.",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Repo Security"
+    ]
+  },
+  {
+    "objectID": "policies/security.html#objectives-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c2069636f6e696679206279746573697a653a756e6c6f636b203e7d7d",
+    "href": "policies/security.html#objectives-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c2069636f6e696679206279746573697a653a756e6c6f636b203e7d7d",
+    "title": "Repo Security",
+    "section": "",
+    "text": "Prevent sensitive information leaks to Github\nSet up guardrails, .gitignore, hooks\nScrub private repos before they go public\n\nIf sensitive information is leaked and commited to the remote repo, then they will stay in the git history (and will require a lot of effort to remove them from the history).",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Repo Security"
+    ]
+  },
+  {
+    "objectID": "policies/security.html#sec-creds",
+    "href": "policies/security.html#sec-creds",
+    "title": "Repo Security",
+    "section": "Protect Credentials with .gitignore",
+    "text": "Protect Credentials with .gitignore\nIt is bad practice and a security risk to add private credentials to a script. If your script contains things like passwords, server names, or network drives, be aware that that information will be publicly visible when you push it to a remote git/github repo. Many of our scripts must call passwords and server names in order for them to work properly, so we need a way to hide that information from the public but still be able to run the scripts locally. .gitignore can help achieve this.\nIn the root of your repo there should be a file called .gitignore. This files contains a list of file types that we don’t want to be added to the remote git repo. Here’s an example:\nconsider this .gitignore:\n\n\n\n.gitignore\n\n# excel files\n*.xlsx\n*.xls\n\n# logs\n*.log\n\n# text files\n*.txt\n\n# RDS Objects\n*.RDS\n\n\nIt contains anything with an excel, log, txt or RDS extension. This means that any file with those extensions that you create in your local clone of the repo will exist for you, but the file cannot and will not ever be pushed to the remote repo.\n\nEnvironment Variables + .gitignore\nWe can store private information in local files and make sure that the do not get pushed to the public remote repo by using .gitignore. There are a number of ways to do this. We typically use a yaml file that can be filled out with personal credentials locally. The file will not be committed to the remote repo.\nThere are many ways to achieve this. If you have a more simple workflow that uses R, consider the .Renviron approach. If you have a more complex workflow that has multiple languages and many credentials, consider the yaml approach\n\n.Renvironyaml\n\n\nIf you’re using just R in your repo and have just a few things you want private, consider using a .Renviron file in addition to .gitignore.\n\nIn the .gitignore, add .Renviron:\n\n\n\n.gitignore\n\n# R Environment Variables\n.Renviron\n\n\nCreate a .Renviron file at the root of you local repo\nAdd the things you want to be kept private\n\n\n\n.Renviron\n\nmy_password=\"thisismypassword123\"\n\n\nNow in an R script you can call that password and hide the credentials instead of writting the password in the script for everyone to see:\n\n\n\n\n\n\ngood_script.R\n\nmy_password &lt;- Sys.getenv('my_password')\n\n\n\n\n\n\nbad_script.R\n\nmy_password &lt;- \"thisismypassword123\"\n\n\n\n\nSys.getenv() looks for the .Renviron file and the variables inside of it. This means you can get all your credentials from the .Renviron but also keep that information\n\n\nHere’s another way to add credentials that may be more robust.\nMany of our scripts use a .yml file that contains a list of API tokens, server names, and usernames/passwords specific to each individual user. There are two .yml files. One is a template (containing no actual passwords..) that exists in the repo and serves as a template so every individual user can keep up to date with new credential additions. The other is the individual creds.yml that is in the repo’s .gitignore. This file will never exist in the repo and only exist locally (in the user’s C drive).\nThe .yml file can work with multiple programming languages including R and Python. They are read in the same way and can be easily adjusted when adding new passwords or using them as configuration files. It can work like this:\n\nIn your .gitignore, add a new line that says creds.yml.\n\n\n\n.gitignore\n\n# creds files\ncreds.yml\n\n\nIn the root of you local git clone, make a file called creds.yml.\nIn the yaml file you can nest values. For example, under conn_list_wdrs I have all the parameters needed to make a SQL server connection string in R/Python:\n\n\n\ncreds.yml\n\n# Default is needed to distinguish values.\n# Leave a blank line (NO SPACES) as the last line in this file or things will break\n# Quotes aren't necessary, but can be used.\ndefault: \n  conn_list_wdrs:\n    Driver: \"SQL Server Native Client 11.0\"\n    Server: \"someservername\"\n    Database: \"db\"\n    Trusted_connection: \"yes\" \n    ApplicationIntent: \"readonly\"\n    \n  fulgent:\n    username: &lt;USERNAME&gt;\n    password: &lt;PASSWORD&gt;\n\n\nTo call these credentials in R or Python it will look like this:\n\n\n\n\n\nscript.R\n\nlibrary(yaml)\n\n# read in the local credentials yaml file\ncreds &lt;- yaml::read_yaml(\"creds.yml\")$default\n\n# call in the variables\n\nconnection &lt;- DBI::dbConnect(\n  odbc::odbc(), \n  Driver = creds$conn_list_wdrs$Driver, \n  Server = creds$conn_list_wdrs$Server, \n  Database = creds$conn_list_wdrs$Database, \n  Trusted_connection = creds$conn_list_wdrs$Trusted_connection, \n  ApplicationIntent = creds$conn_list_wdrs$ApplicationIntent\n)\n\n\n\n\nscript.py\n\nimport yaml\n\n# read credentials\nwith open(f\"creds.yml\") as f:\n    creds = yaml.safe_load(f)['default']\n\nconn = pyodbc.connect(\n  DRIVER=creds['conn_list_wdrs']['Driver'],\n  SERVER=creds['conn_list_wdrs']['Server'],\n  DATABASE=creds['conn_list_wdrs']['Database'],\n  Trusted_Connection=creds['conn_list_wdrs']['Trusted_connection'],\n  ApplicationIntent=creds['conn_list_wdrs']['ApplicationIntent']\n  )\n\n\n\n\nYou can add more nested sections besides default, like this, where I added a test parameter:\n\n\n\n\ncreds.yml\n\n# Default is needed to distinguish values.\n# Leave a blank line (NO SPACES) as the last line in this file or things will break\n# Quotes aren't necessary, but can be used.\ndefault: \n  conn_list_wdrs:\n    Driver: \"SQL Server Native Client 11.0\"\n    Server: \"someservername\"\n    Database: \"db\"\n    Trusted_connection: \"yes\" \n    ApplicationIntent: \"readonly\"\n    \n  fulgent:\n    username: &lt;USERNAME&gt;\n    password: &lt;PASSWORD&gt;\n\ntest:\n  conn_list_wdrs:\n    Driver: \"SQL Server Native Client 11.0\"\n    Server: \n    Database: \n    Trusted_connection: \n    ApplicationIntent: \n\n\nThis is useful to organized and automatically call different parameters. Now there is a test list with its own variables. This lets us switch a set of variables within our scripts. default applies to the main credentials where test can distinguish which variables should be test or dev scripts specific. Notice below that you can now call the credentials from a .yml file into an R or Python script and the actual credentials will never exist in the code pushed to the repo.\n\n\n\nscript-in-repo.R\n\n# this script is in the repo, but credentials are hidden\nlibrary(yaml)\n\n# read in the local credentials yaml file\ncreds &lt;- yaml::read_yaml(\"path/to/local-credentials.yml\")\n\n# pull in the credentials\nserver_name &lt;- creds$default$conn_list_wdrs$server\n\n\n\nAutomating With Yaml Creds\nWe can even get more specific and add an if-else statement to specify which credential we want to select. This can be helpful if we have a CI/CD pipeline and have a script automatically run on a task scheduler or cron job. We can call the credentials we want in the command line and have the command line code run in my task scheduler. That way we can use multiple different versions of the same script and have all of it be automated.\nFor example,\n\nthe R script on the left uses the commandArgs() to pull any arguments passed to the script in a shell/command line script.\non the right, the shell script has production and test as second arguments.\nthese are passed to the R script as arg[2].\nnow we can use arg[2] in the if-else statement to conditionally select credentials and do it automatically in a pipeline.\n\n\n\n\n\n\nscript-in-repo.R\n\nargs &lt;- commandArgs(TRUE)\n\n# this script is in the repo, but credentials are hidden\nlibrary(yaml)\n\n# read in the local credentials yaml file\ncreds &lt;- yaml::read_yaml(\"path/to/local-credentials.yml\")\n\n# pull in the credentials\nif(args[2] == \"production\"){\n  server_name &lt;- creds$default$conn_list_wdrs$server\n} else if(args[2] == \"test\"){\n  server_name &lt;- creds$test$conn_list_wdrs$server\n}\n\n\n\n\n\n\nshell-trigger-script.sh\n\n# Run the production code\n$ Rscript -e \"source('path/script_in_repo.R');\" production\n\n# Run the test/dev code\n$ Rscript -e \"source('path/script_in_repo.R');\" test \n\n\n\n\n\n\nyaml Template\nYou can put a template creds.yml file in your repo so that others can see what credentials they need in order for the code to run.\nThis is a template file, so it will not have any passwords/secrets in it. Its only purpose is to provide an example copy of what a user’s creds.yml file needs to look like.\n\nMake a template called creds_TEMPLATE.yml\nRemove any passwords, usernames, secrets, etc to have it be a file that looks like this:\n\n\n\n\ncreds_TEMPLATE.yml\n\n# Default is needed to distinguish values.\n# Leave a blank line (NO SPACES) as the last line in this file or things will break\n# Quotes aren't necessary, but can be used.\ndefault: \n  conn_list_wdrs:\n    Driver: \n    Server: \n    Database: \n    Trusted_connection: \n    ApplicationIntent: \n    \n  fulgent:\n    username: \n    password: \n\ntest:\n  conn_list_wdrs:\n    Driver: \n    Server: \n    Database: \n    Trusted_connection: \n    ApplicationIntent: \n\n\n\nOnce you have the creds_TEMPLATE.yml template in your repo, make sure that nobody on your team (or anyone with write access..) is able to accidentally push changes to the template. We don’t want someone’s passwords or API tokens to exist in GitHub.\n\nThis link shows how to skip any changes made to the specific file https://stackoverflow.com/a/39776107. If someone makes local changes to the template, the changes will not show in their commit. It is a safe guard.\n\nFor all individual users, run this code:\n\n\n\nPowerShell\n\ngit update-index --skip-worktree creds_TEMPLATE.yml\n\n\n\nThis will tell your local git to ignore any changes made to creds_TEMPLATE.yml, but also allow it to exist in the repo (since .gitignore will prevent it from being in the repo)\n\nIf you need to update the template file run this:\n\n\n\nPowerShell\n\ngit update-index --no-skip-worktree creds_TEMPLATE.yml\n\n\n\nThis will allow changes to the template. So when you need to update the template, use this code\nAnd to get a list of files that are “skipped”, use this code:\n\n\n\nPowerShell\n\ngit ls-files -v . | grep ^S",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Repo Security"
+    ]
+  },
+  {
+    "objectID": "policies/security.html#sec-hooks",
+    "href": "policies/security.html#sec-hooks",
+    "title": "Repo Security",
+    "section": "Security Guardrails",
+    "text": "Security Guardrails\nUsing a .gitignore file for environmental variables/credentials is an excellent guardrail and promotes good coding habits, but we may also want additional guardrails such as hooks.\nHooks are processes that run in the background and can prevent code from being pushed if there is a security flaw. There are two hooks we could use for security; pre-commit hooks and pre-receive hooks",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Repo Security"
+    ]
+  },
+  {
+    "objectID": "policies/security.html#pre-commit-hooks",
+    "href": "policies/security.html#pre-commit-hooks",
+    "title": "Repo Security",
+    "section": "Pre-commit Hooks",
+    "text": "Pre-commit Hooks\nPre-commit hooks run a process locally when the user attempts to commit code to a git branch. Hooks have many uses. Here we can use them as a security guardrail to prevent accidental credential leaks in committed code. For example, if someone accidentally pushes a server name to the public repo, the hook will prevent that code from ever getting into the remote repo and will give the user a local error.\nThe instructions below work for a single user, but lacks automated security update capabilities. Please reach out to our email [DOH.CDS.GenSeqSurvDQ@doh.wa.gov] for access to our automated pre-commit hooks. We require this for all users in our org.\nFollow the instructions below to set up pre-commit hooks for all of your repos. You can set up different hooks for individual repos, but I recommend setting this up globally so that all of your local clones are covered by the security hook.\nThis document goes through setting up git hooks in more detail\n\nWindowsWSL/Linux\n\n\n\nClone or download the zip from the AWS Git Secrets repo\nExtract zip or cd to the repo\nOpen folder and right click install.ps1.\n\nRun in Power Shell\nType Y to give permission\n\nAlternatively, in the powershel terminal you can change directories cd to the repo and .\\install.ps1\nMake a directory for a global hook template\n\n\n\nPowerShell\n\nmkdir ~/.git-template\n\n\nRun git secrets –install\n\n\n\nPowerShell\n\ngit secrets --install ~/.git-template\n\n\nConfigure git to use that template for all your repos\n\n\n\n\nPowerShell\n\ngit config --global init.templateDir ’~/.git-template’ \n\n\n\nMake or copy the regex file called secrets_key containing the secret patterns outside of your git repos.\n\nThis file should be given to you by the Github admins. It contains a regex of potential secrets. Contact frank.aragona@doh.wa.gov for more information.\n\nMake sure the file secrets_key is in your .gitignore. We can’t push that to the remote repo.\nRun git secrets --add-provider -- cat ./secrets_key\n\n\n\nPowerShell\n\ngit secrets --add-provider --global -- cat path/to/secrets_key\n\n\nMake sure the AWS providers are added:\n\n\n\nPowerShell\n\ngit secrets --register-aws --global\n\n\n\nYou can also add prohibited patterns like this\n\n\n\nPowerShell\n\n# add a pattern\ngit secrets --add '[A-Z0-9]{20}'\n\n# add a literal string, the + is escaped\ngit secrets --add --literal 'foo+bar'\n\n# add an allowed pattern\ngit secrets --add -a 'allowed pattern'\n\n\n\nCheck your git history (Section 5)\nIf something gets flagged and you don’t care about your history anymore: Delete .git folder and reinitialize repository\n\nI would take caution about this point. There might be better ways to clean your git history if you don’t want to get rid of everything.\n\nTest on one of my projects to see if rebasing is a sustainable option\nMake repo public\nWill automatically scan on every commit and won’t let it commit unless it’s clean - Create a few files to show it working\n\n\n\n\n\n\n\nNote\n\n\n\nWe can’t use the “Non capture group” feature of regex. Meaning we can’t use patterns like this in our regex: (?:abc) – see https://regexr.com IMPORTANT: Tab separate your regex expressions. Making new lines caused a bit of chaos and took really long to figure out. (you can use multiple tabs to separate them more visually)\n\n\n\n\n\nClone the AWS Git Secrets repo\nIn the terminal, cd to the repo\nInstall the command:\n\n\n\nterminal\n\nsudo make install\n\n\nYou may need to add this file to your $PATH variables.\n\nrun nano .bashrc to get your bash profile:\n\n\n\nterminal\n\nnano .bashrc\n\n\nthen down arrow key to get to the last line in the file\nadd the path like this:\n\n\n\nterminal\n\nexport PATH=$PATH:/user/local/bin/git-secrets\\\n\n\nhit CTRL + O then ENTER to save\nhit CTRL + X to exit\nstart a new terminal and write this to see your path variables.\ngit-secrets should be in there somewhere now\n\n\n\nterminal\n\necho $PATH\n\n\n\nMake a git template directory\n\n\n\nterminal\n\nmkdir ~/.git-template\n\n\nInstall the hooks globally into that template\n\n\n\nterminal\n\ngit secrets --install ~/.git-template    \n\n\nConfigure git to use that template globally\n\n\n\nterminal\n\ngit config --global init.templateDir '~/git-template'\n\n\nMake or copy the regex file called secrets_key containing the secret patterns into your folder.\n\nThis file should be given to you by the Github admins. It contains a regex of potential secrets. Contact frank.aragona@doh.wa.gov for more information.\n\nMake sure the file secrets_key is in your .gitignore. We can’t push that to the remote repo.\nAdd the secrets file to your provider list\n\n\n\n\nterminal\n\ngit secrets --add-provider --global -- cat ./secrets_key\n\n\n\nMake sure the AWS providers are added:\n\n\n\nPowerShell\n\ngit secrets --register-aws --global\n\n\n\nYou can also add prohibited patterns like this\n\n\n\nterminal\n\n# add a pattern\ngit secrets --add '[A-Z0-9]{20}'\n\n# add a literal string, the + is escaped\ngit secrets --add --literal 'foo+bar'\n\n# add an allowed pattern\ngit secrets --add -a 'allowed pattern'\n\n\n\nCheck your git history (Section 5)\nIf something gets flagged and you don’t care about your history anymore: Delete .git folder and reinitialize repository\n\nI would take caution about this point. There might be better ways to clean your git history if you don’t want to get rid of everything.\n\nTest on one of my projects to see if rebasing is a sustainable option\nMake repo public\nWill automatically scan on every commit and won’t let it commit unless it’s clean - Create a few files to show it working\n\n\n\n\n\n\n\nNote\n\n\n\nWe can’t use the “Non capture group” feature of regex. Meaning we can’t use patterns like this in our regex: (?:abc) – see https://regexr.com IMPORTANT: Tab separate your regex expressions. Making new lines caused a bit of chaos and took really long to figure out. (you can use multiple tabs to separate them more visually)\n\n\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\n\nThe REGEX strings used in the secrets_key file may be decieving\nMake sure to test that the regex flags what you want it to\ngit secrets --scan-history may take a very long time to run\nFollow the Secret Scanning instructions below for more help",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Repo Security"
+    ]
+  },
+  {
+    "objectID": "policies/security.html#sec-scan",
+    "href": "policies/security.html#sec-scan",
+    "title": "Repo Security",
+    "section": "Secret Scanning",
+    "text": "Secret Scanning\nNow that the pre-commit hook is set up, any future commits to your repo will be scanned for secrets. If you are pushing a pre-existing repo to a public repo for the first time, you should scan the existing code in the repo because the pre-commit hook will not automatically do that. They are really set up to prevent any future secrets from being pushed to the repo, not to scan what is currently in the repo.\nThere are a few ways to scan the history of your repo for secrets. The git secrets command comes with a few options to scan the history, but I have found that it is a bit broken.\n\nthe git secrets --scan-history command will run forever if you have a large repo (especially if you have html files in it)\nglobs have not worked for me (specifying the file types you want to scan for git secrets --scan *glob)\nlikewise, scanning specific folders have not worked for me like this git secrets --scan directory/*\n\nI’ll show 2 ways to scan for secrets, one with a native git command git log, and the other with git secrets\n\ngit log for scanning\nThis is the easier way to scan commit history.\nNavigate to your repo and execute this command:\n\n\n\nbash\n\ngit log -G\"&lt;regex here&gt;\" -p\n\n\nNote that the regex pattern can be imported from the secrets_key file. You can also search for simple strings like this\n\n\n\nbash\n\ngit log -S \"&lt;string&gt;\" -p\n\n\nThere are a lot of options with the git log command and you can read more here and here\nBasically, the -G option stands for grep, -p will show the diffs of the files, and -S is for string.\n\n\ngit secrets for scanning\nThis isn’t my favorite way to scan code, but it is an option if you want to double check things.\n\nCheck that the secrets_key regex is working by running the process on a repo that you know has secrets in it. For example, in a different folder, run all the pre-commit hook steps above and add a known “bad” string into the regex. For example, in the regex put bad_string and in a file in that folder put bad_string. When you scan it should get flagged.\nIf secret scanning is taking too long, you might want to check certain files first. I’ve found that HTML files take a very long time to scan for secrets.\n\nFollow the instructions below to scan for specific files. The script will scan for all the file types that you select. For example, if you want to only scan R files, it will only scan R files.\n\nWindowsWSL/Linux\n\n\n\nIn PowerShell, navigate to your repo and paste this code:\n\n\n\n\nsecret-scanner9000.ps1\n\n# Example Usage\n# write this in the powershell terminal, adjust for the file type(s) you want to scan - can be multiple types: $fileExtensions = @(\".R\", \".py\")\n# then execute this in the terminal: ScanFiles -FileExtensions $fileExtensions\n\n# It will give you an output of any secrets that are contained in those files\n\nFunction ScanFiles{\n  param (\n      [string]$filePath = (Get-Location).Path,\n      [string[]]$fileExtensions\n) \n  Get-ChildItem $filePath -recurse | Where-Object {$_.extension -in $fileExtensions} | \n  Foreach-Object {\n\n      git secrets --scan $_.FullName\n\n  }\n}\n\n\n\nWrite the file extensions you want to scan for in a PowerShell Terminal window like this:\n\n\n\n\nPowerShell\n\n$fileExtensions = @(\".R\",\".py\",\".Rmd\",\".qmd\")\n\n\n\nNow, you can scan your secrets by copying and pasting this code into PowerShell:\n\n\n\n\nPowerShell\n\nScanFiles -FileExtensions $fileExtensions\n\n\n\n\n\nIn a bash/Ubuntu terminal, navigate to your repo and paste this code:\n\n\n\n\nbash\n\nfind . -type f \\( -name \"*.R\" -o -name \"*.py\" -o -name \"*.qmd\" -o -name \"*.rmd\" -o -name \"*.md\" \\) -print0 | xargs -0 -I {} git secrets --scan {}\n\n\n\nThis is set to scan all R, Python, QMD, RMD, or MD files. If you want to add another file type, do it like this where you add -o -name \"*.NEW_TYPE\" to the find command args:\n\n\n\n\nbash\n\nfind . -type f \\( -name \"*.R\" -o -name \"*.py\" -o -name \"*.qmd\" -o -name \"*.rmd\" -o -name \"*.md\" -o -name \"*.NEW_TYPE\"  \\) -print0 | xargs -0 -I {} git secrets --scan {}",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Repo Security"
+    ]
+  },
+  {
+    "objectID": "policies/security.html#pre-recieve-hooks",
+    "href": "policies/security.html#pre-recieve-hooks",
+    "title": "Repo Security",
+    "section": "Pre-Recieve Hooks",
+    "text": "Pre-Recieve Hooks\nThese are still being investigated. They are remote hooks (not local like pre-commit hooks) that can be deployed throughout the Github organization. They can block certain commits from ever being pushed to the remote repo. They may make things unnecessarily complicated",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Repo Security"
+    ]
+  },
+  {
+    "objectID": "policies/security.html#sec-public",
+    "href": "policies/security.html#sec-public",
+    "title": "Repo Security",
+    "section": "Pushing Private Code to Public Repos",
+    "text": "Pushing Private Code to Public Repos\nWe may wish to take private codes and push them to a public repo. We need to make sure that the public code doesn’t not contain sensitive or forbidden data/code, so cleaning up the private repo is important before pushing.\nThere are a few ways to do this, but the easiest way is to copy the clean private code to the public repo, that is, copy all the files you want to add publicly but do not copy the .git folder. If the private repo has a dirty git history we will not want that history in the public repo because the sensitive data will then be publicly available.\n\n\n\n\n\n\n\n\n\n\n{{&lt; fa exclamation &gt;}} The private repository on the left still contains sensitive information in the git history. The public repository on the right has a clean git history because we copied only the current clean files from the private repo and did not attach its git history (which lives in the hidden .git folder)",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Repo Security"
+    ]
+  },
+  {
+    "objectID": "policies/security.html#sec-history",
+    "href": "policies/security.html#sec-history",
+    "title": "Repo Security",
+    "section": "Clean git history",
+    "text": "Clean git history\nIf you have a repo that has secrets or prohibited values in any commit, you can remove them from the git history. If you have a private repo that needs to be made public and it contains bad commits in the history, consider creating a new repo for the public version. If that is not doable, here are steps for removing the prohibited secrets from the git history.\n\n\n\n\n\n\nWarning\n\n\n\nThis is kinda skecthy and irreversible. It involves changing the git history from a local machine. The local clone can destroy code in your repo if it is behind or ahead in commits relative to the main branch in the remote repo. Consider setting up a test repo and practice on it before doing anything. And always make a backup of your work. See Frank or DIQA people for help.\n\n\n\nInstall the git-filter-repo tool for cleaning the git history. Click that link for instructions, it involves cloning the repo and then putting the folder path in your PATH\nIn a terminal, navigate to your repo and run\n\n\n\nTerminal\n\ngit filter-repo --analyze\n\n\nNow clean the history with:\n\n\n\nTerminal\n\ngit filter-repo --replace-text C:\\path\\to\\secrets\\patterns.txt\n\nNote, you can write a string or a .txt path to that command above and it will remove any string in your git history with those patterns. Since we have patterns already specified from our git secrets tool, use that file here.\n\nCheck your local clone and see if it properly redacted the files\nAdd the remote back to your clone\n\nBy default, these commands remove the link between github and your local folder containing the code (for a good reason). You’ll need to create the link again with:\n\n\nTerminal\n\ngit remote add origin &lt;repository-url&gt;\n\n\nPush the new git history to main/your repo. Must be done by an admin. Please be careful with this.\n\n\n\nTerminal\n\ngit push origin main --force\n\nif that doesn’t work try\n\n\nTerminal\n\ngit push --force --all origin\n\nIt should look like this in GitHub now where strings are replaced with REMOVED\n\nThere are many more options for overwriting the git history, such as removing a file instead of just key words. See the git-filter-repo documentation for more info.",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Repo Security"
+    ]
+  },
+  {
+    "objectID": "policies/security.html#code-reviewersgithub-operations-team",
+    "href": "policies/security.html#code-reviewersgithub-operations-team",
+    "title": "Repo Security",
+    "section": "Code Reviewers/Github Operations Team",
+    "text": "Code Reviewers/Github Operations Team\nWith the guardrails above in place there should be few chances that credentials get pushed to a repo. However accidents may still happen. We want to make sure that anyone who opens up a repo in the Github organization adheres to the rules, has the proper credential/coding set-up, and installs their local pre-commit hooks properly.\nIt may be useful to have a team within the organization that helps with repo set-up. The team would help avoid a scenario where a person opens up a repo without reading this documentation and understanding the rules (and thus potentially breaking security rules).\nThis Github Operations Team could also be helpful in managing permissions for members in the organization. See the video below on how the company Qualcomm manages their Github organization https://www.youtube.com/embed/1T4HAPBFbb0?si=YRsUYXIxLPhdr41T and how they use a Github Operations Team to guide new members access/repo development",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Repo Security"
     ]
   }
 ]

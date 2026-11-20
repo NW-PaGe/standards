@@ -1,0 +1,72 @@
+# Checklist
+
+Steps you need to follow to create a public repo and make sure it is secure
+
+Author
+
+Frank Aragona [](mailto:frank.aragona@doh.wa.gov)
+
+Published
+
+Friday, the 16th of August, 2024
+
+Modified
+
+Friday, the 20th of November, 2026
+
+## Checklist
+
+If you need to make a public repo, this quick start guide is for you. **Please meet with Frank Aragona DOH.CDS.GenSeqSurvDQ@doh.wa.gov before creating a public repo.**
+
+- [ ] Submit a request (service central ticket) to join a public GitHub organization (email[^1] for help)
+- [ ] Review [items that are **prohibited**](../policies/security.llms.md#tbl-prohibit) from being in a repo
+- [ ] Add [security guardrails](../policies/security.llms.md#sec-creds)
+- [ ] Create global [security hooks](../policies/security.llms.md#sec-hooks) for all your repos
+- [ ] Make a *private* staging repo to make sure everything is clean
+- [ ] Perform [secret scanning](../policies/security.llms.md#sec-scan) on your repo
+- [ ] Add a [license](lic.qmd)
+- [ ] Make [branch protections](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches)
+- [ ] Copy over the *cleaned* main branch from [private repo into new public repo](../policies/security.llms.md#sec-public)
+- [ ] Add a README and consider adding a [Github page](how_to.qmd) for documentation
+
+\
+
+## Access
+
+Our organization has several public Github orgs. If you are internal to Washington State Department of Health, you will need to submit a Service Central Request for access. Please reach out to frank.aragona@doh.wa.gov for help.
+
+## Github Security
+
+**Please read all of the [security guidelines here](../policies/security.llms.md)**
+
+The guide will go over
+
+- what data/code is not allowed in a public repo
+- security layers you need to prevent leaks
+- converting private code to public repositories
+- installation of pre-commit hooks to prevent leaks
+
+## Building a Public Repo
+
+If you have an existing private repo that needs to be public, please follow these steps:
+
+- [repo cleaning guides](https://nw-page.github.io/standards/gh/security.html#pushing-private-code-to-public-repos)
+- [code scanning](https://nw-page.github.io/standards/gh/security.html#secret-scanning)
+
+## Licensing
+
+- [license rules](https://nw-page.github.io/standards/gh/lic.html)
+
+## Repo tips/advice
+
+- [org policies](https://nw-page.github.io/standards/gh/policies.html)
+- [make your repo reproducible](https://nw-page.github.io/standards/gh/reproduce.html)
+- [repo documentation](https://nw-page.github.io/standards/gh/how_to.html)
+- [virtual environments](https://nw-page.github.io/standards/gh/renv.html)
+- [git/github help, and how to collaborate on a repo](contribute.qmd)
+
+Back to top
+
+## Footnotes
+
+[^1]: DOH.CDS.GenSeqSurvDQ@doh.wa.gov\>

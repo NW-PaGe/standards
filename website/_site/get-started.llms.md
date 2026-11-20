@@ -26,6 +26,6 @@ NW-PaGe Github repo tutorials
 
 ## Next steps
 
-Read the [configuration guide](guides/configuration.llms.md) to change the options of the project.
+Read the [configuration guide](guides/configuration.qmd) to change the options of the project.
 
 Back to top

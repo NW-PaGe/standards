@@ -11,8 +11,8 @@ website:
         href: index.qmd
       - text: "Get started"
         href: get-started.qmd
-      - text: "Guides"
-        href: guides/checklist.qmd
+      - text: "Policies"
+        href: policies/checklist.qmd
       - text: "Reference"
         href: reference.qmd
   sidebar:
@@ -20,10 +20,11 @@ website:
     contents:
       - index.qmd
       - get-started.qmd
-      - section: "Guides"
+      - section: "Policies"
         contents:
-          - guides/checklist.qmd
-          - guides/writing.qmd
+          - policies/checklist.qmd
+          - policies/security.qmd
+          - policies/writing.qmd
       - reference.qmd
 
 brand: _brand.yml
