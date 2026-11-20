@@ -315,194 +315,218 @@ Hooks are processes that run in the background and can prevent code from being p
 
 Pre-commit hooks run a process locally when the user attempts to commit code to a git branch. Hooks have many uses. Here we can use them as a security guardrail to prevent accidental credential leaks in committed code. For example, if someone accidentally pushes a server name to the public repo, the hook will prevent that code from ever getting into the remote repo and will give the user a local error.
 
-The instructions below work for a single user, but lacks automated security update capabilities. Please reach out to our email \[<DOH.CDS.GenSeqSurvDQ@doh.wa.gov>\] for access to our automated pre-commit hooks. We require this for all users in our org.
+### For Washington DOH Users:
 
-Follow the instructions below to set up pre-commit hooks *for all of your repos*. You can set up different hooks for individual repos, but I recommend setting this up globally so that all of your local clones are covered by the security hook.
+Please reach out to our email \[<DOH.CDS.GenSeqSurvDQ@doh.wa.gov>\] for access to our automated pre-commit hooks. We require this for all users in our org.
 
-[This document](https://sparkbox.com/foundry/git_secrets) goes through setting up git hooks in more detail
+### For Devs, creating hooks for your team:
 
-## Windows
+Our teams use custom hooks that let us share a ‘ban list’. A ban list is a .txt file that has regex or strings that are prohibited from being in our repos. The base code uses a program called [git-find](https://github.com/edenian-prince/rust-secrets).
 
-1.  Clone or download the zip from the [AWS Git Secrets repo](https://github.com/awslabs/git-secrets/)
+1.  Create a new repo with the following files; `setup.ps1`, `setup.sh`, and `patterns.txt`
 
-2.  Extract zip or `cd` to the repo
+The setup scripts will contain code for installing the git-find program.
 
-3.  Open folder and right click install.ps1.
+2.  Paste this code in the setup files:
 
-    1.  Run in Power Shell
-    2.  Type Y to give permission
+## setup.ps1
 
-    Alternatively, in the powershel terminal you can change directories `cd` to the repo and `.\install.ps1`
+``` powershell
+# -------------------------------------------------
+# Fail-Fast Automated Setup Script
+# -------------------------------------------------
 
-4.  Make a directory for a global hook template
+# Stop immediately if any command fails
+$ErrorActionPreference = "Stop"
 
-    ``` bash
-    mkdir ~/.git-template
-    ```
+try {
 
-5.  Run git secrets –install
+    # Define variables
+    $cliURL = "https://github.com/edenian-prince/rust-secrets.git"  # <-- path to the cli tool. don't touch!
+    $cliPathName = "rust-secrets"
+    $cliPath = Join-Path $HOME $cliPathName
 
-    ``` bash
-    git secrets --install ~/.git-template
-    ```
+    $RepoUrl = ""                                                   # <-- replace with your repo URL
+    $RepoName = "secret-hooks"                                      # <-- folder name to clone into
+    $RepoFile = "patterns.txt"
+    $RepoPath = Join-Path $HOME $RepoName
+    $SecretFilePath = Join-Path $RepoPath $RepoFile
 
-6.  Configure git to use that template for all your repos
+    # 1️ Install CLI tool
+    Write-Host "Cloning repository to $cliPath..."
+    if (Test-Path $cliPath) {
+        Write-Host "Repository folder already exists. Pulling latest changes..."
+        Set-Location $cliPath
+        git pull
+        powershell -ExecutionPolicy Bypass -File ./install.ps1
+    } else {
+        git clone $cliURL $cliPath
+        Set-Location $cliPath
+        powershell -ExecutionPolicy Bypass -File ./install.ps1
 
-``` bash
-git config --global init.templateDir ’~/.git-template’ 
+    }
+
+    # 3️ Clone the repo to $HOME
+    Write-Host "Cloning repository to $RepoPath..."
+    if (Test-Path $RepoPath) {
+        Write-Host "Repository folder already exists. Pulling latest changes..."
+        Set-Location $RepoPath
+        git pull
+    } else {
+        git clone $RepoUrl $RepoPath
+    }
+
+    # 4️ Run git-find install
+    Write-Host "Running git-find install..."
+    git-find install
+
+    # 5️ Run git-find add-provider and automatically answer 'y'
+    # Write 'y' to stdin.txt first
+    "y" | Set-Content -Path "stdin.txt"
+    
+    # Then start the process
+    Write-Host "Running git-find add-provider $SecretFilePath..."
+    $proc = Start-Process -FilePath "git-find" `
+        -ArgumentList "add-provider", "--path", $SecretFilePath `
+        -NoNewWindow -RedirectStandardInput "stdin.txt" -Wait -PassThru
+    
+    $proc.WaitForExit()
+
+    # Clean up repo
+    # Move out of repo directory before deleting it
+    Set-Location ..
+
+    # Remove the repo directory
+    Write-Host "Clean up, removing folder: $cliPath"
+    Remove-Item -Recurse -Force $cliPath
+
+    Write-Host "✅ Setup completed successfully!"
+
+} catch {
+    Write-Host "ERROR: Script stopped. $_" -ForegroundColor Red
+    exit 1
+}
 ```
 
-7.  Make or copy the regex file called `secrets_key` containing the secret patterns **outside of your git repos**.
-
-    - This file should be given to you by the Github admins. It contains a regex of potential secrets. Contact `frank.aragona@doh.wa.gov` for more information.
-
-8.  Make sure the file `secrets_key` is in your `.gitignore`. We can’t push that to the remote repo.
-
-9.  Run `git secrets --add-provider -- cat ./secrets_key`
-
-    ``` bash
-    git secrets --add-provider --global -- cat path/to/secrets_key
-    ```
-
-10. Make sure the AWS providers are added:
-
-    ``` bash
-    git secrets --register-aws --global
-    ```
-
-You can also add prohibited patterns like this
+## setup.sh
 
 ``` bash
-# add a pattern
-git secrets --add '[A-Z0-9]{20}'
+#!/usr/bin/env bash
 
-# add a literal string, the + is escaped
-git secrets --add --literal 'foo+bar'
+# -------------------------------------------------
+# Fail-Fast Automated Setup Script (Bash/Linux)
+# -------------------------------------------------
 
-# add an allowed pattern
-git secrets --add -a 'allowed pattern'
+set -e  # Exit immediately if a command fails
+set -o pipefail  # Catch errors in piped commands
+
+# Helper function for error handling
+function handle_error {
+    echo "ERROR: Script stopped at line $1."
+    exit 1
+}
+trap 'handle_error $LINENO' ERR
+
+# ------------------------------
+# 1️ Install CLI tool
+# ------------------------------
+CLI_URL="https://github.com/edenian-prince/rust-secrets.git"  # <-- don't touch! this is where the cli tool lives
+CLI_NAME="rust-secrets"
+CLI_PATH="$HOME/$CLI_NAME"
+
+REPO_URL=""                                                   # <-- replace with your repo URL
+REPO_NAME="secret-hooks"
+REPO_FILE="patterns.txt"
+REPO_PATH="$HOME/$REPO_NAME"
+SECRET_FILE_PATH="$REPO_PATH/$REPO_FILE"
+
+echo "Cloning repository to $CLI_PATH..."
+if [ -d "$CLI_PATH" ]; then
+    echo "Repository folder already exists. Pulling latest changes..."
+    cd "$CLI_PATH"
+    git pull
+else
+    git clone "$CLI_URL" "$CLI_PATH"
+    cd "$CLI_PATH"
+fi
+
+# Run install script (assuming Bash version of install exists)
+if [ -f "./install.sh" ]; then
+    bash ./install.sh
+elif [ -f "./install.ps1" ]; then
+    # If only PowerShell script exists
+    pwsh -File ./install.ps1
+else
+    echo "No install script found in $CLI_PATH"
+fi
+
+# ------------------------------
+# 2️ Clone secrets repo
+# ------------------------------
+
+echo "Cloning repository to $REPO_PATH..."
+if [ -d "$REPO_PATH" ]; then
+    echo "Repository folder already exists. Pulling latest changes..."
+    cd "$REPO_PATH"
+    git pull
+else
+    git clone "$REPO_URL" "$REPO_PATH"
+    cd "$REPO_PATH"
+fi
+
+# ------------------------------
+# 3️ Run git-find install
+# ------------------------------
+echo "Running git-find install..."
+git-find install
+
+# ------------------------------
+# 4️ Run git-find add-provider and automatically answer 'y'
+# ------------------------------
+echo "y" | git-find add-provider --path "$SECRET_FILE_PATH"
+
+# ------------------------------
+# 5️ Clean up CLI repo
+# ------------------------------
+echo "Clean up, removing folder: $CLI_PATH"
+rm -rf "$CLI_PATH"
+
+echo "✅ Setup completed successfully!"
 ```
 
-11. Check your git history ([Section 5](#sec-scan))
+3.  In the `patterns.txt` file, put the strings and regexes that you want to avoid in the file on separate lines like:
 
-12. If something gets flagged and you don’t care about your history anymore: Delete .git folder and reinitialize repository
+``` default
+# Place your regex patterns here
+# Don't paste actual secrets!! Regular expressions only
 
-    - I would take caution about this point. There might be better ways to clean your git history if you don’t want to get rid of everything.
+# Azure tokens - this regex didn't work for me.. broken
+[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+
 
-13. Test on one of my projects to see if rebasing is a sustainable option
+# Generic private key
+-----BEGIN [A-Z]*PRIVATE KEY-----
 
-14. Make repo public
+# Databricks tokens
+dapi[0-9a-fA-F]{32,64}
 
-15. Will automatically scan on every commit and won’t let it commit unless it’s clean - Create a few files to show it working
+# Databricks url
+adb-[0-9]{16}
+```
 
-> **NOTE:**
->
-> We can’t use the “Non capture group” feature of regex. Meaning we can’t use patterns like this in our regex: (?:abc) – see https://regexr.com IMPORTANT: Tab separate your regex expressions. Making new lines caused a bit of chaos and took really long to figure out. (you can use multiple tabs to separate them more visually)
+4.  Now, your users can clone the repo, open up powershell or bash, and run:
 
-## WSL/Linux
+``` powershell
+./setup.ps1
+```
 
-1.  Clone the [AWS Git Secrets repo](https://github.com/awslabs/git-secrets/)
-
-2.  In the terminal, `cd` to the repo
-
-3.  Install the command:
-
-    ``` bash
-    sudo make install
-    ```
-
-4.  You may need to add this file to your \$PATH variables.
-
-    - run `nano .bashrc` to get your bash profile:
-
-      ``` bash
-      nano .bashrc
-      ```
-
-    - then down arrow key to get to the last line in the file
-
-    - add the path like this:
-
-      ``` bash
-      export PATH=$PATH:/user/local/bin/git-secrets\
-      ```
-
-    - hit `CTRL + O` then `ENTER` to save
-
-    - hit `CTRL + X` to exit
-
-    - start a new terminal and write this to see your path variables.
-
-    - `git-secrets` should be in there somewhere now
-
-      ``` bash
-      echo $PATH
-      ```
-
-5.  Make a git template directory
-
-    ``` bash
-    mkdir ~/.git-template
-    ```
-
-6.  Install the hooks globally into that template
-
-    ``` bash
-    git secrets --install ~/.git-template    
-    ```
-
-7.  Configure git to use that template globally
-
-    ``` bash
-    git config --global init.templateDir '~/git-template'
-    ```
-
-8.  Make or copy the regex file called `secrets_key` containing the secret patterns into your folder.
-
-    - This file should be given to you by the Github admins. It contains a regex of potential secrets. Contact `frank.aragona@doh.wa.gov` for more information.
-
-9.  Make sure the file `secrets_key` is in your `.gitignore`. We can’t push that to the remote repo.
-
-10. Add the secrets file to your provider list
+or
 
 ``` bash
-git secrets --add-provider --global -- cat ./secrets_key
+chmod +x setup.sh
+./setup.sh
 ```
 
-11. Make sure the AWS providers are added:
-
-    ``` bash
-    git secrets --register-aws --global
-    ```
-
-You can also add prohibited patterns like this
-
-``` bash
-# add a pattern
-git secrets --add '[A-Z0-9]{20}'
-
-# add a literal string, the + is escaped
-git secrets --add --literal 'foo+bar'
-
-# add an allowed pattern
-git secrets --add -a 'allowed pattern'
-```
-
-12. Check your git history ([Section 5](#sec-scan))
-
-13. If something gets flagged and you don’t care about your history anymore: Delete .git folder and reinitialize repository
-
-    - I would take caution about this point. There might be better ways to clean your git history if you don’t want to get rid of everything.
-
-14. Test on one of my projects to see if rebasing is a sustainable option
-
-15. Make repo public
-
-16. Will automatically scan on every commit and won’t let it commit unless it’s clean - Create a few files to show it working
-
-> **NOTE:**
->
-> We can’t use the “Non capture group” feature of regex. Meaning we can’t use patterns like this in our regex: (?:abc) – see https://regexr.com IMPORTANT: Tab separate your regex expressions. Making new lines caused a bit of chaos and took really long to figure out. (you can use multiple tabs to separate them more visually)
+5.  If you ever need to update the ban list/`patterns.txt` it will automatically update the list for all of your users that have the program installed.
 
 \
 
@@ -512,24 +536,43 @@ git secrets --add -a 'allowed pattern'
 >
 > - The REGEX strings used in the `secrets_key` file may be decieving
 > - Make sure to test that the regex flags what you want it to
-> - `git secrets --scan-history` may take a very long time to run
-> - Follow the Secret Scanning instructions below for more help
+> - You can also add personal regexes and local ban lists on a per repo basis
+> - See [https://github.com/edenian-prince/rust-secrets/](https://github.com/edenian-prince/rust-secrets/tree/main#rust-secrets) for more details and examples!
 
 ## Secret Scanning
 
 Now that the pre-commit hook is set up, any future commits to your repo will be scanned for secrets. If you are pushing a pre-existing repo to a public repo for the first time, you should scan the existing code in the repo because the pre-commit hook will not automatically do that. They are really set up to prevent any *future* secrets from being pushed to the repo, not to scan what is *currently* in the repo.
 
-There are a few ways to scan the history of your repo for secrets. The `git secrets` command comes with a few options to scan the history, but I have found that it is a bit broken.
+I’ll show 2 ways to scan for secrets, one with a native git command `git log`, and the other with `git find`
 
-- the `git secrets --scan-history` command will run forever if you have a large repo (especially if you have html files in it)
-- globs have not worked for me (specifying the file types you want to scan for `git secrets --scan *glob`)
-- likewise, scanning specific folders have not worked for me like this `git secrets --scan directory/*`
+### git find for scanning
 
-I’ll show 2 ways to scan for secrets, one with a native git command `git log`, and the other with `git secrets`
+You can use the `git-find` command that you installed in the pre-commit hooks to scan your repos for every item in the `patterns.txt` or ban list.
+
+1.  Navigate to your repo and run:
+
+``` bash
+git find scan
+```
+
+and it will look like this, indicating which regexes passed or failed:
+
+``` bash
+Local file: C:\Users\FAA3303\pathogen-repo-guide-secrets.txt
+Loaded 2 regexes
+Scanning for regex: -----BEGIN [A-Z]*PRIVATE KEY-----
+No matches found for pattern #1
+
+Scanning for regex: dapi[0-9a-fA-F]{32,64}
+No matches found for pattern #2
+
+Scanning for regex: adb-[0-9]{16}
+No matches found for pattern #3
+```
 
 ### git log for scanning
 
-This is the easier way to scan *commit history*.
+Here’s a base git way to scan *commit history*.
 
 Navigate to your repo and execute this command:
 
@@ -547,70 +590,9 @@ There are a lot of options with the `git log` command and you can [read more her
 
 Basically, the `-G` option stands for `grep`, `-p` will show the diffs of the files, and `-S` is for string.
 
-### git secrets for scanning
-
-This isn’t my favorite way to scan code, but it is an option if you want to double check things.
-
-1.  Check that the `secrets_key` regex is working by running the process on a repo that you know has secrets in it. For example, in a different folder, run all the pre-commit hook steps above and add a known “bad” string into the regex. For example, in the regex put `bad_string` and in a file in that folder put `bad_string`. When you scan it should get flagged.
-
-2.  If secret scanning is taking too long, you might want to check certain files first. I’ve found that HTML files take a *very* long time to scan for secrets.
-
-Follow the instructions below to scan for specific files. The script will scan for all the file types that you select. For example, if you want to only scan R files, it will only scan R files.
-
-## Windows
-
-1.  In PowerShell, navigate to your repo and paste this code:
-
-``` bash
-# Example Usage
-# write this in the powershell terminal, adjust for the file type(s) you want to scan - can be multiple types: $fileExtensions = @(".R", ".py")
-# then execute this in the terminal: ScanFiles -FileExtensions $fileExtensions
-
-# It will give you an output of any secrets that are contained in those files
-
-Function ScanFiles{
-  param (
-      [string]$filePath = (Get-Location).Path,
-      [string[]]$fileExtensions
-) 
-  Get-ChildItem $filePath -recurse | Where-Object {$_.extension -in $fileExtensions} | 
-  Foreach-Object {
-
-      git secrets --scan $_.FullName
-
-  }
-}
-```
-
-2.  Write the file extensions you want to scan for in a PowerShell Terminal window like this:
-
-``` bash
-$fileExtensions = @(".R",".py",".Rmd",".qmd")
-```
-
-3.  Now, you can scan your secrets by copying and pasting this code into PowerShell:
-
-``` bash
-ScanFiles -FileExtensions $fileExtensions
-```
-
-## WSL/Linux
-
-1.  In a bash/Ubuntu terminal, navigate to your repo and paste this code:
-
-``` bash
-find . -type f \( -name "*.R" -o -name "*.py" -o -name "*.qmd" -o -name "*.rmd" -o -name "*.md" \) -print0 | xargs -0 -I {} git secrets --scan {}
-```
-
-2.  This is set to scan all R, Python, QMD, RMD, or MD files. If you want to add another file type, do it like this where you add `-o -name "*.NEW_TYPE"` to the `find` command args:
-
-``` bash
-find . -type f \( -name "*.R" -o -name "*.py" -o -name "*.qmd" -o -name "*.rmd" -o -name "*.md" -o -name "*.NEW_TYPE"  \) -print0 | xargs -0 -I {} git secrets --scan {}
-```
-
 ## Pre-Recieve Hooks
 
-These are still being investigated. They are remote hooks (not local like pre-commit hooks) that can be deployed throughout the Github organization. They can block certain commits from ever being pushed to the remote repo. They may make things unnecessarily complicated
+These are remote hooks (not local like pre-commit hooks) that can be deployed throughout the Github organization. They can block certain commits from ever being pushed to the remote repo. They may make things unnecessarily complicated but they cost money. Go to your GitHub admins and see if they can activate them in your org.
 
 ## Pushing Private Code to Public Repos
 
@@ -622,7 +604,9 @@ There are a few ways to do this, but the easiest way is to copy the clean privat
 
 ![](images/public_repo3.PNG)
 
-{{\< fa exclamation \>}} The private repository on the left still contains sensitive information in the git history. The public repository on the right has a clean git history because we copied only the current clean files from the private repo and did not attach its git history (which lives in the hidden `.git` folder)
+> **WARNING:**
+>
+> The private repository on the left still contains sensitive information in the git history. The public repository on the right has a clean git history because we copied only the current clean files from the private repo and did not attach its git history (which lives in the hidden `.git` folder)
 
 ## Clean git history
 

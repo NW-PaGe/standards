@@ -170,7 +170,7 @@
     "href": "policies/security.html#pre-commit-hooks",
     "title": "Repo Security",
     "section": "Pre-commit Hooks",
-    "text": "Pre-commit Hooks\nPre-commit hooks run a process locally when the user attempts to commit code to a git branch. Hooks have many uses. Here we can use them as a security guardrail to prevent accidental credential leaks in committed code. For example, if someone accidentally pushes a server name to the public repo, the hook will prevent that code from ever getting into the remote repo and will give the user a local error.\nThe instructions below work for a single user, but lacks automated security update capabilities. Please reach out to our email [DOH.CDS.GenSeqSurvDQ@doh.wa.gov] for access to our automated pre-commit hooks. We require this for all users in our org.\nFollow the instructions below to set up pre-commit hooks for all of your repos. You can set up different hooks for individual repos, but I recommend setting this up globally so that all of your local clones are covered by the security hook.\nThis document goes through setting up git hooks in more detail\n\nWindowsWSL/Linux\n\n\n\nClone or download the zip from the AWS Git Secrets repo\nExtract zip or cd to the repo\nOpen folder and right click install.ps1.\n\nRun in Power Shell\nType Y to give permission\n\nAlternatively, in the powershel terminal you can change directories cd to the repo and .\\install.ps1\nMake a directory for a global hook template\n\n\n\nPowerShell\n\nmkdir ~/.git-template\n\n\nRun git secrets –install\n\n\n\nPowerShell\n\ngit secrets --install ~/.git-template\n\n\nConfigure git to use that template for all your repos\n\n\n\n\nPowerShell\n\ngit config --global init.templateDir ’~/.git-template’ \n\n\n\nMake or copy the regex file called secrets_key containing the secret patterns outside of your git repos.\n\nThis file should be given to you by the Github admins. It contains a regex of potential secrets. Contact frank.aragona@doh.wa.gov for more information.\n\nMake sure the file secrets_key is in your .gitignore. We can’t push that to the remote repo.\nRun git secrets --add-provider -- cat ./secrets_key\n\n\n\nPowerShell\n\ngit secrets --add-provider --global -- cat path/to/secrets_key\n\n\nMake sure the AWS providers are added:\n\n\n\nPowerShell\n\ngit secrets --register-aws --global\n\n\n\nYou can also add prohibited patterns like this\n\n\n\nPowerShell\n\n# add a pattern\ngit secrets --add '[A-Z0-9]{20}'\n\n# add a literal string, the + is escaped\ngit secrets --add --literal 'foo+bar'\n\n# add an allowed pattern\ngit secrets --add -a 'allowed pattern'\n\n\n\nCheck your git history (Section 5)\nIf something gets flagged and you don’t care about your history anymore: Delete .git folder and reinitialize repository\n\nI would take caution about this point. There might be better ways to clean your git history if you don’t want to get rid of everything.\n\nTest on one of my projects to see if rebasing is a sustainable option\nMake repo public\nWill automatically scan on every commit and won’t let it commit unless it’s clean - Create a few files to show it working\n\n\n\n\n\n\n\nNote\n\n\n\nWe can’t use the “Non capture group” feature of regex. Meaning we can’t use patterns like this in our regex: (?:abc) – see https://regexr.com IMPORTANT: Tab separate your regex expressions. Making new lines caused a bit of chaos and took really long to figure out. (you can use multiple tabs to separate them more visually)\n\n\n\n\n\nClone the AWS Git Secrets repo\nIn the terminal, cd to the repo\nInstall the command:\n\n\n\nterminal\n\nsudo make install\n\n\nYou may need to add this file to your $PATH variables.\n\nrun nano .bashrc to get your bash profile:\n\n\n\nterminal\n\nnano .bashrc\n\n\nthen down arrow key to get to the last line in the file\nadd the path like this:\n\n\n\nterminal\n\nexport PATH=$PATH:/user/local/bin/git-secrets\\\n\n\nhit CTRL + O then ENTER to save\nhit CTRL + X to exit\nstart a new terminal and write this to see your path variables.\ngit-secrets should be in there somewhere now\n\n\n\nterminal\n\necho $PATH\n\n\n\nMake a git template directory\n\n\n\nterminal\n\nmkdir ~/.git-template\n\n\nInstall the hooks globally into that template\n\n\n\nterminal\n\ngit secrets --install ~/.git-template    \n\n\nConfigure git to use that template globally\n\n\n\nterminal\n\ngit config --global init.templateDir '~/git-template'\n\n\nMake or copy the regex file called secrets_key containing the secret patterns into your folder.\n\nThis file should be given to you by the Github admins. It contains a regex of potential secrets. Contact frank.aragona@doh.wa.gov for more information.\n\nMake sure the file secrets_key is in your .gitignore. We can’t push that to the remote repo.\nAdd the secrets file to your provider list\n\n\n\n\nterminal\n\ngit secrets --add-provider --global -- cat ./secrets_key\n\n\n\nMake sure the AWS providers are added:\n\n\n\nPowerShell\n\ngit secrets --register-aws --global\n\n\n\nYou can also add prohibited patterns like this\n\n\n\nterminal\n\n# add a pattern\ngit secrets --add '[A-Z0-9]{20}'\n\n# add a literal string, the + is escaped\ngit secrets --add --literal 'foo+bar'\n\n# add an allowed pattern\ngit secrets --add -a 'allowed pattern'\n\n\n\nCheck your git history (Section 5)\nIf something gets flagged and you don’t care about your history anymore: Delete .git folder and reinitialize repository\n\nI would take caution about this point. There might be better ways to clean your git history if you don’t want to get rid of everything.\n\nTest on one of my projects to see if rebasing is a sustainable option\nMake repo public\nWill automatically scan on every commit and won’t let it commit unless it’s clean - Create a few files to show it working\n\n\n\n\n\n\n\nNote\n\n\n\nWe can’t use the “Non capture group” feature of regex. Meaning we can’t use patterns like this in our regex: (?:abc) – see https://regexr.com IMPORTANT: Tab separate your regex expressions. Making new lines caused a bit of chaos and took really long to figure out. (you can use multiple tabs to separate them more visually)\n\n\n\n\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\n\nThe REGEX strings used in the secrets_key file may be decieving\nMake sure to test that the regex flags what you want it to\ngit secrets --scan-history may take a very long time to run\nFollow the Secret Scanning instructions below for more help",
+    "text": "Pre-commit Hooks\nPre-commit hooks run a process locally when the user attempts to commit code to a git branch. Hooks have many uses. Here we can use them as a security guardrail to prevent accidental credential leaks in committed code. For example, if someone accidentally pushes a server name to the public repo, the hook will prevent that code from ever getting into the remote repo and will give the user a local error.\n\nFor Washington DOH Users:\nPlease reach out to our email [DOH.CDS.GenSeqSurvDQ@doh.wa.gov] for access to our automated pre-commit hooks. We require this for all users in our org.\n\n\nFor Devs, creating hooks for your team:\nOur teams use custom hooks that let us share a ‘ban list’. A ban list is a .txt file that has regex or strings that are prohibited from being in our repos. The base code uses a program called git-find.\n\nCreate a new repo with the following files; setup.ps1, setup.sh, and patterns.txt\n\nThe setup scripts will contain code for installing the git-find program.\n\nPaste this code in the setup files:\n\n\nsetup.ps1setup.sh\n\n\n\n\nsetup.ps1\n\n# -------------------------------------------------\n# Fail-Fast Automated Setup Script\n# -------------------------------------------------\n\n# Stop immediately if any command fails\n$ErrorActionPreference = \"Stop\"\n\ntry {\n\n    # Define variables\n    $cliURL = \"https://github.com/edenian-prince/rust-secrets.git\"  # &lt;-- path to the cli tool. don't touch!\n    $cliPathName = \"rust-secrets\"\n    $cliPath = Join-Path $HOME $cliPathName\n\n    $RepoUrl = \"\"                                                   # &lt;-- replace with your repo URL\n    $RepoName = \"secret-hooks\"                                      # &lt;-- folder name to clone into\n    $RepoFile = \"patterns.txt\"\n    $RepoPath = Join-Path $HOME $RepoName\n    $SecretFilePath = Join-Path $RepoPath $RepoFile\n\n    # 1️ Install CLI tool\n    Write-Host \"Cloning repository to $cliPath...\"\n    if (Test-Path $cliPath) {\n        Write-Host \"Repository folder already exists. Pulling latest changes...\"\n        Set-Location $cliPath\n        git pull\n        powershell -ExecutionPolicy Bypass -File ./install.ps1\n    } else {\n        git clone $cliURL $cliPath\n        Set-Location $cliPath\n        powershell -ExecutionPolicy Bypass -File ./install.ps1\n\n    }\n\n    # 3️ Clone the repo to $HOME\n    Write-Host \"Cloning repository to $RepoPath...\"\n    if (Test-Path $RepoPath) {\n        Write-Host \"Repository folder already exists. Pulling latest changes...\"\n        Set-Location $RepoPath\n        git pull\n    } else {\n        git clone $RepoUrl $RepoPath\n    }\n\n    # 4️ Run git-find install\n    Write-Host \"Running git-find install...\"\n    git-find install\n\n    # 5️ Run git-find add-provider and automatically answer 'y'\n    # Write 'y' to stdin.txt first\n    \"y\" | Set-Content -Path \"stdin.txt\"\n    \n    # Then start the process\n    Write-Host \"Running git-find add-provider $SecretFilePath...\"\n    $proc = Start-Process -FilePath \"git-find\" `\n        -ArgumentList \"add-provider\", \"--path\", $SecretFilePath `\n        -NoNewWindow -RedirectStandardInput \"stdin.txt\" -Wait -PassThru\n    \n    $proc.WaitForExit()\n\n    # Clean up repo\n    # Move out of repo directory before deleting it\n    Set-Location ..\n\n    # Remove the repo directory\n    Write-Host \"Clean up, removing folder: $cliPath\"\n    Remove-Item -Recurse -Force $cliPath\n\n    Write-Host \"✅ Setup completed successfully!\"\n\n} catch {\n    Write-Host \"ERROR: Script stopped. $_\" -ForegroundColor Red\n    exit 1\n}\n\n\n\n\n\nsetup.sh\n\n#!/usr/bin/env bash\n\n# -------------------------------------------------\n# Fail-Fast Automated Setup Script (Bash/Linux)\n# -------------------------------------------------\n\nset -e  # Exit immediately if a command fails\nset -o pipefail  # Catch errors in piped commands\n\n# Helper function for error handling\nfunction handle_error {\n    echo \"ERROR: Script stopped at line $1.\"\n    exit 1\n}\ntrap 'handle_error $LINENO' ERR\n\n# ------------------------------\n# 1️ Install CLI tool\n# ------------------------------\nCLI_URL=\"https://github.com/edenian-prince/rust-secrets.git\"  # &lt;-- don't touch! this is where the cli tool lives\nCLI_NAME=\"rust-secrets\"\nCLI_PATH=\"$HOME/$CLI_NAME\"\n\nREPO_URL=\"\"                                                   # &lt;-- replace with your repo URL\nREPO_NAME=\"secret-hooks\"\nREPO_FILE=\"patterns.txt\"\nREPO_PATH=\"$HOME/$REPO_NAME\"\nSECRET_FILE_PATH=\"$REPO_PATH/$REPO_FILE\"\n\necho \"Cloning repository to $CLI_PATH...\"\nif [ -d \"$CLI_PATH\" ]; then\n    echo \"Repository folder already exists. Pulling latest changes...\"\n    cd \"$CLI_PATH\"\n    git pull\nelse\n    git clone \"$CLI_URL\" \"$CLI_PATH\"\n    cd \"$CLI_PATH\"\nfi\n\n# Run install script (assuming Bash version of install exists)\nif [ -f \"./install.sh\" ]; then\n    bash ./install.sh\nelif [ -f \"./install.ps1\" ]; then\n    # If only PowerShell script exists\n    pwsh -File ./install.ps1\nelse\n    echo \"No install script found in $CLI_PATH\"\nfi\n\n# ------------------------------\n# 2️ Clone secrets repo\n# ------------------------------\n\necho \"Cloning repository to $REPO_PATH...\"\nif [ -d \"$REPO_PATH\" ]; then\n    echo \"Repository folder already exists. Pulling latest changes...\"\n    cd \"$REPO_PATH\"\n    git pull\nelse\n    git clone \"$REPO_URL\" \"$REPO_PATH\"\n    cd \"$REPO_PATH\"\nfi\n\n# ------------------------------\n# 3️ Run git-find install\n# ------------------------------\necho \"Running git-find install...\"\ngit-find install\n\n# ------------------------------\n# 4️ Run git-find add-provider and automatically answer 'y'\n# ------------------------------\necho \"y\" | git-find add-provider --path \"$SECRET_FILE_PATH\"\n\n# ------------------------------\n# 5️ Clean up CLI repo\n# ------------------------------\necho \"Clean up, removing folder: $CLI_PATH\"\nrm -rf \"$CLI_PATH\"\n\necho \"✅ Setup completed successfully!\"\n\n\n\n\n\nIn the patterns.txt file, put the strings and regexes that you want to avoid in the file on separate lines like:\n\n\n\npatterns.txt\n\n# Place your regex patterns here\n# Don't paste actual secrets!! Regular expressions only\n\n# Azure tokens - this regex didn't work for me.. broken\n[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+\n\n# Generic private key\n-----BEGIN [A-Z]*PRIVATE KEY-----\n\n# Databricks tokens\ndapi[0-9a-fA-F]{32,64}\n\n# Databricks url\nadb-[0-9]{16}\n\n\nNow, your users can clone the repo, open up powershell or bash, and run:\n\n\n\nTerminal\n\n./setup.ps1\n\nor\n\n\nTerminal\n\nchmod +x setup.sh\n./setup.sh\n\n\nIf you ever need to update the ban list/patterns.txt it will automatically update the list for all of your users that have the program installed.\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\n\nThe REGEX strings used in the secrets_key file may be decieving\nMake sure to test that the regex flags what you want it to\nYou can also add personal regexes and local ban lists on a per repo basis\nSee https://github.com/edenian-prince/rust-secrets/ for more details and examples!",
     "crumbs": [
       "Home",
       "Policies",
@@ -182,7 +182,7 @@
     "href": "policies/security.html#sec-scan",
     "title": "Repo Security",
     "section": "Secret Scanning",
-    "text": "Secret Scanning\nNow that the pre-commit hook is set up, any future commits to your repo will be scanned for secrets. If you are pushing a pre-existing repo to a public repo for the first time, you should scan the existing code in the repo because the pre-commit hook will not automatically do that. They are really set up to prevent any future secrets from being pushed to the repo, not to scan what is currently in the repo.\nThere are a few ways to scan the history of your repo for secrets. The git secrets command comes with a few options to scan the history, but I have found that it is a bit broken.\n\nthe git secrets --scan-history command will run forever if you have a large repo (especially if you have html files in it)\nglobs have not worked for me (specifying the file types you want to scan for git secrets --scan *glob)\nlikewise, scanning specific folders have not worked for me like this git secrets --scan directory/*\n\nI’ll show 2 ways to scan for secrets, one with a native git command git log, and the other with git secrets\n\ngit log for scanning\nThis is the easier way to scan commit history.\nNavigate to your repo and execute this command:\n\n\n\nbash\n\ngit log -G\"&lt;regex here&gt;\" -p\n\n\nNote that the regex pattern can be imported from the secrets_key file. You can also search for simple strings like this\n\n\n\nbash\n\ngit log -S \"&lt;string&gt;\" -p\n\n\nThere are a lot of options with the git log command and you can read more here and here\nBasically, the -G option stands for grep, -p will show the diffs of the files, and -S is for string.\n\n\ngit secrets for scanning\nThis isn’t my favorite way to scan code, but it is an option if you want to double check things.\n\nCheck that the secrets_key regex is working by running the process on a repo that you know has secrets in it. For example, in a different folder, run all the pre-commit hook steps above and add a known “bad” string into the regex. For example, in the regex put bad_string and in a file in that folder put bad_string. When you scan it should get flagged.\nIf secret scanning is taking too long, you might want to check certain files first. I’ve found that HTML files take a very long time to scan for secrets.\n\nFollow the instructions below to scan for specific files. The script will scan for all the file types that you select. For example, if you want to only scan R files, it will only scan R files.\n\nWindowsWSL/Linux\n\n\n\nIn PowerShell, navigate to your repo and paste this code:\n\n\n\n\nsecret-scanner9000.ps1\n\n# Example Usage\n# write this in the powershell terminal, adjust for the file type(s) you want to scan - can be multiple types: $fileExtensions = @(\".R\", \".py\")\n# then execute this in the terminal: ScanFiles -FileExtensions $fileExtensions\n\n# It will give you an output of any secrets that are contained in those files\n\nFunction ScanFiles{\n  param (\n      [string]$filePath = (Get-Location).Path,\n      [string[]]$fileExtensions\n) \n  Get-ChildItem $filePath -recurse | Where-Object {$_.extension -in $fileExtensions} | \n  Foreach-Object {\n\n      git secrets --scan $_.FullName\n\n  }\n}\n\n\n\nWrite the file extensions you want to scan for in a PowerShell Terminal window like this:\n\n\n\n\nPowerShell\n\n$fileExtensions = @(\".R\",\".py\",\".Rmd\",\".qmd\")\n\n\n\nNow, you can scan your secrets by copying and pasting this code into PowerShell:\n\n\n\n\nPowerShell\n\nScanFiles -FileExtensions $fileExtensions\n\n\n\n\n\nIn a bash/Ubuntu terminal, navigate to your repo and paste this code:\n\n\n\n\nbash\n\nfind . -type f \\( -name \"*.R\" -o -name \"*.py\" -o -name \"*.qmd\" -o -name \"*.rmd\" -o -name \"*.md\" \\) -print0 | xargs -0 -I {} git secrets --scan {}\n\n\n\nThis is set to scan all R, Python, QMD, RMD, or MD files. If you want to add another file type, do it like this where you add -o -name \"*.NEW_TYPE\" to the find command args:\n\n\n\n\nbash\n\nfind . -type f \\( -name \"*.R\" -o -name \"*.py\" -o -name \"*.qmd\" -o -name \"*.rmd\" -o -name \"*.md\" -o -name \"*.NEW_TYPE\"  \\) -print0 | xargs -0 -I {} git secrets --scan {}",
+    "text": "Secret Scanning\nNow that the pre-commit hook is set up, any future commits to your repo will be scanned for secrets. If you are pushing a pre-existing repo to a public repo for the first time, you should scan the existing code in the repo because the pre-commit hook will not automatically do that. They are really set up to prevent any future secrets from being pushed to the repo, not to scan what is currently in the repo.\nI’ll show 2 ways to scan for secrets, one with a native git command git log, and the other with git find\n\ngit find for scanning\nYou can use the git-find command that you installed in the pre-commit hooks to scan your repos for every item in the patterns.txt or ban list.\n\nNavigate to your repo and run:\n\n\n\nTerminal\n\ngit find scan\n\nand it will look like this, indicating which regexes passed or failed:\n\n\nTerminal\n\nLocal file: C:\\Users\\FAA3303\\pathogen-repo-guide-secrets.txt\nLoaded 2 regexes\nScanning for regex: -----BEGIN [A-Z]*PRIVATE KEY-----\nNo matches found for pattern #1\n\nScanning for regex: dapi[0-9a-fA-F]{32,64}\nNo matches found for pattern #2\n\nScanning for regex: adb-[0-9]{16}\nNo matches found for pattern #3\n\n\n\ngit log for scanning\nHere’s a base git way to scan commit history.\nNavigate to your repo and execute this command:\n\n\nTerminal\n\ngit log -G\"&lt;regex here&gt;\" -p\n\nNote that the regex pattern can be imported from the secrets_key file. You can also search for simple strings like this\n\n\nTerminal\n\ngit log -S \"&lt;string&gt;\" -p\n\nThere are a lot of options with the git log command and you can read more here and here\nBasically, the -G option stands for grep, -p will show the diffs of the files, and -S is for string.",
     "crumbs": [
       "Home",
       "Policies",
@@ -194,7 +194,7 @@
     "href": "policies/security.html#pre-recieve-hooks",
     "title": "Repo Security",
     "section": "Pre-Recieve Hooks",
-    "text": "Pre-Recieve Hooks\nThese are still being investigated. They are remote hooks (not local like pre-commit hooks) that can be deployed throughout the Github organization. They can block certain commits from ever being pushed to the remote repo. They may make things unnecessarily complicated",
+    "text": "Pre-Recieve Hooks\nThese are remote hooks (not local like pre-commit hooks) that can be deployed throughout the Github organization. They can block certain commits from ever being pushed to the remote repo. They may make things unnecessarily complicated but they cost money. Go to your GitHub admins and see if they can activate them in your org.",
     "crumbs": [
       "Home",
       "Policies",
@@ -206,7 +206,7 @@
     "href": "policies/security.html#sec-public",
     "title": "Repo Security",
     "section": "Pushing Private Code to Public Repos",
-    "text": "Pushing Private Code to Public Repos\nWe may wish to take private codes and push them to a public repo. We need to make sure that the public code doesn’t not contain sensitive or forbidden data/code, so cleaning up the private repo is important before pushing.\nThere are a few ways to do this, but the easiest way is to copy the clean private code to the public repo, that is, copy all the files you want to add publicly but do not copy the .git folder. If the private repo has a dirty git history we will not want that history in the public repo because the sensitive data will then be publicly available.\n\n\n\n\n\n\n\n\n\n\n{{&lt; fa exclamation &gt;}} The private repository on the left still contains sensitive information in the git history. The public repository on the right has a clean git history because we copied only the current clean files from the private repo and did not attach its git history (which lives in the hidden .git folder)",
+    "text": "Pushing Private Code to Public Repos\nWe may wish to take private codes and push them to a public repo. We need to make sure that the public code doesn’t not contain sensitive or forbidden data/code, so cleaning up the private repo is important before pushing.\nThere are a few ways to do this, but the easiest way is to copy the clean private code to the public repo, that is, copy all the files you want to add publicly but do not copy the .git folder. If the private repo has a dirty git history we will not want that history in the public repo because the sensitive data will then be publicly available.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\nThe private repository on the left still contains sensitive information in the git history. The public repository on the right has a clean git history because we copied only the current clean files from the private repo and did not attach its git history (which lives in the hidden .git folder)",
     "crumbs": [
       "Home",
       "Policies",
@@ -235,6 +235,149 @@
       "Home",
       "Policies",
       "Repo Security"
+    ]
+  },
+  {
+    "objectID": "reference.html",
+    "href": "reference.html",
+    "title": "Reference",
+    "section": "",
+    "text": "This page lists the options of My project. Replace the table with the options of your project.",
+    "crumbs": [
+      "Home",
+      "Reference"
+    ]
+  },
+  {
+    "objectID": "reference.html#options",
+    "href": "reference.html#options",
+    "title": "Reference",
+    "section": "Options",
+    "text": "Options\n\n\n\nOption\nDefault\nUse\n\n\n\n\ntitle\n\"My project\"\nThe name of the site.\n\n\ndescription\nnone\nThe short text for search engines.\n\n\nrepo-url\nnone\nThe address of the repository.",
+    "crumbs": [
+      "Home",
+      "Reference"
+    ]
+  },
+  {
+    "objectID": "reference.html#commands",
+    "href": "reference.html#commands",
+    "title": "Reference",
+    "section": "Commands",
+    "text": "Commands\n\n\n\nCommand\nUse\n\n\n\n\nquarto preview\nShow the site and update it when a file changes.\n\n\nquarto render\nBuild the site in the _site folder.",
+    "crumbs": [
+      "Home",
+      "Reference"
+    ]
+  },
+  {
+    "objectID": "policies/configuration.html",
+    "href": "policies/configuration.html",
+    "title": "Configuration",
+    "section": "",
+    "text": "This guide shows how to change the site. Two files control how the site looks."
+  },
+  {
+    "objectID": "policies/configuration.html#the-site-file",
+    "href": "policies/configuration.html#the-site-file",
+    "title": "Configuration",
+    "section": "The site file",
+    "text": "The site file\nThe file _quarto.yml holds the title, the navigation, and the options of the site. Change the title and the description first.\n\n\n_quarto.yml\n\nwebsite:\n  title: \"My project\"\n  description: \"A short description of my project.\"\n\nChange repo-url to the address of your repository."
+  },
+  {
+    "objectID": "policies/configuration.html#the-brand-file",
+    "href": "policies/configuration.html#the-brand-file",
+    "title": "Configuration",
+    "section": "The brand file",
+    "text": "The brand file\nThe file _brand.yml holds the colours of the site. Each colour has a light value and a dark value. The site uses the primary colour for the current item and for links.\n\n\n_brand.yml\n\ncolor:\n  primary:\n    light: \"#1d5fd1\"\n    dark: \"#7fa8f0\"\n\n\n\n\n\n\n\nTipTest both colour schemes\n\n\n\nChange the colour scheme of your system. Make sure that the text is easy to read in both schemes."
+  },
+  {
+    "objectID": "policies/configuration.html#next-steps",
+    "href": "policies/configuration.html#next-steps",
+    "title": "Configuration",
+    "section": "Next steps",
+    "text": "Next steps\nRead Writing pages to see each element that a page can hold."
+  },
+  {
+    "objectID": "policies/writing.html",
+    "href": "policies/writing.html",
+    "title": "Writing pages",
+    "section": "",
+    "text": "This page shows each element that the template styles. Copy the element that you need and change its text.",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Writing pages"
+    ]
+  },
+  {
+    "objectID": "policies/writing.html#callouts",
+    "href": "policies/writing.html#callouts",
+    "title": "Writing pages",
+    "section": "Callouts",
+    "text": "Callouts\n\n\n\n\n\n\nNoteA note\n\n\n\nUse a note for extra information.\n\n\n\n\n\n\n\n\nTipA tip\n\n\n\nUse a tip for advice that saves time.\n\n\n\n\n\n\n\n\nWarningA warning\n\n\n\nUse a warning for an action that can cause a problem.\n\n\n\n\n\n\n\n\nNoteA collapsed callout\n\n\n\n\n\nThe reader opens this callout to read more.\n\n\n\n\n\n\n\n\n\nA minimal callout has no title bar.",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Writing pages"
+    ]
+  },
+  {
+    "objectID": "policies/writing.html#code",
+    "href": "policies/writing.html#code",
+    "title": "Writing pages",
+    "section": "Code",
+    "text": "Code\nA code block can show a file name.\n\n\nhello.py\n\ndef greet(name):\n    return f\"Hello, {name}\"\n\nA code block can number its lines.\n\n\npython\n\nfirst = 1\nsecond = 2\ntotal = first + second\n\nA terminal block shows a command and its output. A line that starts with $ and a space is a command.\n\n\nTerminal\n\necho \"Hello\"\nHello",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Writing pages"
+    ]
+  },
+  {
+    "objectID": "policies/writing.html#tabs",
+    "href": "policies/writing.html#tabs",
+    "title": "Writing pages",
+    "section": "Tabs",
+    "text": "Tabs\n\nPythonR\n\n\n\n\npython\n\nprint(\"Hello\")\n\n\n\n\n\nr\n\ncat(\"Hello\\n\")",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Writing pages"
+    ]
+  },
+  {
+    "objectID": "policies/writing.html#figures-and-tables",
+    "href": "policies/writing.html#figures-and-tables",
+    "title": "Writing pages",
+    "section": "Figures and tables",
+    "text": "Figures and tables\n\n\n\n\n\ntext\n\nproject/\n  _quarto.yml\n  _brand.yml\n  index.qmd\n\n\n\nFigure 1: The files that a project holds at first.\n\n\n\n\n\n\nTable 1: The files to change first.\n\n\n\n\n\nFile\nUse\n\n\n\n\n_quarto.yml\nThe options of the site.\n\n\n_brand.yml\nThe colours of the site.\n\n\nindex.qmd\nThe home page.",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Writing pages"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "NW-PaGe Policies and Guidelines",
+    "section": "",
+    "text": "This is a static website documenting the policies and guidelines for public Github use at the Pacific Northwest Genomic Center of Excellence. Scroll below to see overviews on Github, Azure, and AWS policies.",
+    "crumbs": [
+      "Home",
+      "NW-PaGe Policies and Guidelines"
+    ]
+  },
+  {
+    "objectID": "index.html#next-steps",
+    "href": "index.html#next-steps",
+    "title": "NW-PaGe Policies and Guidelines",
+    "section": "Next steps",
+    "text": "Next steps\n\nGet started shows how to install the project.\nConfiguration shows how to change the site and its colours.\nWriting pages shows each element that a page can hold.\nReference lists the options of the project.",
+    "crumbs": [
+      "Home",
+      "NW-PaGe Policies and Guidelines"
     ]
   }
 ]
