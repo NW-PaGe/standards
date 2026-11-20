@@ -202,6 +202,10 @@ SSH is an excellent option for cloning a repo. It is similar to using an identif
 
 {{< video https://www.youtube.com/embed/8X4u9sca3Io?si=bHKQHA28VBz2PXUP >}}
 
+:::{.panel-tabset}
+
+#### Linux
+
 1. In a terminal, write the following and replace the email with your email:
 
 :::{.medframe}
@@ -210,7 +214,7 @@ ssh-keygen -t ed25519 -C your@email.com
 ```
 :::
 
-2. It should then ask if you want to make a passphrase. I recommend doing this
+2. It should then ask if you want to make a passphrase. (I usually don't enter one)
 
 3. Get the pid
 
@@ -288,6 +292,105 @@ git clone git@github.com:org/reponame.git
 ```
 :::
 
+#### Windows
+
+1. In a terminal, write the following and replace the email with your email:
+
+:::{.medframe}
+```{bash filename="terminal"}
+ssh-keygen -t ed25519 -C your@email.com
+```
+:::
+
+2. It should then ask if you want to make a passphrase. (I usually don't enter one)
+
+3. There might be a ton of issues because Windows is Windows. You may need to install OpenSSH. In your Windows Seach bar, type in PowerShell and _run as administrator_
+
+Run this
+```{bash filename='PowerShell'}
+Get-WindowsCapability -Online | Where-Object Name -like 'OpenSSH*'
+```
+
+Run this
+```{bash filename='PowerShell'}
+Set-Service -Name ssh-agent -StartupType Automatic
+```
+
+Run this
+```{bash filename='PowerShell'}
+Start-Service ssh-agent
+```
+
+4. Make a config file _in the root of your `C:/User/USERXXXX/` directory
+
+:::{.smallframe}
+```{bash filename="PowerShell"}
+New-Item ~/.ssh/config
+```
+:::
+
+5. Open the file
+
+:::{.smallframe}
+```{bash filename="PowerShell"}
+notepad ~/.ssh/config
+```
+:::
+
+6. Add this to the config file. it will use your passkey and recognize you. Update the path!! `C:/Users/USERXXXXX/.ssh/id_ed25519`
+
+:::{.medframe}
+```{bash filename="ssh/config"}
+Host *
+  IgnoreUnknown AddKeysToAgent,UseKeychain
+  AddKeysToAgent yes
+  IdentityFile C:/Users/USERXXXXX/.ssh/id_ed25519
+  UseKeychain yes
+```
+:::
+
+save the file
+
+7. Add the identity
+
+:::{.medframe}
+```{bash filename="PowerShell"}
+ssh-add C:/Users/USERXXXXX/.ssh/id_ed25519
+```
+:::
+
+8. In Github, go to your profile and the `SSH + GPG Keys` section
+
+9. Click SSH Keys, add a title, and in the key location write your key. You can find your key in your terminal by writing:
+
+:::{.medframe}
+```{bash filename="PowerShell"}
+notepad C:/Users/USERXXXXX/.ssh/id_ed25519.pub
+```
+:::
+
+**Copy the whole output including your email and paste it into the Github key location**
+
+10. Test it by writing this:
+
+:::{.medframe}
+```{bash filename="terminal"}
+ssh -T git@github.com
+```
+:::
+
+11. Use the key to clone a repo.
+
+Now you can clone a repo using the SSH key. Copy the SSH path and write this (replace the string after clone with your repo of choice):
+
+:::{.medframe}
+```{bash filename="terminal"}
+git clone git@github.com:org/reponame.git
+```
+:::
+
+
+:::
 
 ### GitHub CLI
 

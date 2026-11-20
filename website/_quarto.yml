@@ -1,0 +1,34 @@
+project:
+  type: atelier
+
+website:
+  title: "My project"
+  description: "A short description of my project."
+  repo-url: https://github.com/owner/project
+  navbar:
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "Get started"
+        href: get-started.qmd
+      - text: "Guides"
+        href: guides/checklist.qmd
+      - text: "Reference"
+        href: reference.qmd
+  sidebar:
+    style: docked
+    contents:
+      - index.qmd
+      - get-started.qmd
+      - section: "Guides"
+        contents:
+          - guides/checklist.qmd
+          - guides/writing.qmd
+      - reference.qmd
+
+brand: _brand.yml
+
+extensions:
+  atelier:
+    version: "1.0.0"
+

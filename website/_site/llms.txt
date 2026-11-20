@@ -1,0 +1,11 @@
+# My project
+
+> A short description of my project.
+
+## Pages
+
+- [Reference](reference.llms.md)
+- [Writing pages](guides/writing.llms.md)
+- [Get started](get-started.llms.md)
+- [Configuration](guides/configuration.llms.md)
+- [My project](index.llms.md)

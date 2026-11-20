@@ -1,0 +1,296 @@
+[
+  {
+    "objectID": "reference.html",
+    "href": "reference.html",
+    "title": "Reference",
+    "section": "",
+    "text": "This page lists the options of My project. Replace the table with the options of your project.",
+    "crumbs": [
+      "Home",
+      "Reference"
+    ]
+  },
+  {
+    "objectID": "reference.html#options",
+    "href": "reference.html#options",
+    "title": "Reference",
+    "section": "Options",
+    "text": "Options\n\n\n\nOption\nDefault\nUse\n\n\n\n\ntitle\n\"My project\"\nThe name of the site.\n\n\ndescription\nnone\nThe short text for search engines.\n\n\nrepo-url\nnone\nThe address of the repository.",
+    "crumbs": [
+      "Home",
+      "Reference"
+    ]
+  },
+  {
+    "objectID": "reference.html#commands",
+    "href": "reference.html#commands",
+    "title": "Reference",
+    "section": "Commands",
+    "text": "Commands\n\n\n\nCommand\nUse\n\n\n\n\nquarto preview\nShow the site and update it when a file changes.\n\n\nquarto render\nBuild the site in the _site folder.",
+    "crumbs": [
+      "Home",
+      "Reference"
+    ]
+  },
+  {
+    "objectID": "guides/writing.html",
+    "href": "guides/writing.html",
+    "title": "Writing pages",
+    "section": "",
+    "text": "This page shows each element that the template styles. Copy the element that you need and change its text.",
+    "crumbs": [
+      "Home",
+      "Guides",
+      "Writing pages"
+    ]
+  },
+  {
+    "objectID": "guides/writing.html#callouts",
+    "href": "guides/writing.html#callouts",
+    "title": "Writing pages",
+    "section": "Callouts",
+    "text": "Callouts\n\n\n\n\n\n\nNoteA note\n\n\n\nUse a note for extra information.\n\n\n\n\n\n\n\n\nTipA tip\n\n\n\nUse a tip for advice that saves time.\n\n\n\n\n\n\n\n\nWarningA warning\n\n\n\nUse a warning for an action that can cause a problem.\n\n\n\n\n\n\n\n\nNoteA collapsed callout\n\n\n\n\n\nThe reader opens this callout to read more.\n\n\n\n\n\n\n\n\n\nA minimal callout has no title bar.",
+    "crumbs": [
+      "Home",
+      "Guides",
+      "Writing pages"
+    ]
+  },
+  {
+    "objectID": "guides/writing.html#code",
+    "href": "guides/writing.html#code",
+    "title": "Writing pages",
+    "section": "Code",
+    "text": "Code\nA code block can show a file name.\n\n\nhello.py\n\ndef greet(name):\n    return f\"Hello, {name}\"\n\nA code block can number its lines.\n\n\npython\n\nfirst = 1\nsecond = 2\ntotal = first + second\n\nA terminal block shows a command and its output. A line that starts with $ and a space is a command.\n\n\nTerminal\n\necho \"Hello\"\nHello",
+    "crumbs": [
+      "Home",
+      "Guides",
+      "Writing pages"
+    ]
+  },
+  {
+    "objectID": "guides/writing.html#tabs",
+    "href": "guides/writing.html#tabs",
+    "title": "Writing pages",
+    "section": "Tabs",
+    "text": "Tabs\n\nPythonR\n\n\n\n\npython\n\nprint(\"Hello\")\n\n\n\n\n\nr\n\ncat(\"Hello\\n\")",
+    "crumbs": [
+      "Home",
+      "Guides",
+      "Writing pages"
+    ]
+  },
+  {
+    "objectID": "guides/writing.html#figures-and-tables",
+    "href": "guides/writing.html#figures-and-tables",
+    "title": "Writing pages",
+    "section": "Figures and tables",
+    "text": "Figures and tables\n\n\n\n\n\ntext\n\nproject/\n  _quarto.yml\n  _brand.yml\n  index.qmd\n\n\n\nFigure 1: The files that a project holds at first.\n\n\n\n\n\n\nTable 1: The files to change first.\n\n\n\n\n\nFile\nUse\n\n\n\n\n_quarto.yml\nThe options of the site.\n\n\n_brand.yml\nThe colours of the site.\n\n\nindex.qmd\nThe home page.",
+    "crumbs": [
+      "Home",
+      "Guides",
+      "Writing pages"
+    ]
+  },
+  {
+    "objectID": "get-started.html",
+    "href": "get-started.html",
+    "title": "Get started",
+    "section": "",
+    "text": "This page shows how to install My project. Replace the steps with the steps for your project.",
+    "crumbs": [
+      "Home",
+      "Get started"
+    ]
+  },
+  {
+    "objectID": "get-started.html#install",
+    "href": "get-started.html#install",
+    "title": "Get started",
+    "section": "Install",
+    "text": "Install\nRun the install command in a terminal.\n\n\nTerminal\n\npip install my-project\ninstalled my-project",
+    "crumbs": [
+      "Home",
+      "Get started"
+    ]
+  },
+  {
+    "objectID": "get-started.html#check-the-install",
+    "href": "get-started.html#check-the-install",
+    "title": "Get started",
+    "section": "Check the install",
+    "text": "Check the install\nRun the version command. The output shows the version number.\n\n\nTerminal\n\nmy-project --version\n1.0.0\n\n\n\n\n\n\n\nNoteReplace this page\n\n\n\nWrite the steps that a new reader must do first. Keep each step to one action.",
+    "crumbs": [
+      "Home",
+      "Get started"
+    ]
+  },
+  {
+    "objectID": "get-started.html#next-steps",
+    "href": "get-started.html#next-steps",
+    "title": "Get started",
+    "section": "Next steps",
+    "text": "Next steps\nRead the configuration guide to change the options of the project.",
+    "crumbs": [
+      "Home",
+      "Get started"
+    ]
+  },
+  {
+    "objectID": "guides/configuration.html",
+    "href": "guides/configuration.html",
+    "title": "Configuration",
+    "section": "",
+    "text": "This guide shows how to change the site. Two files control how the site looks."
+  },
+  {
+    "objectID": "guides/configuration.html#the-site-file",
+    "href": "guides/configuration.html#the-site-file",
+    "title": "Configuration",
+    "section": "The site file",
+    "text": "The site file\nThe file _quarto.yml holds the title, the navigation, and the options of the site. Change the title and the description first.\n\n\n_quarto.yml\n\nwebsite:\n  title: \"My project\"\n  description: \"A short description of my project.\"\n\nChange repo-url to the address of your repository."
+  },
+  {
+    "objectID": "guides/configuration.html#the-brand-file",
+    "href": "guides/configuration.html#the-brand-file",
+    "title": "Configuration",
+    "section": "The brand file",
+    "text": "The brand file\nThe file _brand.yml holds the colours of the site. Each colour has a light value and a dark value. The site uses the primary colour for the current item and for links.\n\n\n_brand.yml\n\ncolor:\n  primary:\n    light: \"#1d5fd1\"\n    dark: \"#7fa8f0\"\n\n\n\n\n\n\n\nTipTest both colour schemes\n\n\n\nChange the colour scheme of your system. Make sure that the text is easy to read in both schemes."
+  },
+  {
+    "objectID": "guides/configuration.html#next-steps",
+    "href": "guides/configuration.html#next-steps",
+    "title": "Configuration",
+    "section": "Next steps",
+    "text": "Next steps\nRead Writing pages to see each element that a page can hold."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "NW-PaGe Policies and Guidelines",
+    "section": "",
+    "text": "This is a static website documenting the policies and guidelines for public Github use at the Pacific Northwest Genomic Center of Excellence. Scroll below to see overviews on Github, Azure, and AWS policies.",
+    "crumbs": [
+      "Home",
+      "NW-PaGe Policies and Guidelines"
+    ]
+  },
+  {
+    "objectID": "index.html#quick-start",
+    "href": "index.html#quick-start",
+    "title": "NW-PaGe Policies and Guidelines",
+    "section": "Quick start",
+    "text": "Quick start\nPreview the site on your computer. The site updates each time you save a file.",
+    "crumbs": [
+      "Home",
+      "NW-PaGe Policies and Guidelines"
+    ]
+  },
+  {
+    "objectID": "index.html#next-steps",
+    "href": "index.html#next-steps",
+    "title": "NW-PaGe Policies and Guidelines",
+    "section": "Next steps",
+    "text": "Next steps\n\nGet started shows how to install the project.\nConfiguration shows how to change the site and its colours.\nWriting pages shows each element that a page can hold.\nReference lists the options of the project.",
+    "crumbs": [
+      "Home",
+      "NW-PaGe Policies and Guidelines"
+    ]
+  },
+  {
+    "objectID": "guides/checklist.html",
+    "href": "guides/checklist.html",
+    "title": "Get Started",
+    "section": "",
+    "text": "If you need to make a public repo, this quick start guide is for you. Please meet with Frank Aragona DOH.CDS.GenSeqSurvDQ@doh.wa.gov before creating a public repo.\n\nSubmit a request (service central ticket) to join a public GitHub organization (email1 for help)\nReview items that are prohibited from being in a repo\nAdd security guardrails\nCreate global security hooks for all your repos\nMake a private staging repo to make sure everything is clean\nPerform secret scanning on your repo\nAdd a license\nMake branch protections\nCopy over the cleaned main branch from private repo into new public repo\nAdd a README and consider adding a Github page for documentation",
+    "crumbs": [
+      "Home",
+      "Guides",
+      "Get Started"
+    ]
+  },
+  {
+    "objectID": "guides/checklist.html#checklist",
+    "href": "guides/checklist.html#checklist",
+    "title": "Get Started",
+    "section": "",
+    "text": "If you need to make a public repo, this quick start guide is for you. Please meet with Frank Aragona DOH.CDS.GenSeqSurvDQ@doh.wa.gov before creating a public repo.\n\nSubmit a request (service central ticket) to join a public GitHub organization (email1 for help)\nReview items that are prohibited from being in a repo\nAdd security guardrails\nCreate global security hooks for all your repos\nMake a private staging repo to make sure everything is clean\nPerform secret scanning on your repo\nAdd a license\nMake branch protections\nCopy over the cleaned main branch from private repo into new public repo\nAdd a README and consider adding a Github page for documentation",
+    "crumbs": [
+      "Home",
+      "Guides",
+      "Get Started"
+    ]
+  },
+  {
+    "objectID": "guides/checklist.html#access",
+    "href": "guides/checklist.html#access",
+    "title": "Get Started",
+    "section": "Access",
+    "text": "Access\nOur organization has several public Github orgs. If you are internal to Washington State Department of Health, you will need to submit a Service Central Request for access. Please reach out to frank.aragona@doh.wa.gov for help.",
+    "crumbs": [
+      "Home",
+      "Guides",
+      "Get Started"
+    ]
+  },
+  {
+    "objectID": "guides/checklist.html#github-security",
+    "href": "guides/checklist.html#github-security",
+    "title": "Get Started",
+    "section": "Github Security",
+    "text": "Github Security\nPlease read all of the security guidelines here\nThe guide will go over\n\nwhat data/code is not allowed in a public repo\nsecurity layers you need to prevent leaks\nconverting private code to public repositories\ninstallation of pre-commit hooks to prevent leaks",
+    "crumbs": [
+      "Home",
+      "Guides",
+      "Get Started"
+    ]
+  },
+  {
+    "objectID": "guides/checklist.html#building-a-public-repo",
+    "href": "guides/checklist.html#building-a-public-repo",
+    "title": "Get Started",
+    "section": "Building a Public Repo",
+    "text": "Building a Public Repo\nIf you have an existing private repo that needs to be public, please follow these steps:\n\nrepo cleaning guides\ncode scanning",
+    "crumbs": [
+      "Home",
+      "Guides",
+      "Get Started"
+    ]
+  },
+  {
+    "objectID": "guides/checklist.html#licensing",
+    "href": "guides/checklist.html#licensing",
+    "title": "Get Started",
+    "section": "Licensing",
+    "text": "Licensing\n\nlicense rules",
+    "crumbs": [
+      "Home",
+      "Guides",
+      "Get Started"
+    ]
+  },
+  {
+    "objectID": "guides/checklist.html#repo-tipsadvice",
+    "href": "guides/checklist.html#repo-tipsadvice",
+    "title": "Get Started",
+    "section": "Repo tips/advice",
+    "text": "Repo tips/advice\n\norg policies\nmake your repo reproducible\nrepo documentation\nvirtual environments\ngit/github help, and how to collaborate on a repo",
+    "crumbs": [
+      "Home",
+      "Guides",
+      "Get Started"
+    ]
+  },
+  {
+    "objectID": "guides/checklist.html#footnotes",
+    "href": "guides/checklist.html#footnotes",
+    "title": "Get Started",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nDOH.CDS.GenSeqSurvDQ@doh.wa.gov&gt;↩︎",
+    "crumbs": [
+      "Home",
+      "Guides",
+      "Get Started"
+    ]
+  }
+]
