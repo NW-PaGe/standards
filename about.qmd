@@ -1,5 +1,0 @@
----
-title: "About"
----
-
-This site was made with Quarto. It can execute code and render the outputs into the html. 

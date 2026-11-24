@@ -1,0 +1,45 @@
+project:
+  type: atelier
+
+website:
+  title: "My project"
+  description: "A short description of my project."
+  repo-url: https://github.com/owner/project
+  navbar:
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "Policies"
+        href: policies/checklist.qmd
+      - text: "Tutorials"
+        href: tools/release.qmd
+      - text: "Reference"
+        href: reference.qmd
+  sidebar:
+    style: docked
+    contents:
+      - index.qmd
+      - section: "Policies"
+        contents:
+          - policies/checklist.qmd
+          - policies/security.qmd
+          - policies/gh_setup.qmd
+          - policies/gh_collab_tutorial.qmd
+          - policies/policies.qmd
+          - policies/lic.qmd
+          - policies/reproduce.qmd
+      - section: "Tutorials"
+        contents: 
+          - tools/release.qmd
+          - tools/renv.qmd
+          - tools/templates.qmd
+          - tools/how_to.qmd
+          - tools/newrepo.qmd
+      - reference.qmd
+
+brand: _brand.yml
+
+extensions:
+  atelier:
+    version: "1.2.0"
+

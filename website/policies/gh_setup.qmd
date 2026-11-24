@@ -1,0 +1,488 @@
+---
+title: "Git/GitHub User Setup"
+description: How to contribute to the org and a basic Git/Github usage guide for the NW-PaGe Github Organization
+date: February 1, 2023
+date-modified: today
+author: Frank Aragona
+execute: 
+  # freeze: true
+  eval: false
+knitr: true
+---
+
+::: {.box}
+## **Objectives** {{< iconify bi:journal-check >}}
+
+- How to contribute to our GitHub repos
+- Steps to create a GitHub repo
+- Steps to clone a repo
+
+
+**You will need Git and Github to make code contributions:**
+
+- Git is a [version control software](https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F).
+- Github is a [platform for developers](https://en.wikipedia.org/wiki/GitHub) that utilizes Git
+- In order to contribute to this organization you must have Git installed and a Github account
+:::
+
+## Git Basics
+
+- You need to install Git on your machine [follow here for help](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
+- For a tutorial on how Git works, [follow our Git page here](git.qmd)
+
+
+## Github Basics
+
+- Go to the [Github website](https://github.com/) to create an account.
+- Bookmark the [NW-PaGe Github Org](https://github.com/NW-PaGe)
+
+## Contributing
+
+There are multiple ways to contribute to a Github repo, whether it is to report a bug, request a feature, or actively contribute to the code base.
+
+:::{.panel-tabset}
+
+### Bug Report
+
+To report a bug, 
+
+1. click on a repo and click on the `Issues` tab.
+
+2. click the `New issue` button
+
+3. click on the `Bug Report` tab
+
+From here you will need to fill out the bug report along with steps to reproduce the behavior you're seeing.
+
+### Feature Request
+
+Do you have a feature that you want included in the code base? 
+
+1. click on a repo and click on the `Issues` tab.
+
+2. click the `New issue` button
+
+3. click on the `Feature Request` tab
+
+From here you will need to fill out the feature request along with details
+
+### Discussions
+
+There is a discussions tab in our Github org. You can start discussions, ask questions, and share ideas here.
+
+### Contribute Code
+
+To contribute to a public repo in our Github org, please contact the repo owner to request read/write access. If you want to create a repo in the org, please contact `frank.aragona@doh.wa.gov`.
+
+Before contributing any code, please read our [security policies](security.qmd) and [collaboration guide](gh_collab_tutorial.qmd). There you will find our repo rules and instructions on how to set up pre-commit hooks and contributing how to contribute code.
+
+Once granted access, follow the steps below to create a repo (@sec-create-repo) and/or collaborate on code (@sec-collab).
+
+:::
+
+## Create a Repo {#sec-create-repo}
+
+Please see our [tutorial for more details.](newrepo.qmd)
+
+Once granted access to create a repo, you can go to [our org](https://github.com/orgs/NW-PaGe/) and click `Repositories > New repository` or [click here](https://github.com/organizations/NW-PaGe/repositories/new)
+
+This will take you to the `Create a new repository` screen. Please follow these instructions when filling it out:
+
+:::{.panel-tabset}
+#### Repository template
+
+Consider using a template unless you want to develop a repo from scratch. We have pre-built R, Python, and base templates that have [Github Codespaces](gh/codespace.qmd) set up as well as `.gitignore` files and virtual environments.
+
+#### Owner and Repo name
+
+Make sure the `Owner` name is NW-PaGe. Name your repository something descriptive and easy to type out. Avoid spaces and capital letters unless necessary. 
+
+The repo description can be filled out at any time after creating the repo
+
+#### Internal vs Private
+
+We don't allow you to create a public repo initially. Please create a Private repo first, and then once you are ready to make it public you can.
+
+#### README, .gitignore, license
+
+- Check the `Add a README file` box.
+- Add a `.gitignore` if the option is available (choose either R or Python)
+- Choose an `MIT` license unless you know you want a different license [more info here](gh/license.qmd)
+
+:::
+
+## Cloning a Repo {#sec-clone}
+
+Whether you have created your own repo or want to contribute to someone else's repo, you will need to make a local clone of that repo on your personal machine.
+
+To make a local clone of a repo, click on the green `Code` button when you're in the main repo's web page. In the local tab there are multiple ways to clone. For most of our work, I suggest creating an SSH key. If you are new to git/Github and on a Windows machine, I recommend installing the [Github Desktop app](https://desktop.github.com/) and following the instructions below.
+
+:::{.panel-tabset}
+
+### HTTPS
+
+Cloning via HTTPS is a relatively quick process. 
+
+1. Start by navigating to the repo in Github and selecting the `Code` button:
+
+![](images/https.png)
+
+2. Copy the path that starts with `https://`, in this case it's `https://github.com/NW-PaGe/standards.git`
+
+3. In a terminal/command prompt, navigate to a folder of your choice (in windows I would make a folder called Projects here: `C:/Users/<username>/Projects`)
+
+```{.bash .terminal}
+cd C:/Users/<your_username>/Projects
+```
+
+
+4. Use git clone and replace the `https://github.com/NW-PaGe/standards.git` with your path:
+
+```{.bash .terminal}
+git clone https://github.com/NW-PaGe/standards.git
+```
+
+5. Check if things ran by executing this code:
+
+```{.bash .terminal}
+git status
+```
+
+
+**NOTE:** the HTTPS method is good but it will require you to enter your username and a token every time you push a commit to the remote repo in Github. You will need to create a Personal Access Token (PAT) whenever you want to make a commit. If this is annoying to you, use the SSH or Github Desktop App methods.
+
+#### Make a PAT
+
+Here's a guide on [making a PAT](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic)
+
+1. Click on you Github profile icon in the upper right
+
+2. Click Settings
+
+3. Scroll down to `Developer Settings`
+
+4. Select Personal access tokens (classic) and then Generate new token
+
+5. When you make a commit you will need to input this personal access token when it asks for your password. 
+
+**Do not store this token anywhere! Especially make sure it is not stored in your repo. This has tons of security risks and needs to be for singular use only**
+
+
+### SSH
+
+SSH is an excellent option for cloning a repo. It is similar to using an identifier to tell Github that you are, in fact, you. [This video below](https://www.youtube.com/watch?v=8X4u9sca3Io) is a great resource on how to set up the key. I will also write out the steps in the video below. Also, see the [Github documentation](https://docs.github.com/en/authentication/connecting-to-github-with-ssh) for more information.
+
+{{< video https://www.youtube.com/embed/8X4u9sca3Io?si=bHKQHA28VBz2PXUP >}}
+
+:::{.panel-tabset}
+
+#### Linux
+
+1. In a terminal, write the following and replace the email with your email:
+
+```{.bash .terminal}
+ssh-keygen -t ed25519 -C your@email.com
+```
+
+2. It should then ask if you want to make a passphrase. (I usually don't enter one)
+
+3. Get the pid
+
+```{.bash .terminal}
+eval "$(ssh-agent -s)"
+```
+
+4. Make a config file
+
+```{.bash .terminal}
+touch ~/.ssh/config
+```
+
+
+5. If the file doesn't open, you can open it like this
+
+```{.bash .terminal}
+nano ~/.ssh/config
+```
+
+
+6. Add this to the config file. it will use your passkey and recognize you
+
+```{.bash .terminal filename="ssh/config"}
+Host *
+  IgnoreUnknown AddKeysToAgent,UseKeychain
+  AddKeysToAgent yes
+  IdentityFile ~/.ssh/id_ed25519
+  UseKeychain yes
+```
+
+
+To save this file in nano, on your keyboard write `CRTL+O` then `ENTER` to save the file. Then `CTRL+X` to exit back to the terminal. You can also open this file through a notepad or other software. You could also search for the file in your file explorer and edit it in notepad if that is easier.
+
+7. Add the identity
+
+```{.bash .terminal}
+ssh-add ~/.ssh/id_ed25519
+```
+
+
+8. In Github, go to your profile and the `SSH + GPG Keys` section
+
+9. Click SSH Keys, add a title, and in the key location write your key. You can find your key in your terminal by writing:
+
+```{.bash .terminal}
+cat ~/.ssh/id_ed25519.pub
+```
+
+**Copy the whole output including your email and paste it into the Github key location**
+
+10. Test it by writing this:
+
+```{.bash .terminal}
+ssh -T git@github.com
+```
+
+11. Use the key to clone a repo.
+
+Now you can clone a repo using the SSH key. Copy the SSH path and write this (replace the string after clone with your repo of choice):
+
+```{.bash .terminal}
+git clone git@github.com:org/reponame.git
+```
+
+
+#### Windows
+
+1. In a terminal, write the following and replace the email with your email:
+
+```{.bash .terminal}
+ssh-keygen -t ed25519 -C your@email.com
+```
+
+2. It should then ask if you want to make a passphrase. (I usually don't enter one)
+
+3. There might be a ton of issues because Windows is Windows. You may need to install OpenSSH. In your Windows Seach bar, type in PowerShell and _run as administrator_
+
+Run this
+```{.PowerShell .terminal}
+Get-WindowsCapability -Online | Where-Object Name -like 'OpenSSH*'
+```
+
+Run this
+```{.PowerShell .terminal}
+Set-Service -Name ssh-agent -StartupType Automatic
+```
+
+Run this
+```{.PowerShell .terminal}
+Start-Service ssh-agent
+```
+
+4. Make a config file _in the root of your `C:/User/USERXXXX/` directory
+
+```{.PowerShell .terminal}
+New-Item ~/.ssh/config
+```
+
+5. Open the file
+
+```{.PowerShell .terminal}
+notepad ~/.ssh/config
+```
+
+
+6. Add this to the config file. it will use your passkey and recognize you. Update the path!! `C:/Users/USERXXXXX/.ssh/id_ed25519`
+
+```{.bash .terminal filename="ssh/config"}
+Host *
+  IgnoreUnknown AddKeysToAgent,UseKeychain
+  AddKeysToAgent yes
+  IdentityFile C:/Users/USERXXXXX/.ssh/id_ed25519
+  UseKeychain yes
+```
+:::
+
+save the file
+
+7. Add the identity
+
+```{.PowerShell .terminal
+ssh-add C:/Users/USERXXXXX/.ssh/id_ed25519
+```
+
+8. In Github, go to your profile and the `SSH + GPG Keys` section
+
+9. Click SSH Keys, add a title, and in the key location write your key. You can find your key in your terminal by writing:
+
+```{.PowerShell .terminal}
+notepad C:/Users/USERXXXXX/.ssh/id_ed25519.pub
+```
+
+**Copy the whole output including your email and paste it into the Github key location**
+
+10. Test it by writing this:
+
+```{.bash .terminal}
+ssh -T git@github.com
+```
+
+11. Use the key to clone a repo.
+
+Now you can clone a repo using the SSH key. Copy the SSH path and write this (replace the string after clone with your repo of choice):
+
+```{.bash .terminal}
+git clone git@github.com:org/reponame.git
+```
+
+
+
+:::
+
+### GitHub CLI
+
+The [GitHub CLI](https://cli.github.com/) is an excellent tool for not just cloning your repo, but for managing repositories and organizations from a terminal. 
+
+:::{.panel-tabset}
+
+#### Windows
+
+To install the CLI in Windos, I follwed the instructions provided in the [Github CLI repo](https://github.com/cli/cli?tab=readme-ov-file#windows).
+
+I normally install commands using Scoop, but you have many options here.
+
+1. Paste this code into a powershell window and execute it
+
+```{.PowerShell .terminal}
+winget install --id GitHub.cli
+
+```
+
+
+2. Now update the package
+
+
+```{.PowerShell .terminal}
+winget upgrade --id GitHub.cli
+```
+
+
+3. You will need to authorize your github account like this:
+
+
+```{.PowerShell .terminal}
+gh auth login
+```
+
+
+4. It will ask you to authorize in a browser or with a personal access token
+
+  I created a [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
+
+5. Now you can clone a repo like this:
+
+
+```{.bash .terminal}
+gh repo clone org/repo-name
+```
+
+
+You can also now do some cool things with your org/repo like searching for strings, creating issues, and more. For example, here are the issues in this repo:
+
+```{.bash .terminal}
+gh issue list
+```
+
+
+```{markdown filename="output"}
+Showing 3 of 3 open issues in NW-PaGe/standards
+
+ID  TITLE                                      LABELS         UPDATED           
+#7  add .gitignore documentation                              about 2 months ago
+#3  Make sure all references are added to ...  documentation  about 5 months ago
+#2  Fix cross reference links                  documentation  about 5 months ago
+```
+
+
+
+#### WSL/Linux
+
+To install in a linux terminal, I'm following the instructions provided in the [Github CLI repo](https://github.com/cli/cli/blob/trunk/docs/install_linux.md).
+
+1. Paste this code into your bash terminal and execute it.
+
+```{.bash .terminal}
+(type -p wget >/dev/null || (sudo apt update && sudo apt-get install wget -y)) \
+&& sudo mkdir -p -m 755 /etc/apt/keyrings \
+&& wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \
+&& sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \
+&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+&& sudo apt update \
+&& sudo apt install gh -y
+```
+
+2. Then upgrate the command with the code below
+
+```{.bash .terminal}
+sudo apt update
+sudo apt install gh
+```
+
+
+3. You now need to authorize yourself as a user. 
+
+```{.bash .terminal}
+gh auth login
+```
+
+
+4. It will ask you to authorize in a browser or with a personal access token
+
+  I created a [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens). In linux there are some issues with the command and using a browser fyi.
+
+5. Now you can clone a repo like this:
+
+```{.bash .terminal}
+gh repo clone org/repo-name
+```
+
+
+You can also now do some cool things with your org/repo like searching for strings, creating issues, and more. For example, here are the issues in this repo:
+
+```{.bash .terminal}
+gh issue list
+```
+
+
+```{markdown filename="output"}
+Showing 3 of 3 open issues in NW-PaGe/standards
+
+ID  TITLE                                      LABELS         UPDATED           
+#7  add .gitignore documentation                              about 2 months ago
+#3  Make sure all references are added to ...  documentation  about 5 months ago
+#2  Fix cross reference links                  documentation  about 5 months ago
+```
+
+:::
+
+
+### Open with GitHub Desktop
+
+If you're new to Git or Github and are using a Windows machine, the GitHub Desktop app is a great option for managing git workflows. 
+
+1. Install the [app](https://desktop.github.com/)
+
+2. You will need to [authenticate](https://docs.github.com/en/desktop/installing-and-authenticating-to-github-desktop/authenticating-to-github-in-github-desktop) your account 
+
+3. Now you should be able to clone repos through the app. In Github, when you click on the Code tab you will see the option to open in Github Desktop:
+
+![](images/gh-desktop.png)
+
+This will open up the desktop app and let you choose a file path for your Github repos. I recommend putting your repos into a Github or Projects folder in your local C drive, like this 
+
+- `C:/Users/yourname/Projects/<your-repo>/` 
+
+If you're cloning many repos you should put the repos into folders separated by the Github org 
+
+- `C:/Users/yourname/Projects/<gh-org-name>/<repo-in-org>/` 
+
+:::
