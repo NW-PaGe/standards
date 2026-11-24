@@ -22,7 +22,8 @@ website:
           - policies/checklist.qmd
           - policies/security.qmd
           - policies/gh_setup.qmd
-          - policies\gh_collab_tutorial.qmd
+          - policies/gh_collab_tutorial.qmd
+          - policies/policies.qmd
           - policies/writing.qmd
       - reference.qmd
 
