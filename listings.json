@@ -3,8 +3,8 @@
     "listing": "/tools/index.html",
     "items": [
       "/tools/how_to.html",
-      "/tools/git.html",
       "/tools/link_code.html",
+      "/tools/newrepo.html",
       "/tools/pkgdoc.html",
       "/tools/release.html",
       "/tools/templates.html",

@@ -1,0 +1,6216 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.12.3">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Frank Aragona">
+<meta name="description" content="Data and Code Democratization - how to make your code reproducible">
+
+<title>Reproducibility – My project</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+@media print {
+  html {
+    color-scheme: light only;
+  }
+  html, body, pre, code {
+    background-color: transparent;
+  }
+  body, a, a:visited, blockquote {
+    color: black;
+  }
+  pre, code {
+    padding: 0;
+  }
+  p, h2, h3 {
+    orphans: 3;
+    widows: 3;
+  }
+  h2, h3, h4 {
+    page-break-after: avoid;
+  }
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../tools/release.html" rel="next">
+<link href="../policies/lic.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-62aef0b4591cb2712c0355cbac5bb088.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-2dcaa17ab44e31d080c2f0757409bab4.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-62aef0b4591cb2712c0355cbac5bb088.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-bc6b8562bcfb179e47c1409950728734.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-ebd3e14e2765008252058df029c42d98.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-bc6b8562bcfb179e47c1409950728734.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/atelier-fonts-5.3.0/fonts.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/code-window-1.9.1/style.css" rel="stylesheet">
+<script>document.addEventListener("DOMContentLoaded",function(){
+  var DEFAULT_COLLAPSE=null;
+  function findMarkerSource(el){
+    return el.querySelector('pre[class*="cw-style-"],pre[class*="cw-collapse-"],pre[data-code-window-lines-label]')
+      ||el.querySelector('[class*="cw-style-"],[class*="cw-collapse-"],[data-code-window-lines-label]');
+  }
+  document.querySelectorAll(".code-with-filename").forEach(function(el){
+    var marker=findMarkerSource(el);
+    var styleApplied=/\bcode-window-(macos|windows|default)\b/.test(el.className);
+    if(!styleApplied){
+      var sm=marker&&marker.className.match(/cw-style-(\w+)/);
+      if(sm){el.classList.add("code-window-"+sm[1]);marker.classList.remove(sm[0]);}
+      else{el.classList.add("code-window-macos");}
+    }
+    var collapse=null;
+    if(marker){
+      var cm=marker.className.match(/cw-collapse-(open|closed|none)/);
+      if(cm){collapse=cm[1]==='none'?false:cm[1];marker.classList.remove(cm[0]);}
+    }
+    if(collapse===null&&DEFAULT_COLLAPSE){collapse=DEFAULT_COLLAPSE;}
+    if(marker&&marker.hasAttribute("data-code-window-lines-label")){
+      var spec=marker.getAttribute("data-code-window-lines-label");
+      marker.removeAttribute("data-code-window-lines-label");
+      var titleBar=el.querySelector(".code-with-filename-file");
+      if(titleBar&&!titleBar.querySelector(".code-with-filename-lines")){
+        var chip=document.createElement("span");
+        chip.className="code-with-filename-lines";
+        chip.textContent="L"+spec.replace(/,/g,",\u200B");
+        titleBar.appendChild(chip);
+      }
+    }
+    if(collapse&&!el.classList.contains("code-window-collapsible")){
+      var titleBar=el.querySelector(".code-with-filename-file");
+      if(titleBar){
+        var details=document.createElement("details");
+        details.className=el.className+" code-window-collapsible";
+        if(collapse==="open"){details.open=true;}
+        var summaryEl=document.createElement("summary");
+        summaryEl.className="code-with-filename-file";
+        while(titleBar.firstChild){summaryEl.appendChild(titleBar.firstChild);}
+        titleBar.parentNode.removeChild(titleBar);
+        details.appendChild(summaryEl);
+        while(el.firstChild){details.appendChild(el.firstChild);}
+        el.parentNode.replaceChild(details,el);
+      }
+    }
+  });
+});</script>
+<script src="../site_libs/quarto-contrib/mobile-toc/mobile-toc.js"></script>
+<link href="../site_libs/quarto-contrib/mobile-toc/mobile-toc.css" rel="stylesheet">
+<script src="../site_libs/quarto-contrib/remember-2.1.3/remember.js"></script>
+<link href="../site_libs/quarto-contrib/remember-2.1.3/remember.css" rel="stylesheet">
+<script src="../site_libs/quarto-contrib/iconify-3.0.0/iconify-icon.min.js"></script>
+<script src="../site_libs/quarto-contrib/quarto-gitlink-widget-1.14.0/widget.js"></script>
+<link href="../site_libs/quarto-contrib/quarto-gitlink-widget-1.14.0/widget.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script id="atelier-page-load" type="text/javascript">
+
+	/**
+
+	 * @license MIT
+
+	 * @copyright 2026 Mickaël Canouil
+
+	 * @author Mickaël Canouil
+
+	 */
+
+	// This script is in the head. It changes the header once the parser has
+
+	// written it, before the browser paints the page. A mutation observer
+
+	// callback runs before the next paint, so each change is in the first paint.
+
+	// A change that comes later makes the header taller, and the content moves.
+
+	// A page with no #quarto-content gets the same changes on DOMContentLoaded.
+
+	(function () {
+
+		function pageOf(path) {
+
+			return path.replace(/index\.html$/, "");
+
+		}
+
+
+
+		// Quarto marks the first navbar link whose page is also in the sidebar.
+
+		// With one sidebar that holds every page, that link is "Home" on every
+
+		// page. The mark moves to the link of the current page, with
+
+		// aria-current="page". A page that no navbar link opens keeps the mark
+
+		// of Quarto, with aria-current="true", because that tab is a section and
+
+		// not the page. The sidebar link is handled in a11y-fixes.html.
+
+		// Upstream: https://github.com/quarto-dev/quarto-cli/issues/15392 (mark)
+
+		// Upstream: https://github.com/quarto-dev/quarto-cli/issues/15190 (aria-current)
+
+		// Related upstream: https://github.com/quarto-dev/quarto-cli/issues/11481
+
+		// Remove when: the minimum Quarto version includes both fixes.
+
+		function markCurrentTab() {
+
+			var here = pageOf(location.pathname);
+
+			var links = Array.prototype.slice.call(document.querySelectorAll(".navbar .nav-link[href]"));
+
+			// The toggle of a navbar menu has href="#", which opens no page.
+
+			var current = links.find(function (link) {
+
+				var href = link.getAttribute("href");
+
+				return (
+
+					href !== "" &&
+
+					href.charAt(0) !== "#" &&
+
+					link.origin === location.origin &&
+
+					link.hash === "" &&
+
+					pageOf(link.pathname) === here
+
+				);
+
+			});
+
+			links.forEach(function (link) {
+
+				if (current && link !== current) {
+
+					link.classList.remove("active");
+
+					link.removeAttribute("aria-current");
+
+				} else if (link.classList.contains("active")) {
+
+					link.setAttribute("aria-current", current ? "page" : "true");
+
+				}
+
+			});
+
+			if (current) {
+
+				current.classList.add("active");
+
+				current.setAttribute("aria-current", "page");
+
+			}
+
+		}
+
+
+
+		// The version pill follows the brand in the navbar. A navbar with a logo
+
+		// has two brand links in one container, so the pill goes once after the
+
+		// last child of the container. chrome.html adds the pill of the sidebar,
+
+		// because the parser has not written the sidebar when this script runs.
+
+		function addVersionPill(version) {
+
+			var brand = document.querySelector(".navbar-brand-container > :last-child");
+
+			if (!version || !brand) return;
+
+			var pill = document.createElement("span");
+
+			pill.className = "atelier-version";
+
+			pill.textContent = version;
+
+			brand.after(pill);
+
+		}
+
+
+
+		// The label of the announcement names its type. The theme colours map
+
+		// to the notice label.
+
+		function labelAnnouncement(bar, labels) {
+
+			var typeClass = Array.prototype.find.call(bar.classList, function (name) {
+
+				return name.indexOf("alert-") === 0;
+
+			});
+
+			var type = (typeClass || "").slice(6);
+
+			var key = "announcement-" + (["info", "warning", "danger", "success"].includes(type) ? type : "notice");
+
+			var label = document.createElement("span");
+
+			label.className = "atelier-announcement-label";
+
+			var icon = bar.querySelector(".quarto-announcement-icon");
+
+			if (icon) {
+
+				icon.setAttribute("aria-hidden", "true");
+
+				label.appendChild(icon);
+
+			}
+
+			if (labels[key]) label.appendChild(document.createTextNode(labels[key]));
+
+			bar.insertBefore(label, bar.firstChild);
+
+		}
+
+
+
+		// Quarto shows the announcement and sets the top padding of the body
+
+		// only on DOMContentLoaded. Until then, the bar is hidden and the padding
+
+		// is 64px, which is less than the two rows of the Atelier header. Thus
+
+		// the content moves down after the first paint. This function sets the
+
+		// bar and the padding first, with the values that Quarto gives them later.
+
+		// Upstream: https://github.com/quarto-dev/quarto-cli/issues/15405
+
+		// Remove when: the minimum Quarto version includes the fix.
+
+		function showAnnouncement(bar) {
+
+			var dismissed;
+
+			try {
+
+				dismissed = window.localStorage.getItem("quarto-announce-" + bar.getAttribute("data-announcement-id"));
+
+			} catch (error) {
+
+				// Blocked storage: Quarto then keeps the bar hidden, so the bar stays hidden here too.
+
+				return;
+
+			}
+
+			if (dismissed) {
+
+				bar.remove();
+
+			} else {
+
+				bar.classList.remove("hidden");
+
+			}
+
+		}
+
+
+
+		function settleHeader(bar) {
+
+			if (bar && bar.classList.contains("hidden")) showAnnouncement(bar);
+
+			var header = document.querySelector("header.fixed-top");
+
+			if (header) document.body.style.paddingTop = header.clientHeight + "px";
+
+		}
+
+
+
+		// chrome.html reads the options again, and warns when the block is not valid JSON.
+
+		function readOptions() {
+
+			try {
+
+				return JSON.parse(document.getElementById("atelier-options")?.textContent || "{}");
+
+			} catch (error) {
+
+				return {};
+
+			}
+
+		}
+
+
+
+		var done = false;
+
+		function run() {
+
+			done = true;
+
+			observer.disconnect();
+
+			var options = readOptions();
+
+			var bar = document.getElementById("quarto-announcement");
+
+			markCurrentTab();
+
+			addVersionPill(options.version);
+
+			if (bar) labelAnnouncement(bar, options.labels || {});
+
+			settleHeader(bar);
+
+		}
+
+
+
+		var observer = new MutationObserver(function () {
+
+			if (document.getElementById("quarto-content")) run();
+
+		});
+
+		observer.observe(document, { childList: true, subtree: true });
+
+		document.addEventListener("DOMContentLoaded", function () {
+
+			if (!done) run();
+
+		}, { once: true });
+
+	})();
+
+</script>
+
+<script type="application/json" id="atelier-options">{"labels":{"announcement-danger":"Danger","announcement-info":"Info","announcement-notice":"Notice","announcement-region":"Announcement","announcement-success":"Success","announcement-warning":"Warning","code-window":"Code","footnote-back":"Back to note {n} in the text","home":"Home","listing-filters":"Listing filters","logo-link":"{site} — home","navigation-site-label":"Site","next":"Next","page-metadata":"Page metadata","previous":"Previous","search-label":"Search","site-banner":"Site banner","table-scroll":"Scrollable table","toc-copy-link":"Copy link","toc-link-copied":"Link copied","toc-reading-time":"{n} min read","toc-title-website":"On this page","toc-updated":"Updated {date}","toggle-dark-mode":"Toggle dark mode","toggle-navigation":"Toggle navigation"},"version":"1.2.0"}</script>
+<script type="application/json" id="atelier-workshop">{"labels":{"duration-hours":"{h} h","duration-hours-minutes":"{h} h {m} min","duration-minutes":"{m} min","exercise-title":"Exercise","next":"Next","objectives-title":"By the end of this module, you can","previous":"Previous","reading-bar":"Reading navigation","reading-position":"Page {n} of {m}","reading-progress":"Reading progress","solution-summary":"Show the solution","terminal":"Terminal","timer-label":"Session time left","timer-pause":"Pause the session timer","toc-module-read":"{n}% of this module read","toc-read":"(read)","workshop-author-plural":"Instructors","workshop-author-single":"Instructor","workshop-bar":"Module navigation","workshop-completed":"(completed)","workshop-modified":"Materials updated","workshop-position":"Module {n} of {m}","workshop-progress":"Workshop progress","workshop-published":"Session","workshop-total":"about {time}"},"mode":"documentation","offset":".."}</script>
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#14161a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14161a" media="(prefers-color-scheme: dark)">
+<script type="application/json" id="mobile-toc-options">{"labels":{"close":"Close"}}</script>
+<script id="quarto-remember-config" type="application/json">{"project-type":"website","separate-chapter-state":false}</script>
+<script type="application/json" id="gitlink-widget-config">{"api":{"endpoint":"https://api.github.com/repos/owner/project","forksField":"forks_count","headers":{"Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"},"starsField":"stargazers_count"},"cacheKey":"gitlink-widget-github-owner/project","icon":"mark-github","icons":{"fork":[{"d":"M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"}],"issue":[{"d":"M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"},{"d":"M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"}],"mark-github":[{"d":"M6.766 11.328c-2.063-.25-3.516-1.734-3.516-3.656 0-.781.281-1.625.75-2.188-.203-.515-.172-1.609.063-2.062.625-.078 1.468.25 1.968.703.594-.187 1.219-.281 1.985-.281.765 0 1.39.094 1.953.265.484-.437 1.344-.765 1.969-.687.218.422.25 1.515.046 2.047.5.593.766 1.39.766 2.203 0 1.922-1.453 3.375-3.547 3.64.531.344.89 1.094.89 1.954v1.625c0 .468.391.734.86.547C13.781 14.359 16 11.53 16 8.03 16 3.61 12.406 0 7.984 0 3.563 0 0 3.61 0 8.031a7.88 7.88 0 0 0 5.172 7.422c.422.156.828-.125.828-.547v-1.25c-.219.094-.5.156-.75.156-1.031 0-1.64-.562-2.078-1.609-.172-.422-.36-.672-.719-.719-.187-.015-.25-.093-.25-.187 0-.188.313-.328.625-.328.453 0 .844.281 1.25.86.313.452.64.655 1.031.655s.641-.14 1-.5c.266-.265.47-.5.657-.656"}],"pull-request":[{"d":"M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z"}],"release":[{"d":"M1 7.775V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 0 1 0 2.474l-5.026 5.026a1.75 1.75 0 0 1-2.474 0l-6.25-6.25A1.752 1.752 0 0 1 1 7.775Zm1.5 0c0 .066.026.13.073.177l6.25 6.25a.25.25 0 0 0 .354 0l5.025-5.025a.25.25 0 0 0 0-.354l-6.25-6.25a.25.25 0 0 0-.177-.073H2.75a.25.25 0 0 0-.25.25ZM6 5a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"}],"repo":[{"d":"M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"}],"star":[{"d":"M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Zm0 2.445L6.615 5.5a.75.75 0 0 1-.564.41l-3.097.45 2.24 2.184a.75.75 0 0 1 .216.664l-.528 3.084 2.769-1.456a.75.75 0 0 1 .698 0l2.77 1.456-.53-3.084a.75.75 0 0 1 .216-.664l2.24-2.183-3.096-.45a.75.75 0 0 1-.564-.41L8 2.694Z"}]},"links":[{"href":"https://github.com/owner/project","icon":"repo","label":"Repository"},{"href":"https://github.com/owner/project/issues","icon":"issue","label":"Issues"},{"href":"https://github.com/owner/project/pulls","icon":"pull-request","label":"Pull Requests"},{"href":"https://github.com/owner/project/releases","icon":"release","label":"Releases"},{"divider":true},{"href":"https://github.com/owner/project","icon":"star","label":"Add a Star","stat":"stars"},{"href":"https://github.com/owner/project/fork","icon":"fork","label":"Create a Fork","stat":"forks"}],"menuLabel":"GitHub repository menu"}</script>
+
+
+<meta property="og:title" content="Reproducibility – My project">
+<meta property="og:description" content="Data and Code Democratization - how to make your code reproducible">
+<meta property="og:image" content="https://NW-PaGe.github.io/standards/policies/images/codespace.png">
+<meta property="og:site_name" content="My project">
+<meta property="og:locale" content="en_GB">
+<meta property="og:image:height" content="794">
+<meta property="og:image:width" content="1130">
+<meta name="twitter:title" content="Reproducibility – My project">
+<meta name="twitter:description" content="Data and Code Democratization - how to make your code reproducible">
+<meta name="twitter:image" content="https://NW-PaGe.github.io/standards/policies/images/codespace.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://NW-PaGe.github.io/standards/policies/reproduce.html">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      refreshSafariScrollbar();
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">My project</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../policies/checklist.html"> 
+<span class="menu-text">Policies</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../tools/release.html"> 
+<span class="menu-text">Tutorials</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../reference.html"> 
+<span class="menu-text">Reference</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
+</div>
+            <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../policies/checklist.html">Policies</a></li><li class="breadcrumb-item"><a href="../policies/reproduce.html">Reproducibility</a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto" aria-label="Section">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NW-PaGe Policies and Guidelines</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Policies</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../policies/checklist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Checklist</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../policies/security.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Repo Security</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../policies/gh_setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Git/GitHub User Setup</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../policies/gh_collab_tutorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Collaborating on GitHub</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../policies/policies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Org Policies</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../policies/lic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Licensing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../policies/reproduce.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Reproducibility</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">Tutorials</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tools/release.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Release Cycles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tools/renv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Virtual Environments</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tools/templates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Templates</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tools/how_to.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Code and Repo Documentation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tools/newrepo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">New Repo</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reference</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#objectives-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c2069636f6e69667920616e64727372786e3a636f70792d636f6465203e7d7d" id="toc-objectives-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c2069636f6e69667920616e64727372786e3a636f70792d636f6465203e7d7d" class="nav-link active" data-scroll-target="#objectives-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c2069636f6e69667920616e64727372786e3a636f70792d636f6465203e7d7d"><strong>Objectives</strong> <iconify-icon role="img" inline="" icon="andrsrxn:copy-code" aria-label="Icon copy-code from andrsrxn Iconify.design set." title="Icon copy-code from andrsrxn Iconify.design set."></iconify-icon></a></li>
+  <li><a href="#data-and-code-democratization" id="toc-data-and-code-democratization" class="nav-link" data-scroll-target="#data-and-code-democratization">Data and Code Democratization</a></li>
+  <li><a href="#github-codespaces" id="toc-github-codespaces" class="nav-link" data-scroll-target="#github-codespaces">Github Codespaces</a>
+  <ul class="collapse">
+  <li><a href="#open-a-codespace" id="toc-open-a-codespace" class="nav-link" data-scroll-target="#open-a-codespace">Open a Codespace</a></li>
+  <li><a href="#devcontainers" id="toc-devcontainers" class="nav-link" data-scroll-target="#devcontainers">Devcontainers</a></li>
+  </ul></li>
+  <li><a href="#virtual-environments" id="toc-virtual-environments" class="nav-link" data-scroll-target="#virtual-environments">Virtual Environments</a></li>
+  <li><a href="#github-releases" id="toc-github-releases" class="nav-link" data-scroll-target="#github-releases">Github Releases</a></li>
+  <li><a href="#documentation" id="toc-documentation" class="nav-link" data-scroll-target="#documentation">Documentation</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/owner/project/edit/main/policies/reproduce.qmd" target="_blank" rel="noopener noreferrer" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/owner/project/issues/new" target="_blank" rel="noopener noreferrer" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../policies/checklist.html">Policies</a></li><li class="breadcrumb-item"><a href="../policies/reproduce.html">Reproducibility</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Reproducibility</h1>
+</div>
+
+<div>
+  <div class="description">
+    Data and Code Democratization - how to make your code reproducible
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Frank Aragona </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Sunday, the 9th of April, 2023</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">Tuesday, the 24th of November, 2026</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="objectives-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c2069636f6e69667920616e64727372786e3a636f70792d636f6465203e7d7d" class="level2 box">
+<h2 class="anchored" data-anchor-id="objectives-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c2069636f6e69667920616e64727372786e3a636f70792d636f6465203e7d7d"><strong>Objectives</strong> <iconify-icon role="img" inline="" icon="andrsrxn:copy-code" aria-label="Icon copy-code from andrsrxn Iconify.design set." title="Icon copy-code from andrsrxn Iconify.design set."></iconify-icon></h2>
+<ul>
+<li>Data and Code Democratization</li>
+<li>Github Codespaces</li>
+<li>Package reproducibility with virtual environments</li>
+<li>Github Releases</li>
+<li>Documentation</li>
+</ul>
+</section>
+<section id="data-and-code-democratization" class="level2">
+<h2 class="anchored" data-anchor-id="data-and-code-democratization">Data and Code Democratization</h2>
+<p>Data and code in our repositories need to be accessible to end users and developers. There should be no bottlenecks or difficulties with installing software, executing code, finding documentation, and using test datasets.</p>
+<p>The goal is for any user to run code without needing to install anything on their personal machine and run your code with minimal set up. This may not be possible in every scenario, but there are tools available in Github to make this possible for the majority of our repos.</p>
+</section>
+<section id="github-codespaces" class="level2">
+<h2 class="anchored" data-anchor-id="github-codespaces">Github Codespaces</h2>
+<p><a href="https://github.com/features/codespaces">Github Codespaces</a> are virtual machines (VMs) owned by Github that are connected to each repository. They let a user open the repo in a browser IDE (Integrated Development Environment) and execute the code in that environment. There is no set up or installation necessary for them.</p>
+<p>The VMs are free for up to 60 hours a month of use and there are more hours added for Github users with paid memberships. 60 hours/month should be plenty for our purposes. Users are responsible for their own Codespace, so if they go over the limit they will be responsible for adding more hours and paying for the service.</p>
+<section id="open-a-codespace" class="level3">
+<h3 class="anchored" data-anchor-id="open-a-codespace">Open a Codespace</h3>
+<p>At the root of the repo, click on the <strong>Code</strong> drop down button</p>
+<ol type="1">
+<li>On the right there is a tab called Codespaces.</li>
+<li>Click the <strong>+</strong> sign and a Codespace will launch</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/codespace.png" class="img-fluid figure-img"></p>
+<figcaption>open up a codespace</figcaption>
+</figure>
+</div>
+<p>This will open up a VS Code window in your browser. There are also options to open up a Jupyter Notebook or Jetbrains IDE (Pycharm). You can also install an Rstudio IDE into the codespace. It will look something like this - note that the repository is already linked and checked out into the codespace:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/codespace_vscode.jpg" class="img-fluid figure-img"></p>
+<figcaption>VS Code IDE in Github Codespaces</figcaption>
+</figure>
+</div>
+<p>Here you can install most software. You can also customize the Codespace so that whenever someone opens one in your repo it will come with software pre-installed. More on that in the devcontainers section</p>
+</section>
+<section id="devcontainers" class="level3">
+<h3 class="anchored" data-anchor-id="devcontainers">Devcontainers</h3>
+<p><a href="https://docs.github.com/en/codespaces/setting-up-your-project-for-codespaces/adding-a-dev-container-configuration/introduction-to-dev-containers">Devcontainers</a> are a way to install software into a Codespace so that whenever a user opens up the Codespace they won’t need to install anything themselves. Making a container can be a little tricky, so we’ve made Github templates that have devcontainers already made. See <a href="../tools/templates.html">templates</a>. There are R, Python, and general default templates. These containers will install R, Rstudio, Python, and all the packages in the repo’s virtual environments (venv, conda, pip, renv, etc) so that the user can run all the code in your repo within a couple minutes.</p>
+<p>To set up a devcontainer for yourself;</p>
+<ol type="1">
+<li>Click on `Code &gt; Codespaces &gt; Configure dev container</li>
+</ol>
+<p><img src="images/devcontainer.jpg" class="img-fluid"></p>
+<ol start="2" type="1">
+<li>This will make a folder named <code>.devcontainer</code> at the root of your repo</li>
+<li>In that folder it will make a file named <code>devcontainer.json</code></li>
+<li>On the right there is a searchable marketplace for software to add to your container</li>
+</ol>
+<p><img src="images/devmarket.jpg" class="img-fluid"></p>
+<ol start="5" type="1">
+<li>Each one comes with instructions on how to add the software to the <code>.devcontainer.json</code></li>
+</ol>
+<p>For more information about Codespaces, <a href="../tools/codespaces.qmd">see the guides here</a></p>
+</section>
+</section>
+<section id="virtual-environments" class="level2">
+<h2 class="anchored" data-anchor-id="virtual-environments">Virtual Environments</h2>
+<p>Virtual Environments are another great way to make sure aspects of your repo are reproducible. They are commonly used to record package versions that the code/project uses. For more on virtual environments, <a href="../tools/renv.html">please see the venv guide.</a></p>
+</section>
+<section id="github-releases" class="level2">
+<h2 class="anchored" data-anchor-id="github-releases">Github Releases</h2>
+<p>Github Releases save code snapshots, versions, and changelogs of your repo. They are a great way for end users and developers to use different versions of their code and visualize changes that happened with each version. Please see the <a href="../tools/release.html">Github Releases guide</a> for more information.</p>
+</section>
+<section id="documentation" class="level2">
+<h2 class="anchored" data-anchor-id="documentation">Documentation</h2>
+<p>Your code should be well documented so that end users (and developers) can understand what code is doing, how to install the software, and the utility of the project.</p>
+<p>In general, you should have a README.md file in your repo that explains at least a high level summary of the code in the repo and what it does, how to install the code, outputs, and how to contribute to the repo. In addition, it may be a good idea to make a Github Page (a static website hosted in your repo) that explains the code in more detail. <a href="../tools/how_to.html">See the documentation guides here.</a></p>
+<p>Having a Github Page is necessary if you have a package. Consider using software like <code>pkgdown</code> for R or <code>quartodoc</code> for Python (or other related software that helps link code to your documentation automatically). <a href="../tools/pkgdoc.html">See more about package documentation here.</a></p>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/NW-PaGe\.github\.io\/standards\/");
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
+      var opensNewContext = (link) => {
+        var target = (link.getAttribute("target") || "").toLowerCase();
+        return target !== "" && !["_self", "_parent", "_top"].includes(target);
+      }
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // an explicit target wins over the site-wide setting
+            if (link.getAttribute("target") === null) {
+              link.setAttribute("target", "_blank");
+            }
+            if (link.getAttribute("rel") === null && opensNewContext(link)) {
+              link.setAttribute("rel", "noopener");
+            }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+        if (opensNewContext(link)) {
+          describeNewWindow(link);
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="../policies/lic.html" class="pagination-link" aria-label="Licensing">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Licensing</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../tools/release.html" class="pagination-link" aria-label="Release Cycles">
+        <span class="nav-page-text">Release Cycles</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Powered by <a href="https://quarto.org" target="_blank" rel="noopener noreferrer">Quarto</a>.</p>
+</div>   
+    <div class="nav-footer-center">
+<p>© <span id="current-year"></span> <a href="https://mickael.canouil.fr" target="_blank" rel="noopener noreferrer">Mickaël CANOUIL</a>.</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/owner/project/edit/main/policies/reproduce.qmd" target="_blank" rel="noopener noreferrer" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/owner/project/issues/new" target="_blank" rel="noopener noreferrer" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+<script id="quarto-current-year" type="text/javascript">
+
+  /**
+
+   * @license MIT
+
+   * @copyright 2026 Mickaël Canouil
+
+   * @author Mickaël Canouil
+
+   */
+
+  document.addEventListener("DOMContentLoaded", function () {
+
+    const el = document.getElementById('current-year');
+
+    if (el) el.textContent = new Date().getFullYear();
+
+  });
+
+</script>
+
+<script id="quarto-external-links" type="text/javascript">
+
+  /**
+
+   * @license MIT
+
+   * @copyright 2026 Mickaël Canouil
+
+   * @author Mickaël Canouil
+
+   */
+
+  // Quarto cannot set target on format-links, so sidebar links open in a new tab here.
+
+  // Upstream: https://github.com/quarto-dev/quarto-cli/issues/10730
+
+  // Remove when: the minimum Quarto version includes the fix.
+
+  // Not SCSS: target and rel are attributes, which CSS cannot set.
+
+  const SIDEBAR_LINK_SELECTOR =
+
+    '.quarto-alternate-formats a, .quarto-other-links a';
+
+
+
+  function addSecurityAttributes(link) {
+
+    if (link.getAttribute('target') === '_blank') {
+
+      const currentRel = link.getAttribute('rel') || '';
+
+      const relValues = new Set(currentRel.split(/\s+/).filter(Boolean));
+
+      relValues.add('noopener');
+
+      relValues.add('noreferrer');
+
+      link.setAttribute('rel', Array.from(relValues).join(' '));
+
+    }
+
+  }
+
+
+
+  function ensureBlankTarget(link) {
+
+    link.setAttribute('target', '_blank');
+
+    addSecurityAttributes(link);
+
+  }
+
+
+
+  document.addEventListener('DOMContentLoaded', () => {
+
+    document.querySelectorAll('a[target="_blank"]').forEach(addSecurityAttributes);
+
+    document.querySelectorAll(SIDEBAR_LINK_SELECTOR).forEach(ensureBlankTarget);
+
+
+
+    const observer = new MutationObserver(mutations => {
+
+      mutations.forEach(mutation => {
+
+        mutation.addedNodes.forEach(node => {
+
+          if (node.nodeType === 1) {
+
+            if (node.tagName === 'A') {
+
+              addSecurityAttributes(node);
+
+            }
+
+            node.querySelectorAll('a[target="_blank"]').forEach(addSecurityAttributes);
+
+            node.querySelectorAll(SIDEBAR_LINK_SELECTOR).forEach(ensureBlankTarget);
+
+          }
+
+        });
+
+      });
+
+    });
+
+
+
+    observer.observe(document.body, { childList: true, subtree: true });
+
+  });
+
+</script>
+
+<script id="ordinal-dates" type="text/javascript">
+
+	/**
+
+	 * @license MIT
+
+	 * @copyright 2026 Mickaël Canouil
+
+	 * @author Mickaël Canouil
+
+	 */
+
+	document.addEventListener("DOMContentLoaded", function () {
+
+		const SELECTOR = [".date", ".date-modified", ".listing-date", ".listing-file-modified"].join(", ");
+
+		const PATTERN = /(\d+)(st|nd|rd|th)\b/g;
+
+
+
+		function wrapTextNode(node) {
+
+			const text = node.nodeValue;
+
+			const fragment = document.createDocumentFragment();
+
+			let cursor = 0;
+
+			let match;
+
+			PATTERN.lastIndex = 0;
+
+			while ((match = PATTERN.exec(text)) !== null) {
+
+				const [full, digits, suffix] = match;
+
+				const start = match.index;
+
+				if (start > cursor) {
+
+					fragment.appendChild(document.createTextNode(text.slice(cursor, start)));
+
+				}
+
+				fragment.appendChild(document.createTextNode(digits));
+
+				const sup = document.createElement("sup");
+
+				sup.className = "ordinal-suffix";
+
+				sup.textContent = suffix;
+
+				fragment.appendChild(sup);
+
+				cursor = start + full.length;
+
+			}
+
+			if (cursor === 0) return;
+
+			if (cursor < text.length) {
+
+				fragment.appendChild(document.createTextNode(text.slice(cursor)));
+
+			}
+
+			node.parentNode.replaceChild(fragment, node);
+
+		}
+
+
+
+		const elements = document.querySelectorAll(SELECTOR);
+
+		if (elements.length === 0) return;
+
+		elements.forEach(function (el) {
+
+			if (el.dataset.ordinalDates === "wrapped") return;
+
+			const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, {
+
+				acceptNode: function (node) {
+
+					if (node.parentNode && node.parentNode.classList && node.parentNode.classList.contains("ordinal-suffix")) {
+
+						return NodeFilter.FILTER_REJECT;
+
+					}
+
+					return NodeFilter.FILTER_ACCEPT;
+
+				},
+
+			});
+
+			const targets = [];
+
+			let current = walker.nextNode();
+
+			while (current) {
+
+				targets.push(current);
+
+				current = walker.nextNode();
+
+			}
+
+			targets.forEach(wrapTextNode);
+
+			el.dataset.ordinalDates = "wrapped";
+
+		});
+
+	});
+
+</script>
+
+<script id="a11y-fixes" type="text/javascript">
+
+	/**
+
+	 * @license MIT
+
+	 * @copyright 2026 Mickaël Canouil
+
+	 * @author Mickaël Canouil
+
+	 */
+
+	document.addEventListener("DOMContentLoaded", () => {
+
+		const labels = (window.atelierOptions || {}).labels || {};
+
+
+
+		// Logo link: Quarto emits <a class="navbar-brand"> with an inner <img alt>,
+
+		// but the accessible name is lost when the image is styled away.
+
+		// Related upstream: https://github.com/quarto-dev/quarto-cli/issues/14660
+
+		// Upstream: https://github.com/quarto-dev/quarto-cli/issues/15165
+
+		// Remove when: the minimum Quarto version includes the fix.
+
+		// Not SCSS: the accessible name is an attribute, which CSS cannot set.
+
+		const siteName = (
+
+			document.querySelector(".navbar-title")?.textContent ||
+
+			document.title ||
+
+			labels["navigation-site-label"] ||
+
+			""
+
+		).trim();
+
+		const logoName = (labels["logo-link"] || "").replace("{site}", siteName);
+
+		document
+
+			.querySelectorAll("a.navbar-brand:not([aria-label]), a.navbar-brand-logo:not([aria-label])")
+
+			.forEach((a) => {
+
+				if (logoName) a.setAttribute("aria-label", logoName);
+
+			});
+
+
+
+		// Author email link: Quarto emits <a class="quarto-title-author-email"> around an
+
+		// icon only, so the link has no accessible name. Use the address as the name.
+
+		// Upstream: https://github.com/quarto-dev/quarto-cli/issues/15166
+
+		// Remove when: the minimum Quarto version includes the fix.
+
+		// Not SCSS: the accessible name is an attribute, which CSS cannot set.
+
+		document.querySelectorAll("a.quarto-title-author-email:not([aria-label])").forEach((a) => {
+
+			const address = decodeURIComponent((a.getAttribute("href") || "").replace(/^mailto:/i, "").split("?")[0]);
+
+			if (address) a.setAttribute("aria-label", address);
+
+		});
+
+
+
+		// Search input: Quarto labels the field through aria-labelledby, which
+
+		// names it "Submit" (textbox) or nothing (overlay), and that label wins
+
+		// over an aria-label on the input. Name the referenced label with Quarto's
+
+		// own localised search label, and again when a search host or the overlay
+
+		// renders a new one.
+
+		// Upstream: https://github.com/quarto-dev/quarto-cli/issues/15062
+
+		// Remove when: the minimum Quarto version includes the fix.
+
+		// Not SCSS: the name sits on a label and on host-rendered inputs, which CSS cannot name.
+
+		const searchName = labels["search-label"];
+
+		const setSearchName = (element) => {
+
+			if (searchName && element.getAttribute("aria-label") !== searchName) {
+
+				element.setAttribute("aria-label", searchName);
+
+			}
+
+		};
+
+		const nameSearchInputs = () => {
+
+			document.querySelectorAll(".aa-Input").forEach((input) => {
+
+				const labelId = (input.getAttribute("aria-labelledby") || "").trim().split(/\s+/)[0];
+
+				setSearchName((labelId && document.getElementById(labelId)) || input);
+
+			});
+
+			// The overlay trigger carries autocomplete's English "Search" title.
+
+			document.querySelectorAll(".aa-DetachedSearchButton").forEach(setSearchName);
+
+		};
+
+		nameSearchInputs();
+
+		const searchObserver = new MutationObserver(nameSearchInputs);
+
+		searchObserver.observe(document.body, { childList: true });
+
+		document.querySelectorAll('[id="quarto-search"]').forEach((host) => {
+
+			searchObserver.observe(host, { childList: true, subtree: true });
+
+		});
+
+
+
+		// Search overlay: Quarto opens it as a plain <div> over the page. Screen
+
+		// readers and Tab still reach the page behind it, the result count is not
+
+		// announced, the magnifier is a Tab stop that only closes the overlay, and
+
+		// Esc or Cancel drops focus on <body>. Make the overlay a modal dialog:
+
+		// set the page behind it inert, add a status region that repeats the
+
+		// result header, and give focus back to the search button on close.
+
+		// The autocomplete library renders the overlay again on each key, so
+
+		// every step checks the current value before it writes.
+
+		// Upstream: https://github.com/quarto-dev/quarto-cli/issues/15189
+
+		// Remove when: the minimum Quarto version includes the fix.
+
+		// Not SCSS: roles, inert, focus and a live region are DOM changes, which CSS cannot make.
+
+		let overlayTrigger = null;
+
+		let overlayObserver = null;
+
+		document.addEventListener(
+
+			"click",
+
+			(event) => {
+
+				const trigger = event.target.closest(".aa-DetachedSearchButton");
+
+				if (trigger) overlayTrigger = trigger;
+
+			},
+
+			true,
+
+		);
+
+		// The selection highlight follows the arrow keys only, so a result that
+
+		// Tab reaches looks inactive beside the highlighted one. Move the
+
+		// selection to the focused result with the event the library already
+
+		// selects on, and again when the library resets the selection.
+
+		const selectFocusedResult = () => {
+
+			const focused = document.activeElement;
+
+			const item = focused && focused.closest(".aa-DetachedOverlay .aa-Item");
+
+			if (item && item.getAttribute("aria-selected") !== "true") {
+
+				item.dispatchEvent(new MouseEvent("mousemove", { bubbles: true }));
+
+			}
+
+		};
+
+		document.addEventListener("focusin", selectFocusedResult);
+
+		const setAttributeOnce = (element, name, value) => {
+
+			if (element.getAttribute(name) !== value) element.setAttribute(name, value);
+
+		};
+
+		const syncOverlay = (overlay) => {
+
+			const container = overlay.querySelector(".aa-DetachedContainer");
+
+			if (!container) return;
+
+			setAttributeOnce(container, "role", "dialog");
+
+			setAttributeOnce(container, "aria-modal", "true");
+
+			setAttributeOnce(container, "aria-label", searchName);
+
+			overlay.querySelectorAll(".aa-SubmitButton").forEach((button) => {
+
+				setAttributeOnce(button, "tabindex", "-1");
+
+			});
+
+			let status = container.querySelector(":scope > .atelier-search-status");
+
+			if (!status) {
+
+				status = document.createElement("div");
+
+				status.className = "atelier-search-status visually-hidden";
+
+				status.setAttribute("role", "status");
+
+				container.appendChild(status);
+
+			}
+
+			const header = overlay.querySelector(".aa-Panel .search-result-header, .aa-Panel .quarto-search-no-results");
+
+			const message = header ? header.textContent.trim() : "";
+
+			if (status.textContent !== message) status.textContent = message;
+
+			nameSearchInputs();
+
+			selectFocusedResult();
+
+		};
+
+		const openOverlay = (overlay) => {
+
+			Array.from(document.body.children).forEach((child) => {
+
+				if (child === overlay || child.inert || child.tagName === "SCRIPT") return;
+
+				child.inert = true;
+
+				child.dataset.atelierInert = "";
+
+			});
+
+			syncOverlay(overlay);
+
+			overlayObserver = new MutationObserver(() => syncOverlay(overlay));
+
+			overlayObserver.observe(overlay, {
+
+				childList: true,
+
+				subtree: true,
+
+				attributes: true,
+
+				attributeFilter: ["aria-selected", "aria-label"],
+
+			});
+
+		};
+
+		const closeOverlay = () => {
+
+			if (overlayObserver) overlayObserver.disconnect();
+
+			overlayObserver = null;
+
+			document.querySelectorAll("[data-atelier-inert]").forEach((child) => {
+
+				child.inert = false;
+
+				delete child.dataset.atelierInert;
+
+			});
+
+			const focusLost = !document.activeElement || document.activeElement === document.body;
+
+			// The keyboard shortcut opens the overlay without a click, so fall
+
+			// back to the search button that is on screen.
+
+			const trigger =
+
+				overlayTrigger && overlayTrigger.isConnected
+
+					? overlayTrigger
+
+					: Array.from(document.querySelectorAll(".aa-DetachedSearchButton")).find(
+
+							(button) => button.offsetParent !== null,
+
+						);
+
+			if (focusLost && trigger) trigger.focus();
+
+		};
+
+		new MutationObserver((records) => {
+
+			records.forEach((record) => {
+
+				record.addedNodes.forEach((node) => {
+
+					if (node.classList && node.classList.contains("aa-DetachedOverlay")) openOverlay(node);
+
+				});
+
+				record.removedNodes.forEach((node) => {
+
+					if (node.classList && node.classList.contains("aa-DetachedOverlay")) closeOverlay();
+
+				});
+
+			});
+
+		}).observe(document.body, { childList: true });
+
+
+
+		// CSL bibliography: Quarto emits role="listitem" without a role="list" parent.
+
+		// Upstream: https://github.com/quarto-dev/quarto-cli/issues/14755 (bibliography)
+
+		// Upstream: https://github.com/quarto-dev/quarto-cli/issues/15171 (appendix cite as)
+
+		// Remove when: the minimum Quarto version includes the fix.
+
+		// Not SCSS: removing an ARIA role is a DOM change, which CSS cannot make.
+
+		document.querySelectorAll('[role="listitem"]').forEach((el) => {
+
+			el.removeAttribute("role");
+
+		});
+
+
+
+		// The page title-block is also a <header>, which is a duplicate banner
+
+		// alongside the site navbar; demote it and label the site banner.
+
+		// Upstream: https://github.com/quarto-dev/quarto-cli/issues/14375
+
+		// Remove when: the minimum Quarto version includes the fix.
+
+		// Not SCSS: ARIA roles and labels are attributes, which CSS cannot set.
+
+		const siteHeader = document.getElementById("quarto-header");
+
+		if (siteHeader && labels["site-banner"] && !siteHeader.getAttribute("aria-label")) {
+
+			siteHeader.setAttribute("aria-label", labels["site-banner"]);
+
+		}
+
+		const titleHeader = document.querySelector("header#title-block-header, header.quarto-title-block");
+
+		if (titleHeader) {
+
+			titleHeader.setAttribute("role", "presentation");
+
+		}
+
+
+
+		// Listing category sidebar: Quarto emits <h5>Categories</h5> after the page
+
+		// <h1>, breaking heading order. Re-tag to <h2> so the outline stays monotonic.
+
+		// Upstream: https://github.com/quarto-dev/quarto-cli/issues/14384
+
+		// Remove when: the minimum Quarto version includes the fix.
+
+		// Not SCSS: changing the heading level is a change of tag name, which CSS cannot make.
+
+		document.querySelectorAll("h5.quarto-listing-category-title").forEach((h5) => {
+
+			const h2 = document.createElement("h2");
+
+			for (const attr of h5.attributes) h2.setAttribute(attr.name, attr.value);
+
+			h2.innerHTML = h5.innerHTML;
+
+			h5.replaceWith(h2);
+
+		});
+
+
+
+		// Wrap orphan listing landmarks so the region rule passes; skip nodes already
+
+		// inside a landmark, and the mobile sidebar-toggle clones (non-unique).
+
+		// Related upstream: https://github.com/quarto-dev/quarto-cli/issues/14377
+
+		// Remove when: the minimum Quarto version includes the fix.
+
+		// Not SCSS: adding a wrapper element and a role is a DOM change, which CSS cannot make.
+
+		const insideLandmark = (el) =>
+
+			el &&
+
+			el.closest(
+
+				'main, [role="main"], aside, [role="complementary"], nav, [role="navigation"], section[aria-label], section[aria-labelledby]',
+
+			);
+
+		const inToggleClone = (el) => el && el.closest(".quarto-sidebar-toggle-contents, .quarto-sidebar-toggle");
+
+		const labelOnce = (el, role, label) => {
+
+			if (!el || el.getAttribute("role") || insideLandmark(el.parentElement)) return;
+
+			el.setAttribute("role", role);
+
+			if (label && !el.getAttribute("aria-label")) el.setAttribute("aria-label", label);
+
+		};
+
+
+
+		document.querySelectorAll(".quarto-listing-category-title").forEach((title) => {
+
+			const next = title.nextElementSibling;
+
+			if (next && next.classList.contains("quarto-listing-category") && !insideLandmark(title.parentElement)) {
+
+				const wrap = document.createElement("div");
+
+				wrap.setAttribute("role", "complementary");
+
+				if (labels["listing-filters"]) wrap.setAttribute("aria-label", labels["listing-filters"]);
+
+				title.parentNode.insertBefore(wrap, title);
+
+				wrap.appendChild(title);
+
+				wrap.appendChild(next);
+
+			}
+
+		});
+
+		document.querySelectorAll(".quarto-listing-category").forEach((el) => {
+
+			if (inToggleClone(el)) return;
+
+			labelOnce(el, "complementary", labels["listing-filters"]);
+
+		});
+
+		// An empty strip (Quarto writes it with whitespace only) is hidden by SCSS and has no landmark.
+
+		document.querySelectorAll(".quarto-title-meta").forEach((el) => {
+
+			if (el.firstElementChild) labelOnce(el, "region", labels["page-metadata"]);
+
+		});
+
+
+
+		// Listing categories: Quarto emits <div> elements with a click handler, so
+
+		// Tab never reaches them and a screen reader does not call them controls.
+
+		// Give them a button role, a place in the Tab order and Enter or Space.
+
+		// Quarto re-renders listing items after a filter or a page change, so the
+
+		// attributes are set only on elements that do not have them yet.
+
+		// The categories in the list are toggles: Quarto marks the active one by
+
+		// its class only, so `aria-pressed` follows the class. The chips on each
+
+		// item set the filter and do not toggle it, so they take no pressed state.
+
+		// Upstream: https://github.com/quarto-dev/quarto-cli/issues/15067
+
+		// Remove when: the minimum Quarto version includes the fix.
+
+		// Not SCSS: a role, a tab stop, and a pressed state are attributes, which CSS cannot set.
+
+		const categorySelector = ".quarto-listing-category .category, .listing-category";
+
+		const makeCategoriesButtons = (root) => {
+
+			root.querySelectorAll(categorySelector).forEach((el) => {
+
+				if (!el.hasAttribute("role")) {
+
+					el.setAttribute("role", "button");
+
+					el.setAttribute("tabindex", "0");
+
+				}
+
+				if (el.closest(".quarto-listing-category")) {
+
+					const pressed = el.classList.contains("active") ? "true" : "false";
+
+					if (el.getAttribute("aria-pressed") !== pressed) el.setAttribute("aria-pressed", pressed);
+
+				}
+
+			});
+
+		};
+
+		makeCategoriesButtons(document);
+
+		document.querySelectorAll(".quarto-listing").forEach((listing) => {
+
+			new MutationObserver(() => makeCategoriesButtons(listing)).observe(listing, {
+
+				childList: true,
+
+				subtree: true,
+
+			});
+
+		});
+
+		document.querySelectorAll(".quarto-listing-category").forEach((list) => {
+
+			new MutationObserver(() => makeCategoriesButtons(list)).observe(list, {
+
+				childList: true,
+
+				subtree: true,
+
+				attributes: true,
+
+				attributeFilter: ["class"],
+
+			});
+
+		});
+
+		document.addEventListener("keydown", (event) => {
+
+			if (event.key !== "Enter" && event.key !== " ") return;
+
+			if (event.ctrlKey || event.altKey || event.metaKey) return;
+
+			const target = event.target instanceof Element ? event.target.closest(categorySelector) : null;
+
+			if (!target) return;
+
+			event.preventDefault();
+
+			if (!event.repeat) target.click();
+
+		});
+
+
+
+		// Footnote back-links: Quarto renders only an arrow glyph, which a screen
+
+		// reader reads as "return" or nothing. Name each one after its note.
+
+		// Quarto exposes no localised string for this link in the page, so the
+
+		// name comes from the `atelier-footnote-back` label.
+
+		// Upstream: https://github.com/quarto-dev/quarto-cli/issues/15064
+
+		// Remove when: the minimum Quarto version includes the fix.
+
+		// Not SCSS: the accessible name is an attribute, which CSS cannot set.
+
+		document.querySelectorAll("section.footnotes .footnote-back:not([aria-label])").forEach((a) => {
+
+			const number = (a.closest("li[id^='fn']")?.id || "").replace("fn", "");
+
+			if (/^\d+$/.test(number) && labels["footnote-back"]) {
+
+				a.setAttribute("aria-label", labels["footnote-back"].replace("{n}", number));
+
+			}
+
+		});
+
+
+
+		// Callout type label: in a titled callout the hidden type label runs into
+
+		// the title, so the DOM text reads "NoteTitle". Add the missing space.
+
+		// Upstream: https://github.com/quarto-dev/quarto-cli/issues/15177
+
+		// Remove when: the minimum Quarto version includes the fix.
+
+		// Not SCSS: generated content does not change the DOM text, and Chrome already
+
+		// spaces the accessible name, because the label is absolutely positioned.
+
+		document.querySelectorAll(".callout .callout-title-container > .screen-reader-only").forEach((label) => {
+
+			if (!/\s$/.test(label.textContent)) label.append(" ");
+
+		});
+
+
+
+		// Collapsible callout: the header is a plain div with aria-expanded, no
+
+		// role and no tab stop, and its aria-label hides the title. Give the
+
+		// header a button role, a tab stop, and Enter and Space. Bootstrap keeps
+
+		// aria-expanded in step and hides the closed body with display: none, so
+
+		// the body needs no inert. A link in the title cannot sit inside a button,
+
+		// and Bootstrap cancels a click on a link inside its trigger, so then the
+
+		// chevron becomes the button: the toggle attributes move to it, and the
+
+		// title link only follows its href.
+
+		// Upstream: https://github.com/quarto-dev/quarto-cli/issues/4934
+
+		// Remove when: the minimum Quarto version includes the fix.
+
+		// Not SCSS: roles, tab stops and key handling are DOM behaviour, which CSS cannot add.
+
+		const calloutToggleAttributes = ["data-bs-toggle", "data-bs-target", "aria-controls", "aria-expanded"];
+
+		document.querySelectorAll(".callout > .callout-header[data-bs-toggle='collapse']").forEach((header) => {
+
+			header.removeAttribute("aria-label");
+
+
+
+			const title = header.querySelector(".callout-title-container");
+
+			header.querySelectorAll(".callout-icon, .callout-toggle").forEach((icon) => {
+
+				icon.setAttribute("aria-hidden", "true");
+
+			});
+
+
+
+			let control = header;
+
+			const chevron = header.querySelector(":scope > .callout-btn-toggle");
+
+			if (chevron && title?.querySelector("a[href], button, input, select, textarea")) {
+
+				control = chevron;
+
+				calloutToggleAttributes.forEach((name) => {
+
+					control.setAttribute(name, header.getAttribute(name));
+
+					header.removeAttribute(name);
+
+				});
+
+				control.setAttribute("aria-label", title.textContent.trim());
+
+			}
+
+			control.setAttribute("role", "button");
+
+			control.setAttribute("tabindex", "0");
+
+
+
+			control.addEventListener("keydown", (event) => {
+
+				// Keys pressed on a link or another control in the title are theirs.
+
+				if (event.target !== control) return;
+
+				if (event.key !== "Enter" && event.key !== " ") return;
+
+				if (event.ctrlKey || event.altKey || event.metaKey) return;
+
+				// Space would scroll the page.
+
+				event.preventDefault();
+
+				if (!event.repeat) control.click();
+
+			});
+
+		});
+
+
+
+		// The bar that replaces the sidebar on narrow screens is a nav element,
+
+		// but its links, if any, are in the breadcrumbs nav inside it. Remove its
+
+		// landmark role and its label.
+
+		// Upstream: https://github.com/quarto-dev/quarto-cli/issues/14868
+
+		// Remove when: the minimum Quarto version includes the fix.
+
+		// Not SCSS: ARIA roles are attributes, which CSS cannot set.
+
+		document.querySelectorAll("nav.quarto-secondary-nav").forEach((bar) => {
+
+			bar.setAttribute("role", "none");
+
+			bar.removeAttribute("aria-label");
+
+		});
+
+
+
+		// The click area of the narrow-screen bar and the backdrop of the open
+
+		// sidebar are also collapse triggers for the sidebar, and Bootstrap writes
+
+		// aria-expanded on every trigger when it opens or closes. Neither element
+
+		// has a role, which does not allow the attribute. The sidebar button next
+
+		// to the click area keeps it. Remove it from the other two each time.
+
+		// Upstream: https://github.com/quarto-dev/quarto-cli/issues/15229
+
+		// Remove when: the minimum Quarto version includes the fix.
+
+		// Not SCSS: removing an attribute is a DOM change, which CSS cannot make.
+
+		const expandedObserver = new MutationObserver((records) => {
+
+			records.forEach((record) => record.target.removeAttribute("aria-expanded"));
+
+		});
+
+		document
+
+			.querySelectorAll('nav.quarto-secondary-nav a[data-bs-toggle="collapse"]:not([href]), #quarto-sidebar-glass')
+
+			.forEach((element) => {
+
+				element.removeAttribute("aria-expanded");
+
+				expandedObserver.observe(element, { attributes: true, attributeFilter: ["aria-expanded"] });
+
+			});
+
+
+
+		// Quarto marks the sidebar link to the current page with a class only, so
+
+		// a screen reader cannot tell which page is current. The copy of the
+
+		// sidebar that Quarto shows when content overlaps it is cloned later, and
+
+		// keeps the attribute.
+
+		// Upstream: https://github.com/quarto-dev/quarto-cli/issues/15190
+
+		// Remove when: the minimum Quarto version includes the fix.
+
+		// Not SCSS: aria-current is an attribute, which CSS cannot set.
+
+		document.querySelectorAll("#quarto-sidebar .sidebar-link.active:not([aria-current])").forEach((link) => {
+
+			link.setAttribute("aria-current", "page");
+
+		});
+
+
+
+		// The accessible name of the previous and next page links is the page
+
+		// title alone; only the arrow icons show the direction. Add the direction
+
+		// to the name, before the title so the visible text stays in the name.
+
+		// Upstream: https://github.com/quarto-dev/quarto-cli/issues/14804
+
+		// Remove when: the minimum Quarto version includes the fix.
+
+		// Not SCSS: the accessible name is an attribute, which CSS cannot set.
+
+		[
+
+			[".nav-page-previous", labels.previous],
+
+			[".nav-page-next", labels.next],
+
+		].forEach(([side, direction]) => {
+
+			if (!direction) return;
+
+			document.querySelectorAll(`.page-navigation ${side} a.pagination-link`).forEach((link) => {
+
+				const title = (link.getAttribute("aria-label") || link.textContent).trim();
+
+				if (!title.startsWith(`${direction}:`)) {
+
+					link.setAttribute("aria-label", `${direction}: ${title}`);
+
+				}
+
+			});
+
+		});
+
+
+
+		// A table of contents in a side column comes before the page title in the
+
+		// document, so the page starts with its "On this page" h2 and not with
+
+		// the h1. The TOC nav keeps its name, so remove the heading role only.
+
+		// Upstream: https://github.com/quarto-dev/quarto-cli/issues/12568
+
+		// Remove when: the minimum Quarto version includes the fix.
+
+		// Not SCSS: the heading role is part of the element, which CSS cannot change.
+
+		const tocTitle = document.querySelector("nav#TOC > h2#toc-title");
+
+		const pageTitle = document.querySelector("h1");
+
+		if (tocTitle && pageTitle && tocTitle.compareDocumentPosition(pageTitle) & Node.DOCUMENT_POSITION_FOLLOWING) {
+
+			tocTitle.setAttribute("role", "presentation");
+
+		}
+
+
+
+		// When content overlaps a side column, Quarto replaces the column with a
+
+		// toggle whose title is a div with a click handler only: it has no role,
+
+		// no tab stop, no keyboard action and no expanded state. Give the title
+
+		// the role, tab stop, keys and state of a button. Quarto hides the
+
+		// contents of a closed toggle, and the column it replaces, with height
+
+		// and opacity only, which leaves their links in the tab order: make them
+
+		// inert while they are hidden. Quarto builds a new toggle each time it
+
+		// shows one, so watch the page for new toggles.
+
+		// Upstream: https://github.com/quarto-dev/quarto-cli/issues/14969
+
+		// Remove when: the minimum Quarto version includes the fix.
+
+		// Not SCSS: roles, states and key handlers are DOM changes, which CSS cannot make.
+
+		const enhancedToggles = new WeakSet();
+
+		const toggleNames = {
+
+			"quarto-toc-toggle": labels["toc-title-website"],
+
+			"quarto-lefttoc-toggle": labels["toc-title-website"],
+
+			"quarto-sidebarnav-toggle": document.querySelector("nav#quarto-sidebar")?.getAttribute("aria-label") || labels["navigation-site-label"],
+
+		};
+
+		const enhanceToggle = (title) => {
+
+			if (enhancedToggles.has(title)) return;
+
+			enhancedToggles.add(title);
+
+			const toggle = title.parentElement;
+
+			const contents = toggle.querySelector(":scope > .quarto-sidebar-toggle-contents");
+
+			title.setAttribute("role", "button");
+
+			title.setAttribute("tabindex", "0");
+
+			if (!title.textContent.trim() && !title.hasAttribute("aria-label")) {
+
+				const name = toggleNames[toggle.id] || labels["toggle-navigation"];
+
+				if (name) title.setAttribute("aria-label", name);
+
+			}
+
+			title.querySelectorAll(".quarto-sidebar-toggle-icon").forEach((icon) => {
+
+				icon.setAttribute("aria-hidden", "true");
+
+			});
+
+			if (contents) {
+
+				if (!contents.id) contents.id = `${toggle.id || "quarto-sidebar-toggle"}-contents`;
+
+				title.setAttribute("aria-controls", contents.id);
+
+				// The contents are clones of the hidden column, and copy its inert state.
+
+				for (const clone of contents.children) clone.inert = false;
+
+			}
+
+			const syncExpanded = () => {
+
+				const expanded = toggle.classList.contains("expanded");
+
+				title.setAttribute("aria-expanded", String(expanded));
+
+				if (contents) contents.inert = !expanded;
+
+			};
+
+			syncExpanded();
+
+			new MutationObserver(syncExpanded).observe(toggle, { attributes: true, attributeFilter: ["class"] });
+
+			title.addEventListener("keydown", (event) => {
+
+				if (event.key !== "Enter" && event.key !== " ") return;
+
+				if (event.ctrlKey || event.altKey || event.metaKey) return;
+
+				// Space scrolls the page, and Quarto closes the toggle on scroll.
+
+				event.preventDefault();
+
+				if (!event.repeat) title.click();
+
+			});
+
+		};
+
+		const enhanceTogglesIn = (node) => {
+
+			if (node.nodeType !== Node.ELEMENT_NODE) return;
+
+			if (node.matches(".quarto-sidebar-toggle-title")) enhanceToggle(node);
+
+			node.querySelectorAll(".quarto-sidebar-toggle-title").forEach(enhanceToggle);
+
+		};
+
+		document.querySelectorAll("#quarto-sidebar, #quarto-sidebar-toc-left, #quarto-margin-sidebar").forEach((column) => {
+
+			for (const child of column.children) {
+
+				const syncInert = () => {
+
+					child.inert = child.style.opacity === "0";
+
+				};
+
+				syncInert();
+
+				new MutationObserver(syncInert).observe(child, { attributes: true, attributeFilter: ["style"] });
+
+			}
+
+		});
+
+		enhanceTogglesIn(document.body);
+
+		new MutationObserver((mutations) => {
+
+			mutations.forEach((mutation) => mutation.addedNodes.forEach(enhanceTogglesIn));
+
+		}).observe(document.body, { childList: true, subtree: true });
+
+
+
+		// A link with role="button" does not react to Space as a button does.
+
+		// The back-to-top and dropdown toggle blocks below rely on this handler.
+
+		const pressOnSpace = (element) => {
+
+			element.addEventListener("keydown", (event) => {
+
+				if (event.key !== " ") return;
+
+				event.preventDefault();
+
+				element.click();
+
+			});
+
+		};
+
+
+
+		// Back to top: Quarto writes an <a> with no href and no tabindex, so the
+
+		// keyboard cannot reach it. Put it in the Tab order, and after it scrolls
+
+		// the page, start the next Tab from the top of the page. The theme keeps
+
+		// it visible while it has focus.
+
+		// Upstream: https://github.com/quarto-dev/quarto-cli/issues/15187
+
+		// Remove when: the minimum Quarto version includes the fix.
+
+		// Not SCSS: tabindex and focus are DOM changes, which CSS cannot make.
+
+		const backToTop = document.getElementById("quarto-back-to-top");
+
+		if (backToTop && !backToTop.hasAttribute("href") && !backToTop.hasAttribute("tabindex")) {
+
+			backToTop.setAttribute("tabindex", "0");
+
+			backToTop.dataset.atelierFocusable = "";
+
+			backToTop.addEventListener("keydown", (event) => {
+
+				if (event.key === "Enter") backToTop.click();
+
+			});
+
+			pressOnSpace(backToTop);
+
+			backToTop.addEventListener("click", () => {
+
+				if (document.activeElement !== backToTop) return;
+
+				document.body.setAttribute("tabindex", "-1");
+
+				document.body.focus({ preventScroll: true });
+
+				document.body.removeAttribute("tabindex");
+
+			});
+
+		}
+
+
+
+		// Navbar menus: Quarto gives each dropdown toggle role="link", but the
+
+		// control opens a menu and goes to no page. Use the button role, as
+
+		// Bootstrap does.
+
+		// Upstream: https://github.com/quarto-dev/quarto-cli/issues/15188
+
+		// Remove when: the minimum Quarto version includes the fix.
+
+		// Not SCSS: an ARIA role is an attribute, which CSS cannot set.
+
+		document.querySelectorAll('.dropdown-toggle[role="link"]').forEach((toggle) => {
+
+			toggle.setAttribute("role", "button");
+
+			pressOnSpace(toggle);
+
+		});
+
+
+
+		// Navigation icons: in the navbar, the sidebar and the footer, Quarto
+
+		// writes each `icon:` as <i role="img"> with no name, and writes empty
+
+		// title and aria-label attributes on a tool with no `text:`. Hide the icon
+
+		// when the link has text. Otherwise name the link from the icon, and hide
+
+		// the icon.
+
+		// Upstream: https://github.com/quarto-dev/quarto-cli/issues/15123 (icon beside text)
+
+		// Upstream: https://github.com/quarto-dev/quarto-cli/issues/14828 (icon-only tools)
+
+		// Remove when: the minimum Quarto version includes both fixes.
+
+		// Not SCSS: roles and names are attributes, which CSS cannot set.
+
+		const iconName = (icon) => {
+
+			const glyph = Array.from(icon.classList).find((name) => name.startsWith("bi-"));
+
+			if (!glyph) return "";
+
+			const words = glyph.slice(3).replace(/-/g, " ");
+
+			return words.charAt(0).toUpperCase() + words.slice(1);
+
+		};
+
+		document.querySelectorAll("#quarto-header a i.bi, #quarto-sidebar a i.bi, .nav-footer a i.bi").forEach((icon) => {
+
+			const link = icon.closest("a");
+
+			["title", "aria-label"].forEach((name) => {
+
+				if (link.getAttribute(name) === "") link.removeAttribute(name);
+
+			});
+
+			const hasText = link.textContent.trim() !== "";
+
+			const name = hasText ? "" : icon.getAttribute("aria-label") || link.getAttribute("title") || iconName(icon);
+
+			if (!hasText && !link.getAttribute("aria-label")) {
+
+				if (!name) return;
+
+				link.setAttribute("aria-label", name);
+
+			}
+
+			if (icon.getAttribute("role") === "img") icon.removeAttribute("role");
+
+			icon.setAttribute("aria-hidden", "true");
+
+		});
+
+
+
+		// Floating colour scheme toggle: on a page with no navbar and no sidebar
+
+		// tools, Quarto appends the toggle's container to the end of <body>. It is
+
+		// drawn at the top right, but focus reaches it last. Move it after the
+
+		// fixed header that holds the announcement bar, or after the skip link
+
+		// when there is no header. It stays a direct child of <body>.
+
+		// The toggle position in theme.scss also depends on this move.
+
+		// Upstream: https://github.com/quarto-dev/quarto-cli/issues/14838
+
+		// Remove when: the minimum Quarto version includes the fix.
+
+		// Not SCSS: focus order follows the DOM order, which CSS cannot change.
+
+		const floatingToggle = document.querySelector(".top-right.quarto-color-scheme-toggle")?.closest("body > *");
+
+		if (floatingToggle) {
+
+			const anchor = document.body.querySelector(":scope > #quarto-header")
+
+				?? document.body.querySelector(":scope > #quarto-skip-link");
+
+			if (anchor) anchor.after(floatingToggle);
+
+			else document.body.prepend(floatingToggle);
+
+		}
+
+	});
+
+</script>
+
+<script id="navbar-tooltips" type="text/javascript">
+
+	/**
+
+	 * @license MIT
+
+	 * @copyright 2026 Mickaël Canouil
+
+	 * @author Mickaël Canouil
+
+	 */
+
+	// Every popup has an arrow that points at its trigger, the navbar tooltips
+
+	// included. Quarto turns the arrow off for each of its popups
+
+	// (cross-references, footnotes, citations, code annotations), so wrap tippy to
+
+	// turn it on again. This runs before Quarto makes its popups, on
+
+	// DOMContentLoaded.
+
+	// Remove when: never, because the arrow is Atelier design.
+
+	(function () {
+
+		if (typeof window.tippy !== "function") return;
+
+		var quartoTippy = window.tippy;
+
+		var arrowTippy = function (targets, props) {
+
+			return quartoTippy(targets, Object.assign({}, props, { arrow: true }));
+
+		};
+
+		Object.assign(arrowTippy, quartoTippy);
+
+		window.tippy = arrowTippy;
+
+	})();
+
+
+
+	document.addEventListener("DOMContentLoaded", function () {
+
+		var labels = (window.atelierOptions || {}).labels || {};
+
+		var hasTippy = typeof window.tippy === "function";
+
+		var config = {
+
+			// The `quarto` theme gives the popup surface and the arrow, and `atelier`
+
+			// the smaller type of a tooltip.
+
+			theme: "quarto atelier",
+
+			placement: "bottom",
+
+			delay: [100, 0],
+
+			offset: [0, 6],
+
+			allowHTML: false,
+
+			appendTo: function () {
+
+				return document.body;
+
+			},
+
+		};
+
+
+
+		// Without tippy, the browser's own tooltip on the control is the fallback.
+
+		function bind(el, content, extra) {
+
+			if (!el || !content || el.dataset.tippyBound === "1") return;
+
+			if (hasTippy) {
+
+				el.removeAttribute("title");
+
+				window.tippy(el, Object.assign({ content: content }, config, extra || {}));
+
+				el.dataset.tippyBound = "1";
+
+			} else if (!el.getAttribute("title")) {
+
+				el.setAttribute("title", content);
+
+			}
+
+		}
+
+
+
+		// An icon-only link carries its name on the glyph. Iconify puts it on an
+
+		// <iconify-icon>, but a glyph is just as often an empty element painted
+
+		// with a CSS mask or holding an inline SVG, so fall back to the first
+
+		// empty labelled descendant instead of assuming one element type.
+
+		// Emptiness is what distinguishes a glyph from a labelled control that
+
+		// happens to sit inside the link.
+
+		function glyphOf(link) {
+
+			var icon = link.querySelector("iconify-icon");
+
+			if (icon) return icon;
+
+			var candidates = link.querySelectorAll("[aria-label], [title]");
+
+			for (var i = 0; i < candidates.length; i++) {
+
+				if (!candidates[i].textContent.replace(/\s+/g, " ").trim()) return candidates[i];
+
+			}
+
+			return null;
+
+		}
+
+
+
+		document.querySelectorAll("#quarto-header .navbar a.nav-link").forEach(function (link) {
+
+			var icon = glyphOf(link);
+
+			var visibleText = link.textContent.replace(/\s+/g, " ").trim();
+
+			var label = (icon && (icon.getAttribute("aria-label") || icon.getAttribute("title"))) || visibleText;
+
+			// The icon is decorative once the link is named; hiding it avoids a
+
+			// doubled screen-reader announcement (e.g. "Credits Credits").
+
+			// The tooltip belongs to the whole link, so the glyph drops its title.
+
+			if (icon) {
+
+				icon.removeAttribute("title");
+
+				icon.setAttribute("aria-hidden", "true");
+
+				icon.setAttribute("role", "presentation");
+
+				icon.removeAttribute("aria-label");
+
+			}
+
+			if (!visibleText && label) {
+
+				// Icon-only control: give the link a name and a styled tooltip.
+
+				var ariaLabel = label;
+
+				if (link.target === "_blank" && !/new tab/i.test(ariaLabel)) {
+
+					ariaLabel += " (opens in a new tab)";
+
+				}
+
+				if (!link.getAttribute("aria-label")) link.setAttribute("aria-label", ariaLabel);
+
+				bind(link, label);
+
+			} else if (visibleText && !link.getAttribute("aria-label")) {
+
+				link.setAttribute("aria-label", visibleText);
+
+			}
+
+		});
+
+
+
+		document.querySelectorAll(".quarto-color-scheme-toggle").forEach(function (toggle) {
+
+			// Hover-only and hide on click, so the tooltip does not linger after toggling.
+
+			bind(toggle, toggle.getAttribute("aria-label") || toggle.getAttribute("title") || labels["toggle-dark-mode"], {
+
+				trigger: "mouseenter",
+
+				hideOnClick: true,
+
+			});
+
+		});
+
+
+
+		document.querySelectorAll("a.navbar-brand, a.navbar-brand-logo").forEach(function (logo) {
+
+			bind(logo, labels.home);
+
+		});
+
+	});
+
+</script>
+
+<script id="header-scroll" type="text/javascript">
+
+	/**
+
+	 * @license MIT
+
+	 * @copyright 2026 Mickaël Canouil
+
+	 * @author Mickaël Canouil
+
+	 */
+
+	// Quarto starts Headroom with no offset, so the fixed header unpins after
+
+	// 5 px of scroll and slides away. The body keeps its top padding, which
+
+	// leaves an empty band as tall as the header above the page. Wrap Headroom
+
+	// to give it the header height as its offset, so that the header unpins
+
+	// only after the page scrolls past it. Headroom reads the offset object on
+
+	// each scroll, so the wrapper updates it when the header changes height.
+
+	// This runs before Quarto makes the header Headroom, on DOMContentLoaded.
+
+	// Upstream: https://github.com/quarto-dev/quarto-cli/pull/15397
+
+	// Remove when: the minimum Quarto version includes the fix.
+
+	(function () {
+
+		var QuartoHeadroom = window.Headroom;
+
+		if (typeof QuartoHeadroom !== "function") return;
+
+		var OffsetHeadroom = function (elem, options) {
+
+			var headroom = new QuartoHeadroom(
+
+				elem,
+
+				Object.assign({}, options, { offset: elem.offsetHeight })
+
+			);
+
+			if (window.ResizeObserver) {
+
+				new ResizeObserver(function () {
+
+					headroom.offset.up = headroom.offset.down = elem.offsetHeight;
+
+				}).observe(elem);
+
+			}
+
+			return headroom;
+
+		};
+
+		Object.assign(OffsetHeadroom, QuartoHeadroom);
+
+		OffsetHeadroom.prototype = QuartoHeadroom.prototype;
+
+		window.Headroom = OffsetHeadroom;
+
+	})();
+
+</script>
+
+<!--
+
+@license MIT
+
+@copyright 2026 Mickaël Canouil
+
+@author Mickaël Canouil
+
+-->
+
+<script id="atelier-chrome" type="text/javascript">
+
+	(function () {
+
+		// The other Atelier scripts that run after the body read the options from
+
+		// here. Of those scripts, this script runs first. page-load.html, in the
+
+		// head, reads the block on its own.
+
+		var options = {};
+
+		try {
+
+			options = JSON.parse(document.getElementById("atelier-options")?.textContent || "{}");
+
+		} catch (error) {
+
+			console.warn("Atelier: the options block is not valid JSON.", error);
+
+		}
+
+		window.atelierOptions = options;
+
+		var labels = options.labels || {};
+
+
+
+		// A preset can pin one colour scheme. The terminal preset is dark, so its
+
+		// SCSS sets --atelier-scheme-pin on the root. The dark bundle becomes the
+
+		// active one through Quarto's own toggle. The SCSS hides the toggles,
+
+		// because they would only switch to a look the preset does not have.
+
+		// A page without the property does nothing here.
+
+		if (getComputedStyle(document.documentElement).getPropertyValue("--atelier-scheme-pin").trim() === "dark") {
+
+			// The body class alone cannot tell: Quarto takes it from the data-mode of
+
+			// the light bundle, and that bundle is already dark under this preset.
+
+			// So the dark bundle counts as active only when the alternate (dark)
+
+			// sheets are enabled and the body is dark.
+
+			var darkSheets = document.querySelectorAll("link.quarto-color-scheme.quarto-color-alternate");
+
+			var darkBundleInactive = function () {
+
+				return darkSheets.length > 0 && !(
+
+					document.body.classList.contains("quarto-dark") &&
+
+					[].every.call(darkSheets, function (sheet) { return sheet.rel === "stylesheet"; })
+
+				);
+
+			};
+
+			var needsToggle = darkBundleInactive();
+
+			if (needsToggle) {
+
+				applyDarkScheme(darkBundleInactive);
+
+			}
+
+		}
+
+
+
+		// Quarto saves the choice under a key that every Quarto site on this origin
+
+		// shares. The stored value is put back after the toggle, so the reader's
+
+		// choice on other sites does not change. Quarto reads and writes that key
+
+		// in localStorage, which can throw. Then the toggle runs again with a
+
+		// stand-in that stores nothing, but only when the first toggle did not
+
+		// already switch the sheets before it failed. One warning says what
+
+		// happened, with the error that caused it.
+
+		// Upstream: https://github.com/quarto-dev/quarto-cli/issues/15305
+
+		// Upstream: https://github.com/quarto-dev/quarto-cli/issues/15296
+
+		// Remove when: the minimum Quarto version includes both fixes.
+
+		function applyDarkScheme(darkBundleInactive) {
+
+			var storageKey = "quarto-color-scheme";
+
+			var stored = null;
+
+			var canRestore = false;
+
+			var warning = null;
+
+			function warn(message, error) {
+
+				warning = [message, error];
+
+			}
+
+			try {
+
+				stored = window.localStorage.getItem(storageKey);
+
+				canRestore = true;
+
+			} catch (readError) {
+
+				canRestore = false;
+
+			}
+
+			try {
+
+				window.quartoToggleColorScheme();
+
+				if (canRestore) {
+
+					restoreStored();
+
+				}
+
+			} catch (error) {
+
+				warn("Atelier: the dark colour scheme could not be applied cleanly.", error);
+
+				if (darkBundleInactive()) {
+
+					toggleWithoutStorage();
+
+				}
+
+			}
+
+			if (warning) {
+
+				console.warn(warning[0], warning[1]);
+
+			}
+
+
+
+			function restoreStored() {
+
+				try {
+
+					if (stored === null) {
+
+						window.localStorage.removeItem(storageKey);
+
+					} else {
+
+						window.localStorage.setItem(storageKey, stored);
+
+					}
+
+				} catch (writeError) {
+
+					warn("Atelier: the stored colour scheme choice cannot be restored.", writeError);
+
+				}
+
+			}
+
+
+
+			function toggleWithoutStorage() {
+
+				var original = Object.getOwnPropertyDescriptor(window, "localStorage");
+
+				var swapped = false;
+
+				try {
+
+					Object.defineProperty(window, "localStorage", {
+
+						configurable: true,
+
+						value: { getItem: function () { return null; }, setItem: function () {}, removeItem: function () {} },
+
+					});
+
+					swapped = true;
+
+					window.quartoToggleColorScheme();
+
+				} catch (retryError) {
+
+					warn("Atelier: the dark colour scheme cannot be applied.", retryError);
+
+				}
+
+				if (!swapped) {
+
+					return;
+
+				}
+
+				try {
+
+					if (original) {
+
+						Object.defineProperty(window, "localStorage", original);
+
+					} else {
+
+						delete window.localStorage;
+
+					}
+
+				} catch (restoreError) {
+
+					warn("Atelier: the browser storage cannot be restored after applying the dark colour scheme.", restoreError);
+
+				}
+
+			}
+
+		}
+
+
+
+		// The version pill follows the title link in the sidebar. Without a
+
+		// version, no pill is added. page-load.html adds the pill of the navbar.
+
+		if (options.version) {
+
+			document.querySelectorAll(".sidebar-title > a").forEach(function (title) {
+
+				var pill = document.createElement("span");
+
+				pill.className = "atelier-version";
+
+				pill.textContent = options.version;
+
+				title.after(pill);
+
+			});
+
+		}
+
+
+
+		// Quarto marks the current page in the breadcrumbs by class only, so the
+
+		// last crumb, a link or a span, gets aria-current when it has none.
+
+		// Upstream: none filed (WCAG 4.1.2)
+
+		// Remove when: Quarto marks the current breadcrumb.
+
+		document.querySelectorAll(".quarto-page-breadcrumbs .breadcrumb, .quarto-title-breadcrumbs .breadcrumb").forEach(function (list) {
+
+			var last = list.querySelector(".breadcrumb-item:last-child");
+
+			if (!last) return;
+
+			var target = last.querySelector("a") || last;
+
+			if (!target.hasAttribute("aria-current")) target.setAttribute("aria-current", "page");
+
+		});
+
+
+
+		// Quarto writes the label of a numbered, cross-referenced float as plain
+
+		// text ("Figure 1: ..."), so the text up to the first colon is wrapped to
+
+		// give the label its own style. A caption that is not a numbered float
+
+		// is left alone, because its words before a colon are not a label.
+
+		// Not SCSS: CSS cannot select a part of a text node.
+
+		document.querySelectorAll(".quarto-float figcaption").forEach(function (caption) {
+
+			var first = caption.firstChild;
+
+			if (!first || first.nodeType !== Node.TEXT_NODE || caption.querySelector(".atelier-caption-label")) return;
+
+			var match = /^(\s*[^:\d]{1,30}\d[\d.]*:)/.exec(first.textContent);
+
+			if (!match) return;
+
+			var label = document.createElement("span");
+
+			label.className = "atelier-caption-label";
+
+			label.textContent = match[1];
+
+			first.textContent = first.textContent.slice(match[1].length);
+
+			caption.insertBefore(label, first);
+
+		});
+
+
+
+		// With a search field in the sidebar header, the tools follow the field
+
+		// instead of sitting under the title. The field sits in a wrapper, so the
+
+		// tools become the wrapper's next sibling.
+
+		var sidebarSearch = document.querySelector("#quarto-sidebar .sidebar-search");
+
+		var sidebarTools = document.querySelector("#quarto-sidebar .sidebar-tools-main");
+
+		if (sidebarSearch && sidebarTools && sidebarSearch.parentElement) {
+
+			sidebarSearch.parentElement.after(sidebarTools);
+
+		}
+
+
+
+		// The search button keeps Quarto's own accessible name. The label and the
+
+		// shortcut are decoration for sighted users, so both are hidden from
+
+		// assistive technology.
+
+		var searchOptions = {};
+
+		try {
+
+			searchOptions = JSON.parse(document.getElementById("quarto-search-options")?.textContent || "{}");
+
+		} catch (error) {
+
+			console.warn("Atelier: the search options block is not valid JSON.", error);
+
+		}
+
+		var shortcut = [].concat(searchOptions["keyboard-shortcut"] || [])[0];
+
+
+
+		function decorate(button) {
+
+			if (button.querySelector(".atelier-search-label")) return;
+
+			if (labels["search-label"]) {
+
+				var label = document.createElement("span");
+
+				label.className = "atelier-search-label";
+
+				label.setAttribute("aria-hidden", "true");
+
+				label.textContent = labels["search-label"];
+
+				button.appendChild(label);
+
+			}
+
+			if (shortcut) {
+
+				var key = document.createElement("kbd");
+
+				key.setAttribute("aria-hidden", "true");
+
+				key.textContent = shortcut;
+
+				button.appendChild(key);
+
+			}
+
+		}
+
+
+
+		var searchHost = document.querySelector(".navbar #quarto-search");
+
+		if (!searchHost) return;
+
+		var selector = ".aa-DetachedSearchButton";
+
+		var found = searchHost.querySelector(selector);
+
+		if (found) {
+
+			decorate(found);
+
+		} else {
+
+			var observer = new MutationObserver(function () {
+
+				var button = searchHost.querySelector(selector);
+
+				if (!button) return;
+
+				observer.disconnect();
+
+				decorate(button);
+
+			});
+
+			observer.observe(searchHost, { childList: true, subtree: true });
+
+		}
+
+	})();
+
+</script>
+
+<!--
+
+@license MIT
+
+@copyright 2026 Mickaël Canouil
+
+@author Mickaël Canouil
+
+-->
+
+<script id="atelier-course-model" type="text/javascript">
+
+	(function () {
+
+		// The workshop bar, the stepper, the table of contents, and the objectives
+
+		// read the course from window.atelierCourse. It is built here once, from the
+
+		// workshop data block and Quarto's own sidebar. A page without a sidebar menu
+
+		// gets null. A workshop page that no sidebar of extensions.atelier.sidebars
+
+		// lists also gets null, so it keeps the plain sidebar.
+
+		window.atelierCourse = null;
+
+		var menu = document.querySelector("#quarto-sidebar .sidebar-menu-container");
+
+		if (!menu) return;
+
+
+
+		var data = {};
+
+		try {
+
+			data = JSON.parse(document.getElementById("atelier-workshop")?.textContent || "{}");
+
+		} catch (error) {
+
+			console.warn("Atelier: the workshop data block is not valid JSON.", error);
+
+		}
+
+		var labels = data.labels || {};
+
+		var workshop = data.mode === "workshop";
+
+		if (workshop && data.listed !== true) return;
+
+		var durations = data.durations || {};
+
+
+
+		// The site root path is the page path with the offset applied. A folder
+
+		// URL gets "index.html", so it matches the sidebar link to that page.
+
+		var root = new URL(data.offset || "./", location.href).pathname;
+
+		function toHref(url) {
+
+			var path = url.pathname;
+
+			if (path.slice(-1) === "/") path += "index.html";
+
+			return path.indexOf(root) === 0 ? path.slice(root.length) : path;
+
+		}
+
+
+
+		function hrefOf(raw) {
+
+			return toHref(new URL(raw, location.href));
+
+		}
+
+
+
+		// A page of the course is a link to this site, below the site root.
+
+		function isPage(url) {
+
+			return url.origin === location.origin && url.pathname.indexOf(root) === 0;
+
+		}
+
+
+
+		function label(key, values) {
+
+			return String(labels[key] || "").replace(/\{(\w+)\}/g, function (match, name) {
+
+				return values && name in values ? values[name] : match;
+
+			});
+
+		}
+
+
+
+		function format(minutes) {
+
+			var hours = Math.floor(minutes / 60);
+
+			var rest = minutes % 60;
+
+			var key = "duration-minutes";
+
+			if (hours > 0 && rest > 0) key = "duration-hours-minutes";
+
+			else if (hours > 0) key = "duration-hours";
+
+			// No-break spaces keep a duration on one line.
+
+			return label(key, { h: hours, m: rest }).replace(/ /g, "\u00a0");
+
+		}
+
+
+
+		function sum(values) {
+
+			var known = values.filter(function (value) {
+
+				return value !== null;
+
+			});
+
+			return known.length ? known.reduce(function (a, b) { return a + b; }, 0) : null;
+
+		}
+
+
+
+		function textOf(element) {
+
+			return (element?.textContent || "").replace(/\s+/g, " ").trim();
+
+		}
+
+
+
+		var pages = [];
+
+		var modules = [];
+
+		var moduleItems = [];
+
+		var indexByHref = {};
+
+
+
+		function pageIndex(link, href) {
+
+			if (!(href in indexByHref)) {
+
+				var minutes = durations[href];
+
+				indexByHref[href] = pages.length;
+
+				pages.push({
+
+					href: href,
+
+					title: textOf(link.querySelector(".menu-text") || link),
+
+					minutes: typeof minutes === "number" ? minutes : null,
+
+					module: modules.length,
+
+				});
+
+			}
+
+			return indexByHref[href];
+
+		}
+
+
+
+		var items = menu.querySelector("ul")?.children || [];
+
+		Array.prototype.forEach.call(items, function (item) {
+
+			var indices = [];
+
+			item.querySelectorAll("a.sidebar-link[href]").forEach(function (link) {
+
+				var raw = link.getAttribute("href");
+
+				if (raw === "#") return;
+
+				var url = new URL(raw, location.href);
+
+				if (!isPage(url)) return;
+
+				var index = pageIndex(link, toHref(url));
+
+				if (indices.indexOf(index) === -1) indices.push(index);
+
+			});
+
+			if (!indices.length) return;
+
+			moduleItems.push(item);
+
+			modules.push({
+
+				title: textOf(item.querySelector(".sidebar-item-container .menu-text")),
+
+				pages: indices,
+
+				minutes: sum(indices.map(function (index) { return pages[index].minutes; })),
+
+			});
+
+		});
+
+
+
+		var here = hrefOf(location.href);
+
+		var current = Object.prototype.hasOwnProperty.call(indexByHref, here) ? indexByHref[here] : -1;
+
+
+
+		function neighbour(selector) {
+
+			var link = document.querySelector(selector);
+
+			if (!link) return null;
+
+			return { href: hrefOf(link.getAttribute("href")), title: textOf(link.querySelector(".nav-page-text") || link) };
+
+		}
+
+
+
+		var course = {
+
+			mode: workshop ? "workshop" : "documentation",
+
+			labels: labels,
+
+			duration: typeof data.duration === "number" ? data.duration : null,
+
+			pages: pages,
+
+			modules: modules,
+
+			// The top-level sidebar items of the modules, in the order of modules.
+
+			moduleItems: moduleItems,
+
+			current: current,
+
+			currentModule: current === -1 ? -1 : pages[current].module,
+
+			previous: neighbour(".page-navigation .nav-page-previous a"),
+
+			next: neighbour(".page-navigation .nav-page-next a"),
+
+			totalMinutes: sum(pages.map(function (page) { return page.minutes; })),
+
+			format: format,
+
+			label: label,
+
+		};
+
+
+
+		if (workshop) {
+
+			course.storageKey = data.sidebar ? "atelier:" + root + ":" + data.sidebar : null;
+
+			course.progress = { visited: [], read: {}, objectives: {} };
+
+			var warned = false;
+
+			function warn(error) {
+
+				if (warned) return;
+
+				warned = true;
+
+				console.warn("Atelier: the workshop progress cannot be stored in this browser.", error);
+
+			}
+
+
+
+			course.save = function () {
+
+				if (!course.storageKey) return;
+
+				try {
+
+					localStorage.setItem(course.storageKey, JSON.stringify(course.progress));
+
+				} catch (error) {
+
+					warn(error);
+
+				}
+
+			};
+
+
+
+			course.isComplete = function (moduleIndex) {
+
+				var module = modules[moduleIndex];
+
+				return Boolean(module) && module.pages.every(function (index) {
+
+					return course.progress.visited.indexOf(pages[index].href) !== -1;
+
+				});
+
+			};
+
+
+
+			if (course.storageKey) {
+
+				try {
+
+					var stored = JSON.parse(localStorage.getItem(course.storageKey) || "null");
+
+					if (stored && typeof stored === "object") {
+
+						course.progress = {
+
+							visited: Array.isArray(stored.visited) ? stored.visited : [],
+
+							read: stored.read && typeof stored.read === "object" ? stored.read : {},
+
+							objectives: stored.objectives && typeof stored.objectives === "object" ? stored.objectives : {},
+
+						};
+
+					}
+
+				} catch (error) {
+
+					warn(error);
+
+				}
+
+			}
+
+			if (current !== -1 && course.progress.visited.indexOf(here) === -1) {
+
+				course.progress.visited.push(here);
+
+				course.save();
+
+			}
+
+		}
+
+
+
+		window.atelierCourse = course;
+
+	})();
+
+</script>
+
+<!--
+
+@license MIT
+
+@copyright 2026 Mickaël Canouil
+
+@author Mickaël Canouil
+
+-->
+
+<script id="atelier-reading-bar" type="text/javascript">
+
+	(function () {
+
+		// Without a navbar, a bar sits at the top of the content, beside the
+
+		// sidebar. In documentation mode it shows the section, the page, the page
+
+		// position, and the previous and next links. In workshop mode it shows the
+
+		// module, the module position, and a session timer when the page has a
+
+		// duration. With a navbar, only workshop mode has the bar: it is the module
+
+		// row under the navbar, inside the header, so it stays with the navbar.
+
+		if (!window.atelierCourse || window.atelierCourse.current < 0) return;
+
+		var content = document.getElementById("quarto-content");
+
+		if (!content) return;
+
+
+
+		var course = window.atelierCourse;
+
+		var workshop = course.mode === "workshop";
+
+		var navbar = document.querySelector("#quarto-header > nav.navbar");
+
+		if (navbar && !workshop) return;
+
+		var page = course.pages[course.current];
+
+		var module = course.modules[course.currentModule];
+
+
+
+		function element(tag, className, text) {
+
+			var node = document.createElement(tag);
+
+			if (className) node.className = className;
+
+			if (text) node.textContent = text;
+
+			return node;
+
+		}
+
+		// An empty label sets no attribute, so a control never gets an empty name.
+
+		function setLabel(node, name, text) {
+
+			if (text) node.setAttribute(name, text);
+
+		}
+
+
+
+		function icon(name) {
+
+			var node = element("i", "bi " + name);
+
+			node.setAttribute("aria-hidden", "true");
+
+			return node;
+
+		}
+
+
+
+		var bar = element("nav", "atelier-bar");
+
+		setLabel(bar, "aria-label", course.label(workshop ? "workshop-bar" : "reading-bar"));
+
+
+
+		var row = element("div", "atelier-bar-row");
+
+		var crumb = element("p", "atelier-bar-crumb");
+
+		// In documentation mode a top-level page has no section, so the crumb
+
+		// shows the page title only. A module with the same title as the page,
+
+		// such as a module of one page, also shows the page title only.
+
+		var active = document.querySelector("#quarto-sidebar .sidebar-link.active");
+
+		var inSection = Boolean(active && active.closest(".sidebar-item-section"));
+
+		if (module && module.title && module.title !== page.title && (workshop || inSection)) {
+
+			crumb.appendChild(document.createTextNode(module.title + " / "));
+
+		}
+
+		crumb.appendChild(element("b", "", page.title));
+
+		row.appendChild(crumb);
+
+
+
+		var actions = element("div", "atelier-bar-actions");
+
+		if (workshop && course.duration !== null) {
+
+			actions.appendChild(timer(course.duration * 60));
+
+		}
+
+		// Quarto's bottom page navigation holds the link relative to this page.
+
+		function navLink(kind, target, iconName) {
+
+			if (!target) return;
+
+			var link = element("a", "atelier-bar-" + kind);
+
+			var quartoLink = document.querySelector(".page-navigation .nav-page-" + kind + " a");
+
+			link.href = quartoLink.href;
+
+			var label = course.label(kind);
+
+			if (!label) setLabel(link, "aria-label", quartoLink.textContent.trim());
+
+			var text = document.createTextNode(label);
+
+			if (kind === "previous") {
+
+				link.appendChild(icon(iconName));
+
+				link.appendChild(text);
+
+			} else {
+
+				link.appendChild(text);
+
+				link.appendChild(icon(iconName));
+
+			}
+
+			actions.appendChild(link);
+
+		}
+
+		navLink("previous", course.previous, "bi-arrow-left-short");
+
+		navLink("next", course.next, "bi-arrow-right-short");
+
+		row.appendChild(actions);
+
+		bar.appendChild(row);
+
+
+
+		var n = workshop ? course.currentModule + 1 : course.current + 1;
+
+		var m = workshop ? course.modules.length : course.pages.length;
+
+		var progress = element("div", "atelier-bar-progress");
+
+		progress.setAttribute("role", "progressbar");
+
+		setLabel(progress, "aria-label", course.label(workshop ? "workshop-progress" : "reading-progress"));
+
+		progress.setAttribute("aria-valuemin", "0");
+
+		progress.setAttribute("aria-valuemax", String(m));
+
+		progress.setAttribute("aria-valuenow", String(n));
+
+		setLabel(progress, "aria-valuetext", course.label(workshop ? "workshop-position" : "reading-position", { n: n, m: m }));
+
+		var fill = element("span");
+
+		fill.style.width = (m ? (n / m) * 100 : 0) + "%";
+
+		progress.appendChild(fill);
+
+		bar.appendChild(progress);
+
+
+
+		// In the header, Quarto measures the module row with the navbar when it
+
+		// sets the page offset, so the row needs no measurement of its own.
+
+		if (navbar) {
+
+			bar.classList.add("atelier-bar-module-row");
+
+			navbar.after(bar);
+
+		} else {
+
+			content.insertBefore(bar, content.firstChild);
+
+			// The table of contents and the scroll padding sit below the bar. The
+
+			// bar grows when the crumb wraps, so its height is kept current.
+
+			var measure = function () {
+
+				document.documentElement.style.setProperty("--atelier-bar-height", bar.getBoundingClientRect().height + "px");
+
+			};
+
+			measure();
+
+			if (typeof ResizeObserver === "function") new ResizeObserver(measure).observe(bar);
+
+		}
+
+
+
+		// The timer counts down from the page duration. It is not a live region,
+
+		// so it does not announce each second.
+
+		function timer(total) {
+
+			var group = document.createDocumentFragment();
+
+			var toggle = element("button", "atelier-timer-toggle");
+
+			toggle.type = "button";
+
+			toggle.setAttribute("aria-pressed", "false");
+
+			setLabel(toggle, "aria-label", course.label("timer-pause"));
+
+			var glyph = icon("bi-pause-fill");
+
+			toggle.appendChild(glyph);
+
+
+
+			var display = element("span", "atelier-timer");
+
+			display.setAttribute("role", "timer");
+
+			setLabel(display, "aria-label", course.label("timer-label"));
+
+
+
+			var remaining = total;
+
+			var end = 0;
+
+			var interval = null;
+
+
+
+			function pad(value) {
+
+				return (value < 10 ? "0" : "") + value;
+
+			}
+
+
+
+			function show() {
+
+				var hours = Math.floor(remaining / 3600);
+
+				var minutes = Math.floor((remaining % 3600) / 60);
+
+				var seconds = remaining % 60;
+
+				display.textContent = hours > 0 ? hours + ":" + pad(minutes) + ":" + pad(seconds) : minutes + ":" + pad(seconds);
+
+			}
+
+
+
+			function stop() {
+
+				clearInterval(interval);
+
+				interval = null;
+
+			}
+
+
+
+			function start() {
+
+				end = Date.now() + remaining * 1000;
+
+				interval = setInterval(function () {
+
+					remaining = Math.max(0, Math.ceil((end - Date.now()) / 1000));
+
+					if (!document.hidden || remaining === 0) show();
+
+					if (remaining === 0) {
+
+						stop();
+
+						toggle.disabled = true;
+
+					}
+
+				}, 1000);
+
+			}
+
+
+
+			document.addEventListener("visibilitychange", function () {
+
+				if (document.hidden || interval === null) return;
+
+				remaining = Math.max(0, Math.ceil((end - Date.now()) / 1000));
+
+				show();
+
+			});
+
+
+
+			toggle.addEventListener("click", function () {
+
+				if (remaining === 0) return;
+
+				var paused = interval !== null;
+
+				if (paused) stop();
+
+				else start();
+
+				toggle.setAttribute("aria-pressed", String(paused));
+
+				glyph.className = "bi " + (paused ? "bi-play-fill" : "bi-pause-fill");
+
+			});
+
+
+
+			show();
+
+			start();
+
+			group.appendChild(toggle);
+
+			group.appendChild(display);
+
+			return group;
+
+		}
+
+	})();
+
+</script>
+
+<!--
+
+@license MIT
+
+@copyright 2026 Mickaël Canouil
+
+@author Mickaël Canouil
+
+-->
+
+<script id="atelier-course" type="text/javascript">
+
+	(function () {
+
+		// In workshop mode, these components show the course from
+
+		// window.atelierCourse. Each block below is one component.
+
+		var course = window.atelierCourse;
+
+		if (!course || course.mode !== "workshop") return;
+
+
+
+		function element(tag, className, text) {
+
+			var node = document.createElement(tag);
+
+			if (className) node.className = className;
+
+			if (text) node.textContent = text;
+
+			return node;
+
+		}
+
+
+
+		// =====================================================================
+
+		// S3 COURSE STEPPER
+
+		// =====================================================================
+
+		// The sidebar menu shows each module with a number, its duration, and a
+
+		// tick when all its pages are visited. A summary above the menu shows
+
+		// the module position and the total time. Quarto's markup stays: the
+
+		// script adds classes and elements only. All modules other than the
+
+		// current module are collapsed, and Quarto's toggle opens them again.
+
+		(function () {
+
+			var menu = document.querySelector("#quarto-sidebar .sidebar-menu-container");
+
+			var items = course.moduleItems;
+
+			if (!menu || !items.length) return;
+
+
+
+			menu.classList.add("atelier-stepper");
+
+			var hasCurrent = course.currentModule !== -1;
+
+
+
+			items.forEach(function (item, index) {
+
+				var module = course.modules[index];
+
+				// A section with its own page has the label in a link and a separate
+
+				// toggle with the chevron only. Other sections have the label in the
+
+				// toggle. A page has the label in its link.
+
+				var container = item.querySelector(":scope > .sidebar-item-container");
+
+				var toggle = container && container.querySelector(":scope > .sidebar-item-toggle");
+
+				var control = (container && container.querySelector(":scope > a.sidebar-link")) || toggle;
+
+				var text = control && control.querySelector(".menu-text");
+
+				if (!text) return;
+
+
+
+				var done = course.isComplete(index);
+
+				var current = index === course.currentModule;
+
+				item.classList.add("atelier-step");
+
+				if (done) item.classList.add("atelier-step-done");
+
+				if (current) item.classList.add("atelier-step-current");
+
+
+
+				var dot = element("span", "atelier-step-dot", done ? "✓" : String(index + 1));
+
+				dot.setAttribute("aria-hidden", "true");
+
+				control.insertBefore(dot, control.firstChild);
+
+
+
+				// The wrapper moves the label node with its id, so the section
+
+				// list keeps its accessible name.
+
+				var label = element("span", "atelier-step-label");
+
+				text.parentNode.insertBefore(label, text);
+
+				label.appendChild(text);
+
+				if (done) {
+
+					label.appendChild(element("span", "visually-hidden", " " + course.label("workshop-completed")));
+
+				}
+
+				if (module.minutes !== null) {
+
+					label.appendChild(element("small", "atelier-step-time", course.format(module.minutes)));
+
+				}
+
+
+
+				if (toggle && hasCurrent && !current) {
+
+					var target = item.querySelector(":scope > .sidebar-section");
+
+					if (target) target.classList.remove("show");
+
+					toggle.classList.add("collapsed");
+
+					toggle.setAttribute("aria-expanded", "false");
+
+				}
+
+			});
+
+
+
+			var summary = element("div", "atelier-course-summary");
+
+			var parts = [];
+
+			var m = course.modules.length;
+
+			var n = course.currentModule + 1;
+
+			if (hasCurrent) parts.push(course.label("workshop-position", { n: n, m: m }));
+
+			if (course.totalMinutes !== null) {
+
+				parts.push(course.label("workshop-total", { time: course.format(course.totalMinutes) }));
+
+			}
+
+			if (parts.length) summary.appendChild(element("p", "", parts.join(" · ")));
+
+			var progress = element("div", "atelier-course-progress");
+
+			progress.setAttribute("aria-hidden", "true");
+
+			var fill = element("span");
+
+			fill.style.width = (m ? (n / m) * 100 : 0) + "%";
+
+			progress.appendChild(fill);
+
+			summary.appendChild(progress);
+
+			menu.parentNode.insertBefore(summary, menu);
+
+		})();
+
+
+
+		// =====================================================================
+
+		// T3 PROGRESS DOTS
+
+		// =====================================================================
+
+		// The table of contents gets a dot for each heading, filled once the
+
+		// heading has passed the top of the viewport, and a ring with the share
+
+		// of the module read. The read headings are stored under the page in
+
+		// the course progress. Quarto clones the table of contents into a
+
+		// toggle on narrow pages. The clone is found again on every update, so
+
+		// it shows the same dots.
+
+		(function () {
+
+			var toc = document.querySelector("#quarto-margin-sidebar #TOC");
+
+			if (!toc) return;
+
+
+
+			var anchors = Array.prototype.filter.call(toc.querySelectorAll("a.nav-link[data-scroll-target^='#']"), function (link) {
+
+				return link.getAttribute("data-scroll-target").length > 1;
+
+			});
+
+			// Another script makes the href of a link absolute, so the entries
+
+			// are matched on the target that Quarto keeps in a data attribute.
+
+			var headings = [];
+
+			anchors.forEach(function (link) {
+
+				var target = link.getAttribute("data-scroll-target");
+
+				var id;
+
+				try {
+
+					id = decodeURIComponent(target.slice(1));
+
+				} catch (error) {
+
+					console.warn("Atelier: the table of contents target " + target + " is not a valid URL fragment; the entry gets no progress dot.", error);
+
+					return;
+
+				}
+
+				var heading = document.getElementById(id);
+
+				if (heading) headings.push({ href: target, node: heading });
+
+			});
+
+			if (!headings.length) return;
+
+
+
+			var key = course.current !== -1 ? course.pages[course.current].href : location.pathname;
+
+			var stored = course.progress.read[key];
+
+			// Only the headings that are on the page now count as read.
+
+			var read = (Array.isArray(stored) ? stored : []).filter(function (href) {
+
+				return headings.some(function (heading) { return heading.href === href; });
+
+			});
+
+			var inModule = course.currentModule !== -1;
+
+
+
+			// A clone made before this block runs lacks the class and the line,
+
+			// so render() calls this on every root. It adds only what is missing.
+
+			// It returns the ring and the text node of the line, or null outside a module.
+
+			function prepare(root) {
+
+				root.classList.add("atelier-toc-dots");
+
+				if (!inModule) return null;
+
+				var existing = root.querySelector(".atelier-toc-progress");
+
+				if (existing) return { ring: existing.querySelector(".atelier-ring"), text: existing.lastChild };
+
+				var progress = element("p", "atelier-toc-progress");
+
+				var ring = element("span", "atelier-ring");
+
+				ring.setAttribute("aria-hidden", "true");
+
+				progress.appendChild(ring);
+
+				var text = document.createTextNode("");
+
+				progress.appendChild(text);
+
+				var title = root.querySelector("#toc-title");
+
+				if (title) {
+
+					title.after(progress);
+
+				} else {
+
+					root.prepend(progress);
+
+				}
+
+				return { ring: ring, text: text };
+
+			}
+
+
+
+			function share() {
+
+				var pages = course.modules[course.currentModule].pages;
+
+				var total = pages.reduce(function (sum, index) {
+
+					if (index === course.current) return sum + read.length / headings.length;
+
+					return sum + (course.progress.visited.indexOf(course.pages[index].href) !== -1 ? 1 : 0);
+
+				}, 0);
+
+				return Math.round((100 * total) / pages.length);
+
+			}
+
+
+
+			function render() {
+
+				var percent = inModule ? share() : 0;
+
+				document.querySelectorAll("#quarto-margin-sidebar #TOC, .quarto-sidebar-toggle-contents #TOC").forEach(function (root) {
+
+					var line = prepare(root);
+
+					headings.forEach(function (heading) {
+
+						var link = root.querySelector('a.nav-link[data-scroll-target="' + heading.href + '"]');
+
+						if (!link) return;
+
+						var done = read.indexOf(heading.href) !== -1;
+
+						var hidden = link.querySelector(":scope > .atelier-read-text");
+
+						link.classList.add("atelier-toc-tracked");
+
+						link.classList.toggle("atelier-read", done);
+
+						if (done && !hidden) {
+
+							link.appendChild(element("span", "visually-hidden atelier-read-text", " " + course.label("toc-read")));
+
+						} else if (!done && hidden) {
+
+							hidden.remove();
+
+						}
+
+					});
+
+					if (line) {
+
+						line.ring.style.setProperty("--atelier-ring", percent + "%");
+
+						line.text.nodeValue = course.label("toc-module-read", { n: percent });
+
+					}
+
+				});
+
+			}
+
+
+
+			var pending = false;
+
+			function mark(hrefs) {
+
+				var added = hrefs.filter(function (href) { return read.indexOf(href) === -1; });
+
+				if (!added.length) return;
+
+				read = read.concat(added);
+
+				added.forEach(function (href) { observer.unobserve(nodeByHref.get(href)); });
+
+				stopWatchingWhenRead();
+
+				if (pending) return;
+
+				pending = true;
+
+				requestAnimationFrame(function () {
+
+					pending = false;
+
+					course.progress.read[key] = read;
+
+					course.save();
+
+					render();
+
+				});
+
+			}
+
+
+
+			var byNode = new Map(headings.map(function (heading) { return [heading.node, heading.href]; }));
+
+			var nodeByHref = new Map(headings.map(function (heading) { return [heading.href, heading.node]; }));
+
+			var observer = new IntersectionObserver(function (entries) {
+
+				mark(entries.filter(function (entry) {
+
+					return entry.boundingClientRect.top < 0;
+
+				}).map(function (entry) { return byNode.get(entry.target); }));
+
+			}, { threshold: [0, 1] });
+
+			headings.forEach(function (heading) {
+
+				if (read.indexOf(heading.href) === -1) observer.observe(heading.node);
+
+			});
+
+
+
+			// The last headings of a short final section never reach the top.
+
+			function checkEnd() {
+
+				var root = document.documentElement;
+
+				if (window.innerHeight + window.scrollY >= root.scrollHeight - 2) {
+
+					mark(headings.map(function (heading) { return heading.href; }));
+
+				}
+
+			}
+
+			// A scroll fires many events in one frame, so the check runs once a frame.
+
+			var endCheckQueued = false;
+
+			function onScroll() {
+
+				if (endCheckQueued) return;
+
+				endCheckQueued = true;
+
+				window.requestAnimationFrame(function () {
+
+					endCheckQueued = false;
+
+					checkEnd();
+
+				});
+
+			}
+
+			window.addEventListener("scroll", onScroll, { passive: true });
+
+
+
+			// Once every heading is read, nothing is left to watch.
+
+			function stopWatchingWhenRead() {
+
+				if (read.length < headings.length) return;
+
+				observer.disconnect();
+
+				window.removeEventListener("scroll", onScroll);
+
+			}
+
+			checkEnd();
+
+			stopWatchingWhenRead();
+
+
+
+			// Quarto marks the current entry with a class only. Mirror it in
+
+			// aria-current so assistive technology announces it.
+
+			var links = toc.querySelectorAll(".nav-link");
+
+			function syncCurrent() {
+
+				links.forEach(function (link) {
+
+					if (link.classList.contains("active")) {
+
+						link.setAttribute("aria-current", "location");
+
+					} else {
+
+						link.removeAttribute("aria-current");
+
+					}
+
+				});
+
+			}
+
+			syncCurrent();
+
+			new MutationObserver(syncCurrent).observe(toc, { subtree: true, attributes: true, attributeFilter: ["class"] });
+
+
+
+			render();
+
+		})();
+
+
+
+		// =====================================================================
+
+		// W1 OBJECTIVES
+
+		// =====================================================================
+
+		// The Lua filter writes a checkbox for each objective, with an id made
+
+		// from the objective text. The ticked boxes are stored under the page in
+
+		// the course progress, as these ids. Only the ids of the boxes that are
+
+		// on the page now count, so the id of a changed objective goes on the
+
+		// next save.
+
+		(function () {
+
+			var boxes = document.querySelectorAll(".atelier-objectives input[data-atelier-objective]");
+
+			if (!boxes.length) return;
+
+
+
+			var key = course.current !== -1 ? course.pages[course.current].href : location.pathname;
+
+			var stored = course.progress.objectives[key];
+
+			var ids = Array.prototype.map.call(boxes, function (box) {
+
+				return box.getAttribute("data-atelier-objective");
+
+			});
+
+			var ticked = (Array.isArray(stored) ? stored : []).filter(function (value) {
+
+				return ids.indexOf(value) !== -1;
+
+			});
+
+
+
+			boxes.forEach(function (box) {
+
+				var id = box.getAttribute("data-atelier-objective");
+
+				box.checked = ticked.indexOf(id) !== -1;
+
+				box.addEventListener("change", function () {
+
+					ticked = ticked.filter(function (value) { return value !== id; });
+
+					if (box.checked) ticked.push(id);
+
+					course.progress.objectives[key] = ticked.slice().sort();
+
+					course.save();
+
+				});
+
+			});
+
+		})();
+
+	})();
+
+</script>
+
+<!--
+
+@license MIT
+
+@copyright 2026 Mickaël Canouil
+
+@author Mickaël Canouil
+
+-->
+
+<script id="atelier-announcement" type="text/javascript">
+
+	(function () {
+
+		var bar = document.getElementById("quarto-announcement");
+
+		if (!bar) return;
+
+
+
+		var labels = (window.atelierOptions || {}).labels || {};
+
+
+
+		bar.setAttribute("role", "region");
+
+		if (labels["announcement-region"]) bar.setAttribute("aria-label", labels["announcement-region"]);
+
+
+
+		var button = bar.querySelector("button.quarto-announcement-action");
+
+		if (button) {
+
+			// Quarto removes the bar on dismissal, and the focused button goes with it,
+
+			// so focus would fall to the body. This runs before Quarto's handler and only moves focus.
+
+			function isVisible(element) {
+
+				if (typeof element.checkVisibility === "function") {
+
+					return element.checkVisibility({ visibilityProperty: true });
+
+				}
+
+				return element.getClientRects().length > 0;
+
+			}
+
+			button.addEventListener("click", function () {
+
+				if (document.activeElement !== button) return;
+
+				var focusable = "a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex='-1'])";
+
+				var next = Array.prototype.find.call(document.querySelectorAll(focusable), function (element) {
+
+					return (
+
+						!bar.contains(element) &&
+
+						Boolean(bar.compareDocumentPosition(element) & Node.DOCUMENT_POSITION_FOLLOWING) &&
+
+						!element.disabled &&
+
+						!element.closest("[inert]") &&
+
+						isVisible(element)
+
+					);
+
+				});
+
+				if (!next) {
+
+					next = document.querySelector("main");
+
+					if (next && !next.hasAttribute("tabindex")) next.setAttribute("tabindex", "-1");
+
+				}
+
+				if (next) next.focus();
+
+			});
+
+		}
+
+	})();
+
+</script>
+
+<!--
+
+@license MIT
+
+@copyright 2026 Mickaël Canouil
+
+@author Mickaël Canouil
+
+-->
+
+<script id="atelier-toc-card" type="text/javascript">
+
+	(function () {
+
+		var toc = document.querySelector("#quarto-margin-sidebar #TOC");
+
+		if (!toc) return;
+
+
+
+		// In workshop mode, html/scripts/course.html draws the progress dots in
+
+		// place of this card.
+
+		if (window.atelierCourse && window.atelierCourse.mode === "workshop") return;
+
+
+
+		var labels = (window.atelierOptions || {}).labels || {};
+
+		var readingTime = labels["toc-reading-time"];
+
+		var updated = labels["toc-updated"];
+
+		var copyLabel = labels["toc-copy-link"];
+
+		var copiedLabel = labels["toc-link-copied"];
+
+
+
+		// The meta row sits between the title and the entries. Reading time
+
+		// counts 200 words a minute, at least one minute, of the content that
+
+		// shows: the veil extension hides content with the hidden attribute.
+
+		var meta = document.createElement("div");
+
+		meta.className = "atelier-toc-meta";
+
+		var content = document.getElementById("quarto-document-content");
+
+		function countWords() {
+
+			if (!content) return 0;
+
+			var walker = document.createTreeWalker(content, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT, {
+
+				acceptNode: function (node) {
+
+					if (node.nodeType === Node.TEXT_NODE) return NodeFilter.FILTER_ACCEPT;
+
+					if (node.hidden || node.id === "title-block-header") return NodeFilter.FILTER_REJECT;
+
+					return NodeFilter.FILTER_SKIP;
+
+				}
+
+			});
+
+			var text = [];
+
+			while (walker.nextNode()) {
+
+				text.push(walker.currentNode.nodeValue);
+
+			}
+
+			return text.join("").split(/\s+/).filter(Boolean).length;
+
+		}
+
+		if (readingTime) {
+
+			var time = document.createElement("span");
+
+			time.className = "atelier-toc-reading-time";
+
+			var readingText = function () {
+
+				return readingTime.replace("{n}", Math.max(1, Math.round(countWords() / 200)));
+
+			};
+
+			time.textContent = readingText();
+
+			// Quarto clones the card for narrow screens after this script runs,
+
+			// so an update writes to each copy.
+
+			var updateReadingTime = function () {
+
+				var text = readingText();
+
+				document.querySelectorAll(".atelier-toc-reading-time").forEach(function (copy) {
+
+					copy.textContent = text;
+
+				});
+
+			};
+
+			// Veil starts on DOMContentLoaded, after this script runs. It sends
+
+			// veil:ready once it has applied the start state, and veil:change
+
+			// after each later change.
+
+			if (document.getElementById("veil-config")) {
+
+				document.addEventListener("veil:ready", updateReadingTime);
+
+				document.addEventListener("veil:change", updateReadingTime);
+
+			}
+
+			meta.appendChild(time);
+
+		}
+
+		var modified = document.querySelector(".quarto-title-meta .date-modified");
+
+		var modifiedDate = modified && modified.textContent.trim();
+
+		if (updated && modifiedDate) {
+
+			var stamp = document.createElement("span");
+
+			stamp.className = "atelier-toc-updated";
+
+			stamp.textContent = updated.replace("{date}", modifiedDate);
+
+			meta.appendChild(stamp);
+
+		}
+
+		var title = toc.querySelector("#toc-title");
+
+		if (title) {
+
+			title.after(meta);
+
+		} else {
+
+			toc.prepend(meta);
+
+		}
+
+
+
+		// Quarto writes the actions list only when the site has actions.
+
+		var actions = toc.querySelector(".toc-actions");
+
+		if (!actions) {
+
+			actions = document.createElement("div");
+
+			actions.className = "toc-actions";
+
+			toc.appendChild(actions);
+
+		}
+
+		var list = actions.querySelector("ul");
+
+		if (!list) {
+
+			list = document.createElement("ul");
+
+			actions.appendChild(list);
+
+		}
+
+		var button = document.createElement("button");
+
+		button.type = "button";
+
+		button.className = "toc-action atelier-copy-link";
+
+		button.innerHTML = '<i class="bi bi-link-45deg" aria-hidden="true"></i>';
+
+		button.appendChild(document.createTextNode(copyLabel || ""));
+
+		var item = document.createElement("li");
+
+		item.appendChild(button);
+
+		list.appendChild(item);
+
+
+
+		var status = document.createElement("span");
+
+		status.className = "visually-hidden";
+
+		status.setAttribute("aria-live", "polite");
+
+		toc.appendChild(status);
+
+
+
+		// Quarto clones the margin table of contents into a toggle on narrow
+
+		// pages, and a clone has no listeners. Delegate from the document so
+
+		// that the original and the clone both work.
+
+		var timers = new WeakMap();
+
+		document.addEventListener("click", function (event) {
+
+			var target = event.target;
+
+			var copy = target && target.closest && target.closest(".atelier-copy-link");
+
+			if (!copy) {
+
+				return;
+
+			}
+
+			function failed(error) {
+
+				console.warn("Atelier: copying the page link failed.", error);
+
+			}
+
+			if (!navigator.clipboard || !navigator.clipboard.writeText) {
+
+				failed(new Error("the clipboard is not available"));
+
+				return;
+
+			}
+
+			var written;
+
+			try {
+
+				written = navigator.clipboard.writeText(location.href.split("#")[0]);
+
+			} catch (error) {
+
+				failed(error);
+
+				return;
+
+			}
+
+			var scope = copy.closest("#TOC, .quarto-sidebar-toggle-contents") || document;
+
+			var live = scope.querySelector('[aria-live="polite"]');
+
+			var label = copy.lastChild;
+
+			written.then(
+
+				function () {
+
+					if (live) {
+
+						live.textContent = copiedLabel || "";
+
+					}
+
+					label.nodeValue = copiedLabel || "";
+
+					clearTimeout(timers.get(copy));
+
+					timers.set(copy, setTimeout(function () {
+
+						label.nodeValue = copyLabel || "";
+
+						if (live) {
+
+							live.textContent = "";
+
+						}
+
+					}, 2000));
+
+				},
+
+				failed
+
+			);
+
+		});
+
+
+
+		// Quarto marks the current entry with a class only. Mirror it in
+
+		// aria-current so assistive technology announces it.
+
+		var links = toc.querySelectorAll(".nav-link");
+
+		function syncCurrent() {
+
+			links.forEach(function (link) {
+
+				if (link.classList.contains("active")) {
+
+					link.setAttribute("aria-current", "location");
+
+				} else {
+
+					link.removeAttribute("aria-current");
+
+				}
+
+			});
+
+		}
+
+		syncCurrent();
+
+		new MutationObserver(syncCurrent).observe(toc, { subtree: true, attributes: true, attributeFilter: ["class"] });
+
+	})();
+
+</script>
+
+<!--
+
+@license MIT
+
+@copyright 2026 Mickaël Canouil
+
+@author Mickaël Canouil
+
+-->
+
+<script id="atelier-title-block" type="text/javascript">
+
+	(function () {
+
+		// Quarto writes the keywords as one comma-separated paragraph by design.
+
+		// The chip design needs one element for each keyword, so the paragraph is
+
+		// split here. Without JavaScript the paragraph stays as Quarto wrote it.
+
+		// The split is on each comma, so a keyword that holds a comma becomes two
+
+		// chips.
+
+		var paragraph = document.querySelector("#title-block-header .keywords > p");
+
+		if (!paragraph) {
+
+			return;
+
+		}
+
+		var keywords = paragraph.textContent
+
+			.split(",")
+
+			.map(function (keyword) {
+
+				return keyword.trim();
+
+			})
+
+			.filter(Boolean);
+
+		paragraph.replaceChildren.apply(
+
+			paragraph,
+
+			keywords.map(function (keyword) {
+
+				var chip = document.createElement("span");
+
+				chip.className = "atelier-keyword";
+
+				chip.textContent = keyword;
+
+				return chip;
+
+			}),
+
+		);
+
+	})();
+
+</script>
+
+<!--
+
+@license MIT
+
+@copyright 2026 Mickaël Canouil
+
+@author Mickaël Canouil
+
+-->
+
+<script id="atelier-code-blocks" type="text/javascript">
+
+	(function () {
+
+		var labels = (window.atelierOptions || {}).labels || {};
+
+
+
+		// Quarto documents line highlighting for Reveal.js only, so the filter
+
+		// copies the line spec of `code-window-lines` or `code-line-numbers` to
+
+		// `data-atelier-highlight`.
+
+		// A spec is a comma-separated list of numbers and ranges such as 1,3-4.
+
+		function parseSpec(spec) {
+
+			var numbers = [];
+
+			spec.split(",").forEach(function (part) {
+
+				var match = /^\s*(\d+)(?:\s*-\s*(\d+))?\s*$/.exec(part);
+
+				if (!match) {
+
+					console.warn("Atelier: ignoring '" + part.trim() + "' in the code-line-numbers spec '" + spec + "'.");
+
+					return;
+
+				}
+
+				var first = parseInt(match[1], 10);
+
+				var last = match[2] ? parseInt(match[2], 10) : first;
+
+				for (var line = first; line <= last; line++) {
+
+					numbers.push(line);
+
+				}
+
+			});
+
+			return numbers;
+
+		}
+
+
+
+		// Add a class to each line that the spec in the attribute lists. A line
+
+		// is the span with the id of the block, a dash, and the line number.
+
+		function markLines(attribute, className) {
+
+			document.querySelectorAll("[" + attribute + "]").forEach(function (block) {
+
+				var prefix = block.id;
+
+				if (!prefix) {
+
+					return;
+
+				}
+
+				parseSpec(block.getAttribute(attribute)).forEach(function (line) {
+
+					var span = document.getElementById(prefix + "-" + line);
+
+					if (span) {
+
+						span.classList.add(className);
+
+					}
+
+				});
+
+			});
+
+		}
+
+
+
+		markLines("data-atelier-highlight", "atelier-line-highlight");
+
+
+
+		// The terminal block lists the lines that had a `$` prompt in
+
+		// `data-atelier-prompt`, and the style draws the prompt before them.
+
+		markLines("data-atelier-prompt", "atelier-prompt-line");
+
+
+
+		// The lines that continue a command after a `\` are in
+
+		// `data-atelier-continuation`. They take the command colour, with no prompt.
+
+		markLines("data-atelier-continuation", "atelier-command-line");
+
+
+
+		// The style centres the copy button on the window header, which grows
+
+		// when its items wrap, so the window keeps the header height in a variable.
+
+		// Code Window replaces the header of a collapsible window with a `summary`.
+
+		var headerHeights = new ResizeObserver(function (entries) {
+
+			entries.forEach(function (entry) {
+
+				var codeWindow = entry.target.parentElement;
+
+				if (!codeWindow) {
+
+					headerHeights.unobserve(entry.target);
+
+					return;
+
+				}
+
+				var height = entry.target.clientHeight + "px";
+
+				if (codeWindow.style.getPropertyValue("--atelier-code-header-height") !== height) {
+
+					codeWindow.style.setProperty("--atelier-code-header-height", height);
+
+				}
+
+			});
+
+		});
+
+
+
+		// The window header shows the language beside the file name. Pandoc
+
+		// writes only `sourceCode` and the highlighted language on the `code`
+
+		// element, whatever the order of the classes on the `pre` element.
+
+		function setUpWindows() {
+
+			document.querySelectorAll(".code-with-filename").forEach(function (codeWindow) {
+
+				var header = codeWindow.querySelector(":scope > .code-with-filename-file");
+
+				if (!header) {
+
+					return;
+
+				}
+
+				headerHeights.observe(header);
+
+				var pre = codeWindow.querySelector("pre.sourceCode");
+
+				if (!pre || header.querySelector(".atelier-code-language")) {
+
+					return;
+
+				}
+
+				if (pre.classList.contains("atelier-terminal")) {
+
+					codeWindow.classList.add("atelier-terminal");
+
+				}
+
+				var code = pre.querySelector(":scope > code.sourceCode");
+
+				var language = code && Array.prototype.find.call(code.classList, function (name) {
+
+					return name !== "sourceCode";
+
+				});
+
+				// Code that is not highlighted has the class `default`, which is not
+
+				// a language.
+
+				if (language === "default") {
+
+					language = null;
+
+				}
+
+				// With auto-filename, Code Window names the window after its language,
+
+				// or `default` when it has none. The language label replaces that
+
+				// name, so the header shows the language once, or no name at all.
+
+				// Code Window marks such a window `code-window-auto` when its
+
+				// post-render filter runs, and marks the code block `cw-auto` when it
+
+				// does not.
+
+				var named = codeWindow.classList.contains("code-window-auto") || pre.classList.contains("cw-auto");
+
+				var windowName = named && header.querySelector(":scope > pre");
+
+				var shownName = windowName && windowName.textContent.trim().toLowerCase();
+
+				var unnamed = shownName === "default";
+
+				if (unnamed || (language && shownName === language.toLowerCase())) {
+
+					windowName.hidden = true;
+
+				}
+
+				// A collapsible window toggles from its header, which needs a name.
+
+				if (unnamed && header.tagName === "SUMMARY" && labels["code-window"]) {
+
+					header.setAttribute("aria-label", labels["code-window"]);
+
+				}
+
+				if (!language) {
+
+					return;
+
+				}
+
+				var label = document.createElement("span");
+
+				label.className = "atelier-code-language";
+
+				label.textContent = language;
+
+				header.append(label);
+
+			});
+
+		}
+
+		setUpWindows();
+
+		// Code Window builds some windows, such as a collapsible one, on DOMContentLoaded.
+
+		document.addEventListener("DOMContentLoaded", setUpWindows);
+
+	})();
+
+</script>
+
+<!--
+
+@license MIT
+
+@copyright 2026 Mickaël Canouil
+
+@author Mickaël Canouil
+
+-->
+
+<script id="atelier-listings" type="text/javascript">
+
+	(function () {
+
+		var listings = document.querySelectorAll(".quarto-listing");
+
+		if (listings.length === 0) return;
+
+
+
+		var generatedIds = 0;
+
+
+
+		// The filter and sort controls have a placeholder or an aria-label, but no
+
+		// visible label, so the name disappears when the user types. Add a label
+
+		// before the input group, with the text that Quarto already gives the
+
+		// control. The label sits outside the group, so the Bootstrap join rules do
+
+		// not move the icon box or square its corners. The label and the group share
+
+		// a wrapper, so they stay on one line when the row wraps.
+
+		// Upstream: none filed (WCAG 3.3.2)
+
+		// Remove when: Quarto gives the listing filter and sort controls a visible label.
+
+		function labelControl(control, text, suffix) {
+
+			if (!control || !text) return;
+
+			var group = control.closest(".input-group");
+
+			if (!group || group.parentElement.classList.contains("atelier-listing-field")) return;
+
+			if (!control.id) {
+
+				generatedIds += 1;
+
+				control.id = "atelier-listing-" + suffix + "-" + generatedIds;
+
+			}
+
+			var label = document.createElement("label");
+
+			label.className = "atelier-listing-label";
+
+			label.htmlFor = control.id;
+
+			label.textContent = text;
+
+			var field = document.createElement("div");
+
+			field.className = "atelier-listing-field";
+
+			group.parentElement.insertBefore(field, group);
+
+			field.appendChild(label);
+
+			field.appendChild(group);
+
+		}
+
+
+
+		// Quarto marks the current page of a listing by a class only, so a screen
+
+		// reader does not announce it.
+
+		// Upstream: none filed (WCAG 4.1.2)
+
+		// Remove when: Quarto sets aria-current on the link of the current listing page.
+
+		function markCurrentPage(listing) {
+
+			listing.querySelectorAll(".pagination .page-link").forEach(function (link) {
+
+				var item = link.closest(".page-item");
+
+				var current = !!item && item.classList.contains("active");
+
+				if (current && link.getAttribute("aria-current") !== "page") {
+
+					link.setAttribute("aria-current", "page");
+
+				} else if (!current && link.hasAttribute("aria-current")) {
+
+					link.removeAttribute("aria-current");
+
+				}
+
+			});
+
+		}
+
+
+
+		// Quarto writes a sort header as a link with no href, so the keyboard
+
+		// cannot reach it, and nothing says which column is sorted. Make the link
+
+		// a button that answers Enter and Space, and set aria-sort on its cell.
+
+		// Upstream: none filed (WCAG 2.1.1, 4.1.2)
+
+		// Remove when: Quarto writes sortable headers as buttons with aria-sort.
+
+		function sortHeaders(listing) {
+
+			listing.querySelectorAll("th > a.sort").forEach(function (header) {
+
+				if (header.getAttribute("role") !== "button") {
+
+					header.setAttribute("role", "button");
+
+				}
+
+				if (!header.hasAttribute("tabindex")) {
+
+					header.setAttribute("tabindex", "0");
+
+				}
+
+				if (!header.dataset.atelierSortKeys) {
+
+					header.dataset.atelierSortKeys = "true";
+
+					header.addEventListener("keydown", function (event) {
+
+						if (event.key !== "Enter" && event.key !== " ") return;
+
+						if (event.ctrlKey || event.altKey || event.metaKey || event.shiftKey) return;
+
+						event.preventDefault();
+
+						if (!event.repeat) header.click();
+
+					});
+
+				}
+
+				var cell = header.parentElement;
+
+				var direction = null;
+
+				if (header.classList.contains("asc")) direction = "ascending";
+
+				if (header.classList.contains("desc")) direction = "descending";
+
+				if (direction && cell.getAttribute("aria-sort") !== direction) {
+
+					cell.setAttribute("aria-sort", direction);
+
+				} else if (!direction && cell.hasAttribute("aria-sort")) {
+
+					cell.removeAttribute("aria-sort");
+
+				}
+
+			});
+
+		}
+
+
+
+		function apply(listing) {
+
+			var filter = listing.querySelector(".quarto-listing-filter input");
+
+			var sort = listing.querySelector(".quarto-listing-sort select");
+
+			labelControl(filter, filter && filter.getAttribute("placeholder"), "filter");
+
+			labelControl(sort, sort && sort.getAttribute("aria-label"), "sort");
+
+			markCurrentPage(listing);
+
+			sortHeaders(listing);
+
+		}
+
+
+
+		// list.js builds the pagination again after each page change, filter, or
+
+		// sort, so the changes are applied again from an observer. Class changes
+
+		// mark the current page and the sorted column. A burst of mutations runs
+
+		// apply() once, in the next frame. apply() cannot trigger itself in a loop:
+
+		// it writes only attributes outside the class filter, and it builds the
+
+		// label wrapper once, on the first pass, before the observer starts.
+
+		listings.forEach(function (listing) {
+
+			apply(listing);
+
+			var scheduled = false;
+
+			new MutationObserver(function () {
+
+				if (scheduled) return;
+
+				scheduled = true;
+
+				requestAnimationFrame(function () {
+
+					scheduled = false;
+
+					apply(listing);
+
+				});
+
+			}).observe(listing, { childList: true, subtree: true, attributes: true, attributeFilter: ["class"] });
+
+		});
+
+	})();
+
+</script>
+
+<script id="atelier-table-scroll" type="text/javascript">
+
+  /**
+
+   * @license MIT
+
+   * @copyright 2026 Mickaël Canouil
+
+   * @author Mickaël Canouil
+
+   */
+
+  // A wide table cannot wrap, so it scrolls in its own box on a narrow screen.
+
+  // Remove when: never.
+
+  // Not SCSS: a table that scrolls by itself loses its table layout, so the
+
+  // scroll box has to be a new element around the table.
+
+  (() => {
+
+    // A box that clips its content does not scroll, so a table in it still
+
+    // gets a scroll box of its own. A Bootstrap `table-responsive-*` box
+
+    // scrolls only below its breakpoint, so it counts at every width.
+
+    const SCROLLS = ['auto', 'scroll'];
+
+    const RESPONSIVE = '[class*="table-responsive"]';
+
+    // Marks the attributes that this script adds, so that it removes only those.
+
+    const MARKER = 'data-atelier-table-scroll';
+
+    // The same selector as Quarto's scrollable-regions.js. Content that the
+
+    // keyboard reaches already scrolls the box, so the box needs no tab stop.
+
+    const FOCUSABLE =
+
+      'a[href]:not([tabindex="-1"]), ' +
+
+      'button:not([tabindex="-1"]):not(:disabled), ' +
+
+      'input:not([tabindex="-1"]):not(:disabled), ' +
+
+      'select:not([tabindex="-1"]):not(:disabled), ' +
+
+      'textarea:not([tabindex="-1"]):not(:disabled), ' +
+
+      '[tabindex]:not([tabindex="-1"]):not(:disabled)';
+
+    // For each box: whether the box needs a tab stop of its own, because the
+
+    // table holds no focusable content, and the caption that names the box.
+
+    const boxes = new Map();
+
+    let captions = 0;
+
+    let label = '';
+
+
+
+    function scrollsAlready(table, checked) {
+
+      for (let node = table.parentElement; node && node !== document.body; node = node.parentElement) {
+
+        if (!checked.has(node)) {
+
+          checked.set(
+
+            node,
+
+            node.matches(RESPONSIVE) || SCROLLS.includes(getComputedStyle(node).overflowX),
+
+          );
+
+        }
+
+        if (checked.get(node)) return true;
+
+      }
+
+      return false;
+
+    }
+
+
+
+    // A box that scrolls takes the keyboard focus, so that a keyboard user can
+
+    // scroll it (WCAG 2.1.1), as Quarto does for code. It is a group named by
+
+    // the table caption, or the caption of the figure of a cross-referenced
+
+    // table, or the `atelier-table-scroll` label, so that a screen reader says
+
+    // what gets the focus. A group adds no landmark for each wide table.
+
+    // A box that fits adds no tab stop. A box keeps its tab stop while it has
+
+    // the focus, so that the focus does not move from under the user.
+
+    function syncFocus(box) {
+
+      const entry = boxes.get(box);
+
+      if (!entry || !entry.needsTabStop) return;
+
+      const scrolls = box.scrollWidth - box.clientWidth > 1 && box.clientHeight > 1;
+
+      if (scrolls === box.hasAttribute(MARKER)) return;
+
+      if (scrolls) {
+
+        box.setAttribute('tabindex', '0');
+
+        box.setAttribute('role', 'group');
+
+        if (entry.caption) {
+
+          if (!entry.caption.id) entry.caption.id = `atelier-table-caption-${++captions}`;
+
+          box.setAttribute('aria-labelledby', entry.caption.id);
+
+        } else if (label) {
+
+          box.setAttribute('aria-label', label);
+
+        }
+
+        box.setAttribute(MARKER, '');
+
+      } else if (box !== document.activeElement) {
+
+        box.removeAttribute('tabindex');
+
+        box.removeAttribute('role');
+
+        box.removeAttribute('aria-labelledby');
+
+        box.removeAttribute('aria-label');
+
+        box.removeAttribute(MARKER);
+
+      }
+
+    }
+
+
+
+    // The box and the table are both observed: a web font that loads late makes
+
+    // the table wider without a change to the size of the box.
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+      label = ((window.atelierOptions || {}).labels || {})['table-scroll'] || '';
+
+      const checked = new Map();
+
+      const tables = [...document.querySelectorAll('main table')]
+
+        .filter((table) => !scrollsAlready(table, checked));
+
+      const resize = new ResizeObserver((entries) => {
+
+        new Set(entries.map((entry) => entry.target.closest('.atelier-table-scroll')))
+
+          .forEach(syncFocus);
+
+      });
+
+      // A table in the cell of a wrapped table scrolls with the outer box.
+
+      tables.forEach((table) => {
+
+        if (table.parentElement.closest('.atelier-table-scroll')) return;
+
+        const box = document.createElement('div');
+
+        box.className = 'atelier-table-scroll';
+
+        table.before(box);
+
+        box.append(table);
+
+        boxes.set(box, {
+
+          needsTabStop: !table.querySelector(FOCUSABLE),
+
+          caption: table.querySelector(':scope > caption')
+
+            || table.closest('figure.quarto-float-tbl')?.querySelector(':scope > figcaption'),
+
+        });
+
+        box.addEventListener('focusout', () => syncFocus(box));
+
+        resize.observe(box);
+
+        resize.observe(table);
+
+      });
+
+    });
+
+  })();
+
+</script>
+
+
+
+
+
+<script src="../site_libs/quarto-contrib/line-highlight-1.0.0/line-highlight.js" defer="true"></script>
+</body></html>
