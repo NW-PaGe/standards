@@ -56,7 +56,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./get-started.html" rel="next">
+<link href="./policies/security.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
@@ -124,6 +124,7 @@ ul.task-list li input[type="checkbox"] {
 });</script>
 <script src="site_libs/quarto-contrib/mobile-toc/mobile-toc.js"></script>
 <link href="site_libs/quarto-contrib/mobile-toc/mobile-toc.css" rel="stylesheet">
+<script src="site_libs/quarto-contrib/iconify-3.0.0/iconify-icon.min.js"></script>
 <script src="site_libs/quarto-contrib/quarto-gitlink-widget-1.14.0/widget.js"></script>
 <link href="site_libs/quarto-contrib/quarto-gitlink-widget-1.14.0/widget.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -515,10 +516,6 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./get-started.html"> 
-<span class="menu-text">Get started</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="./policies/checklist.html"> 
 <span class="menu-text">Policies</span></a>
   </li>  
@@ -557,12 +554,6 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">NW-PaGe Policies and Guidelines</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./get-started.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Get started</span></a>
-  </div>
-</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true">
@@ -571,14 +562,14 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./policies/checklist.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Checklist</span></a>
+  <a href="./policies/security.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Repo Security</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./policies/security.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Repo Security</span></a>
+  <a href="./policies/gh_setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Git/GitHub User Setup</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -633,14 +624,40 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>This is a static website documenting the policies and guidelines for public Github use at the Pacific Northwest Genomic Center of Excellence. Scroll below to see overviews on Github, Azure, and AWS policies.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><iconify-icon role="img" inline="" icon="bi:file-earmark-check-fill" style="font-size: 4em;" aria-label="Icon file-earmark-check-fill from bi Iconify.design set." title="Icon file-earmark-check-fill from bi Iconify.design set."></iconify-icon></p>
+<section id="policies-and-rules" class="level3">
+<h3 class="anchored" data-anchor-id="policies-and-rules">Policies and Rules</h3>
+<p>NW-PaGe Github policies</p>
+<ul>
+<li><a href="quickstart.qmd">Checklist</a></li>
+<li><a href="security.qmd">Repo Security Rules</a></li>
+<li><a href="gh_setup.qmd">GitHub setup</a></li>
+<li><a href="gh_collab_tutorial.qmd">Collaboration guide</a></li>
+<li><a href="lic.qmd">Licensing</a></li>
+<li><a href="policies.qmd">Organization Requirements</a></li>
+<li><a href="reproduce.qmd">Code Requirements</a></li>
+</ul>
+</section>
+</div><div class="column" style="width:50%;">
+<p><iconify-icon role="img" inline="" icon="octicon:rocket-16" style="font-size: 4em;" aria-label="Icon rocket-16 from octicon Iconify.design set." title="Icon rocket-16 from octicon Iconify.design set."></iconify-icon></p>
+<section id="tutorials" class="level3">
+<h3 class="anchored" data-anchor-id="tutorials">Tutorials</h3>
+<p>NW-PaGe Github repo tutorials</p>
+<ul>
+<li><a href="release.qmd">Release Cycles</a></li>
+<li><a href="renv.qmd">Virtual Environments</a></li>
+<li><a href="templates.qmd">Github and Quarto Templates</a></li>
+<li><a href="git.qmd">Git Basics</a></li>
+<li><a href="how_to.qmd">Repo Documentation/Github Pages and Quarto</a></li>
+</ul>
+</section>
+</div>
+</div>
 <section id="next-steps" class="level2">
 <h2 class="anchored" data-anchor-id="next-steps">Next steps</h2>
-<ul>
-<li><a href="./get-started.html">Get started</a> shows how to install the project.</li>
-<li><a href="guides/configuration.qmd">Configuration</a> shows how to change the site and its colours.</li>
-<li><a href="guides/writing.qmd">Writing pages</a> shows each element that a page can hold.</li>
-<li><a href="./reference.html">Reference</a> lists the options of the project.</li>
-</ul>
+<p>Read the <a href="guides/security.qmd">Repo Security guide</a>.</p>
 
 
 </section>
@@ -1206,8 +1223,8 @@ ul.task-list li input[type="checkbox"] {
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./get-started.html" class="pagination-link" aria-label="Get started">
-        <span class="nav-page-text">Get started</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./policies/security.html" class="pagination-link" aria-label="Repo Security">
+        <span class="nav-page-text">Repo Security</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

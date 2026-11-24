@@ -9,8 +9,6 @@ website:
     left:
       - text: "Home"
         href: index.qmd
-      - text: "Get started"
-        href: get-started.qmd
       - text: "Policies"
         href: policies/checklist.qmd
       - text: "Reference"
@@ -19,11 +17,12 @@ website:
     style: docked
     contents:
       - index.qmd
-      - get-started.qmd
       - section: "Policies"
         contents:
           - policies/checklist.qmd
           - policies/security.qmd
+          - policies/gh_setup.qmd
+          - policies\gh_collab_tutorial.qmd
           - policies/writing.qmd
       - reference.qmd
 

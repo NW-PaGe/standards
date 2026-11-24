@@ -374,10 +374,154 @@
     "href": "index.html#next-steps",
     "title": "NW-PaGe Policies and Guidelines",
     "section": "Next steps",
-    "text": "Next steps\n\nGet started shows how to install the project.\nConfiguration shows how to change the site and its colours.\nWriting pages shows each element that a page can hold.\nReference lists the options of the project.",
+    "text": "Next steps\nRead the Repo Security guide.",
     "crumbs": [
       "Home",
       "NW-PaGe Policies and Guidelines"
+    ]
+  },
+  {
+    "objectID": "policies/gh_setup.html",
+    "href": "policies/gh_setup.html",
+    "title": "Git/GitHub User Setup",
+    "section": "",
+    "text": "How to contribute to our GitHub repos\nSteps to create a GitHub repo\nSteps to clone a repo\n\nYou will need Git and Github to make code contributions:\n\nGit is a version control software.\nGithub is a platform for developers that utilizes Git\nIn order to contribute to this organization you must have Git installed and a Github account",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Git/GitHub User Setup"
+    ]
+  },
+  {
+    "objectID": "policies/gh_setup.html#objectives-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c2069636f6e6966792062693a6a6f75726e616c2d636865636b203e7d7d",
+    "href": "policies/gh_setup.html#objectives-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c2069636f6e6966792062693a6a6f75726e616c2d636865636b203e7d7d",
+    "title": "Git/GitHub User Setup",
+    "section": "",
+    "text": "How to contribute to our GitHub repos\nSteps to create a GitHub repo\nSteps to clone a repo\n\nYou will need Git and Github to make code contributions:\n\nGit is a version control software.\nGithub is a platform for developers that utilizes Git\nIn order to contribute to this organization you must have Git installed and a Github account",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Git/GitHub User Setup"
+    ]
+  },
+  {
+    "objectID": "policies/gh_setup.html#git-basics",
+    "href": "policies/gh_setup.html#git-basics",
+    "title": "Git/GitHub User Setup",
+    "section": "Git Basics",
+    "text": "Git Basics\n\nYou need to install Git on your machine follow here for help.\nFor a tutorial on how Git works, follow our Git page here",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Git/GitHub User Setup"
+    ]
+  },
+  {
+    "objectID": "policies/gh_setup.html#github-basics",
+    "href": "policies/gh_setup.html#github-basics",
+    "title": "Git/GitHub User Setup",
+    "section": "Github Basics",
+    "text": "Github Basics\n\nGo to the Github website to create an account.\nBookmark the NW-PaGe Github Org",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Git/GitHub User Setup"
+    ]
+  },
+  {
+    "objectID": "policies/gh_setup.html#contributing",
+    "href": "policies/gh_setup.html#contributing",
+    "title": "Git/GitHub User Setup",
+    "section": "Contributing",
+    "text": "Contributing\nThere are multiple ways to contribute to a Github repo, whether it is to report a bug, request a feature, or actively contribute to the code base.\n\nBug ReportFeature RequestDiscussionsContribute Code\n\n\nTo report a bug,\n\nclick on a repo and click on the Issues tab.\nclick the New issue button\nclick on the Bug Report tab\n\nFrom here you will need to fill out the bug report along with steps to reproduce the behavior you’re seeing.\n\n\nDo you have a feature that you want included in the code base?\n\nclick on a repo and click on the Issues tab.\nclick the New issue button\nclick on the Feature Request tab\n\nFrom here you will need to fill out the feature request along with details\n\n\nThere is a discussions tab in our Github org. You can start discussions, ask questions, and share ideas here.\n\n\nTo contribute to a public repo in our Github org, please contact the repo owner to request read/write access. If you want to create a repo in the org, please contact frank.aragona@doh.wa.gov.\nBefore contributing any code, please read our security policies and collaboration guide. There you will find our repo rules and instructions on how to set up pre-commit hooks and contributing how to contribute code.\nOnce granted access, follow the steps below to create a repo (Section 5) and/or collaborate on code (?@sec-collab).",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Git/GitHub User Setup"
+    ]
+  },
+  {
+    "objectID": "policies/gh_setup.html#sec-create-repo",
+    "href": "policies/gh_setup.html#sec-create-repo",
+    "title": "Git/GitHub User Setup",
+    "section": "Create a Repo",
+    "text": "Create a Repo\nPlease see our tutorial for more details.\nOnce granted access to create a repo, you can go to our org and click Repositories &gt; New repository or click here\nThis will take you to the Create a new repository screen. Please follow these instructions when filling it out:\n\nRepository templateOwner and Repo nameInternal vs PrivateREADME, .gitignore, license\n\n\nConsider using a template unless you want to develop a repo from scratch. We have pre-built R, Python, and base templates that have Github Codespaces set up as well as .gitignore files and virtual environments.\n\n\nMake sure the Owner name is NW-PaGe. Name your repository something descriptive and easy to type out. Avoid spaces and capital letters unless necessary.\nThe repo description can be filled out at any time after creating the repo\n\n\nWe don’t allow you to create a public repo initially. Please create a Private repo first, and then once you are ready to make it public you can.\n\n\n\nCheck the Add a README file box.\nAdd a .gitignore if the option is available (choose either R or Python)\nChoose an MIT license unless you know you want a different license more info here",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Git/GitHub User Setup"
+    ]
+  },
+  {
+    "objectID": "policies/gh_setup.html#sec-clone",
+    "href": "policies/gh_setup.html#sec-clone",
+    "title": "Git/GitHub User Setup",
+    "section": "Cloning a Repo",
+    "text": "Cloning a Repo\nWhether you have created your own repo or want to contribute to someone else’s repo, you will need to make a local clone of that repo on your personal machine.\nTo make a local clone of a repo, click on the green Code button when you’re in the main repo’s web page. In the local tab there are multiple ways to clone. For most of our work, I suggest creating an SSH key. If you are new to git/Github and on a Windows machine, I recommend installing the Github Desktop app and following the instructions below.\n\nHTTPSSSH\n\n\nCloning via HTTPS is a relatively quick process.\n\nStart by navigating to the repo in Github and selecting the Code button:\n\n\n\nCopy the path that starts with https://, in this case it’s https://github.com/NW-PaGe/standards.git\nIn a terminal/command prompt, navigate to a folder of your choice (in windows I would make a folder called Projects here: C:/Users/&lt;username&gt;/Projects)\n\n\n\nTerminal\n\ncd C:/Users/&lt;your_username&gt;/Projects\n\n\nUse git clone and replace the https://github.com/NW-PaGe/standards.git with your path:\n\n\n\nTerminal\n\ngit clone https://github.com/NW-PaGe/standards.git\n\n\nCheck if things ran by executing this code:\n\n\n\nTerminal\n\ngit status\n\nNOTE: the HTTPS method is good but it will require you to enter your username and a token every time you push a commit to the remote repo in Github. You will need to create a Personal Access Token (PAT) whenever you want to make a commit. If this is annoying to you, use the SSH or Github Desktop App methods.\n\nMake a PAT\nHere’s a guide on making a PAT\n\nClick on you Github profile icon in the upper right\nClick Settings\nScroll down to Developer Settings\nSelect Personal access tokens (classic) and then Generate new token\nWhen you make a commit you will need to input this personal access token when it asks for your password.\n\nDo not store this token anywhere! Especially make sure it is not stored in your repo. This has tons of security risks and needs to be for singular use only\n\n\n\nSSH is an excellent option for cloning a repo. It is similar to using an identifier to tell Github that you are, in fact, you. This video below is a great resource on how to set up the key. I will also write out the steps in the video below. Also, see the Github documentation for more information.\n\n\nLinuxWindows\n\n\n\nIn a terminal, write the following and replace the email with your email:\n\n\n\nTerminal\n\nssh-keygen -t ed25519 -C your@email.com\n\n\nIt should then ask if you want to make a passphrase. (I usually don’t enter one)\nGet the pid\n\n\n\nTerminal\n\neval \"$(ssh-agent -s)\"\n\n\nMake a config file\n\n\n\nTerminal\n\ntouch ~/.ssh/config\n\n\nIf the file doesn’t open, you can open it like this\n\n\n\nTerminal\n\nnano ~/.ssh/config\n\n\nAdd this to the config file. it will use your passkey and recognize you\n\n\n\nssh/config\n\nHost *\n  IgnoreUnknown AddKeysToAgent,UseKeychain\n  AddKeysToAgent yes\n  IdentityFile ~/.ssh/id_ed25519\n  UseKeychain yes\n\nTo save this file in nano, on your keyboard write CRTL+O then ENTER to save the file. Then CTRL+X to exit back to the terminal. You can also open this file through a notepad or other software. You could also search for the file in your file explorer and edit it in notepad if that is easier.\n\nAdd the identity\n\n\n\nTerminal\n\nssh-add ~/.ssh/id_ed25519\n\n\nIn Github, go to your profile and the SSH + GPG Keys section\nClick SSH Keys, add a title, and in the key location write your key. You can find your key in your terminal by writing:\n\n\n\nTerminal\n\ncat ~/.ssh/id_ed25519.pub\n\nCopy the whole output including your email and paste it into the Github key location\n\nTest it by writing this:\n\n\n\nTerminal\n\nssh -T git@github.com\n\n\nUse the key to clone a repo.\n\nNow you can clone a repo using the SSH key. Copy the SSH path and write this (replace the string after clone with your repo of choice):\n\n\nTerminal\n\ngit clone git@github.com:org/reponame.git\n\n\n\n\nIn a terminal, write the following and replace the email with your email:\n\n\n\nTerminal\n\nssh-keygen -t ed25519 -C your@email.com\n\n\nIt should then ask if you want to make a passphrase. (I usually don’t enter one)\nThere might be a ton of issues because Windows is Windows. You may need to install OpenSSH. In your Windows Seach bar, type in PowerShell and run as administrator\n\nRun this\n\n\nTerminal\n\nGet-WindowsCapability -Online | Where-Object Name -like 'OpenSSH*'\n\nRun this\n\n\nTerminal\n\nSet-Service -Name ssh-agent -StartupType Automatic\n\nRun this\n\n\nTerminal\n\nStart-Service ssh-agent\n\n\nMake a config file _in the root of your C:/User/USERXXXX/ directory\n\n\n\nTerminal\n\nNew-Item ~/.ssh/config\n\n\nOpen the file\n\n\n\nTerminal\n\nnotepad ~/.ssh/config\n\n\nAdd this to the config file. it will use your passkey and recognize you. Update the path!! C:/Users/USERXXXXX/.ssh/id_ed25519\n\n\n\nssh/config\n\nHost *\n  IgnoreUnknown AddKeysToAgent,UseKeychain\n  AddKeysToAgent yes\n  IdentityFile C:/Users/USERXXXXX/.ssh/id_ed25519\n  UseKeychain yes\n\n\n\n\nsave the file\n\nAdd the identity\n\n{.PowerShell .terminal ssh-add C:/Users/USERXXXXX/.ssh/id_ed25519\n\nIn Github, go to your profile and the SSH + GPG Keys section\nClick SSH Keys, add a title, and in the key location write your key. You can find your key in your terminal by writing:\n\n\n\nTerminal\n\nnotepad C:/Users/USERXXXXX/.ssh/id_ed25519.pub\n\nCopy the whole output including your email and paste it into the Github key location\n\nTest it by writing this:\n\n\n\nTerminal\n\nssh -T git@github.com\n\n\nUse the key to clone a repo.\n\nNow you can clone a repo using the SSH key. Copy the SSH path and write this (replace the string after clone with your repo of choice):\n\n\nTerminal\n\ngit clone git@github.com:org/reponame.git\n\n\n\n\n\nGitHub CLI\nThe GitHub CLI is an excellent tool for not just cloning your repo, but for managing repositories and organizations from a terminal.\n\nWindowsWSL/Linux\n\n\nTo install the CLI in Windos, I follwed the instructions provided in the Github CLI repo.\nI normally install commands using Scoop, but you have many options here.\n\nPaste this code into a powershell window and execute it\n\n\n\nTerminal\n\nwinget install --id GitHub.cli\n\n\nNow update the package\n\n\n\nTerminal\n\nwinget upgrade --id GitHub.cli\n\n\nYou will need to authorize your github account like this:\n\n\n\nTerminal\n\ngh auth login\n\n\nIt will ask you to authorize in a browser or with a personal access token\n\nI created a personal access token.\n\nNow you can clone a repo like this:\n\n\n\nTerminal\n\ngh repo clone org/repo-name\n\nYou can also now do some cool things with your org/repo like searching for strings, creating issues, and more. For example, here are the issues in this repo:\n\n\nTerminal\n\ngh issue list\n\n\n\n\noutput\n\nShowing 3 of 3 open issues in NW-PaGe/standards\n\nID  TITLE                                      LABELS         UPDATED           \n#7  add .gitignore documentation                              about 2 months ago\n#3  Make sure all references are added to ...  documentation  about 5 months ago\n#2  Fix cross reference links                  documentation  about 5 months ago\n\n\n\n\nTo install in a linux terminal, I’m following the instructions provided in the Github CLI repo.\n\nPaste this code into your bash terminal and execute it.\n\n\n\nTerminal\n\n(type -p wget &gt;/dev/null || (sudo apt update && sudo apt-get install wget -y)) \\\n&& sudo mkdir -p -m 755 /etc/apt/keyrings \\\n&& wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg &gt; /dev/null \\\n&& sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \\\n&& echo \"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main\" | sudo tee /etc/apt/sources.list.d/github-cli.list &gt; /dev/null \\\n&& sudo apt update \\\n&& sudo apt install gh -y\n\n\nThen upgrate the command with the code below\n\n\n\nTerminal\n\nsudo apt update\nsudo apt install gh\n\n\nYou now need to authorize yourself as a user.\n\n\n\nTerminal\n\ngh auth login\n\n\nIt will ask you to authorize in a browser or with a personal access token\n\nI created a personal access token. In linux there are some issues with the command and using a browser fyi.\n\nNow you can clone a repo like this:\n\n\n\nTerminal\n\ngh repo clone org/repo-name\n\nYou can also now do some cool things with your org/repo like searching for strings, creating issues, and more. For example, here are the issues in this repo:\n\n\nTerminal\n\ngh issue list\n\n\n\n\noutput\n\nShowing 3 of 3 open issues in NW-PaGe/standards\n\nID  TITLE                                      LABELS         UPDATED           \n#7  add .gitignore documentation                              about 2 months ago\n#3  Make sure all references are added to ...  documentation  about 5 months ago\n#2  Fix cross reference links                  documentation  about 5 months ago\n\n\n\n\n\n\n\nOpen with GitHub Desktop\nIf you’re new to Git or Github and are using a Windows machine, the GitHub Desktop app is a great option for managing git workflows.\n\nInstall the app\nYou will need to authenticate your account\nNow you should be able to clone repos through the app. In Github, when you click on the Code tab you will see the option to open in Github Desktop:\n\n\nThis will open up the desktop app and let you choose a file path for your Github repos. I recommend putting your repos into a Github or Projects folder in your local C drive, like this\n\nC:/Users/yourname/Projects/&lt;your-repo&gt;/\n\nIf you’re cloning many repos you should put the repos into folders separated by the Github org\n\nC:/Users/yourname/Projects/&lt;gh-org-name&gt;/&lt;repo-in-org&gt;/\n\n:::",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Git/GitHub User Setup"
+    ]
+  },
+  {
+    "objectID": "policies/gh_collab_tutorial.html",
+    "href": "policies/gh_collab_tutorial.html",
+    "title": "Collaborating on GitHub",
+    "section": "",
+    "text": "We rely on GitHub for collaboration within and between teams. This tutorial goes over how to collaborate within the same GitHub repository if you have collaborator access to the repository. There are several ways in which you can interact with GitHub. We present two approaches using the command line and another using GitHub Desktop (a GUI).",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Collaborating on GitHub"
+    ]
+  },
+  {
+    "objectID": "policies/gh_collab_tutorial.html#introduction",
+    "href": "policies/gh_collab_tutorial.html#introduction",
+    "title": "Collaborating on GitHub",
+    "section": "",
+    "text": "We rely on GitHub for collaboration within and between teams. This tutorial goes over how to collaborate within the same GitHub repository if you have collaborator access to the repository. There are several ways in which you can interact with GitHub. We present two approaches using the command line and another using GitHub Desktop (a GUI).",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Collaborating on GitHub"
+    ]
+  },
+  {
+    "objectID": "policies/gh_collab_tutorial.html#workflow-overview",
+    "href": "policies/gh_collab_tutorial.html#workflow-overview",
+    "title": "Collaborating on GitHub",
+    "section": "Workflow Overview",
+    "text": "Workflow Overview\nThe high-level workflow we recommend following for collaborators within a repository is:\n\nClone the repository.\nCreate a feature branch.\nMake changes, commit, update branch with main, and push the branch.\nOpen a pull request from branch to main.\nConduct reviews and address comments.\nMerge the pull request and delete the branch.\nUpdate your local main repo with merged PR.\nRepeat.",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Collaborating on GitHub"
+    ]
+  },
+  {
+    "objectID": "policies/gh_collab_tutorial.html#steps-for-collaborating-on-github-using-github-desktop-gui",
+    "href": "policies/gh_collab_tutorial.html#steps-for-collaborating-on-github-using-github-desktop-gui",
+    "title": "Collaborating on GitHub",
+    "section": "Steps for Collaborating on GitHub Using GitHub Desktop (GUI)",
+    "text": "Steps for Collaborating on GitHub Using GitHub Desktop (GUI)\nGitHub Desktop is a user-friendly application that simplifies version control and collaboration. This tutorial walks you through the process of collaborating on a GitHub repository using GitHub Desktop, including cloning a repository, creating branches, making changes, committing, pushing updates, and managing pull requests.\n\n0. Install GitHub Desktop\nGitHub Desktop is free and can be installed on your Windows or Mac machines. Follow the installation instructions here.\n\n\n1. Protecting the main Branch\n\nStep 1.1: Enable Branch Protection Rules\nOn your GitHub repository website page:\n\nNavigate to Settings &gt; Branches &gt; Branch Protection Rules in the repository.\nClick Add branch ruleset.\nEnter a name for your ruleset.\nChange Enforcement status: Active\nUnder Targets, click Add target:\n\nEither click Include by pattern and type in main or if main is your default branch click Include default branch.\n\nUnder Rules:\n\nRequire a pull request before merging.\nRestrict deletions.\nBlock force pushes.\nRequire status checks to pass before merging (optional but recommended for repos with CI/CD checks).\nUnder Require a pull request before merging: Enable Require approvals and specify the number of reviewers (optional)\n\nSave changes.\n\n\n\n\n\n2. Initial SetUp: Cloning the Repository\n\nOpen GitHub Desktop\n\nOpening up GitHub Desktop should bring you to a UI similar to this where you see tabs for Current repository and Current branch. \n\nClick the drop down arrow for Current repository &gt; Add &gt; Clone repository or you can click File &gt; Clone Repository \nIn the dialog box:\n\nSearch for the repository that you want to clone\nSelect the location you would like to clone the repository to on your local machine\n\nClick Clone\n\nNote: If you don’t have collaborator access to a private repository you will not be able to clone the repository.\n The repo and its contents will be located at the local path you’ve selected.\n\n\n3. Creating a Branch\n\nEnsure the main branch is selected in the current repository\n\nif not, click the branch dropdown in the top bar and select main\n\nMake sure that main is up to date by clicking Fetch origin\nClick Branch &gt; New Branch\nEnter a descriptive name for the branch, such as feature/add-readme or bugfix/fix-typo.\nEnsure that it says “Your new branch will be based on your currently checked out branch (main). main is the default branch for your repository”, then click Create Branch.\nThe new branch will now be checked out automatically.\n\n ###\n\nMake changes and commit those changes to the branch\nMake changes to the files and code in your repository folder\nAfter making changes:\n\nGo back to GitHub Desktop\nYou’ll see the list of changed files under the Changes tab\n\nStage and commit your changes:\n\nWrite a short, descriptive commit message in the Summary field (e.g. docs: added details to README)\nOptionally, add a description for more details\nClick Commit to &lt;branch_name&gt; to save your changes locally\n\n\n\n\n\n5. Keeping Your Branch Up-to-Date\nTo avoid conflicts, ensure your branch is up-to-date with the latest changes from main\n\nSwitch to the main branch\n\nClick the branch drop down and select main\nClick Fetch origin to pull the latest changes\n\nSwitch back to your branch and merge main\n\nClick Current branch &gt; Choose a branch to merge into  or you can click at the top Branch &gt; Merge into Current Branch\nSelect main as the branch to merge.\nIf the branch is up to date with main then the “Create a merge commit” button will not be clickable.\nCreate a merge commit if there are differences between main and your branch.\n\nResolve any conflicts (if prompted).\nMake any necessary commits after resolving conflicts\n\n\n\n\n6. Pushing Changes to GitHub\n\nAfter committing your changes, click Publish branch in GitHub Desktop to push the new branch to GitHub\nIf the branch is already published, click Push origin to sync your changes to the remote repository on GitHub.\n\n\n\n7. Create a Pull Request\n\nOpen GitHub Desktop and click Branch &gt; Create Pull Request\n\nThis opens the pull request (PR) page on GitHub in your web browser\n\nFill out the PR form:\n\nEnsure the source branch is your feature branch and the target branch is main at the top of the PR where it should say base:main &lt;- compare:&lt;branch_name&gt;\nIf your repository is in the NW-PaGe organization we have auto-populated Pull Request Templates to remind you to look for sensitive data that may be accidentally included in your commits or the pull request itself.\n\nSubmit the pull request\n\n\n\n\n\n8. Reviewing and Addressing Feedback\n\nCollaborators may review your pull request and suggest changes.\nIf changes are requested:\n\nMake updates locally in your branch\nCommit the changes in GitHub Desktop\nPush the branch to update the PR automatically\n\n\n\n\n9. Merging the Pull Request\n\nOnce the pull request is approved and all checks pass, click Merge PUll Request on GitHub\nAfter merging, delete the branch on GitHub by clicking Delete Branch\n\n\n\n\n10. Cleaning up Local Branches\n\nAfter merging the pull request, delete the local branch to keep your work space clean.\nIn GitHub Desktop:\n\ngo to the branch drop down\nSelect the branch you want to delete\nRight-click and choose Delete\n\n\n\n\n11. Pulling Latest Changes to main\n\nSwitch back to the main branch in GitHub Desktop\nClick Fetch origin to pull the latest changes",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Collaborating on GitHub"
+    ]
+  },
+  {
+    "objectID": "policies/gh_collab_tutorial.html#steps-for-collaborating-on-github-using-the-command-line",
+    "href": "policies/gh_collab_tutorial.html#steps-for-collaborating-on-github-using-the-command-line",
+    "title": "Collaborating on GitHub",
+    "section": "Steps for Collaborating on GitHub Using the Command Line",
+    "text": "Steps for Collaborating on GitHub Using the Command Line\n\n0. Sign-in\nSign-in to GitHub using your GitHub credentials. If you are part of WA DOH make sure to use your WA DOH is compliant Git Hub account. Every WA DOH GitHub user should have 2-factor authentication enabled.\n\n\n1. Protecting the main Branch\n\nStep 1.1: Enable Branch Protection Rules\nOn your GitHub repository website page:\n\nNavigate to Settings &gt; Branches &gt; Branch Protection Rules in the repository.\nClick Add branch ruleset.\nEnter a name for your ruleset.\nChange Enforcement status: Active\nUnder Targets, click Add target:\n\nEither click Include by pattern and type in main or if main is your default branch click Include default branch.\n\nUnder Rules:\n\nRequire a pull request before merging.\nRestrict deletions.\nBlock force pushes.\nRequire status checks to pass before merging (optional but recommended for repos with CI/CD checks).\nUnder Require a pull request before merging: Enable Require approvals and specify the number of reviewers (optional).\n\nSave changes.\n\n\n\n\n\n2. Initial SetUp: Cloning the Repository\n\nLocate the repository on GitHub\nCopy the repository URL from the green Code button.\n\n\n\nRun the following command in your terminal to clone the repo:\n\n\nTerminal\n\ngit clone &lt;repository_url&gt; \n\nNavigate to the repository folder:\n\n\nTerminal\n\ncd &lt;repository_name&gt;\n\n\n\n\n3. Branching Workflow\n\nStep 3.1: Create a branch\nBranches are created to isolate development tasks. Always branch off the main branch.\n\nPull the latest change from the main branch:\n\n\n\nTerminal\n\ngit checkout main \ngit pull origin main \n\n\nCreate and switch to a new branch\n\n\n\nTerminal\n\ngit checkout -b &lt;branch_name&gt; \n\nNote: Branches can be called whatever you’d like. If you’d like to organize your name conventions you could consider using prefixes like feature/,bugfix/. This would look like: git checkout -b feature/add-flu-lbis\n\nPush the new branch to publish on GitHub:\n\n\n\nTerminal\n\ngit push -u origin &lt;branch_name&gt; \n\n\n\nStep 3.2: Develop on the branch\n\nMake changes to the code/repository.\nStage the changes:\n\nFirst check that you have the changes you want to make by running git status. This will show all the files you’ve changed.\n\n\n\n\nTerminal\n\ngit status\n\n\nThen when you’re sure you have the changes you want, you can stage the changes individually or all at once:\n\n\n\nTerminal\n\ngit add &lt;path/to/changed/file&gt; # stage individual file (conservative and secure approach)\n\n\n\nTerminal\n\ngit add . # stage all files at once (risky approach)\n\n\n\n\n\n\n\nWarning\n\n\n\ngit add . will stage all files with changes or deletions. This could be a security risk if you’re unaware of all the changes you’ve made on a branch.\n\n\n\nCommit the changes with a descriptive message:\n\n\n\nTerminal\n\ngit commit -m \"docs: make changes to readme documentation to include instructions on logging in\"\n\nNote: Use clear, description messages. You can follow the format of conventional commits such as &lt;type&gt;:&lt;subject&gt; for a commit message. Example: fix: fix bug in merge.py script.\nPlease see the Release Cycle page for more info. In summary, conventional commits can trigger an action in GitHub. For example, whenever a commit title contains the word fix: , a GitHub Action will bump up the codebase’s version number from something like 1.0.0 to 1.0.1 - We use the following key words in our commit messages:\n\n\n\nkey word\nwhen to use it\n\n\n\n\nfix:\na commit of the type fix patches a bug in your codebase (this correlates with PATCH in Semantic Versioning).\n\n\nfeat:\na commit of the type feat introduces a new feature to the codebase (this correlates with MINOR in Semantic Versioning).\n\n\ndocs:\nyour commit is related to updating the documentation and not the codebase itself\n\n\nchore:\nyour commit doesn’t change what the code or documentation does, it just updates something like formatting, file structure, naming conventions, etc.\n\n\ntest:\nyour commit is just a test commit\n\n\n\n\n\n\n\n\n\n\n4. Making Pull Requests (PRs)\n\nStep 4.1 Update your Branch with main\nBefore opening a PR, ensure your branch is up-to-date with the latest changes in main to ensure compatability. 1. Swith to the main branch and pull the latest changes:\n\n\nTerminal\n\ngit checkout main \ngit pull origin main \n\n\nSwitch back to your branch:\n\n\n\nTerminal\n\ngit checkout &lt;branch_name&gt; \n\n\nMerge main into your branch\n\n\nMerge (safe and retains all commit history):\n\n\n\nTerminal\n\ngit merge main\n\nNote: if you’re comfortable with git and you need to keep a clean git history, consider using git rebase main. Here’s an excellent article explaining the pros and cons of merge vs rebase\n\nResolve conflicts, if any:\n\n\nEdit conflicting files, then stage the changes:\n\n\n\nTerminal\n\ngit add &lt;file_name&gt; \n\n\nCommit the resolved conflicts:\n\n\n\nTerminal\n\ngit commit -m \"chore: Resolve merge conflicts with main\" \n\n\nPush the updated branch:\n\n\n\nTerminal\n\ngit push \n\n\n\nStep 4.2: Open a Pull Request\n\nPush changes to the feature branch:\n\n\n\nTerminal\n\ngit push origin &lt;branch_name&gt; \n\n\nOn GitHub, click Pull Requests &gt; New Pull Request.\nSelect your branch as the source and main as the target.\nAdd a title and descripton, request reviews, and submit\nSubmit the pull request.\n\n\n\nStep 4.2: Resolve any Pull Request Feedback\n\nAddress feedback in your branch then commit and push back to the branch\n\n\n\nTerminal\n\ngit add . \ngit commit -m \"Address PR feedback\" \ngit push \n\n\n\n\n5. Merging Pull Requests\n\nStep 5.1: Merge into main\n\nEnsure the PR passes all checks and is approved.\nClick Merge Pull Request\nDelete the branch on GitHub by clicking Delete Branch\n\n\n\n\n6. Pruning Branches\n\nStep 6.1: Delete Local Branches\n\nList all local branches\n\n\n\nTerminal\n\ngit branch \n\n\nDelete a branch:\n\n\n\nTerminal\n\ngit branch -d &lt;branch_name&gt; \n\nNote: Use -D to force delete if the branch isn’t merged\n\n\n\n7. Update main with the merged PR\nAfter merging your pull request, it’s important to update your local main branch to reflect the latest changes from the remote repository. 1. Switch to the main branch:\n\n\nTerminal\n\ngit checkout main \n\n\nPull the latest changes from the remote:\n\n\n\nTerminal\n\ngit pull origin main",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Collaborating on GitHub"
     ]
   }
 ]

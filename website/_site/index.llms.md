@@ -2,11 +2,30 @@
 
 This is a static website documenting the policies and guidelines for public Github use at the Pacific Northwest Genomic Center of Excellence. Scroll below to see overviews on Github, Azure, and AWS policies.
 
+### Policies and Rules
+
+NW-PaGe Github policies
+
+- [Checklist](quickstart.qmd)
+- [Repo Security Rules](security.qmd)
+- [GitHub setup](gh_setup.qmd)
+- [Collaboration guide](gh_collab_tutorial.qmd)
+- [Licensing](lic.qmd)
+- [Organization Requirements](policies.qmd)
+- [Code Requirements](reproduce.qmd)
+
+### Tutorials
+
+NW-PaGe Github repo tutorials
+
+- [Release Cycles](release.qmd)
+- [Virtual Environments](renv.qmd)
+- [Github and Quarto Templates](templates.qmd)
+- [Git Basics](git.qmd)
+- [Repo Documentation/Github Pages and Quarto](how_to.qmd)
+
 ## Next steps
 
-- [Get started](get-started.llms.md) shows how to install the project.
-- [Configuration](guides/configuration.qmd) shows how to change the site and its colours.
-- [Writing pages](guides/writing.qmd) shows each element that a page can hold.
-- [Reference](reference.llms.md) lists the options of the project.
+Read the [Repo Security guide](guides/security.qmd).
 
 Back to top
