@@ -6,26 +6,26 @@ This is a static website documenting the policies and guidelines for public Gith
 
 NW-PaGe Github policies
 
-- [Checklist](quickstart.qmd)
-- [Repo Security Rules](security.qmd)
-- [GitHub setup](gh_setup.qmd)
-- [Collaboration guide](gh_collab_tutorial.qmd)
-- [Licensing](lic.qmd)
-- [Organization Requirements](policies.qmd)
-- [Code Requirements](reproduce.qmd)
+- [Checklist](policies/quickstart.qmd)
+- [Repo Security Rules](policies/security.llms.md)
+- [GitHub setup](policies/gh_setup.llms.md)
+- [Collaboration guide](policies/gh_collab_tutorial.llms.md)
+- [Licensing](policies/lic.llms.md)
+- [Organization Requirements](policies/policies.llms.md)
+- [Code Requirements](policies/reproduce.llms.md)
 
 ### Tutorials
 
 NW-PaGe Github repo tutorials
 
-- [Release Cycles](release.qmd)
-- [Virtual Environments](renv.qmd)
-- [Github and Quarto Templates](templates.qmd)
-- [Git Basics](git.qmd)
-- [Repo Documentation/Github Pages and Quarto](how_to.qmd)
+- [Release Cycles](tools/release.llms.md)
+- [Virtual Environments](tools/renv.llms.md)
+- [Github and Quarto Templates](tools/templates.llms.md)
+- [Git Basics](tools/git.qmd)
+- [Repo Documentation/Github Pages and Quarto](tools/how_to.llms.md)
 
 ## Next steps
 
-Read the [Repo Security guide](guides/security.qmd).
+Read the [Repo Security guide](policies/security.llms.md).
 
 Back to top

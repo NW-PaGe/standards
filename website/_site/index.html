@@ -56,7 +56,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./policies/security.html" rel="next">
+<link href="./policies/checklist.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
@@ -297,7 +297,7 @@ ul.task-list li input[type="checkbox"] {
 		}, { once: true });
 	})();
 </script>
-<script type="application/json" id="atelier-options">{"labels":{"announcement-danger":"Danger","announcement-info":"Info","announcement-notice":"Notice","announcement-region":"Announcement","announcement-success":"Success","announcement-warning":"Warning","code-window":"Code","footnote-back":"Back to note {n} in the text","home":"Home","listing-filters":"Listing filters","logo-link":"{site} — home","navigation-site-label":"Site","next":"Next","page-metadata":"Page metadata","previous":"Previous","search-label":"Search","site-banner":"Site banner","table-scroll":"Scrollable table","toc-copy-link":"Copy link","toc-link-copied":"Link copied","toc-reading-time":"{n} min read","toc-title-website":"On this page","toc-updated":"Updated {date}","toggle-dark-mode":"Toggle dark mode","toggle-navigation":"Toggle navigation"},"version":"1.0.0"}</script>
+<script type="application/json" id="atelier-options">{"labels":{"announcement-danger":"Danger","announcement-info":"Info","announcement-notice":"Notice","announcement-region":"Announcement","announcement-success":"Success","announcement-warning":"Warning","code-window":"Code","footnote-back":"Back to note {n} in the text","home":"Home","listing-filters":"Listing filters","logo-link":"{site} — home","navigation-site-label":"Site","next":"Next","page-metadata":"Page metadata","previous":"Previous","search-label":"Search","site-banner":"Site banner","table-scroll":"Scrollable table","toc-copy-link":"Copy link","toc-link-copied":"Link copied","toc-reading-time":"{n} min read","toc-title-website":"On this page","toc-updated":"Updated {date}","toggle-dark-mode":"Toggle dark mode","toggle-navigation":"Toggle navigation"},"version":"1.2.0"}</script>
 <script type="application/json" id="atelier-workshop">{"labels":{"duration-hours":"{h} h","duration-hours-minutes":"{h} h {m} min","duration-minutes":"{m} min","exercise-title":"Exercise","next":"Next","objectives-title":"By the end of this module, you can","previous":"Previous","reading-bar":"Reading navigation","reading-position":"Page {n} of {m}","reading-progress":"Reading progress","solution-summary":"Show the solution","terminal":"Terminal","timer-label":"Session time left","timer-pause":"Pause the session timer","toc-module-read":"{n}% of this module read","toc-read":"(read)","workshop-author-plural":"Instructors","workshop-author-single":"Instructor","workshop-bar":"Module navigation","workshop-completed":"(completed)","workshop-modified":"Materials updated","workshop-position":"Module {n} of {m}","workshop-progress":"Workshop progress","workshop-published":"Session","workshop-total":"about {time}"},"mode":"documentation","offset":"."}</script>
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#14161a" media="(prefers-color-scheme: light)">
@@ -520,6 +520,10 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Policies</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./tools/release.html"> 
+<span class="menu-text">Tutorials</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./reference.html"> 
 <span class="menu-text">Reference</span></a>
   </li>  
@@ -562,6 +566,12 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./policies/checklist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Checklist</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./policies/security.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Repo Security</span></a>
   </div>
@@ -574,8 +584,64 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./policies/writing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Writing pages</span></a>
+  <a href="./policies/gh_collab_tutorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Collaborating on GitHub</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./policies/policies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Org Policies</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./policies/lic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Licensing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./policies/reproduce.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reproducibility</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">Tutorials</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tools/release.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Release Cycles</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tools/renv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Virtual Environments</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tools/templates.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Templates</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tools/how_to.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Code and Repo Documentation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tools/newrepo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">New Repo</span></a>
   </div>
 </li>
       </ul>
@@ -631,13 +697,13 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="policies-and-rules">Policies and Rules</h3>
 <p>NW-PaGe Github policies</p>
 <ul>
-<li><a href="quickstart.qmd">Checklist</a></li>
-<li><a href="security.qmd">Repo Security Rules</a></li>
-<li><a href="gh_setup.qmd">GitHub setup</a></li>
-<li><a href="gh_collab_tutorial.qmd">Collaboration guide</a></li>
-<li><a href="lic.qmd">Licensing</a></li>
-<li><a href="policies.qmd">Organization Requirements</a></li>
-<li><a href="reproduce.qmd">Code Requirements</a></li>
+<li><a href="policies/quickstart.qmd">Checklist</a></li>
+<li><a href="./policies/security.html">Repo Security Rules</a></li>
+<li><a href="./policies/gh_setup.html">GitHub setup</a></li>
+<li><a href="./policies/gh_collab_tutorial.html">Collaboration guide</a></li>
+<li><a href="./policies/lic.html">Licensing</a></li>
+<li><a href="./policies/policies.html">Organization Requirements</a></li>
+<li><a href="./policies/reproduce.html">Code Requirements</a></li>
 </ul>
 </section>
 </div><div class="column" style="width:50%;">
@@ -646,18 +712,18 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="tutorials">Tutorials</h3>
 <p>NW-PaGe Github repo tutorials</p>
 <ul>
-<li><a href="release.qmd">Release Cycles</a></li>
-<li><a href="renv.qmd">Virtual Environments</a></li>
-<li><a href="templates.qmd">Github and Quarto Templates</a></li>
-<li><a href="git.qmd">Git Basics</a></li>
-<li><a href="how_to.qmd">Repo Documentation/Github Pages and Quarto</a></li>
+<li><a href="./tools/release.html">Release Cycles</a></li>
+<li><a href="./tools/renv.html">Virtual Environments</a></li>
+<li><a href="./tools/templates.html">Github and Quarto Templates</a></li>
+<li><a href="tools/git.qmd">Git Basics</a></li>
+<li><a href="./tools/how_to.html">Repo Documentation/Github Pages and Quarto</a></li>
 </ul>
 </section>
 </div>
 </div>
 <section id="next-steps" class="level2">
 <h2 class="anchored" data-anchor-id="next-steps">Next steps</h2>
-<p>Read the <a href="guides/security.qmd">Repo Security guide</a>.</p>
+<p>Read the <a href="./policies/security.html">Repo Security guide</a>.</p>
 
 
 </section>
@@ -1223,8 +1289,8 @@ ul.task-list li input[type="checkbox"] {
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./policies/security.html" class="pagination-link" aria-label="Repo Security">
-        <span class="nav-page-text">Repo Security</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./policies/checklist.html" class="pagination-link" aria-label="Checklist">
+        <span class="nav-page-text">Checklist</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

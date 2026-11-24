@@ -1,8 +1,4 @@
 ---
-# title: NW-PaGe Github Organization Policies
-# subtitle: Security policies, repo guides and templates for pushing code to the Github Org
-# date: September 1, 2023
-# date-modified: today
 author: 
   - name: Frank Aragona
     email: frank.aragona@doh.wa.gov
@@ -21,21 +17,6 @@ format:
         - assets/typst-template.typ
         - assets/typst-show.typ
     number-sections: true
-
-  # pdf:
-  #   toc: true
-  #   toc-depth: 2
-  #   number-sections: true
-  #   number-depth: 2
-  #   output-file: "nw-page-github-policies"
-  #   output-ext:  "pdf"
-  #   margin-width: 10px
-  #   gutter-width: 1.5rem
-  #   fig-pos: "H" # this makes sure that the figures output where they're supposed to in pdf 
-  #   # linkcolor: RSSblue
-  #   # urlcolor: RSSblue
-  #   include-in-header:
-  #      - "styles.tex"
 editor: source
 execute: 
   warning: false
@@ -84,7 +65,7 @@ For more information, tutorials and code examples, please see the policies websi
 #| eval: true
 #| message: false
 #| warning: false
-why <- process_qmd("gh/quickstart.qmd", fpath_in = "images/", fpath_out = "gh/images/")
+why <- process_qmd("website/policies/quickstart.qmd", fpath_in = "images/", fpath_out = "website/policies/images/")
 cat(unlist(why), sep = '\n')
 ```
 
@@ -96,7 +77,7 @@ cat(unlist(why), sep = '\n')
 #| eval: true
 #| message: false
 #| warning: false
-why <- process_qmd("gh/security.qmd", fpath_in = "images/", fpath_out = "gh/images/")
+why <- process_qmd("website/policies/security.qmd", fpath_in = "images/", fpath_out = "website/policies/images/")
 cat(unlist(why), sep = '\n')
 ```
 
@@ -108,7 +89,7 @@ cat(unlist(why), sep = '\n')
 #| eval: true
 #| message: false
 #| warning: false
-why <- process_qmd("gh/gh_setup.qmd", fpath_in = "images/", fpath_out = "gh/images/")
+why <- process_qmd("website/policies/gh_setup.qmd", fpath_in = "images/", fpath_out = "website/policies/images/")
 cat(unlist(why), sep = '\n')
 ```
 
@@ -120,7 +101,7 @@ cat(unlist(why), sep = '\n')
 #| eval: true
 #| message: false
 #| warning: false
-why <- process_qmd("gh/gh_collab_tutorial.qmd", fpath_in = "images/", fpath_out = "gh/images/")
+why <- process_qmd("website/policies/gh_collab_tutorial.qmd", fpath_in = "images/", fpath_out = "website/policies/images/")
 cat(unlist(why), sep = '\n')
 ```
 
@@ -133,7 +114,7 @@ cat(unlist(why), sep = '\n')
 #| eval: true
 #| message: false
 #| warning: false
-why <- process_qmd("gh/lic.qmd", fpath_in = "images/", fpath_out = "gh/images/")
+why <- process_qmd("website/policies/lic.qmd", fpath_in = "images/", fpath_out = "website/policies/images/")
 cat(unlist(why), sep = '\n')
 ```
 
@@ -145,7 +126,7 @@ cat(unlist(why), sep = '\n')
 #| eval: true
 #| message: false
 #| warning: false
-why <- process_qmd("gh/policies.qmd", fpath_in = "images/", fpath_out = "gh/images/")
+why <- process_qmd("website/policies/policies.qmd", fpath_in = "images/", fpath_out = "website/policies/images/")
 cat(unlist(why), sep = '\n')
 ```
 
@@ -157,7 +138,7 @@ cat(unlist(why), sep = '\n')
 #| eval: true
 #| message: false
 #| warning: false
-why <- process_qmd("gh/reproduce.qmd", fpath_in = "images/", fpath_out = "gh/images/")
+why <- process_qmd("website/policies/reproduce.qmd", fpath_in = "images/", fpath_out = "website/policies/images/")
 cat(unlist(why), sep = '\n')
 ```
 
@@ -171,7 +152,7 @@ cat(unlist(why), sep = '\n')
 #| eval: true
 #| message: false
 #| warning: false
-why <- process_qmd("gh/release.qmd", fpath_in = "images/", fpath_out = "gh/images/")
+why <- process_qmd("website/policies/release.qmd", fpath_in = "images/", fpath_out = "website/tools/images/")
 cat(unlist(why), sep = '\n')
 ```
 
@@ -183,7 +164,7 @@ cat(unlist(why), sep = '\n')
 #| eval: true
 #| message: false
 #| warning: false
-why <- process_qmd("gh/renv.qmd", fpath_in = "images/", fpath_out = "gh/images/")
+why <- process_qmd("website/tools/renv.qmd", fpath_in = "images/", fpath_out = "website/tools/images/")
 cat(unlist(why), sep = '\n')
 ```
 
@@ -195,7 +176,7 @@ cat(unlist(why), sep = '\n')
 #| eval: true
 #| message: false
 #| warning: false
-why <- process_qmd("gh/templates.qmd", fpath_in = "images/", fpath_out = "gh/images/")
+why <- process_qmd("website/tools/templates.qmd", fpath_in = "images/", fpath_out = "website/tools/images/")
 cat(unlist(why), sep = '\n')
 ```
 
@@ -208,7 +189,7 @@ cat(unlist(why), sep = '\n')
 #| eval: true
 #| message: false
 #| warning: false
-why <- process_qmd("gh/how_to.qmd", fpath_in = "images/", fpath_out = "gh/images/")
+why <- process_qmd("website/tools/how_to.qmd", fpath_in = "images/", fpath_out = "website/tools/images/")
 cat(unlist(why), sep = '\n')
 ```
 
@@ -220,6 +201,6 @@ cat(unlist(why), sep = '\n')
 #| eval: true
 #| message: false
 #| warning: false
-why <- process_qmd("gh/newrepo.qmd", fpath_in = "images/", fpath_out = "gh/images/")
+why <- process_qmd("website/tools/newrepo.qmd", fpath_in = "images/", fpath_out = "website/tools/images/")
 cat(unlist(why), sep = '\n')
 ```

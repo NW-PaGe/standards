@@ -13,13 +13,13 @@ This is a static website documenting the policies and guidelines for public Gith
 
 NW-PaGe Github policies
 
-- [Checklist](quickstart.qmd)
-- [Repo Security Rules](security.qmd)
-- [GitHub setup](gh_setup.qmd)
-- [Collaboration guide](gh_collab_tutorial.qmd)
-- [Licensing](lic.qmd)
-- [Organization Requirements](policies.qmd)
-- [Code Requirements](reproduce.qmd)
+- [Checklist](policies/quickstart.qmd)
+- [Repo Security Rules](policies/security.qmd)
+- [GitHub setup](policies/gh_setup.qmd)
+- [Collaboration guide](policies/gh_collab_tutorial.qmd)
+- [Licensing](policies/lic.qmd)
+- [Organization Requirements](policies/policies.qmd)
+- [Code Requirements](policies/reproduce.qmd)
 
 
 :::
@@ -33,11 +33,11 @@ NW-PaGe Github policies
 
 NW-PaGe Github repo tutorials
 
-- [Release Cycles](release.qmd)
-- [Virtual Environments](renv.qmd)
-- [Github and Quarto Templates](templates.qmd)
-- [Git Basics](git.qmd)
-- [Repo Documentation/Github Pages and Quarto](how_to.qmd)
+- [Release Cycles](tools/release.qmd)
+- [Virtual Environments](tools/renv.qmd)
+- [Github and Quarto Templates](tools/templates.qmd)
+- [Git Basics](tools/git.qmd)
+- [Repo Documentation/Github Pages and Quarto](tools/how_to.qmd)
 
 :::
 :::
@@ -45,4 +45,4 @@ NW-PaGe Github repo tutorials
 
 ## Next steps
 
-Read the [Repo Security guide](guides/security.qmd).
+Read the [Repo Security guide](policies/security.qmd).
