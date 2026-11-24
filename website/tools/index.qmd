@@ -1,0 +1,26 @@
+---
+title: "Guides and Templates"
+description: Make your code reproducible and easy to use for end users
+date: September 1, 2023
+date-modified: today
+author: 
+  - name: Frank Aragona
+    email: frank.aragona@doh.wa.gov
+    affiliations:
+      - Washington Department of Health
+      - Data Integration/Quality Assurance
+knitr: true
+editor: 
+  markdown: 
+    wrap: 72
+filters: 
+  - line-highlight
+listing:
+  type: table
+  fields: [image, date, title, author, reading-time]
+  categories: true
+
+---
+
+
+

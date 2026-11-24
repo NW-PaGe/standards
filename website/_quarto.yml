@@ -25,7 +25,14 @@ website:
           - policies/gh_collab_tutorial.qmd
           - policies/policies.qmd
           - policies/lic.qmd
-          - policies/writing.qmd
+          - policies/reproduce.qmd
+      - section: "Tutorials"
+        contents: 
+          - tools/release.qmd
+          - tools/renv.qmd
+          - tools/templates.qmd
+          - tools/how_to.qmd
+          - tools/newrepo.qmd
       - reference.qmd
 
 brand: _brand.yml
