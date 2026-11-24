@@ -1201,5 +1201,41 @@
       "Tutorials",
       "Virtual Environments"
     ]
+  },
+  {
+    "objectID": "tools/newrepo.html",
+    "href": "tools/newrepo.html",
+    "title": "New Repo",
+    "section": "",
+    "text": "We are often writing scripts that could be useful to others. This tutorial goes over how to make your R scripts accessible to others by making them available in the NW-PAGE GitHub repo.",
+    "crumbs": [
+      "Home",
+      "Tutorials",
+      "New Repo"
+    ]
+  },
+  {
+    "objectID": "tools/newrepo.html#introduction",
+    "href": "tools/newrepo.html#introduction",
+    "title": "New Repo",
+    "section": "",
+    "text": "We are often writing scripts that could be useful to others. This tutorial goes over how to make your R scripts accessible to others by making them available in the NW-PAGE GitHub repo.",
+    "crumbs": [
+      "Home",
+      "Tutorials",
+      "New Repo"
+    ]
+  },
+  {
+    "objectID": "tools/newrepo.html#steps",
+    "href": "tools/newrepo.html#steps",
+    "title": "New Repo",
+    "section": "Steps",
+    "text": "Steps\n\nSign-in\nSign-in to GitHub using your GitHub credentials. If you are part of WA DOH make sure to use your WA DOH compliant Git Hub account.\n\n\nCreate a new repository\nIn the browser, navigate to Repositories and click New repository\n\n\n\nFill out the new repository fields\n\nName your repo\nSelect your repo to be private, you can change this later\nSelect the option to add a README file\nSelect a .gitignore template (R or Python are good options)\nSelect the MIT license\nClick Create repository\n\n\n\n\nCheck out your new repo\nCongratulations you have created a new GitHub repo. Now you have to populate it with information!\n\n\n\nClone the new repo\nNow you would want to clone your repo in your machine to start uploading content via commits. To do this click Code and either clone your repo using terminal by copying the URL, or click Open with GitHub Desktop. I will demonstrate using the latter option.\n\nGitHub Desktop will open. Double check the location where you want to close your repo. Click Clone and double check that a folder with the repo name has been created in the local path you provided.\n\n\n\nSafeguard sensitive data\nBefore making your first commit you would want to make sure to do your due diligence to safe guard important information.\n\nCheck that you are using git secrets which will block commits that contain file paths and server names from being uploaded to your repo\nAdd file names that you don’t want to accidentally upload to the repo to the gitignore file\n\n\n\nPopulating the repo via commits\nIf your information is saved elsewhere and you need to upload it to the repo simply copy and paste the files inside the folder where you cloned the repo. In this example, I pasted an HTML file inside the folder and then I navigated to GitHub Desktop to make the commit which will upload that file to the repo.\nRemember to select the file, add a title to the commit, click Commit to main, and then click Push origin.",
+    "crumbs": [
+      "Home",
+      "Tutorials",
+      "New Repo"
+    ]
   }
 ]

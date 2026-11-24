@@ -11,6 +11,8 @@ website:
         href: index.qmd
       - text: "Policies"
         href: policies/checklist.qmd
+      - text: "Tutorials"
+        href: tools/release.qmd
       - text: "Reference"
         href: reference.qmd
   sidebar:
@@ -39,5 +41,5 @@ brand: _brand.yml
 
 extensions:
   atelier:
-    version: "1.0.0"
+    version: "1.2.0"
 
