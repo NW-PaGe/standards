@@ -24,6 +24,7 @@ website:
           - policies/gh_setup.qmd
           - policies/gh_collab_tutorial.qmd
           - policies/policies.qmd
+          - policies/lic.qmd
           - policies/writing.qmd
       - reference.qmd
 

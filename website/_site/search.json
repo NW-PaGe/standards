@@ -667,5 +667,65 @@
       "Policies",
       "Org Policies"
     ]
+  },
+  {
+    "objectID": "policies/lic.html",
+    "href": "policies/lic.html",
+    "title": "Licensing",
+    "section": "",
+    "text": "Licenses prevent code theft and inappropriate redistribution of code.\nReview common open-source licenses\nLicense types vary depending on repo goals",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Licensing"
+    ]
+  },
+  {
+    "objectID": "policies/lic.html#summary-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c2069636f6e69667920616e64727372786e3a66696c65203e7d7d",
+    "href": "policies/lic.html#summary-b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c2069636f6e69667920616e64727372786e3a66696c65203e7d7d",
+    "title": "Licensing",
+    "section": "",
+    "text": "Licenses prevent code theft and inappropriate redistribution of code.\nReview common open-source licenses\nLicense types vary depending on repo goals",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Licensing"
+    ]
+  },
+  {
+    "objectID": "policies/lic.html#general-license-info",
+    "href": "policies/lic.html#general-license-info",
+    "title": "Licensing",
+    "section": "General License Info",
+    "text": "General License Info\nBelow is a list of common open-source licenses.\n\n\nThere isn’t a one size fits all license, so thankfully there are a variety of options. Here are two common ones:",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Licensing"
+    ]
+  },
+  {
+    "objectID": "policies/lic.html#gnu-gpl-licenses",
+    "href": "policies/lic.html#gnu-gpl-licenses",
+    "title": "Licensing",
+    "section": "GNU GPL licenses",
+    "text": "GNU GPL licenses\n\nThese are the strong licenses\nPrevents someone from taking our code and privatizing it (and making money off of it)\nSomeone can still use our code, they just need to ensure that what they’re doing with it is open-source\n“Copyright and license notices must be preserved.”\n“Contributors provide an express grant of patent rights. When a modified version is used to provide a service over a network, the complete source code of the modified version must be made available.”",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Licensing"
+    ]
+  },
+  {
+    "objectID": "policies/lic.html#mit-license",
+    "href": "policies/lic.html#mit-license",
+    "title": "Licensing",
+    "section": "MIT license",
+    "text": "MIT license\n\nI think this is the most commonly used one\n“short and simple permissive license… only requiring preservation of copyright and license notices”\n“Licensed works, modifications, and larger works may be distributed under different terms and without source code.”\nSomeone could basically do whatever they want with the code.\nNextstain/ncov repo is currently using this\n\nAnd here are a couple of youtube videos that were helping in explaining licensing",
+    "crumbs": [
+      "Home",
+      "Policies",
+      "Licensing"
+    ]
   }
 ]
