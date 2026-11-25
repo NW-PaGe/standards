@@ -606,20 +606,6 @@
     ]
   },
   {
-    "objectID": "get-started.html",
-    "href": "get-started.html",
-    "title": "Get started",
-    "section": "",
-    "text": "This page shows how to install My project. Replace the steps with the steps for your project."
-  },
-  {
-    "objectID": "get-started.html#next-steps",
-    "href": "get-started.html#next-steps",
-    "title": "Get started",
-    "section": "Next steps",
-    "text": "Next steps\nRead the configuration guide to change the options of the project."
-  },
-  {
     "objectID": "policies/checklist.html",
     "href": "policies/checklist.html",
     "title": "Checklist",

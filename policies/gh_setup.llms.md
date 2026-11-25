@@ -78,7 +78,7 @@ Once granted access, follow the steps below to create a repo ([Section 5](#sec-
 
 ## Create a Repo
 
-Please see our [tutorial for more details.](newrepo.qmd)
+Please see our [tutorial for more details.](../tools/newrepo.llms.md)
 
 Once granted access to create a repo, you can go to [our org](https://github.com/orgs/NW-PaGe/) and click `Repositories > New repository` or [click here](https://github.com/organizations/NW-PaGe/repositories/new)
 
@@ -86,7 +86,7 @@ This will take you to the `Create a new repository` screen. Please follow these 
 
 ## Repository template
 
-Consider using a template unless you want to develop a repo from scratch. We have pre-built R, Python, and base templates that have [Github Codespaces](gh/codespace.qmd) set up as well as `.gitignore` files and virtual environments.
+Consider using a template unless you want to develop a repo from scratch. We have pre-built R, Python, and base templates that have [Github Codespaces](../tools/codespace.qmd) set up as well as `.gitignore` files and virtual environments.
 
 ## Owner and Repo name
 
@@ -102,7 +102,7 @@ We don’t allow you to create a public repo initially. Please create a Private 
 
 - Check the `Add a README file` box.
 - Add a `.gitignore` if the option is available (choose either R or Python)
-- Choose an `MIT` license unless you know you want a different license [more info here](gh/license.qmd)
+- Choose an `MIT` license unless you know you want a different license [more info here](../policies/lic.llms.md)
 
 ## Cloning a Repo
 

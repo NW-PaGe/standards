@@ -1,4 +1,4 @@
-# My project
+# NW-PaGe Policies & Tutorials
 
 > A short description of my project.
 
@@ -14,7 +14,6 @@
 - [Git/GitHub User Setup](https://NW-PaGe.github.io/standards/policies/gh_setup.llms.md)
 - [Configuration](https://NW-PaGe.github.io/standards/policies/configuration.llms.md)
 - [NW-PaGe Policies and Guidelines](https://NW-PaGe.github.io/standards/index.llms.md)
-- [Get started](https://NW-PaGe.github.io/standards/get-started.llms.md)
 - [Checklist](https://NW-PaGe.github.io/standards/policies/checklist.llms.md)
 - [Collaborating on GitHub](https://NW-PaGe.github.io/standards/policies/gh_collab_tutorial.llms.md)
 - [Licensing](https://NW-PaGe.github.io/standards/policies/lic.llms.md)

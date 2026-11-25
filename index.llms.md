@@ -6,7 +6,7 @@ This is a static website documenting the policies and guidelines for public Gith
 
 NW-PaGe Github policies
 
-- [Checklist](policies/quickstart.qmd)
+- [Checklist](policies/checklist.llms.md)
 - [Repo Security Rules](policies/security.llms.md)
 - [GitHub setup](policies/gh_setup.llms.md)
 - [Collaboration guide](policies/gh_collab_tutorial.llms.md)
