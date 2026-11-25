@@ -12,7 +12,7 @@ Friday, the 16th of August, 2024
 
 Modified
 
-Friday, the 20th of November, 2026
+Tuesday, the 24th of November, 2026
 
 ## Checklist
 
@@ -24,7 +24,7 @@ If you need to make a public repo, this quick start guide is for you. **Please m
 - [ ] Create global [security hooks](../policies/security.llms.md#sec-hooks) for all your repos
 - [ ] Make a *private* staging repo to make sure everything is clean
 - [ ] Perform [secret scanning](../policies/security.llms.md#sec-scan) on your repo
-- [ ] Add a [license](lic.qmd)
+- [ ] Add a [license](../policies/lic.llms.md)
 - [ ] Make [branch protections](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches)
 - [ ] Copy over the *cleaned* main branch from [private repo into new public repo](../policies/security.llms.md#sec-public)
 - [ ] Add a README and consider adding a [Github page](how_to.qmd) for documentation

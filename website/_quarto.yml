@@ -2,7 +2,7 @@ project:
   type: atelier
 
 website:
-  title: "My project"
+  title: "NW-PaGe Policies & Tutorials"
   description: "A short description of my project."
   repo-url: https://github.com/owner/project
   navbar:

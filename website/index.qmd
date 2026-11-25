@@ -13,7 +13,7 @@ This is a static website documenting the policies and guidelines for public Gith
 
 NW-PaGe Github policies
 
-- [Checklist](policies/quickstart.qmd)
+- [Checklist](policies/checklist.qmd)
 - [Repo Security Rules](policies/security.qmd)
 - [GitHub setup](policies/gh_setup.qmd)
 - [Collaboration guide](policies/gh_collab_tutorial.qmd)

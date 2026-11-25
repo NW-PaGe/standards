@@ -14,7 +14,7 @@ Sunday, the 9th of April, 2023
 
 Modified
 
-Friday, the 20th of November, 2026
+Tuesday, the 24th of November, 2026
 
 ## Objectives
 
